@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html>
+        <nav class="navigation">
+            <ul>
+                <li><a href="contact.html">About Me</a></li>
+                
+                
+            </ul>
+        </nav>
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <title>Codes C</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #222831;
+        }
+
+        .code-box {
+            background-color: #ffffffab;
+            border: 2px solid #000000;
+            padding: 50px;
+            margin: 40px;
+            width: 400px;
+            height: 200px;
+            cursor: pointer;
+        }
+        .code-box:hover {
+            background-color: #80484800;
+        }
+        .explication {
+            display: none;
+            background-color: #f7f7f7;
+            border: 1px solid #cccccc;
+            padding: 10px;
+            margin: 10px;
+            width: 300px;
+        }
+        .algorithme {
+            display: none;
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            padding: 10px;
+            margin: 10px;
+            width: 300px;
+        }
+    </style>
+</head>
+<h1>
+             <h2>Codes C</h2>
+    <h1> <div class="code-box" onclick="afficherExplication('explication1', 'algorithme1')">printf("Hello, World!");</div></h1> 
+    <div class="explication" id="explication1">Affiche le message "Hello, World!" à l'écran.</div>
+    <div class="algorithme" id="algorithme1">Écrire("hello World!")</div>
+
+   <h1> <div class="code-box" onclick="afficherExplication('explication2', 'algorithme2')">scanf("%d", &x);</div></h1>
+    <div class="explication" id="explication2">Lit un entier et le stocke dans la variable x.</div>
+    <div class="algorithme" id="algorithme2">Lire(x)</div>
+
+    <h1><div class="code-box" onclick="afficherExplication('explication3', 'algorithme3')">for (int i = 0; i < 10; i++) { ... }</div></h1>
+    <div class="explication" id="explication3">Exécute le code à l'intérieur du bloc 10 fois, avec i allant de 0 à 9.</div>
+    <div class="algorithme" id="algorithme3">Pour i de 0 à 9 Faire ... FinPour</div>
+
+    <h1><div class="code-box" onclick="afficherExplication('explication4', 'algorithme4')">do { ... } while (x < 10);</div></h1>
+    <div class="explication" id="explication4">Exécute le code à l'intérieur du bloc tant que x est inférieur à 10.</div>
+    <div class="algorithme" id="algorithme4">Répéter ... Jusqu'à x >= 10</div>
+
+    <h1><div class="code-box" onclick="afficherExplication('explication5', 'algorithme5')">while (x < 10) { ... }</div></h1>
+    <div class="explication" id="explication5">Exécute le code à l'intérieur du bloc tant que x est inférieur à 10.</div>
+    <div class="algorithme" id="algorithme5">Tant que x < 10 Faire ... FinTantQue</div>
+
+    <h1><div class="code-box" onclick="afficherExplication('explication6', 'algorithme6')">!x</div></h1>
+    <div class="explication" id="explication6">Négation logique de x.</div>
+    <div class="algorithme" id="algorithme6">Non x</div>
+
+    <h1><div class="code-box" onclick="afficherExplication('explication7', 'algorithme7')">%d</div></h1>
+    <div class="explication" id="explication7">Format pour afficher un entier.</div>
+    <div class="algorithme" id="algorithme7">Entier</div>
+
+    <h1><div class="code-box" onclick="afficherExplication('explication8', 'algorithme8')">%f</div></h1>
+    <div class="explication" id="explication8">Format pour afficher un réel.</div>
+    <div class="algorithme" id="algorithme8">Réel</div>
+
+    <h1><div class="code-box" onclick="afficherExplication('explication9', 'algorithme9')">%c</div></h1>
+    <div class="explication" id="explication9">Format pour afficher un caractère.</div>
+    <div class="algorithme" id="algorithme9">Caractère</div>
+ <h1><div class="code-box" onclick="afficherExplication('explication10', 'algorithme10')">+=</div></h1>
+    <div class="explication" id="explication10">L'opérateur += en C est utilisé pour ajouter une valeur à une variable et stocker le résultat dans la même variable.
+</div>
+    <div class="algorithme" id="algorithme10">x+=3
+        x=x+3
+        
+    </div> 
+    <script>
+        function afficherExplication(idExplication, idAlgorithme) {
+            var explication = document.getElementById(idExplication);
+            var algorithme = document.getElementById(idAlgorithme);
+            if (explication.style.display === "block") {
+                explication.style.display = "none";
+                algorithme.style.display = "none";
+            } else {
+                explication.style.display = "block";
+                algorithme.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
