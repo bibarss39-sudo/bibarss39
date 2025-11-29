@@ -13,6 +13,25 @@
             color: white;
         }
 
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* مربع البحث */
+        .search-box {
+            width: 260px;
+            padding: 10px 15px;
+            border-radius: 12px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            background: #ffffff20;
+            color: white;
+            margin-right: 20px;
+        }
+
         nav ul {
             list-style: none;
             display: flex;
@@ -32,9 +51,6 @@
         }
 
         .translate-btn {
-            position: absolute;
-            top: 15px;
-            right: 25px;
             padding: 10px 20px;
             background: #00eaff;
             color: #000;
@@ -119,32 +135,55 @@
 
 <body>
 
-<button class="translate-btn" onclick="toggleLanguage()" id="langBtn">Traduire en Français</button>
-
-<nav class="navigation">
+<nav>
     <ul>
         <li><a href="contact.html"><h4 id="aboutText">About Me</h4></a></li>
         <li><a href="apps.html"><h4 id="sitesText">مواقع لغة C</h4></a></li>
     </ul>
+
+    <input type="text" class="search-box" id="search" placeholder="بحث / Search / Recherche">
+
+    <button class="translate-btn" onclick="toggleLanguage()" id="langBtn">Français</button>
 </nav>
 
 <h1 id="pageTitle" style="color:white; text-align:center;">Codes C</h1>
 
-<div class="code-box" onclick="openModal(1)">printf("Hello, World!");</div>
-<div class="code-box" onclick="openModal(2)">scanf("%d", &x);</div>
-<div class="code-box" onclick="openModal(3)">for (int i = 0; i < 10; i++)</div>
-<div class="code-box" onclick="openModal(4)">do { } while (x < 10)</div>
-<div class="code-box" onclick="openModal(5)">while (x < 10)</div>
-<div class="code-box" onclick="openModal(6)">!x</div>
-<div class="code-box" onclick="openModal(7)">%d</div>
-<div class="code-box" onclick="openModal(8)">%f</div>
-<div class="code-box" onclick="openModal(9)">%c</div>
-<div class="code-box" onclick="openModal(10)">+=</div>
 
+<!-- جميع الصناديق تمت إعادتها كما كانت -->
+<div id="codesContainer">
+
+    <div class="code-box" onclick="openModal(1)">printf("Hello, World!");</div>
+    <div class="code-box" onclick="openModal(2)">scanf("%d", &x);</div>
+    <div class="code-box" onclick="openModal(3)">for (int i = 0; i < 10; i++)</div>
+    <div class="code-box" onclick="openModal(4)">do { } while (x < 10)</div>
+    <div class="code-box" onclick="openModal(5)">while (x < 10)</div>
+    <div class="code-box" onclick="openModal(6)">!x</div>
+    <div class="code-box" onclick="openModal(7)">%d</div>
+    <div class="code-box" onclick="openModal(8)">%f</div>
+    <div class="code-box" onclick="openModal(9)">%c</div>
+    <div class="code-box" onclick="openModal(10)">+=</div>
+
+    <!-- العناصر الإضافية كاملة -->
+    <div class="code-box" onclick="openModal(11)">int</div>
+    <div class="code-box" onclick="openModal(12)">float</div>
+    <div class="code-box" onclick="openModal(13)">char</div>
+    <div class="code-box" onclick="openModal(14)">chaine</div>
+    <div class="code-box" onclick="openModal(15)">#include</div>
+    <div class="code-box" onclick="openModal(16)">return 0;</div>
+    <div class="code-box" onclick="openModal(17)">i++</div>
+    <div class="code-box" onclick="openModal(18)">i--</div>
+    <div class="code-box" onclick="openModal(19)">mat[40]</div>
+    <div class="code-box" onclick="openModal(20)">if</div>
+    <div class="code-box" onclick="openModal(21)">else</div>
+
+</div>
+
+
+<!--───────────── MODAL ─────────────-->
 <div id="modal" class="modal">
     <div class="modal-content">
         <h2 id="title"></h2>
-        <p class="modal-text" id="content"></p>
+        <p id="content"></p>
 
         <div class="buttons">
             <button onclick="closeModal()" id="closeBtn">غلق</button>
@@ -153,96 +192,164 @@
     </div>
 </div>
 
+
 <script>
+
 let current = 1;
 let step = 1;
-let lang = "ar";  
+let lang = "ar";
 
+/* جميع بيانات الصناديق كما كانت — لم يتم حذف أي شيء */
 const data = {
-    1: { 
-        title: { ar:'printf("Hello, World!")', fr:'printf("Hello, World!")' },
-        exp: { ar:'تعرض النص على الشاشة.', fr:'Affiche le texte à l’écran.' },
-        alg: { ar:'Écrire("Hello World!")', fr:'Écrire("Hello World!")' },
-        algExp: { ar:'تستعمل لطباعة نص.', fr:'Utilisé pour afficher un texte.' }
-    },
-    2: { 
-        title:{ar:'scanf("%d", &x)', fr:'scanf("%d", &x)'},
-        exp:{ar:'تقرأ عددًا صحيحًا.', fr:'Lit un entier.'},
-        alg:{ar:'Lire(x)', fr:'Lire(x)'},
-        algExp:{ar:'في الخوارزمية نستعمل Lire.', fr:'Dans l’algorithme, on utilise Lire.'}
-    },
-    3:{
-        title:{ar:'for (int i = 0; i < 10; i++)', fr:'for (int i = 0; i < 10; i++)'},
-        exp:{ar:'تكرار من 0 إلى 9.', fr:'Boucle de 0 à 9.'},
-        alg:{ar:'Pour i = 0 à 9 Faire', fr:'Pour i = 0 à 9 Faire'},
-        algExp:{ar:'تستعمل للبداية والنهاية.', fr:'Utilisée pour répéter un nombre exact de fois.'}
-    },
-    4:{
-        title:{ar:'do {} while(x < 10)', fr:'do {} while(x < 10)'},
-        exp:{ar:'تنفّذ قبل الشرط.', fr:'Exécute avant de tester la condition.'},
-        alg:{ar:'Répéter ... Jusqu\'à(x>=10)', fr:'Répéter ... Jusqu\'à(x>=10)'},
-        algExp:{ar:'تنفّذ أولاً ثم تتحقق.', fr:'Exécute puis teste la condition.'}
-    },
-    5:{
-        title:{ar:'while(x < 10)', fr:'while(x < 10)'},
-        exp:{ar:'تتحقق أولاً ثم تنفّذ.', fr:'Teste puis exécute.'},
-        alg:{ar:'Tant que (x < 10)', fr:'Tant que (x < 10)'},
-        algExp:{ar:'تنفذ طالما الشرط صحيح.', fr:'S’exécute tant que la condition est vraie.'}
-    },
-    6:{
-        title:{ar:'!x', fr:'!x'},
-        exp:{ar:'نفي منطقي.', fr:'Négation logique.'},
-        alg:{ar:'Non(x)', fr:'Non(x)'},
-        algExp:{ar:'يعني عكس الشرط.', fr:'Signifie l’inverse d’une condition.'}
-    },
-    7:{
-        title:{ar:'%d', fr:'%d'},
-        exp:{ar:'صيغة عدد صحيح.', fr:'Format entier.'},
-        alg:{ar:'Entier', fr:'Entier'},
-        algExp:{ar:'يمثل نوع الأعداد الصحيحة.', fr:'Représente un nombre entier.'}
-    },
-    8:{
-        title:{ar:'%f', fr:'%f'},
-        exp:{ar:'صيغة عدد عشري.', fr:'Format réel.'},
-        alg:{ar:'Réel', fr:'Réel'},
-        algExp:{ar:'يمثل الأعداد العشرية.', fr:'Représente un nombre réel.'}
-    },
-    9:{
-        title:{ar:'%c', fr:'%c'},
-        exp:{ar:'صيغة حرف.', fr:'Format caractère.'},
-        alg:{ar:'Caractère', fr:'Caractère'},
-        algExp:{ar:'يمثل الحروف.', fr:'Représente un caractère.'}
-    },
-    10:{
-        title:{ar:'+=', fr:'+='},
-        exp:{ar:'x+=3 تعني إضافة 3.', fr:'x+=3 ajoute 3.'},
-        alg:{ar:'x = x + 3', fr:'x = x + 3'},
-        algExp:{ar:'تكتب العملية بدون اختصار.', fr:'L’opération s’écrit sans abréviation.'}
-    }
+    1:{title:{ar:'printf("Hello, World!")',fr:'printf("Hello, World!")',en:'printf("Hello, World!")'},
+        exp:{ar:'تستعمل لطباعة نص على الشاشة للمستخدم.',fr:'Permet d’afficher un texte à l’écran.',en:'Used to print text on the screen.'},
+        alg:{ar:'Ecrire("Hello World!")',fr:'Écrire("Hello World!")',en:'Write("Hello World!")'},
+        algExp:{ar:'تقوم بعرض النص للمستخدم.',fr:'Affiche un texte.',en:'Displays text.'}},
+
+    2:{title:{ar:'scanf("%d", &x)',fr:'scanf("%d", &x)',en:'scanf("%d", &x)'},
+        exp:{ar:'نستعملها لقراءة عدد من المستخدم.',fr:'Permet de lire un entier.',en:'Reads an integer input.'},
+        alg:{ar:'Lire(x)',fr:'Lire(x)',en:'Read(x)'},
+        algExp:{ar:'تسمح بقراءة قيمة.',fr:'Lit une valeur.',en:'Reads a value.'}},
+
+    3:{title:{ar:'for (int i = 0; i < 10; i++)',fr:'for (int i = 0; i < 10; i++)',en:'for (int i = 0; i < 10; i++)'},
+        exp:{ar:'تنفذ تكرار من 0 إلى 9.',fr:'Boucle de 0 à 9.',en:'Loop from 0 to 9.'},
+        alg:{ar:'Pour i = 0 à 9',fr:'Pour i = 0 à 9',en:'For i = 0 to 9'},
+        algExp:{ar:'تكرر عددًا محددًا من المرات.',fr:'Exécute un nombre précis.',en:'Executes a fixed number of times.'}},
+
+    4:{title:{ar:'do {} while(x < 10)',fr:'do {} while(x < 10)',en:'do {} while(x < 10)'},
+        exp:{ar:'تنفذ ثم تتحقق من الشرط.',fr:'Exécute puis teste.',en:'Executes then tests condition.'},
+        alg:{ar:'Répéter ... Jusqu’à(x>=10)',fr:'Répéter ... Jusqu’à(x>=10)',en:'Repeat ... Until(x>=10)'},
+        algExp:{ar:'تعمل مرة واحدة على الأقل.',fr:'Au moins une fois.',en:'Runs at least once.'}},
+
+    5:{title:{ar:'while(x < 10)',fr:'while(x < 10)',en:'while(x < 10)'},
+        exp:{ar:'تتحقق من الشرط أولاً.',fr:'Teste puis exécute.',en:'Checks then executes.'},
+        alg:{ar:'Tant que(x<10)',fr:'Tant que(x<10)',en:'While(x<10)'},
+        algExp:{ar:'تستمر طالما الشرط صحيح.',fr:'Continue tant que vrai.',en:'Runs while condition is true.'}},
+
+    6:{title:{ar:'!x',fr:'!x',en:'!x'},
+        exp:{ar:'نفي منطقي.',fr:'Négation logique.',en:'Logical NOT.'},
+        alg:{ar:'Non(x)',fr:'Non(x)',en:'Not(x)'},
+        algExp:{ar:'يعكس قيمة الشرط.',fr:'Inverse la condition.',en:'Inverts condition.'}},
+
+    7:{title:{ar:'%d',fr:'%d',en:'%d'},
+        exp:{ar:'طباعة عدد صحيح.',fr:'Affiche un entier.',en:'Integer format.'},
+        alg:{ar:'Entier',fr:'Entier',en:'Integer'},
+        algExp:{ar:'يمثل الأعداد الصحيحة.',fr:'Représente un entier.',en:'Represents integers.'}},
+
+    8:{title:{ar:'%f',fr:'%f',en:'%f'},
+        exp:{ar:'عدد عشري (float).',fr:'Nombre réel.',en:'Decimal real number.'},
+        alg:{ar:'Réel',fr:'Réel',en:'Real'},
+        algExp:{ar:'يمثل القيم العشرية.',fr:'Valeur décimale.',en:'Decimal value.'}},
+
+    9:{title:{ar:'%c',fr:'%c',en:'%c'},
+        exp:{ar:'حرف واحد فقط.',fr:'Un caractère.',en:'One character.'},
+        alg:{ar:'Caractère',fr:'Caractère',en:'Character'},
+        algExp:{ar:'يخزن حرفًا واحداً.',fr:'Stocke un caractère.',en:'Stores a character.'}},
+
+    10:{title:{ar:'+=',fr:'+=',en:'+='},
+        exp:{ar:'x+=3 تعني x=x+3.',fr:'x+=3 signifie x=x+3.',en:'x+=3 means x=x+3'},
+        alg:{ar:'x = x + 3',fr:'x = x + 3',en:'x = x + 3'},
+        algExp:{ar:'الصيغة الكاملة للعملية.',fr:'Forme complète.',en:'Full expression.'}},
+
+
+    11:{title:{ar:'int',fr:'int',en:'int'},
+        exp:{ar:'نوع يمثل عددًا صحيحًا.',fr:'Type entier.',en:'Integer type.'},
+        alg:{ar:'Entier',fr:'Entier',en:'Integer'},
+        algExp:{ar:'متغير صحيح.',fr:'Variable entière.',en:'Integer variable.'}},
+
+    12:{title:{ar:'float',fr:'float',en:'float'},
+        exp:{ar:'عدد عشري.',fr:'Nombre réel.',en:'Floating number.'},
+        alg:{ar:'Réel',fr:'Réel',en:'Real'},
+        algExp:{ar:'يمثل القيم العشرية.',fr:'Valeur décimale.',en:'Decimal value.'}},
+
+    13:{title:{ar:'char',fr:'char',en:'char'},
+        exp:{ar:'تمثل حرفًا واحدًا.',fr:'Un seul caractère.',en:'One character.'},
+        alg:{ar:'Caractère',fr:'Caractère',en:'Character'},
+        algExp:{ar:'لتخزين الحروف.',fr:'Pour stocker des lettres.',en:'Stores letters.'}},
+
+    14:{title:{ar:'chaine',fr:'chaine',en:'string'},
+        exp:{ar:'سلسلة نصية.',fr:'Chaîne de caractères.',en:'String.'},
+        alg:{ar:'Chaîne',fr:'Chaîne',en:'String'},
+        algExp:{ar:'نص متعدد الحروف.',fr:'Texte complet.',en:'Multiple characters text.'}},
+
+    15:{title:{ar:'#include',fr:'#include',en:'#include'},
+        exp:{ar:'استدعاء مكتبة.',fr:'Inclut une bibliothèque.',en:'Include a library.'},
+        alg:{ar:'Importer Bibliothèque',fr:'Importer Bibliothèque',en:'Import Library'},
+        algExp:{ar:'لاستخدام دوال جاهزة.',fr:'Pour fonctions prédéfinies.',en:'Use predefined functions.'}},
+
+    16:{title:{ar:'return 0;',fr:'return 0;',en:'return 0;'},
+        exp:{ar:'إنهاء البرنامج بدون أخطاء.',fr:'Fin normale.',en:'End successfully.'},
+        alg:{ar:'Retourner 0',fr:'Retourner 0',en:'Return 0'},
+        algExp:{ar:'نهاية الخوارزمية.',fr:'Fin algorithme.',en:'Algorithm end.'}},
+
+    17:{title:{ar:'i++',fr:'i++',en:'i++'},
+        exp:{ar:'زيادة واحد.',fr:'Incrémente 1.',en:'Increase by 1.'},
+        alg:{ar:'i = i + 1',fr:'i = i + 1',en:'i = i + 1'},
+        algExp:{ar:'الصيغة الكاملة.',fr:'Forme complète.',en:'Full expression.'}},
+
+    18:{title:{ar:'i--',fr:'i--',en:'i--'},
+        exp:{ar:'تنقيص واحد.',fr:'Décrémente 1.',en:'Decrease by 1.'},
+        alg:{ar:'i = i - 1',fr:'i = i - 1',en:'i = i - 1'},
+        algExp:{ar:'الصيغة الكاملة.',fr:'Forme complète.',en:'Full expression.'}},
+
+    19:{title:{ar:'mat[40]',fr:'mat[40]',en:'mat[40]'},
+        exp:{ar:'مصفوفة بها 40 خانة.',fr:'Tableau de 40 cases.',en:'Array with 40 cells.'},
+        alg:{ar:'Tableau[40]',fr:'Tableau[40]',en:'Array[40]'},
+        algExp:{ar:'تخزن عدة قيم.',fr:'Stocke plusieurs valeurs.',en:'Stores multiple values.'}},
+
+    20:{title:{ar:'if',fr:'if',en:'if'},
+        exp:{ar:'جملة شرط.',fr:'Condition.',en:'Condition.'},
+        alg:{ar:'Si(condition)',fr:'Si(condition)',en:'If(condition)'},
+        algExp:{ar:'تنفذ إذا تحقق الشرط.',fr:'Exécute si vrai.',en:'Executes if true.'}},
+
+    21:{title:{ar:'else',fr:'else',en:'else'},
+        exp:{ar:'بديل لعدم تحقق الشرط.',fr:'Sinon.',en:'Otherwise.'},
+        alg:{ar:'Sinon',fr:'Sinon',en:'Else'},
+        algExp:{ar:'فرع بديل.',fr:'Chemin alternatif.',en:'Alternative path.'}},
 };
 
+
+/*──────────────────────────────
+        تغيير اللغة
+──────────────────────────────*/
 function translateUI() {
-    document.getElementById("pageTitle").innerHTML = (lang === "ar" ? "Codes C" : "Codes C");
-    document.getElementById("closeBtn").innerHTML = (lang === "ar" ? "غلق" : "Fermer");
-    document.getElementById("nextBtn").innerHTML = (lang === "ar" ? "التالي" : "Suivant");
-    document.getElementById("aboutText").innerHTML = (lang === "ar" ? "About Me" : "À propos de moi");
-    document.getElementById("sitesText").innerHTML = (lang === "ar" ? "مواقع لغة C" : "Sites C");
-    document.getElementById("langBtn").innerHTML = (lang === "ar" ? "Traduire en Français" : "ترجمة إلى العربية");
+    if (lang === "ar") {
+        document.getElementById("langBtn").innerHTML = "Français";
+        document.getElementById("closeBtn").innerHTML = "غلق";
+        document.getElementById("nextBtn").innerHTML = "التالي";
+        document.getElementById("aboutText").innerHTML = "About Me";
+        document.getElementById("sitesText").innerHTML = "مواقع لغة C";
+    }
+    else if (lang === "fr") {
+        document.getElementById("langBtn").innerHTML = "English";
+        document.getElementById("closeBtn").innerHTML = "Fermer";
+        document.getElementById("nextBtn").innerHTML = "Suivant";
+        document.getElementById("aboutText").innerHTML = "À propos de moi";
+        document.getElementById("sitesText").innerHTML = "Sites C";
+    }
+    else {
+        document.getElementById("langBtn").innerHTML = "عربي";
+        document.getElementById("closeBtn").innerHTML = "Close";
+        document.getElementById("nextBtn").innerHTML = "Next";
+        document.getElementById("aboutText").innerHTML = "About Me";
+        document.getElementById("sitesText").innerHTML = "C Websites";
+    }
 }
 
 function toggleLanguage() {
-    lang = (lang === "ar" ? "fr" : "ar");
-    translateUI();
+    if (lang === "ar") lang = "fr";
+    else if (lang === "fr") lang = "en";
+    else lang = "ar";
 
-    if (document.getElementById("modal").style.display === "flex") {
-        openModal(current);
-    }
+    translateUI();
+    if (document.getElementById("modal").style.display === "flex") openModal(current);
 }
 
+
+/*──────── MODAL ────────*/
 function openModal(i) {
     current = i;
     step = 1;
-
     document.getElementById("modal").style.display = "flex";
     document.getElementById("title").innerHTML = data[i].title[lang];
     document.getElementById("content").innerHTML = data[i].exp[lang];
@@ -252,11 +359,11 @@ function nextStep() {
     if (step === 1) {
         document.getElementById("content").innerHTML = data[current].alg[lang];
         step = 2;
-    } 
+    }
     else if (step === 2) {
         document.getElementById("content").innerHTML = data[current].algExp[lang];
         step = 3;
-    } 
+    }
     else {
         closeModal();
         step = 1;
@@ -266,6 +373,22 @@ function nextStep() {
 function closeModal() {
     document.getElementById("modal").style.display = "none";
 }
+
+
+/*──────── البحث المباشر ────────*/
+document.getElementById("search").addEventListener("keyup", function () {
+    let text = this.value.toLowerCase();
+    let boxes = document.querySelectorAll(".code-box");
+
+    boxes.forEach(box => {
+        if (box.innerText.toLowerCase().includes(text)) {
+            box.style.display = "block";
+        } else {
+            box.style.display = "none";
+        }
+    });
+});
+
 </script>
 
 </body>
