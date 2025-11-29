@@ -1,81 +1,186 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <h2><li><a href="index.html">home</a></li></h2>
+    <meta charset="UTF-8">
     <title>Applications de développement C</title>
+
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #cccccc;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            margin: 0;
+            padding: 0;
+            color: #e2e8f0;
             text-align: center;
         }
+
+        /* Home Button */
+        .home-btn {
+            display: inline-block;
+            margin: 25px;
+            font-size: 22px;
+            text-decoration: none;
+            color: #ffffff;
+            background: #3b82f6;
+            padding: 12px 28px;
+            border-radius: 12px;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .home-btn:hover {
+            background: #2563eb;
+            transform: scale(1.07);
+        }
+
         .container {
-            width: 80%;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #ffffff;
-            border: 1px solid #aaaaaa;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 85%;
+            margin: 30px auto 40px auto;
+            background: rgba(255,255,255,0.06);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            backdrop-filter: blur(10px);
         }
-        .section {
-            margin-bottom: 40px;
+
+        h1 {
+            font-size: 38px;
+            margin-bottom: 25px;
+            color: #60a5fa;
         }
+
+        .section h2 {
+            font-size: 30px;
+            color: #93c5fd;
+            margin-top: 40px;
+        }
+
         .app {
-            margin-bottom: 20px;
-            padding: 10px;
-            border: 1px solid #dddddd;
-            border-radius: 10px;
-            background-color: #f9f9f9;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 18px;
+            padding: 20px;
+            margin: 25px auto;
+            width: 75%;
+            transition: 0.3s;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
         }
+
+        .app:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.45);
+        }
+
+        .app h3 {
+            font-size: 26px;
+            margin-bottom: 10px;
+            color: #bfdbfe;
+        }
+
+        .app p {
+            color: #cbd5e1;
+            font-size: 17px;
+            margin-bottom: 15px;
+        }
+
         .app a {
             text-decoration: none;
-            color: #0066cc;
+            background: #3b82f6;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin: 5px;
+            display: inline-block;
+            transition: 0.3s;
+            font-weight: bold;
         }
+
         .app a:hover {
-            color: #0033cc;
+            background: #2563eb;
+            transform: scale(1.08);
         }
     </style>
 </head>
+
 <body>
+
+    <a href="home.html" class="home-btn">🏠 Home</a>
+
     <div class="container">
         <h1>Applications de développement C</h1>
+
+        <!-- PC SECTION -->
         <div class="section">
-            <h2>Pour ordinateur</h2>
+            <h2>💻 Pour ordinateur</h2>
+
+            <div class="app">
+                <h3>Clion (JetBrains)</h3>
+                <p>Un IDE C/C++ professionnel avec analyse intelligente.</p>
+                <a href="https://www.jetbrains.com/clion/" target="_blank">Windows</a>
+                <a href="https://www.jetbrains.com/clion/" target="_blank">Linux</a>
+                <a href="https://www.jetbrains.com/clion/" target="_blank">macOS</a>
+            </div>
+
             <div class="app">
                 <h3>Code::Blocks</h3>
-                <p>Un IDE gratuit et open-source pour C et C++</p>
-                <a href="https://sourceforge.net/projects/codeblocks/files/" target="_blank">Télécharger pour Windows</a> | <a href="https://www.codeblocks.org/download/source" target="_blank">Télécharger pour Linux</a> | <a href="https://www.codeblocks.org/download/source" target="_blank">Télécharger pour macOS</a>
+                <p>Un IDE gratuit et open-source pour C et C++.</p>
+                <a href="https://sourceforge.net/projects/codeblocks/files/" target="_blank">Windows</a>
+                <a href="https://www.codeblocks.org/download/source" target="_blank">Linux</a>
+                <a href="https://www.codeblocks.org/download/source" target="_blank">macOS</a>
             </div>
+
             <div class="app">
                 <h3>Visual Studio</h3>
-                <p>Un IDE puissant pour C et C++</p>
-                <a href="https://www.visualstudio.com/fr/downloads/" target="_blank">Télécharger pour Windows</a> | <a href="https://docs.microsoft.com/en-us/visualstudio/mac/installation" target="_blank">Télécharger pour macOS</a>
+                <p>Un environnement complet pour le développement C/C++.</p>
+                <a href="https://www.visualstudio.com/fr/downloads/" target="_blank">Windows</a>
+                <a href="https://learn.microsoft.com/fr-fr/visualstudio/mac/installation" target="_blank">macOS</a>
             </div>
+
             <div class="app">
                 <h3>GCC</h3>
-                <p>Un compilateur C et C++ gratuit et open-source</p>
-                <a href="https://sourceforge.net/projects/gcc-win64/" target="_blank">Télécharger pour Windows</a> | <a href="https://gcc.gnu.org/install/" target="_blank">Télécharger pour Linux</a> | <a href="https://gcc.gnu.org/install/" target="_blank">Télécharger pour macOS</a>
+                <p>Le compilateur C/C++ le plus utilisé au monde.</p>
+                <a href="https://sourceforge.net/projects/gcc-win64/" target="_blank">Windows</a>
+                <a href="https://gcc.gnu.org/install/" target="_blank">Linux</a>
+                <a href="https://gcc.gnu.org/install/" target="_blank">macOS</a>
+            </div>
+
+            <div class="app">
+                <h3>Dev-C++</h3>
+                <p>Un IDE léger et simple pour apprendre C.</p>
+                <a href="https://sourceforge.net/projects/orwelldevcpp/" target="_blank">Windows</a>
             </div>
         </div>
+
+        <!-- MOBILE SECTION -->
         <div class="section">
-            <h2>Pour téléphone</h2>
+            <h2>📱 Pour téléphone</h2>
+
             <div class="app">
                 <h3>C4droid</h3>
-                <p>Un IDE C et C++ pour Android</p>
-                <a href="https://play.google.com/store/apps/details?id=com.n0n3m4.droidc" target="_blank">Télécharger pour Android</a>
+                <p>Un IDE C/C++ puissant pour Android.</p>
+                <a href="https://play.google.com/store/apps/details?id=com.n0n3m4.droidc" target="_blank">Android</a>
             </div>
+
             <div class="app">
                 <h3>C Compiler</h3>
-                <p>Un compilateur C pour Android</p>
-                app href="https://play.google.com/store/apps/details?id=com.n0n3m4.droidc" target="_blank">Télécharger pour Android</a>
+                <p>Un compilateur simple et efficace.</p>
+                <a href="https://play.google.com/store/apps/details?id=com.rhmsoft.cc" target="_blank">Android</a>
             </div>
+
+            <div class="app">
+                <h3>Termux</h3>
+                <p>Terminal Android permettant d'utiliser GCC.</p>
+                <a href="https://play.google.com/store/apps/details?id=com.termux" target="_blank">Android</a>
+            </div>
+
             <div class="app">
                 <h3>Codeanywhere</h3>
-                <p>Un IDE en ligne pour C et C++</p>
-                <a href="https://codeanywhere.com/" target="_blank">Télécharger pour iOS et Android</a>
+                <p>Un IDE cloud accessible partout.</p>
+                <a href="https://codeanywhere.com/" target="_blank">Android / iOS</a>
             </div>
+
         </div>
+
     </div>
 </body>
 </html>

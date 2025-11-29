@@ -1,43 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <h2><li><a href="index.html">home</a></li></h2>
+    <meta charset="UTF-8" />
     <title>Contactez-moi</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e1e2f, #2e3440);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
+
         .container {
-            width: 50%;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #cccccc;
-            border: 1px solid #aaaaaa;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 420px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255,255,255,0.2);
         }
+
+        h1 {
+            margin-bottom: 25px;
+            font-size: 30px;
+            letter-spacing: 1px;
+        }
+
         .info {
-            margin-bottom: 20px;
+            margin: 20px 0;
+            font-size: 18px;
         }
-        .info label {
+
+        .info a {
+            color: #61dafb;
             font-weight: bold;
-            margin-right: 10px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .info a:hover {
+            color: #a6e3ff;
+        }
+
+        .home-btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 25px;
+            background: #61dafb;
+            color: #000;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s ease;
+        }
+
+        .home-btn:hover {
+            background: #a6e3ff;
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
+
     <div class="container">
         <h1>Contactez-moi</h1>
+
         <div class="info">
-            <label>Facebook :</label>
+            <label>📘 Facebook :</label>
             <a href="https://www.facebook.com/share/1AQqjJ2PhS/" target="_blank">Bibars Horri</a>
         </div>
+
         <div class="info">
-            <label>Email :</label>
+            <label>📧 Email :</label>
             <a href="mailto:bibarss39@gmail.com">bibarss39@gmail.com</a>
         </div>
+
+        <a href="home.html" class="home-btn">⟵ Retour</a>
     </div>
+
 </body>
 </html>

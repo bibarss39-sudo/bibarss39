@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Codes C</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #222831;
+            margin: 0;
+            padding: 40px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            color: white;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        .code-box {
+            background: #ffffffab;
+            border: 2px solid #000000;
+            padding: 40px;
+            margin: 25px auto;
+            width: 380px;
+            height: 150px;
+            cursor: pointer;
+            border-radius: 14px;
+            text-align: center;
+            font-size: 26px;
+            transition: 0.3s;
+            box-shadow: 0 6px 15px #00000050;
+        }
+
+        .code-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px #00000070;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000a2;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            animation: fade 0.4s ease;
+        }
+
+        @keyframes fade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            width: 450px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 8px 25px #00000080;
+            animation: pop 0.35s ease;
+        }
+
+        @keyframes pop {
+            from { transform: scale(0.6); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-text {
+            margin: 20px 0;
+            font-size: 20px;
+            color: #222;
+            font-weight: bold;
+        }
+
+        .buttons {
+            margin-top: 25px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            border: none;
+            background: #222831;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #3a3a3a;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navigation">
+    <ul>
+        <li><a href="contact.html"><h4>About Me</h4></a></li>
+        <li><a href="apps.html"><h4>مواقع لغة C</h4></a></li>
+    </ul>
+</nav>
+
+<h1 style="color:white; text-align:center;">Codes C</h1>
+
+
+<div class="code-box" onclick="openModal(1)">printf("Hello, World!");</div>
+<div class="code-box" onclick="openModal(2)">scanf("%d", &x);</div>
+<div class="code-box" onclick="openModal(3)">for (int i = 0; i < 10; i++)</div>
+<div class="code-box" onclick="openModal(4)">do { } while (x < 10)</div>
+<div class="code-box" onclick="openModal(5)">while (x < 10)</div>
+<div class="code-box" onclick="openModal(6)">!x</div>
+<div class="code-box" onclick="openModal(7)">%d</div>
+<div class="code-box" onclick="openModal(8)">%f</div>
+<div class="code-box" onclick="openModal(9)">%c</div>
+<div class="code-box" onclick="openModal(10)">+=</div>
+
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <h2 id="title"></h2>
+        <p class="modal-text" id="content"></p>
+
+        <div class="buttons">
+            <button onclick="closeModal()">غلق</button>
+            <button onclick="nextStep()">التالي</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let current = 1;
+    let step = 1;
+
+    const data = {
+        1: { title: 'printf("Hello, World!")', exp: 'Affiche "Hello, World!" à l\'écran.', alg: 'Écrire("Hello World!")' },
+        2: { title: 'scanf("%d", &x)', exp: 'Lit un entier et le stocke dans x.', alg: 'Lire(x)' },
+        3: { title: 'for (int i = 0; i < 10; i++)', exp: 'Boucle de 0 à 9.', alg: 'Pour i de 0 à 9.' },
+        4: { title: 'do {} while(x < 10)', exp: 'Exécute puis teste.', alg: 'Répéter ... Jusqu\'à' },
+        5: { title: 'while(x < 10)', exp: 'Teste puis exécute.', alg: 'Tant que x < 10' },
+        6: { title: '!x', exp: 'Négation logique.', alg: 'Non x' },
+        7: { title: '%d', exp: 'Format entier.', alg: 'Entier' },
+        8: { title: '%f', exp: 'Format réel.', alg: 'Réel' },
+        9: { title: '%c', exp: 'Format caractère.', alg: 'Caractère' },
+        10:{ title: '+=', exp: 'x+=3 ajoute 3 à x', alg: 'x=x+3' }
+    };
+
+    function openModal(i) {
+        current = i;
+        step = 1;
+
+        document.getElementById("modal").style.display = "flex";
+        document.getElementById("title").innerHTML = data[i].title;
+        document.getElementById("content").innerHTML = data[i].exp;
+    }
+
+   
+    function nextStep() {
+        if (step === 1) {
+            document.getElementById("content").innerHTML = data[current].alg;
+            step = 2;
+        } else {
+            closeModal();
+            step = 1;
+        }
+    }
+
+    function closeModal() {
+        document.getElementById("modal").style.display = "none";
+    }
+</script>
+
+</body>
+</html>
