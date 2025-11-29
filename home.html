@@ -7,9 +7,10 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #222831;
+            background-color: #1b1f24;
             margin: 0;
             padding: 40px;
+            color: white;
         }
 
         nav ul {
@@ -19,14 +20,39 @@
         }
 
         nav ul li a {
-            color: white;
+            color: #00eaff;
             font-size: 20px;
             text-decoration: none;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #0aff9d;
+            transform: scale(1.05);
+        }
+
+        .translate-btn {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            padding: 10px 20px;
+            background: #00eaff;
+            color: #000;
+            border: none;
+            font-size: 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .translate-btn:hover {
+            background: #0aff9d;
+            transform: scale(1.05);
         }
 
         .code-box {
-            background: #ffffffab;
-            border: 2px solid #000000;
+            background: #ffffff18;
+            border: 1px solid #00eaff60;
             padding: 40px;
             margin: 25px auto;
             width: 380px;
@@ -37,11 +63,13 @@
             font-size: 26px;
             transition: 0.3s;
             box-shadow: 0 6px 15px #00000050;
+            color: #e9f1ff;
         }
 
         .code-box:hover {
-            transform: scale(1.05);
+            transform: scale(1.07);
             box-shadow: 0 10px 20px #00000070;
+            background: #ffffff25;
         }
 
         .modal {
@@ -54,35 +82,15 @@
             display: none;
             justify-content: center;
             align-items: center;
-            animation: fade 0.4s ease;
-        }
-
-        @keyframes fade {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         .modal-content {
-            width: 450px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(8px);
+            width: 480px;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 30px;
             border-radius: 16px;
-            padding: 25px;
             text-align: center;
-            box-shadow: 0 8px 25px #00000080;
-            animation: pop 0.35s ease;
-        }
-
-        @keyframes pop {
-            from { transform: scale(0.6); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        .modal-text {
-            margin: 20px 0;
-            font-size: 20px;
-            color: #222;
-            font-weight: bold;
+            color: #111;
         }
 
         .buttons {
@@ -95,7 +103,7 @@
             padding: 12px 25px;
             font-size: 16px;
             border: none;
-            background: #222831;
+            background: #1b1f24;
             color: white;
             border-radius: 10px;
             cursor: pointer;
@@ -103,23 +111,24 @@
         }
 
         button:hover {
-            background: #3a3a3a;
-            transform: scale(1.05);
+            background: #2d333b;
+            transform: scale(1.07);
         }
     </style>
 </head>
 
 <body>
 
+<button class="translate-btn" onclick="toggleLanguage()" id="langBtn">Traduire en Français</button>
+
 <nav class="navigation">
     <ul>
-        <li><a href="contact.html"><h4>About Me</h4></a></li>
-        <li><a href="apps.html"><h4>مواقع لغة C</h4></a></li>
+        <li><a href="contact.html"><h4 id="aboutText">About Me</h4></a></li>
+        <li><a href="apps.html"><h4 id="sitesText">مواقع لغة C</h4></a></li>
     </ul>
 </nav>
 
-<h1 style="color:white; text-align:center;">Codes C</h1>
-
+<h1 id="pageTitle" style="color:white; text-align:center;">Codes C</h1>
 
 <div class="code-box" onclick="openModal(1)">printf("Hello, World!");</div>
 <div class="code-box" onclick="openModal(2)">scanf("%d", &x);</div>
@@ -132,60 +141,135 @@
 <div class="code-box" onclick="openModal(9)">%c</div>
 <div class="code-box" onclick="openModal(10)">+=</div>
 
-
 <div id="modal" class="modal">
     <div class="modal-content">
         <h2 id="title"></h2>
         <p class="modal-text" id="content"></p>
 
         <div class="buttons">
-            <button onclick="closeModal()">غلق</button>
-            <button onclick="nextStep()">التالي</button>
+            <button onclick="closeModal()" id="closeBtn">غلق</button>
+            <button onclick="nextStep()" id="nextBtn">التالي</button>
         </div>
     </div>
 </div>
 
 <script>
-    let current = 1;
-    let step = 1;
+let current = 1;
+let step = 1;
+let lang = "ar";  
 
-    const data = {
-        1: { title: 'printf("Hello, World!")', exp: 'Affiche "Hello, World!" à l\'écran.', alg: 'Écrire("Hello World!")' },
-        2: { title: 'scanf("%d", &x)', exp: 'Lit un entier et le stocke dans x.', alg: 'Lire(x)' },
-        3: { title: 'for (int i = 0; i < 10; i++)', exp: 'Boucle de 0 à 9.', alg: 'Pour i de 0 à 9.' },
-        4: { title: 'do {} while(x < 10)', exp: 'Exécute puis teste.', alg: 'Répéter ... Jusqu\'à' },
-        5: { title: 'while(x < 10)', exp: 'Teste puis exécute.', alg: 'Tant que x < 10' },
-        6: { title: '!x', exp: 'Négation logique.', alg: 'Non x' },
-        7: { title: '%d', exp: 'Format entier.', alg: 'Entier' },
-        8: { title: '%f', exp: 'Format réel.', alg: 'Réel' },
-        9: { title: '%c', exp: 'Format caractère.', alg: 'Caractère' },
-        10:{ title: '+=', exp: 'x+=3 ajoute 3 à x', alg: 'x=x+3' }
-    };
+const data = {
+    1: { 
+        title: { ar:'printf("Hello, World!")', fr:'printf("Hello, World!")' },
+        exp: { ar:'تعرض النص على الشاشة.', fr:'Affiche le texte à l’écran.' },
+        alg: { ar:'Écrire("Hello World!")', fr:'Écrire("Hello World!")' },
+        algExp: { ar:'تستعمل لطباعة نص.', fr:'Utilisé pour afficher un texte.' }
+    },
+    2: { 
+        title:{ar:'scanf("%d", &x)', fr:'scanf("%d", &x)'},
+        exp:{ar:'تقرأ عددًا صحيحًا.', fr:'Lit un entier.'},
+        alg:{ar:'Lire(x)', fr:'Lire(x)'},
+        algExp:{ar:'في الخوارزمية نستعمل Lire.', fr:'Dans l’algorithme, on utilise Lire.'}
+    },
+    3:{
+        title:{ar:'for (int i = 0; i < 10; i++)', fr:'for (int i = 0; i < 10; i++)'},
+        exp:{ar:'تكرار من 0 إلى 9.', fr:'Boucle de 0 à 9.'},
+        alg:{ar:'Pour i = 0 à 9 Faire', fr:'Pour i = 0 à 9 Faire'},
+        algExp:{ar:'تستعمل للبداية والنهاية.', fr:'Utilisée pour répéter un nombre exact de fois.'}
+    },
+    4:{
+        title:{ar:'do {} while(x < 10)', fr:'do {} while(x < 10)'},
+        exp:{ar:'تنفّذ قبل الشرط.', fr:'Exécute avant de tester la condition.'},
+        alg:{ar:'Répéter ... Jusqu\'à(x>=10)', fr:'Répéter ... Jusqu\'à(x>=10)'},
+        algExp:{ar:'تنفّذ أولاً ثم تتحقق.', fr:'Exécute puis teste la condition.'}
+    },
+    5:{
+        title:{ar:'while(x < 10)', fr:'while(x < 10)'},
+        exp:{ar:'تتحقق أولاً ثم تنفّذ.', fr:'Teste puis exécute.'},
+        alg:{ar:'Tant que (x < 10)', fr:'Tant que (x < 10)'},
+        algExp:{ar:'تنفذ طالما الشرط صحيح.', fr:'S’exécute tant que la condition est vraie.'}
+    },
+    6:{
+        title:{ar:'!x', fr:'!x'},
+        exp:{ar:'نفي منطقي.', fr:'Négation logique.'},
+        alg:{ar:'Non(x)', fr:'Non(x)'},
+        algExp:{ar:'يعني عكس الشرط.', fr:'Signifie l’inverse d’une condition.'}
+    },
+    7:{
+        title:{ar:'%d', fr:'%d'},
+        exp:{ar:'صيغة عدد صحيح.', fr:'Format entier.'},
+        alg:{ar:'Entier', fr:'Entier'},
+        algExp:{ar:'يمثل نوع الأعداد الصحيحة.', fr:'Représente un nombre entier.'}
+    },
+    8:{
+        title:{ar:'%f', fr:'%f'},
+        exp:{ar:'صيغة عدد عشري.', fr:'Format réel.'},
+        alg:{ar:'Réel', fr:'Réel'},
+        algExp:{ar:'يمثل الأعداد العشرية.', fr:'Représente un nombre réel.'}
+    },
+    9:{
+        title:{ar:'%c', fr:'%c'},
+        exp:{ar:'صيغة حرف.', fr:'Format caractère.'},
+        alg:{ar:'Caractère', fr:'Caractère'},
+        algExp:{ar:'يمثل الحروف.', fr:'Représente un caractère.'}
+    },
+    10:{
+        title:{ar:'+=', fr:'+='},
+        exp:{ar:'x+=3 تعني إضافة 3.', fr:'x+=3 ajoute 3.'},
+        alg:{ar:'x = x + 3', fr:'x = x + 3'},
+        algExp:{ar:'تكتب العملية بدون اختصار.', fr:'L’opération s’écrit sans abréviation.'}
+    }
+};
 
-    function openModal(i) {
-        current = i;
+function translateUI() {
+    document.getElementById("pageTitle").innerHTML = (lang === "ar" ? "Codes C" : "Codes C");
+    document.getElementById("closeBtn").innerHTML = (lang === "ar" ? "غلق" : "Fermer");
+    document.getElementById("nextBtn").innerHTML = (lang === "ar" ? "التالي" : "Suivant");
+    document.getElementById("aboutText").innerHTML = (lang === "ar" ? "About Me" : "À propos de moi");
+    document.getElementById("sitesText").innerHTML = (lang === "ar" ? "مواقع لغة C" : "Sites C");
+    document.getElementById("langBtn").innerHTML = (lang === "ar" ? "Traduire en Français" : "ترجمة إلى العربية");
+}
+
+function toggleLanguage() {
+    lang = (lang === "ar" ? "fr" : "ar");
+    translateUI();
+
+    if (document.getElementById("modal").style.display === "flex") {
+        openModal(current);
+    }
+}
+
+function openModal(i) {
+    current = i;
+    step = 1;
+
+    document.getElementById("modal").style.display = "flex";
+    document.getElementById("title").innerHTML = data[i].title[lang];
+    document.getElementById("content").innerHTML = data[i].exp[lang];
+}
+
+function nextStep() {
+    if (step === 1) {
+        document.getElementById("content").innerHTML = data[current].alg[lang];
+        step = 2;
+    } 
+    else if (step === 2) {
+        document.getElementById("content").innerHTML = data[current].algExp[lang];
+        step = 3;
+    } 
+    else {
+        closeModal();
         step = 1;
-
-        document.getElementById("modal").style.display = "flex";
-        document.getElementById("title").innerHTML = data[i].title;
-        document.getElementById("content").innerHTML = data[i].exp;
     }
+}
 
-   
-    function nextStep() {
-        if (step === 1) {
-            document.getElementById("content").innerHTML = data[current].alg;
-            step = 2;
-        } else {
-            closeModal();
-            step = 1;
-        }
-    }
-
-    function closeModal() {
-        document.getElementById("modal").style.display = "none";
-    }
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
 </script>
 
 </body>
 </html>
+
+
+
