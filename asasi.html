@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>القائمة الرئيسية — C Language</title>
+
+<!-- أيقونات Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+    body {
+        background-color: #1b1f24;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        color: white;
+    }
+
+    h1 {
+        text-align: center;
+        color: #00eaff;
+        margin-bottom: 30px;
+        font-size: 32px;
+    }
+
+    .lang-buttons {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .lang-buttons button {
+        background-color: #00eaff;
+        border: none;
+        padding: 10px 22px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        margin: 5px;
+        transition: 0.3s;
+        color: #000;
+    }
+
+    .lang-buttons button:hover {
+        background-color: #0aff9d;
+    }
+
+    /* القائمة العمودية */
+    .menu {
+        width: 90%;
+        max-width: 500px;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .item {
+        background: #ffffff18;
+        border: 1px solid #00eaff70;
+        border-radius: 15px;
+        padding: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 15px;
+        font-size: 22px;
+        font-weight: bold;
+        color: #00eaff;
+        cursor: pointer;
+        transition: 0.35s;
+        box-shadow: 0 0 10px #00eaff40;
+        text-decoration: none;
+    }
+
+    .item i {
+        font-size: 26px;
+    }
+
+    .item:hover {
+        background-color: #00eaff;
+        color: #000;
+        transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+        h1 {
+            font-size: 26px;
+        }
+
+        .item {
+            font-size: 19px;
+            padding: 16px;
+        }
+
+        .item i {
+            font-size: 22px;
+        }
+    }
+</style>
+</head>
+
+<body onload="setLang('ar')">
+
+<h1 data-lang="ar">القائمة الرئيسية — لغة C</h1>
+<h1 data-lang="en" style="display:none">Main Menu — C Language</h1>
+<h1 data-lang="fr" style="display:none">Menu Principal — Langage C</h1>
+
+<!-- زر تغيير اللغة -->
+<div class="lang-buttons">
+    <button onclick="setLang('ar')">العربية</button>
+    <button onclick="setLang('en')">English</button>
+    <button onclick="setLang('fr')">Français</button>
+</div>
+
+<!-- القائمة العمودية -->
+<div class="menu">
+
+    <!-- codes c -->
+    <a class="item" href="home.html" data-lang="ar"><i class="fa-solid fa-code"></i> أكواد C</a>
+    <a class="item" href="home.html" data-lang="en" style="display:none"><i class="fa-solid fa-code"></i> C Codes</a>
+    <a class="item" href="home.html" data-lang="fr" style="display:none"><i class="fa-solid fa-code"></i> Codes C</a>
+
+    <!-- أمثلة -->
+    <a class="item" href="امثلة.html" data-lang="ar"><i class="fa-solid fa-lightbulb"></i> أمثلة</a>
+    <a class="item" href="امثلة.html" data-lang="en" style="display:none"><i class="fa-solid fa-lightbulb"></i> Examples</a>
+    <a class="item" href="امثلة.html" data-lang="fr" style="display:none"><i class="fa-solid fa-lightbulb"></i> Exemples</a>
+
+    <!-- اختصارات -->
+    <a class="item" href="اختصارات.html" data-lang="ar"><i class="fa-solid fa-keyboard"></i> اختصارات الكيبورد</a>
+    <a class="item" href="اختصارات.html" data-lang="en" style="display:none"><i class="fa-solid fa-keyboard"></i> Keyboard Shortcuts</a>
+    <a class="item" href="اختصارات.html" data-lang="fr" style="display:none"><i class="fa-solid fa-keyboard"></i> Raccourcis Clavier</a>
+
+    <!-- تواصل معي -->
+    <a class="item" href="contact.html" data-lang="ar"><i class="fa-solid fa-envelope"></i> تواصل معي</a>
+    <a class="item" href="contact.html" data-lang="en" style="display:none"><i class="fa-solid fa-envelope"></i> Contact Me</a>
+    <a class="item" href="contact.html" data-lang="fr" style="display:none"><i class="fa-solid fa-envelope"></i> Contactez-moi</a>
+
+    <!-- مصادر -->
+    <a class="item" href="مصادر.html" data-lang="ar"><i class="fa-solid fa-book"></i> مصادر للشرح</a>
+    <a class="item" href="مصادر.html" data-lang="en" style="display:none"><i class="fa-solid fa-book"></i> Learning Resources</a>
+    <a class="item" href="مصادر.html" data-lang="fr" style="display:none"><i class="fa-solid fa-book"></i> Sources d'Apprentissage</a>
+
+    <!-- التطبيقات -->
+    <a class="item" href="apps.html" data-lang="ar"><i class="fa-solid fa-mobile-screen-button"></i> تطبيقات C</a>
+    <a class="item" href="apps.html" data-lang="en" style="display:none"><i class="fa-solid fa-mobile-screen-button"></i> C Apps</a>
+    <a class="item" href="apps.html" data-lang="fr" style="display:none"><i class="fa-solid fa-mobile-screen-button"></i> Applications C</a>
+
+</div>
+
+<script>
+let lang = "ar";
+
+function setLang(l) {
+    lang = l;
+    document.querySelectorAll("[data-lang]").forEach(el => {
+        el.style.display = (el.getAttribute("data-lang") === l) ? "flex" : "none";
+    });
+}
+</script>
+
+</body>
+</html>
+

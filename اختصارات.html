@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8" />
+<title>اختصارات ورموز مهمة — CodeBlocks</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #1b1f24;
+        margin: 0;
+        padding: 20px;
+        color: white;
+    }
+
+    h1 {
+        text-align: center;
+        color: #00eaff;
+        margin-bottom: 20px;
+    }
+
+    /* زر الهوم */
+    .home-btn {
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        background: #00eaff;
+        color: #000;
+        padding: 10px 18px;
+        border-radius: 12px;
+        font-weight: bold;
+        text-decoration: none;
+        box-shadow: 0 0 12px #00eaff80;
+        transition: 0.3s;
+        z-index: 2000;
+    }
+    .home-btn:hover {
+        background: #0aff9d;
+        box-shadow: 0 0 15px #0aff9d80;
+        transform: scale(1.05);
+    }
+
+    .lang-buttons {
+        text-align: center;
+        margin-bottom: 25px;
+        margin-top: 50px;
+    }
+
+    .lang-buttons button {
+        background-color: #00eaff;
+        border: none;
+        color: #000;
+        padding: 10px 20px;
+        margin: 5px;
+        cursor: pointer;
+        border-radius: 10px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .lang-buttons button:hover {
+        background-color: #0aff9d;
+    }
+
+    .symbol-buttons {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+        gap: 12px;
+        width: 90%;
+        margin: auto;
+    }
+
+    .symbol-buttons button {
+        background-color: #ffffff20;
+        border: 1px solid #00eaff80;
+        color: #00eaff;
+        padding: 12px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: bold;
+        transition: 0.3s;
+        box-shadow: 0 0 8px #00eaff40;
+    }
+
+    .symbol-buttons button:hover {
+        background-color: #00eaff;
+        color: #000;
+        transform: scale(1.08);
+    }
+
+    /* Popup background */
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.65);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    /* Popup box */
+    .popup {
+        background: #11141a;
+        border: 1px solid #00eaff80;
+        border-radius: 15px;
+        padding: 25px;
+        width: 85%;
+        max-width: 350px;
+        text-align: center;
+        color: white;
+        box-shadow: 0 0 20px #00eaff60;
+        animation: fadeIn 0.35s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.8); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    .popup-symbol {
+        font-size: 45px;
+        color: #00eaff;
+        margin-bottom: 15px;
+    }
+
+    .popup-text {
+        color: #dcdcdc;
+        margin: 8px 0;
+        font-size: 17px;
+    }
+
+    .close-btn {
+        margin-top: 20px;
+        background-color: #00eaff;
+        color: black;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .box {
+        background: #ffffff18;
+        border: 1px solid #00eaff60;
+        padding: 20px;
+        margin: 15px auto;
+        width: 80%;
+        border-radius: 14px;
+    }
+</style>
+</head>
+
+<body onload="setLang('ar')">
+
+<!-- زر الهوم -->
+<a href="asasi.html" class="home-btn">🏠 Home</a>
+
+<h1 data-lang="ar">اختصارات ورموز مهمة في CodeBlocks ولغة C</h1>
+<h1 data-lang="en" style="display:none">Important Keyboard Shortcuts & Symbols for CodeBlocks / C</h1>
+<h1 data-lang="fr" style="display:none">Raccourcis et symboles importants pour CodeBlocks / C</h1>
+
+<div class="lang-buttons">
+    <button onclick="setLang('ar')">العربية</button>
+    <button onclick="setLang('en')">English</button>
+    <button onclick="setLang('fr')">Français</button>
+</div>
+
+<!-- رموز -->
+<div class="symbol-buttons">
+    <button onclick="showInfo('{', 'shift + {')">{</button>
+    <button onclick="showInfo('}', 'shift + }')">}</button>
+    <button onclick="showInfo('(', 'shift + 9')">(</button>
+    <button onclick="showInfo(')', 'shift + 0')">)</button>
+    <button onclick="showInfo('[', 'alt gr + 5')">[</button>
+    <button onclick="showInfo(']', 'alt gr + °')">]</button>
+    <button onclick="showInfo('|', 'alt gr + 6')">|</button>
+    <button onclick="showInfo('\\', 'alt gr + à')">\\</button>
+    <button onclick="showInfo('<', 'shift + ,')"><</button>
+    <button onclick="showInfo('>', 'shift + .')">></button>
+    <button onclick="showInfo('&', 'shift + 7')">&</button>
+    <button onclick="showInfo('*', 'shift + 8')">*</button>
+    <button onclick="showInfo('%', 'shift + 5')">%</button>
+    <button onclick="showInfo('$', 'shift + 4')">$</button>
+    <button onclick="showInfo('^', 'alt gr + ^')">^</button>
+    <button onclick="showInfo('@', 'alt gr + 0')">@</button>
+    <button onclick="showInfo('~', 'alt gr + 2')">~</button>
+    <button onclick="showInfo('/', '/ key')">/</button>
+    <button onclick="showInfo('?', 'shift + /')">?</button>
+    <button onclick="showInfo('+', '+ key')">+</button>
+    <button onclick="showInfo('-', '- key')">-</button>
+    <button onclick="showInfo('=', '= key')">=</button>
+</div>
+
+<!-- Popup -->
+<div class="overlay" id="overlay">
+    <div class="popup">
+        <div class="popup-symbol" id="pSymbol"></div>
+        <div class="popup-text" id="pDesc"></div>
+        <div class="popup-text" id="pKey"></div>
+        <button class="close-btn" onclick="closePopup()">إغلاق</button>
+    </div>
+</div>
+
+<!-- صناديق عربية -->
+<div class="box" data-lang="ar">
+    <div class="shortcut">Ctrl + Shift + N</div>
+    <div class="desc">إنشاء ملف C جديد بسرعة.</div>
+</div>
+<div class="box" data-lang="ar">
+    <div class="shortcut">Ctrl + F9</div>
+    <div class="desc">ترجمة الكود.</div>
+</div>
+<div class="box" data-lang="ar">
+    <div class="shortcut">Ctrl + F10</div>
+    <div class="desc">تشغيل البرنامج بعد الترجمة.</div>
+</div>
+<div class="box" data-lang="ar">
+    <div class="shortcut">Ctrl + S</div>
+    <div class="desc">حفظ الملف.</div>
+</div>
+
+<!-- English -->
+<div class="box" data-lang="en" style="display:none">
+    <div class="shortcut">Ctrl + Shift + N</div>
+    <div class="desc">Create a new C file quickly.</div>
+</div>
+<div class="box" data-lang="en" style="display:none">
+    <div class="shortcut">Ctrl + F9</div>
+    <div class="desc">Compile the code.</div>
+</div>
+<div class="box" data-lang="en" style="display:none">
+    <div class="shortcut">Ctrl + F10</div>
+    <div class="desc">Run the program after compiling.</div>
+</div>
+<div class="box" data-lang="en" style="display:none">
+    <div class="shortcut">Ctrl + S</div>
+    <div class="desc">Save the file.</div>
+</div>
+
+<!-- French -->
+<div class="box" data-lang="fr" style="display:none">
+    <div class="shortcut">Ctrl + Shift + N</div>
+    <div class="desc">Créer rapidement un fichier C.</div>
+</div>
+<div class="box" data-lang="fr" style="display:none">
+    <div class="shortcut">Ctrl + F9</div>
+    <div class="desc">Compiler le code.</div>
+</div>
+<div class="box" data-lang="fr" style="display:none">
+    <div class="shortcut">Ctrl + F10</div>
+    <div class="desc">Exécuter le programme après compilation.</div>
+</div>
+<div class="box" data-lang="fr" style="display:none">
+    <div class="shortcut">Ctrl + S</div>
+    <div class="desc">Enregistrer le fichier.</div>
+</div>
+
+<script>
+let lang = "ar";
+
+const descriptions = {
+    "|": { ar: "يستخدم لعمليات OR في البرمجة.", en: "Used for OR operations.", fr: "Utilisé pour les opérations OR." },
+    "{": { ar: "بداية بلوك في C.", en: "Start of a block.", fr: "Début d'un bloc." },
+    "}": { ar: "نهاية بلوك في C.", en: "End of a block.", fr: "Fin d'un bloc." },
+    "[": { ar: "بداية مصفوفة.", en: "Array start.", fr: "Début d'un tableau." },
+    "]": { ar: "نهاية مصفوفة.", en: "Array end.", fr: "Fin d'un tableau." }
+};
+
+function showInfo(symbol, combo) {
+    document.getElementById("pSymbol").textContent = symbol;
+
+    let desc = descriptions[symbol]?.[lang] || {
+        ar: "رمز مهم يستخدم في البرمجة.",
+        en: "An important programming symbol.",
+        fr: "Symbole important pour la programmation."
+    }[lang];
+
+    document.getElementById("pDesc").textContent = desc;
+
+    let keyText = {
+        ar: "طريقة كتابته: " + combo,
+        en: "Key combination: " + combo,
+        fr: "Combinaison: " + combo
+    }[lang];
+
+    document.getElementById("pKey").textContent = keyText;
+
+    document.getElementById("overlay").style.display = "flex";
+}
+
+function closePopup() {
+    document.getElementById("overlay").style.display = "none";
+}
+
+function setLang(l) {
+    lang = l;
+    document.querySelectorAll('[data-lang]').forEach(el => {
+        el.style.display = (el.getAttribute('data-lang') === l) ? 'block' : 'none';
+    });
+}
+</script>
+
+</body>
+</html>

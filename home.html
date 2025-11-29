@@ -19,7 +19,7 @@
             align-items: center;
         }
 
-        /* مربع البحث */
+        
         .search-box {
             width: 260px;
             padding: 10px 15px;
@@ -36,6 +36,7 @@
             list-style: none;
             display: flex;
             gap: 25px;
+            padding: 0;
         }
 
         nav ul li a {
@@ -130,15 +131,42 @@
             background: #2d333b;
             transform: scale(1.07);
         }
+        .home-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #00eaff25;
+    padding: 10px 18px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #00eaff;
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+.home-btn:hover {
+    background: #00eaff40;
+    transform: scale(1.09);
+    color: #0aff9d;
+}
+
+.home-icon {
+    font-size: 22px;
+}
+
     </style>
 </head>
 
 <body>
 
+<!-- NAVIGATION UPDATED ✔ -->
 <nav>
     <ul>
-        <li><a href="contact.html"><h4 id="aboutText">About Me</h4></a></li>
-        <li><a href="apps.html"><h4 id="sitesText">مواقع لغة C</h4></a></li>
+         <li>
+            <a href="asasi.html" class="home-btn">
+                <span class="home-icon">🏠</span>
+                <h4 id="homeText">Home</h4>
+            </a>
     </ul>
 
     <input type="text" class="search-box" id="search" placeholder="بحث / Search / Recherche">
@@ -149,7 +177,7 @@
 <h1 id="pageTitle" style="color:white; text-align:center;">Codes C</h1>
 
 
-<!-- جميع الصناديق تمت إعادتها كما كانت -->
+
 <div id="codesContainer">
 
     <div class="code-box" onclick="openModal(1)">printf("Hello, World!");</div>
@@ -163,7 +191,7 @@
     <div class="code-box" onclick="openModal(9)">%c</div>
     <div class="code-box" onclick="openModal(10)">+=</div>
 
-    <!-- العناصر الإضافية كاملة -->
+   
     <div class="code-box" onclick="openModal(11)">int</div>
     <div class="code-box" onclick="openModal(12)">float</div>
     <div class="code-box" onclick="openModal(13)">char</div>
@@ -179,7 +207,7 @@
 </div>
 
 
-<!--───────────── MODAL ─────────────-->
+
 <div id="modal" class="modal">
     <div class="modal-content">
         <h2 id="title"></h2>
@@ -199,7 +227,7 @@ let current = 1;
 let step = 1;
 let lang = "ar";
 
-/* جميع بيانات الصناديق كما كانت — لم يتم حذف أي شيء */
+
 const data = {
     1:{title:{ar:'printf("Hello, World!")',fr:'printf("Hello, World!")',en:'printf("Hello, World!")'},
         exp:{ar:'تستعمل لطباعة نص على الشاشة للمستخدم.',fr:'Permet d’afficher un texte à l’écran.',en:'Used to print text on the screen.'},
@@ -237,7 +265,7 @@ const data = {
         algExp:{ar:'يمثل الأعداد الصحيحة.',fr:'Représente un entier.',en:'Represents integers.'}},
 
     8:{title:{ar:'%f',fr:'%f',en:'%f'},
-        exp:{ar:'عدد عشري (float).',fr:'Nombre réel.',en:'Decimal real number.'},
+        exp:{ar:'عدد عشري.',fr:'Nombre réel.',en:'Decimal real number.'},
         alg:{ar:'Réel',fr:'Réel',en:'Real'},
         algExp:{ar:'يمثل القيم العشرية.',fr:'Valeur décimale.',en:'Decimal value.'}},
 
@@ -309,30 +337,31 @@ const data = {
 };
 
 
-/*──────────────────────────────
-        تغيير اللغة
-──────────────────────────────*/
+
+
+// ---------------- TRANSLATION INCLUDING HOME BUTTON ✔ ----------------
+
 function translateUI() {
     if (lang === "ar") {
         document.getElementById("langBtn").innerHTML = "Français";
         document.getElementById("closeBtn").innerHTML = "غلق";
         document.getElementById("nextBtn").innerHTML = "التالي";
-        document.getElementById("aboutText").innerHTML = "About Me";
-        document.getElementById("sitesText").innerHTML = "مواقع لغة C";
+
+        document.getElementById("homeText").innerHTML = "الرئيسية";
     }
     else if (lang === "fr") {
         document.getElementById("langBtn").innerHTML = "English";
         document.getElementById("closeBtn").innerHTML = "Fermer";
         document.getElementById("nextBtn").innerHTML = "Suivant";
-        document.getElementById("aboutText").innerHTML = "À propos de moi";
-        document.getElementById("sitesText").innerHTML = "Sites C";
+
+        document.getElementById("homeText").innerHTML = "Accueil";
     }
     else {
         document.getElementById("langBtn").innerHTML = "عربي";
         document.getElementById("closeBtn").innerHTML = "Close";
         document.getElementById("nextBtn").innerHTML = "Next";
-        document.getElementById("aboutText").innerHTML = "About Me";
-        document.getElementById("sitesText").innerHTML = "C Websites";
+
+        document.getElementById("homeText").innerHTML = "Home";
     }
 }
 
@@ -346,7 +375,9 @@ function toggleLanguage() {
 }
 
 
-/*──────── MODAL ────────*/
+
+// ---------------- MODAL SYSTEM ----------------
+
 function openModal(i) {
     current = i;
     step = 1;
@@ -375,7 +406,9 @@ function closeModal() {
 }
 
 
-/*──────── البحث المباشر ────────*/
+
+// ---------------- SEARCH SYSTEM ----------------
+
 document.getElementById("search").addEventListener("keyup", function () {
     let text = this.value.toLowerCase();
     let boxes = document.querySelectorAll(".code-box");
@@ -393,6 +426,3 @@ document.getElementById("search").addEventListener("keyup", function () {
 
 </body>
 </html>
-
-
-
