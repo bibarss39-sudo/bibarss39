@@ -2,89 +2,159 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contactez-moi</title>
-    <link rel="icon" href="1.png"/>
+    <link rel="icon" href="1.png" />
+    <!-- خط أنيق من Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
             background: linear-gradient(135deg, #1e1e2f, #2e3440);
-            color: #fff;
+            color: #f0f0f8;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
+            overflow: hidden;
         }
 
         .container {
-            width: 420px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
+            width: 90%;
+            max-width: 460px;
+            background: rgba(30, 30, 46, 0.75);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 40px 30px;
             text-align: center;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4),
+                        0 0 0 1px rgba(0, 234, 255, 0.2);
+            border: 1px solid rgba(0, 234, 255, 0.15);
+            animation: fadeInUp 0.7s ease-out;
         }
 
         h1 {
-            margin-bottom: 25px;
-            font-size: 30px;
-            letter-spacing: 1px;
+            margin-bottom: 30px;
+            font-size: 32px;
+            font-weight: 700;
+            color: #00eaff;
+            text-shadow: 0 0 10px rgba(0, 234, 255, 0.3);
+            letter-spacing: 1.2px;
         }
 
         .info {
-            margin: 20px 0;
+            margin: 22px 0;
             font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.07);
+            padding: 14px;
+            border-radius: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .info:hover {
+            background: rgba(0, 234, 255, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .info .icon {
+            font-size: 22px;
+            color: #00eaff;
+            width: 30px;
+            text-align: center;
         }
 
         .info a {
             color: #61dafb;
-            font-weight: bold;
+            font-weight: 600;
             text-decoration: none;
             transition: 0.3s;
+            word-break: break-all;
         }
 
         .info a:hover {
-            color: #a6e3ff;
+            color: #0aff9d;
+            text-shadow: 0 0 8px rgba(10, 255, 180, 0.4);
         }
 
         .home-btn {
-            display: inline-block;
-            margin-top: 25px;
-            padding: 12px 25px;
-            background: #61dafb;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #00eaff, #0aff9d);
             color: #000;
-            border-radius: 12px;
+            border-radius: 16px;
             text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
-            transition: 0.3s ease;
+            font-size: 17px;
+            font-weight: 700;
+            box-shadow: 0 6px 20px rgba(0, 234, 255, 0.4);
+            transition: all 0.35s ease;
         }
 
         .home-btn:hover {
-            background: #a6e3ff;
-            transform: scale(1.05);
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(10, 255, 157, 0.6);
+            background: linear-gradient(135deg, #0aff9d, #00eaff);
+        }
+
+        .home-btn:active {
+            transform: translateY(-1px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* سلوك على الهاتف */
+        @media (max-width: 500px) {
+            .container {
+                padding: 30px 20px;
+                width: 95%;
+            }
+            h1 {
+                font-size: 28px;
+            }
+            .info {
+                font-size: 16px;
+                flex-direction: column;
+                gap: 8px;
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Contactez-moi</h1>
+        <h1>📬 Contactez-moi</h1>
 
         <div class="info">
-            <label>📘 Facebook :</label>
-            <a href="https://www.facebook.com/share/1AQqjJ2PhS/" target="_blank">Bibars Horri</a>
+            <span class="icon">📘</span>
+            <a href="https://www.facebook.com/share/1AQqjJ2PhS/" target="_blank" rel="noopener noreferrer">Bibars Horri</a>
         </div>
 
         <div class="info">
-            <label>📧 Email :</label>
+            <span class="icon">📧</span>
             <a href="mailto:bibarss39@gmail.com">bibarss39@gmail.com</a>
         </div>
 
-        <a href="asasi.html" class="home-btn">⟵ Retour</a>
+        <a href="asasi.html" class="home-btn">
+            <span>🏠</span> Retour à l'accueil
+        </a>
     </div>
 
 </body>

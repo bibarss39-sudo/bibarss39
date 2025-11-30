@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>اختصارات ورموز مهمة — Code::Blocks</title>
+    <link rel="icon" href="1.png" />
+
+    <!-- خط عربي جميل -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', Arial, sans-serif;
+            background: linear-gradient(135deg, #1b1f24, #222831);
+            color: white;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00eaff;
+            margin: 40px 0 30px;
+            font-size: 28px;
+            text-shadow: 0 0 10px rgba(0, 234, 255, 0.4);
+            letter-spacing: 1px;
+        }
+
+        /* زر الهوم */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #00eaff;
+            color: #000;
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 0 12px #00eaff80;
+            transition: 0.3s;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .home-btn:hover {
+            background: #0aff9d;
+            box-shadow: 0 0 15px #0aff9d80;
+            transform: scale(1.05);
+        }
+
+        .lang-buttons {
+            text-align: center;
+            margin: 30px 0 25px;
+        }
+
+        .lang-buttons button {
+            background: rgba(0, 234, 255, 0.15);
+            border: 2px solid #00eaff;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 12px;
+            font-weight: bold;
+            transition: 0.3s;
+            min-width: 100px;
+        }
+
+        .lang-buttons button:hover {
+            background: #00eaff;
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px #00eaff60;
+        }
+
+        .section-title {
+            color: #0aff9d;
+            margin: 35px 0 15px;
+            font-size: 22px;
+            text-align: center;
+        }
+
+        .symbol-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+            gap: 12px;
+            width: 90%;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .symbol-buttons button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #00eaff60;
+            color: #00eaff;
+            padding: 14px 8px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 22px;
+            font-weight: bold;
+            transition: 0.3s;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .symbol-buttons button:hover {
+            background: #00eaff;
+            color: #000;
+            transform: scale(1.12);
+            box-shadow: 0 6px 15px #00eaff80;
+        }
+
+        .shortcuts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 90%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .box {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid #00eaff60;
+            padding: 18px;
+            border-radius: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .shortcut {
+            background: rgba(0, 234, 255, 0.2);
+            padding: 6px 14px;
+            border-radius: 10px;
+            font-weight: bold;
+            color: #00eaff;
+            font-size: 17px;
+            white-space: nowrap;
+        }
+
+        .desc {
+            color: #d0d0e0;
+            font-size: 16px;
+            text-align: right;
+        }
+
+        /* Popup */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .popup {
+            background: #11141a;
+            border: 1px solid #00eaff80;
+            border-radius: 18px;
+            padding: 30px;
+            width: 90%;
+            max-width: 380px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 0 25px #00eaff80;
+            animation: fadeIn 0.35s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.85); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .popup-symbol {
+            font-size: 60px;
+            color: #00eaff;
+            margin-bottom: 15px;
+            font-family: monospace;
+        }
+
+        .popup-text {
+            color: #e0e0ff;
+            margin: 10px 0;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        .close-btn {
+            margin-top: 20px;
+            background: linear-gradient(135deg, #00eaff, #0aff9d);
+            color: #000;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 17px;
+            transition: 0.3s;
+        }
+
+        .close-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #0aff9d80;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 24px; }
+            .desc { text-align: center; }
+            .box { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+
+<body>
+
+<a href="asasi.html" class="home-btn">
+    <span>🏠</span>
+    <span data-lang-key="home">الرئيسية</span>
+</a>
+
+<h1 data-lang-key="page-title">اختصارات ورموز مهمة في Code::Blocks ولغة C</h1>
+
+<div class="lang-buttons">
+    <button onclick="setLang('ar')">العربية</button>
+    <button onclick="setLang('en')">English</button>
+    <button onclick="setLang('fr')">Français</button>
+</div>
+
+<!-- رموز -->
+<h2 class="section-title" data-lang-key="symbols">الرموز المهمة</h2>
+<div class="symbol-buttons" id="symbolGrid"></div>
+
+<!-- اختصارات Code::Blocks -->
+<h2 class="section-title" data-lang-key="shortcuts">اختصارات Code::Blocks</h2>
+<div class="shortcuts-list" id="shortcutsList"></div>
+
+<!-- Popup -->
+<div class="overlay" id="overlay">
+    <div class="popup">
+        <div class="popup-symbol" id="pSymbol"></div>
+        <div class="popup-text" id="pDesc"></div>
+        <div class="popup-text" id="pKey"></div>
+        <button class="close-btn" onclick="closePopup()" id="closeBtnText">إغلاق</button>
+    </div>
+</div>
+
+<script>
+const translations = {
+    "page-title": {
+        ar: "اختصارات ورموز مهمة في Code::Blocks ولغة C",
+        en: "Important Shortcuts & Symbols for Code::Blocks / C",
+        fr: "Raccourcis et symboles importants pour Code::Blocks / C"
+    },
+    "symbols": {
+        ar: "الرموز المهمة",
+        en: "Important Symbols",
+        fr: "Symboles importants"
+    },
+    "shortcuts": {
+        ar: "اختصارات Code::Blocks",
+        en: "Code::Blocks Shortcuts",
+        fr: "Raccourcis Code::Blocks"
+    },
+    "home": {
+        ar: "الرئيسية",
+        en: "Home",
+        fr: "Accueil"
+    },
+    "close": {
+        ar: "إغلاق",
+        en: "Close",
+        fr: "Fermer"
+    }
+};
+
+const symbols = [
+    { char: "{", key: "Shift + [", desc: { ar: "بداية كتلة تعليمات.", en: "Start of a code block.", fr: "Début d'un bloc de code." } },
+    { char: "}", key: "Shift + ]", desc: { ar: "نهاية كتلة تعليمات.", en: "End of a code block.", fr: "Fin d'un bloc de code." } },
+    { char: "(", key: "Shift + 9", desc: { ar: "فتح قوس (تُستخدم في التوابع والتعبيرات).", en: "Opening parenthesis (used in functions and expressions).", fr: "Parenthèse ouvrante (dans fonctions et expressions)." } },
+    { char: ")", key: "Shift + 0", desc: { ar: "إغلاق قوس.", en: "Closing parenthesis.", fr: "Parenthèse fermante." } },
+    { char: "[", key: "Alt Gr + 5", desc: { ar: "فتح قوس مصفوفة.", en: "Opening square bracket (for arrays).", fr: "Crochet ouvrant (pour tableaux)." } },
+    { char: "]", key: "Alt Gr + °", desc: { ar: "إغلاق قوس مصفوفة.", en: "Closing square bracket.", fr: "Crochet fermant." } },
+    { char: "|", key: "Alt Gr + 6", desc: { ar: "أو منطقي (OR).", en: "Bitwise OR operator.", fr: "Opérateur OR bit à bit." } },
+    { char: "\\", key: "Alt Gr + 8", desc: { ar: "الشرطة المائلة العكسية (تُستخدم في المسارات).", en: "Backslash (used in file paths).", fr: "Barre oblique inverse (dans chemins de fichiers)." } },
+    { char: "<", key: "Shift + ,", desc: { ar: "أصغر من (مقارنة).", en: "Less than (comparison).", fr: "Inférieur à (comparaison)." } },
+    { char: ">", key: "Shift + .", desc: { ar: "أكبر من (مقارنة).", en: "Greater than (comparison).", fr: "Supérieur à (comparaison)." } },
+    { char: "&", key: "Shift + 7", desc: { ar: "ومنطقي أو عنوان متغير (&).", en: "Bitwise AND or address-of operator.", fr: "ET bit à bit ou opérateur d'adresse (&)." } },
+    { char: "*", key: "Shift + 8", desc: { ar: "ضرب أو مؤشر.", en: "Multiplication or pointer.", fr: "Multiplication ou pointeur." } },
+    { char: "%", key: "Shift + 5", desc: { ar: "باقِ القسمة (modulo).", en: "Modulo operator (remainder).", fr: "Opérateur modulo (reste)." } },
+    { char: "$", key: "Shift + 4", desc: { ar: "رمز نادر الاستخدام في C.", en: "Rarely used in C.", fr: "Peu utilisé en C." } },
+    { char: "^", key: "Alt Gr + ^", desc: { ar: "XOR منطقي.", en: "Bitwise XOR operator.", fr: "Opérateur XOR bit à bit." } },
+    { char: "@", key: "Alt Gr + 0", desc: { ar: "لا يُستخدم في C (مستخدم في لغات أخرى).", en: "Not used in C (used in other languages).", fr: "Non utilisé en C (dans autres langages)." } },
+    { char: "~", key: "Alt Gr + 2", desc: { ar: "NOT منطقي (Bitwise complement).", en: "Bitwise NOT (complement).", fr: "NON bit à bit (complément)." } },
+    { char: "/", key: "/", desc: { ar: "قسمة.", en: "Division operator.", fr: "Opérateur de division." } },
+    { char: "?", key: "Shift + /", desc: { ar: "تُستخدم في التعبير الشرطي (مثل: a ? b : c).", en: "Used in ternary operator (e.g., a ? b : c).", fr: "Utilisé dans l'opérateur ternaire." } },
+    { char: "+", key: "+", desc: { ar: "جمع.", en: "Addition operator.", fr: "Opérateur d'addition." } },
+    { char: "-", key: "-", desc: { ar: "طرح أو عامل سالب.", en: "Subtraction or negative sign.", fr: "Soustraction ou signe négatif." } },
+    { char: "=", key: "=", desc: { ar: "إسناد قيمة.", en: "Assignment operator.", fr: "Opérateur d'affectation." } }
+];
+
+const shortcuts = [
+    { keys: "Ctrl + Shift + N", desc: { ar: "إنشاء ملف C جديد.", en: "Create a new C file.", fr: "Créer un nouveau fichier C." } },
+    { keys: "Ctrl + F9", desc: { ar: "ترجمة (Build) المشروع.", en: "Build (compile) the project.", fr: "Compiler le projet." } },
+    { keys: "Ctrl + F10", desc: { ar: "تشغيل البرنامج بعد الترجمة.", en: "Run the program after building.", fr: "Exécuter le programme après compilation." } },
+    { keys: "Ctrl + S", desc: { ar: "حفظ الملف الحالي.", en: "Save the current file.", fr: "Enregistrer le fichier actuel." } },
+    { keys: "F9", desc: { ar: "ترجمة وتشغيل البرنامج مباشرة.", en: "Build and run the program.", fr: "Compiler et exécuter le programme." } },
+    { keys: "Ctrl + Z", desc: { ar: "تراجع عن آخر تعديل.", en: "Undo last action.", fr: "Annuler la dernière action." } },
+    { keys: "Ctrl + Y", desc: { ar: "إعادة آخر تعديل.", en: "Redo last action.", fr: "Rétablir la dernière action." } },
+    { keys: "Ctrl + C", desc: { ar: "نسخ النص المحدد.", en: "Copy selected text.", fr: "Copier le texte sélectionné." } },
+    { keys: "Ctrl + V", desc: { ar: "لصق النص.", en: "Paste copied text.", fr: "Coller le texte copié." } },
+    { keys: "Ctrl + X", desc: { ar: "قص النص.", en: "Cut selected text.", fr: "Couper le texte sélectionné." } },
+    { keys: "Ctrl + F", desc: { ar: "البحث عن نص.", en: "Find text in file.", fr: "Rechercher du texte." } },
+    { keys: "Ctrl + /", desc: { ar: "تحويل السطر إلى تعليق (Toggle comment).", en: "Toggle line comment.", fr: "Basculer commentaire de ligne." } }
+];
+
+let currentLang = "ar";
+
+function renderSymbols() {
+    const container = document.getElementById("symbolGrid");
+    container.innerHTML = "";
+    symbols.forEach(s => {
+        const btn = document.createElement("button");
+        btn.textContent = s.char;
+        btn.onclick = () => showInfo(s.char, s.key, s.desc);
+        container.appendChild(btn);
+    });
+}
+
+function renderShortcuts() {
+    const container = document.getElementById("shortcutsList");
+    container.innerHTML = "";
+    shortcuts.forEach(s => {
+        const div = document.createElement("div");
+        div.className = "box";
+        div.innerHTML = `
+            <span class="shortcut">${s.keys}</span>
+            <span class="desc">${s.desc[currentLang]}</span>
+        `;
+        container.appendChild(div);
+    });
+}
+
+function showInfo(symbol, combo, descObj) {
+    document.getElementById("pSymbol").textContent = symbol;
+    document.getElementById("pDesc").textContent = descObj[currentLang];
+    
+    const keyText = {
+        ar: "طريقة الكتابة: " + combo,
+        en: "Key combination: " + combo,
+        fr: "Combinaison: " + combo
+    }[currentLang];
+
+    document.getElementById("pKey").textContent = keyText;
+    document.getElementById("overlay").style.display = "flex";
+}
+
+function closePopup() {
+    document.getElementById("overlay").style.display = "none";
+}
+
+function setLang(lang) {
+    currentLang = lang;
+    document.documentElement.setAttribute("lang", lang);
+    document.documentElement.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+
+    // تحديث العناوين
+    document.querySelectorAll("[data-lang-key]").forEach(el => {
+        const key = el.getAttribute("data-lang-key");
+        if (translations[key] && translations[key][lang] !== undefined) {
+            el.textContent = translations[key][lang];
+        }
+    });
+
+    // تحديث زر الإغلاق
+    document.getElementById("closeBtnText").textContent = translations["close"][lang];
+
+    // إعادة عرض المحتوى بلغة جديدة
+    renderShortcuts();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    renderSymbols();
+    renderShortcuts();
+    setLang("ar");
+});
+</script>
+
+</body>
+</html>

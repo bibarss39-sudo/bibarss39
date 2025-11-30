@@ -7,7 +7,7 @@
 
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #1b1f24;
             margin: 0;
             padding: 40px;
@@ -20,7 +20,6 @@
             align-items: center;
         }
 
-        
         .search-box {
             width: 260px;
             padding: 10px 15px;
@@ -52,15 +51,17 @@
             transform: scale(1.05);
         }
 
+        /* تصغير زر الترجمة */
         .translate-btn {
-            padding: 10px 20px;
+            padding: 8px 12px; /* تم التصغير */
             background: #00eaff;
             color: #000;
             border: none;
-            font-size: 16px;
-            border-radius: 12px;
+            font-size: 14px; /* تم التصغير */
+            border-radius: 10px; /* أكثر أناقة */
             cursor: pointer;
             transition: .3s;
+            font-weight: bold;
         }
 
         .translate-btn:hover {
@@ -72,21 +73,26 @@
             background: #ffffff18;
             border: 1px solid #00eaff60;
             padding: 40px;
-            margin: 25px auto;
+            margin: 20px auto;
             width: 380px;
             height: 150px;
             cursor: pointer;
             border-radius: 14px;
             text-align: center;
-            font-size: 26px;
+            font-size: 24px;
+            font-family: 'Courier New', monospace;
             transition: 0.3s;
             box-shadow: 0 6px 15px #00000050;
             color: #e9f1ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
 
         .code-box:hover {
-            transform: scale(1.07);
-            box-shadow: 0 10px 20px #00000070;
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px #00000080;
             background: #ffffff25;
         }
 
@@ -100,25 +106,40 @@
             display: none;
             justify-content: center;
             align-items: center;
+            z-index: 1000;
         }
 
         .modal-content {
-            width: 480px;
-            background: rgba(255, 255, 255, 0.98);
+            width: 500px;
+            background: rgba(255, 255, 255, 0.97);
             padding: 30px;
-            border-radius: 16px;
+            border-radius: 18px;
             text-align: center;
             color: #111;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+            font-family: 'Courier New', monospace;
+            color: #007acc;
+        }
+
+        .modal-content p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 25px;
         }
 
         .buttons {
             margin-top: 25px;
             display: flex;
             justify-content: space-between;
+            gap: 12px;
         }
 
         button {
-            padding: 12px 25px;
+            padding: 12px 16px;
             font-size: 16px;
             border: none;
             background: #1b1f24;
@@ -126,61 +147,68 @@
             border-radius: 10px;
             cursor: pointer;
             transition: 0.3s;
+            flex: 1;
+            min-width: 80px;
         }
 
         button:hover {
             background: #2d333b;
-            transform: scale(1.07);
+            transform: scale(1.05);
         }
+
         .home-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: #00eaff25;
-    padding: 10px 18px;
-    border-radius: 12px;
-    text-decoration: none;
-    color: #00eaff;
-    font-size: 20px;
-    transition: 0.3s;
-}
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #00eaff25;
+            padding: 10px 18px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #00eaff;
+            font-size: 20px;
+            transition: 0.3s;
+        }
 
-.home-btn:hover {
-    background: #00eaff40;
-    transform: scale(1.09);
-    color: #0aff9d;
-}
+        .home-btn:hover {
+            background: #00eaff40;
+            transform: scale(1.09);
+            color: #0aff9d;
+        }
 
-.home-icon {
-    font-size: 22px;
-}
+        .home-icon {
+            font-size: 22px;
+        }
 
+        h1 {
+            margin-top: 20px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 
 <body>
 
-<!-- NAVIGATION UPDATED ✔ -->
+<!-- NAVIGATION -->
 <nav>
     <ul>
-         <li>
+        <li>
             <a href="asasi.html" class="home-btn">
                 <span class="home-icon">🏠</span>
                 <h4 id="homeText">Home</h4>
             </a>
+        </li>
     </ul>
 
     <input type="text" class="search-box" id="search" placeholder="بحث / Search / Recherche">
 
-    <button class="translate-btn" onclick="toggleLanguage()" id="langBtn">Français</button>
+    <button class="translate-btn" onclick="toggleLanguage()" id="langBtn">AR</button>
 </nav>
 
-<h1 id="pageTitle" style="color:white; text-align:center;">Codes C</h1>
-
-
+<h1 id="pageTitle">Codes C</h1>
 
 <div id="codesContainer">
-
     <div class="code-box" onclick="openModal(1)">printf("Hello, World!");</div>
     <div class="code-box" onclick="openModal(2)">scanf("%d", &x);</div>
     <div class="code-box" onclick="openModal(3)">for (int i = 0; i < 10; i++)</div>
@@ -191,8 +219,6 @@
     <div class="code-box" onclick="openModal(8)">%f</div>
     <div class="code-box" onclick="openModal(9)">%c</div>
     <div class="code-box" onclick="openModal(10)">+=</div>
-
-   
     <div class="code-box" onclick="openModal(11)">int</div>
     <div class="code-box" onclick="openModal(12)">float</div>
     <div class="code-box" onclick="openModal(13)">char</div>
@@ -204,11 +230,14 @@
     <div class="code-box" onclick="openModal(19)">mat[40]</div>
     <div class="code-box" onclick="openModal(20)">if</div>
     <div class="code-box" onclick="openModal(21)">else</div>
-
+    <div class="code-box" onclick="openModal(22)">switch(x)</div>
+    <div class="code-box" onclick="openModal(23)">break;</div>
+    <div class="code-box" onclick="openModal(24)">continue;</div>
+    <div class="code-box" onclick="openModal(25)">// comment</div>
+    <div class="code-box" onclick="openModal(26)">/* comment */</div>
 </div>
 
-
-
+<!-- Modal -->
 <div id="modal" class="modal">
     <div class="modal-content">
         <h2 id="title"></h2>
@@ -216,154 +245,178 @@
 
         <div class="buttons">
             <button onclick="closeModal()" id="closeBtn">غلق</button>
+            <button onclick="prevStep()" id="prevBtn" style="display: none;">رجوع</button>
             <button onclick="nextStep()" id="nextBtn">التالي</button>
         </div>
     </div>
 </div>
 
-
 <script>
-
 let current = 1;
 let step = 1;
 let lang = "ar";
 
-
 const data = {
     1:{title:{ar:'printf("Hello, World!")',fr:'printf("Hello, World!")',en:'printf("Hello, World!")'},
-        exp:{ar:'تستعمل لطباعة نص على الشاشة للمستخدم.',fr:'Permet d’afficher un texte à l’écran.',en:'Used to print text on the screen.'},
-        alg:{ar:'Ecrire("Hello World!")',fr:'Écrire("Hello World!")',en:'Write("Hello World!")'},
-        algExp:{ar:'تقوم بعرض النص للمستخدم.',fr:'Affiche un texte.',en:'Displays text.'}},
+        exp:{ar:'تُستخدم لطباعة نص أو قيمة على الشاشة. مثال: طباعة رسالة ترحيب.',fr:'Affiche un texte ou une valeur à l’écran.',en:'Displays text or values on the screen.'},
+        algFr:'Écrire("Hello World!")',
+        algExp:{ar:'تُظهر مخرجات مباشرة للمستخدم على الشاشة.',fr:'Produit une sortie textuelle.',en:'Produces textual output for the user.'}},
 
     2:{title:{ar:'scanf("%d", &x)',fr:'scanf("%d", &x)',en:'scanf("%d", &x)'},
-        exp:{ar:'نستعملها لقراءة عدد من المستخدم.',fr:'Permet de lire un entier.',en:'Reads an integer input.'},
-        alg:{ar:'Lire(x)',fr:'Lire(x)',en:'Read(x)'},
-        algExp:{ar:'تسمح بقراءة قيمة.',fr:'Lit une valeur.',en:'Reads a value.'}},
+        exp:{ar:'تقرأ عددًا صحيحًا من المستخدم وتخزّنه في المتغير x.',fr:'Lit un entier saisi par l’utilisateur et le stocke dans x.',en:'Reads an integer input from the user and stores it in x.'},
+        algFr:'Lire(x)',
+        algExp:{ar:'تسمح بإدخال بيانات من المستخدم أثناء تشغيل البرنامج.',fr:'Permet à l’utilisateur d’entrer une valeur.',en:'Allows user input into a variable.'}},
 
     3:{title:{ar:'for (int i = 0; i < 10; i++)',fr:'for (int i = 0; i < 10; i++)',en:'for (int i = 0; i < 10; i++)'},
-        exp:{ar:'تنفذ تكرار من 0 إلى 9.',fr:'Boucle de 0 à 9.',en:'Loop from 0 to 9.'},
-        alg:{ar:'Pour i = 0 à 9',fr:'Pour i = 0 à 9',en:'For i = 0 to 9'},
-        algExp:{ar:'تكرر عددًا محددًا من المرات.',fr:'Exécute un nombre précis.',en:'Executes a fixed number of times.'}},
+        exp:{ar:'حلقة تُكرّر تنفيذ كتلة من الأوامر 10 مرات (من 0 إلى 9).',fr:'Boucle qui s’exécute exactement 10 fois (de 0 à 9).',en:'Loop that executes exactly 10 times (from 0 to 9).'},
+        algFr:'Pour i allant de 0 à 9',
+        algExp:{ar:'تُستخدم عندما تعرف عدد مرات التكرار مسبقًا.',fr:'Répète un bloc un nombre fixe de fois.',en:'Repeats a block a fixed number of times.'}},
 
-    4:{title:{ar:'do {} while(x < 10)',fr:'do {} while(x < 10)',en:'do {} while(x < 10)'},
-        exp:{ar:'تنفذ ثم تتحقق من الشرط.',fr:'Exécute puis teste.',en:'Executes then tests condition.'},
-        alg:{ar:'Répéter ... Jusqu’à(x>=10)',fr:'Répéter ... Jusqu’à(x>=10)',en:'Repeat ... Until(x>=10)'},
-        algExp:{ar:'تعمل مرة واحدة على الأقل.',fr:'Au moins une fois.',en:'Runs at least once.'}},
+    4:{title:{ar:'do { } while (x < 10)',fr:'do { } while (x < 10)',en:'do { } while (x < 10)'},
+        exp:{ar:'تنفّذ الكتلة مرة واحدة على الأقل، ثم تكررها طالما أن x أقل من 10.',fr:'Exécute le bloc au moins une fois, puis répète tant que la condition est vraie.',en:'Executes the block at least once, then repeats while condition is true.'},
+        algFr:'Répéter ... jusqu’à (x >= 10)',
+        algExp:{ar:'مثالية عندما تريد تنفيذ الكتلة قبل التحقق من الشرط.',fr:'Utilisée quand le bloc doit s’exécuter avant la vérification.',en:'Used when the block must run before checking the condition.'}},
 
-    5:{title:{ar:'while(x < 10)',fr:'while(x < 10)',en:'while(x < 10)'},
-        exp:{ar:'تتحقق من الشرط أولاً.',fr:'Teste puis exécute.',en:'Checks then executes.'},
-        alg:{ar:'Tant que(x<10)',fr:'Tant que(x<10)',en:'While(x<10)'},
-        algExp:{ar:'تستمر طالما الشرط صحيح.',fr:'Continue tant que vrai.',en:'Runs while condition is true.'}},
+    5:{title:{ar:'while (x < 10)',fr:'while (x < 10)',en:'while (x < 10)'},
+        exp:{ar:'تكرّر تنفيذ الكتلة طالما أن الشرط (x < 10) صحيح.',fr:'Répète le bloc tant que x < 10 est vrai.',en:'Repeats the block while x < 10 is true.'},
+        algFr:'Tant que (x < 10)',
+        algExp:{ar:'لا تُنفّذ الكتلة أبدًا إذا كان الشرط خاطئًا من البداية.',fr:'N’exécute pas le bloc si la condition est fausse au départ.',en:'Does not run the block if condition is initially false.'}},
 
     6:{title:{ar:'!x',fr:'!x',en:'!x'},
-        exp:{ar:'نفي منطقي.',fr:'Négation logique.',en:'Logical NOT.'},
-        alg:{ar:'Non(x)',fr:'Non(x)',en:'Not(x)'},
-        algExp:{ar:'يعكس قيمة الشرط.',fr:'Inverse la condition.',en:'Inverts condition.'}},
+        exp:{ar:'يعكس قيمة الشرط: إذا كانت x تساوي 0 يصبح الناتج "صح"، والعكس.',fr:'Opérateur logique qui inverse la valeur : vrai si x vaut 0, faux sinon.',en:'Logical operator that inverts the value: true if x is 0, false otherwise.'},
+        algFr:'Non(x)',
+        algExp:{ar:'يُستخدم للتأكد من أن قيمة ما غير صحيحة (أو تساوي صفر).',fr:'Permet de tester qu’une valeur est fausse (ou nulle).',en:'Used to test that a value is false (or zero).'}},
 
     7:{title:{ar:'%d',fr:'%d',en:'%d'},
-        exp:{ar:'طباعة عدد صحيح.',fr:'Affiche un entier.',en:'Integer format.'},
-        alg:{ar:'Entier',fr:'Entier',en:'Integer'},
-        algExp:{ar:'يمثل الأعداد الصحيحة.',fr:'Représente un entier.',en:'Represents integers.'}},
+        exp:{ar:'رمز تنسيق لطباعة أو قراءة عدد صحيح (مثل 42 أو -5).',fr:'Spécificateur de format pour un entier (int).',en:'Format specifier for integers (int).'},
+        algFr:'Entier',
+        algExp:{ar:'يُستخدم مع printf أو scanf للتعامل مع الأعداد الصحيحة.',fr:'Utilisé avec printf/scanf pour les entiers.',en:'Used with printf/scanf for integer values.'}},
 
     8:{title:{ar:'%f',fr:'%f',en:'%f'},
-        exp:{ar:'عدد عشري.',fr:'Nombre réel.',en:'Decimal real number.'},
-        alg:{ar:'Réel',fr:'Réel',en:'Real'},
-        algExp:{ar:'يمثل القيم العشرية.',fr:'Valeur décimale.',en:'Decimal value.'}},
+        exp:{ar:'رمز تنسيق لطباعة أو قراءة عدد عشري (مثل 3.14).',fr:'Spécificateur pour un nombre à virgule flottante.',en:'Format specifier for floating-point numbers.'},
+        algFr:'Réel',
+        algExp:{ar:'يُستخدم للأرقام ذات الفاصلة العشرية.',fr:'Utilisé pour les nombres décimaux.',en:'Used for decimal numbers.'}},
 
     9:{title:{ar:'%c',fr:'%c',en:'%c'},
-        exp:{ar:'حرف واحد فقط.',fr:'Un caractère.',en:'One character.'},
-        alg:{ar:'Caractère',fr:'Caractère',en:'Character'},
-        algExp:{ar:'يخزن حرفًا واحداً.',fr:'Stocke un caractère.',en:'Stores a character.'}},
+        exp:{ar:'رمز تنسيق لطباعة أو قراءة حرف واحد (مثل \'A\' أو \'?\').',fr:'Spécificateur pour un seul caractère.',en:'Format specifier for a single character.'},
+        algFr:'Caractère',
+        algExp:{ar:'يتعامل مع متغير يحتوي على حرف واحد فقط.',fr:'Traite une variable contenant un seul caractère.',en:'Handles a variable holding one character.'}},
 
     10:{title:{ar:'+=',fr:'+=',en:'+='},
-        exp:{ar:'x+=3 تعني x=x+3.',fr:'x+=3 signifie x=x+3.',en:'x+=3 means x=x+3'},
-        alg:{ar:'x = x + 3',fr:'x = x + 3',en:'x = x + 3'},
-        algExp:{ar:'الصيغة الكاملة للعملية.',fr:'Forme complète.',en:'Full expression.'}},
-
+        exp:{ar:'يجمع قيمة على المتغير ويخزّن الناتج فيه: x += 3 تعني x = x + 3.',fr:'Ajoute une valeur : x += 3 équivaut à x = x + 3.',en:'Adds a value: x += 3 is equivalent to x = x + 3.'},
+        algFr:'x ← x + 3',
+        algExp:{ar:'طريقة مختصرة لكتابة عملية الجمع والتخزين معًا.',fr:'Forme abrégée pour l’addition et l’affectation.',en:'Shorthand for addition and assignment.'}},
 
     11:{title:{ar:'int',fr:'int',en:'int'},
-        exp:{ar:'نوع يمثل عددًا صحيحًا.',fr:'Type entier.',en:'Integer type.'},
-        alg:{ar:'Entier',fr:'Entier',en:'Integer'},
-        algExp:{ar:'متغير صحيح.',fr:'Variable entière.',en:'Integer variable.'}},
+        exp:{ar:'نوع بيانات لتخزين الأعداد الصحيحة (مثل 100، -20، 0).',fr:'Type de données pour les entiers (ex: -5, 0, 100).',en:'Data type for integers (e.g., -5, 0, 100).'},
+        algFr:'Entier',
+        algExp:{ar:'لا يدعم الأعداد ذات الفاصلة العشرية.',fr:'Stocke des valeurs numériques sans décimales.',en:'Stores numeric values without decimals.'}},
 
     12:{title:{ar:'float',fr:'float',en:'float'},
-        exp:{ar:'عدد عشري.',fr:'Nombre réel.',en:'Floating number.'},
-        alg:{ar:'Réel',fr:'Réel',en:'Real'},
-        algExp:{ar:'يمثل القيم العشرية.',fr:'Valeur décimale.',en:'Decimal value.'}},
+        exp:{ar:'نوع بيانات لتخزين الأعداد العشرية (مثل 2.5 أو -3.1415).',fr:'Type pour les nombres décimaux (ex: 3.14, -2.5).',en:'Data type for decimal numbers (e.g., 3.14, -2.5).'},
+        algFr:'Réel',
+        algExp:{ar:'يُستخدم للأرقام التي تحتوي على فاصلة عشرية.',fr:'Utilisé pour les nombres à virgule flottante.',en:'Used for floating-point numbers.'}},
 
     13:{title:{ar:'char',fr:'char',en:'char'},
-        exp:{ar:'تمثل حرفًا واحدًا.',fr:'Un seul caractère.',en:'One character.'},
-        alg:{ar:'Caractère',fr:'Caractère',en:'Character'},
-        algExp:{ar:'لتخزين الحروف.',fr:'Pour stocker des lettres.',en:'Stores letters.'}},
+        exp:{ar:'نوع بيانات لتخزين حرف واحد (مثل \'m\' أو \'$\').',fr:'Type pour un seul caractère (ex: \'A\', \'7\').',en:'Data type for a single character (e.g., \'A\', \'7\').'},
+        algFr:'Caractère',
+        algExp:{ar:'يحتوي على رمز واحد من جدول الحروف (مثل ASCII).',fr:'Contient un symbole du tableau ASCII.',en:'Holds one symbol from the ASCII table.'}},
 
     14:{title:{ar:'chaine',fr:'chaine',en:'string'},
-        exp:{ar:'سلسلة نصية.',fr:'Chaîne de caractères.',en:'String.'},
-        alg:{ar:'Chaîne',fr:'Chaîne',en:'String'},
-        algExp:{ar:'نص متعدد الحروف.',fr:'Texte complet.',en:'Multiple characters text.'}},
+        exp:{ar:'في لغة C، السلسلة النصية هي مصفوفة من الحروف تنتهي بـ \'\\0\'.',fr:'En C, une chaîne est un tableau de caractères terminé par \'\\0\'.',en:'In C, a string is a char array ending with \'\\0\'.'},
+        algFr:'Chaîne de caractères',
+        algExp:{ar:'تُخزّن كلمات أو جمل كاملة (مثل "مرحبا").',fr:'Sert à stocker des mots ou des phrases.',en:'Used to store words or sentences.'}},
 
     15:{title:{ar:'#include',fr:'#include',en:'#include'},
-        exp:{ar:'استدعاء مكتبة.',fr:'Inclut une bibliothèque.',en:'Include a library.'},
-        alg:{ar:'Importer Bibliothèque',fr:'Importer Bibliothèque',en:'Import Library'},
-        algExp:{ar:'لاستخدام دوال جاهزة.',fr:'Pour fonctions prédéfinies.',en:'Use predefined functions.'}},
+        exp:{ar:'يُدخل مكتبة خارجية (مثل stdio.h) لاستخدام دوالها الجاهزة.',fr:'Inclut une bibliothèque externe (ex: stdio.h).',en:'Includes an external library (e.g., stdio.h) to use its functions.'},
+        algFr:'Utiliser Bibliothèque',
+        algExp:{ar:'بدونه، لا يمكنك استخدام دوال مثل printf أو scanf.',fr:'Permet d’utiliser des fonctions prédéfinies.',en:'Enables use of predefined functions like printf and scanf.'}},
 
     16:{title:{ar:'return 0;',fr:'return 0;',en:'return 0;'},
-        exp:{ar:'إنهاء البرنامج بدون أخطاء.',fr:'Fin normale.',en:'End successfully.'},
-        alg:{ar:'Retourner 0',fr:'Retourner 0',en:'Return 0'},
-        algExp:{ar:'نهاية الخوارزمية.',fr:'Fin algorithme.',en:'Algorithm end.'}},
+        exp:{ar:'تنهي دالة main() وتشير إلى أن البرنامج انتهى بنجاح (بدون أخطاء).',fr:'Termine main() avec succès (code 0 = succès).',en:'Ends main() and indicates successful program termination.'},
+        algFr:'Retourner 0',
+        algExp:{ar:'القيمة 0 تعني "نجاح"، وأي رقم آخر يدل على خطأ.',fr:'Indique que l’algorithme s’est terminé sans erreur.',en:'Means the algorithm ended without errors.'}},
 
     17:{title:{ar:'i++',fr:'i++',en:'i++'},
-        exp:{ar:'زيادة واحد.',fr:'Incrémente 1.',en:'Increase by 1.'},
-        alg:{ar:'i = i + 1',fr:'i = i + 1',en:'i = i + 1'},
-        algExp:{ar:'الصيغة الكاملة.',fr:'Forme complète.',en:'Full expression.'}},
+        exp:{ar:'يزيد قيمة المتغير i بمقدار 1. مثال: إذا كانت i=5، تصبح i=6.',fr:'Incrémente i de 1 (post-incrémentation).',en:'Increments i by 1 (post-increment).'},
+        algFr:'i ← i + 1',
+        algExp:{ar:'طريقة مختصرة لكتابة i = i + 1.',fr:'Forme abrégée pour incrémenter la variable.',en:'Shorthand to increase the variable by one.'}},
 
     18:{title:{ar:'i--',fr:'i--',en:'i--'},
-        exp:{ar:'تنقيص واحد.',fr:'Décrémente 1.',en:'Decrease by 1.'},
-        alg:{ar:'i = i - 1',fr:'i = i - 1',en:'i = i - 1'},
-        algExp:{ar:'الصيغة الكاملة.',fr:'Forme complète.',en:'Full expression.'}},
+        exp:{ar:'يقلل قيمة المتغير i بمقدار 1. مثال: إذا كانت i=5، تصبح i=4.',fr:'Décrémente i de 1 (post-décrémentation).',en:'Decrements i by 1 (post-decrement).'},
+        algFr:'i ← i - 1',
+        algExp:{ar:'طريقة مختصرة لكتابة i = i - 1.',fr:'Forme abrégée pour décrémenter la variable.',en:'Shorthand to decrease the variable by one.'}},
 
     19:{title:{ar:'mat[40]',fr:'mat[40]',en:'mat[40]'},
-        exp:{ar:'مصفوفة بها 40 خانة.',fr:'Tableau de 40 cases.',en:'Array with 40 cells.'},
-        alg:{ar:'Tableau[40]',fr:'Tableau[40]',en:'Array[40]'},
-        algExp:{ar:'تخزن عدة قيم.',fr:'Stocke plusieurs valeurs.',en:'Stores multiple values.'}},
+        exp:{ar:'مصفوفة تحتوي على 40 عنصرًا مرقّمًا من 0 إلى 39.',fr:'Tableau de 40 éléments indexés de 0 à 39.',en:'Array with 40 elements, indexed from 0 to 39.'},
+        algFr:'Tableau[40]',
+        algExp:{ar:'تُخزّن عدة قيم من نفس النوع في مكان واحد.',fr:'Stocke un ensemble de valeurs du même type.',en:'Stores a collection of values of the same type.'}},
 
     20:{title:{ar:'if',fr:'if',en:'if'},
-        exp:{ar:'جملة شرط.',fr:'Condition.',en:'Condition.'},
-        alg:{ar:'Si(condition)',fr:'Si(condition)',en:'If(condition)'},
-        algExp:{ar:'تنفذ إذا تحقق الشرط.',fr:'Exécute si vrai.',en:'Executes if true.'}},
+        exp:{ar:'تنفّذ كتلة من الأوامر فقط إذا كان الشرط صحيحًا.',fr:'Structure conditionnelle : exécute le bloc si la condition est vraie.',en:'Conditional statement: executes block if condition is true.'},
+        algFr:'Si (condition)',
+        algExp:{ar:'تُستخدم لاتخاذ قرارات داخل البرنامج.',fr:'Utilisée pour prendre des décisions dans le programme.',en:'Used to make decisions in the program.'}},
 
     21:{title:{ar:'else',fr:'else',en:'else'},
-        exp:{ar:'بديل لعدم تحقق الشرط.',fr:'Sinon.',en:'Otherwise.'},
-        alg:{ar:'Sinon',fr:'Sinon',en:'Else'},
-        algExp:{ar:'فرع بديل.',fr:'Chemin alternatif.',en:'Alternative path.'}},
+        exp:{ar:'تنفّذ كتلة بديلة إذا كان شرط if غير صحيح.',fr:'Exécute un bloc alternatif si la condition if est fausse.',en:'Executes an alternative block if the if condition is false.'},
+        algFr:'Sinon',
+        algExp:{ar:'توفر بديلاً عند عدم تحقق الشرط الأول.',fr:'Fournit une alternative lorsque la condition échoue.',en:'Provides an alternative path when condition fails.'}},
+
+    22:{title:{ar:'switch(x)',fr:'switch(x)',en:'switch(x)'},
+        exp:{ar:'يختار ويُنفّذ كتلة من الأوامر بناءً على قيمة المتغير x.',fr:'Évalue une expression et exécute le cas correspondant.',en:'Evaluates an expression and executes a matching case.'},
+        algFr:'Selon(x)',
+        algExp:{ar:'بديل أكثر تنظيمًا لعدة عبارات if-else.',fr:'Alternative élégante aux if-else imbriqués.',en:'Clean alternative to nested if-else statements.'}},
+
+    23:{title:{ar:'break;',fr:'break;',en:'break;'},
+        exp:{ar:'يخرج فورًا من الحلقة (for, while) أو من كتلة switch.',fr:'Termine immédiatement la boucle ou le bloc switch.',en:'Immediately exits the current loop or switch block.'},
+        algFr:'Quitter',
+        algExp:{ar:'يُستخدم لإيقاف الحلقة قبل انتهائها الطبيعي.',fr:'Permet une sortie anticipée d’une boucle ou switch.',en:'Used for early exit from a loop or switch.'}},
+
+    24:{title:{ar:'continue;',fr:'continue;',en:'continue;'},
+        exp:{ar:'يتخطى باقي الحلقة الحالية ويبدأ التكرار التالي فورًا.',fr:'Ignore le reste de la boucle et passe à l’itération suivante.',en:'Skips the rest of the loop and jumps to the next iteration.'},
+        algFr:'Continuer',
+        algExp:{ar:'مفيد لتخطي بعض القيم دون إيقاف الحلقة بالكامل.',fr:'Utile pour ignorer certaines itérations.',en:'Useful to skip certain iterations without breaking the loop.'}},
+
+    25:{title:{ar:'// comment',fr:'// comment',en:'// comment'},
+        exp:{ar:'تعليق أحادي السطر: يُهمل عند تشغيل البرنامج ويُستخدم للشرح.',fr:'Commentaire sur une ligne : ignoré par le compilateur.',en:'Single-line comment: ignored by the compiler.'},
+        algFr:'// commentaire',
+        algExp:{ar:'لا يؤثر على البرنامج، فقط للمطورين.',fr:'Sert à expliquer ou désactiver temporairement du code.',en:'Used to explain code or temporarily disable a line.'}},
+
+    26:{title:{ar:'/* comment */',fr:'/* comment */',en:'/* comment */'},
+        exp:{ar:'تعليق متعدد الأسطر: يُستخدم لشرح كتل كبيرة من الكود.',fr:'Commentaire multi-lignes : pour expliquer du code étendu.',en:'Multi-line comment: used to explain larger code sections.'},
+        algFr:'/* commentaire */',
+        algExp:{ar:'يبدأ بـ /* وينتهي بـ */، ولا يُنفّذ أبدًا.',fr:'Commence par /* et finit par */, ignoré à la compilation.',en:'Begins with /* and ends with */, completely ignored during compilation.'}}
 };
 
-
-
-
-// ---------------- TRANSLATION INCLUDING HOME BUTTON ✔ ----------------
+// ---------------- TRANSLATION SYSTEM ----------------
+function updateLangBtn() {
+    const labels = { ar: 'AR', fr: 'FR', en: 'EN' };
+    document.getElementById("langBtn").textContent = labels[lang];
+}
 
 function translateUI() {
     if (lang === "ar") {
-        document.getElementById("langBtn").innerHTML = "Français";
-        document.getElementById("closeBtn").innerHTML = "غلق";
-        document.getElementById("nextBtn").innerHTML = "التالي";
-
-        document.getElementById("homeText").innerHTML = "الرئيسية";
+        document.getElementById("closeBtn").textContent = "غلق";
+        document.getElementById("nextBtn").textContent = "التالي";
+        document.getElementById("prevBtn").textContent = "رجوع";
+        document.getElementById("homeText").textContent = "الرئيسية";
+        document.getElementById("search").placeholder = "بحث / Search / Recherche";
     }
     else if (lang === "fr") {
-        document.getElementById("langBtn").innerHTML = "English";
-        document.getElementById("closeBtn").innerHTML = "Fermer";
-        document.getElementById("nextBtn").innerHTML = "Suivant";
-
-        document.getElementById("homeText").innerHTML = "Accueil";
+        document.getElementById("closeBtn").textContent = "Fermer";
+        document.getElementById("nextBtn").textContent = "Suivant";
+        document.getElementById("prevBtn").textContent = "Précédent";
+        document.getElementById("homeText").textContent = "Accueil";
+        document.getElementById("search").placeholder = "Recherche / Search / بحث";
     }
     else {
-        document.getElementById("langBtn").innerHTML = "عربي";
-        document.getElementById("closeBtn").innerHTML = "Close";
-        document.getElementById("nextBtn").innerHTML = "Next";
-
-        document.getElementById("homeText").innerHTML = "Home";
+        document.getElementById("closeBtn").textContent = "Close";
+        document.getElementById("nextBtn").textContent = "Next";
+        document.getElementById("prevBtn").textContent = "Back";
+        document.getElementById("homeText").textContent = "Home";
+        document.getElementById("search").placeholder = "Search / Recherche / بحث";
     }
+    updateLangBtn();
 }
 
 function toggleLanguage() {
@@ -372,33 +425,55 @@ function toggleLanguage() {
     else lang = "ar";
 
     translateUI();
-    if (document.getElementById("modal").style.display === "flex") openModal(current);
+    if (document.getElementById("modal").style.display === "flex") {
+        openModal(current);
+    }
 }
 
-
-
 // ---------------- MODAL SYSTEM ----------------
-
 function openModal(i) {
     current = i;
     step = 1;
     document.getElementById("modal").style.display = "flex";
-    document.getElementById("title").innerHTML = data[i].title[lang];
-    document.getElementById("content").innerHTML = data[i].exp[lang];
+    document.getElementById("title").textContent = data[i].title[lang];
+    document.getElementById("content").textContent = data[i].exp[lang];
+    document.getElementById("prevBtn").style.display = "none";
+    document.getElementById("nextBtn").textContent = 
+        lang === "ar" ? "التالي" : (lang === "fr" ? "Suivant" : "Next");
 }
 
 function nextStep() {
     if (step === 1) {
-        document.getElementById("content").innerHTML = data[current].alg[lang];
+        // الخوارزمية تُعرض دائمًا بالفرنسية
+        document.getElementById("content").textContent = data[current].algFr;
         step = 2;
+        document.getElementById("prevBtn").style.display = "block";
     }
     else if (step === 2) {
-        document.getElementById("content").innerHTML = data[current].algExp[lang];
+        // شرح الخوارزمية حسب لغة الواجهة
+        document.getElementById("content").textContent = data[current].algExp[lang];
         step = 3;
+        document.getElementById("nextBtn").textContent = 
+            lang === "ar" ? "إغلاق" : (lang === "fr" ? "Fermer" : "Close");
     }
     else {
         closeModal();
+    }
+}
+
+function prevStep() {
+    if (step === 2) {
+        document.getElementById("content").textContent = data[current].exp[lang];
         step = 1;
+        document.getElementById("prevBtn").style.display = "none";
+        document.getElementById("nextBtn").textContent = 
+            lang === "ar" ? "التالي" : (lang === "fr" ? "Suivant" : "Next");
+    }
+    else if (step === 3) {
+        document.getElementById("content").textContent = data[current].algFr;
+        step = 2;
+        document.getElementById("nextBtn").textContent = 
+            lang === "ar" ? "التالي" : (lang === "fr" ? "Suivant" : "Next");
     }
 }
 
@@ -406,23 +481,19 @@ function closeModal() {
     document.getElementById("modal").style.display = "none";
 }
 
-
-
 // ---------------- SEARCH SYSTEM ----------------
-
-document.getElementById("search").addEventListener("keyup", function () {
-    let text = this.value.toLowerCase();
-    let boxes = document.querySelectorAll(".code-box");
+document.getElementById("search").addEventListener("input", function () {
+    const text = this.value.trim().toLowerCase();
+    const boxes = document.querySelectorAll(".code-box");
 
     boxes.forEach(box => {
-        if (box.innerText.toLowerCase().includes(text)) {
-            box.style.display = "block";
-        } else {
-            box.style.display = "none";
-        }
+        const code = box.textContent.toLowerCase();
+        box.style.display = code.includes(text) ? "flex" : "none";
     });
 });
 
+// Initialize
+translateUI();
 </script>
 
 </body>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>غير متوفر حاليًا</title>
+  <link rel="icon" href="1.png" />
+  <!-- خط عربي جميل -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #1b1f24, #14171a);
+      color: #e0e0e0;
+      font-family: 'Tajawal', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 600px;
+      padding: 30px;
+      background: rgba(30, 34, 39, 0.7);
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5),
+                  0 0 20px #00eaff20;
+      backdrop-filter: blur(4px);
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    .icon {
+      font-size: 90px;
+      color: #00eaff;
+      margin-bottom: 24px;
+      text-shadow: 0 0 20px #00eaff70;
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 28px;
+      font-weight: 700;
+      color: #0aff9d;
+      text-shadow: 0 0 12px #0aff9d40;
+      line-height: 1.4;
+    }
+
+    /* أزرار الترجمة */
+    .lang-buttons {
+      margin: 24px 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .lang-buttons button {
+      background: rgba(0, 234, 255, 0.15);
+      border: 2px solid #00eaff;
+      color: #ffffff;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      min-width: 100px;
+    }
+
+    .lang-buttons button:hover {
+      background: #00eaff;
+      color: #000;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px #00eaff60;
+    }
+
+    .lang-buttons button:active {
+      transform: translateY(-1px);
+    }
+
+    /* زر الهوم */
+    .home-btn {
+      margin-top: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #0aff9d, #00eaff);
+      padding: 14px 32px;
+      border-radius: 16px;
+      color: #000;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 700;
+      box-shadow: 0 6px 20px #00eaff60;
+      transition: all 0.35s ease;
+    }
+
+    .home-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px #0aff9d80;
+      background: linear-gradient(135deg, #00eaff, #0aff9d);
+    }
+
+    .home-btn:active {
+      transform: translateY(-1px);
+    }
+
+    /* الحركات */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); opacity: 0.9; }
+    }
+
+    /* تحسين للهواتف */
+    @media (max-width: 600px) {
+      .container {
+        margin: 20px;
+        padding: 24px 20px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .icon {
+        font-size: 70px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="icon">⏳</div>
+
+  <!-- النصوص بثلاث لغات -->
+  <h1 data-lang="ar">لم يُنشَأ هذا المحتوى بعد</h1>
+  <h1 data-lang="en" style="display:none">This content is not ready yet</h1>
+  <h1 data-lang="fr" style="display:none">Ce contenu n’est pas encore prêt</h1>
+
+  <!-- أزرار التبديل بين اللغات -->
+  <div class="lang-buttons">
+    <button onclick="setLang('ar')">العربية</button>
+    <button onclick="setLang('en')">English</button>
+    <button onclick="setLang('fr')">Français</button>
+  </div>
+
+  <!-- زر العودة للرئيسية -->
+  <a href="asasi.html" class="home-btn">
+    <span>🏠</span> العودة إلى الرئيسية
+  </a>
+</div>
+
+<script>
+  // تعيين اللغة عند التحميل
+  document.addEventListener("DOMContentLoaded", () => {
+    // حاول قراءة اللغة المحفوظة أو استخدم العربية كافتراضي
+    const savedLang = localStorage.getItem("lang") || "ar";
+    setLang(savedLang);
+  });
+
+  function setLang(lang) {
+    // حفظ اللغة لجلسة مستقبلية
+    localStorage.setItem("lang", lang);
+
+    // إظهار النص المطلوب وإخفاء الباقي
+    document.querySelectorAll("[data-lang]").forEach(el => {
+      el.style.display = el.getAttribute("data-lang") === lang ? "block" : "none";
+    });
+
+    // تحديث اتجاه النص ( rtl / ltr )
+    document.body.setAttribute("lang", lang);
+    document.body.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+
+    // تحديث عنوان الصفحة
+    const titles = {
+      ar: "غير متوفر حاليًا",
+      en: "Not Available Yet",
+      fr: "Pas encore disponible"
+    };
+    document.title = titles[lang] || "غير متوفر";
+  }
+</script>
+
+</body>
+</html>

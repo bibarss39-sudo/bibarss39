@@ -1,59 +1,120 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>صفحة الدخول</title>
+    <link rel="icon" href="1.png" />
 
+    <!-- Meta Tags لتحسين الظهور على وسائل التواصل -->
+    <meta property="og:title" content="تعلم لغة C بسهولة" />
+    <meta property="og:description" content="موقع تعليمي شامل لتعلم البرمجة بلغة C من الصفر حتى الاحتراف." />
+    <meta property="og:image" content="1.png" />
+    <meta property="og:type" content="website" />
 
+    <!-- خط عربي جميل -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@600;700&display=swap" rel="stylesheet">
 
-    <meta charset="UTF-8">
-    <title>صفحة دخول</title>
-    <link rel="icon" href="1.png"/>
-    <meta
-    property="og:title"
-    content="coding c" />
-        <meta
-    property="og:descriptions"
-    content="موقع تعليمي للcبشكل كامل" />
-        <meta
-    property="og:image"
-    content="1.png" />
-        <meta
-    property="og:type"
-    content="website" />
     <style>
-
-
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
-            background-color: #222831; 
+            background: linear-gradient(135deg, #1b1f24, #222831);
+            font-family: 'Tajawal', Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            overflow: hidden;
         }
 
-        a {
-            font-size: 40px;
+        .welcome {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .welcome h1 {
+            font-size: 42px;
+            color: #00eaff;
+            text-shadow: 0 0 15px rgba(0, 234, 255, 0.6);
+            margin-bottom: 12px;
+            letter-spacing: 1.5px;
+        }
+
+        .welcome p {
+            font-size: 20px;
+            color: #a0a0b0;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .btn-enter {
+            display: inline-block;
+            padding: 16px 50px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #000;
+            background: linear-gradient(135deg, #00eaff, #0aff9d);
             text-decoration: none;
-            color: #ff6600;
-            padding: 15px 30px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.3);
-            transition: 0.3s;
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(0, 234, 255, 0.4);
+            transition: all 0.35s ease;
+            letter-spacing: 1px;
+            animation: pulse 2s infinite;
         }
 
-        a:hover {
-            color: white;
-            background: #ff6600;
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        .btn-enter:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(10, 255, 157, 0.7);
+            background: linear-gradient(135deg, #0aff9d, #00eaff);
+        }
+
+        .btn-enter:active {
+            transform: translateY(-2px);
+        }
+
+        /* حركات */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 6px 20px rgba(0, 234, 255, 0.4); }
+            50% { box-shadow: 0 6px 20px rgba(10, 255, 157, 0.8); }
+        }
+
+        /* تحسين للهواتف */
+        @media (max-width: 600px) {
+            .welcome h1 {
+                font-size: 32px;
+            }
+            .welcome p {
+                font-size: 17px;
+                padding: 0 15px;
+            }
+            .btn-enter {
+                padding: 14px 40px;
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <a href="asasi.html">دخول</a>
+    <div class="container">
+        <div class="welcome">
+            <h1>مرحباً بك في عالم البرمجة!</h1>
+            <p>ابدأ رحلتك لتعلم لغة C من الأساسيات وحتى الإتقان</p>
+        </div>
+        <a href="asasi.html" class="btn-enter">🚀 ابدأ الآن</a>
+    </div>
 
 </body>
 </html>
