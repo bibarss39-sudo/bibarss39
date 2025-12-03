@@ -4,36 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>أفضل أدوات تطوير لغة C</title>
-    <link rel="icon" href="1.png"/>
-    <!-- Font Awesome 6 Free CDN -->
+    <link rel="icon" href="1.png" />
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- Google Fonts: Poppins + Tajawal (للعربية) -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --card-bg: rgba(30, 41, 59, 0.7);
+            --bg-primary: #0b1120;
+            --bg-secondary: #141c2f;
+            --card-bg: rgba(25, 35, 55, 0.75);
+            --card-bg-hover: rgba(30, 45, 75, 0.9);
             --accent: #3b82f6;
-            --accent-hover: #2563eb;
-            --text-primary: #e2e8f0;
-            --text-secondary: #94a3b8;
-            --border: rgba(255, 255, 255, 0.1);
+            --accent-light: #60a5fa;
+            --accent-dark: #2563eb;
             --success: #10b981;
             --warning: #f59e0b;
+            --danger: #ef4444;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border: rgba(148, 163, 184, 0.12);
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
+            --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.35);
+            --shadow-lg: 0 16px 40px rgba(59, 130, 246, 0.2);
+            --transition-fast: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        * { box-sizing: border-box; }
-
-        body {
-            font-family: 'Tajawal', 'Poppins', sans-serif;
-            background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', 'Poppins', system-ui, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
             color: var(--text-primary);
-            line-height: 1.6;
-            transition: all 0.3s ease;
+            line-height: 1.65;
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* شريط تمرير علوي */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--accent), #0ea5e9, #00eaff);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        body.scrolling::before {
+            opacity: 1;
         }
 
         /* Language Switcher */
@@ -44,33 +79,43 @@
             display: flex;
             gap: 8px;
             z-index: 100;
+            backdrop-filter: blur(8px);
+            background: rgba(15, 23, 42, 0.6);
+            padding: 6px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
         }
 
         .lang-btn {
-            width: 42px;
-            height: 32px;
+            width: 40px;
+            height: 30px;
             border-radius: 8px;
-            border: 2px solid var(--border);
-            background: rgba(255,255,255,0.05);
-            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.07);
+            color: var(--text-muted);
             font-size: 16px;
+            font-weight: 600;
+            border: none;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s;
+            transition: var(--transition);
+            will-change: transform, background;
         }
 
         .lang-btn:hover {
-            transform: scale(1.1);
-            border-color: var(--accent);
+            transform: scale(1.12);
+            background: rgba(96, 165, 250, 0.2);
+            color: var(--accent-light);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
         }
 
         .lang-btn.active {
             background: var(--accent);
             color: white;
-            border-color: var(--accent);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+            transform: scale(1.05);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5), var(--shadow-lg);
         }
 
         /* Home Button */
@@ -81,25 +126,28 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            font-size: 18px;
+            font-size: 17px;
+            font-weight: 600;
             text-decoration: none;
             color: white;
-            background: var(--accent);
-            padding: 12px 24px;
-            border-radius: 14px;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 18px rgba(59, 130, 246, 0.3);
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            padding: 12px 22px;
+            border-radius: 16px;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
             z-index: 10;
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .home-btn:hover {
-            background: var(--accent-hover);
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.5);
+            background: linear-gradient(135deg, var(--accent-light), #0ea5e9);
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: var(--shadow-lg);
         }
 
         .container {
-            max-width: 900px;
+            max-width: 880px;
             margin: 100px auto 60px;
             padding: 0 20px;
         }
@@ -107,19 +155,39 @@
         header {
             text-align: center;
             margin-bottom: 50px;
+            padding: 0 10px;
         }
 
         h1 {
-            font-size: 2.8rem;
+            font-size: 2.6rem;
             margin: 0;
-            color: #60a5fa;
-            text-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            color: var(--accent-light);
+            text-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            border-radius: 2px;
         }
 
         .subtitle {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            margin-top: 12px;
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-top: 14px;
+            max-width: 700px;
+            margin: 14px auto 0;
+            line-height: 1.7;
         }
 
         .section {
@@ -127,18 +195,28 @@
         }
 
         .section-title {
-            font-size: 2.1rem;
+            font-size: 1.9rem;
             color: #93c5fd;
-            margin: 40px 0 25px;
+            margin: 45px 0 28px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             justify-content: center;
-            font-weight: 600;
+            font-weight: 700;
+            position: relative;
         }
 
         .section-title i {
             color: var(--accent);
+            font-size: 1.6rem;
+            background: rgba(59, 130, 246, 0.12);
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
         }
 
         .section-title::before,
@@ -146,116 +224,178 @@
             content: "";
             flex: 1;
             height: 1px;
-            background: var(--border);
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
         }
 
         .app-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 24px;
+            gap: 26px;
         }
 
         .app-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 24px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border-radius: 22px;
+            padding: 28px;
+            transition: var(--transition);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+            will-change: transform, box-shadow;
             text-align: right;
         }
 
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent), #0ea5e9);
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.4s ease;
+            z-index: 1;
+        }
+
+        .app-card:hover::before {
+            transform: scaleY(1);
+        }
+
         .app-card:hover {
+            background: var(--card-bg-hover);
             transform: translateY(-8px);
-            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45);
+            box-shadow: var(--shadow-lg), 0 0 0 1px rgba(96, 165, 250, 0.3);
             border-color: rgba(96, 165, 250, 0.4);
         }
 
         .app-card h3 {
-            font-size: 1.6rem;
-            margin: 0 0 12px;
-            color: #bfdbfe;
+            font-size: 1.55rem;
+            margin: 0 0 16px;
+            color: #e0f2fe;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
+            font-weight: 700;
         }
 
         .app-card h3 i {
             font-size: 1.4rem;
-            width: 36px;
-            height: 36px;
-            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            display: flex;
             align-items: center;
             justify-content: center;
             background: rgba(59, 130, 246, 0.15);
-            border-radius: 10px;
+            border-radius: 12px;
             color: var(--accent);
+            flex-shrink: 0;
         }
 
         .tag {
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             background: var(--success);
             color: white;
-            padding: 3px 10px;
-            border-radius: 20px;
+            padding: 4px 12px;
+            border-radius: 30px;
             font-weight: bold;
+            letter-spacing: 0.3px;
         }
 
         .tag.paid {
-            background: #ef4444;
+            background: var(--danger);
         }
 
         .app-card p {
             color: var(--text-secondary);
             font-size: 1.05rem;
-            margin-bottom: 20px;
-            line-height: 1.7;
+            margin-bottom: 22px;
+            line-height: 1.75;
+            position: relative;
+            z-index: 2;
+        }
+
+        .app-card p code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.95em;
+            color: #ffedd5;
         }
 
         .links {
             display: flex;
             flex-wrap: wrap;
             gap: 12px;
-            margin-top: 10px;
+            margin-top: 12px;
         }
 
         .link-btn {
             text-decoration: none;
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             color: white;
-            padding: 10px 20px;
-            border-radius: 12px;
+            padding: 11px 20px;
+            border-radius: 14px;
             font-weight: 600;
             font-size: 1rem;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            transition: all 0.3s;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-width: 130px;
+            justify-content: center;
         }
 
         .link-btn:hover {
-            background: var(--accent-hover);
-            transform: scale(1.05);
+            background: linear-gradient(135deg, var(--accent-light), #0ea5e9);
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
         }
 
         .note {
-            background: rgba(56, 189, 248, 0.1);
-            border-left: 4px solid #0ea5e9;
-            padding: 14px 20px;
-            border-radius: 0 8px 8px 0;
-            margin-top: 20px;
-            font-size: 0.95rem;
+            background: rgba(21, 128, 234, 0.1);
+            border-left: 4px solid #3b82f6;
+            padding: 16px 20px;
+            border-radius: 0 10px 10px 0;
+            margin-top: 22px;
+            font-size: 0.98rem;
             color: #dbeafe;
+            position: relative;
+        }
+
+        .note::before {
+            content: "ⓘ";
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #3b82f6;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+            color: white;
         }
 
         footer {
             text-align: center;
-            margin-top: 40px;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            font-size: 0.92rem;
+            color: var(--text-muted);
         }
 
-        /* Language-specific adjustments */
+        /* LTR adjustments */
         body.lang-en, body.lang-fr {
             direction: ltr;
             text-align: left;
@@ -263,20 +403,54 @@
         body.lang-en .app-card, body.lang-fr .app-card {
             text-align: left;
         }
+        body.lang-en .note, body.lang-fr .note {
+            border-left: none;
+            border-right: 4px solid #3b82f6;
+            border-radius: 10px 0 0 10px;
+        }
+        body.lang-en .note::before, body.lang-fr .note::before {
+            left: auto;
+            right: -20px;
+        }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .container { margin-top: 80px; }
-            h1 { font-size: 2.2rem; }
-            .section-title { font-size: 1.7rem; }
-            .app-card { padding: 20px; }
-            .lang-switcher { top: 70px; right: 10px; }
+            .container { margin-top: 90px; }
+            h1 { font-size: 2.1rem; }
+            h1::after { width: 60px; bottom: -10px; }
+            .subtitle { font-size: 1.05rem; }
+            .section-title { font-size: 1.6rem; }
+            .section-title i { width: 42px; height: 42px; font-size: 1.4rem; }
+            .app-card { padding: 22px 20px; }
+            .app-card h3 { font-size: 1.4rem; }
+            .lang-switcher { top: 80px; right: 12px; }
+            .home-btn { top: 80px; left: 12px; padding: 10px 18px; font-size: 16px; }
+            .links { flex-direction: column; }
+            .link-btn { width: 100%; }
+        }
+
+        @media (max-width: 480px) {
+            .container { margin-top: 100px; padding: 0 16px; }
+            h1 { font-size: 1.9rem; }
+            .subtitle { font-size: 1rem; }
+            .section-title { font-size: 1.45rem; }
+            .app-card { padding: 20px 16px; }
+            .app-card h3 { font-size: 1.35rem; gap: 10px; }
+            .app-card p { font-size: 1rem; }
+            .lang-switcher { gap: 6px; }
+            .lang-btn { width: 36px; height: 28px; font-size: 14px; }
+        }
+
+        /* Performance: prevent zoom on iOS double-tap */
+        @media (max-width: 768px) {
+            html {
+                -webkit-text-size-adjust: 100%;
+            }
         }
     </style>
 </head>
 
 <body class="lang-ar">
-    <!-- Language Switcher -->
     <div class="lang-switcher">
         <button class="lang-btn active" data-lang="ar" title="العربية">🇸🇦</button>
         <button class="lang-btn" data-lang="fr" title="Français">🇫🇷</button>
@@ -327,7 +501,7 @@
                         أقوى بيئة تطوير من مايكروسوفت. تدعم C/C++ عبر مُجمّع MSVC أو Clang، مع أدوات تحليل، تصحيح، وواجهة متكاملة. مثالية لمشاريع كبيرة (ألعاب، تطبيقات سطح مكتب، خوادم).
                     </p>
                     <div class="links">
-                        <a href="https://visualstudio.microsoft.com/fr/downloads/" target="_blank" class="link-btn">
+                        <a href="https://visualstudio.microsoft.com/downloads/" target="_blank" class="link-btn">
                             <i class="fas fa-download"></i> <span class="lang-key" data-key="vs_community">Community (مجاني)</span>
                         </a>
                         <a href="https://learn.microsoft.com/fr-fr/cpp/build/vscpp-step-0-installation" target="_blank" class="link-btn">
@@ -355,7 +529,7 @@
                     </div>
                 </div>
 
-                <!-- GCC -->
+                <!-- GCC / Clang -->
                 <div class="app-card">
                     <h3><i class="fas fa-gears"></i> GCC / Clang</h3>
                     <p class="lang-key" data-key="gcc_desc">
@@ -461,7 +635,6 @@
     </div>
 
     <script>
-        // الترجمات
         const translations = {
             ar: {
                 home: "العودة للرئيسية",
@@ -531,11 +704,9 @@
             }
         };
 
-        // تحميل اللغة المحفوظة أو الافتراضية
         const savedLang = localStorage.getItem('preferredLang') || 'ar';
         setLanguage(savedLang);
 
-        // زر تبديل اللغة
         document.querySelectorAll('.lang-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const lang = btn.getAttribute('data-lang');
@@ -545,17 +716,14 @@
         });
 
         function setLanguage(lang) {
-            // تحديث فئة الجسم
             document.body.className = `lang-${lang}`;
             document.getElementById('html-root').setAttribute('lang', lang);
             document.getElementById('html-root').setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
 
-            // تحديث الأزرار النشطة
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
             });
 
-            // تحديث النصوص
             document.querySelectorAll('[data-key]').forEach(el => {
                 const key = el.getAttribute('data-key');
                 if (translations[lang][key]) {
@@ -563,6 +731,10 @@
                 }
             });
         }
+
+        window.addEventListener('scroll', () => {
+            document.body.classList.toggle('scrolling', window.scrollY > 10);
+        });
     </script>
 </body>
 </html>

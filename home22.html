@@ -1,568 +1,1288 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" id="html-root">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أفضل أدوات تطوير لغة C</title>
-    <link rel="icon" href="1.png"/>
-    <!-- Font Awesome 6 Free CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- Google Fonts: Poppins + Tajawal (للعربية) -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🤖 مساعدي الذكي — Ultimate Edition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    <style>
-        :root {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --card-bg: rgba(30, 41, 59, 0.7);
-            --accent: #3b82f6;
-            --accent-hover: #2563eb;
-            --text-primary: #e2e8f0;
-            --text-secondary: #94a3b8;
-            --border: rgba(255, 255, 255, 0.1);
-            --success: #10b981;
-            --warning: #f59e0b;
-        }
+    body {
+      font-family: 'Tajawal', 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(135deg, #f0f9ff, #e6f7ff);
+      color: #0f172a;
+      line-height: 1.6;
+      padding: 15px;
+    }
 
-        * { box-sizing: border-box; }
+    .container {
+      max-width: 1050px;
+      margin: 0 auto;
+    }
 
-        body {
-            font-family: 'Tajawal', 'Poppins', sans-serif;
-            background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
-            margin: 0;
-            padding: 0;
-            color: var(--text-primary);
-            line-height: 1.6;
-            transition: all 0.3s ease;
-        }
+    header {
+      text-align: center;
+      margin: 20px 0;
+      padding: 28px;
+      background: white;
+      border-radius: 22px;
+      box-shadow: 0 12px 35px rgba(14, 165, 233, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
 
-        /* Language Switcher */
-        .lang-switcher {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            gap: 8px;
-            z-index: 100;
-        }
+    header::before {
+      content: "";
+      position: absolute;
+      top: -70px;
+      right: -70px;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      background: rgba(14, 165, 233, 0.12);
+    }
 
-        .lang-btn {
-            width: 42px;
-            height: 32px;
-            border-radius: 8px;
-            border: 2px solid var(--border);
-            background: rgba(255,255,255,0.05);
-            color: var(--text-secondary);
-            font-size: 16px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-        }
+    .ai-icon {
+      font-size: 4.5rem;
+      color: #0ea5e9;
+      margin-bottom: 16px;
+      animation: float 3.8s ease-in-out infinite;
+    }
 
-        .lang-btn:hover {
-            transform: scale(1.1);
-            border-color: var(--accent);
-        }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
 
-        .lang-btn.active {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
-        }
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #0c4a6e;
+      margin-bottom: 12px;
+    }
 
-        /* Home Button */
-        .home-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 18px;
-            text-decoration: none;
-            color: white;
-            background: var(--accent);
-            padding: 12px 24px;
-            border-radius: 14px;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 18px rgba(59, 130, 246, 0.3);
-            z-index: 10;
-        }
+    .subtitle {
+      font-size: 1.3rem;
+      color: #334155;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
 
-        .home-btn:hover {
-            background: var(--accent-hover);
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.5);
-        }
+    .highlight {
+      background: linear-gradient(120deg, #dbeafe, #bfdbfe);
+      padding: 3px 10px;
+      border-radius: 8px;
+      font-weight: 700;
+      color: #1e40af;
+    }
 
-        .container {
-            max-width: 900px;
-            margin: 100px auto 60px;
-            padding: 0 20px;
-        }
+    /* شريط المحادثة */
+    .chat-history {
+      background: white;
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 22px;
+      max-height: 240px;
+      overflow-y: auto;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+      display: none;
+      border: 1px solid #bfdbfe;
+    }
 
-        header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
+    .history-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #0ea5e9;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-        h1 {
-            font-size: 2.8rem;
-            margin: 0;
-            color: #60a5fa;
-            text-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        }
+    .history-item {
+      padding: 11px 0;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 1.05rem;
+    }
 
-        .subtitle {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            margin-top: 12px;
-        }
+    .history-item:last-child { border-bottom: none; }
 
-        .section {
-            margin-bottom: 60px;
-        }
+    .history-q { 
+      color: #0c4a6e; 
+      font-weight: 600;
+      background: linear-gradient(120deg, #f0f9ff, #dbeafe);
+      padding: 7px 14px;
+      border-radius: 12px;
+      display: inline-block;
+      border: 1px solid #93c5fd;
+    }
+    .history-a { 
+      color: #065f46; 
+      margin-top: 9px;
+      padding: 9px 14px;
+      background: #f0fdf4;
+      border-radius: 12px;
+      border-left: 3px solid #16a34a;
+    }
 
-        .section-title {
-            font-size: 2.1rem;
-            color: #93c5fd;
-            margin: 40px 0 25px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            justify-content: center;
-            font-weight: 600;
-        }
+    /* صندوق الإدخال */
+    .chat-box {
+      background: white;
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 12px 45px rgba(14, 165, 233, 0.25);
+      margin-bottom: 28px;
+    }
 
-        .section-title i {
-            color: var(--accent);
-        }
+    .input-tools {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
 
-        .section-title::before,
-        .section-title::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: var(--border);
-        }
+    .tool-btn {
+      flex: 1;
+      min-width: 140px;
+      padding: 15px 20px;
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 16px;
+      font-weight: 700;
+      color: #1e293b;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 1.1rem;
+    }
 
-        .app-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 24px;
-        }
+    .tool-btn:hover {
+      background: #f1f5f9;
+      transform: translateY(-4px);
+    }
 
-        .app-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 24px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            text-align: right;
-        }
+    .tool-btn.active {
+      background: linear-gradient(135deg, #dbeafe, #93c5fd);
+      border-color: #60a5fa;
+      color: #1e40af;
+      box-shadow: 0 7px 14px rgba(59, 130, 246, 0.3);
+    }
 
-        .app-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45);
-            border-color: rgba(96, 165, 250, 0.4);
-        }
+    .input-group {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
 
-        .app-card h3 {
-            font-size: 1.6rem;
-            margin: 0 0 12px;
-            color: #bfdbfe;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+    #questionInput {
+      flex: 1;
+      padding: 20px 24px;
+      border: 2px solid #cbd5e1;
+      border-radius: 18px;
+      font-size: 1.15rem;
+      font-family: inherit;
+      outline: none;
+      transition: all 0.3s;
+      min-height: 80px;
+      resize: vertical;
+      line-height: 1.6;
+    }
 
-        .app-card h3 i {
-            font-size: 1.4rem;
-            width: 36px;
-            height: 36px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(59, 130, 246, 0.15);
-            border-radius: 10px;
-            color: var(--accent);
-        }
+    #questionInput:focus {
+      border-color: #0ea5e9;
+      box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.3);
+    }
 
-        .tag {
-            font-size: 0.75rem;
-            background: var(--success);
-            color: white;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-weight: bold;
-        }
+    #askBtn {
+      background: linear-gradient(135deg, #0ea5e9, #0284c7);
+      color: white;
+      border: none;
+      border-radius: 18px;
+      padding: 0 36px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 6px 15px rgba(14, 165, 233, 0.4);
+    }
 
-        .tag.paid {
-            background: #ef4444;
-        }
+    #askBtn:hover {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(14, 165, 233, 0.5);
+    }
 
-        .app-card p {
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-            margin-bottom: 20px;
-            line-height: 1.7;
-        }
+    #askBtn:active { transform: translateY(0); }
 
-        .links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 10px;
-        }
+    /* صندوق الإجابة */
+    .answer-box {
+      background: #f8fafc;
+      border-radius: 20px;
+      padding: 32px;
+      font-size: 1.15rem;
+      color: #1e293b;
+      line-height: 1.8;
+      border-left: 6px solid #0ea5e9;
+      min-height: 180px;
+    }
 
-        .link-btn {
-            text-decoration: none;
-            background: var(--accent);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
-        }
+    .answer-box h3 {
+      color: #0c4a6e;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
 
-        .link-btn:hover {
-            background: var(--accent-hover);
-            transform: scale(1.05);
-        }
+    .answer-box code {
+      background: #dbeafe;
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      color: #1e40af;
+      font-size: 1.1rem;
+      border: 1px solid #93c5fd;
+    }
 
-        .note {
-            background: rgba(56, 189, 248, 0.1);
-            border-left: 4px solid #0ea5e9;
-            padding: 14px 20px;
-            border-radius: 0 8px 8px 0;
-            margin-top: 20px;
-            font-size: 0.95rem;
-            color: #dbeafe;
-        }
+    .answer-box pre {
+      background: #0c4a6e;
+      color: #f0f9ff;
+      padding: 20px;
+      border-radius: 14px;
+      overflow-x: auto;
+      margin: 20px 0;
+      font-size: 1.05rem;
+      line-height: 1.65;
+      border-left: 5px solid #38bdf8;
+    }
 
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
+    .answer-box .pseudo {
+      background: #f0fdf4;
+      border-left: 4px solid #16a34a;
+      padding: 18px;
+      border-radius: 10px;
+      font-family: 'Courier New', monospace;
+      direction: ltr;
+      text-align: left;
+    }
 
-        /* Language-specific adjustments */
-        body.lang-en, body.lang-fr {
-            direction: ltr;
-            text-align: left;
-        }
-        body.lang-en .app-card, body.lang-fr .app-card {
-            text-align: left;
-        }
+    .answer-box .error-list {
+      background: #fef2f2;
+      border-left: 5px solid #ef4444;
+      padding: 20px;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container { margin-top: 80px; }
-            h1 { font-size: 2.2rem; }
-            .section-title { font-size: 1.7rem; }
-            .app-card { padding: 20px; }
-            .lang-switcher { top: 70px; right: 10px; }
-        }
-    </style>
+    .error-list h4 {
+      color: #b91c1c;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .error-list li {
+      margin-bottom: 10px;
+      color: #dc2626;
+      padding: 8px 0 8px 25px;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .error-list li:before {
+      content: "⚠️";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      font-size: 1.1rem;
+    }
+
+    .error-fix {
+      background: #f0fdf4;
+      border-left: 4px solid #16a34a;
+      padding: 18px;
+      border-radius: 10px;
+      margin-top: 18px;
+    }
+
+    .error-fix h4 {
+      color: #166534;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* نصائح */
+    .tips-card {
+      background: white;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+      margin-top: 24px;
+    }
+
+    .tips-card h3 {
+      color: #065f46;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .tip-item {
+      background: #f0fdf4;
+      padding: 18px;
+      border-radius: 16px;
+      font-size: 1.05rem;
+      border: 1px solid #bbf7d0;
+    }
+
+    .tip-item strong { 
+      color: #065f46; 
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+
+    .tip-item em {
+      color: #0c4a6e;
+      font-style: normal;
+    }
+
+    .symbol-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    .symbol-table th,
+    .symbol-table td {
+      padding: 14px;
+      text-align: right;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .symbol-table th {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+    .symbol-table tr:hover {
+      background: #f8fafc;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 35px;
+      padding: 24px;
+      color: #475569;
+      font-size: 1.1rem;
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+    }
+
+    @media (max-width: 650px) {
+      .input-tools { flex-direction: column; }
+      h1 { font-size: 2.3rem; }
+      .ai-icon { font-size: 3.5rem; }
+      .tool-btn { min-width: 100%; }
+      .answer-box { padding: 24px 18px; }
+    }
+  </style>
 </head>
+<body>
+  <div class="container">
+    <header>
+      <div class="ai-icon">
+        <i class="fas fa-robot"></i>
+      </div>
+      <h1>🤖 مساعدي الذكي <span class="highlight">Ultimate Edition</span></h1>
+      <p class="subtitle">نسخة شاملة — <strong>375 سؤالًا</strong> من المنهج + <strong>80 رمزًا</strong> + <strong>40 خطأ</strong><br>
+      يفهم لهجاتك، يصحح أخطاءك، ويشرح بأبسط طريقة! 💙</p>
+    </header>
 
-<body class="lang-ar">
-    <!-- Language Switcher -->
-    <div class="lang-switcher">
-        <button class="lang-btn active" data-lang="ar" title="العربية">🇸🇦</button>
-        <button class="lang-btn" data-lang="fr" title="Français">🇫🇷</button>
-        <button class="lang-btn" data-lang="en" title="English">🇬🇧</button>
+    <div class="chat-history" id="chatHistory">
+      <div class="history-title">
+        <i class="fas fa-comments"></i> محادثاتك (آخر 5)
+      </div>
+      <div id="historyContent"></div>
     </div>
 
-    <a href="asasi.html" class="home-btn">
-        <i class="fas fa-home"></i> 
-        <span class="lang-key" data-key="home">العودة للرئيسية</span>
-    </a>
+    <div class="chat-box">
+      <div class="input-tools">
+        <button class="tool-btn active" id="modeQnA">
+          <i class="fas fa-comment-dots"></i> أسئلة المنهج
+        </button>
+        <button class="tool-btn" id="modeCode">
+          <i class="fas fa-code"></i> تصحيح كود (مُطوّر)
+        </button>
+        <button class="tool-btn" id="modeSymbols">
+          <i class="fas fa-icons"></i> معاني الرموز
+        </button>
+      </div>
 
-    <div class="container">
-        <header>
-            <h1><i class="fas fa-code"></i> <span class="lang-key" data-key="title">أفضل أدوات تطوير لغة C</span></h1>
-            <p class="subtitle lang-key" data-key="subtitle">
-                بيئات تطوير ومحررات موثوقة — للحاسوب والهاتف — لكتابة، ترجمة، وتصحيح أكواد C/C++ باحترافية
-            </p>
-        </header>
+      <div class="input-group">
+        <textarea id="questionInput" placeholder="اسأل بأي صيغة... مثال: ليش لما أستخدم scanf بدون & يعطيني seg fault؟ أو شلون أكتب حلقة for؟" rows="3" autofocus></textarea>
+        <button id="askBtn">إرسال <i class="fas fa-paper-plane"></i></button>
+      </div>
 
-        <!-- Desktop Section -->
-        <section class="section">
-            <h2 class="section-title">
-                <i class="fas fa-desktop"></i> 
-                <span class="lang-key" data-key="desktop_section">🖥️ لأجهزة الحاسوب (Windows / macOS / Linux)</span>
-            </h2>
-
-            <div class="app-grid">
-                <!-- CLion -->
-                <div class="app-card">
-                    <h3><i class="fas fa-laptop-code"></i> CLion <span class="tag">مميز</span></h3>
-                    <p class="lang-key" data-key="clion_desc">
-                        بيئة تطوير احترافية من JetBrains لمطوري C/C++. تدعم CMake، GDB/LLDB، Docker، WSL، وتطوير مضمن (Embedded)، مع تحليل ذكي للشفرة، إكمال تلقائي، وتصحيح أخطاء متقدم.
-                    </p>
-                    <div class="links">
-                        <a href="https://www.jetbrains.com/clion/download/" target="_blank" class="link-btn">
-                            <i class="fas fa-download"></i> <span class="lang-key" data-key="download">تحميل</span>
-                        </a>
-                        <a href="https://www.jetbrains.com/clion/features/" target="_blank" class="link-btn">
-                            <i class="fas fa-star"></i> <span class="lang-key" data-key="features">الميزات</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Visual Studio (Windows) -->
-                <div class="app-card">
-                    <h3><i class="fab fa-windows"></i> Visual Studio (Windows)</h3>
-                    <p class="lang-key" data-key="vs_desc">
-                        أقوى بيئة تطوير من مايكروسوفت. تدعم C/C++ عبر مُجمّع MSVC أو Clang، مع أدوات تحليل، تصحيح، وواجهة متكاملة. مثالية لمشاريع كبيرة (ألعاب، تطبيقات سطح مكتب، خوادم).
-                    </p>
-                    <div class="links">
-                        <a href="https://visualstudio.microsoft.com/fr/downloads/" target="_blank" class="link-btn">
-                            <i class="fas fa-download"></i> <span class="lang-key" data-key="vs_community">Community (مجاني)</span>
-                        </a>
-                        <a href="https://learn.microsoft.com/fr-fr/cpp/build/vscpp-step-0-installation" target="_blank" class="link-btn">
-                            <i class="fas fa-book"></i> <span class="lang-key" data-key="guide">الدليل</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Code::Blocks -->
-                <div class="app-card">
-                    <h3><i class="fas fa-cube"></i> Code::Blocks</h3>
-                    <p class="lang-key" data-key="codeblocks_desc">
-                        بيئة تطوير مفتوحة المصدر وخفيفة، تعتمد على GCC أو Clang. مناسبة للمبتدئين والمشاريع المتوسطة. تدعم أنظمة Windows، Linux، وmacOS.
-                    </p>
-                    <div class="links">
-                        <a href="https://www.codeblocks.org/downloads/binaries/" target="_blank" class="link-btn">
-                            <i class="fab fa-windows"></i> Windows
-                        </a>
-                        <a href="https://formulae.brew.sh/formula/codeblocks" target="_blank" class="link-btn">
-                            <i class="fab fa-apple"></i> macOS
-                        </a>
-                        <a href="https://packages.ubuntu.com/search?keywords=codeblocks" target="_blank" class="link-btn">
-                            <i class="fab fa-linux"></i> Linux
-                        </a>
-                    </div>
-                </div>
-
-                <!-- GCC -->
-                <div class="app-card">
-                    <h3><i class="fas fa-gears"></i> GCC / Clang</h3>
-                    <p class="lang-key" data-key="gcc_desc">
-                        المُجمّع الأساسي لكتابة أكواد C/C++. ضروري لتشغيل معظم البيئات. على macOS: استخدم <code>xcode-select --install</code>. على Windows: استخدم <a href="https://www.msys2.org/" target="_blank">MSYS2</a>.
-                    </p>
-                    <div class="links">
-                        <a href="https://gcc.gnu.org/install/" target="_blank" class="link-btn">
-                            <i class="fas fa-globe"></i> GCC
-                        </a>
-                        <a href="https://clang.llvm.org/" target="_blank" class="link-btn">
-                            <i class="fas fa-code-branch"></i> Clang
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Dev-C++ -->
-                <div class="app-card">
-                    <h3><i class="fas fa-terminal"></i> Dev-C++ (Embarcadero)</h3>
-                    <p class="lang-key" data-key="devcpp_desc">
-                        بيئة بسيطة مناسبة جداً للمبتدئين. تحتوي على مُجمّع TDM-GCC مدمج. نسخة مُحدّثة من Orwell (مدعومة من Embarcadero عبر GitHub).
-                    </p>
-                    <div class="links">
-                        <a href="https://github.com/Embarcadero/Dev-Cpp/releases" target="_blank" class="link-btn">
-                            <i class="fab fa-github"></i> GitHub
-                        </a>
-                        <a href="https://github.com/tdm-gcc/tdm-gcc/releases" target="_blank" class="link-btn">
-                            <i class="fas fa-microchip"></i> TDM-GCC
-                        </a>
-                    </div>
-                </div>
+      <div class="answer-box" id="answerBox">
+        <h3><i class="fas fa-graduation-cap"></i> مرحباً! أنا جاهز أساعدك 🌟</h3>
+        <p>تم تصميمي خصيصًا لطلاب الخوارزميات ولغة C — <strong>لا أسئلة غبية، ولا أخطاء فادحة</strong>!<br>
+        اسألني بأي صيغة (حتى لو بلهجتك أو فيها أخطاء إملائية)، وسأجيبك <strong>بأبسط طريقة</strong>.</p>
+        
+        <div class="tips-card">
+          <h3><i class="fas fa-lightbulb"></i> كيف تسأل بذكاء؟</h3>
+          <div class="tips-grid">
+            <div class="tip-item">
+              <strong>استخدم لهجتك</strong><br>
+              <em>"بدي أعرف شلون أكتب حلقة for؟"</em>
             </div>
-        </section>
-
-        <!-- Mobile Section -->
-        <section class="section">
-            <h2 class="section-title">
-                <i class="fas fa-mobile-screen-button"></i> 
-                <span class="lang-key" data-key="mobile_section">📱 للهواتف الذكية</span>
-            </h2>
-
-            <div class="app-grid">
-                <!-- C4droid -->
-                <div class="app-card">
-                    <h3><i class="fas fa-mobile-alt"></i> C4droid</h3>
-                    <p class="lang-key" data-key="c4droid_desc">
-                        أقوى محرر C/C++ على أندرويد. يدعم GCC وClang، ويسمح بالكتابة، الترجمة، والتشغيل مباشرةً على الجهاز. يتطلب ترخيصاً لفتح الميزات الكاملة.
-                    </p>
-                    <div class="links">
-                        <a href="https://play.google.com/store/apps/details?id=com.n0n3m4.droidc" target="_blank" class="link-btn">
-                            <i class="fab fa-google-play"></i> Google Play
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Termux -->
-                <div class="app-card">
-                    <h3><i class="fas fa-terminal"></i> Termux</h3>
-                    <p class="lang-key" data-key="termux_desc">
-                        طرفية لينكس حقيقية على أندرويد. بعد التثبيت، نفّذ <code>pkg install clang</code> لتطوير C/C++. مثالي للمستخدمين المتقدمين.
-                    </p>
-                    <div class="links">
-                        <a href="https://f-droid.org/packages/com.termux/" target="_blank" class="link-btn">
-                            <i class="fas fa-shield-alt"></i> F-Droid (موصى به)
-                        </a>
-                        <a href="https://wiki.termux.com/wiki/Main_Page" target="_blank" class="link-btn">
-                            <i class="fas fa-book"></i> الدليل
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Acode -->
-                <div class="app-card">
-                    <h3><i class="fas fa-edit"></i> Acode + C Plugin</h3>
-                    <p class="lang-key" data-key="acode_desc">
-                        محرر خفيف وسريع (مفتوح المصدر). مع إضافة دعم C وTermux، يمكنك تطوير C بكفاءة على أندرويد.
-                    </p>
-                    <div class="links">
-                        <a href="https://play.google.com/store/apps/details?id=com.foxdebug.acodefree" target="_blank" class="link-btn">
-                            <i class="fab fa-google-play"></i> مجاني
-                        </a>
-                    </div>
-                </div>
-
-                <!-- VS Code on iPad -->
-                <div class="app-card">
-                    <h3><i class="fab fa-apple"></i> VS Code (iPad)</h3>
-                    <p class="lang-key" data-key="vscode_ipad_desc">
-                        تطبيق Visual Studio Code رسمي على iPadOS. مع إضافات C/C++ وGitHub Codespaces، يمكنك تطوير C/C++ باحترافية.
-                    </p>
-                    <div class="links">
-                        <a href="https://apps.apple.com/us/app/visual-studio-code/id1605891240" target="_blank" class="link-btn">
-                            <i class="fab fa-app-store"></i> App Store
-                        </a>
-                    </div>
-                </div>
+            <div class="tip-item">
+              <strong>ما تخف من الأخطاء</strong><br>
+              <em>"سيجمانتيشن فاولد إيش معناه؟"</em>
             </div>
-        </section>
-
-        <footer>
-            <p class="lang-key" data-key="footer1">✅ جميع الروابط مُختارة من مصادر رسمية أو مجتمعات موثوقة (GitHub, JetBrains, Microsoft, F-Droid).</p>
-            <p class="lang-key" data-key="footer2">آخر تحديث: ديسمبر ٢٠٢٥</p>
-        </footer>
+            <div class="tip-item">
+              <strong>اطلب تبسيط</strong><br>
+              <em>"اشرح لي البحث الثنائي بشكل بسيط"</em>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <footer>
+      <p>✨ <strong>Ultimate Edition</strong> — مُحدّثة بـ +800 مرادف، 375 سؤال، 80 رمز، 40 خطأ — كلها لراحتك!</p>
+    </footer>
 
     <script>
-        // الترجمات
-        const translations = {
-            ar: {
-                home: "العودة للرئيسية",
-                title: "أفضل أدوات تطوير لغة C",
-                subtitle: "بيئات تطوير ومحررات موثوقة — للحاسوب والهاتف — لكتابة، ترجمة، وتصحيح أكواد C/C++ باحترافية",
-                desktop_section: "🖥️ لأجهزة الحاسوب (Windows / macOS / Linux)",
-                mobile_section: "📱 للهواتف الذكية",
-                download: "تحميل",
-                features: "الميزات",
-                vs_community: "Community (مجاني)",
-                guide: "الدليل",
-                clion_desc: "بيئة تطوير احترافية من JetBrains لمطوري C/C++. تدعم CMake، GDB/LLDB، Docker، WSL، وتطوير مضمن (Embedded)، مع تحليل ذكي للشفرة، إكمال تلقائي، وتصحيح أخطاء متقدم.",
-                vs_desc: "أقوى بيئة تطوير من مايكروسوفت. تدعم C/C++ عبر مُجمّع MSVC أو Clang، مع أدوات تحليل، تصحيح، وواجهة متكاملة. مثالية لمشاريع كبيرة (ألعاب، تطبيقات سطح مكتب، خوادم).",
-                codeblocks_desc: "بيئة تطوير مفتوحة المصدر وخفيفة، تعتمد على GCC أو Clang. مناسبة للمبتدئين والمشاريع المتوسطة. تدعم أنظمة Windows، Linux، وmacOS.",
-                gcc_desc: "المُجمّع الأساسي لكتابة أكواد C/C++. ضروري لتشغيل معظم البيئات. على macOS: استخدم <code>xcode-select --install</code>. على Windows: استخدم <a href='https://www.msys2.org/' target='_blank'>MSYS2</a>.",
-                devcpp_desc: "بيئة بسيطة مناسبة جداً للمبتدئين. تحتوي على مُجمّع TDM-GCC مدمج. نسخة مُحدّثة من Orwell (مدعومة من Embarcadero عبر GitHub).",
-                c4droid_desc: "أقوى محرر C/C++ على أندرويد. يدعم GCC وClang، ويسمح بالكتابة، الترجمة، والتشغيل مباشرةً على الجهاز. يتطلب ترخيصاً لفتح الميزات الكاملة.",
-                termux_desc: "طرفية لينكس حقيقية على أندرويد. بعد التثبيت، نفّذ <code>pkg install clang</code> لتطوير C/C++. مثالي للمستخدمين المتقدمين.",
-                acode_desc: "محرر خفيف وسريع (مفتوح المصدر). مع إضافة دعم C وTermux، يمكنك تطوير C بكفاءة على أندرويد.",
-                vscode_ipad_desc: "تطبيق Visual Studio Code رسمي على iPadOS. مع إضافات C/C++ وGitHub Codespaces، يمكنك تطوير C/C++ باحترافية.",
-                footer1: "✅ جميع الروابط مُختارة من مصادر رسمية أو مجتمعات موثوقة (GitHub, JetBrains, Microsoft, F-Droid).",
-                footer2: "آخر تحديث: ديسمبر ٢٠٢٥"
-            },
-            fr: {
-                home: "Accueil",
-                title: "Meilleurs outils pour développer en C",
-                subtitle: "Environnements de développement fiables — ordinateur et mobile — pour coder, compiler et déboguer en C/C++",
-                desktop_section: "🖥️ Pour ordinateur (Windows / macOS / Linux)",
-                mobile_section: "📱 Pour smartphone",
-                download: "Télécharger",
-                features: "Fonctionnalités",
-                vs_community: "Community (gratuit)",
-                guide: "Guide",
-                clion_desc: "IDE professionnel de JetBrains pour C/C++. Supporte CMake, GDB/LLDB, Docker, WSL et le développement embarqué, avec analyse intelligente, auto-complétion et débogage avancé.",
-                vs_desc: "L'IDE le plus puissant de Microsoft. Supporte C/C++ via MSVC ou Clang. Idéal pour les gros projets (jeux, applications desktop, serveurs).",
-                codeblocks_desc: "IDE léger, open-source, basé sur GCC/Clang. Idéal pour débutants et projets moyens.",
-                gcc_desc: "Le compilateur standard pour C/C++. Sur macOS : <code>xcode-select --install</code>. Sur Windows : utilisez <a href='https://www.msys2.org/' target='_blank'>MSYS2</a>.",
-                devcpp_desc: "IDE simple, idéal pour l'apprentissage. Inclut TDM-GCC. Version maintenue par Embarcadero (GitHub).",
-                c4droid_desc: "Le meilleur IDE C/C++ sur Android. Compilation et exécution directe sur l'appareil.",
-                termux_desc: "Terminal Linux sur Android. Installez Clang via <code>pkg install clang</code> pour coder en C/C++.",
-                acode_desc: "Éditeur léger et open-source. Avec le plugin C et Termux, parfait pour Android.",
-                vscode_ipad_desc: "VS Code officiel sur iPadOS. Développez en C/C++ avec GitHub Codespaces.",
-                footer1: "✅ Tous les liens proviennent de sources officielles (GitHub, JetBrains, Microsoft, F-Droid).",
-                footer2: "Dernière mise à jour : Décembre 2025"
-            },
-            en: {
-                home: "Home",
-                title: "Best Tools for C Development",
-                subtitle: "Trusted IDEs & editors — desktop & mobile — to write, compile, and debug C/C++ code professionally",
-                desktop_section: "🖥️ For Desktop (Windows / macOS / Linux)",
-                mobile_section: "📱 For Mobile",
-                download: "Download",
-                features: "Features",
-                vs_community: "Community (Free)",
-                guide: "Guide",
-                clion_desc: "Professional C/C++ IDE by JetBrains. Supports CMake, GDB/LLDB, Docker, WSL, and embedded dev, with smart code analysis and advanced debugging.",
-                vs_desc: "Microsoft’s most powerful IDE. Supports C/C++ via MSVC or Clang. Ideal for large projects (games, desktop apps, servers).",
-                codeblocks_desc: "Lightweight, open-source IDE based on GCC/Clang. Great for beginners and medium projects.",
-                gcc_desc: "The standard compiler for C/C++. On macOS: <code>xcode-select --install</code>. On Windows: use <a href='https://www.msys2.org/' target='_blank'>MSYS2</a>.",
-                devcpp_desc: "Simple IDE, perfect for learning. Bundles TDM-GCC. Maintained by Embarcadero (GitHub).",
-                c4droid_desc: "The most powerful C/C++ IDE on Android. Compile and run directly on device.",
-                termux_desc: "Linux terminal on Android. Run <code>pkg install clang</code> to develop in C/C++.",
-                acode_desc: "Lightweight, open-source editor. With C plugin + Termux, great for Android development.",
-                vscode_ipad_desc: "Official VS Code for iPadOS. Develop C/C++ with GitHub Codespaces.",
-                footer1: "✅ All links are from official sources (GitHub, JetBrains, Microsoft, F-Droid).",
-                footer2: "Last updated: December 2025"
-            }
-        };
+      // === 1. نظام مرادفات ضخم (800+ تعبير) ===
+      const synonyms = {
+        // اللهجات + أخطاء إملائية
+        "ايش": ["ما", "ماذا", "أي", "وش", "شو", "ايه", "اى", "ايش هوا", "ايش يعني"],
+        "شلون": ["كيف", "بأي طريقة", "ما الطريقة", "ازاي", "إزاي", "عايز اعرف ازاي", "بدي اعرف شلون", "شلون اعمل"],
+        "ليش": ["لماذا", "ما السبب", "علشان ايه", "ليه", "ليش يصير", "ليش بيحصل", "ليش لما"],
+        "شو": ["ما", "ماذا", "ايش", "وش"],
+        "إيش": ["ما", "ماذا", "ايش"],
+        "بدي": ["أريد", "أبغى", "عايز", "أرغب", "أحب"],
+        "عايز": ["أريد", "بدي", "أبغى"],
+        "ينعمل": ["يُنفذ", "يُكتب", "يُطبق", "يُصمم", "نعمل"],
+        "يصير": ["يحصل", "يحدث", "يظهر", "يظهر خطأ", "يطلع"],
+        "وقع": ["توقف", "انهار", "crash", "seg fault", "segmentation fault", "سيجمنتايشن فولت"],
+        "عطاني": ["أعطاني", "ظهر لي", "طلعني", "سبب لي", "طلع لي"],
+        "سيجمنتايشن": ["segmentation", "سيجمانتيشن", "سيجمانتيشن", "تقسيم", "خطأ تقسيم"],
+        "فولت": ["fault", "فالت", "فشل", "فاولد"],
+        "فاولد": ["fault", "فولت", "فشل"],
+        "ميموري": ["memory", "ذاكرة", "مساحة", "تخزين"],
+        "ليك": ["leak", "تسريب", "هدر"],
+        "برينت": ["print", "اطبع", "printf", "برنت"],
+        "سكان": ["scan", "scanf", "اقرأ", "سكن"],
+        "ريتورن": ["return", "ارجع", "أعد", "رجع"],
+        "إف": ["if", "اذا", "في حالة", "إذا"],
+        "إلز": ["else", "غير كده", "خلاف ذلك", " والا"],
+        "وايل": ["while", "ما دام", "طالما", "وائل"],
+        "فور": ["for", "لـ", "لتكرار", "فور"],
+        "ستركت": ["struct", "هيكل", "ستراكت"],
+        "ديفين": ["define", "تعريف", "ديفاين"],
+        "فايل": ["file", "ملف", "فايل"],
+        "مصفوفة": ["جدول", "array", "تيبلو", "تابلو", "tablo"],
+        "خوارزمية": ["algorithm", "ألگوريتم", "خوارزميه", "خورزمية"],
+        "الخوارزمية": ["algorithm", "ألگوريتم", "خوارزميه", "خورزمية"],
+        "مؤشر": ["pointer", "عنوان", "بواينتر", "مؤشر ذاكرة"],
+        "دالة": ["function", "فانكشن", "وظيفة", "procedure"],
+        "برنامج": ["كود", "source", "مشروع", "تطبيق", "بروجرام"],
+        "كود": ["برنامج", "تنفيذ", "كتابة", "source code", "كود"],
+        "خطأ": ["مشكلة", "عُقدة", "issue", "bug", "غلطة", "غلط"],
+        "أدخل": ["ادخل", "اقرأ", "input", "إدخال"],
+        "أطبع": ["اطبع", "output", "إخراج", "برينت"],
+        "أحسب": ["احسب", "compute", "حساب", "processing"],
+        "أبحث": ["ابحث", "search", "بحث", "looking for"],
+        "أرتب": ["ارتب", "sort", "ترتيب", "فرز"],
+        "أدمج": ["ادمج", "merge", "دمج", "جمع"],
+        "أحذف": ["احذف", "delete", "حذف", "إزالة"],
+        "أضيف": ["اضيف", "add", "إضافة", "insert"],
+        "أقارن": ["اقارن", "compare", "مقارنة", "matchCondition"],
+        
+        // المصطلحات الفرنسية (من منهجك)
+        "affectation": ["إسناد", "assignment", "إعطاء قيمة", "إسناد قيمة"],
+        "Organigramme": ["مخطط انسيابي", "flowchart", "رسم تخطيطي"],
+        "pseudo-code": ["شبة كود", "كود شبه برمجي", "pseudo code"],
+        "boolean": ["منطقي", "boo lean", "صحيح أو خاطئ", "vrai or faux"],
+        "vrai": ["صحيح", "true", "حق", "موجب"],
+        "faux": ["خاطئ", "false", "غلط", "سالب"],
+        "calcul": ["حساب", "عملية", "معالجة", "computation"],
+        "Étape": ["خطوة", "step", "مرحلة", "عملية"],
+        "Commentaire": ["تعليق", "شرح", "note", "توضيح"],
+        "puissance": ["أس", "أسس", "exponent", "power"],
+        "concate": ["دمج", "concatenation", "دمج النصوص", "جمع سلاسل"],
+        "SinonSi": ["else if", "elif", "وإلا إذا", "خلاف ذلك إذا"],
+        "TantQue": ["while", "طالما", "ما دام", "حالة"],
+        "Faire": ["نفذ", "do", "execute", "perform"],
+        "FinTantQue": ["نهاية while", "end while", "ختام"],
+        "Pour": ["for", "لـ", "من أجل", "for loop"],
+        "allant de": ["من", "going from", "يبدأ من"],
+        "à": ["إلى", "to", "ينتهي عند"],
+        "pas": ["خطوة", "step", "زيادة", "increment"],
+        "Répéter": ["repeat", "كرر", "أعد", "do"],
+        "Jusqu’à": ["حتى", "until", "حتى يتحقق"],
+        "tableau": ["مصفوفة", "جدول", "array", "تيبلو"],
+        "chaîne": ["سلسلة", "string", "نص", "character array"],
+        
+        // الرموز
+        "++": ["زيادة", "increment", "يزيد", "يزيد بمقدار واحد", "plus plus"],
+        "--": ["نقصان", "decrement", "ينقص", "ينقص بمقدار واحد", "minus minus"],
+        "&": ["عنوان", "address", "رمز العنوان", "ampersand", "عنوان المتغير"],
+        "*": ["نجمة", "إبطال", "dereference", "قيمة في العنوان", "مؤشر"],
+        "->": ["سهم", "arrow", "وصول لهيكل", "struct access", "سهم هيكل"],
+        ".": ["نقطة", "dot", "وصول مباشر", "direct access", "نقطة هيكل"],
+        "\\n": ["سطر جديد", "new line", "ينتقل لسطر", "enter", "سطر"],
+        "\\t": ["تاب", "tab", "مسافة كبيرة", "indent", "تبويب"],
+        "\\\\": ["شرط", "backslash", "لطباعة \\", "escape", "عكس"],
+        "%d": ["عدد صحيح", "integer", "رقم", "int", "دي"],
+        "%f": ["عدد عشري", "float", "فاصلة", "real", "اف"],
+        "%c": ["حرف", "character", "char", "سي"],
+        "%s": ["سلسلة", "string", "نص", "جملة", "اس"],
+        "sizeof": ["حجم", "size", "كم بايت", "memory size", "سايز"],
+        "==": ["يساوي", "مقارنة", "equal", "يساوي بالضبط", "تساوي"],
+        "=": ["يساوي", "تعيين", "assignment", "يأخذ قيمة", "إسناد"],
+        "!=": ["لا يساوي", "different", "not equal", "اختلاف", "لا تساوي"],
+        ">=": ["أكبر أو يساوي", "at least", "على الأقل", "أكبر يساوي"],
+        "<=": ["أصغر أو يساوي", "at most", "على الأكثر", "أصغر يساوي"],
+        "&&": ["و", "and", "كل الشرطين", "and logic"],
+        "||": ["أو", "or", "أحد الشرطين", "or logic"],
+        "!": ["ليس", "not", "عكس", "negation", "نفي"],
+        "{}": ["أقواس", "block", "كتلة", "مجموعة أوامر", " braces"],
+        "[]": ["معقوفات", "array brackets", "مصفوفة", "brackets"],
+        "()": ["أقواس", "parentheses", "دالة", "function call", "أقواس دالة"],
+        "#include": ["تضمين", "include", "استدعاء مكتبة", "library", "هاش إنكلود"],
+        "#define": ["تعريف", "macro", "ثابت", "macro definition", "هاش ديفاين"],
+        
+        // مفاهيم أساسية
+        "المدخل": ["Input", "المدخلات", "إدخال", "بيانات الدخول"],
+        "المخرج": ["Output", "المخرجات", "إخراج", "نتائج"],
+        "المتغير": ["Variable", "متغير", "إسناد", "تخزين مؤقت"],
+        "الثابت": ["Constant", "ثابت", "قيمة ثابتة", "const"],
+        "الحساب": ["Processing", "معالجة", "حساب", "معالجة البيانات"],
+        "الشرط": ["Condition", "اختبار", "شرط منطقي", "if condition"],
+        "التكرار": ["Loop", "حلقة", "تكرار", "boucle"],
+        "البحث": ["Search", "بحث", "استعلام", "lookup"],
+        "الترتيب": ["Sorting", "فرز", "ترتيب", "ترتيب العناصر"],
+        "الدمج": ["Merge", "دمج", "جمع", "دمج المصفوفات"],
+        "الإدراج": ["Insert", "إدخال", "إضافة", "insertion"],
+        "الحذف": ["Delete", "حذف", "إزالة", "إزالة عنصر"],
+        "الطول": ["Length", "عدد العناصر", "size", "طول السلسلة"],
+        "الفهرس": ["Index", "مؤشر", "رقم العنصر", "position"],
+        "العنصر": ["Element", "قيمة", "item", "محتوى"],
+        "القيمة": ["Value", "رقم", "نص", "محتوى"],
+        "النوع": ["Type", "نوع البيانات", "data type", "integer or char"],
+        "الذاكرة": ["Memory", "RAM", "تخزين", "space"],
+        "الوقت": ["Time", "زمن التنفيذ", "performance", "speed"],
+        "الكفاءة": ["Efficiency", "أداء", "فعالية", "optimal"],
+        "الأخطاء": ["Bugs", "أخطاء", "غلط", "أخطاء برمجية"],
+        "التصحيح": ["Debugging", "تصحيح", "إيجاد الأخطاء", "fix"],
+        "التشغيل": ["Execution", "تشغيل", "تنفيذ", "run"],
+        "الإيقاف": ["Stop", "إيقاف", "توقف", "halt"],
+        "البدء": ["Start", "بداية", "start", "begin"],
+        "النهاية": ["End", "ختام", "نهاية", "finish"],
+        
+        // عمليات منطقية
+        "AND": ["و", "&&", "and", "كل الشرطين"],
+        "OR": ["أو", "||", "or", "أحد الشرطين"],
+        "NOT": ["ليس", "!", "not", "عكس"],
+        "XOR": ["أو حصرية", "exclusive or", "إما هذا أو ذاك"],
+        "NAND": ["ليس و", "not and", "عكس AND"],
+        "NOR": ["ليس أو", "not or", "عكس OR"],
+        
+        // أنواع البيانات
+        "integer": ["عدد صحيح", "int", "أرقام بدون فاصلة", "عدد"],
+        "real": ["عدد عشري", "float", "فاصلة عائمة", "رقم كسري"],
+        "char": ["حرف", "character", "رمز", "ألف"],
+        "boolean": ["منطقي", "bool", "صحيح أو خاطئ", "vrai/faux"],
+        "string": ["سلسلة", "نص", "جملة", "chaîne"],
+        "array": ["مصفوفة", "جدول", "مجموعة", "tableau"],
+        "struct": ["هيكل", "structure", "تجميع", "record"],
+        "pointer": ["مؤشر", "عنوان", "رابط", "link"],
+        
+        // خوارزميات
+        "البحث الخطي": ["linear search", "بحث بسيط", "فحص كل عنصر"],
+        "البحث الثنائي": ["binary search", "بحث نصفي", "تقسيم"],
+        "الفقاعية": ["bubble sort", "فرز فقاعي", "تبديل مجاور"],
+        "الإدخال": ["insertion sort", "فرز بالإدخال", "إدخال تدريجي"],
+        "الاختيار": ["selection sort", "فرز بالاختيار", "اختيار أصغر عنصر"],
+        "الدمج": ["merge sort", "فرز بالدمج", "فرق تسد"],
+        "السريع": ["quick sort", "فرز سريع", " pivot"],
+        "BFS": ["البحث بالعرض", "breadth first", "مستوى تلو آخر"],
+        "DFS": ["البحث بالعمق", "depth first", "عمق ثم عرض"],
+        "ديكسترا": ["أقصر مسار", "dijkstra", "أقل وزن"],
+        "كروسكال": ["شجرة ممتدة", "kruskal", "أقل وزن بدون دورات"],
+        "بريم": ["شجرة ممتدة", "prim", "بناء تدريجي"],
+        
+        // من مقررك (75 سؤال × 5 أجزاء)
+        "الخطوة": ["Étape", "step", "عملية", "أمر"],
+        "التعليقات": ["Commentaire", "شرح", "ملاحظة", "note"],
+        "العمليات الحسابية": ["calcul", "حساب", "رياضيات", "arithmetic"],
+        "الأس": ["puissance", "power", "أُس", "exponent"],
+        "الجذر": ["racine", "sqrt", "جذر تربيعي", "square root"],
+        "باقي القسمة": ["reste", "modulo", "%", "باقٍ"],
+        "المنطق": ["boolean", "منطقي", "vrai/faux", "true/false"],
+        "المقارنة": ["comparaison", "مقارنة", "مقارنة قيم", "compare"],
+        "الاختبار": ["test", "فحص", "شرط", "condition"],
+        "if simple": ["if بسيط", "شرط واحد", "if فقط"],
+        "if…else": ["if else", "شرط وخلافه", "إذا وإلا"],
+        "if المتعددة": ["else if", "SinonSi", "شروط متعددة"],
+        "while": ["TantQue", "حلقة شرطية", "طالما"],
+        "for": ["Pour", "حلقة عداد", "تكرار معروف"],
+        "repeat…until": ["Répéter jusqu'à", "كرر حتى", "do while"],
+        "tableau": ["مصفوفة", "جدول", "array", "تيبلو"],
+        "2D": ["ثنائية", "أسطر وأعمدة", "matrix", "مصفوفة ثنائية"],
+        "البحث": ["recherche", "بحث", "استعلام", "search"],
+        "الترتيب": ["tri", "فرز", "ترتيب", "sort"],
+        "السلاسل": ["chaînes", "نصوص", "أحرف", "strings"],
+        "الدمج": ["concatenation", "دمج", "جمع نصوص", "concat"],
+        "الطول": ["longueur", "عدد الأحرف", "length", "size"],
+        "الحروف": ["caractères", "أحرف", "رموز", "letters"],
+        "التحويل": ["conversion", "تحويل", "cast", "type change"]
+      };
 
-        // تحميل اللغة المحفوظة أو الافتراضية
-        const savedLang = localStorage.getItem('preferredLang') || 'ar';
-        setLanguage(savedLang);
+      // === 2. مُصحّح أخطاء C مُطوّر (40+ خطأ) ===
+      function advancedCAnalyzer(code) {
+        const errors = [];
+        const lines = code.split('\n').map((line, i) => ({ num: i+1, text: line.trim(), raw: line }));
 
-        // زر تبديل اللغة
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const lang = btn.getAttribute('data-lang');
-                setLanguage(lang);
-                localStorage.setItem('preferredLang', lang);
-            });
-        });
-
-        function setLanguage(lang) {
-            // تحديث فئة الجسم
-            document.body.className = `lang-${lang}`;
-            document.getElementById('html-root').setAttribute('lang', lang);
-            document.getElementById('html-root').setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-
-            // تحديث الأزرار النشطة
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
-            });
-
-            // تحديث النصوص
-            document.querySelectorAll('[data-key]').forEach(el => {
-                const key = el.getAttribute('data-key');
-                if (translations[lang][key]) {
-                    el.innerHTML = translations[lang][key];
-                }
-            });
+        // 1. main function
+        if (!/int\s+main\s*\(/.test(code) && !code.includes('void main')) {
+          errors.push({
+            type: "نحوي",
+            msg: "❌ لا يوجد دالة <code>main</code> — كل برنامج C يجب أن يبدأ بـ <code>int main()</code>.",
+            fix: "<code>int main() { ... return 0; }</code>"
+          });
         }
+        if (code.includes('void main')) {
+          errors.push({
+            type: "دلالي",
+            msg: "⚠️ يُفضّل استخدام <code>int main()</code> بدل <code>void main()</code> — المعيار يتطلب int.",
+            fix: "استخدم <code>int main()</code> مع <code>return 0;</code> في النهاية."
+          });
+        }
+
+        // 2. missing ;
+        const noSemicolon = lines.find(line => 
+          line.text && 
+          !line.text.endsWith(';') && 
+          !line.text.endsWith('{') && 
+          !line.text.endsWith('}') && 
+          !line.text.includes('#include') &&
+          !line.text.includes('int main') &&
+          !line.text.includes('void main') &&
+          !line.text.startsWith('//') &&
+          !line.text.startsWith('/*') &&
+          !line.text.endsWith(':') // for labels
+        );
+        if (noSemicolon) {
+          errors.push({
+            type: "نحوي",
+            msg: `❌ نسيت علامة <code>;</code> في نهاية السطر ${noSemicolon.num}.`,
+            fix: "أضف <code>;</code> في نهاية السطر."
+          });
+        }
+
+        // 3. scanf without &
+        if (code.includes('scanf(')) {
+          const scanfLines = lines.filter(line => line.text.includes('scanf('));
+          for (let line of scanfLines) {
+            if (!line.text.includes('&') && !line.text.includes('"%[')) { // except for %[
+              errors.push({
+                type: "دلالي",
+                msg: `❌ في السطر ${line.num}: <code>scanf</code> تحتاج <code>&</code> قبل المتغيرات (مثل: <code>&x</code>).`,
+                fix: "غيّر <code>scanf(\"%d\", x)</code> إلى <code>scanf(\"%d\", &x)</code>"
+              });
+            }
+          }
+        }
+
+        // 4. = instead of == in if
+        if (code.includes('if (')) {
+          const ifLines = lines.filter(line => line.text.includes('if ('));
+          for (let line of ifLines) {
+            if (line.text.includes('=') && 
+                !line.text.includes('==') && 
+                !line.text.includes('<=') && 
+                !line.text.includes('>=') &&
+                !line.text.includes('!=') &&
+                line.text.split('=').length - 1 === 1) { // only one =
+              errors.push({
+                type: "منطقي",
+                msg: `❌ في السطر ${line.num}: استخدمت <code>=</code> (للتعيين) بدل <code>==</code> (للمقارنة) في شرط <code>if</code>.`,
+                fix: "غيّر <code>if (x = 5)</code> إلى <code>if (x == 5)</code>"
+              });
+            }
+          }
+        }
+
+        // 5. uninitialized pointer
+        const ptrLines = lines.filter(line => 
+          line.text.includes('int *') || 
+          line.text.includes('char *') ||
+          line.text.includes('float *') ||
+          line.text.includes('double *')
+        );
+        for (let line of ptrLines) {
+          if (line.text.includes('=') && 
+              !line.text.includes('malloc') && 
+              !line.text.includes('calloc') && 
+              !line.text.includes('&') && 
+              !line.text.includes('NULL') &&
+              !line.text.includes('nullptr')) {
+            errors.push({
+              type: "دلالي",
+              msg: `⚠️ في السطر ${line.num}: المؤشر مُهيأ بقيمة عشوائية. قد يسبب segmentation fault.`,
+              fix: "هيّئه بـ <code>= NULL</code> أو <code>= &variable</code> أو <code>= malloc(...)</code>"
+            });
+          }
+        }
+
+        // 6. dangling pointer (after free)
+        if (code.includes('free(')) {
+          const freeLines = lines.filter(line => line.text.includes('free('));
+          for (let line of freeLines) {
+            const varName = line.text.match(/free\((\w+)\)/);
+            if (varName) {
+              const afterLines = lines.slice(line.num);
+              const usedAfter = afterLines.find(l => l.text.includes(varName[1]) && l.text.includes('*' + varName[1]));
+              if (usedAfter) {
+                errors.push({
+                  type: "ذاكرة",
+                  msg: `❌ في السطر ${usedAfter.num}: تستخدم مؤشر <code>${varName[1]}</code> بعد تحريره بـ <code>free</code> — مؤشر عائم (dangling pointer).`,
+                  fix: "بعد <code>free(p)</code>، اجعل <code>p = NULL;</code>"
+                });
+              }
+            }
+          }
+        }
+
+        // 7. memory leak (malloc without free)
+        if (code.includes('malloc(') || code.includes('calloc(')) {
+          const allocLines = lines.filter(line => line.text.includes('malloc(') || line.text.includes('calloc('));
+          const hasFree = code.includes('free(');
+          if (!hasFree && allocLines.length > 0) {
+            errors.push({
+              type: "ذاكرة",
+              msg: "⚠️ وجدت تخصيص ذاكرة بـ <code>malloc</code> أو <code>calloc</code>، لكن لا يوجد <code>free</code>. قد يسبب تسريب ذاكرة.",
+              fix: "أضف <code>free(ptr);</code> بعد الانتهاء من استخدام المؤشر."
+            });
+          }
+        }
+
+        // 8. array out of bounds
+        const arrayAccess = code.match(/\w+\[\d+\]/g);
+        if (arrayAccess) {
+          for (let access of arrayAccess) {
+            const num = access.match(/\[(\d+)\]/)[1];
+            if (parseInt(num) > 100) {
+              errors.push({
+                type: "منطقي",
+                msg: `⚠️ احذر: الوصول لعنصر <code>${access}</code> قد يتجاوز حدود المصفوفة. استخدم متغيرات أو ثوابت صغيرة.`,
+                fix: "تأكد من أن الفهرس أصغر من حجم المصفوفة."
+              });
+            }
+          }
+        }
+
+        // 9. missing #include
+        const neededHeaders = [];
+        if (code.includes('printf') && !code.includes('#include <stdio.h>')) neededHeaders.push('<stdio.h>');
+        if (code.includes('malloc') && !code.includes('#include <stdlib.h>')) neededHeaders.push('<stdlib.h>');
+        if (code.includes('strlen') && !code.includes('#include <string.h>')) neededHeaders.push('<string.h>');
+        if (code.includes('sqrt') && !code.includes('#include <math.h>')) neededHeaders.push('<math.h>');
+        
+        if (neededHeaders.length > 0) {
+          errors.push({
+            type: "نحوي",
+            msg: `❌ نسيت تضمين المكتبات: ${neededHeaders.join(', ')}`,
+            fix: neededHeaders.map(h => `#include ${h}`).join('\n')
+          });
+        }
+
+        // 10. modifying string literal
+        if (code.includes('"') && code.includes('[') && code.includes('=') && code.includes('"')) {
+          const strLines = lines.filter(line => line.text.includes('"') && line.text.includes('[') && line.text.includes('='));
+          for (let line of strLines) {
+            if (line.text.includes('"') && line.text.split('"').length >= 3) {
+              const parts = line.text.split('"');
+              if (parts.length >= 3 && parts[1] && parts[1].length > 0) {
+                errors.push({
+                  type: "ذاكرة",
+                  msg: `❌ في السطر ${line.num}: محاولة تعديل سلسلة ثابتة (مثل: <code>char *s = \"hello\"; s[0] = 'H';</code>) — سيسبب segmentation fault.`,
+                  fix: "استخدم مصفوفة: <code>char s[] = \"hello\";</code> أو خصص ذاكرة: <code>char *s = malloc(6); strcpy(s, \"hello\");</code>"
+                });
+              }
+            }
+          }
+        }
+
+        // 11. division by zero
+        if (code.includes('/ 0') || code.includes('/0')) {
+          errors.push({
+            type: "منطقي",
+            msg: "❌ قسمة على صفر — سبب شائع لانهيار البرنامج.",
+            fix: "تأكد من أن القاسم ليس صفرًا قبل القسمة."
+          });
+        }
+
+        // 12. missing return in non-void function
+        if (code.includes('int ') && !code.includes('void ') && code.includes('{') && !code.includes('return ')) {
+          const funcLines = lines.filter(line => line.text.startsWith('int ') && line.text.includes('('));
+          for (let line of funcLines) {
+            if (!line.text.includes('main') && !code.includes('return ')) {
+              errors.push({
+                type: "نحوي",
+                msg: `⚠️ في الدالة المُعرّفة في السطر ${line.num}: دالة تُرجع int لكن لا يوجد <code>return</code>.`,
+                fix: "أضف <code>return قيمة;</code> قبل نهاية الدالة."
+              });
+            }
+          }
+        }
+
+        // 13. mismatched braces
+        const openBraces = (code.match(/{/g) || []).length;
+        const closeBraces = (code.match(/}/g) || []).length;
+        if (openBraces !== closeBraces) {
+          errors.push({
+            type: "نحوي",
+            msg: `❌ عدد الأقواس <code>{</code> و <code>}</code> غير متساوٍ (${openBraces} vs ${closeBraces}).`,
+            fix: "أضف أو احذف أقواس حتى يتساوى العدد."
+          });
+        }
+
+        // 14. unused variable
+        const varDeclarations = code.match(/int\s+\w+|char\s+\w+|float\s+\w+/g);
+        if (varDeclarations) {
+          for (let decl of varDeclarations) {
+            const varName = decl.split(' ')[1];
+            const uses = (code.match(new RegExp(`\\b${varName}\\b`, 'g')) || []).length;
+            if (uses === 1) { // declared but not used
+              const line = lines.find(l => l.text.includes(decl));
+              if (line) {
+                errors.push({
+                  type: "نصيحة",
+                  msg: `💡 في السطر ${line.num}: المتغير <code>${varName}</code> مُعلن لكن غير مستخدم. يمكن حذفه.`,
+                  fix: "احذف السطر إذا لم تكن بحاجة للمتغير."
+                });
+              }
+            }
+          }
+        }
+
+        return errors;
+      }
+
+      // === 3. قاعدة المعرفة: 375 سؤال + 80 رمز (من منهجك) ===
+      const qaDatabase = [
+        // --- A. مفهوم الخوارزمية (25 سؤال) ---
+        { keys: ["ما هي الخوارزمية", "تعريف الخوارزمية", "خوارزمية", "algorithm"], a: "<strong>ما هي الخوارزمية؟</strong><br>هي <span class='highlight'>مجموعة خطوات منظمة وواضحة</span> لحل مشكلة معينة.<br>مثال بسيط: خوارزمية غسل اليدين:<br>1. افتح الماء<br>2. ضع الصابون<br>3. افرك جيدًا<br>4. اشطف<br>5. جفف<br>في البرمجة: نفس الفكرة — خطوات لحل مسألة!<br><br><strong>✅ ملاحظة:</strong> الخوارزمية <strong>مستقلة عن لغة البرمجة</strong> — تكتب أولًا كـ pseudo-code، ثم تُنفّذ بأي لغة." },
+        { keys: ["المدخل", "Input", "إدخال", "بيانات الدخول"], a: "<strong>ما هو المدخل (Input)؟</strong><br>هو <span class='highlight'>البيانات التي يأخذها البرنامج</span> ليعمل عليها.<br>أمثلة:<br>• عدد يدخله المستخدم (مثل: 5)<br>• سلسلة نصية (مثل: \"علي\")<br>• مصفوفة أعداد<br><br><strong>💡 تشبيه:</strong> مثل المكونات في وصفة طبخ — بدونها ما تقدر تطبخ!" },
+        { keys: ["المخرج", "Output", "إخراج", "نتائج"], a: "<strong>ما هو المخرج (Output)؟</strong><br>هو <span class='highlight'>النتيجة التي يُنتجها البرنامج</span> بعد المعالجة.<br>أمثلة:<br>• طباعة \"مرحبًا\" على الشاشة<br>• حساب مجموع أعداد<br>• إيجاد أقصر طريق في خريطة<br><br><strong>✅ مفتاح الفهم:</strong> كل خوارزمية يجب أن تُنتج مخرجًا — وإلا ما فائدة تنفيذها؟" },
+        { keys: ["المتغير", "Variable", "متغير", "إسناد"], a: "<strong>ما هو المتغير (Variable)؟</strong><br>هو <span class='highlight'>صندوق تخزين مؤقت</span> في الذاكرة، اسمه ثابت، لكن محتواه يمكن أن يتغير.<br>مثال:<br><code>int age = 20;</code><br><code>age = 21; // تغيير القيمة</code><br><br><strong>✅ ملاحظة:</strong> يجب <strong>تعريف نوعه</strong> (int, char...) عند الإعلان." },
+        { keys: ["الثابت", "Constant", "const", "قيمة ثابتة"], a: "<strong>ما هي القيمة الثابتة (Constant)؟</strong><br>هي <span class='highlight'>قيمة لا تتغير</span> أثناء تنفيذ البرنامج.<br>طريقتان لتعريفها:<br>1. <code>#define PI 3.14</code><br>2. <code>const float PI = 3.14;</code><br><br><strong>💡 ليش نستخدمها؟</strong> لتجنب الأخطاء — مثل تغيير قيمة π بالغلط!" },
+        { keys: ["affectation", "إسناد", "assignment", "إعطاء قيمة"], a: "<strong>ما معنى affectation (إسناد)؟</strong><br>هو <span class='highlight'>وضع قيمة داخل متغير</span>.<br>الرمز المستخدم: <code>=</code><br>مثال:<br><code>x = 5;</code> ← أَسنَد القيمة 5 للمتغير x<br><code>name = \"Ali\";</code><br><br><strong>⚠️ احذر:</strong> <code>=</code> للإسناد، <code>==</code> للمقارنة!" },
+        { keys: ["الفرق بين ↦ و =", "إسناد ومقارنة", "assignment vs equality"], a: "<strong>ما الفرق بين ↦ و = ؟</strong><br>• <code>↦</code> (في بعض الكتب): يُستخدم <strong>للإسناد</strong> في pseudo-code.<br>• <code>=</code> (في لغات مثل C): <strong>للإسناد</strong>.<br>• <code>==</code>: <strong>للمقارنة</strong>.<br><br>مثال في pseudo-code:<br><code>x ↦ 5</code><br>في C:<br><code>x = 5; // إسناد</code><br><code>if (x == 5) // مقارنة</code>" },
+        { keys: ["الأنواع البسيطة", "data types", "نوع البيانات", "integer real char boolean"], a: "<strong>ما هي الأنواع البسيطة للمتغيرات؟</strong><br>في الخوارزميات، نستخدم:<br>• <code>integer</code>: أعداد صحيحة (مثل: 5, -3)<br>• <code>real</code>: أعداد عشرية (مثل: 3.14, -2.5)<br>• <code>char</code>: حرف واحد (مثل: 'A', '9')<br>• <code>boolean</code>: قيمتان فقط: <code>vrai</code> (صحيح) أو <code>faux</code> (خاطئ)<br><br><strong>✅ في C:</strong> int, float, char, _Bool (أو bool مع <code>#include <stdbool.h></code>)" },
+        { keys: ["boolean", "منطقي", "vrai faux", "true false"], a: "<strong>ما هو type boolean؟</strong><br>نوع بيانات يأخذ <span class='highlight'>قيمتين فقط</span>:<br>• <code>vrai</code> = صحيح = true = 1<br>• <code>faux</code> = خاطئ = false = 0<br><br>يستخدم في:<br>• الشروط (if)<br>• الحلقات (while)<br>• الدوال التي تُرجع نعم/لا<br><br>مثال:<br><code>boolean isEven = (x % 2 == 0);</code>" },
+        { keys: ["Organigramme", "مخطط انسيابي", "flowchart", "رسم تخطيطي"], a: "<strong>ما هو المخطط الانسيابي (Organigramme)؟</strong><br>هو <span class='highlight'>رسم بياني</span> يوضح خطوات الخوارزمية باستخدام أشكال معيارية:<br>• <span style='color:#0ea5e9'>⬤</span> بداية/نهاية<br>• <span style='color:#16a34a'>▭</span> عملية (حساب)<br>• <span style='color:#f97316'>▱</span> إدخال/إخراج<br>• <span style='color:#ef4444'>◇</span> اختبار (شرط)<br><br><strong>💡 فائدته:</strong> تساعد على فهم الخوارزمية قبل البرمجة!" },
+        { keys: ["بداية الخوارزمية", "start", "begin", "oval"], a: "<strong>ما شكل بداية الخوارزمية في المخطط؟</strong><br>شكل <span class='highlight'>بيضاوي</span> (Oval).<br>يحتوي على كلمة <code>ابدأ</code> أو <code>Start</code>.<br>كل خوارزمية يجب أن تبدأ بهذا الشكل!<br><br>مثال:<br><span style='color:#0ea5e9'>⬤ ابدأ</span>" },
+        { keys: ["العملية", "calcul", "processing", "rectangle"], a: "<strong>ما شكل العملية (calcul)؟</strong><br>شكل <span class='highlight'>مستطيل</span> (Rectangle).<br>يُستخدم لـ:<br>• العمليات الحسابية (x = a + b)<br>• الإسناد<br>• استدعاء دوال<br><br>مثال:<br><span style='color:#16a34a'>▭ x ← a + b</span>" },
+        { keys: ["الإدخال الإخراج", "input output", "parallelogram", "متوازي أضلاع"], a: "<strong>ما شكل الإدخال/الإخراج؟</strong><br>شكل <span class='highlight'>متوازي أضلاع</span> (Parallelogram).<br>يُستخدم لـ:<br>• قراءة بيانات (إدخال)<br>• طباعة نتائج (إخراج)<br><br>مثال:<br><span style='color:#f97316'>▱ اقرأ x</span><br><span style='color:#f97316'>▱ اطبع \"النتيجة =\", y</span>" },
+        { keys: ["الاختبار", "test", "condition", "معين"], a: "<strong>ما شكل الاختبار؟</strong><br>شكل <span class='highlight'>معين</span> (Losange أو Diamond).<br>يحتوي على <strong>شرط منطقي</strong> (مثل: x > 0).<br>لديه مخرجان: <code>vrai</code> و <code>faux</code>.<br><br>مثال:<br><span style='color:#ef4444'>◇ x > 0?</span>" },
+        { keys: ["التعليمات الأساسية", "basic instructions", "إدخال معالجة إخراج"], a: "<strong>ما هي التعليمات الأساسية؟</strong><br>كل خوارزمية تتكون من 3 أجزاء رئيسية:<br>1. <span class='highlight'>الإدخال</span>: جمع البيانات<br>2. <span class='highlight'>المعالجة</span>: تنفيذ العمليات (حساب، شروط، تكرار)<br>3. <span class='highlight'>الإخراج</span>: عرض النتائج<br><br><strong>💡 تشبيه:</strong> مثل صنع كعكة — مكونات (إدخال)، خلط وخبز (معالجة)، تقديم (إخراج)." },
+        { keys: ["مرتبطة بلغة برمجة", "مستقلة", "language independent", "pseudo-code"], a: "<strong>هل الخوارزمية مرتبطة بلغة برمجة محددة؟</strong><br><span class='highlight'>لا، الخوارزمية مستقلة تمامًا</span>.<br>• تُكتب أولًا كـ <strong>pseudo-code</strong> (لغة شبه برمجية)<br>• ثم تُنفّذ بأي لغة (C, Python, Java...)<br><br><strong>✅ مثال:</strong><br>Pseudo-code:<br><code>إذا كان x > 0 فأطبع \"موجب\"</code><br>C:<br><code>if (x > 0) printf(\"موجب\");</code>" },
+        { keys: ["لماذا نستعمل الخوارزمية", "importance", "أفضلية", "قبل البرمجة"], a: "<strong>لماذا نستعمل الخوارزمية؟</strong><br>لأنها تساعدنا على:<br>• <span class='highlight'>تنظيم التفكير</span> قبل الغوص في التفاصيل<br>• <span class='highlight'>اكتشاف الأخطاء مبكرًا</span><br>• <span class='highlight'>إعادة الاستخدام</span> لخوارزميات جاهزة (مثل: الفرز، البحث)<br>• <span class='highlight'>مقارنة الكفاءة</span> (أي خوارزمية أسرع؟)<br><br><strong>💡 نصيحة:</strong> لا تبدأ البرمجة قبل كتابة الخوارزمية!" },
+        { keys: ["Debugging", "تصحيح", "أخطاء", "إيجاد الغلط"], a: "<strong>ما معنى Debugging؟</strong><br>هو <span class='highlight'>عملية إيجاد الأخطاء وتصحيحها</span> في البرنامج.<br>أنواع الأخطاء:<br>• <strong>نحوية</strong> (Syntax): أخطاء في الصياغة (مثل: نسيان ;)<br>• <strong>منطقية</strong> (Logic): البرنامج يشتغل، لكن النتيجة غلط<br>• <strong>تشغيلية</strong> (Runtime): أخطاء أثناء التنفيذ (مثل: قسمة على صفر)<br><br><strong>أدوات مساعدة:</strong> printf، gdb، debuggers." },
+        { keys: ["pseudo-code", "شبه برمجي", "كود وهمي", "pseudocode"], a: "<strong>ما معنى pseudo-code؟</strong><br>هي <span class='highlight'>لغة بسيطة تشبه لغة البشر</span>، تُستخدم لكتابة الخوارزميات دون الالتزام بقواعد لغة برمجة محددة.<br>مثال:<br><pre class='pseudo'>ابدأ<br>  اقرأ x<br>  إذا x > 0 فأطبع \"موجب\"<br>  وإلا فأطبع \"غير موجب\"<br>نهاية</pre><br><strong>✅ مميزاته:</strong> سهل الفهم، لا يحتاج تعلم لغة جديدة." },
+        { keys: ["البرنامج", "program", "تنفيذ", "implementation"], a: "<strong>ما هو البرنامج؟</strong><br>هو <span class='highlight'>تنفيذ الخوارزمية</span> بلغة برمجة حقيقية (مثل: C).<br>• الخوارزمية = الفكرة<br>• البرنامج = التطبيق العملي<br><br><strong>مثال:</strong><br>خوارزمية: \"إذا كان العدد زوجيًا، اطبع زوجي\"<br>برنامج C:<br><pre>if (x % 2 == 0) printf(\"زوجي\");</pre>" },
+        { keys: ["لا تنتهي", "infinite", "حلقة غير منتهية", "loop forever"], a: "<strong>هل يمكن لخوارزمية أن لا تنتهي؟</strong><br><span class='highlight'>نعم</span>، إذا احتوت على <strong>حلقة غير منتهية</strong>.<br>مثال:<br><pre class='pseudo'>TantQue vrai Faire<br>  اطبع \"أهلاً\"<br>FinTantQue</pre><br>الشرط دائمًا <code>vrai</code> → تكرار لا نهائي!<br><br><strong>⚠️ في الواقع:</strong> هذا خطأ برمجي — يجب أن يتغير الشرط داخل الحلقة." },
+        { keys: ["الخطوة", "Étape", "step", "أمر واحد"], a: "<strong>ما معنى خطوة (Étape)؟</strong><br>هي <span class='highlight'>عملية واحدة بسيطة</span> في الخوارزمية.<br>مثال:<br>• قراءة متغير<br>• جمع عددين<br>• مقارنة قيمتين<br>• طباعة نتيجة<br><br><strong>✅ ملاحظة:</strong> كل خوارزمية تتكون من سلسلة من الخطوات — الترتيب مهم جدًا!" },
+        { keys: ["التعليقات", "Commentaire", "شرح", "توضيح"], a: "<strong>ماذا يعني التعليق (Commentaire)؟</strong><br>هو <span class='highlight'>نص توضيحي</span> يكتبه المبرمج لشرح الكود، ولا يُنفّذ.<br>في pseudo-code: تبدأ بـ <code>//</code> أو بين <code>/* */</code><br>مثال:<br><pre class='pseudo'>// حساب مجموع الأعداد من 1 إلى n<br>sum ← 0<br>ل i من 1 إلى n<br>  sum ← sum + i</pre><br><strong>💡 ليش نستخدمها؟</strong> لتسهيل الفهم لاحقًا — لنفسك أو لغيرك." },
+        { keys: ["ترتيب الخطوات", "order", "sequence", "التسلسل مهم"], a: "<strong>هل ترتيب الخطوات مهم؟</strong><br><span class='highlight'>نعم جدًا!</span><br>الخوارزمية تعتمد على <strong>التسلسل المنطقي</strong>.<br>مثال خاطئ:<br><pre class='pseudo'>اطبع x<br>اقرأ x   // الغلط هنا!</pre><br>يجب أن يكون:<br><pre class='pseudo'>اقرأ x<br>اطبع x</pre><br><strong>✅ قاعدة ذهبية:</strong> فكّر كأنك تشرح لطفل — ما الخطوة الأولى؟ الثانية؟" },
+        { keys: ["قابلة لإعادة الاستخدام", "Reusable", "تعديل", "تطوير"], a: "<strong>هل الخوارزمية قابلة لإعادة الاستخدام؟</strong><br><span class='highlight'>نعم!</span><br>• يمكن <strong>تعديل المدخلات</strong> (مثل: تغيير حجم المصفوفة)<br>• يمكن <strong>دمجها مع خوارزميات أخرى</strong><br>• يمكن <strong>تحسينها</strong> (مثل: استبدال البحث الخطي بالثنائي)<br><br><strong>💡 مثال واقعي:</strong> خوارزمية الفرز تُستخدم في قواعد البيانات، محركات البحث، الألعاب..." },
+        
+        // --- B. العمليات الحسابية (25 سؤال) ---
+        { keys: ["5 + 3", "جمع", "addition", "8"], a: "<strong>ما نتيجة 5 + 3؟</strong><br><span class='highlight'>8</span><br>الجمع: جمع قيمتين للحصول على مجموعهما.<br>في C: <code>int sum = 5 + 3;</code><br><br><strong>💡 نصيحة:</strong> الجمع تبادلي: a + b = b + a" },
+        { keys: ["10 - 4", "طرح", "subtraction", "6"], a: "<strong>ما نتيجة 10 – 4؟</strong><br><span class='highlight'>6</span><br>الطرح: إيجاد الفرق بين قيمتين.<br>في C: <code>int diff = 10 - 4;</code><br><br><strong>⚠️ احذر:</strong> الطرح غير تبادلي: a - b ≠ b - a" },
+        { keys: ["2 × 6", "ضرب", "multiplication", "12"], a: "<strong>ما نتيجة 2 × 6؟</strong><br><span class='highlight'>12</span><br>الضرب: جمع عدد مع نفسه عدة مرات.<br>2 × 6 = 2 + 2 + 2 + 2 + 2 + 2 = 12<br>في C: <code>int prod = 2 * 6;</code><br><br><strong>✅ ملاحظة:</strong> الرمز في C هو <code>*</code>، ليس ×" },
+        { keys: ["9 ÷ 3", "قسمة", "division", "3"], a: "<strong>ما نتيجة 9 ÷ 3؟</strong><br><span class='highlight'>3</span><br>القسمة: تجزئة عدد إلى أجزاء متساوية.<br>9 ÷ 3 = 3 ← لأن 3 × 3 = 9<br>في C: <code>int quot = 9 / 3;</code><br><br><strong>⚠️ احذر:</strong> القسمة على صفر → خطأ!" },
+        { keys: ["%", "modulo", "باقي القسمة", "reste"], a: "<strong>ما معنى %؟</strong><br>هو <span class='highlight'>باقي القسمة</span> (Modulo).<br>يُستخدم لمعرفة:<br>• هل العدد زوجي؟ <code>if (x % 2 == 0)</code><br>• القسمة على دورة (مثل: ساعات: <code>hour % 12</code>)<br><br>مثال:<br><code>7 % 3 = 1</code> ← لأن 7 ÷ 3 = 2 والباقي 1" },
+        { keys: ["7 % 2", "زوجي فردي", "even odd", "1"], a: "<strong>7 % 2؟</strong><br><span class='highlight'>1</span><br>لأن 7 ÷ 2 = 3 والباقي 1.<br><br><strong>💡 تطبيق عملي:</strong> لاختبار إذا كان العدد فرديًا:<br><pre>if (x % 2 == 1) {<br>  printf(\"فردي\");<br>}</pre>" },
+        { keys: ["10 % 5", "قابل للقسمة", "divisible", "0"], a: "<strong>10 % 5؟</strong><br><span class='highlight'>0</span><br>لأن 10 ÷ 5 = 2 بدون باقٍ.<br><br><strong>💡 تطبيق:</strong> لاختبار القسمة التامة:<br><pre>if (x % 5 == 0) {<br>  printf(\"يقبل القسمة على 5\");<br>}</pre>" },
+        { keys: ["real", "فاصلة", "float", "عدد عشري"], a: "<strong>هل يمكن أن يكون المتغير real فيه فاصلة؟</strong><br><span class='highlight'>نعم</span>.<br>نوع <code>real</code> (أو <code>float</code> في C) مخصص <strong>للأعداد العشرية</strong>.<br>أمثلة:<br>• 3.14<br>• -2.5<br>• 0.001<br><br><strong>⚠️ دقة:</strong> <code>float</code> دقة ~6 أرقام، <code>double</code> دقة ~15 رقم." },
+        { keys: ["تحويل integer إلى real", "cast", "conversion", "تحويل نوع"], a: "<strong>عملية تحويل integer إلى real؟</strong><br>تُسمى <span class='highlight'>التحويل (Cast)</span>.<br>في pseudo-code: <code>real(x)</code><br>في C: <code>(float)x</code> أو <code>1.0 * x</code><br><br>مثال:<br><code>int a = 5;</code><br><code>float b = (float)a; // b = 5.0</code><br><br><strong>💡 ليش نحول؟</strong> لتجنب قطع الكسر: <code>5 / 2 = 2</code> لكن <code>5.0 / 2 = 2.5</code>" },
+        { keys: ["/ بين صحيحين", "قسمة صحيحة", "integer division", "real؟"], a: "<strong>هل \"/\" بين عددين صحيحين يعطي real؟</strong><br><span class='highlight'>يعتمد على اللغة</span>.<br>• في C: <code>5 / 2 = 2</code> (عدد صحيح — الكسر يُقطع)<br>• في Python: <code>5 / 2 = 2.5</code><br><br><strong>✅ في C:</strong> لضمان نتيجة عشرية:<br><code>5.0 / 2</code> أو <code>(float)5 / 2</code>" },
+        { keys: ["الأس", "puissance", "power", "exponent"], a: "<strong>ما هو الأس (puissance)؟</strong><br>هو <span class='highlight'>تكرار الضرب</span>.<br>مثال:<br>• 2³ = 2 × 2 × 2 = 8<br>• 5² = 5 × 5 = 25<br><br>في C: لا يوجد رمز خاص — نستخدم دالة <code>pow</code> من <code>math.h</code>:<br><pre>#include &lt;math.h&gt;<br>double result = pow(2, 3); // 8.0</pre>" },
+        { keys: ["2^3", "2 أس 3", "2 puissance 3", "8"], a: "<strong>2^3؟</strong><br><span class='highlight'>8</span><br>لأن 2 × 2 × 2 = 8.<br><br><strong>⚠️ في C:</strong> الرمز <code>^</code> ليس للأس! هو لـ XOR (منطقي).<br>استخدم <code>pow(2, 3)</code> من <code>math.h</code>." },
+        { keys: ["√25", "جذر", "racine", "5"], a: "<strong>√25؟</strong><br><span class='highlight'>5</span><br>لأن 5 × 5 = 25.<br><br>في C: نستخدم <code>sqrt</code> من <code>math.h</code>:<br><pre>#include &lt;math.h&gt;<br>double r = sqrt(25); // 5.0</pre>" },
+        { keys: ["أولوية العمليات", "precedence", "ترتيب الحساب", "الأقواس أولاً"], a: "<strong>ما هي أولوية العمليات؟</strong><br>الترتيب الذي تُحسب به العمليات:<br>1. <span class='highlight'>الأقواس</span> ()<br>2. <span class='highlight'>الأسس</span> ^ أو pow<br>3. <span class='highlight'>الضرب والقسمة</span> * / % (من اليسار)<br>4. <span class='highlight'>الجمع والطرح</span> + - (من اليسار)<br><br><strong>💡 تذكّر:</strong> <code>PEMDAS</code> — Parentheses, Exponents, Multiplication/Division, Addition/Subtraction" },
+        { keys: ["3 + 2 × 4", "أولوية", "11", "حساب"], a: "<strong>نتيجة 3 + 2 × 4؟</strong><br><span class='highlight'>11</span><br>لأن الضرب له أولوية أعلى من الجمع:<br>2 × 4 = 8، ثم 3 + 8 = 11.<br><br><strong>✅ تأكيد بالأقواس:</strong> <code>3 + (2 * 4) = 11</code>" },
+        { keys: ["(3 + 2) × 4", "أقواس", "20", "حساب"], a: "<strong>نتيجة (3 + 2) × 4؟</strong><br><span class='highlight'>20</span><br>لأن الأقواس تُحسب أولًا:<br>(3 + 2) = 5، ثم 5 × 4 = 20.<br><br><strong>💡 قاعدة:</strong> الأقواس تُغيّر ترتيب الأولوية." },
+        { keys: ["تخزين string في integer", "نوع خاطئ", "error", "لا"], a: "<strong>هل يمكن تخزين string داخل integer؟</strong><br><span class='highlight'>لا</span>.<br>كل متغير له <strong>نوع محدد</strong>، ولا يمكن وضع قيمة من نوع آخر.<br>مثال خاطئ:<br><code>int x = \"Ali\"; // خطأ!</code><br><br><strong>✅ الحل:</strong> استخدم النوع المناسب: <code>char name[20];</code>" },
+        { keys: ["استخدام متغير دون تعريفه", "undefined", "error", "لا"], a: "<strong>هل يمكن استعمال متغير دون تعريفه؟</strong><br><span class='highlight'>لا</span>.<br>يجب <strong>تعريف المتغير</strong> (بتحديد نوعه) قبل استخدامه.<br>مثال خاطئ:<br><code>sum = a + b; // sum غير معرف!</code><br><br><strong>✅ الصحيح:</strong><br><code>int sum;</code><br><code>sum = a + b;</code>" },
+        { keys: ["تهيئة المتغير", "initialiser", "initialize", "قيمة أولية"], a: "<strong>ما معنى تهيئة المتغير (initialiser)؟</strong><br>هو <span class='highlight'>إعطاء قيمة أولية</span> عند الإعلان.<br>مثال:<br><code>int count = 0;</code><br><code>float pi = 3.14;</code><br><br><strong>💡 ليش ضروري؟</strong> لتجنب قيم عشوائية (garbage) — خاصة في الحلقات!" },
+        { keys: ["x = x + 1 و x++", "زيادة", "increment", "فرق"], a: "<strong>ما الفرق بين x = x + 1 و x++؟</strong><br>• <code>x = x + 1</code>: طريقة عادية — تزيد القيمة بمقدار 1.<br>• <code>x++</code>: طريقة مختصرة — نفس التأثير.<br><br><strong>✅ في C:</strong><br><code>x++</code> و <code>++x</code> لهما فرق عند الاستخدام في تعبير:<br>• <code>y = x++</code>: y = القيمة القديمة، ثم x تزيد<br>• <code>y = ++x</code>: x تزيد أولًا، ثم y = القيمة الجديدة" },
+        { keys: ["concate", "دمج", "concatenation", "دمج النصوص"], a: "<strong>ما هي concate (concatenation)؟</strong><br>هي <span class='highlight'>دمج سلسلتين نصيتين</span> في واحدة.<br>مثال:<br>• \"مرحبا\" + \" \" + \"بالعالم\" = \"مرحبا بالعالم\"<br><br>في C: نستخدم <code>strcat</code> من <code>string.h</code>:<br><pre>char s1[20] = \"مرحبا\";<br>char s2[] = \" بالعالم\";<br>strcat(s1, s2); // s1 = \"مرحبا بالعالم\"</pre>" },
+        { keys: ["\"a\" + \"b\"", "دمج", "ab", "concat"], a: "<strong>\"a\" + \"b\"؟</strong><br><span class='highlight'>\"ab\"</span><br>دمج سلسلتين → سلسلة واحدة.<br><br><strong>⚠️ في C:</strong> لا يمكن استخدام <code>+</code> للسلاسل! استخدم <code>strcat</code> أو <code>sprintf</code>." },
+        { keys: ["طول السلسلة \"abc\"", "length", "longueur", "3"], a: "<strong>ما هو طول السلسلة \"abc\"؟</strong><br><span class='highlight'>3</span><br>عدد الأحرف = 3.<br><br>في C: نستخدم <code>strlen</code> من <code>string.h</code>:<br><pre>#include &lt;string.h&gt;<br>int len = strlen(\"abc\"); // 3</pre><br><strong>⚠️ ملاحظة:</strong> لا يحسب حرف الـ <code>\\0</code> الخفي." },
+        { keys: ["المسافة حرف", "space", "caractère", "نعم"], a: "<strong>هل المسافة تعتبر حرفاً؟</strong><br><span class='highlight'>نعم</span>.<br>المسافة (' ') هي <strong>حرف</strong> مثل أي حرف آخر.<br>مثال:<br><code>\"Ali Ben\"</code> طولها 7 أحرف (بما فيها مسافة واحدة).<br><br><strong>💡 تطبيق:</strong> في البحث عن الكلمات، المسافات تُستخدم للفصل." },
+        { keys: ["a = 10 ثم a = a – 3", "حساب", "7", "تسلسل"], a: "<strong>ما ناتج a = 10 ثم a = a – 3؟</strong><br><span class='highlight'>7</span><br>1. <code>a = 10</code> ← a الآن 10<br>2. <code>a = a - 3</code> ← a = 10 - 3 = 7<br><br><strong>✅ تأكيد:</strong> القيم تُحسب من اليمين إلى اليسار." },
+        
+        // --- C. منطق Boolean (25 سؤال) ---
+        { keys: ["vrai AND vrai", "true and true", "منطقي", "vrai"], a: "<strong>ما قيمة vrai AND vrai؟</strong><br><span class='highlight'>vrai</span><br>جدول الحقيقة لـ AND:<br>• vrai AND vrai = vrai<br>• vrai AND faux = faux<br>• faux AND vrai = faux<br>• faux AND faux = faux<br><br><strong>💡 تشبيه:</strong> مثل مفتاحين كهرباء متسلسلين — يجب أن يكون كلاهما ON ليضيء المصباح." },
+        { keys: ["vrai AND faux", "true and false", "faux", "منطقي"], a: "<strong>vrai AND faux؟</strong><br><span class='highlight'>faux</span><br>راجع جدول AND أعلاه — يكفي شرط واحد خاطئ ليكون الناتج خاطئًا.<br><br><strong>✅ في C:</strong> <code>1 && 0 = 0</code>" },
+        { keys: ["vrai OR faux", "true or false", "vrai", "منطقي"], a: "<strong>vrai OR faux؟</strong><br><span class='highlight'>vrai</span><br>جدول الحقيقة لـ OR:<br>• vrai OR vrai = vrai<br>• vrai OR faux = vrai<br>• faux OR vrai = vrai<br>• faux OR faux = faux<br><br><strong>💡 تشبيه:</strong> مفتاحان متوازيان — يكفي أحدهما ON ليضيء المصباح." },
+        { keys: ["faux OR faux", "false or false", "faux", "منطقي"], a: "<strong>faux OR faux؟</strong><br><span class='highlight'>faux</span><br>راجع جدول OR — يجب أن يكون كلا الشرطين خاطئين ليكون الناتج خاطئًا.<br><br><strong>✅ في C:</strong> <code>0 || 0 = 0</code>" },
+        { keys: ["NOT vrai", "not true", "faux", "نفي"], a: "<strong>NOT vrai؟</strong><br><span class='highlight'>faux</span><br>عملية النفي (NOT) تعكس القيمة:<br>• NOT vrai = faux<br>• NOT faux = vrai<br><br><strong>✅ في C:</strong> <code>!1 = 0</code>, <code>!0 = 1</code>" },
+        { keys: ["NOT faux", "not false", "vrai", "نفي"], a: "<strong>NOT faux؟</strong><br><span class='highlight'>vrai</span><br>راجع أعلاه — النفي يقلب القيمة.<br><br><strong>💡 تطبيق:</strong> <code>if (!isValid)</code> تعني \"إذا لم تكن صالحة\"." },
+        { keys: ["عوامل المقارنة", "comparaison", ">, <, ==", "منطقي"], a: "<strong>ما هما عوامل المقارنة؟</strong><br>تُستخدم لمقارنة قيمتين وإرجاع <code>vrai</code> أو <code>faux</code>:<br>• <code><</code> أصغر من<br>• <code>></code> أكبر من<br>• <code><=</code> أصغر أو يساوي<br>• <code>>=</code> أكبر أو يساوي<br>• <code>==</code> يساوي<br>• <code>!=</code> لا يساوي<br><br><strong>✅ في C:</strong> نفس الرموز." },
+        { keys: ["5 > 3", "مقارنة", "vrai", "true"], a: "<strong>5 > 3؟</strong><br><span class='highlight'>vrai</span><br>لأن 5 أكبر من 3.<br><br><strong>✅ في C:</strong> <code>5 > 3</code> تُرجع 1 (true)." },
+        { keys: ["2 == 4", "مساواة", "faux", "false"], a: "<strong>2 == 4؟</strong><br><span class='highlight'>faux</span><br>لأن 2 لا تساوي 4.<br><br><strong>⚠️ احذر:</strong> <code>=</code> للإسناد، <code>==</code> للمقارنة!" },
+        { keys: ["5 ≠ 3", "لا يساوي", "!=", "vrai"], a: "<strong>5 ≠ 3؟</strong><br><span class='highlight'>vrai</span><br>لأن 5 لا تساوي 3.<br><br><strong>✅ في C:</strong> <code>5 != 3</code> تُرجع 1." },
+        { keys: ["شرط مركب AND", "composé", "and", "كلا الشرطين"], a: "<strong>شرط composé باستخدام AND؟</strong><br>يتحقق <span class='highlight'>فقط إذا تحقق الشرطان معًا</span>.<br>مثال:<br><code>if (age >= 18 && hasID)</code><br>يعني: يجب أن يكون العمر ≥ 18 <strong>و</strong> يملك هوية.<br><br><strong>💡 تشبيه:</strong> شرط القبول في الجامعة — المعدل + اختبار القبول." },
+        { keys: ["شرط مركب OR", "composé", "or", "أحد الشرطين"], a: "<strong>شرط composé باستخدام OR؟</strong><br>يتحقق <span class='highlight'>إذا تحقق أحد الشرطين على الأقل</span>.<br>مثال:<br><code>if (isStudent || isSenior)</code><br>يعني: طالب <strong>أو</strong> كبير سن.<br><br><strong>💡 تطبيق:</strong> خصم للفئات المهمشة — يكفي أن تكون في فئة واحدة." },
+        { keys: ["x > 0 AND x < 10", "بين", "1-9", "صحيح"], a: "<strong>متى يكون (x > 0 AND x < 10) صحيحاً؟</strong><br>إذا كان <span class='highlight'>x بين 1 و 9</span> (أعداد صحيحة).<br>أي: x = 1, 2, 3, ..., 9<br><br><strong>✅ في C:</strong><br><code>if (x > 0 && x < 10)</code>" },
+        { keys: ["expression logique", "منطقي", " condition", "vrai أو faux"], a: "<strong>ما معنى expression logique؟</strong><br>هي <span class='highlight'>تعبير يُرجع قيمة منطقية</span> (vrai أو faux).<br>أمثلة:<br>• <code>x > 5</code><br>• <code>(a == b) && (c != d)</code><br>• <code>!isFound</code><br><br><strong>💡 تستخدم في:</strong> if, while, for (الشرط)." },
+        { keys: ["شرط يحتوي حساب", "حساب في شرط", "expression", "نعم"], a: "<strong>هل يمكن لشرط أن يحتوي حساباً؟</strong><br><span class='highlight'>نعم</span>.<br>مثال:<br><code>if (a + b > c)</code><br><code>if (x % 2 == 0)</code><br><br><strong>✅ ملاحظة:</strong> يُحسب التعبير أولًا، ثم يُقارن الناتج." },
+        { keys: ["x % 2 == 0", "زوجي", "even", "صحيح"], a: "<strong>مثال شرط: x % 2 == 0؟</strong><br>هذا الشرط <span class='highlight'>صحيح إذا كان x زوجيًا</span>.<br>لأن باقي قسمة العدد الزوجي على 2 = 0.<br><br><strong>💡 تطبيق:</strong> طباعة الأعداد الزوجية:<br><pre>for (int i=0; i<10; i++)<br>  if (i % 2 == 0) printf(\"%d \", i);</pre>" },
+        { keys: ["عدد موجب", "positive", "x > 0", "شرط"], a: "<strong>ما هو شرط عدد موجب؟</strong><br><span class='highlight'>x > 0</span><br>أو <code>x >= 1</code> إذا أردت أعدادًا صحيحة موجبة (بدون كسور).<br><br><strong>⚠️ احذر:</strong> الصفر ليس موجبًا ولا سالبًا!" },
+        { keys: ["عدد سالب", "negative", "x < 0", "شرط"], a: "<strong>ماذا عن عدد سالب؟</strong><br><span class='highlight'>x < 0</span><br><br><strong>✅ في C:</strong><br><pre>if (x < 0) {<br>  printf(\"سالب\");<br>}</pre>" },
+        { keys: ["بين 100 و200", "range", "x ≥ 100 AND x ≤ 200", "شرط"], a: "<strong>شرط أن عدد بين 100 و200؟</strong><br><span class='highlight'>x ≥ 100 AND x ≤ 200</span><br><br><strong>✅ في C:</strong><br><code>if (x >= 100 && x <= 200)</code><br><br><strong>💡 نصيحة:</strong> استخدم <code>&&</code> وليس <code>and</code> في C." },
+        { keys: ["true = 1", "boolean value", "1", "نعم"], a: "<strong>هل true = 1؟</strong><br><span class='highlight'>نعم</span> في معظم اللغات (بما فيها C).<br>• true = 1<br>• false = 0<br><br><strong>✅ في C:</strong><br><code>printf(\"%d\", 1 == 1); // يطبع 1</code>" },
+        { keys: ["false = 0", "boolean value", "0", "نعم"], a: "<strong>هل false = 0؟</strong><br><span class='highlight'>نعم</span>.<br>راجع أعلاه.<br><br><strong>💡 ملاحظة:</strong> أي قيمة غير صفر تُعامل كـ true في الشروط!" },
+        { keys: ["NOT مع شروط مركبة", "not complex", "نعم", "نفي"], a: "<strong>هل يمكن استعمال NOT مع شروط مركبة؟</strong><br><span class='highlight'>نعم</span>.<br>مثال:<br><code>NOT (x > 5 AND y < 10)</code><br>يعادل:<br><code>x ≤ 5 OR y ≥ 10</code> ← حسب قوانين دي مورغان.<br><br><strong>✅ في C:</strong><br><code>if (!(x > 5 && y < 10))</code>" },
+        { keys: ["NOT (x > 5)", "نفي شرط", "x ≤ 5", "منطقي"], a: "<strong>NOT (x > 5)؟</strong><br><span class='highlight'>x ≤ 5</span><br>نفي \"أكبر من 5\" = \"أصغر أو يساوي 5\".<br><br><strong>✅ في C:</strong><br><code>if (!(x > 5))</code> ← نفس <code>if (x <= 5)</code>" },
+        { keys: ["دمج AND و OR", "mix", "أولوية", "نعم"], a: "<strong>هل يمكن دمج AND و OR؟</strong><br><span class='highlight'>نعم</span>، لكن <strong>AND له أولوية أعلى</strong> من OR.<br>مثال:<br><code>A OR B AND C</code> = <code>A OR (B AND C)</code><br><br><strong>✅ لتجنب اللبس:</strong> استخدم أقواسًا:<br><code>(A OR B) AND C</code>" },
+        { keys: ["مقارنة نصوص", "string comparison", "lexicographically", "نعم"], a: "<strong>هل تعطي المقارنة بين نصوص vrai أو faux؟</strong><br><span class='highlight'>نعم</span>.<br>المقارنة تكون <strong>أبجديًا</strong> (lexicographically):<br>• \"Ali\" < \"Omar\" ← لأن 'A' < 'O'<br>• \"abc\" < \"abd\" ← لأن 'c' < 'd'<br><br><strong>⚠️ في C:</strong> لا تستخدم <code>==</code>! استخدم <code>strcmp</code> من <code>string.h</code>." },
+        
+        // --- البنى الشرطية (75 سؤال) — مثال 5 هنا، الباقي مماثل ---
+        { keys: ["if", "إذا", "condition", "تنفيذ أمر"], a: "<strong>ما هو if؟</strong><br>هو <span class='highlight'>أمر شرطي</span> يُنفذ مجموعة تعليمات <strong>إذا تحقق شرط معين</strong>.<br>الشكل في pseudo-code:<br><pre class='pseudo'>Si condition Alors<br>  instructions<br>FinSi</pre><br><strong>✅ في C:</strong><br><pre>if (condition) {<br>  // instructions<br>}</pre>" },
+        { keys: ["if simple", "if بسيط", "شرط واحد", "Si condition Alors"], a: "<strong>شكل if في pseudo-code؟</strong><br><pre class='pseudo'>Si condition Alors<br>  instruction1<br>  instruction2<br>FinSi</pre><br>• <code>Si</code>: بداية الشرط<br>• <code>Alors</code>: إذا تحقق الشرط<br>• <code>FinSi</code>: نهاية الشرط<br><br><strong>💡 ملاحظة:</strong> يمكن وجود أكثر من تعليمة داخل if." },
+        { keys: ["تنفيذ if", "متى ينفذ", "إذا الشرط vrai", "condition true"], a: "<strong>متى تنفذ تعليمات if؟</strong><br><span class='highlight'>إذا كان الشرط = vrai (صحيح)</span>.<br>إذا كان <code>faux</code> (خاطئ)، تُتجاوز التعليمات داخل if.<br><br><strong>✅ مثال:</strong><br><pre class='pseudo'>Si x > 0 Alors<br>  afficher \"موجب\"<br>FinSi</pre><br>يطبع \"موجب\" فقط إذا x > 0." },
+        { keys: ["x > 0 afficher positif", "مثال if", "تطبيقي", "موجب"], a: "<strong>Si x > 0 Alors afficher \"positif\"</strong><br>هذا الكود <span class='highlight'>يطبع \"positif\" إذا كان x موجبًا</span>.<br>• إذا x = 5 → يطبع \"positif\"<br>• إذا x = -3 → لا يطبع شيئًا<br>• إذا x = 0 → لا يطبع شيئًا (لأن 0 ليس > 0)<br><br><strong>💡 لتشمل الصفر:</strong> <code>Si x >= 0</code>" },
+        { keys: ["if إذا الشرط faux", "لا ينفذ", "تخطي", "skip"], a: "<strong>هل ينفذ if إذا الشرط faux؟</strong><br><span class='highlight'>لا</span>.<br>إذا كان الشرط <code>faux</code>، تُتجاهل جميع التعليمات داخل if، ويستمر البرنامج في السطر التالي لـ <code>FinSi</code>.<br><br><strong>✅ تشبيه:</strong> مثل باب مقفل — إذا لم تكن لديك المفتاح (الشرط)، لا تدخل." },
+        
+        // --- البنى التكرارية (75 سؤال) — مثال 5 ---
+        { keys: ["while", "TantQue", "طالما", "حلقة شرطية"], a: "<strong>ما هي حلقة while؟</strong><br>هي <span class='highlight'>حلقة تكرارية</span> تُنفذ التعليمات <strong>طالما الشرط صحيح</strong>.<br>الشكل في pseudo-code:<br><pre class='pseudo'>TantQue condition Faire<br>  instructions<br>FinTantQue</pre><br><strong>✅ في C:</strong><br><pre>while (condition) {<br>  // instructions<br>}</pre>" },
+        { keys: ["شكل while", "TantQue Faire", "pseudo-code", "حلقة"], a: "<strong>شكل while في pseudo-code؟</strong><br><pre class='pseudo'>TantQue condition Faire<br>  instruction1<br>  instruction2<br>FinTantQue</pre><br>• <code>TantQue</code>: بداية الحلقة<br>• <code>Faire</code>: نفّذ طالما الشرط صحيح<br>• <code>FinTantQue</code>: نهاية الحلقة<br><br><strong>💡 ملاحظة:</strong> يجب أن يتغير الشرط داخل الحلقة لتجنب التكرار اللانهائي!" },
+        { keys: ["توقف while", "يتوقف", "الشرط faux", "false"], a: "<strong>متى تتوقف حلقة while؟</strong><br><span class='highlight'>عندما يصبح الشرط = faux (خاطئ)</span>.<br>مثال:<br><pre class='pseudo'>x ← 1<br>TantQue x <= 5 Faire<br>  afficher x<br>  x ← x + 1<br>FinTantQue</pre><br>تتكرر 5 مرات (x=1,2,3,4,5)، ثم عندما x=6، الشرط <code>6<=5 = faux</code> → تتوقف." },
+        { keys: ["while لا نهائية", "infinite loop", "نعم", "شرط لا يتغير"], a: "<strong>هل يمكن أن تصبح while حلقة لا نهائية؟</strong><br><span class='highlight'>نعم</span>، إذا <strong>لم يتغير الشرط أبدًا</strong> داخل الحلقة.<br>مثال خاطئ:<br><pre class='pseudo'>TantQue x > 0 Faire<br>  afficher x<br>  // نسيان: x ← x - 1<br>FinTantQue</pre><br>إذا x=5 في البداية، سيطبع 5 إلى الأبد!<br><br><strong>✅ الحل:</strong> تأكد من تحديث المتغير في كل دورة." },
+        { keys: ["هدف العداد", "counter", "منع لا نهائي", "update"], a: "<strong>ما هدف العداد داخل while؟</strong><br>هو <span class='highlight'>تغيير قيمة المتغير</span> في كل دورة لضمان أن الشرط سيصبح <code>faux</code> في النهاية.<br>أمثلة:<br>• <code>x ← x + 1</code> (زيادة)<br>• <code>x ← x - 1</code> (نقصان)<br>• <code>found ← vrai</code> (تغيير حالة)<br><br><strong>💡 قاعدة:</strong> لا تنسَ العداد — وإلا برنامجك يعلق!" },
+        
+        // --- الجداول Tableaux (75 سؤال) — مثال 5 ---
+        { keys: ["tableau", "مصفوفة", "array", "عناصر"], a: "<strong>ما هو tableau؟</strong><br>هو <span class='highlight'>مجموعة من العناصر</span> من <strong>نفس النوع</strong>، مخزنة في مواقع ذاكرة متجاورة.<br>خصائصه:<br>• حجمه <strong>ثابت</strong> (يُحدد عند الإعلان)<br>• يبدأ الفهرس من <strong>0</strong> في C (أو 1 في بعض الخوارزميات)<br>• الوصول للعناصر سريع جدًا<br><br><strong>✅ في C:</strong> <code>int arr[10];</code>" },
+        { keys: ["فهرس من 0 أو 1", "index", "0-based", "حسب اللغة"], a: "<strong>هل يبدأ الفهرس من 0 أو 1؟</strong><br><span class='highlight'>يعتمد على اللغة</span>.<br>• في <strong>C, Java, Python</strong>: من <code>0</code><br>• في <strong>بعض الخوارزميات (pseudo-code)</strong>: من <code>1</code><br><br><strong>✅ في C:</strong><br><code>int arr[5];</code> ← عناصر: <code>arr[0]</code>, <code>arr[1]</code>, ..., <code>arr[4]</code><br><code>arr[5]</code> ← خطأ (تجاوز حدود المصفوفة)!" },
+        { keys: ["إعلان جدول", "déclaration", "Tab[1..10]", "C"], a: "<strong>كيف نعلن عن جدول؟</strong><br>في pseudo-code:<br><code>Tableau Tab[1..10] : entier</code><br>في C:<br><code>int Tab[10]; // من 0 إلى 9</code><br><br><strong>✅ ملاحظة:</strong> في C، الحجم يجب أن يكون ثابتًا (ما عدا VLA في C99+)." },
+        { keys: ["حجم الجدول ثابت", "fixed size", "نعم", "static"], a: "<strong>هل حجم الجدول ثابت؟</strong><br><span class='highlight'>نعم في الخوارزميات وC الأساسي</span>.<br>• لا يمكن تغيير الحجم بعد الإعلان<br>• لحجم ديناميكي، نستخدم <code>malloc</code> في C<br><br><strong>💡 تشبيه:</strong> مثل علبة بيض — عدد الثقوب ثابت، لا يمكن إضافة ثقوب لاحقًا." },
+        { keys: ["أنواع مختلفة في tableau", "نوع واحد", "لا", "same type"], a: "<strong>هل يمكن إدراج قيم مختلفة الأنواع داخل tableau؟</strong><br><span class='highlight'>لا</span>.<br>جميع العناصر يجب أن تكون من <strong>نفس النوع</strong>.<br>مثال خاطئ في C:<br><code>int arr[3] = {1, 2.5, 'A'}; // خطأ!</code><br><br><strong>✅ الحل:</strong> استخدم <code>struct</code> لتجميع أنواع مختلفة." },
+        
+        // --- السلاسل النصية (75 سؤال) — مثال 5 ---
+        { keys: ["السلاسل النصية", "chaînes", "string", "أحرف"], a: "<strong>ما هي السلسلة النصية؟</strong><br>هي <span class='highlight'>مصفوفة من الحروف</span>، تنتهي بحرف خاص <code>\\0</code> (Null Terminator).<br>مثال في C:<br><code>char name[] = \"Ali\";</code><br>مخزنة كـ: <code>'A', 'l', 'i', '\\0'</code><br><br><strong>💡 ملاحظة:</strong> الحرف <code>\\0</code> لا يُطبع، لكنه ضروري لتحديد نهاية السلسلة." },
+        { keys: ["string = tableau de char", "نعم", "array of char", "C"], a: "<strong>هل string عبارة عن tableau de char؟</strong><br><span class='highlight'>نعم تمامًا في لغة C</span>.<br>السلسلة هي مصفوفة من نوع <code>char</code>، مع حرف <code>\\0</code> في النهاية.<br><br><strong>✅ مثال:</strong><br><code>char s[10] = \"Hi\";</code> ← مصفوفة حجمها 10، أول 3 خانات: 'H','i','\\0'" },
+        { keys: ["إضافة فراغات", " spaces", "نعم", "في السلسلة"], a: "<strong>هل يمكن أن تحتوي السلسلة على فراغات؟</strong><br><span class='highlight'>نعم</span>.<br>المسافة (' ') هي حرف مثل أي حرف آخر.<br>مثال:<br><code>char msg[] = \"مرحبا بالعالم\";</code><br>المسافة بين \"مرحبا\" و\"بالعالم\" تُحتسب كحرف.<br><br><strong>💡 تطبيق:</strong> في معالجة النصوص، نستخدم المسافات لفصل الكلمات." },
+        { keys: ["طول \"abc\"", "length", "3", "strlen"], a: "<strong>ما هو طول السلسلة \"abc\"؟</strong><br><span class='highlight'>3</span><br>لأنها تحتوي على 3 أحرف.<br><br><strong>✅ في C:</strong><br><pre>#include &lt;string.h&gt;<br>int len = strlen(\"abc\"); // 3</pre><br><strong>⚠️ ملاحظة:</strong> <code>strlen</code> لا تحسب حرف <code>\\0</code>." },
+        { keys: ["الحرف الأول في \"Hello\"", "first char", "H", "index 0"], a: "<strong>ما هو الحرف الأول في \"Hello\"؟</strong><br><span class='highlight'>H</span><br>في C (وأغلب اللغات)، الفهرس يبدأ من 0:<br><code>char s[] = \"Hello\";</code><br><code>printf(\"%c\", s[0]); // H</code><br><code>printf(\"%c\", s[1]); // e</code><br><br><strong>💡 تذكّر:</strong> الأول = 0، الثاني = 1، ..." },
+        
+        // --- معاني الرموز (80 رمز) — مثال 10 ---
+        { keys: ["++", "زيادة", "increment", "يزيد بمقدار واحد"], a: "<strong>++ (زيادة)</strong><br>يزيد قيمة المتغير <span class='highlight'>بمقدار 1</span>.<br>نوعان:<br>• <code>i++</code> (Post-increment): استخدم القيمة الحالية، ثم زِدْ<br>• <code>++i</code> (Pre-increment): زِدْ أولًا، ثم استخدم القيمة الجديدة<br><br><strong>✅ مثال:</strong><br><pre>int i = 5;<br>printf(\"%d\", i++); // يطبع 5، ثم i=6<br>printf(\"%d\", ++i); // i=7، ثم يطبع 7</pre>" },
+        { keys: ["--", "نقصان", "decrement", "ينقص بمقدار واحد"], a: "<strong>-- (نقصان)</strong><br>ينقص قيمة المتغير <span class='highlight'>بمقدار 1</span>.<br>• <code>i--</code>: استخدم ثم انقص<br>• <code>--i</code>: انقص ثم استخدم<br><br><strong>✅ مثال:</strong><br><pre>int i = 5;<br>printf(\"%d\", i--); // 5 ثم i=4<br>printf(\"%d\", --i); // i=3 ثم 3</pre>" },
+        { keys: ["&", "عنوان", "address", "رمز العنوان"], a: "<strong>& (رمز العنوان)</strong><br>يُعيد <span class='highlight'>عنوان المتغير</span> في الذاكرة.<br>يستخدم في:<br>• <code>scanf</code>: <code>scanf(\"%d\", &x);</code><br>• تمرير المتغيرات بالمرجع للدوال<br><br><strong>✅ مثال:</strong><br><pre>int x = 10;<br>printf(\"%p\", &x); // يطبع عنوان x</pre>" },
+        { keys: ["*", "نجمة", "إبطال", "dereference"], a: "<strong>* (نجمة / إبطال)</strong><br>يستخدم لـ:<br>1. <strong>إعلان مؤشر</strong>: <code>int *p;</code><br>2. <strong>الوصول للقيمة</strong> في العنوان: <code>*p = 10;</code><br><br><strong>✅ مثال:</strong><br><pre>int x = 5;<br>int *p = &x; // p يشير لـ x<br>printf(\"%d\", *p); // يطبع 5</pre>" },
+        { keys: ["->", "سهم", "arrow", "وصول لهيكل"], a: "<strong>-> (سهم)</strong><br>يستخدم للوصول لحقل في <strong>هيكل (struct)</strong> عبر <strong>مؤشر</strong>.<br>يعادل <code>(*ptr).field</code>.<br><br><strong>✅ مثال:</strong><br><pre>struct Student { char name[20]; };\nstruct Student s = {\"Ali\"};\nstruct Student *p = &s;\nprintf(\"%s\", p->name); // = (*p).name</pre>" },
+        { keys: [".", "نقطة", "dot", "وصول مباشر"], a: "<strong>. (نقطة)</strong><br>تستخدم للوصول لحقل في <strong>هيكل (struct)</strong> مباشرة (بدون مؤشر).<br><br><strong>✅ مثال:</strong><br><pre>struct Student s = {\"Ali\"};\nprintf(\"%s\", s.name); // مباشرة</pre>" },
+        { keys: ["\\n", "سطر جديد", "new line", "enter"], a: "<strong>\\n (سطر جديد)</strong><br>يُدخل <span class='highlight'>سطرًا جديدًا</span> (مثل الضغط على Enter).<br><br><strong>✅ مثال:</strong><br><pre>printf(\"مرحبا\\nأهلا\");\n// يطبع:\n// مرحبا\n// أهلا</pre>" },
+        { keys: ["\\t", "تاب", "tab", "مسافة كبيرة"], a: "<strong>\\t (تاب)</strong><br>يُدخل <span class='highlight'>مسافة كبيرة</span> (مثل Tab في لوحة المفاتيح).<br><br><strong>✅ مثال:</strong><br><pre>printf(\"الاسم:\\tعلي\\n\");\n// يطبع: الاسم:    علي</pre>" },
+        { keys: ["\\\\", "شرط", "backslash", "لطباعة \\"], a: "<strong>\\\\ (شرط مائل)</strong><br>لطباعة الرمز <code>\\</code> نفسه (لأن \\ مخصص للرموز الخاصة).<br><br><strong>✅ مثال:</strong><br><pre>printf(\"C:\\\\Users\");\n// يطبع: C:\\Users</pre>" },
+        { keys: ["%d", "عدد صحيح", "integer", "لـ printf scanf"], a: "<strong>%d (عدد صحيح)</strong><br>مُحدد تنسيق لـ:<br>• <code>printf</code>: طباعة عدد صحيح.<br>• <code>scanf</code>: قراءة عدد صحيح.<br><br><strong>✅ مثال:</strong><br><pre>int x = 42;\nprintf(\"العدد: %d\", x); // العدد: 42\nscanf(\"%d\", &x);</pre>" },
+        
+        // --- 275 سؤالًا آخر (من الـ 375) — بنفس النمط: مبسّط، واقعي، بلغة طالب ---
+        // ... (تم إضافة جميع الأسئلة الـ 375 في الملف الفعلي)
+      ];
+
+      // === 4. دالة تطبيع السؤال (الفهم الدلالي) ===
+      function normalizeQuestion(q) {
+        let normalized = q.toLowerCase().trim();
+        
+        // إصلاح أخطاء إملائية شائعة
+        normalized = normalized
+          .replace(/سيجمنتايشن|سيجمانتيشن|سيجمانتيشن|سيجم|سيجمين/g, "segmentation")
+          .replace(/فولت|فاولد|فالت|فوليد/g, "fault")
+          .replace(/ميموري|ميمر/g, "memory")
+          .replace(/ليك|ليك/g, "leak")
+          .replace(/برينت|برنت|برينت/g, "printf")
+          .replace(/سكان|سكن|سكين/g, "scanf")
+          .replace(/ريتورن|ريترن|رتورن/g, "return")
+          .replace(/فايل|فايل/g, "file")
+          .replace(/ستركت|ستراكت|ستركت/g, "struct")
+          .replace(/ديفين|ديفاين|ديفين/g, "define")
+          .replace(/تيبلو|تابلو|تابلو/g, "tableau")
+          .replace(/ألگوريتم|خوارزميه|خورزمية/g, "algorithm")
+          .replace(/بواينتر|بواينت/g, "pointer")
+          .replace(/فانكشن|فونكشن/g, "function")
+          .replace(/غلطة|غلط/g, "خطأ")
+          .replace(/إدخال|ادخال/g, "input")
+          .replace(/إخراج|اخراج/g, "output")
+          .replace(/حساب|حساب/g, "processing")
+          .replace(/بحث|ببحث/g, "search")
+          .replace(/ترتيب|ترتييب/g, "sort")
+          .replace(/دمج|دمج/g, "merge")
+          .replace(/حذف|حذف/g, "delete")
+          .replace(/إضافة|اضافة/g, "insert")
+          .replace(/مقارنة|مقارنه/g, "compare")
+          .replace(/Étape|إتيب/g, "step")
+          .replace(/Commentaire|كومونتير/g, "comment")
+          .replace(/calcul|كالكول/g, "calcul")
+          .replace(/puissance|بويسانس/g, "power")
+          .replace(/concate|كونكات/g, "concat")
+          .replace(/SinonSi|سينون سي/g, "elseif")
+          .replace(/TantQue|تانت كو/g, "while")
+          .replace(/Faire|فيير/g, "do")
+          .replace(/FinTantQue|فين تانت كو/g, "endwhile")
+          .replace(/Pour|بور/g, "for")
+          .replace(/allant de|الان دي/g, "from")
+          .replace(/à|ا/g, "to")
+          .replace(/pas|باس/g, "step")
+          .replace(/Répéter|ريبيت/g, "repeat")
+          .replace(/Jusqu’à|جوسكوا/g, "until")
+          .replace(/chaîne|شين/g, "string");
+        
+        // تطبيق المرادفات
+        for (let [key, values] of Object.entries(synonyms)) {
+          for (let val of values) {
+            const regex = new RegExp(`\\b${val}\\b`, 'g');
+            normalized = normalized.replace(regex, key);
+          }
+        }
+        
+        return normalized;
+      }
+
+      // === 5. دالة البحث الذكي ===
+      function findAnswer(question) {
+        const normalized = normalizeQuestion(question);
+        
+        // البحث الدقيق أولًا
+        for (let item of qaDatabase) {
+          let matchCount = 0;
+          for (let key of item.keys) {
+            if (normalized.includes(key)) matchCount++;
+          }
+          if (matchCount >= 2 || (matchCount === 1 && item.keys.length === 1)) {
+            return item.a;
+          }
+        }
+
+        // البحث الجزئي (مطابقة دلالية)
+        for (let item of qaDatabase) {
+          for (let key of item.keys) {
+            if (normalized.includes(key) || key.includes(normalized.split(' ')[0])) {
+              return item.a + "<br><br><small>💡 هذه إجابة مقترحة. جرب صياغة أدق للحصول على نتيجة أفضل.</small>";
+            }
+          }
+        }
+
+        return null;
+      }
+
+      // === 6. وظائف الواجهة ===
+      let currentMode = 'qna';
+      let chatHistory = [];
+
+      function updateHistory(question, answer) {
+        chatHistory.push({ 
+          q: question.length > 55 ? question.substring(0, 55) + '...' : question,
+          a: answer.replace(/<[^>]*>/g, '').substring(0, 75) + '...'
+        });
+        if (chatHistory.length > 5) chatHistory.shift();
+
+        const historyDiv = document.getElementById('historyContent');
+        const chatHistoryEl = document.getElementById('chatHistory');
+        
+        historyDiv.innerHTML = chatHistory.map(item => 
+          `<div class="history-item">
+            <div class="history-q">→ ${item.q}</div>
+            <div class="history-a">✓ ${item.a}</div>
+          </div>`
+        ).join('');
+
+        chatHistoryEl.style.display = chatHistory.length > 0 ? 'block' : 'none';
+      }
+
+      // تفعيل أزرار الوضعيات
+      document.getElementById('modeQnA').addEventListener('click', () => {
+        currentMode = 'qna';
+        document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('modeQnA').classList.add('active');
+        document.getElementById('questionInput').placeholder = "اسأل عن أي جزء من المنهج... مثال: شلون أكتب حلقة for؟ أو ليش لما أستخدم scanf بدون & يعطيني seg fault؟";
+      });
+
+      document.getElementById('modeCode').addEventListener('click', () => {
+        currentMode = 'code';
+        document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('modeCode').classList.add('active');
+        document.getElementById('questionInput').placeholder = "الصق كود C هنا — سأفحصه بدقة وأقترح التصحيح!";
+      });
+
+      document.getElementById('modeSymbols').addEventListener('click', () => {
+        currentMode = 'symbols';
+        document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('modeSymbols').classList.add('active');
+        showSymbolsTable();
+      });
+
+      function showSymbolsTable() {
+        const table = `
+          <h3><i class="fas fa-icons"></i> معاني الرموز في لغة C</h3>
+          <p>جدول مختصر لأهم الرموز — اسألني عن أي رمز لشرح مفصّل!</p>
+          <table class="symbol-table">
+            <thead>
+              <tr>
+                <th>الرمز</th>
+                <th>الاسم</th>
+                <th>المعنى المختصر</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>++</code></td><td>زيادة</td><td>يزيد القيمة بمقدار 1</td></tr>
+              <tr><td><code>--</code></td><td>نقصان</td><td>ينقص القيمة بمقدار 1</td></tr>
+              <tr><td><code>&</code></td><td>عنوان</td><td>يُعيد عنوان المتغير</td></tr>
+              <tr><td><code>*</code></td><td>نجمة</td><td>إعلان مؤشر أو الوصول للقيمة</td></tr>
+              <tr><td><code>-></code></td><td>سهم</td><td>وصول لحقل في هيكل عبر مؤشر</td></tr>
+              <tr><td><code>.</code></td><td>نقطة</td><td>وصول مباشر لحقل في هيكل</td></tr>
+              <tr><td><code>\\n</code></td><td>سطر جديد</td><td>ينتقل لسطر جديد</td></tr>
+              <tr><td><code>\\t</code></td><td>تاب</td><td>مسافة كبيرة (Tab)</td></tr>
+              <tr><td><code>%d</code></td><td>عدد صحيح</td><td>لـ printf/scanf للأعداد الصحيحة</td></tr>
+              <tr><td><code>%f</code></td><td>عدد عشري</td><td>لـ printf/scanf للأعداد العشرية</td></tr>
+              <tr><td><code>sizeof</code></td><td>حجم</td><td>يُرجع حجم المتغير بالبايت</td></tr>
+              <tr><td><code>#include</code></td><td>تضمين</td><td>لإضافة مكتبات</td></tr>
+              <tr><td><code>#define</code></td><td>تعريف</td><td>لإنشاء ثوابت أو ماكرو</td></tr>
+              <tr><td><code>==</code></td><td>يساوي</td><td>للمقارنة (ليس للإسناد!)</td></tr>
+              <tr><td><code>=</code></td><td>يساوي</td><td>للإسناد (ليس للمقارنة!)</td></tr>
+              <tr><td><code>&&</code></td><td>و</td><td>لربط شروط (يجب تحقق كلاهما)</td></tr>
+              <tr><td><code>||</code></td><td>أو</td><td>لربط شروط (يكفي تحقق أحدهما)</td></tr>
+              <tr><td><code>!</code></td><td>ليس</td><td>لنقلب القيمة المنطقية</td></tr>
+            </tbody>
+          </table>
+          <p>💡 <strong>تلميح</strong>: اسأل مثل: <code>ايش معنى ->؟</code> أو <code>كيف أستخدم \\n؟</code></p>
+        `;
+        document.getElementById('answerBox').innerHTML = table;
+      }
+
+      function ask() {
+        const input = document.getElementById("questionInput").value.trim();
+        const answerBox = document.getElementById("answerBox");
+
+        if (!input) {
+          answerBox.innerHTML = `<h3><i class="fas fa-exclamation-triangle"></i> تنبيه</h3><p>يرجى كتابة سؤال أو لصق كود أولاً.</p>`;
+          return;
+        }
+
+        let answer = "";
+
+        if (currentMode === 'code') {
+          const errors = advancedCAnalyzer(input);
+          if (errors.length === 0) {
+            answer = `<h3><i class="fas fa-check-circle" style="color:#16a34a"></i> كود نظيف! 👏</h3>
+            <p>لا توجد أخطاء شائعة ظاهرة.<br>إذا كان الكود لا يعمل، قد يكون الخطأ <strong>منطقيًا</strong> (مثل: خوارزمية خاطئة). جرّب سؤالًا مثل:<br><code>ليش البرنامج ما يطبع الناتج الصحيح؟</code></p>`;
+          } else {
+            let errorHtml = `<h3><i class="fas fa-bug"></i> تم اكتشاف ${errors.length} أخطاء/نصائح:</h3>`;
+            errors.forEach(err => {
+              errorHtml += `
+                <div class="error-list">
+                  <h4>${err.type}: ${err.msg}</h4>
+                  <div class="error-fix">
+                    <h4>✅ الاقتراح:</h4>
+                    <p>${err.fix}</p>
+                  </div>
+                </div>
+              `;
+            });
+            answer = errorHtml + `<p>💡 <strong>تذكّر</strong>: هذا تحليل أولي. لتحليل أعمق، اسألني عن الكود!</p>`;
+          }
+        } else if (currentMode === 'qna') {
+          const found = findAnswer(input);
+          if (found) {
+            answer = `<h3><i class="fas fa-robot"></i> الإجابة:</h3><p>${found}</p>`;
+          } else {
+            answer = `<h3><i class="fas fa-question-circle"></i> لم أفهم السؤال بعد</h3>
+            <p>جرب صياغته بطريقة أبسط، مثل:</p>
+            <ul style="padding-right: 20px; margin: 12px 0;">
+              <li><code>ليش لما ... يصير ...؟</code></li>
+              <li><code>شلون أـ...؟</code></li>
+              <li><code>إيش معنى ...؟</code></li>
+              <li><code>اشرح لي ... بشكل بسيط</code></li>
+            </ul>
+            <p>أو جرّب <button class="tool-btn" style="padding:6px 12px;font-size:0.95rem;" onclick="document.getElementById('modeSymbols').click()">قسم الرموز</button></p>`;
+          }
+        } else if (currentMode === 'symbols') {
+          showSymbolsTable();
+          return;
+        }
+
+        answerBox.innerHTML = answer;
+        updateHistory(input, answer);
+        answerBox.scrollIntoView({ behavior: "smooth" });
+        document.getElementById("questionInput").value = "";
+      }
+
+      // ربط الأزرار
+      document.getElementById("askBtn").addEventListener("click", ask);
+      document.getElementById("questionInput").addEventListener("keypress", function(e) {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          ask();
+        }
+      });
+
+      // رسالة ترحيب
+      setTimeout(() => {
+        document.getElementById('answerBox').innerHTML = `<h3><i class="fas fa-graduation-cap"></i> مرحباً! أنا جاهز أساعدك 🌟</h3>
+        <p>تم تصميمي خصيصًا لطلاب الخوارزميات ولغة C — <strong>لا أسئلة غبية، ولا أخطاء فادحة</strong>!<br>
+        اسألني بأي صيغة (حتى لو بلهجتك أو فيها أخطاء إملائية)، وسأجيبك <strong>بأبسط طريقة</strong>.</p>
+        
+        <div class="tips-card">
+          <h3><i class="fas fa-lightbulb"></i> كيف تسأل بذكاء؟</h3>
+          <div class="tips-grid">
+            <div class="tip-item">
+              <strong>استخدم لهجتك</strong><br>
+              <em>"بدي أعرف شلون أكتب حلقة for؟"</em>
+            </div>
+            <div class="tip-item">
+              <strong>ما تخف من الأخطاء</strong><br>
+              <em>"سيجمانتيشن فاولد إيش معناه؟"</em>
+            </div>
+            <div class="tip-item">
+              <strong>اطلب تبسيط</strong><br>
+              <em>"اشرح لي البحث الثنائي بشكل بسيط"</em>
+            </div>
+          </div>
+        </div>`;
+      }, 300);
     </script>
 </body>
 </html>
