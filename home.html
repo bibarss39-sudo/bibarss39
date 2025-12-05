@@ -66,7 +66,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             padding: 0 10px;
             flex-wrap: wrap;
             gap: 16px;
@@ -134,18 +134,95 @@
         h1 {
             text-align: center;
             font-size: 2.4rem;
-            margin: 20px 0 35px;
+            margin: 20px 0 15px;
             color: var(--accent-light);
             text-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
             font-weight: 700;
             letter-spacing: -0.5px;
         }
 
+        /* ✨ Enhanced Hint Box */
+        .hint-box {
+            position: relative;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(14, 165, 233, 0.1));
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 18px;
+            padding: 16px 24px;
+            margin: 0 auto 28px;
+            max-width: 720px;
+            font-size: 1.1rem;
+            color: var(--accent-light);
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 
+                0 4px 20px rgba(0, 0, 0, 0.15),
+                0 0 0 0 rgba(59, 130, 246, 0.4);
+            transition: 
+                all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                box-shadow 0.5s ease;
+            animation: fadeInUp 0.6s ease-out, pulseGlow 3s ease-in-out 1.2s infinite;
+            overflow: hidden;
+        }
+
+        .hint-box::before {
+            content: '';
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.3rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .hint-box:hover {
+            transform: translateY(-4px) scale(1.01);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(14, 165, 233, 0.15));
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.25),
+                0 0 12px rgba(59, 130, 246, 0.5);
+            border-color: rgba(96, 165, 250, 0.7);
+        }
+
+        .hint-box::after {
+            content: '';
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            opacity: 0.6;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 
+                    0 4px 20px rgba(0, 0, 0, 0.15),
+                    0 0 0 0 rgba(59, 130, 246, 0.4);
+            }
+            50% {
+                box-shadow: 
+                    0 4px 20px rgba(0, 0, 0, 0.15),
+                    0 0 0 8px rgba(59, 130, 246, 0.15);
+            }
+        }
+
         #codesContainer {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 22px;
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
         .code-box {
@@ -186,6 +263,28 @@
             transform: translateY(-6px);
             box-shadow: var(--shadow-lg), 0 0 0 1px rgba(96, 165, 250, 0.3);
             background: rgba(30, 45, 75, 0.85);
+        }
+
+        /* ✨ تأثير النقر (Pulse + Bounce) */
+        .code-box.pulse {
+            animation: clickPulse 0.6s ease-out;
+        }
+
+        @keyframes clickPulse {
+            0% {
+                transform: scale(1);
+                box-shadow: var(--shadow-md);
+            }
+            30% {
+                transform: scale(1.04) translateY(-2px);
+                box-shadow: 
+                    0 8px 30px rgba(59, 130, 246, 0.6),
+                    0 0 0 8px rgba(59, 130, 246, 0.2);
+            }
+            100% {
+                transform: scale(1) translateY(0);
+                box-shadow: var(--shadow-md);
+            }
         }
 
         /* Modal */
@@ -306,6 +405,10 @@
             h1 {
                 font-size: 2rem;
             }
+            .hint-box {
+                font-size: 1rem;
+                padding: 14px 20px;
+            }
             #codesContainer {
                 grid-template-columns: 1fr;
                 gap: 18px;
@@ -319,6 +422,10 @@
         @media (max-width: 480px) {
             h1 {
                 font-size: 1.8rem;
+            }
+            .hint-box {
+                font-size: 0.95rem;
+                padding: 12px 16px;
             }
             .modal-content {
                 padding: 24px 18px;
@@ -354,36 +461,42 @@
 
     <h1 id="pageTitle">أكواد C</h1>
 
-    <div id="codesContainer">
-        <div class="code-box" onclick="openModal(1)">printf("Hello, World!");</div>
-        <div class="code-box" onclick="openModal(2)">scanf("%d", &x);</div>
-        <div class="code-box" onclick="openModal(3)">for (int i = 0; i < 10; i++)</div>
-        <div class="code-box" onclick="openModal(4)">do { } while (x < 10)</div>
-        <div class="code-box" onclick="openModal(5)">while (x < 10)</div>
-        <div class="code-box" onclick="openModal(6)">!x</div>
-        <div class="code-box" onclick="openModal(7)">%d</div>
-        <div class="code-box" onclick="openModal(8)">%f</div>
-        <div class="code-box" onclick="openModal(9)">%c</div>
-        <div class="code-box" onclick="openModal(10)">+=</div>
-        <div class="code-box" onclick="openModal(11)">int</div>
-        <div class="code-box" onclick="openModal(12)">float</div>
-        <div class="code-box" onclick="openModal(13)">char</div>
-        <div class="code-box" onclick="openModal(14)">chaine</div>
-        <div class="code-box" onclick="openModal(15)">#include</div>
-        <div class="code-box" onclick="openModal(16)">return 0;</div>
-        <div class="code-box" onclick="openModal(17)">i++</div>
-        <div class="code-box" onclick="openModal(18)">i--</div>
-        <div class="code-box" onclick="openModal(19)">mat[40]</div>
-        <div class="code-box" onclick="openModal(20)">if</div>
-        <div class="code-box" onclick="openModal(21)">else</div>
-        <div class="code-box" onclick="openModal(22)">switch(x)</div>
-        <div class="code-box" onclick="openModal(23)">break;</div>
-        <div class="code-box" onclick="openModal(24)">continue;</div>
-        <div class="code-box" onclick="openModal(25)">// comment</div>
-        <div class="code-box" onclick="openModal(26)">/* comment */</div>
+    <!-- ✨ Enhanced Hint Box -->
+    <div class="hint-box">
+        <span id="hintText">انقر على أي صندوق لعرض شرح مفصّل باللغات: العربية / الفرنسية / الإنجليزية</span>
     </div>
 
-    <!-- Modal -->
+    <div id="codesContainer">
+       
+        <div class="code-box" onclick="handleClick(this, 1)">printf("Hello, World!");</div>
+        <div class="code-box" onclick="handleClick(this, 2)">scanf("%d", &x);</div>
+        <div class="code-box" onclick="handleClick(this, 3)">for (int i = 0; i < 10; i++)</div>
+        <div class="code-box" onclick="handleClick(this, 4)">do { } while (x < 10)</div>
+        <div class="code-box" onclick="handleClick(this, 5)">while (x < 10)</div>
+        <div class="code-box" onclick="handleClick(this, 6)">!x</div>
+        <div class="code-box" onclick="handleClick(this, 7)">%d</div>
+        <div class="code-box" onclick="handleClick(this, 8)">%f</div>
+        <div class="code-box" onclick="handleClick(this, 9)">%c</div>
+        <div class="code-box" onclick="handleClick(this, 10)">+=</div>
+        <div class="code-box" onclick="handleClick(this, 11)">int</div>
+        <div class="code-box" onclick="handleClick(this, 12)">float</div>
+        <div class="code-box" onclick="handleClick(this, 13)">char</div>
+        <div class="code-box" onclick="handleClick(this, 14)">chaine</div>
+        <div class="code-box" onclick="handleClick(this, 15)">#include</div>
+        <div class="code-box" onclick="handleClick(this, 16)">return 0;</div>
+        <div class="code-box" onclick="handleClick(this, 17)">i++</div>
+        <div class="code-box" onclick="handleClick(this, 18)">i--</div>
+        <div class="code-box" onclick="handleClick(this, 19)">mat[40]</div>
+        <div class="code-box" onclick="handleClick(this, 20)">if</div>
+        <div class="code-box" onclick="handleClick(this, 21)">else</div>
+        <div class="code-box" onclick="handleClick(this, 22)">switch(x)</div>
+        <div class="code-box" onclick="handleClick(this, 23)">break;</div>
+        <div class="code-box" onclick="handleClick(this, 24)">continue;</div>
+        <div class="code-box" onclick="handleClick(this, 25)">// comment</div>
+        <div class="code-box" onclick="handleClick(this, 26)">/* comment */</div>
+    </div>
+
+   
     <div id="modal" class="modal">
         <div class="modal-content">
             <h2 id="title"></h2>
@@ -438,7 +551,7 @@
                     fr: 'Boucle qui s’exécute exactement 10 fois (de 0 à 9).',
                     en: 'Loop that executes exactly 10 times (from 0 to 9).'
                 },
-                algFr: 'Pour i allant de 0 à 9',
+                algFr: 'Pour i  de 0 à 9  faire',
                 algExp: {
                     ar: 'تُستخدم عندما تعرف عدد مرات التكرار مسبقًا.',
                     fr: 'Répète un bloc un nombre fixe de fois.',
@@ -769,7 +882,17 @@
             }
         };
 
-        // ---------------- TRANSLATION SYSTEM ----------------
+              function handleClick(element, index) {
+        
+            element.classList.add('pulse');
+            setTimeout(() => {
+                element.classList.remove('pulse');
+            }, 600); 
+           
+            openModal(index);
+        }
+
+       
         function updateLangBtn() {
             const labels = { ar: 'AR', fr: 'FR', en: 'EN' };
             document.getElementById("langBtn").textContent = labels[lang];
@@ -793,9 +916,16 @@
             document.getElementById("nextBtn").textContent = step === 3 ? t.close : t.next;
             document.getElementById("prevBtn").textContent = t.back;
 
+            
+            const hints = {
+                ar: "انقر على أي صندوق لعرض شرح مفصّل باللغات: العربية / الفرنسية / الإنجليزية",
+                fr: "Cliquez sur une boîte pour afficher une explication détaillée en arabe / français / anglais",
+                en: "Click any box to see a detailed explanation in Arabic / French / English"
+            };
+            document.getElementById("hintText").textContent = hints[lang];
+
             updateLangBtn();
 
-            // إذا كان المودال مفتوحًا، نحدّث المحتوى
             if (document.getElementById("modal").style.display === "flex") {
                 openModal(current);
             }
@@ -806,7 +936,7 @@
             translateUI();
         }
 
-        // ---------------- MODAL SYSTEM ----------------
+       
         function openModal(i) {
             current = i;
             step = 1;
@@ -852,7 +982,6 @@
             document.getElementById("modal").style.display = "none";
         }
 
-        // ---------------- SEARCH SYSTEM ----------------
         document.getElementById("search").addEventListener("input", function () {
             const text = this.value.trim().toLowerCase();
             const boxes = document.querySelectorAll(".code-box");
@@ -863,15 +992,13 @@
             });
         });
 
-        // ---------------- INIT ----------------
+       
         translateUI();
 
-        // تفعيل شريط التمرير العلوي
         window.addEventListener('scroll', () => {
             document.body.classList.toggle('scrolling', window.scrollY > 10);
         });
 
-        // إغلاق المودال عند الضغط خارجه
         document.getElementById("modal").addEventListener("click", function (e) {
             if (e.target === this) closeModal();
         });

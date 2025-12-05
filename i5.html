@@ -68,7 +68,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
             gap: 16px;
         }
@@ -129,7 +129,7 @@
         h1 {
             text-align: center;
             color: var(--accent-light);
-            margin: 20px 0 35px;
+            margin: 15px 0 25px;
             font-size: 2.4rem;
             text-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
             font-weight: 800;
@@ -149,9 +149,87 @@
             border-radius: 2px;
         }
 
+        /* ✨ ملاحظة جميلة ومتحركة — جديدة */
+        .hint-box {
+            position: relative;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(14, 165, 233, 0.08));
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 18px;
+            padding: 16px 24px;
+            margin: 0 auto 32px;
+            max-width: 720px;
+            font-size: 1.05rem;
+            color: var(--accent-light);
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 
+                0 4px 20px rgba(0, 0, 0, 0.15),
+                0 0 0 0 rgba(59, 130, 246, 0.4);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: fadeInUp 0.6s ease-out, gentlePulse 4s ease-in-out 1s infinite;
+            overflow: hidden;
+        }
+
+        .hint-box::before {
+            content: '💡';
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            opacity: 1;
+            transition: opacity 0.3s;
+        }
+
+        .hint-box:hover::before {
+            content: '👆';
+            animation: bounceIn 0.6s ease;
+        }
+
+        .hint-box::after {
+            content: '';
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            width: 24px;
+            height: 24px;
+            transform: translateY(-50%);
+            background: 
+                radial-gradient(circle, var(--accent-light) 40%, transparent 60%);
+            opacity: 0.5;
+            border-radius: 50%;
+            animation: ripple 2s infinite;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes gentlePulse {
+            0%, 100% { box-shadow: 0 4px 20px rgba(0,0,0,0.15), 0 0 0 0 rgba(59,130,246,0.2); }
+            50% { box-shadow: 0 4px 20px rgba(0,0,0,0.15), 0 0 0 6px rgba(59,130,246,0.1); }
+        }
+
+        @keyframes bounceIn {
+            0%, 60%, 80%, 100% { transform: translateY(-50%) scale(1); }
+            30% { transform: translateY(-50%) scale(1.25); }
+        }
+
+        @keyframes ripple {
+            0% { transform: translateY(-50%) scale(1); opacity: 0.5; }
+            100% { transform: translateY(-50%) scale(1.8); opacity: 0; }
+        }
+
         .section-title {
             color: #93c5fd;
-            margin: 40px 0 20px;
+            margin: 30px 0 20px;
             font-size: 1.8rem;
             text-align: center;
             font-weight: 700;
@@ -197,13 +275,15 @@
             padding: 16px 8px;
             border-radius: 16px;
             cursor: pointer;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
             transition: var(--transition);
             box-shadow: var(--shadow-md);
             position: relative;
             overflow: hidden;
             font-family: monospace;
+            /* ✅ تأثير النقر مدمج هنا */
+            animation: none;
         }
 
         .symbol-btn::before {
@@ -228,6 +308,28 @@
             transform: translateY(-5px) scale(1.08);
             box-shadow: var(--shadow-lg), 0 0 0 1px rgba(96, 165, 250, 0.3);
             color: white;
+        }
+
+        /* ✨ تأثير النقر (Pulse + Glow) */
+        .symbol-btn.pulse {
+            animation: clickPulse 0.7s ease-out;
+        }
+
+        @keyframes clickPulse {
+            0% {
+                transform: scale(1);
+                box-shadow: var(--shadow-md);
+            }
+            25% {
+                transform: scale(1.15) translateY(-3px);
+                box-shadow: 
+                    0 10px 30px rgba(59, 130, 246, 0.5),
+                    0 0 0 10px rgba(59, 130, 246, 0.3);
+            }
+            100% {
+                transform: scale(1) translateY(0);
+                box-shadow: var(--shadow-md);
+            }
         }
 
         .shortcuts-list {
@@ -290,6 +392,12 @@
             align-items: center;
             z-index: 10000;
             backdrop-filter: blur(4px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .overlay.active {
+            opacity: 1;
         }
 
         .popup {
@@ -304,6 +412,12 @@
             box-shadow: var(--shadow-lg);
             position: relative;
             overflow: hidden;
+            transform: translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .overlay.active .popup {
+            transform: translateY(0);
         }
 
         .popup::before {
@@ -366,6 +480,7 @@
             .top-bar { flex-direction: column; align-items: stretch; }
             .home-btn, .lang-buttons { width: 100%; justify-content: center; }
             h1 { font-size: 2rem; }
+            .hint-box { font-size: 1rem; padding: 14px 20px; }
             .section-title { font-size: 1.5rem; }
             .symbol-buttons { grid-template-columns: repeat(5, 1fr); }
             .desc { text-align: center; }
@@ -373,8 +488,10 @@
 
         @media (max-width: 480px) {
             h1 { font-size: 1.8rem; }
+            .hint-box { font-size: 0.95rem; padding: 12px 16px; }
+            .hint-box::before, .hint-box::after { font-size: 1rem; }
             .section-title { font-size: 1.4rem; }
-            .symbol-buttons { grid-template-columns: repeat(4, 1fr); }
+            .symbol-buttons { grid-template-columns: repeat(4, 1fr); font-size: 20px; }
             .popup { padding: 24px 18px; }
             .popup-symbol { font-size: 56px; }
         }
@@ -397,6 +514,11 @@
     </div>
 
     <h1 class="lang-key" data-key="page-title">اختصارات ورموز مهمة في Code::Blocks ولغة C</h1>
+
+    <!-- ✨ ملاحظة تفاعلية جديدة -->
+    <div class="hint-box">
+        <span id="hintText">💡 انقر على أي رمز لعرض شرح مفصّل — يظهر زر "إغلاق" في النافذة المنبثقة</span>
+    </div>
 
     <!-- Symbols -->
     <h2 class="section-title">
@@ -448,12 +570,16 @@
                 ar: "إغلاق",
                 en: "Close",
                 fr: "Fermer"
+            },
+            // ✅ ترجمة الملاحظة الجديدة
+            "hint": {
+                ar: "💡 انقر على أي رمز لعرض شرح مفصّل — يظهر زر \"إغلاق\" في النافذة المنبثقة",
+                en: "💡 Click any symbol to see a detailed explanation — a \"Close\" button appears in the popup",
+                fr: "💡 Cliquez sur un symbole pour une explication détaillée — un bouton \"Fermer\" apparaît"
             }
         };
 
-        // ✅ تم توسيع القائمة بشكل كبير (46 رمزًا منظمًا)
         const symbols = [
-            // أقواس وفواصل
             { char: "{", key: "Shift + [", desc: { ar: "بداية كتلة تعليمات (مثل: دالة أو if).", en: "Start of a code block (e.g., function or if).", fr: "Début d’un bloc (ex: fonction, if)." } },
             { char: "}", key: "Shift + ]", desc: { ar: "نهاية كتلة تعليمات.", en: "End of a code block.", fr: "Fin d’un bloc de code." } },
             { char: "(", key: "Shift + 9", desc: { ar: "فتح قوس (تُستخدم في التوابع والتعبيرات).", en: "Opening parenthesis (functions, expressions).", fr: "Parenthèse ouvrante (fonctions, expressions)." } },
@@ -463,15 +589,11 @@
             { char: ",", key: ",", desc: { ar: "فاصلة — للفصل بين المُعاملات أو العناصر.", en: "Comma — separates arguments or elements.", fr: "Virgule — sépare arguments ou éléments." } },
             { char: ";", key: ";", desc: { ar: "فاصلة منقوطة — نهاية العبارة.", en: "Semicolon — ends a statement.", fr: "Point-virgule — fin d’instruction." } },
             { char: ":", key: "Shift + .", desc: { ar: "نقطتان — في switch، ternary، أو labels.", en: "Colon — in switch, ternary, or labels.", fr: "Deux-points — dans switch, ternaire, labels." } },
-            
-            // منطق ومنطقيات
             { char: "!", key: "Shift + 1", desc: { ar: "NOT منطقي — يعكس القيمة (مثل: !x).", en: "Logical NOT — inverts truth value.", fr: "NON logique — inverse la valeur." } },
             { char: "&", key: "Shift + 7", desc: { ar: "AND منطقي (&&) أو عنوان متغير (&).", en: "Logical AND (&&) or address-of (&).", fr: "ET logique (&&) ou opérateur d’adresse (&)." } },
             { char: "|", key: "Alt Gr + 6", desc: { ar: "OR منطقي (||) أو OR ثنائي (|).", en: "Logical OR (||) or bitwise OR (|).", fr: "OU logique (||) ou OU bit à bit (|)." } },
             { char: "^", key: "Alt Gr + ^", desc: { ar: "XOR ثنائي (Bitwise XOR).", en: "Bitwise XOR operator.", fr: "Opérateur XOR bit à bit." } },
             { char: "~", key: "Alt Gr + 2", desc: { ar: "NOT ثنائي (Bitwise complement).", en: "Bitwise NOT (ones’ complement).", fr: "NON bit à bit (complément à 1)." } },
-            
-            // مقارنة
             { char: "=", key: "=", desc: { ar: "إسناد (Assignment).", en: "Assignment operator.", fr: "Opérateur d’affectation." } },
             { char: "==", key: "Shift + =", desc: { ar: "مساواة (مقارنة).", en: "Equality comparison.", fr: "Égalité (comparaison)." } },
             { char: "!=", key: "Alt Gr + Shift + =", desc: { ar: "عدم المساواة.", en: "Inequality comparison.", fr: "Différence (≠)." } },
@@ -479,8 +601,6 @@
             { char: ">", key: "Shift + .", desc: { ar: "أكبر من.", en: "Greater than.", fr: "Supérieur à." } },
             { char: "<=", key: "Shift + < (Alt Gr + ,)", desc: { ar: "أصغر من أو يساوي.", en: "Less than or equal.", fr: "Inférieur ou égal." } },
             { char: ">=", key: "Shift + > (Alt Gr + .)", desc: { ar: "أكبر من أو يساوي.", en: "Greater than or equal.", fr: "Supérieur ou égal." } },
-            
-            // حساب
             { char: "+", key: "+", desc: { ar: "جمع أو موجب.", en: "Addition or unary plus.", fr: "Addition ou signe plus." } },
             { char: "-", key: "-", desc: { ar: "طرح أو سالب.", en: "Subtraction or unary minus.", fr: "Soustraction ou signe moins." } },
             { char: "*", key: "Shift + 8", desc: { ar: "ضرب أو مؤشر (*ptr).", en: "Multiplication or pointer dereference (*ptr).", fr: "Multiplication ou déréférencement (*ptr)." } },
@@ -488,21 +608,15 @@
             { char: "%", key: "Shift + 5", desc: { ar: "باقي القسمة (Modulo).", en: "Modulo (remainder).", fr: "Modulo (reste)." } },
             { char: "++", key: "+ ثم +", desc: { ar: "زيادة بمقدار 1 (Post/Pre-increment).", en: "Increment by 1 (i++ or ++i).", fr: "Incrémentation (i++ ou ++i)." } },
             { char: "--", key: "- ثم -", desc: { ar: "نقصان بمقدار 1 (Post/Pre-decrement).", en: "Decrement by 1 (i-- or --i).", fr: "Décrémentation (i-- ou --i)." } },
-            
-            // تعيين مدمج
             { char: "+=", key: "+ ثم =", desc: { ar: "جمع ثم إسناد (x += 3 تعني x = x + 3).", en: "Add and assign (x += 3 ≡ x = x + 3).", fr: "Addition + affectation (x += 3)." } },
             { char: "-=", key: "- ثم =", desc: { ar: "طرح ثم إسناد.", en: "Subtract and assign.", fr: "Soustraction + affectation." } },
             { char: "*=", key: "* ثم =", desc: { ar: "ضرب ثم إسناد.", en: "Multiply and assign.", fr: "Multiplication + affectation." } },
             { char: "/=", key: "/ ثم =", desc: { ar: "قسمة ثم إسناد.", en: "Divide and assign.", fr: "Division + affectation." } },
             { char: "%=", key: "% ثم =", desc: { ar: "Modulo ثم إسناد.", en: "Modulo and assign.", fr: "Modulo + affectation." } },
-            
-            // تعليقات ونصوص
             { char: "//", key: "Shift + /", desc: { ar: "تعليق سطر واحد.", en: "Single-line comment.", fr: "Commentaire sur une ligne." } },
             { char: "/* */", key: "/* ... */", desc: { ar: "تعليق متعدد الأسطر.", en: "Multi-line comment.", fr: "Commentaire multi-lignes." } },
             { char: "\"", key: "Shift + 2", desc: { ar: "علامة اقتباس — لتعريف السلاسل النصية.", en: "Double quote — for string literals.", fr: "Guillemets — pour chaînes de caractères." } },
             { char: "'", key: "'", desc: { ar: "علامة اقتباس مفردة — لتعريف الحروف.", en: "Single quote — for character literals.", fr: "Apostrophe — pour caractères ('A')." } },
-            
-            // متنوع
             { char: "\\", key: "Alt Gr + 8", desc: { ar: "شرطة مائلة عكسية — في المسارات أو Escape sequences.", en: "Backslash — in paths or escape sequences (\\n).", fr: "Barre oblique inverse — dans chemins ou \\n." } },
             { char: "#", key: "Alt Gr + 3", desc: { ar: "رمز التوجيه المسبق (مثل: #include).", en: "Preprocessor directive (e.g., #include).", fr: "Directive de préprocesseur (#include)." } },
             { char: "$", key: "Shift + 4", desc: { ar: "نادرًا ما يُستخدم في C (مستخدم في لغات أخرى).", en: "Rarely used in C (e.g., in PHP/Perl).", fr: "Rare en C (utilisé dans d’autres langages)." } },
@@ -535,6 +649,30 @@
 
         let currentLang = "ar";
 
+        // ✅ دالة تفعيل التأثير عند النقر
+        function handleClick(btn, symbol, combo, descObj) {
+            // تفعيل تأثير النقر
+            btn.classList.add('pulse');
+            setTimeout(() => {
+                btn.classList.remove('pulse');
+            }, 700);
+
+            // عرض النافذة
+            document.getElementById("pSymbol").textContent = symbol;
+            document.getElementById("pDesc").textContent = descObj[currentLang];
+            
+            const keyLabel = {
+                ar: "طريقة الكتابة: ",
+                en: "Key combo: ",
+                fr: "Raccourci: "
+            }[currentLang];
+            
+            document.getElementById("pKey").textContent = keyLabel + combo;
+            const overlay = document.getElementById("overlay");
+            overlay.classList.add('active');
+            setTimeout(() => overlay.style.display = "flex", 10);
+        }
+
         function renderSymbols() {
             const container = document.getElementById("symbolGrid");
             container.innerHTML = "";
@@ -542,7 +680,7 @@
                 const btn = document.createElement("button");
                 btn.className = "symbol-btn";
                 btn.textContent = s.char;
-                btn.onclick = () => showInfo(s.char, s.key, s.desc);
+                btn.onclick = () => handleClick(btn, s.char, s.key, s.desc);
                 container.appendChild(btn);
             });
         }
@@ -561,22 +699,12 @@
             });
         }
 
-        function showInfo(symbol, combo, descObj) {
-            document.getElementById("pSymbol").textContent = symbol;
-            document.getElementById("pDesc").textContent = descObj[currentLang];
-            
-            const keyLabel = {
-                ar: "طريقة الكتابة: ",
-                en: "Key combo: ",
-                fr: "Raccourci: "
-            }[currentLang];
-            
-            document.getElementById("pKey").textContent = keyLabel + combo;
-            document.getElementById("overlay").style.display = "flex";
-        }
-
         function closePopup() {
-            document.getElementById("overlay").style.display = "none";
+            const overlay = document.getElementById("overlay");
+            overlay.classList.remove('active');
+            setTimeout(() => {
+                overlay.style.display = "none";
+            }, 300);
         }
 
         function setLang(lang) {
@@ -597,6 +725,9 @@
                     el.textContent = translations[key][lang];
                 }
             });
+
+            // ✅ تحديث ملاحظة الرموز
+            document.getElementById("hintText").textContent = translations["hint"][lang];
 
             // تحديث زر الإغلاق
             document.getElementById("closeBtnText").textContent = translations["close"][lang];
