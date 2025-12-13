@@ -18,6 +18,7 @@
             --primary-light: #00eaff;
             --primary-dark: #0f172a;
             --secondary: #0aff9d;
+            --ai-color: #8b5cf6; /* لون جديد للذكاء الاصطناعي */
             --bg-dark: #0f172a;
             --bg-medium: #1e293b;
             --bg-light: rgba(30, 41, 59, 0.6);
@@ -26,6 +27,7 @@
             --shadow-light: rgba(14, 165, 233, 0.25);
             --shadow-medium: rgba(0, 234, 255, 0.3);
             --shadow-heavy: rgba(0, 234, 255, 0.4);
+            --ai-shadow: rgba(139, 92, 246, 0.3); /* ظل للذكاء الاصطناعي */
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
@@ -66,7 +68,7 @@
             left: 0;
             width: 0;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--primary-light), var(--secondary));
+            background: linear-gradient(90deg, var(--primary), var(--primary-light), var(--secondary), var(--ai-color));
             opacity: 0;
             transition: opacity 0.4s ease;
             z-index: 1000;
@@ -102,9 +104,9 @@
             bottom: -8px;
             right: 50%;
             transform: translateX(50%);
-            width: 100px;
+            width: 120px;
             height: 4px;
-            background: linear-gradient(90deg, transparent, var(--primary-light), transparent);
+            background: linear-gradient(90deg, var(--primary-light), var(--secondary), var(--ai-color));
             border-radius: 2px;
         }
 
@@ -178,11 +180,65 @@
 
         .menu {
             width: 100%;
-            max-width: 680px;
+            max-width: 780px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 22px;
             margin-bottom: 40px;
+        }
+
+        /* خانة الذكاء الاصطناعي المميزة */
+        .item.ai-special {
+            background: rgba(139, 92, 246, 0.15);
+            border: 2px solid var(--ai-color);
+            position: relative;
+            overflow: hidden;
+            grid-column: 1 / -1; /* تأخذ كامل العرض */
+        }
+
+        .item.ai-special::before {
+            background: linear-gradient(to bottom, var(--ai-color), #c4b5fd);
+        }
+
+        .item.ai-special .icon-wrapper {
+            background: rgba(139, 92, 246, 0.25);
+        }
+
+        .item.ai-special i {
+            color: #a78bfa;
+        }
+
+        .item.ai-special:hover {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(196, 181, 253, 0.8), rgba(167, 139, 250, 0.6));
+            box-shadow: 0 15px 35px var(--ai-shadow);
+            border-color: transparent;
+        }
+
+        .item.ai-special .ai-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--ai-color);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 8px rgba(139, 92, 246, 0);
+            }
         }
 
         .item {
@@ -345,6 +401,11 @@
             animation-delay: 1s;
         }
 
+        .item.ai-special {
+            animation-delay: 0.1s;
+            animation-duration: 5s;
+        }
+
         footer {
             margin-top: 40px;
             text-align: center;
@@ -372,6 +433,11 @@
             left: 20px;
         }
 
+        html[dir="ltr"] .item.ai-special .ai-badge {
+            left: auto;
+            right: 10px;
+        }
+
         /* تحسين للهواتف */
         @media (max-width: 768px) {
             h1 {
@@ -382,6 +448,11 @@
             .menu {
                 grid-template-columns: 1fr;
                 gap: 18px;
+                max-width: 100%;
+            }
+
+            .item.ai-special {
+                grid-column: auto;
             }
 
             .item {
@@ -459,6 +530,10 @@
             outline: 3px solid var(--secondary);
             outline-offset: 3px;
         }
+
+        .item.ai-special:focus-visible {
+            outline-color: var(--ai-color);
+        }
     </style>
 </head>
 <body>
@@ -490,6 +565,21 @@
 </div>
 
 <div class="menu">
+    <!-- خانة الذكاء الاصطناعي المميزة -->
+    <a class="item ai-special" href="nn.html" data-key="ai">
+        <div class="ai-badge">
+            <i class="fas fa-star"></i>
+            <span data-lang-key="ai_badge">جديد</span>
+        </div>
+        <div class="icon-wrapper">
+            <i class="fa-solid fa-robot"></i>
+        </div>
+        <div class="item-content">
+            <span data-lang-key="ai">مساعد الذكاء الاصطناعي</span>
+            <div class="item-desc" data-lang-key="ai_desc">تصحيح وتحليل أكواد C تلقائياً</div>
+        </div>
+    </a>
+
     <a class="item" href="home.html" data-key="codes">
         <div class="icon-wrapper">
             <i class="fa-solid fa-code"></i>
@@ -571,6 +661,21 @@ const translations = {
         en: "Comprehensive portal for C developers - Start your coding journey",
         fr: "Portail complet pour développeurs C - Commencez votre parcours de codage"
     },
+    ai: {
+        ar: "مساعد الذكاء الاصطناعي",
+        en: "AI Assistant",
+        fr: "Assistant IA"
+    },
+    ai_desc: {
+        ar: "تصحيح وتحليل أكواد C تلقائياً",
+        en: "Automatically correct and analyze C codes",
+        fr: "Corriger et analyser automatiquement les codes C"
+    },
+    ai_badge: {
+        ar: "جديد",
+        en: "NEW",
+        fr: "NOUVEAU"
+    },
     codes: {
         ar: "أكواد C",
         en: "C Codes",
@@ -644,15 +749,15 @@ let currentLang = "ar";
 function initParticles() {
     particlesJS("particles-js", {
         particles: {
-            number: { value: 50, density: { enable: true, value_area: 800 } },
-            color: { value: "#0ea5e9" },
+            number: { value: 60, density: { enable: true, value_area: 800 } },
+            color: { value: ["#0ea5e9", "#8b5cf6", "#00eaff"] }, // ألوان متعددة تشمل لون الذكاء الاصطناعي
             shape: { type: "circle" },
             opacity: { value: 0.3, random: true },
             size: { value: 3, random: true },
             line_linked: {
                 enable: true,
                 distance: 150,
-                color: "#00eaff",
+                color: "#a78bfa", // لون أرجواني فاتح
                 opacity: 0.2,
                 width: 1
             },
@@ -687,6 +792,11 @@ function createRipple(event) {
     circle.style.left = `${event.clientX - button.getBoundingClientRect().left - radius}px`;
     circle.style.top = `${event.clientY - button.getBoundingClientRect().top - radius}px`;
     circle.classList.add("ripple");
+
+    // تغيير لون الـ ripple حسب نوع العنصر
+    if (button.classList.contains('ai-special')) {
+        circle.style.background = 'rgba(139, 92, 246, 0.6)';
+    }
 
     button.appendChild(circle);
 
@@ -735,6 +845,26 @@ function setLang(lang) {
     localStorage.setItem('preferredLang', lang);
 }
 
+// نقل إلى صفحة الذكاء الاصطناعي مع تأثير
+function goToAI() {
+    const aiItem = document.querySelector('.item.ai-special');
+    
+    // تأثير خاص للعنصر
+    aiItem.style.transform = 'scale(0.95)';
+    aiItem.style.boxShadow = '0 0 30px var(--ai-shadow)';
+    
+    // تغيير مؤشر الفأرة
+    document.body.style.cursor = 'wait';
+    
+    // تأثيرات صوتية محاكاة
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    
+    setTimeout(() => {
+        // الانتقال إلى الصفحة
+        window.location.href = "nn.html";
+    }, 500);
+}
+
 // تهيئة الصفحة
 document.addEventListener("DOMContentLoaded", () => {
     // تهيئة الجسيمات
@@ -742,16 +872,107 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // تحميل اللغة المحفوظة
     const savedLang = localStorage.getItem('preferredLang') || 'ar';
-    setLang(savedLang);
+    
+    // تعيين اللغة دون حاجة لـ event
+    const langButtons = document.querySelectorAll('.lang-buttons button');
+    langButtons.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.querySelector('span').textContent === 
+            (savedLang === 'ar' ? 'العربية' : 
+             savedLang === 'en' ? 'English' : 'Français')) {
+            btn.classList.add('active');
+        }
+    });
+    
+    currentLang = savedLang;
+    const dir = savedLang === "ar" ? "rtl" : "ltr";
+    document.documentElement.setAttribute("dir", dir);
+    document.documentElement.setAttribute("lang", savedLang);
+    
+    // تحديث النصوص
+    document.querySelectorAll("[data-lang-key]").forEach(el => {
+        const key = el.getAttribute("data-lang-key");
+        if (translations[key] && translations[key][savedLang] !== undefined) {
+            el.textContent = translations[key][savedLang];
+        }
+    });
     
     // إضافة تأثير النقر للأزرار
     document.querySelectorAll('.lang-buttons button, .item').forEach(btn => {
         btn.addEventListener('click', createRipple);
     });
     
+    // إضافة تأثير خاص لزر الذكاء الاصطناعي
+    const aiItem = document.querySelector('.item.ai-special');
+    if (aiItem) {
+        aiItem.addEventListener('click', function(e) {
+            // منع التنقل الفوري لإظهار التأثير
+            e.preventDefault();
+            
+            // تأثيرات بصرية
+            this.style.transform = 'translateY(-8px) scale(1.02)';
+            this.style.boxShadow = '0 20px 40px var(--ai-shadow)';
+            
+            // تغيير مؤشر الفأرة
+            document.body.style.cursor = 'wait';
+            
+            // تنبيه تحفيزي
+            const messages = {
+                ar: ["⚡ جاري تحميل المساعد الذكي...", "🧠 الذكاء الاصطناعي جاهز لمساعدتك!", "🚀 رحلة تصحيح الكود تبدأ الآن!"],
+                en: ["⚡ Loading smart assistant...", "🧠 AI is ready to help you!", "🚀 Code correction journey starts now!"],
+                fr: ["⚡ Chargement de l'assistant intelligent...", "🧠 L'IA est prête à vous aider!", "🚀 Le voyage de correction de code commence maintenant!"]
+            };
+            
+            const randomMessage = messages[currentLang][Math.floor(Math.random() * messages[currentLang].length)];
+            
+            // إضافة رسالة مؤقتة
+            const tempMsg = document.createElement('div');
+            tempMsg.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(139, 92, 246, 0.9);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 15px;
+                font-weight: bold;
+                z-index: 9999;
+                animation: fadeInOut 1.5s ease;
+                backdrop-filter: blur(10px);
+                border: 2px solid white;
+            `;
+            
+            // تعريف animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeInOut {
+                    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                    20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                    80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            tempMsg.textContent = randomMessage;
+            document.body.appendChild(tempMsg);
+            
+            // الانتقال بعد التأثير
+            setTimeout(() => {
+                window.location.href = "nn.html";
+            }, 1500);
+        });
+    }
+    
     // تحديث مؤشر التمرير
     window.addEventListener('scroll', updateScrollIndicator);
     updateScrollIndicator(); // تهيئة أولية
+    
+    // تأثيرات إضافية عند تحميل الصفحة
+    setTimeout(() => {
+        document.querySelector('.item.ai-special')?.classList.add('loaded');
+    }, 100);
 });
 </script>
 

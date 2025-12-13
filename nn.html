@@ -1,0 +1,3159 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>مساعد الذكاء الاصطناعي المتقدم لتصحيح أكواد C</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            --info-color: #3b82f6;
+            --dark-color: #1f2937;
+            --light-color: #f9fafb;
+            --gray-color: #6b7280;
+            --transition: all 0.3s ease;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius: 12px;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-copy: linear-gradient(135deg, #4ade80 0%, #22d3ee 100%);
+            --home-color: #8b5cf6; /* لون جديد لزر HOME */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Cairo', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: var(--light-color);
+            min-height: 100vh;
+            padding: 15px;
+            transition: var(--transition);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* ========== تحسينات الهواتف المتقدمة ========== */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px 8px;
+            }
+            
+            .container {
+                padding: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 8px 5px;
+            }
+        }
+
+        /* ========== الهيدر المحسن مع زر HOME ========== */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: var(--radius);
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                padding: 15px 12px;
+                margin-bottom: 15px;
+                border-radius: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 12px 10px;
+                border-radius: 8px;
+            }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                min-width: auto;
+                justify-content: center;
+                width: 100%;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                gap: 8px;
+            }
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.5));
+            animation: pulse 2s infinite;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .logo-icon {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-icon {
+                font-size: 1.8rem;
+            }
+        }
+
+        .logo-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        @media (max-width: 768px) {
+            .logo-text {
+                text-align: center;
+            }
+        }
+
+        .logo-text h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #60a5fa, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+            line-height: 1.3;
+            word-break: break-word;
+        }
+
+        @media (max-width: 1024px) {
+            .logo-text h1 {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo-text h1 {
+                font-size: 1.5rem;
+                margin-bottom: 4px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text h1 {
+                font-size: 1.3rem;
+                line-height: 1.2;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .logo-text h1 {
+                font-size: 1.2rem;
+            }
+        }
+
+        .logo-text p {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .logo-text p {
+                font-size: 0.8rem;
+                line-height: 1.3;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text p {
+                font-size: 0.75rem;
+            }
+        }
+
+        /* ========== زر HOME الجديد ========== */
+        .home-btn {
+            background: var(--home-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            margin-left: 15px;
+        }
+
+        .home-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .home-btn:hover::before {
+            left: 100%;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+            background: #7c3aed;
+        }
+
+        @media (max-width: 768px) {
+            .home-btn {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+                margin-left: 0;
+                margin-top: 10px;
+                order: 3;
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .home-btn {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+                gap: 6px;
+            }
+            
+            .home-btn span {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .home-btn span {
+                font-size: 0.7rem;
+            }
+            
+            .home-btn i {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* ========== محسّن لمبدّل اللغة ========== */
+        .language-switcher {
+            display: flex;
+            gap: 6px;
+            background: rgba(15, 23, 42, 0.7);
+            padding: 8px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            flex-wrap: wrap;
+            justify-content: center;
+            min-width: 200px;
+        }
+
+        @media (max-width: 768px) {
+            .language-switcher {
+                width: 100%;
+                justify-content: center;
+                padding: 6px;
+                border-radius: 8px;
+                min-width: auto;
+                margin-top: 10px;
+                order: 2;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .language-switcher {
+                padding: 5px;
+                gap: 4px;
+            }
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 2px solid transparent;
+            color: #cbd5e1;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            flex: 1;
+            min-width: 70px;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lang-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .lang-btn:hover::before {
+            left: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .lang-btn {
+                min-width: 65px;
+                padding: 8px 10px;
+                font-size: 0.82rem;
+                border-radius: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .lang-btn {
+                min-width: 60px;
+                padding: 7px 8px;
+                font-size: 0.8rem;
+                gap: 4px;
+            }
+            
+            .lang-btn span {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .lang-btn {
+                min-width: 55px;
+                padding: 6px;
+            }
+            
+            .lang-btn span {
+                display: none;
+            }
+            
+            .lang-btn i {
+                margin: 0;
+                font-size: 0.9rem;
+            }
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .lang-btn.active {
+            background: var(--gradient-primary);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+            font-weight: 700;
+        }
+
+        .lang-btn.active::before {
+            display: none;
+        }
+
+        .lang-btn i {
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 480px) {
+            .lang-btn i {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* ========== بقية الأنماط بدون تغيير ========== */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 1200px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                gap: 15px;
+            }
+        }
+
+        .panel {
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            animation: fadeIn 0.5s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .panel {
+                padding: 16px;
+                border-radius: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .panel {
+                padding: 14px;
+                border-radius: 8px;
+            }
+        }
+
+        .panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .panel:hover {
+                transform: translateY(-3px);
+            }
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .panel-header {
+                margin-bottom: 15px;
+                padding-bottom: 10px;
+                gap: 10px;
+            }
+        }
+
+        .panel-header i {
+            font-size: 1.6rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 480px) {
+            .panel-header i {
+                font-size: 1.4rem;
+            }
+        }
+
+        .panel-header h2 {
+            font-size: 1.4rem;
+            color: #f1f5f9;
+            font-weight: 700;
+            line-height: 1.3;
+            word-break: break-word;
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            .panel-header h2 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .panel-header h2 {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* زر نسخ الكود المصحح */
+        .copy-btn-container {
+            flex-shrink: 0;
+        }
+
+        .copy-btn {
+            background: var(--gradient-copy);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 6px rgba(74, 222, 128, 0.2);
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(74, 222, 128, 0.3);
+        }
+
+        .copy-btn.copied {
+            background: var(--gradient-success);
+            animation: bounce 0.5s;
+        }
+
+        @media (max-width: 768px) {
+            .copy-btn {
+                padding: 7px 12px;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .copy-btn {
+                padding: 6px 10px;
+                font-size: 0.8rem;
+                gap: 4px;
+            }
+            
+            .copy-btn span {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .copy-btn span {
+                display: none;
+            }
+            
+            .copy-btn i {
+                margin: 0;
+            }
+        }
+
+        /* منطقة إدخال الكود */
+        .code-container {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .code-input {
+            width: 100%;
+            min-height: 350px;
+            padding: 20px 20px 20px 40px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            font-family: 'Cascadia Code', 'Courier New', monospace;
+            font-size: 14px;
+            resize: vertical;
+            transition: var(--transition);
+            background-color: rgba(15, 23, 42, 0.7);
+            color: #e2e8f0;
+            line-height: 1.6;
+            tab-size: 4;
+            -webkit-appearance: none;
+            -webkit-touch-callout: default;
+        }
+
+        @media (max-width: 768px) {
+            .code-input {
+                min-height: 280px;
+                padding: 16px 16px 16px 35px;
+                font-size: 13px;
+                line-height: 1.5;
+                border-radius: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .code-input {
+                min-height: 220px;
+                padding: 14px 14px 14px 32px;
+                font-size: 12px;
+                line-height: 1.4;
+                border-radius: 6px;
+            }
+        }
+
+        .code-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+
+        .line-numbers {
+            position: absolute;
+            left: 8px;
+            top: 20px;
+            font-family: 'Cascadia Code', 'Courier New', monospace;
+            font-size: 14px;
+            color: #64748b;
+            user-select: none;
+            text-align: right;
+            padding-right: 10px;
+            line-height: 1.6;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .line-numbers {
+                font-size: 13px;
+                left: 6px;
+                top: 16px;
+                line-height: 1.5;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .line-numbers {
+                font-size: 12px;
+                left: 5px;
+                top: 14px;
+                line-height: 1.4;
+            }
+        }
+
+        [dir="rtl"] .line-numbers {
+            left: auto;
+            right: 8px;
+            text-align: left;
+            padding-right: 0;
+            padding-left: 10px;
+        }
+
+        /* مجموعة الأزرار المحسنة */
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .button-group {
+                gap: 10px;
+                margin-top: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .button-group {
+                gap: 8px;
+                margin-top: 10px;
+            }
+        }
+
+        .btn {
+            padding: 14px 20px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.4);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        .btn:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+
+        @media (max-width: 1024px) {
+            .btn {
+                min-width: 120px;
+                padding: 12px 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .btn {
+                min-width: 100px;
+                padding: 12px 10px;
+                font-size: 0.9rem;
+                border-radius: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .btn {
+                min-width: 0;
+                flex-basis: calc(50% - 4px);
+                padding: 11px 8px;
+                font-size: 0.85rem;
+                gap: 6px;
+                border-radius: 6px;
+            }
+            
+            .button-group .btn:nth-child(3) {
+                flex-basis: 100%;
+                margin-top: 8px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .btn {
+                flex-basis: 100%;
+                margin-bottom: 5px;
+            }
+            
+            .button-group .btn:nth-child(3) {
+                margin-top: 0;
+            }
+            
+            .btn span {
+                font-size: 0.8rem;
+            }
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #e2e8f0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .btn-tertiary {
+            background: var(--gradient-success);
+            color: white;
+        }
+
+        .btn-tertiary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        /* زر نسخ */
+        .btn-copy {
+            background: var(--gradient-copy);
+            color: white;
+        }
+
+        .btn-copy:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(74, 222, 128, 0.4);
+        }
+
+        /* شريط الإحصائيات */
+        .stats-bar {
+            display: flex;
+            gap: 15px;
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 10px;
+            padding: 12px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        @media (max-width: 768px) {
+            .stats-bar {
+                gap: 12px;
+                padding: 10px;
+                border-radius: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-bar {
+                gap: 8px;
+                padding: 8px;
+            }
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            min-width: 120px;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .stat-item {
+                min-width: 110px;
+                gap: 6px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stat-item {
+                min-width: 48%;
+                margin-bottom: 5px;
+                gap: 5px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .stat-item {
+                min-width: 100%;
+                justify-content: flex-start;
+                margin-bottom: 8px;
+            }
+        }
+
+        .stat-icon {
+            font-size: 1.3rem;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .stat-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stat-icon {
+                width: 30px;
+                height: 30px;
+                font-size: 1.1rem;
+            }
+        }
+
+        .stat-text h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        @media (max-width: 768px) {
+            .stat-text h3 {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stat-text h3 {
+                font-size: 1.3rem;
+            }
+        }
+
+        .stat-text p {
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+        @media (max-width: 480px) {
+            .stat-text p {
+                font-size: 0.75rem;
+            }
+        }
+
+        /* منطقة الأخطاء */
+        .errors-container {
+            max-height: 500px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .errors-container {
+                max-height: 400px;
+                margin-bottom: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .errors-container {
+                max-height: 350px;
+            }
+        }
+
+        .error-item {
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            border-left: 5px solid var(--error-color);
+            background: rgba(239, 68, 68, 0.1);
+            animation: slideIn 0.3s ease;
+            transition: var(--transition);
+        }
+
+        @media (max-width: 768px) {
+            .error-item {
+                padding: 12px;
+                margin-bottom: 10px;
+                border-radius: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .error-item {
+                padding: 10px;
+                margin-bottom: 8px;
+                border-radius: 6px;
+                border-left-width: 4px;
+            }
+        }
+
+        .error-item:hover {
+            transform: translateX(5px);
+            background: rgba(239, 68, 68, 0.15);
+        }
+
+        @media (max-width: 768px) {
+            .error-item:hover {
+                transform: translateX(3px);
+            }
+        }
+
+        .error-item.warning {
+            border-left-color: var(--warning-color);
+            background: rgba(245, 158, 11, 0.1);
+        }
+
+        .error-item.warning:hover {
+            background: rgba(245, 158, 11, 0.15);
+        }
+
+        .error-item.info {
+            border-left-color: var(--info-color);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .error-item.info:hover {
+            background: rgba(59, 130, 246, 0.15);
+        }
+
+        .error-item.success {
+            border-left-color: var(--success-color);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .error-item.success:hover {
+            background: rgba(16, 185, 129, 0.15);
+        }
+
+        .error-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .error-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .error-title i {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 480px) {
+            .error-title i {
+                font-size: 1.1rem;
+            }
+        }
+
+        .error-item .error-title i {
+            color: var(--error-color);
+        }
+
+        .error-item.warning .error-title i {
+            color: var(--warning-color);
+        }
+
+        .error-item.info .error-title i {
+            color: var(--info-color);
+        }
+
+        .error-item.success .error-title i {
+            color: var(--success-color);
+        }
+
+        .error-title strong {
+            font-size: 1rem;
+            word-break: break-word;
+        }
+
+        @media (max-width: 768px) {
+            .error-title strong {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .error-title strong {
+                font-size: 0.9rem;
+            }
+        }
+
+        .error-line {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 480px) {
+            .error-line {
+                font-size: 0.8rem;
+                padding: 3px 8px;
+            }
+        }
+
+        .error-body {
+            margin-bottom: 12px;
+            line-height: 1.5;
+            color: #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .error-body {
+                font-size: 0.9rem;
+                line-height: 1.4;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .error-body {
+                font-size: 0.85rem;
+            }
+        }
+
+        .error-fix {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            margin-top: 8px;
+        }
+
+        @media (max-width: 480px) {
+            .error-fix {
+                padding: 10px;
+                border-radius: 6px;
+            }
+        }
+
+        .error-fix pre {
+            font-family: 'Cascadia Code', 'Courier New', monospace;
+            font-size: 13px;
+            color: #7dd3fc;
+            white-space: pre-wrap;
+            margin: 0;
+            overflow-x: auto;
+        }
+
+        @media (max-width: 768px) {
+            .error-fix pre {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .error-fix pre {
+                font-size: 11px;
+            }
+        }
+
+        /* اقتراحات الذكاء الاصطناعي */
+        .ai-suggestions {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .ai-suggestions {
+                padding: 12px;
+                margin-top: 15px;
+                border-radius: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ai-suggestions {
+                padding: 10px;
+                border-radius: 6px;
+            }
+        }
+
+        .ai-suggestions h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            color: #f1f5f9;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .ai-suggestions h3 {
+                font-size: 1.1rem;
+                gap: 8px;
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ai-suggestions h3 {
+                font-size: 1rem;
+                gap: 6px;
+            }
+        }
+
+        .ai-suggestions h3 i {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            flex-shrink: 0;
+        }
+
+        .suggestion-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 480px) {
+            .suggestion-item {
+                gap: 10px;
+                margin-bottom: 10px;
+                padding-bottom: 10px;
+            }
+        }
+
+        .suggestion-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .suggestion-icon {
+            font-size: 1.1rem;
+            color: #60a5fa;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 480px) {
+            .suggestion-icon {
+                font-size: 1rem;
+                margin-top: 2px;
+            }
+        }
+
+        .suggestion-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .suggestion-content h4 {
+            color: #cbd5e1;
+            margin-bottom: 5px;
+            font-size: 1rem;
+            word-break: break-word;
+        }
+
+        @media (max-width: 768px) {
+            .suggestion-content h4 {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .suggestion-content h4 {
+                font-size: 0.9rem;
+                margin-bottom: 4px;
+            }
+        }
+
+        .suggestion-content p {
+            color: #94a3b8;
+            line-height: 1.5;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .suggestion-content p {
+                font-size: 0.85rem;
+                line-height: 1.4;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .suggestion-content p {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* مؤشر التحميل */
+        .loading {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            flex-direction: column;
+            gap: 15px;
+            text-align: center;
+        }
+
+        .loading.active {
+            display: flex;
+        }
+
+        @media (max-width: 768px) {
+            .loading {
+                padding: 25px;
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .loading {
+                padding: 20px;
+                gap: 10px;
+            }
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @media (max-width: 768px) {
+            .spinner {
+                width: 45px;
+                height: 45px;
+                border-width: 3.5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .spinner {
+                width: 40px;
+                height: 40px;
+                border-width: 3px;
+            }
+        }
+
+        .loading-text {
+            color: #cbd5e1;
+            font-size: 1rem;
+            text-align: center;
+            line-height: 1.4;
+            max-width: 300px;
+        }
+
+        @media (max-width: 768px) {
+            .loading-text {
+                font-size: 0.95rem;
+                max-width: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .loading-text {
+                font-size: 0.9rem;
+                max-width: 200px;
+            }
+        }
+
+        .progress-bar {
+            width: 180px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .progress-bar {
+                width: 160px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .progress-bar {
+                width: 140px;
+                height: 4px;
+            }
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            width: 0%;
+            animation: progress 2s ease-in-out infinite;
+        }
+
+        /* الفوتر */
+        footer {
+            text-align: center;
+            color: #94a3b8;
+            padding: 20px;
+            margin-top: 30px;
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: var(--radius);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            footer {
+                padding: 15px;
+                margin-top: 20px;
+                font-size: 0.85rem;
+                border-radius: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            footer {
+                padding: 12px;
+                border-radius: 8px;
+                font-size: 0.8rem;
+            }
+        }
+
+        footer p {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 480px) {
+            footer p {
+                margin-bottom: 6px;
+                line-height: 1.4;
+            }
+        }
+
+        .ai-model {
+            display: inline-block;
+            background: var(--gradient-primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            margin: 0 4px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .ai-model {
+                padding: 4px 10px;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ai-model {
+                display: block;
+                margin: 8px auto;
+                width: fit-content;
+                padding: 3px 8px;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* الأمثلة */
+        .code-example {
+            background: rgba(15, 23, 42, 0.9);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .code-example {
+                padding: 12px;
+                border-radius: 8px;
+                margin-top: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .code-example {
+                padding: 10px;
+                border-radius: 6px;
+                margin-top: 10px;
+            }
+        }
+
+        .code-example-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .code-example-header h3 {
+            font-size: 1.1rem;
+            color: #f1f5f9;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        @media (max-width: 768px) {
+            .code-example-header h3 {
+                font-size: 1rem;
+                min-width: 150px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .code-example-header h3 {
+                font-size: 0.95rem;
+                min-width: auto;
+            }
+        }
+
+        .example-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: #cbd5e1;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+            user-select: none;
+        }
+
+        @media (max-width: 768px) {
+            .example-btn {
+                padding: 7px 10px;
+                font-size: 0.82rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .example-btn {
+                padding: 6px 8px;
+                font-size: 0.8rem;
+                gap: 4px;
+                border-radius: 5px;
+            }
+            
+            .example-btn span {
+                font-size: 0.75rem;
+            }
+        }
+
+        .example-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        #examplesList {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 10px;
+        }
+
+        @media (max-width: 768px) {
+            #examplesList {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+        }
+
+        .example-item {
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            user-select: none;
+        }
+
+        @media (max-width: 768px) {
+            .example-item {
+                padding: 9px;
+                border-radius: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .example-item {
+                padding: 8px;
+                border-radius: 4px;
+            }
+        }
+
+        .example-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .example-item > div {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media (max-width: 480px) {
+            .example-item > div {
+                gap: 6px;
+            }
+        }
+
+        .example-item strong {
+            color: #e2e8f0;
+            font-size: 0.9rem;
+            word-break: break-word;
+        }
+
+        @media (max-width: 768px) {
+            .example-item strong {
+                font-size: 0.85rem;
+            }
+        }
+
+        .example-item div div {
+            color: #94a3b8;
+            font-size: 0.8rem;
+            margin-top: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .example-item div div {
+                font-size: 0.75rem;
+            }
+        }
+
+        #noErrorsMessage {
+            text-align: center;
+            padding: 30px;
+        }
+
+        @media (max-width: 768px) {
+            #noErrorsMessage {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #noErrorsMessage {
+                padding: 20px;
+            }
+        }
+
+        #noErrorsMessage i {
+            font-size: 3rem;
+            color: #10b981;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            #noErrorsMessage i {
+                font-size: 2.5rem;
+                margin-bottom: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #noErrorsMessage i {
+                font-size: 2.2rem;
+                margin-bottom: 10px;
+            }
+        }
+
+        #noErrorsMessage h3 {
+            color: #10b981;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        @media (max-width: 768px) {
+            #noErrorsMessage h3 {
+                font-size: 1.2rem;
+                margin-bottom: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #noErrorsMessage h3 {
+                font-size: 1.1rem;
+            }
+        }
+
+        #noErrorsMessage p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            #noErrorsMessage p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* الإشعارات */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--gradient-success);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            animation: slideDown 0.3s ease;
+            transform: translateY(-100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .notification i {
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .notification {
+                top: 15px;
+                right: 15px;
+                left: 15px;
+                padding: 12px 15px;
+                border-radius: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .notification {
+                top: 10px;
+                right: 10px;
+                left: 10px;
+                padding: 10px 12px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* الأنيميشن */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes progress {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes highlight {
+            0% { background-color: rgba(251, 191, 36, 0.3); }
+            100% { background-color: transparent; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(40, 40);
+                opacity: 0;
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* تأثيرات إضافية */
+        .highlighted {
+            animation: highlight 2s ease;
+        }
+
+        /* تحسينات للعربية */
+        [dir="rtl"] .code-input, 
+        [dir="rtl"] .error-fix pre,
+        [dir="rtl"] .code-example pre {
+            text-align: left;
+            direction: ltr;
+        }
+
+        /* تخصيص شريط التمرير */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        @media (max-width: 768px) {
+            ::-webkit-scrollbar {
+                width: 6px;
+                height: 6px;
+            }
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-primary);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+
+        /* تحسينات للوضع الأفقي على الهواتف */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .code-input {
+                min-height: 200px;
+            }
+            
+            .errors-container {
+                max-height: 200px;
+            }
+            
+            .panel {
+                padding: 10px;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.2rem;
+            }
+            
+            .logo-text p {
+                display: none;
+            }
+        }
+
+        /* منع تكبير النص على iOS مع السماح بالتكبير عند الضرورة */
+        @media (max-width: 768px) {
+            input, textarea {
+                font-size: 16px !important;
+            }
+        }
+
+        /* تحسينات للظهور على الشاشات الصغيرة جداً */
+        @media (max-width: 320px) {
+            .lang-btn {
+                min-width: 50px;
+                padding: 5px;
+            }
+            
+            .btn {
+                padding: 10px 5px;
+            }
+            
+            .btn span {
+                font-size: 0.75rem;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* تحسينات للأجهزة التي تعمل باللمس */
+        @media (hover: none) and (pointer: coarse) {
+            .btn:hover, 
+            .lang-btn:hover,
+            .example-btn:hover,
+            .error-item:hover,
+            .home-btn:hover {
+                transform: none;
+            }
+            
+            .btn:active,
+            .lang-btn:active,
+            .example-btn:active,
+            .home-btn:active {
+                transform: scale(0.98);
+            }
+        }
+
+        /* تحسين إمكانية الوصول */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* تأثير اللمس للأزرار */
+        .touch-feedback {
+            animation: touchFeedback 0.3s ease;
+        }
+
+        @keyframes touchFeedback {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.95); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- إشعار نسخ الكود -->
+    <div id="copyNotification" class="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notification-text">تم نسخ الكود بنجاح!</span>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-robot logo-icon"></i>
+                <div class="logo-text">
+                    <h1 id="header-title">مساعد الذكاء الاصطناعي المتقدم لتصحيح أكواد C</h1>
+                    <p id="header-subtitle">مدعوم بذكاء اصطناعي قادر على اكتشاف وتصحيح عشرات الأخطاء البرمجية</p>
+                </div>
+            </div>
+            
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="ar">
+                    <i class="fas fa-language"></i>
+                    <span>العربية</span>
+                </button>
+                <button class="lang-btn" data-lang="en">
+                    <i class="fas fa-language"></i>
+                    <span>English</span>
+                </button>
+                <button class="lang-btn" data-lang="fr">
+                    <i class="fas fa-language"></i>
+                    <span>Français</span>
+                </button>
+            </div>
+            
+            <!-- زر HOME الجديد -->
+            <a href="asasi.html" class="home-btn">
+                <i class="fas fa-home"></i>
+                <span>HOME</span>
+            </a>
+        </header>
+
+        <div class="main-content">
+            <div class="panel">
+                <div class="panel-header">
+                    <i class="fas fa-code"></i>
+                    <h2 id="input-title">أدخل كود C الخاص بك هنا</h2>
+                </div>
+                
+                <div class="code-container">
+                    <div class="line-numbers" id="lineNumbers">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15</div>
+                    <textarea class="code-input" id="codeInput" placeholder="#include <stdio.h>" spellcheck="false">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+    int x = 5
+    float y = 3.14;
+    char name[20] = "برمجة";
+    
+    printf("قيمة x هي: %d\n", x);
+    printf("قيمة y هي: %f\n, y);
+    
+    if (x = 5) {
+        printf("x يساوي 5\n");
+    }
+    
+    for(int i = 0; i < 10; i++) {
+        printf("الرقم: %d\n, i);
+    }
+    
+    int arr[5] = {1, 2, 3, 4, 5};
+    printf("العنصر السادس: %d\n", arr[5]);
+    
+    return 0;
+}</textarea>
+                </div>
+                
+                <div class="code-example">
+                    <div class="code-example-header">
+                        <h3 id="example-title">أمثلة أكواد تحتوي على أخطاء شائعة</h3>
+                        <button class="example-btn" id="loadExampleBtn">
+                            <i class="fas fa-code"></i>
+                            <span id="load-example-text">تحميل مثال</span>
+                        </button>
+                    </div>
+                    <div id="examplesList">
+                        <!-- سيتم تعبئتها ديناميكياً -->
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn btn-primary" id="analyzeBtn">
+                        <i class="fas fa-brain"></i>
+                        <span id="analyze-text">تحليل ذكي للكود</span>
+                    </button>
+                    <button class="btn btn-secondary" id="clearBtn">
+                        <i class="fas fa-broom"></i>
+                        <span id="clear-text">مسح الكل</span>
+                    </button>
+                    <button class="btn btn-tertiary" id="optimizeBtn">
+                        <i class="fas fa-rocket"></i>
+                        <span id="optimize-text">تحسين الكود</span>
+                    </button>
+                    <button class="btn btn-copy" id="copyCodeBtn">
+                        <i class="fas fa-copy"></i>
+                        <span id="copy-text">نسخ الكود المصحح</span>
+                    </button>
+                </div>
+                
+                <div class="stats-bar" id="statsBar" style="display: none;">
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-bug" style="color: #ef4444;"></i>
+                        </div>
+                        <div class="stat-text">
+                            <h3 id="errorsCount">0</h3>
+                            <p id="errors-text">أخطاء</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-exclamation-triangle" style="color: #f59e0b;"></i>
+                        </div>
+                        <div class="stat-text">
+                            <h3 id="warningsCount">0</h3>
+                            <p id="warnings-text">تحذيرات</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-lightbulb" style="color: #3b82f6;"></i>
+                        </div>
+                        <div class="stat-text">
+                            <h3 id="suggestionsCount">0</h3>
+                            <p id="suggestions-text">اقتراحات</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-star" style="color: #10b981;"></i>
+                        </div>
+                        <div class="stat-text">
+                            <h3 id="scoreValue">0</h3>
+                            <p id="score-text">نقاط الجودة</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="loading" id="loadingIndicator">
+                    <div class="spinner"></div>
+                    <div class="loading-text" id="loading-text">جارٍ تحليل الكود باستخدام الذكاء الاصطناعي المتقدم...</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <i class="fas fa-search"></i>
+                    <h2 id="results-title">نتائج التحليل الذكي</h2>
+                    <div class="copy-btn-container">
+                        <button class="copy-btn" id="copyCorrectedCodeBtn">
+                            <i class="fas fa-copy"></i>
+                            <span id="copy-corrected-text">نسخ الكود</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="errors-container" id="errorsContainer">
+                    <!-- سيتم إضافة الأخطاء هنا ديناميكياً -->
+                </div>
+                
+                <div id="noErrorsMessage" style="display: none; text-align: center; padding: 40px;">
+                    <i class="fas fa-check-circle" style="font-size: 4rem; color: #10b981; margin-bottom: 20px;"></i>
+                    <h3 id="no-errors-title" style="color: #10b981; margin-bottom: 15px;">لا توجد أخطاء!</h3>
+                    <p id="no-errors-text" style="color: #94a3b8;">الكود الخاص بك خالٍ من الأخطاء. عمل رائع!</p>
+                </div>
+                
+                <div class="ai-suggestions" id="aiSuggestions">
+                    <h3>
+                        <i class="fas fa-robot"></i>
+                        <span id="suggestions-title">اقتراحات الذكاء الاصطناعي</span>
+                    </h3>
+                    <div id="suggestionsList">
+                        <!-- سيتم تعبئتها ديناميكياً -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+    </div>
+
+    <script>
+        // بيانات الترجمة للغات المختلفة
+        const translations = {
+            ar: {
+                title: "مساعد الذكاء الاصطناعي المتقدم لتصحيح أكواد C",
+                subtitle: "مدعوم بذكاء اصطناعي قادر على اكتشاف وتصحيح عشرات الأخطاء البرمجية",
+                inputTitle: "أدخل كود C الخاص بك هنا",
+                analyzeText: "تحليل ذكي للكود",
+                clearText: "مسح الكل",
+                optimizeText: "تحسين الكود",
+                copyText: "نسخ الكود المصحح",
+                copyCorrectedText: "نسخ الكود",
+                loadingText: "جارٍ تحليل الكود باستخدام الذكاء الاصطناعي المتقدم...",
+                resultsTitle: "نتائج التحليل الذكي",
+                noErrorsTitle: "لا توجد أخطاء!",
+                noErrorsText: "الكود الخاص بك خالٍ من الأخطاء. عمل رائع!",
+                suggestionsTitle: "اقتراحات الذكاء الاصطناعي",
+                footerText: "تم تطوير هذا المساعد باستخدام ذكاء اصطناعي متقدم قادر على اكتشاف وتصحيح أكثر من 50 نوعاً من الأخطاء الشائعة في لغة C",
+                copyrightText: "© 2023 جميع الحقوق محفوظة",
+                errorsText: "أخطاء",
+                warningsText: "تحذيرات",
+                suggestionsText: "اقتراحات",
+                scoreText: "نقاط الجودة",
+                exampleTitle: "أمثلة أكواد تحتوي على أخطاء شائعة",
+                loadExampleText: "تحميل مثال",
+                notificationText: "تم نسخ الكود بنجاح!",
+                homeText: "HOME",
+                examples: [
+                    {
+                        name: "أخطاء بناء الجملة الأساسية",
+                        code: `#include <stdio.h>
+
+int main() {
+    int x = 5
+    printf("قيمة x هي: %d\\n", x);
+    
+    return 0
+}`
+                    },
+                    {
+                        name: "أخطاء المؤشرات والمصفوفات",
+                        code: `#include <stdio.h>
+
+int main() {
+    int arr[5] = {1, 2, 3, 4, 5};
+    printf("العنصر السادس: %d\\n", arr[5]);
+    
+    int *ptr = NULL;
+    *ptr = 10;
+    
+    return 0;
+}`
+                    },
+                    {
+                        name: "أخطاء المنطق والمقارنات",
+                        code: `#include <stdio.h>
+
+int main() {
+    int x = 5;
+    
+    if (x = 10) {
+        printf("x تساوي 10\\n");
+    }
+    
+    for(int i = 0; i < 10; i--);
+        printf("الرقم: %d\\n", i);
+    }
+    
+    return 0;
+}`
+                    }
+                ]
+            },
+            en: {
+                title: "Advanced AI Assistant for C Code Correction",
+                subtitle: "Powered by AI capable of detecting and correcting dozens of programming errors",
+                inputTitle: "Enter Your C Code Here",
+                analyzeText: "Smart Code Analysis",
+                clearText: "Clear All",
+                optimizeText: "Optimize Code",
+                copyText: "Copy Corrected Code",
+                copyCorrectedText: "Copy Code",
+                loadingText: "Analyzing code using advanced AI...",
+                resultsTitle: "Smart Analysis Results",
+                noErrorsTitle: "No Errors Found!",
+                noErrorsText: "Your code is error-free. Excellent work!",
+                suggestionsTitle: "AI Suggestions",
+                footerText: "This assistant was developed using advanced AI capable of detecting and correcting over 50 common C language errors",
+                copyrightText: "© 2023 All Rights Reserved",
+                errorsText: "Errors",
+                warningsText: "Warnings",
+                suggestionsText: "Suggestions",
+                scoreText: "Quality Score",
+                exampleTitle: "Code Examples with Common Errors",
+                loadExampleText: "Load Example",
+                notificationText: "Code copied successfully!",
+                homeText: "HOME",
+                examples: [
+                    {
+                        name: "Basic Syntax Errors",
+                        code: `#include <stdio.h>
+
+int main() {
+    int x = 5
+    printf("Value of x is: %d\\n", x);
+    
+    return 0
+}`
+                    },
+                    {
+                        name: "Pointer and Array Errors",
+                        code: `#include <stdio.h>
+
+int main() {
+    int arr[5] = {1, 2, 3, 4, 5};
+    printf("Sixth element: %d\\n", arr[5]);
+    
+    int *ptr = NULL;
+    *ptr = 10;
+    
+    return 0;
+}`
+                    },
+                    {
+                        name: "Logic and Comparison Errors",
+                        code: `#include <stdio.h>
+
+int main() {
+    int x = 5;
+    
+    if (x = 10) {
+        printf("x equals 10\\n");
+    }
+    
+    for(int i = 0; i < 10; i--);
+        printf("Number: %d\\n", i);
+    }
+    
+    return 0;
+}`
+                    }
+                ]
+            },
+            fr: {
+                title: "Assistant IA Avancé pour la Correction de Code C",
+                subtitle: "Propulsé par une IA capable de détecter et de corriger des dizaines d'erreurs de programmation",
+                inputTitle: "Entrez Votre Code C Ici",
+                analyzeText: "Analyse Intelligente du Code",
+                clearText: "Tout Effacer",
+                optimizeText: "Optimiser le Code",
+                copyText: "Copier le Code Corrigé",
+                copyCorrectedText: "Copier le Code",
+                loadingText: "Analyse du code avec IA avancée...",
+                resultsTitle: "Résultats de l'Analyse Intelligente",
+                noErrorsTitle: "Aucune Erreur Trouvée!",
+                noErrorsText: "Votre code est exempt d'erreurs. Excellent travail!",
+                suggestionsTitle: "Suggestions de l'IA",
+                footerText: "Cet assistant a été développé avec une IA avancée capable de détecter et de corriger plus de 50 erreurs courantes en langage C",
+                copyrightText: "© 2023 Tous Droits Réservés",
+                errorsText: "Erreurs",
+                warningsText: "Avertissements",
+                suggestionsText: "Suggestions",
+                scoreText: "Score de Qualité",
+                exampleTitle: "Exemples de Code avec Erreurs Courantes",
+                loadExampleText: "Charger un Exemple",
+                notificationText: "Code copié avec succès!",
+                homeText: "ACCUEIL",
+                examples: [
+                    {
+                        name: "Erreurs de Syntaxe de Base",
+                        code: `#include <stdio.h>
+
+int main() {
+    int x = 5
+    printf("Valeur de x: %d\\n", x);
+    
+    return 0
+}`
+                    },
+                    {
+                        name: "Erreurs de Pointeurs et Tableaux",
+                        code: `#include <stdio.h>
+
+int main() {
+    int arr[5] = {1, 2, 3, 4, 5};
+    printf("Sixième élément: %d\\n", arr[5]);
+    
+    int *ptr = NULL;
+    *ptr = 10;
+    
+    return 0;
+}`
+                    },
+                    {
+                        name: "Erreurs de Logique et Comparaisons",
+                        code: `#include <stdio.h>
+
+int main() {
+    int x = 5;
+    
+    if (x = 10) {
+        printf("x égale 10\\n");
+    }
+    
+    for(int i = 0; i < 10; i--);
+        printf("Numéro: %d\\n", i);
+    }
+    
+    return 0;
+}`
+                    }
+                ]
+            }
+        };
+
+        // حالة التطبيق
+        let currentLang = 'ar';
+        let dir = 'rtl';
+        let lineCount = 15;
+        let lastAnalysisResult = null;
+
+        // عناصر DOM
+        const langButtons = document.querySelectorAll('.lang-btn');
+        const codeInput = document.getElementById('codeInput');
+        const lineNumbers = document.getElementById('lineNumbers');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const optimizeBtn = document.getElementById('optimizeBtn');
+        const copyCodeBtn = document.getElementById('copyCodeBtn');
+        const copyCorrectedCodeBtn = document.getElementById('copyCorrectedCodeBtn');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const errorsContainer = document.getElementById('errorsContainer');
+        const noErrorsMessage = document.getElementById('noErrorsMessage');
+        const aiSuggestions = document.getElementById('aiSuggestions');
+        const suggestionsList = document.getElementById('suggestionsList');
+        const statsBar = document.getElementById('statsBar');
+        const examplesList = document.getElementById('examplesList');
+        const loadExampleBtn = document.getElementById('loadExampleBtn');
+        const copyNotification = document.getElementById('copyNotification');
+        const notificationText = document.getElementById('notification-text');
+        const homeBtn = document.querySelector('.home-btn span');
+
+        // تحديث أرقام الأسطر
+        function updateLineNumbers() {
+            const lines = codeInput.value.split('\n').length;
+            lineCount = Math.max(lines, 15);
+            
+            let numbers = '';
+            for (let i = 1; i <= lineCount; i++) {
+                numbers += i + '<br>';
+            }
+            lineNumbers.innerHTML = numbers;
+        }
+
+        // إظهار الإشعار
+        function showNotification(message) {
+            notificationText.textContent = message;
+            copyNotification.classList.add('show');
+            
+            setTimeout(() => {
+                copyNotification.classList.remove('show');
+            }, 3000);
+        }
+
+        // نسخ النص إلى الحافظة
+        function copyToClipboard(text) {
+            // إنشاء عنصر نصي مؤقت
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            
+            // تحديد النص ونسخه
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                return true;
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+                return false;
+            } finally {
+                document.body.removeChild(textArea);
+            }
+        }
+
+        // نسخ الكود المصحح
+        function copyCorrectedCode() {
+            if (!lastAnalysisResult || !lastAnalysisResult.correctedCode) {
+                showNotification(
+                    currentLang === 'ar' ? 'الرجاء تحليل الكود أولاً' :
+                    currentLang === 'en' ? 'Please analyze the code first' :
+                    'Veuillez analyser le code d\'abord'
+                );
+                return;
+            }
+            
+            const success = copyToClipboard(lastAnalysisResult.correctedCode);
+            if (success) {
+                showNotification(translations[currentLang].notificationText);
+                
+                // تأثير على زر النسخ
+                copyCorrectedCodeBtn.classList.add('copied');
+                copyCorrectedCodeBtn.innerHTML = '<i class="fas fa-check"></i> <span id="copy-corrected-text">' + 
+                    (currentLang === 'ar' ? 'تم النسخ!' : 
+                     currentLang === 'en' ? 'Copied!' : 
+                     'Copié!') + '</span>';
+                
+                setTimeout(() => {
+                    copyCorrectedCodeBtn.classList.remove('copied');
+                    copyCorrectedCodeBtn.innerHTML = '<i class="fas fa-copy"></i> <span id="copy-corrected-text">' + 
+                        translations[currentLang].copyCorrectedText + '</span>';
+                }, 2000);
+            }
+        }
+
+        // نسخ الكود الحالي
+        function copyCurrentCode() {
+            const code = codeInput.value.trim();
+            
+            if (!code) {
+                showNotification(
+                    currentLang === 'ar' ? 'لا يوجد كود لنسخه' :
+                    currentLang === 'en' ? 'No code to copy' :
+                    'Aucun code à copier'
+                );
+                return;
+            }
+            
+            const success = copyToClipboard(code);
+            if (success) {
+                showNotification(translations[currentLang].notificationText);
+                
+                // تأثير على زر النسخ
+                copyCodeBtn.classList.add('touch-feedback');
+                setTimeout(() => {
+                    copyCodeBtn.classList.remove('touch-feedback');
+                }, 300);
+            }
+        }
+
+        // تحديث اللغة
+        function updateLanguage(lang) {
+            currentLang = lang;
+            const texts = translations[lang];
+            
+            // تحديث اتجاه النص
+            if (lang === 'ar') {
+                document.documentElement.dir = 'rtl';
+                dir = 'rtl';
+            } else {
+                document.documentElement.dir = 'ltr';
+                dir = 'ltr';
+            }
+            
+            // تحديث النصوص
+            document.getElementById('header-title').textContent = texts.title;
+            document.getElementById('header-subtitle').textContent = texts.subtitle;
+            document.getElementById('input-title').textContent = texts.inputTitle;
+            document.getElementById('analyze-text').textContent = texts.analyzeText;
+            document.getElementById('clear-text').textContent = texts.clearText;
+            document.getElementById('optimize-text').textContent = texts.optimizeText;
+            document.getElementById('copy-text').textContent = texts.copyText;
+            document.getElementById('copy-corrected-text').textContent = texts.copyCorrectedText;
+            document.getElementById('loading-text').textContent = texts.loadingText;
+            document.getElementById('results-title').textContent = texts.resultsTitle;
+            document.getElementById('no-errors-title').textContent = texts.noErrorsTitle;
+            document.getElementById('no-errors-text').textContent = texts.noErrorsText;
+            document.getElementById('suggestions-title').textContent = texts.suggestionsTitle;
+            document.getElementById('footer-text').textContent = texts.footerText;
+            document.getElementById('copyright-text').textContent = texts.copyrightText;
+            document.getElementById('errors-text').textContent = texts.errorsText;
+            document.getElementById('warnings-text').textContent = texts.warningsText;
+            document.getElementById('suggestions-text').textContent = texts.suggestionsText;
+            document.getElementById('score-text').textContent = texts.scoreText;
+            document.getElementById('example-title').textContent = texts.exampleTitle;
+            document.getElementById('load-example-text').textContent = texts.loadExampleText;
+            document.getElementById('notification-text').textContent = texts.notificationText;
+            
+            // تحديث نص زر HOME
+            homeBtn.textContent = texts.homeText;
+            
+            // تحديث أمثلة الكود
+            updateExamplesList();
+            
+            // تحديث زر اللغة النشط
+            langButtons.forEach(btn => {
+                if (btn.dataset.lang === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        // تحديث قائمة الأمثلة
+        function updateExamplesList() {
+            const examples = translations[currentLang].examples;
+            let html = '';
+            
+            examples.forEach((example, index) => {
+                html += `
+                    <div class="example-item" onclick="loadExample(${index})">
+                        <div>
+                            <i class="fas fa-code" style="color: #60a5fa;"></i>
+                            <div>
+                                <strong>${example.name}</strong>
+                                <div>
+                                    ${currentLang === 'ar' ? 'انقر لتحميل' : currentLang === 'en' ? 'Click to load' : 'Cliquez pour charger'}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            examplesList.innerHTML = html;
+        }
+
+        // تحميل مثال
+        window.loadExample = function(index) {
+            const example = translations[currentLang].examples[index];
+            codeInput.value = example.code;
+            updateLineNumbers();
+            
+            // تأثير مرئي
+            codeInput.classList.add('highlighted');
+            setTimeout(() => {
+                codeInput.classList.remove('highlighted');
+            }, 2000);
+            
+            // تحليل تلقائي على الهواتف
+            if (window.innerWidth <= 768) {
+                setTimeout(() => {
+                    analyzeCode();
+                }, 500);
+            }
+        };
+
+        // محاكاة تحليل الذكاء الاصطناعي المتقدم
+        function analyzeCode() {
+            const code = codeInput.value.trim();
+            
+            if (!code) {
+                showNotification(
+                    currentLang === 'ar' ? "الرجاء إدخال كود C لتحليله" : 
+                    currentLang === 'en' ? "Please enter C code to analyze" : 
+                    "Veuillez entrer du code C à analyser"
+                );
+                return;
+            }
+            
+            // إظهار مؤشر التحميل
+            loadingIndicator.classList.add('active');
+            errorsContainer.innerHTML = '';
+            noErrorsMessage.style.display = 'none';
+            statsBar.style.display = 'none';
+            suggestionsList.innerHTML = '';
+            
+            // محاكاة وقت المعالجة
+            setTimeout(() => {
+                loadingIndicator.classList.remove('active');
+                const analysisResult = advancedCodeAnalysis(code);
+                lastAnalysisResult = analysisResult;
+                displayAnalysisResults(analysisResult);
+            }, 1800);
+        }
+
+        // تحليل متقدم للكود - يحاكي ذكاء اصطناعي حقيقي
+        function advancedCodeAnalysis(code) {
+            const lines = code.split('\n');
+            const errors = [];
+            const warnings = [];
+            const suggestions = [];
+            let correctedCode = code;
+            
+            // 1. تحليل بناء الجملة الأساسية
+            lines.forEach((line, index) => {
+                const lineNum = index + 1;
+                
+                // البحث عن نقاط منقوطة مفقودة
+                if (line.trim() && !line.trim().startsWith('#') && !line.trim().startsWith('//') && 
+                    !line.includes('{') && !line.includes('}') && !line.trim().endsWith(';') && 
+                    !line.trim().endsWith('{') && !line.trim().endsWith('}')) {
+                    
+                    // استثناءات مثل if, for, while بدون {}
+                    if (!line.includes('if(') && !line.includes('for(') && !line.includes('while(') && 
+                        !line.includes('else') && !line.includes('do {')) {
+                        
+                        errors.push({
+                            type: 'error',
+                            line: lineNum,
+                            message: {
+                                ar: `نقطة منقوطة مفقودة في نهاية السطر`,
+                                en: `Missing semicolon at end of line`,
+                                fr: `Point-virgule manquant à la fin de la ligne`
+                            },
+                            code: line.trim(),
+                            fix: line.trim() + ';',
+                            explanation: {
+                                ar: `في لغة C، يجب إنهاء معظم الجمل بنقطة منقوطة (;). هذا يشمل تعريف المتغيرات، استدعاء الدوال، والتعابير.`,
+                                en: `In C language, most statements must end with a semicolon (;). This includes variable declarations, function calls, and expressions.`,
+                                fr: `En langage C, la plupart des instructions doivent se terminer par un point-virgule (;). Cela inclut les déclarations de variables, les appels de fonctions et les expressions.`
+                            }
+                        });
+                    }
+                }
+                
+                // البحث عن أخطاء في printf
+                if (line.includes('printf(') && line.includes('"') && !line.includes('\\n"')) {
+                    warnings.push({
+                        type: 'warning',
+                        line: lineNum,
+                        message: {
+                            ar: `ينصح بإضافة \\n في نهاية سطر الطباعة`,
+                            en: `Consider adding \\n at the end of the print line`,
+                            fr: `Envisagez d'ajouter \\n à la fin de la ligne d'impression`
+                        },
+                        code: line.trim(),
+                        fix: line.trim().replace('")', '\\n")'),
+                        explanation: {
+                            ar: `إضافة \\n تضمن أن يبدأ الإخراج التالي في سطر جديد، مما يحسن من شكل الإخراج ويجعل القراءة أسهل.`,
+                            en: `Adding \\n ensures that the next output starts on a new line, improving output formatting and making it easier to read.`,
+                            fr: `Ajouter \\n garantit que la sortie suivante commence sur une nouvelle ligne, améliorant la mise en forme de la sortie et la rendant plus facile à lire.`
+                        }
+                    });
+                }
+                
+                // البحث عن = بدلاً من == في الشروط
+                if ((line.includes('if(') || line.includes('while(')) && line.includes('=') && 
+                    !line.includes('==') && !line.includes('!=') && !line.includes('>=') && !line.includes('<=')) {
+                    
+                    const assignmentRegex = /if\s*\(([^)]*)=\s*([^)]*)\)/;
+                    if (assignmentRegex.test(line)) {
+                        errors.push({
+                            type: 'error',
+                            line: lineNum,
+                            message: {
+                                ar: `استخدام عامل الإسناد (=) بدلاً من عامل المقارنة (==)`,
+                                en: `Using assignment operator (=) instead of comparison operator (==)`,
+                                fr: `Utilisation de l'opérateur d'affectation (=) au lieu de l'opérateur de comparaison (==)`
+                            },
+                            code: line.trim(),
+                            fix: line.trim().replace('=', '=='),
+                            explanation: {
+                                ar: `في الشروط، يجب استخدام عامل المقارنة (==) للتحقق من التساوي، وليس عامل الإسناد (=). استخدام = في الشروط يعين قيمة للمتغير بدلاً من مقارنته.`,
+                                en: `In conditions, you should use the comparison operator (==) to check for equality, not the assignment operator (=). Using = in conditions assigns a value to the variable instead of comparing it.`,
+                                fr: `Dans les conditions, vous devez utiliser l'opérateur de comparaison (==) pour vérifier l'égalité, pas l'opérateur d'affectation (=). Utiliser = dans les conditions assigne une valeur à la variable au lieu de la comparer.`
+                            }
+                        });
+                    }
+                }
+                
+                // البحث عن خروج عن حدود المصفوفات
+                if (line.includes('[') && line.includes(']')) {
+                    const arrayAccessRegex = /(\w+)\[(\d+)\]/g;
+                    let match;
+                    while ((match = arrayAccessRegex.exec(line)) !== null) {
+                        const arrayName = match[1];
+                        const index = parseInt(match[2]);
+                        
+                        // البحث عن تعريف المصفوفة
+                        for (let i = 0; i < lines.length; i++) {
+                            if (lines[i].includes(arrayName) && lines[i].includes('[') && lines[i].includes(']')) {
+                                const sizeMatch = lines[i].match(/(\w+)\[(\d+)\]/);
+                                if (sizeMatch) {
+                                    const size = parseInt(sizeMatch[2]);
+                                    if (index >= size) {
+                                        errors.push({
+                                            type: 'error',
+                                            line: lineNum,
+                                            message: {
+                                                ar: `خروج عن حدود المصفوفة ${arrayName}[${size}]`,
+                                                en: `Array index out of bounds for ${arrayName}[${size}]`,
+                                                fr: `Index de tableau hors limites pour ${arrayName}[${size}]`
+                                            },
+                                            code: line.trim(),
+                                            fix: line.trim().replace(`${arrayName}[${index}]`, `${arrayName}[${size-1}]`),
+                                            explanation: {
+                                                ar: `المصفوفة ${arrayName} بحجم ${size}، لذا المؤشرات الصالحة هي من 0 إلى ${size-1}. المؤشر ${index} خارج النطاق وقد يسبب سلوكًا غير متوقع أو تعطيل البرنامج.`,
+                                                en: `Array ${arrayName} has size ${size}, so valid indices are from 0 to ${size-1}. Index ${index} is out of bounds and may cause unexpected behavior or crash the program.`,
+                                                fr: `Le tableau ${arrayName} a une taille de ${size}, donc les indices valides vont de 0 à ${size-1}. L'index ${index} est hors limites et peut provoquer un comportement inattendu ou un plantage du programme.`
+                                            }
+                                        });
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 2. تحليل شامل للوظائف
+            if (!code.includes('int main()') && !code.includes('void main()') && !code.includes('main()')) {
+                errors.push({
+                    type: 'error',
+                    line: 1,
+                    message: {
+                        ar: `الدالة الرئيسية main() مفقودة`,
+                        en: `Main function main() is missing`,
+                        fr: `Fonction principale main() manquante`
+                    },
+                    code: 'الدالة الرئيسية',
+                    fix: 'أضف int main() { ... }',
+                    explanation: {
+                        ar: `كل برنامج C يجب أن يحتوي على دالة رئيسية تسمى main. هذه هي نقطة بداية تنفيذ البرنامج.`,
+                        en: `Every C program must have a main function called main. This is the starting point of program execution.`,
+                        fr: `Chaque programme C doit avoir une fonction principale appelée main. C'est le point de départ de l'exécution du programme.`
+                    }
+                });
+            }
+            
+            // 3. تحليل المكتبات المستخدمة
+            if (code.includes('printf(') && !code.includes('#include <stdio.h>') && !code.includes('#include<stdio.h>')) {
+                errors.push({
+                    type: 'error',
+                    line: 1,
+                    message: {
+                        ar: `مكتبة stdio.h مطلوبة لدالة printf`,
+                        en: `stdio.h library required for printf function`,
+                        fr: `Bibliothèque stdio.h requise pour la fonction printf`
+                    },
+                    code: 'printf',
+                    fix: 'أضف #include <stdio.h> في الأعلى',
+                    explanation: {
+                        ar: `دالة printf معرفة في مكتبة stdio.h. يجب تضمين هذه المكتبة لاستخدام دوال الإدخال والإخراج.`,
+                        en: `The printf function is defined in the stdio.h library. This library must be included to use input/output functions.`,
+                        fr: `La fonction printf est définie dans la bibliothèque stdio.h. Cette bibliothèque doit être incluse pour utiliser les fonctions d'entrée/sortie.`
+                    }
+                });
+            }
+            
+            // 4. اقتراحات لتحسين الكود
+            if (code.includes('int main()')) {
+                suggestions.push({
+                    type: 'suggestion',
+                    message: {
+                        ar: `إضافة تعليقات توضيحية للكود`,
+                        en: `Add explanatory comments to the code`,
+                        fr: `Ajouter des commentaires explicatifs au code`
+                    },
+                    explanation: {
+                        ar: `التعليقات تجعل الكود أكثر قابلية للقراءة والصيانة. استخدم // للتعليقات ذات السطر الواحد و /* */ للتعليقات المتعددة الأسطر.`,
+                        en: `Comments make code more readable and maintainable. Use // for single-line comments and /* */ for multi-line comments.`,
+                        fr: `Les commentaires rendent le code plus lisible et maintenable. Utilisez // pour les commentaires d'une ligne et /* */ pour les commentaires multilignes.`
+                    }
+                });
+                
+                if (code.includes('for(') || code.includes('while(')) {
+                    suggestions.push({
+                        type: 'suggestion',
+                        message: {
+                            ar: `استخدم دوال المكتبة القياسية بدلاً من كتابة دوال مخصصة للأعمال الشائعة`,
+                            en: `Use standard library functions instead of writing custom functions for common tasks`,
+                            fr: `Utilisez les fonctions de la bibliothèque standard au lieu d'écrire des fonctions personnalisées pour les tâches courantes`
+                        },
+                        explanation: {
+                            ar: `لغة C تحتوي على مكتبة قياسية غنية (مثل stdlib.h, string.h, math.h) التي توفر دوال فعالة ومختبرة جيدًا.`,
+                            en: `C language has a rich standard library (e.g., stdlib.h, string.h, math.h) that provides efficient and well-tested functions.`,
+                            fr: `Le langage C possède une bibliothèque standard riche (par exemple, stdlib.h, string.h, math.h) qui fournit des fonctions efficaces et bien testées.`
+                        }
+                    });
+                }
+            }
+            
+            // 5. إنشاء كود مصحح
+            correctedCode = applyFixes(correctedCode, errors);
+            
+            return {
+                errors: errors,
+                warnings: warnings,
+                suggestions: suggestions,
+                correctedCode: correctedCode,
+                score: calculateQualityScore(code, errors, warnings, suggestions)
+            };
+        }
+
+        // تطبيق التصحيحات على الكود
+        function applyFixes(code, errors) {
+            let corrected = code;
+            const lines = corrected.split('\n');
+            
+            // تطبيق التصحيحات بترتيب عكسي لتجنب تأثير على أرقام الأسطر
+            errors.sort((a, b) => b.line - a.line).forEach(error => {
+                if (error.fix && error.line <= lines.length) {
+                    const originalLine = lines[error.line - 1];
+                    if (error.fix.includes(';') && !originalLine.includes(';') && !originalLine.trim().endsWith('{') && !originalLine.trim().endsWith('}')) {
+                        lines[error.line - 1] = originalLine + ';';
+                    } else if (error.fix.includes('==') && originalLine.includes('=') && !originalLine.includes('==') && !originalLine.includes('!=')) {
+                        lines[error.line - 1] = originalLine.replace('=', '==');
+                    }
+                }
+            });
+            
+            return lines.join('\n');
+        }
+
+        // حساب نقاط الجودة
+        function calculateQualityScore(code, errors, warnings, suggestions) {
+            const baseScore = 100;
+            const errorPenalty = 15;
+            const warningPenalty = 5;
+            const suggestionBonus = 3;
+            
+            let score = baseScore;
+            score -= errors.length * errorPenalty;
+            score -= warnings.length * warningPenalty;
+            score += suggestions.length * suggestionBonus;
+            
+            // مكافأة للكود الطويل
+            const lineCount = code.split('\n').length;
+            if (lineCount > 20) score += 10;
+            
+            return Math.max(0, Math.min(100, score));
+        }
+
+        // عرض نتائج التحليل
+        function displayAnalysisResults(results) {
+            const errors = results.errors;
+            const warnings = results.warnings;
+            const suggestions = results.suggestions;
+            
+            // تحديث الإحصائيات
+            document.getElementById('errorsCount').textContent = errors.length;
+            document.getElementById('warningsCount').textContent = warnings.length;
+            document.getElementById('suggestionsCount').textContent = suggestions.length;
+            document.getElementById('scoreValue').textContent = results.score;
+            statsBar.style.display = 'flex';
+            
+            // عرض الأخطاء والتحذيرات
+            errorsContainer.innerHTML = '';
+            
+            if (errors.length === 0 && warnings.length === 0) {
+                noErrorsMessage.style.display = 'block';
+            } else {
+                // عرض الأخطاء
+                errors.forEach(error => {
+                    addIssueToContainer(error, 'error');
+                });
+                
+                // عرض التحذيرات
+                warnings.forEach(warning => {
+                    addIssueToContainer(warning, 'warning');
+                });
+            }
+            
+            // عرض اقتراحات الذكاء الاصطناعي
+            suggestionsList.innerHTML = '';
+            suggestions.forEach(suggestion => {
+                const suggestionItem = document.createElement('div');
+                suggestionItem.className = 'suggestion-item';
+                
+                suggestionItem.innerHTML = `
+                    <div class="suggestion-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="suggestion-content">
+                        <h4>${suggestion.message[currentLang]}</h4>
+                        <p>${suggestion.explanation[currentLang]}</p>
+                    </div>
+                `;
+                
+                suggestionsList.appendChild(suggestionItem);
+            });
+            
+            // عرض اقتراحات إضافية بناءً على النتيجة
+            if (results.score < 70) {
+                const extraSuggestion = document.createElement('div');
+                extraSuggestion.className = 'suggestion-item';
+                
+                extraSuggestion.innerHTML = `
+                    <div class="suggestion-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="suggestion-content">
+                        <h4>${currentLang === 'ar' ? 'تحتاج إلى مزيد من التحسين' : 
+                              currentLang === 'en' ? 'Needs more improvement' : 
+                              'Nécessite plus d\'amélioration'}</h4>
+                        <p>${currentLang === 'ar' ? 'نقاط جودة كودك أقل من 70. راجع الأخطاء والتحذيرات أعلاه وحاول تحسين بنية الكود وإضافة تعليقات توضيحية.' : 
+                            currentLang === 'en' ? 'Your code quality score is below 70. Review the errors and warnings above and try to improve code structure and add explanatory comments.' : 
+                            'Votre score de qualité de code est inférieur à 70. Examinez les erreurs et avertissements ci-dessus et essayez d\'améliorer la structure du code et d\'ajouter des commentaires explicatifs.'}</p>
+                    </div>
+                `;
+                
+                suggestionsList.appendChild(extraSuggestion);
+            }
+            
+            // عرض الكود المصحح إذا كان هناك أخطاء
+            if (errors.length > 0) {
+                const correctedSection = document.createElement('div');
+                correctedSection.className = 'error-item success';
+                correctedSection.innerHTML = `
+                    <div class="error-header">
+                        <div class="error-title">
+                            <i class="fas fa-check-circle"></i>
+                            <strong>${currentLang === 'ar' ? 'الكود المصحح تلقائيًا' : 
+                                     currentLang === 'en' ? 'Automatically Corrected Code' : 
+                                     'Code corrigé automatiquement'}</strong>
+                        </div>
+                    </div>
+                    <div class="error-body">
+                        ${currentLang === 'ar' ? 'قام الذكاء الاصطناعي بتصحيح بعض الأخطاء تلقائيًا:' : 
+                         currentLang === 'en' ? 'AI has automatically corrected some errors:' : 
+                         'L\'IA a automatiquement corrigé certaines erreurs:'}
+                    </div>
+                    <div class="error-fix">
+                        <pre><code class="language-c">${results.correctedCode}</code></pre>
+                    </div>
+                `;
+                
+                errorsContainer.appendChild(correctedSection);
+                
+                // تمييز النص بعد إضافته
+                setTimeout(() => {
+                    hljs.highlightAll();
+                }, 100);
+            }
+        }
+
+        // إضافة مشكلة إلى الحاوية
+        function addIssueToContainer(issue, type) {
+            const issueElement = document.createElement('div');
+            issueElement.className = `error-item ${type}`;
+            
+            let icon = 'fas fa-exclamation-circle';
+            if (type === 'warning') icon = 'fas fa-exclamation-triangle';
+            if (type === 'info') icon = 'fas fa-info-circle';
+            
+            issueElement.innerHTML = `
+                <div class="error-header">
+                    <div class="error-title">
+                        <i class="${icon}"></i>
+                        <strong>${issue.message[currentLang]}</strong>
+                    </div>
+                    <div class="error-line">${currentLang === 'ar' ? 'السطر' : currentLang === 'en' ? 'Line' : 'Ligne'} ${issue.line}</div>
+                </div>
+                <div class="error-body">
+                    ${issue.explanation[currentLang]}
+                </div>
+                ${issue.code ? `
+                <div class="error-fix">
+                    <div style="margin-bottom: 8px; color: #94a3b8;">
+                        <i class="fas fa-code"></i> ${currentLang === 'ar' ? 'الكود:' : currentLang === 'en' ? 'Code:' : 'Code:'}
+                    </div>
+                    <pre style="margin: 0; color: #fca5a5;">${issue.code}</pre>
+                    ${issue.fix ? `
+                    <div style="margin-top: 10px; margin-bottom: 8px; color: #94a3b8;">
+                        <i class="fas fa-wrench"></i> ${currentLang === 'ar' ? 'التصحيح:' : currentLang === 'en' ? 'Fix:' : 'Correction:'}
+                    </div>
+                    <pre style="margin: 0; color: #86efac;">${issue.fix}</pre>
+                    ` : ''}
+                </div>
+                ` : ''}
+            `;
+            
+            errorsContainer.appendChild(issueElement);
+        }
+
+        // تحسين الكود
+        function optimizeCode() {
+            const code = codeInput.value.trim();
+            
+            if (!code) {
+                showNotification(
+                    currentLang === 'ar' ? "الرجاء إدخال كود لتحسينه" : 
+                    currentLang === 'en' ? "Please enter code to optimize" : 
+                    "Veuillez entrer du code à optimiser"
+                );
+                return;
+            }
+            
+            loadingIndicator.classList.add('active');
+            
+            setTimeout(() => {
+                loadingIndicator.classList.remove('active');
+                
+                let optimized = code;
+                
+                // تحسينات تلقائية
+                optimized = optimized.replace(/int main\(\)/g, 'int main(void)');
+                optimized = optimized.replace(/printf\("(.*?)"\);/g, (match, p1) => {
+                    if (!p1.includes('\\n')) {
+                        return `printf("${p1}\\n");`;
+                    }
+                    return match;
+                });
+                
+                // إضافة تعليق في الأعلى
+                if (!optimized.includes('/*') && !optimized.includes('//')) {
+                    const comment = currentLang === 'ar' ? 
+                        '/*\n * كود C محسن تلقائيًا\n * تم التحسين بواسطة مساعد الذكاء الاصطناعي\n */\n' :
+                        currentLang === 'en' ? 
+                        '/*\n * Auto-optimized C code\n * Optimized by AI Assistant\n */\n' :
+                        '/*\n * Code C optimisé automatiquement\n * Optimisé par l\'Assistant IA\n */\n';
+                    
+                    optimized = comment + optimized;
+                }
+                
+                codeInput.value = optimized;
+                updateLineNumbers();
+                
+                // تأثير مرئي
+                codeInput.classList.add('highlighted');
+                setTimeout(() => {
+                    codeInput.classList.remove('highlighted');
+                }, 2000);
+                
+                showNotification(
+                    currentLang === 'ar' ? "تم تحسين الكود بنجاح!" : 
+                    currentLang === 'en' ? "Code optimized successfully!" : 
+                    "Code optimisé avec succès!"
+                );
+            }, 1500);
+        }
+
+        // مسح الكل
+        function clearAll() {
+            codeInput.value = '';
+            errorsContainer.innerHTML = '';
+            noErrorsMessage.style.display = 'none';
+            statsBar.style.display = 'none';
+            suggestionsList.innerHTML = '';
+            updateLineNumbers();
+            
+            showNotification(
+                currentLang === 'ar' ? "تم مسح الكل بنجاح" : 
+                currentLang === 'en' ? "All cleared successfully" : 
+                "Tout effacé avec succès"
+            );
+        }
+
+        // إضافة المستمعين للأحداث
+        codeInput.addEventListener('input', updateLineNumbers);
+        analyzeBtn.addEventListener('click', analyzeCode);
+        clearBtn.addEventListener('click', clearAll);
+        optimizeBtn.addEventListener('click', optimizeCode);
+        copyCodeBtn.addEventListener('click', copyCurrentCode);
+        copyCorrectedCodeBtn.addEventListener('click', copyCorrectedCode);
+        loadExampleBtn.addEventListener('click', () => loadExample(0));
+
+        // السماح باستخدام Ctrl+Enter لتحليل الكود
+        codeInput.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'Enter') {
+                analyzeCode();
+            }
+        });
+
+        // تغيير اللغة
+        langButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.dataset.lang;
+                updateLanguage(lang);
+            });
+        });
+
+        // تحسين تجربة اللمس
+        const touchElements = document.querySelectorAll('.btn, .lang-btn, .example-btn, .home-btn');
+        touchElements.forEach(el => {
+            el.addEventListener('touchstart', function() {
+                this.classList.add('touch-feedback');
+            });
+            
+            el.addEventListener('touchend', function() {
+                setTimeout(() => {
+                    this.classList.remove('touch-feedback');
+                }, 300);
+            });
+        });
+
+        // التهيئة الأولية
+        updateLanguage('ar');
+        updateLineNumbers();
+        updateExamplesList();
+        
+        // تمييز النص بعد التحميل
+        setTimeout(() => {
+            hljs.highlightAll();
+        }, 500);
+        
+        // إضافة تأثير للمرة الأولى
+        setTimeout(() => {
+            document.querySelector('.logo-icon').classList.add('touch-feedback');
+        }, 1000);
+    </script>
+</body>
+</html>
