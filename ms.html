@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دروس الخوارزميات </title>
+    <title>دروس الخوارزميات - Hassan EL BAHI</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -22,6 +22,7 @@
             --shadow-medium: rgba(59, 130, 246, 0.25);
             --shadow-heavy: rgba(10, 255, 157, 0.3);
             --youtube-red: #ff0000;
+            --home-color: #8b5cf6;
             --border-radius-sm: 12px;
             --border-radius-md: 18px;
             --border-radius-lg: 24px;
@@ -85,6 +86,97 @@
                 radial-gradient(circle at 40% 80%, rgba(10, 255, 157, 0.05) 0%, transparent 50%);
         }
 
+        /* زر Home المتحرك */
+        .home-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            animation: float-home 4s ease-in-out infinite;
+        }
+
+        @keyframes float-home {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        .home-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: linear-gradient(135deg, var(--home-color), #7c3aed);
+            color: white;
+            padding: 15px 25px;
+            border-radius: var(--border-radius-lg);
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 10px 30px rgba(139, 92, 246, 0.3),
+                0 0 0 2px rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .home-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .home-link:hover::before {
+            left: 100%;
+        }
+
+        .home-link:hover {
+            background: linear-gradient(135deg, #7c3aed, var(--home-color));
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 
+                0 15px 40px rgba(139, 92, 246, 0.4),
+                0 0 0 3px rgba(255, 255, 255, 0.15);
+        }
+
+        .home-link:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .home-icon {
+            font-size: 1.4rem;
+            transition: transform 0.3s ease;
+        }
+
+        .home-link:hover .home-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .home-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 140%;
+            background: linear-gradient(135deg, var(--home-color), transparent);
+            filter: blur(30px);
+            opacity: 0.4;
+            z-index: -1;
+            border-radius: var(--border-radius-lg);
+            animation: home-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes home-glow {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
         /* رأس الصفحة */
         header {
             background: rgba(15, 23, 42, 0.95);
@@ -96,6 +188,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
+            margin-top: 20px;
         }
 
         .header-content {
@@ -562,6 +655,21 @@
             
             header {
                 padding: 1.5rem;
+                margin-top: 10px;
+            }
+            
+            .home-button {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .home-link {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .home-icon {
+                font-size: 1.2rem;
             }
             
             .intro-card {
@@ -610,6 +718,11 @@
                 padding: 1.5rem;
             }
             
+            .home-link {
+                padding: 10px 15px;
+                font-size: 0.8rem;
+            }
+            
             .lesson-title {
                 font-size: 1.3rem;
             }
@@ -618,9 +731,30 @@
                 font-size: 1rem;
             }
         }
+
+        @media (min-width: 1400px) {
+            .home-button {
+                top: 30px;
+                left: 30px;
+            }
+            
+            .home-link {
+                padding: 18px 30px;
+                font-size: 1.1rem;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- زر Home المتحرك -->
+    <div class="home-button">
+        <div class="home-glow"></div>
+        <a href="asasi.html" class="home-link" id="homeBtn">
+            <i class="fas fa-home home-icon"></i>
+            <span data-ar="الرئيسية" data-fr="Accueil" data-en="Home">الرئيسية</span>
+        </a>
+    </div>
+
     <!-- تأثيرات الخلفية -->
     <div class="background-effects">
         <div class="stars-bg" id="starsBg"></div>
@@ -667,7 +801,12 @@
     </main>
 
     <!-- تذييل الصفحة -->
-
+    <footer>
+        <div class="footer-content">
+            <p data-ar="جميع الحقوق محفوظة © 2023 | دروس الخوارزميات" data-fr="Tous droits réservés © 2023 | Cours d'Algorithmique" data-en="All rights reserved © 2023 | Algorithm Lessons">جميع الحقوق محفوظة © 2023 | دروس الخوارزميات</p>
+            <p class="copyright" data-ar="تم تصميم هذه الصفحة لتكون مصدر تعليمي للطلاب والمبرمجين المبتدئين" data-fr="Cette page a été conçue comme une ressource éducative pour les étudiants et les programmeurs débutants" data-en="This page was designed as an educational resource for students and beginner programmers">تم تصميم هذه الصفحة لتكون مصدر تعليمي للطلاب والمبرمجين المبتدئين</p>
+        </div>
+    </footer>
 
     <script>
         // بيانات الدروس
@@ -962,8 +1101,13 @@
             
             if (lang === 'ar') {
                 document.documentElement.dir = 'rtl';
-            } else {
+                document.querySelector('.home-link span').textContent = 'الرئيسية';
+            } else if (lang === 'fr') {
                 document.documentElement.dir = 'ltr';
+                document.querySelector('.home-link span').textContent = 'Accueil';
+            } else if (lang === 'en') {
+                document.documentElement.dir = 'ltr';
+                document.querySelector('.home-link span').textContent = 'Home';
             }
             
             // تحديث النصوص العامة (لا تشمل عناوين الدروس)
@@ -1047,7 +1191,7 @@
                         <a href="${lesson.link}" target="_blank" class="lesson-link">
                             <div class="link-text">
                                 <i class="fab fa-youtube youtube-icon"></i>
-                                <span>مشاهدة على يوتيوب</span>
+                                <span data-ar="مشاهدة على يوتيوب" data-fr="Voir sur YouTube" data-en="Watch on YouTube">مشاهدة على يوتيوب</span>
                             </div>
                         </a>
                     </div>
@@ -1084,18 +1228,20 @@
             const savedLang = localStorage.getItem('preferredLanguage') || 'ar';
             changeLanguage(savedLang);
             
+            // إضافة تأثيرات النقر للأزرار
+            document.querySelectorAll('.lang-btn, .home-link, .lesson-link').forEach(btn => {
+                btn.addEventListener('click', addRippleEffect);
+            });
+            
+            // مستمع الأحداث لأزرار الترجمة
             document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    addRippleEffect(e);
+                btn.addEventListener('click', function() {
                     const lang = this.getAttribute('data-lang');
                     changeLanguage(lang);
                 });
             });
             
-            document.querySelectorAll('.lesson-link').forEach(btn => {
-                btn.addEventListener('click', addRippleEffect);
-            });
-            
+            // تأثير التمرير
             window.addEventListener('scroll', function() {
                 const header = document.querySelector('header');
                 if (window.scrollY > 50) {
@@ -1107,6 +1253,7 @@
                 }
             });
             
+            // تحسين الأداء للشبكات البطيئة
             if ('connection' in navigator) {
                 const connection = navigator.connection;
                 if (connection.saveData || connection.effectiveType.includes('2g')) {
@@ -1117,12 +1264,14 @@
                 }
             }
             
+            // إعادة توليد النجوم عند تغيير حجم النافذة
             window.addEventListener('resize', () => {
                 document.getElementById('starsBg').innerHTML = '';
                 createStars();
             });
         });
         
+        // تحميل الصفحة بسلاسة
         window.addEventListener('load', () => {
             document.body.style.opacity = '1';
             document.body.style.transition = 'opacity 0.3s ease';
