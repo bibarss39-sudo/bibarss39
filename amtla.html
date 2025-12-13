@@ -1,30 +1,35 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr" id="html-root">
+<html lang="ar" dir="rtl" id="html-root">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Exemples de codes C avec algorithmes</title>
+    <title>أمثلة أكواد C مع الخوارزميات - المعمل التعليمي</title>
     <link rel="icon" href="1.png" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Tajawal:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #0c0f1d;
-            --bg-secondary: #1a1e33;
-            --card-bg: rgba(22, 26, 45, 0.75);
-            --card-bg-hover: rgba(30, 35, 60, 0.9);
-            --accent: #58a6ff;
-            --accent-light: #79c0ff;
-            --accent-dark: #388bfd;
-            --success: #3fb950;
-            --text-primary: #f0f6fc;
-            --text-secondary: #8b949e;
-            --border: rgba(148, 163, 184, 0.1);
+            --bg-primary: #0b1120;
+            --bg-secondary: #141c2f;
+            --card-bg: rgba(25, 35, 55, 0.85);
+            --card-bg-hover: rgba(30, 40, 65, 0.95);
+            --accent: #3b82f6;
+            --accent-light: #60a5fa;
+            --accent-dark: #2563eb;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --purple: #8b5cf6;
+            --pink: #ec4899;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --code-text: #e2e8f0;
+            --border: rgba(148, 163, 184, 0.2);
             --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
             --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.35);
-            --shadow-lg: 0 16px 40px rgba(88, 166, 255, 0.2);
+            --shadow-lg: 0 16px 40px rgba(59, 130, 246, 0.25);
+            --glow: 0 0 20px rgba(59, 130, 246, 0.3);
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
@@ -35,7 +40,7 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Tajawal', sans-serif;
             background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
             color: var(--text-primary);
             padding: 20px;
@@ -49,10 +54,10 @@
             content: '';
             position: fixed;
             top: 0;
-            left: 0;
+            right: 0;
             width: 100%;
             height: 6px;
-            background: linear-gradient(90deg, var(--accent), #00eaff, #0aff9d);
+            background: linear-gradient(90deg, var(--accent), #0ea5e9, #00eaff);
             opacity: 0;
             transition: opacity 0.4s ease;
             z-index: 1000;
@@ -70,6 +75,13 @@
             margin-bottom: 30px;
             flex-wrap: wrap;
             gap: 15px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
         .home-btn {
@@ -91,6 +103,26 @@
         .home-btn:hover {
             transform: translateY(-4px) scale(1.04);
             box-shadow: var(--shadow-lg);
+        }
+
+        .page-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--accent-light);
+            background: rgba(59, 130, 246, 0.1);
+            padding: 10px 18px;
+            border-radius: 14px;
+            font-weight: 500;
+            font-size: 15px;
+            transition: var(--transition);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .page-link:hover {
+            background: rgba(59, 130, 246, 0.2);
+            transform: translateY(-2px);
         }
 
         .lang-switcher {
@@ -116,23 +148,30 @@
 
         .lang-btn:hover {
             transform: scale(1.12);
-            background: rgba(121, 192, 255, 0.2);
+            background: rgba(96, 165, 250, 0.2);
             border-color: var(--accent-light);
         }
 
         .lang-btn.active {
             background: var(--accent);
             color: white;
-            box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.4), var(--shadow-lg);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4), var(--shadow-lg);
+        }
+
+        .header-container {
+            text-align: center;
+            margin-bottom: 35px;
+            max-width: 800px;
+            margin-right: auto;
+            margin-left: auto;
         }
 
         h1 {
-            text-align: center;
-            font-size: 2.4rem;
-            margin: 25px 0 40px;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
             color: var(--accent-light);
-            text-shadow: 0 2px 8px rgba(88, 166, 255, 0.3);
-            font-weight: 800;
+            text-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+            font-weight: 700;
             letter-spacing: -0.5px;
             position: relative;
             display: inline-block;
@@ -142,39 +181,92 @@
             content: '';
             position: absolute;
             bottom: -12px;
-            left: 50%;
-            transform: translateX(-50%);
+            right: 50%;
+            transform: translateX(50%);
             width: 80px;
             height: 4px;
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
             border-radius: 2px;
         }
 
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            line-height: 1.7;
+            margin-top: 25px;
+        }
+
+        .search-container {
+            max-width: 650px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
         .search-box {
             width: 100%;
-            max-width: 450px;
-            padding: 14px 20px;
+            padding: 16px 50px 16px 20px;
             border-radius: 14px;
             border: 1px solid var(--border);
             background: rgba(255, 255, 255, 0.05);
             color: white;
             font-size: 16px;
-            margin: 0 auto 30px;
-            display: block;
             transition: var(--transition);
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Tajawal', sans-serif;
         }
 
         .search-box:focus {
             outline: none;
             border-color: var(--accent-light);
             background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.3);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-light);
+            font-size: 18px;
+        }
+
+        /* فلاتر التصنيف */
+        .category-filters {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .filter-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
 
         .examples-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
             gap: 28px;
             margin-top: 20px;
         }
@@ -189,24 +281,23 @@
             position: relative;
             overflow: hidden;
             will-change: transform;
-            contain: content;
         }
 
         .example-card:hover {
             background: var(--card-bg-hover);
             transform: translateY(-8px) scale(1.01);
-            box-shadow: var(--shadow-lg), 0 0 0 1px rgba(121, 192, 255, 0.3);
-            border-color: rgba(121, 192, 255, 0.4);
+            box-shadow: var(--shadow-lg), 0 0 0 1px rgba(96, 165, 250, 0.3);
+            border-color: rgba(96, 165, 250, 0.4);
         }
 
         .example-card::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
+            right: 0;
             width: 4px;
             height: 100%;
-            background: linear-gradient(to bottom, var(--accent), #00eaff);
+            background: linear-gradient(to bottom, var(--accent), #0ea5e9);
             transform: scaleY(0);
             transform-origin: top;
             transition: transform 0.4s ease;
@@ -216,11 +307,12 @@
             transform: scaleY(1);
         }
 
-        .code-header {
+        .card-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 18px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            gap: 15px;
         }
 
         .code-tag {
@@ -228,10 +320,28 @@
             font-size: 19px;
             font-weight: 600;
             color: #ffab70;
+            line-height: 1.4;
+        }
+
+        .card-meta {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .category-tag {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent-light);
+            border: 1px solid rgba(59, 130, 246, 0.3);
         }
 
         .copy-btn {
-            background: rgba(88, 166, 255, 0.15);
+            background: rgba(59, 130, 246, 0.15);
             color: var(--accent-light);
             border: none;
             width: 40px;
@@ -262,13 +372,27 @@
             padding: 20px;
             border-radius: 12px;
             font-family: 'IBM Plex Mono', monospace;
-            font-size: 15.5px;
+            font-size: 15px;
             white-space: pre;
             overflow-x: auto;
             margin: 16px 0;
-            color: #e0f7fa;
+            color: var(--code-text);
             line-height: 1.5;
-            border-left: 3px solid var(--accent);
+            border-right: 3px solid var(--accent);
+            position: relative;
+            text-align: left;
+            direction: ltr;
+        }
+
+        .code-block::before {
+            content: attr(data-lang);
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            font-size: 12px;
+            color: var(--accent-light);
+            opacity: 0.7;
+            font-family: 'Tajawal', sans-serif;
         }
 
         .lang-label {
@@ -281,49 +405,533 @@
             gap: 8px;
         }
 
+        .lang-label i {
+            font-size: 18px;
+        }
+
         .desc {
             color: var(--text-secondary);
-            margin-top: 14px;
+            margin-top: 18px;
             font-size: 15.5px;
             line-height: 1.7;
+            padding-top: 15px;
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+            text-align: right;
+        }
+
+        .card-footer {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .info-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .info-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--accent-light);
+            border-color: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Stats counter */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0 30px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stat-item i {
+            color: var(--accent-light);
+        }
+
+        /* نافذة المعلومات الإضافية المحسنة */
+        .info-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .info-modal.active {
+            display: flex;
+        }
+
+        .info-modal-content {
+            background: linear-gradient(135deg, var(--card-bg), rgba(30, 40, 65, 0.95));
+            border-radius: 24px;
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg), var(--glow);
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            position: relative;
+            animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .info-modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--accent), var(--purple), var(--pink));
+            border-radius: 24px 24px 0 0;
+        }
+
+        .info-header {
+            padding: 25px 30px 20px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .info-header h3 {
+            color: var(--accent-light);
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-header h3 i {
+            color: var(--purple);
+        }
+
+        .close-btn {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            font-size: 18px;
+        }
+
+        .close-btn:hover {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border-color: #ef4444;
+            transform: rotate(90deg);
+        }
+
+        .info-body {
+            padding: 25px 30px;
+        }
+
+        .info-section {
+            margin-bottom: 25px;
+        }
+
+        .info-title {
+            color: var(--accent-light);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-title i {
+            color: var(--purple);
+        }
+
+        .info-text {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 15px;
+            padding-right: 24px;
+        }
+
+        .info-list {
+            list-style: none;
+            margin-top: 10px;
+        }
+
+        .info-list li {
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            padding-right: 24px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .info-list li::before {
+            content: '›';
+            position: absolute;
+            right: 0;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .info-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .info-item-label {
+            color: var(--accent-light);
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .info-item-value {
+            color: var(--text-primary);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .info-footer {
+            padding: 20px 30px;
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .action-btn {
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: var(--accent-light);
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 500;
+        }
+
+        .action-btn:hover {
+            background: rgba(59, 130, 246, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .action-btn.primary {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .action-btn.primary:hover {
+            background: var(--accent-light);
+            box-shadow: var(--shadow-sm);
         }
 
         @media (max-width: 768px) {
             .examples-grid { grid-template-columns: 1fr; }
             h1 { font-size: 2.0rem; }
             .top-bar { flex-direction: column; align-items: stretch; }
-            .home-btn, .lang-switcher { width: 100%; justify-content: center; }
-            .search-box { max-width: 100%; }
+            .nav-buttons { width: 100%; justify-content: center; }
+            .home-btn, .page-link { width: 100%; justify-content: center; }
+            .search-box { max-width: 100%; padding-right: 45px; }
             .example-card { padding: 24px 20px; }
-            .code-block { font-size: 15px; padding: 16px; }
+            .code-block { font-size: 14.5px; padding: 16px; }
+            .code-tag { font-size: 17px; }
+            .info-modal-content { max-width: 95%; }
+            .info-header, .info-body, .info-footer { padding: 20px; }
+            .info-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 480px) {
             h1 { font-size: 1.8rem; }
             .example-card { padding: 20px 16px; }
-            .code-tag { font-size: 17px; }
+            .card-header { flex-direction: column; gap: 10px; }
+            .card-meta { justify-content: flex-start; }
             .copy-btn { width: 38px; height: 38px; }
+            .search-box { padding: 14px 40px 14px 20px; }
+            .search-icon { right: 15px; }
+            .category-filters { gap: 8px; }
+            .filter-btn { padding: 8px 16px; font-size: 13px; }
+            .stats { gap: 10px; }
+            .stat-item { padding: 8px 16px; font-size: 13px; }
+            .info-header h3 { font-size: 1.3rem; }
+        }
+
+        /* Animation for new cards */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .example-card {
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        /* LTR styles for English */
+        body.lang-en {
+            direction: ltr;
+        }
+
+        body.lang-en .search-box {
+            padding: 16px 20px 16px 50px;
+        }
+
+        body.lang-en .search-icon {
+            right: auto;
+            left: 20px;
+        }
+
+        body.lang-en .code-block {
+            border-right: none;
+            border-left: 3px solid var(--accent);
+        }
+
+        body.lang-en .code-block::before {
+            right: 10px;
+            left: auto;
+        }
+
+        body.lang-en .desc {
+            text-align: left;
+        }
+
+        body.lang-en .info-modal-content::before {
+            right: auto;
+            left: 0;
+        }
+
+        body.lang-en .info-text,
+        body.lang-en .info-list li {
+            padding-right: 0;
+            padding-left: 24px;
+        }
+
+        body.lang-en .info-list li::before {
+            right: auto;
+            left: 0;
+        }
+
+        body.lang-en .header-container,
+        body.lang-en .category-filters,
+        body.lang-en .stats {
+            text-align: center;
+        }
+
+        body.lang-en .page-link,
+        body.lang-en .home-btn,
+        body.lang-en .info-btn,
+        body.lang-en .action-btn {
+            flex-direction: row-reverse;
+        }
+
+        body.lang-en .lang-label {
+            flex-direction: row-reverse;
         }
     </style>
 </head>
-<body class="lang-fr">
+<body class="lang-ar">
     <div class="top-bar">
-        <a href="asasi.html" class="home-btn">
-            <i class="fas fa-home"></i>
-            <span class="lang-key" data-key="home">Accueil</span>
-        </a>
+        <div class="nav-buttons">
+            <a href="asasi.html" class="home-btn">
+                <i class="fas fa-home"></i>
+                <span class="lang-key" data-key="home">الرئيسية</span>
+            </a>
+            <a href="index.html" class="page-link">
+                <i class="fas fa-code"></i>
+                <span class="lang-key" data-key="codes">أكواد C</span>
+            </a>
+        </div>
 
         <div class="lang-switcher">
-            <button class="lang-btn active" data-lang="fr">🇫🇷</button>
+            <button class="lang-btn active" data-lang="ar">🇸🇦</button>
+            <button class="lang-btn" data-lang="fr">🇫🇷</button>
             <button class="lang-btn" data-lang="en">🇬🇧</button>
         </div>
     </div>
 
-    <h1 class="lang-key" data-key="title">Exemples de codes C avec algorithmes</h1>
+    <div class="header-container">
+        <h1 class="lang-key" data-key="title">معمل أمثلة لغة C</h1>
+        <p class="subtitle lang-key" data-key="subtitle">
+            استكشف أمثلة كاملة لشيفرات لغة C مع ما يقابلها من خوارزميات. مثالي لفهم منطق البرمجة وممارسة مهاراتك البرمجية.
+        </p>
+    </div>
 
-    <input type="text" class="search-box" id="search" placeholder="Rechercher dans les codes ou descriptions…">
+    <div class="search-container">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" class="search-box" id="search" placeholder="ابحث في الأكواد أو الخوارزميات أو الوصف...">
+    </div>
+
+    <div class="stats" id="stats">
+        <div class="stat-item">
+            <i class="fas fa-code"></i>
+            <span id="totalExamples">0 مثال</span>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-layer-group"></i>
+            <span id="visibleExamples">0 ظاهر</span>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-copy"></i>
+            <span id="copiedCount">0 منسوخ</span>
+        </div>
+    </div>
+
+    <div class="category-filters">
+        <button class="filter-btn active" data-filter="all" onclick="filterExamples('all')">
+            <span class="lang-key" data-key="all">الكل</span>
+        </button>
+        <button class="filter-btn" data-filter="io" onclick="filterExamples('io')">
+            <span class="lang-key" data-key="io">الإدخال/الإخراج</span>
+        </button>
+        <button class="filter-btn" data-filter="loops" onclick="filterExamples('loops')">
+            <span class="lang-key" data-key="loops">الحلقات</span>
+        </button>
+        <button class="filter-btn" data-filter="conditions" onclick="filterExamples('conditions')">
+            <span class="lang-key" data-key="conditions">الشروط</span>
+        </button>
+        <button class="filter-btn" data-filter="types" onclick="filterExamples('types')">
+            <span class="lang-key" data-key="types">أنواع البيانات</span>
+        </button>
+        <button class="filter-btn" data-filter="operators" onclick="filterExamples('operators')">
+            <span class="lang-key" data-key="operators">المشغلات</span>
+        </button>
+        <button class="filter-btn" data-filter="control" onclick="filterExamples('control')">
+            <span class="lang-key" data-key="control">التحكم</span>
+        </button>
+        <button class="filter-btn" data-filter="misc" onclick="filterExamples('misc')">
+            <span class="lang-key" data-key="misc">متنوع</span>
+        </button>
+    </div>
 
     <div class="examples-grid" id="examplesContainer"></div>
+
+    <!-- نافذة المعلومات الإضافية المحسنة -->
+    <div class="info-modal" id="infoModal">
+        <div class="info-modal-content">
+            <div class="info-header">
+                <h3><i class="fas fa-info-circle"></i> <span id="infoTitle">معلومات إضافية</span></h3>
+                <button class="close-btn" onclick="closeInfoModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="info-body">
+                <div class="info-section">
+                    <h4 class="info-title"><i class="fas fa-code"></i> <span id="infoCodeTitle">التعليمات البرمجية</span></h4>
+                    <p class="info-text" id="infoCode"></p>
+                </div>
+                
+                <div class="info-section">
+                    <h4 class="info-title"><i class="fas fa-tag"></i> <span id="infoCategoryTitle">التصنيف</span></h4>
+                    <p class="info-text" id="infoCategory"></p>
+                </div>
+                
+                <div class="info-section">
+                    <h4 class="info-title"><i class="fas fa-comment-alt"></i> <span id="infoDescriptionTitle">الوصف</span></h4>
+                    <p class="info-text" id="infoDescription"></p>
+                </div>
+                
+                <div class="info-section">
+                    <h4 class="info-title"><i class="fas fa-lightbulb"></i> <span id="infoTipsTitle">نصائح واستخدامات</span></h4>
+                    <ul class="info-list" id="infoTips"></ul>
+                </div>
+                
+                <div class="info-grid" id="infoGrid">
+                    <!-- سيتم ملؤه ديناميكياً -->
+                </div>
+            </div>
+            
+            <div class="info-footer">
+                <button class="action-btn" onclick="copyCurrentExample()">
+                    <i class="fas fa-copy"></i>
+                    <span id="copyExampleBtn">نسخ المثال</span>
+                </button>
+                <button class="action-btn primary" onclick="closeInfoModal()">
+                    <i class="fas fa-check"></i>
+                    <span id="closeModalBtn">تم الفهم</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <script>
         const examples = [
@@ -332,8 +940,30 @@
                 c: `#include <stdio.h>\nint main() {\n    printf("Hello, World!\\n");\n    return 0;\n}`,
                 algo: `Algorithme Bonjour\nDébut\n    Écrire("Hello, World!")\nFin`,
                 desc: { 
-                    fr: 'Affiche un message de salutation à l’écran.',
-                    en: 'Prints a greeting message to the console.'
+                    ar: 'برنامج "مرحباً بالعالم" الكلاسيكي. الخطوة الأولى في برمجة لغة C.',
+                    fr: 'Le programme "Hello World" classique. Premier pas en programmation C.',
+                    en: 'Classic "Hello World" program. First step in C programming.'
+                },
+                category: 'io',
+                tips: {
+                    ar: [
+                        'استخدم printf لعرض النصوص والقيم على الشاشة',
+                        'يجب تضمين مكتبة stdio.h لاستخدام printf',
+                        'تستخدم \\n لإنهاء السطر والانتقال للسطر التالي',
+                        'return 0 يشير إلى نجاح تنفيذ البرنامج'
+                    ],
+                    fr: [
+                        'Utilisez printf pour afficher du texte et des valeurs à l\'écran',
+                        'Vous devez inclure stdio.h pour utiliser printf',
+                        'Utilisez \\n pour terminer une ligne et passer à la suivante',
+                        'return 0 indique une exécution réussie du programme'
+                    ],
+                    en: [
+                        'Use printf to display text and values on screen',
+                        'You must include stdio.h to use printf',
+                        'Use \\n to end a line and move to next line',
+                        'return 0 indicates successful program execution'
+                    ]
                 }
             },
             {
@@ -341,8 +971,30 @@
                 c: `#include <stdio.h>\nint main() {\n    int x;\n    printf("Entrez un entier : ");\n    scanf("%d", &x);\n    printf("Vous avez saisi : %d\\n", x);\n    return 0;\n}`,
                 algo: `Algorithme LireEntier\nVariable x : Entier\nDébut\n    Écrire("Entrez un entier : ")\n    Lire(x)\n    Écrire("Vous avez saisi : ", x)\nFin`,
                 desc: { 
-                    fr: 'Lit un entier saisi par l’utilisateur et le stocke dans x.',
-                    en: 'Reads an integer from user input and stores it in x.'
+                    ar: 'قراءة إدخال المستخدم باستخدام scanf. لا تنسى رمز & قبل اسم المتغير.',
+                    fr: 'Lecture d\'entrée utilisateur avec scanf. Ne pas oublier l\'esperluette (&) avant la variable.',
+                    en: 'User input reading with scanf. Don\'t forget the ampersand (&) before variable.'
+                },
+                category: 'io',
+                tips: {
+                    ar: [
+                        'يجب استخدام & قبل اسم المتغير في scanf',
+                        '%d يقرأ عدداً صحيحاً فقط',
+                        'يمكن استخدام scanf لقراءة أنواع بيانات مختلفة',
+                        'يجب مطابقة نوع المتغير مع محدد التنسيق'
+                    ],
+                    fr: [
+                        'Vous devez utiliser & avant le nom de la variable dans scanf',
+                        '%d lit uniquement un entier',
+                        'scanf peut lire différents types de données',
+                        'Le type de variable doit correspondre au spécificateur de format'
+                    ],
+                    en: [
+                        'You must use & before variable name in scanf',
+                        '%d reads only integer',
+                        'scanf can read different data types',
+                        'Variable type must match format specifier'
+                    ]
                 }
             },
             {
@@ -350,17 +1002,61 @@
                 c: `#include <stdio.h>\nint main() {\n    for (int i = 0; i < 10; i++) {\n        printf("%d ", i);\n    }\n    printf("\\n");\n    return 0;\n}`,
                 algo: `Algorithme BoucleFor\nDébut\n    Pour i allant de 0 à 9 Faire\n        Écrire(i, " ")\n    FinPour\nFin`,
                 desc: { 
-                    fr: 'Répète un bloc 10 fois (de 0 à 9).',
-                    en: 'Repeats a block 10 times (from 0 to 9).'
+                    ar: 'الحلقة for الكلاسيكية مع التهيئة، الشرط، والزيادة.',
+                    fr: 'Boucle for classique avec initialisation, condition et incrémentation.',
+                    en: 'Classic for loop with initialization, condition and increment.'
+                },
+                category: 'loops',
+                tips: {
+                    ar: [
+                        'الحلقة for مثالية عندما تعرف عدد التكرارات مسبقاً',
+                        'i++ تعني زيادة i بواحد بعد كل تكرار',
+                        'يمكن استخدام متغيرات مختلفة غير i',
+                        'يمكن التكرار تنازلياً باستخدام i--'
+                    ],
+                    fr: [
+                        'La boucle for est idéale quand vous connaissez le nombre d\'itérations',
+                        'i++ signifie incrémenter i de un après chaque itération',
+                        'Vous pouvez utiliser des variables différentes de i',
+                        'Vous pouvez itérer en descendant avec i--'
+                    ],
+                    en: [
+                        'For loop is ideal when you know iteration count',
+                        'i++ means increment i by one after each iteration',
+                        'You can use variables other than i',
+                        'You can iterate descending with i--'
+                    ]
                 }
             },
             {
                 code: 'do { } while (x < 10)',
                 c: `#include <stdio.h>\nint main() {\n    int x = 0;\n    do {\n        printf("%d ", x);\n        x++;\n    } while (x < 10);\n    printf("\\n");\n    return 0;\n}`,
-                algo: `Algorithme BoucleDoWhile\nVariable x : Entier\nDébut\n    x ← 0\n    Répéter\n        Écrire(x, " ")\n        x ← x + 1\n    Jusqu’à (x >= 10)\nFin`,
+                algo: `Algorithme BoucleDoWhile\nVariable x : Entier\nDébut\n    x ← 0\n    Répéter\n        Écrire(x, " ")\n        x ← x + 1\n    Jusqu\'à (x >= 10)\nFin`,
                 desc: { 
-                    fr: 'Exécute le bloc au moins une fois, puis répète tant que la condition est vraie.',
-                    en: 'Executes block at least once, then repeats while condition is true.'
+                    ar: 'حلقة do-while تضمن تنفيذ الكود مرة واحدة على الأقل قبل التحقق من الشرط.',
+                    fr: 'Boucle do-while garantissant au moins une exécution avant vérification de condition.',
+                    en: 'Do-while loop guarantees at least one execution before condition check.'
+                },
+                category: 'loops',
+                tips: {
+                    ar: [
+                        'do-while تضمن تنفيذ الكتلة مرة واحدة على الأقل',
+                        'مفيدة عند الحاجة لتنفيذ الكود قبل التحقق من الشرط',
+                        'تختلف عن while التي قد لا تنفذ أبداً',
+                        'انتبه لنقطة الفاصلة المنقوطة بعد while'
+                    ],
+                    fr: [
+                        'do-while garantit au moins une exécution du bloc',
+                        'Utile quand vous devez exécuter le code avant de vérifier la condition',
+                        'Différent de while qui peut ne jamais s\'exécuter',
+                        'Attention au point-virgule après while'
+                    ],
+                    en: [
+                        'do-while guarantees at least one block execution',
+                        'Useful when you need to execute code before checking condition',
+                        'Different from while which may never execute',
+                        'Pay attention to semicolon after while'
+                    ]
                 }
             },
             {
@@ -368,8 +1064,30 @@
                 c: `#include <stdio.h>\nint main() {\n    int x = 0;\n    while (x < 10) {\n        printf("%d ", x);\n        x++;\n    }\n    printf("\\n");\n    return 0;\n}`,
                 algo: `Algorithme BoucleWhile\nVariable x : Entier\nDébut\n    x ← 0\n    Tant que (x < 10) Faire\n        Écrire(x, " ")\n        x ← x + 1\n    FinTantQue\nFin`,
                 desc: { 
-                    fr: 'Répète le bloc tant que la condition est vraie.',
-                    en: 'Repeats the block while condition is true.'
+                    ar: 'الحلقة while القياسية. يتم التحقق من الشرط قبل كل تكرار.',
+                    fr: 'Boucle while standard. La condition est vérifiée avant chaque itération.',
+                    en: 'Standard while loop. Condition checked before each iteration.'
+                },
+                category: 'loops',
+                tips: {
+                    ar: [
+                        'while تتحقق من الشرط قبل تنفيذ الكتلة',
+                        'قد لا تنفذ الكتلة أبداً إذا كان الشرط خاطئاً من البداية',
+                        'مفيدة عندما لا تعرف عدد التكرارات مسبقاً',
+                        'تأكد من تحديث متغير الشرط داخل الحلقة'
+                    ],
+                    fr: [
+                        'while vérifie la condition avant d\'exécuter le bloc',
+                        'Le bloc peut ne jamais s\'exécuter si la condition est fausse au départ',
+                        'Utile quand vous ne connaissez pas le nombre d\'itérations',
+                        'Assurez-vous de mettre à jour la variable de condition dans la boucle'
+                    ],
+                    en: [
+                        'while checks condition before executing block',
+                        'Block may never execute if condition is initially false',
+                        'Useful when you don\'t know iteration count',
+                        'Make sure to update condition variable inside loop'
+                    ]
                 }
             },
             {
@@ -377,8 +1095,30 @@
                 c: `#include <stdio.h>\nint main() {\n    int x = 0;\n    if (!x) {\n        printf("x est nul\\n");\n    }\n    return 0;\n}`,
                 algo: `Algorithme NOTLogique\nVariable x : Entier\nDébut\n    x ← 0\n    Si Non(x) Alors\n        Écrire("x est nul")\n    FinSi\nFin`,
                 desc: { 
-                    fr: 'Inverse la valeur : vrai si x = 0, faux sinon.',
-                    en: 'Inverts truth value: true if x is 0, false otherwise.'
+                    ar: 'المشغل المنطقي NOT. يعيد القيمة صحيحة (1) إذا كان التعبير خاطئاً (0).',
+                    fr: 'Opérateur logique NOT. Renvoie vrai (1) si l\'expression est fausse (0).',
+                    en: 'Logical NOT operator. Returns true (1) if expression is false (0).'
+                },
+                category: 'operators',
+                tips: {
+                    ar: [
+                        '! تعكس قيمة التعبير المنطقي',
+                        '!0 يعيد 1 (صحيح)',
+                        '!أي قيمة غير صفرية تعيد 0 (خاطئ)',
+                        'مفيد لاختبار إذا ما كانت القيمة صفراً'
+                    ],
+                    fr: [
+                        '! inverse la valeur d\'une expression booléenne',
+                        '!0 retourne 1 (vrai)',
+                        '!toute valeur non nulle retourne 0 (faux)',
+                        'Utile pour tester si une valeur est nulle'
+                    ],
+                    en: [
+                        '! inverts boolean expression value',
+                        '!0 returns 1 (true)',
+                        '!any non-zero value returns 0 (false)',
+                        'Useful to test if value is zero'
+                    ]
                 }
             },
             {
@@ -386,8 +1126,30 @@
                 c: `#include <stdio.h>\nint main() {\n    int age = 25;\n    printf("Âge : %d ans\\n", age);\n    return 0;\n}`,
                 algo: `Algorithme FormatEntier\nDébut\n    Écrire("Âge : ", 25, " ans")\nFin`,
                 desc: { 
-                    fr: 'Spécificateur de format pour les entiers.',
-                    en: 'Format specifier for integers.'
+                    ar: 'محدد تنسيق للأعداد الصحيحة ذات الإشارة في النظام العشري.',
+                    fr: 'Spécificateur de format pour les entiers signés en base décimale.',
+                    en: 'Format specifier for signed decimal integers.'
+                },
+                category: 'io',
+                tips: {
+                    ar: [
+                        '%d للأعداد الصحيحة الموقعة (بإشارة)',
+                        '%u للأعداد الصحيحة غير الموقعة',
+                        'يمكن تحديد عرض الحقل مثل %5d',
+                        'يستخدم مع printf و scanf'
+                    ],
+                    fr: [
+                        '%d pour les entiers signés',
+                        '%u pour les entiers non signés',
+                        'Vous pouvez spécifier la largeur comme %5d',
+                        'Utilisé avec printf et scanf'
+                    ],
+                    en: [
+                        '%d for signed integers',
+                        '%u for unsigned integers',
+                        'You can specify width like %5d',
+                        'Used with printf and scanf'
+                    ]
                 }
             },
             {
@@ -395,17 +1157,61 @@
                 c: `#include <stdio.h>\nint main() {\n    float pi = 3.14159;\n    printf("π ≈ %.2f\\n", pi);\n    return 0;\n}`,
                 algo: `Algorithme FormatReel\nDébut\n    Écrire("π ≈ ", 3.14)\nFin`,
                 desc: { 
-                    fr: 'Spécificateur pour les nombres à virgule flottante.',
-                    en: 'Format specifier for floating-point numbers.'
+                    ar: 'محدد تنسيق للأعداد العشرية. .2f تعني منزلتين عشريتين.',
+                    fr: 'Spécificateur pour les nombres à virgule flottante. .2f signifie 2 décimales.',
+                    en: 'Format specifier for floating-point numbers. .2f means 2 decimal places.'
+                },
+                category: 'io',
+                tips: {
+                    ar: [
+                        '%f للأعداد العشرية من نوع float',
+                        '%lf للأعداد العشرية من نوع double',
+                        '%.2f تعرض منزلتين عشريتين',
+                        '%10.3f تعرض 10 أرقام مع 3 منازل عشرية'
+                    ],
+                    fr: [
+                        '%f pour les nombres décimaux de type float',
+                        '%lf pour les nombres décimaux de type double',
+                        '%.2f affiche 2 décimales',
+                        '%10.3f affiche 10 chiffres avec 3 décimales'
+                    ],
+                    en: [
+                        '%f for float decimal numbers',
+                        '%lf for double decimal numbers',
+                        '%.2f displays 2 decimal places',
+                        '%10.3f displays 10 digits with 3 decimals'
+                    ]
                 }
             },
             {
                 code: '%c',
-                c: `#include <stdio.h>\nint main() {\n    char c = 'A';\n    printf("Caractère : %c\\n", c);\n    return 0;\n}`,
-                algo: `Algorithme FormatCaractere\nDébut\n    Écrire("Caractère : ", 'A')\nFin`,
+                c: `#include <stdio.h>\nint main() {\n    char c = \'A\';\n    printf("Caractère : %c\\n", c);\n    return 0;\n}`,
+                algo: `Algorithme FormatCaractere\nDébut\n    Écrire("Caractère : ", \'A\')\nFin`,
                 desc: { 
-                    fr: 'Spécificateur pour un seul caractère.',
-                    en: 'Format specifier for a single character.'
+                    ar: 'محدد تنسيق لحرف واحد. استخدم %s للسلاسل النصية.',
+                    fr: 'Spécificateur pour un seul caractère. Utilisez %s pour les chaînes.',
+                    en: 'Format specifier for single character. Use %s for strings.'
+                },
+                category: 'io',
+                tips: {
+                    ar: [
+                        '%c لحرف واحد فقط',
+                        '%s للسلسلة النصية (مصفوفة أحرف)',
+                        'يمكن عرض رمز ASCII باستخدام %d مع char',
+                        'استخدم \\\' للفاصلة العليا داخل char'
+                    ],
+                    fr: [
+                        '%c pour un seul caractère',
+                        '%s pour une chaîne de caractères',
+                        'Vous pouvez afficher le code ASCII avec %d avec char',
+                        'Utilisez \\\' pour l\'apostrophe dans char'
+                    ],
+                    en: [
+                        '%c for single character only',
+                        '%s for string (character array)',
+                        'You can display ASCII code with %d with char',
+                        'Use \\\' for apostrophe inside char'
+                    ]
                 }
             },
             {
@@ -413,195 +1219,157 @@
                 c: `#include <stdio.h>\nint main() {\n    int x = 5;\n    x += 3;\n    printf("x = %d\\n", x);\n    return 0;\n}`,
                 algo: `Algorithme AdditionAffectation\nVariable x : Entier\nDébut\n    x ← 5\n    x ← x + 3\n    Écrire("x = ", x)\nFin`,
                 desc: { 
-                    fr: 'Ajoute une valeur et affecte le résultat (raccourci de x ← x + val).',
-                    en: 'Adds value to variable and stores result (shorthand for x = x + val).'
-                }
-            },
-            {
-                code: 'int',
-                c: `#include <stdio.h>\nint main() {\n    int n = 100;\n    printf("%d\\n", n);\n    return 0;\n}`,
-                algo: `Algorithme DeclarationEntier\nVariable n : Entier\nDébut\n    n ← 100\n    Écrire(n)\nFin`,
-                desc: { 
-                    fr: 'Type pour les entiers (ex: 0, -5, 100).',
-                    en: 'Integer data type (e.g., 0, -5, 100).'
-                }
-            },
-            {
-                code: 'float',
-                c: `#include <stdio.h>\nint main() {\n    float f = 3.14;\n    printf("%.2f\\n", f);\n    return 0;\n}`,
-                algo: `Algorithme DeclarationReel\nVariable f : Réel\nDébut\n    f ← 3.14\n    Écrire(f)\nFin`,
-                desc: { 
-                    fr: 'Type pour les nombres décimaux.',
-                    en: 'Floating-point data type.'
-                }
-            },
-            {
-                code: 'char',
-                c: `#include <stdio.h>\nint main() {\n    char c = 'X';\n    printf("%c\\n", c);\n    return 0;\n}`,
-                algo: `Algorithme DeclarationCaractere\nVariable c : Caractère\nDébut\n    c ← 'X'\n    Écrire(c)\nFin`,
-                desc: { 
-                    fr: 'Type pour un seul caractère (ex: \'A\').',
-                    en: 'Character data type (e.g., \'A\').'
-                }
-            },
-            {
-                code: 'chaine',
-                c: `#include <stdio.h>\nint main() {\n    char s[] = "Bonjour";\n    printf("%s\\n", s);\n    return 0;\n}`,
-                algo: `Algorithme DeclarationChaine\nVariable s : Chaîne\nDébut\n    s ← "Bonjour"\n    Écrire(s)\nFin`,
-                desc: { 
-                    fr: 'Tableau de caractères terminé par \'\\0\'.',
-                    en: 'Char array ending with \'\\0\'.'
-                }
-            },
-            {
-                code: '#include',
-                c: `#include <stdio.h>\n#include <math.h>\nint main() {\n    printf("%.2f\\n", sqrt(16.0));\n    return 0;\n}`,
-                algo: `Algorithme UtiliserBibliotheques\nUtiliser Bibliothèque Math\nDébut\n    Écrire(Racine(16))\nFin`,
-                desc: { 
-                    fr: 'Inclut une bibliothèque externe (ex: stdio.h, math.h).',
-                    en: 'Includes external library (e.g., stdio.h, math.h).'
-                }
-            },
-            {
-                code: 'return 0;',
-                c: `#include <stdio.h>\nint main() {\n    printf("Terminé avec succès\\n");\n    return 0;\n}`,
-                algo: `Algorithme Retour\nDébut\n    Écrire("Terminé avec succès")\n    Retourner 0\nFin`,
-                desc: { 
-                    fr: 'Termine main() avec succès (0 = succès).',
-                    en: 'Ends main() successfully (0 = success).'
-                }
-            },
-            {
-                code: 'i++',
-                c: `#include <stdio.h>\nint main() {\n    int i = 0;\n    i++;\n    printf("%d\\n", i);\n    return 0;\n}`,
-                algo: `Algorithme Incrementation\nVariable i : Entier\nDébut\n    i ← 0\n    i ← i + 1\n    Écrire(i)\nFin`,
-                desc: { 
-                    fr: 'Incrémente la variable de 1.',
-                    en: 'Increments variable by 1.'
-                }
-            },
-            {
-                code: 'i--',
-                c: `#include <stdio.h>\nint main() {\n    int i = 5;\n    i--;\n    printf("%d\\n", i);\n    return 0;\n}`,
-                algo: `Algorithme Decrementation\nVariable i : Entier\nDébut\n    i ← 5\n    i ← i - 1\n    Écrire(i)\nFin`,
-                desc: { 
-                    fr: 'Décrémente la variable de 1.',
-                    en: 'Decrements variable by 1.'
-                }
-            },
-            {
-                code: 'mat[40]',
-                c: `#include <stdio.h>\nint main() {\n    int notes[3] = {12, 15, 18};\n    printf("Note 2 : %d\\n", notes[1]);\n    return 0;\n}`,
-                algo: `Algorithme Tableau\nTableau notes[3] : Entier\nDébut\n    notes[0] ← 12\n    notes[1] ← 15\n    Écrire("Note 2 : ", notes[1])\nFin`,
-                desc: { 
-                    fr: 'Tableau pour stocker plusieurs valeurs du même type.',
-                    en: 'Array to store multiple values of the same type.'
-                }
-            },
-            {
-                code: 'if',
-                c: `#include <stdio.h>\nint main() {\n    int age = 18;\n    if (age >= 18) {\n        printf("Bienvenue !\\n");\n    }\n    return 0;\n}`,
-                algo: `Algorithme Condition\nVariable age : Entier\nDébut\n    age ← 18\n    Si (age >= 18) Alors\n        Écrire("Bienvenue !")\n    FinSi\nFin`,
-                desc: { 
-                    fr: 'Exécute le bloc si la condition est vraie.',
-                    en: 'Executes block if condition is true.'
-                }
-            },
-            {
-                code: 'else',
-                c: `#include <stdio.h>\nint main() {\n    int age = 16;\n    if (age >= 18) {\n        printf("Bienvenue !\\n");\n    } else {\n        printf("Accès refusé.\\n");\n    }\n    return 0;\n}`,
-                algo: `Algorithme Sinon\nVariable age : Entier\nDébut\n    age ← 16\n    Si (age >= 18) Alors\n        Écrire("Bienvenue !")\n    Sinon\n        Écrire("Accès refusé.")\n    FinSi\nFin`,
-                desc: { 
-                    fr: 'Exécute un bloc alternatif si la condition est fausse.',
-                    en: 'Executes alternative block if condition is false.'
-                }
-            },
-            {
-                code: 'switch(x)',
-                c: `#include <stdio.h>\nint main() {\n    int x = 2;\n    switch(x) {\n        case 1: printf("Un\\n"); break;\n        case 2: printf("Deux\\n"); break;\n        default: printf("Autre\\n");\n    }\n    return 0;\n}`,
-                algo: `Algorithme Selon\nVariable x : Entier\nDébut\n    x ← 2\n    Selon (x) Faire\n        1: Écrire("Un")\n        2: Écrire("Deux")\n        Sinon: Écrire("Autre")\n    FinSelon\nFin`,
-                desc: { 
-                    fr: 'Sélectionne un bloc selon la valeur de x.',
-                    en: 'Selects block based on variable value.'
-                }
-            },
-            {
-                code: 'break;',
-                c: `#include <stdio.h>\nint main() {\n    for(int i = 1; i <= 5; i++) {\n        if(i == 3) break;\n        printf("%d ", i);\n    }\n    return 0;\n}`,
-                algo: `Algorithme Quitter\nDébut\n    Pour i = 1 à 5 Faire\n        Si i = 3 Alors Quitter\n        Écrire(i, " ")\n    FinPour\nFin`,
-                desc: { 
-                    fr: 'Sort immédiatement de la boucle.',
-                    en: 'Exits loop immediately.'
-                }
-            },
-            {
-                code: 'continue;',
-                c: `#include <stdio.h>\nint main() {\n    for(int i = 1; i <= 3; i++) {\n        if(i == 2) continue;\n        printf("%d ", i);\n    }\n    return 0;\n}`,
-                algo: `Algorithme Continuer\nDébut\n    Pour i = 1 à 3 Faire\n        Si i = 2 Alors Continuer\n        Écrire(i, " ")\n    FinPour\nFin`,
-                desc: { 
-                    fr: 'Ignore le reste de l’itération et passe à la suivante.',
-                    en: 'Skips current iteration and jumps to next one.'
-                }
-            },
-            {
-                code: '// comment',
-                c: `#include <stdio.h>\nint main() {\n    // Commentaire\n    printf("OK\\n");\n    return 0;\n}`,
-                algo: `Algorithme Commentaire\nDébut\n    // Commentaire\n    Écrire("OK")\nFin`,
-                desc: { 
-                    fr: 'Commentaire sur une ligne — ignoré à la compilation.',
-                    en: 'Single-line comment — ignored by compiler.'
-                }
-            },
-            {
-                code: '/* comment */',
-                c: `#include <stdio.h>\nint main() {\n    /*\n     * Commentaire\n     * multi-lignes\n     */\n    printf("OK\\n");\n    return 0;\n}`,
-                algo: `Algorithme Commentaire\nDébut\n    /*\n     * Commentaire\n     * multi-lignes\n     */\n    Écrire("OK")\nFin`,
-                desc: { 
-                    fr: 'Commentaire multi-lignes — débute par /* et finit par */.',
-                    en: 'Multi-line comment — starts with /* and ends with */.'
+                    ar: 'مشغل الإسناد مع الجمع. يعادل x = x + 3.',
+                    fr: 'Opérateur d\'affectation avec addition. Equivalent à x = x + 3.',
+                    en: 'Addition assignment operator. Equivalent to x = x + 3.'
+                },
+                category: 'operators',
+                tips: {
+                    ar: [
+                        '+= يجمع ويخزن النتيجة في نفس المتغير',
+                        'هناك أيضاً -= *= /= %=',
+                        'يختصر الكود ويجعله أكثر وضوحاً',
+                        'يمكن استخدامه مع جميع أنواع البيانات الرقمية'
+                    ],
+                    fr: [
+                        '+= additionne et stocke le résultat dans la même variable',
+                        'Il y a aussi -= *= /= %=',
+                        'Raccourcit le code et le rend plus clair',
+                        'Peut être utilisé avec tous les types de données numériques'
+                    ],
+                    en: [
+                        '+= adds and stores result in same variable',
+                        'There are also -= *= /= %=',
+                        'Shortens code and makes it clearer',
+                        'Can be used with all numeric data types'
+                    ]
                 }
             }
         ];
 
         const translations = {
-            home: { fr: "Accueil", en: "Home" },
-            title: { fr: "Exemples de codes C avec algorithmes", en: "C Code Examples with Algorithms" }
+            home: { ar: "الرئيسية", fr: "Accueil", en: "Home" },
+            codes: { ar: "أكواد C", fr: "Codes C", en: "C Codes" },
+            title: { ar: "معمل أمثلة لغة C", fr: "Laboratoire d'Exemples C", en: "C Examples Laboratory" },
+            subtitle: {
+                ar: "استكشف أمثلة كاملة لشيفرات لغة C مع ما يقابلها من خوارزميات. مثالي لفهم منطق البرمجة وممارسة مهاراتك البرمجية.",
+                fr: "Explorez des exemples complets de code C avec leurs équivalents en algorithmes. Parfait pour comprendre la logique de programmation et pratiquer vos compétences.",
+                en: "Explore complete C code examples with their algorithm equivalents. Perfect for understanding programming logic and practicing your skills."
+            },
+            all: { ar: "الكل", fr: "Tous", en: "All" },
+            io: { ar: "الإدخال/الإخراج", fr: "E/S", en: "I/O" },
+            loops: { ar: "الحلقات", fr: "Boucles", en: "Loops" },
+            conditions: { ar: "الشروط", fr: "Conditions", en: "Conditions" },
+            types: { ar: "أنواع البيانات", fr: "Types", en: "Types" },
+            operators: { ar: "المشغلات", fr: "Opérateurs", en: "Operators" },
+            control: { ar: "التحكم", fr: "Contrôle", en: "Control" },
+            misc: { ar: "متنوع", fr: "Divers", en: "Misc" },
+            infoTitle: { ar: "معلومات إضافية", fr: "Informations supplémentaires", en: "Additional Information" },
+            infoCodeTitle: { ar: "التعليمات البرمجية", fr: "Instructions de code", en: "Code Instructions" },
+            infoCategoryTitle: { ar: "التصنيف", fr: "Catégorie", en: "Category" },
+            infoDescriptionTitle: { ar: "الوصف", fr: "Description", en: "Description" },
+            infoTipsTitle: { ar: "نصائح واستخدامات", fr: "Conseils et utilisations", en: "Tips and Uses" },
+            copyExampleBtn: { ar: "نسخ المثال", fr: "Copier l'exemple", en: "Copy Example" },
+            closeModalBtn: { ar: "تم الفهم", fr: "Compris", en: "Got It" }
         };
 
-        let currentLang = "fr";
+        let currentLang = "ar";
+        let currentFilter = "all";
+        let copiedCount = 0;
+        let currentExampleIndex = -1;
 
         function renderExamples() {
             const container = document.getElementById("examplesContainer");
             const search = document.getElementById("search").value.toLowerCase();
             container.innerHTML = "";
-            examples.forEach(ex => {
-                const c = ex.code.toLowerCase();
-                const d = ex.desc[currentLang].toLowerCase();
-                const a = ex.algo.toLowerCase();
-                if (search && !c.includes(search) && !d.includes(search) && !a.includes(search)) return;
+            
+            let visibleCount = 0;
+            
+            examples.forEach((ex, index) => {
+                // Filtrer par catégorie
+                if (currentFilter !== "all" && ex.category !== currentFilter) return;
+                
+                // Filtrer par recherche
+                const searchText = search.toLowerCase();
+                if (searchText) {
+                    const codeMatch = ex.code.toLowerCase().includes(searchText);
+                    const descMatch = ex.desc[currentLang].toLowerCase().includes(searchText);
+                    const algoMatch = ex.algo.toLowerCase().includes(searchText);
+                    const cMatch = ex.c.toLowerCase().includes(searchText);
+                    
+                    if (!codeMatch && !descMatch && !algoMatch && !cMatch) return;
+                }
+                
+                visibleCount++;
+                
                 const card = document.createElement("div");
                 card.className = "example-card";
+                card.style.animationDelay = `${index * 0.05}s`;
+                
+                const categoryLabels = {
+                    'io': currentLang === 'ar' ? 'الإدخال/الإخراج' : 
+                          currentLang === 'fr' ? 'Entrée/Sortie' : 'Input/Output',
+                    'loops': currentLang === 'ar' ? 'الحلقات' : 
+                             currentLang === 'fr' ? 'Boucles' : 'Loops',
+                    'conditions': currentLang === 'ar' ? 'الشروط' : 
+                                  currentLang === 'fr' ? 'Conditions' : 'Conditions',
+                    'types': currentLang === 'ar' ? 'أنواع البيانات' : 
+                             currentLang === 'fr' ? 'Types de données' : 'Data Types',
+                    'operators': currentLang === 'ar' ? 'المشغلات' : 
+                                 currentLang === 'fr' ? 'Opérateurs' : 'Operators',
+                    'control': currentLang === 'ar' ? 'التحكم' : 
+                               currentLang === 'fr' ? 'Contrôle' : 'Control',
+                    'misc': currentLang === 'ar' ? 'متنوع' : 
+                            currentLang === 'fr' ? 'Divers' : 'Misc'
+                };
+                
                 card.innerHTML = `
-                    <div class="code-header">
-                        <span class="code-tag">${ex.code}</span>
+                    <div class="card-header">
+                        <div>
+                            <div class="code-tag">${ex.code}</div>
+                            <div class="card-meta">
+                                <span class="category-tag">${categoryLabels[ex.category]}</span>
+                            </div>
+                        </div>
                         <button class="copy-btn" onclick="copyCode(this, \`${ex.c.replace(/`/g, '\\`')}\`)">
                             <i class="fas fa-copy"></i>
                         </button>
                     </div>
-                    <div class="lang-label"><i class="fas fa-code"></i> Code C</div>
-                    <div class="code-block">${ex.c}</div>
-                    <div class="lang-label"><i class="fas fa-project-diagram"></i> Algorithme</div>
-                    <div class="code-block">${ex.algo}</div>
+                    
+                    <div class="lang-label"><i class="fas fa-code"></i> ${currentLang === 'ar' ? 'كود C' : 
+                                                                       currentLang === 'fr' ? 'Code C' : 'C Code'}</div>
+                    <div class="code-block" data-lang="C">${ex.c}</div>
+                    
+                    <div class="lang-label"><i class="fas fa-project-diagram"></i> ${currentLang === 'ar' ? 'خوارزمية' : 
+                                                                                  currentLang === 'fr' ? 'Algorithme' : 'Algorithm'}</div>
+                    <div class="code-block" data-lang="Algo">${ex.algo}</div>
+                    
                     <div class="desc">${ex.desc[currentLang]}</div>
+                    
+                    <div class="card-footer">
+                        <button class="info-btn" onclick="showExampleInfo(${index})">
+                            <i class="fas fa-info-circle"></i>
+                            ${currentLang === 'ar' ? 'معلومات إضافية' : 
+                             currentLang === 'fr' ? 'Plus d\'info' : 'More info'}
+                        </button>
+                    </div>
                 `;
+                
                 container.appendChild(card);
             });
+            
+            updateStats(visibleCount);
         }
 
         function copyCode(btn, code) {
             navigator.clipboard.writeText(code).then(() => {
                 btn.classList.add('copied');
                 btn.innerHTML = '<i class="fas fa-check"></i>';
+                
+                copiedCount++;
+                localStorage.setItem('copiedCount', copiedCount);
+                updateStats();
+                
                 setTimeout(() => {
                     btn.classList.remove('copied');
                     btn.innerHTML = '<i class="fas fa-copy"></i>';
@@ -609,38 +1377,236 @@
             });
         }
 
+        function showExampleInfo(index) {
+            currentExampleIndex = index;
+            const ex = examples[index];
+            
+            // ترجمة العناوين
+            document.querySelectorAll('[id^="info"]').forEach(el => {
+                const id = el.id.replace('info', '').replace('Title', '');
+                if (translations[`info${id}Title`]) {
+                    el.textContent = translations[`info${id}Title`][currentLang];
+                }
+            });
+            
+            document.getElementById('infoCode').textContent = ex.code;
+            document.getElementById('infoDescription').textContent = ex.desc[currentLang];
+            
+            // تحديث التصنيف
+            const categoryLabels = {
+                'io': currentLang === 'ar' ? 'الإدخال/الإخراج' : 
+                      currentLang === 'fr' ? 'Entrée/Sortie' : 'Input/Output',
+                'loops': currentLang === 'ar' ? 'الحلقات' : 
+                         currentLang === 'fr' ? 'Boucles' : 'Loops',
+                'conditions': currentLang === 'ar' ? 'الشروط' : 
+                              currentLang === 'fr' ? 'Conditions' : 'Conditions',
+                'types': currentLang === 'ar' ? 'أنواع البيانات' : 
+                         currentLang === 'fr' ? 'Types de données' : 'Data Types',
+                'operators': currentLang === 'ar' ? 'المشغلات' : 
+                             currentLang === 'fr' ? 'Opérateurs' : 'Operators',
+                'control': currentLang === 'ar' ? 'التحكم' : 
+                           currentLang === 'fr' ? 'Contrôle' : 'Control',
+                'misc': currentLang === 'ar' ? 'متنوع' : 
+                        currentLang === 'fr' ? 'Divers' : 'Misc'
+            };
+            
+            document.getElementById('infoCategory').textContent = categoryLabels[ex.category];
+            
+            // تحديث النصائح
+            const tipsList = document.getElementById('infoTips');
+            tipsList.innerHTML = '';
+            if (ex.tips && ex.tips[currentLang]) {
+                ex.tips[currentLang].forEach(tip => {
+                    const li = document.createElement('li');
+                    li.textContent = tip;
+                    tipsList.appendChild(li);
+                });
+            }
+            
+            // تحديث الشبكة المعلوماتية
+            const infoGrid = document.getElementById('infoGrid');
+            infoGrid.innerHTML = '';
+            
+            const gridItems = [
+                {
+                    icon: 'fas fa-file-code',
+                    label: currentLang === 'ar' ? 'نوع الكود' : 
+                          currentLang === 'fr' ? 'Type de code' : 'Code Type',
+                    value: currentLang === 'ar' ? 'بيان/مشغل' : 
+                          currentLang === 'fr' ? 'Instruction/Opérateur' : 'Statement/Operator'
+                },
+                {
+                    icon: 'fas fa-cogs',
+                    label: currentLang === 'ar' ? 'التعقيد' : 
+                          currentLang === 'fr' ? 'Complexité' : 'Complexity',
+                    value: currentLang === 'ar' ? 'بسيط' : 
+                          currentLang === 'fr' ? 'Simple' : 'Simple'
+                },
+                {
+                    icon: 'fas fa-book',
+                    label: currentLang === 'ar' ? 'المكتبة' : 
+                          currentLang === 'fr' ? 'Bibliothèque' : 'Library',
+                    value: ex.c.includes('stdio.h') ? 'stdio.h' : 'مختلف'
+                },
+                {
+                    icon: 'fas fa-history',
+                    label: currentLang === 'ar' ? 'تاريخ الإضافة' : 
+                          currentLang === 'fr' ? 'Date d\'ajout' : 'Added Date',
+                    value: currentLang === 'ar' ? 'قريباً' : 
+                          currentLang === 'fr' ? 'Bientôt' : 'Soon'
+                }
+            ];
+            
+            gridItems.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'info-item';
+                div.innerHTML = `
+                    <div class="info-item-label">
+                        <i class="${item.icon}"></i>
+                        ${item.label}
+                    </div>
+                    <div class="info-item-value">${item.value}</div>
+                `;
+                infoGrid.appendChild(div);
+            });
+            
+            // تحديث أزرار الترجمة
+            document.getElementById('copyExampleBtn').textContent = translations.copyExampleBtn[currentLang];
+            document.getElementById('closeModalBtn').textContent = translations.closeModalBtn[currentLang];
+            
+            // عرض النافذة
+            document.getElementById('infoModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeInfoModal() {
+            document.getElementById('infoModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function copyCurrentExample() {
+            if (currentExampleIndex !== -1) {
+                const ex = examples[currentExampleIndex];
+                navigator.clipboard.writeText(ex.c).then(() => {
+                    // إضافة تأثير مؤقت على الزر
+                    const btn = document.querySelector('.action-btn');
+                    const originalHTML = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-check"></i> <span id="copyExampleBtn">' + 
+                                   (currentLang === 'ar' ? 'تم النسخ!' : 
+                                    currentLang === 'fr' ? 'Copié!' : 'Copied!') + '</span>';
+                    btn.style.background = 'var(--success)';
+                    btn.style.borderColor = 'var(--success)';
+                    btn.style.color = 'white';
+                    
+                    setTimeout(() => {
+                        btn.innerHTML = originalHTML;
+                        btn.style.background = '';
+                        btn.style.borderColor = '';
+                        btn.style.color = '';
+                    }, 1500);
+                });
+            }
+        }
+
+        function filterExamples(filter) {
+            currentFilter = filter;
+            
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.filter === filter);
+            });
+            
+            renderExamples();
+        }
+
+        function updateStats(visibleCount = 0) {
+            const total = examples.length;
+            
+            const statTexts = {
+                ar: {
+                    total: `${total} مثال`,
+                    visible: `${visibleCount} ظاهر`,
+                    copied: `${copiedCount} منسوخ`
+                },
+                fr: {
+                    total: `${total} exemples`,
+                    visible: `${visibleCount} visibles`,
+                    copied: `${copiedCount} copiés`
+                },
+                en: {
+                    total: `${total} examples`,
+                    visible: `${visibleCount} visible`,
+                    copied: `${copiedCount} copied`
+                }
+            };
+            
+            document.getElementById('totalExamples').textContent = statTexts[currentLang].total;
+            document.getElementById('visibleExamples').textContent = statTexts[currentLang].visible;
+            document.getElementById('copiedCount').textContent = statTexts[currentLang].copied;
+        }
+
         function setLang(lang) {
             currentLang = lang;
             document.body.className = `lang-${lang}`;
             document.getElementById("html-root").setAttribute("lang", lang);
-            document.getElementById("html-root").setAttribute("dir", "ltr");
+            document.getElementById("html-root").setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
 
+            // Update language buttons
             document.querySelectorAll(".lang-btn").forEach(btn => {
                 btn.classList.toggle("active", btn.dataset.lang === lang);
             });
 
+            // Update all translatable text
             document.querySelectorAll("[data-key]").forEach(el => {
                 const k = el.dataset.key;
-                if (translations[k] && translations[k][lang]) el.textContent = translations[k][lang];
+                if (translations[k] && translations[k][lang]) {
+                    el.textContent = translations[k][lang];
+                }
             });
 
-            document.getElementById("search").placeholder = 
-                lang === "fr" ? "Rechercher dans les codes ou descriptions…" :
-                "Search in codes or descriptions…";
+            // Update search placeholder
+            const searchPlaceholders = {
+                ar: "ابحث في الأكواد أو الخوارزميات أو الوصف...",
+                fr: "Rechercher dans les codes, algorithmes ou descriptions…",
+                en: "Search in codes, algorithms or descriptions…"
+            };
+            
+            document.getElementById("search").placeholder = searchPlaceholders[lang];
 
+            // Load copied count
+            copiedCount = parseInt(localStorage.getItem('copiedCount')) || 0;
+            
             renderExamples();
         }
 
+        // Initialize
         window.addEventListener('scroll', () => {
             document.body.classList.toggle('scrolling', window.scrollY > 10);
         });
 
         document.getElementById("search").addEventListener("input", renderExamples);
+        
         document.querySelectorAll(".lang-btn").forEach(btn => {
             btn.addEventListener("click", () => setLang(btn.dataset.lang));
         });
 
-        setLang("fr");
+        // إغلاق النافذة بالضغط على ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && document.getElementById('infoModal').classList.contains('active')) {
+                closeInfoModal();
+            }
+        });
+
+        // إغلاق النافذة بالنقر خارجها
+        document.getElementById('infoModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('infoModal')) {
+                closeInfoModal();
+            }
+        });
+
+        // Load initial data
+        copiedCount = parseInt(localStorage.getItem('copiedCount')) || 0;
+        setLang("ar");
     </script>
 </body>
 </html>

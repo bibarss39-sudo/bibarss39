@@ -13,6 +13,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <style>
+        :root {
+            --primary: #0ea5e9;
+            --primary-light: #00eaff;
+            --primary-dark: #0f172a;
+            --secondary: #0aff9d;
+            --bg-dark: #0f172a;
+            --bg-medium: #1e293b;
+            --bg-light: rgba(30, 41, 59, 0.6);
+            --text-light: #e2e8f0;
+            --text-dark: #0f172a;
+            --shadow-light: rgba(14, 165, 233, 0.25);
+            --shadow-medium: rgba(0, 234, 255, 0.3);
+            --shadow-heavy: rgba(0, 234, 255, 0.4);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -20,132 +36,184 @@
         }
 
         body {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
+            background: linear-gradient(135deg, var(--bg-dark), var(--bg-medium));
             font-family: 'Tajawal', Arial, sans-serif;
-            color: #e2e8f0;
+            color: var(--text-light);
             padding: 20px 16px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* تأثير ظل عند التمرير */
-        body::before {
-            content: '';
+        /* تأثير الجسيمات المتحركة في الخلفية */
+        #particles-js {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 8px;
-            background: linear-gradient(90deg, #0ea5e9, #00eaff, #0aff9d);
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        /* تأثير ظل عند التمرير */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light), var(--secondary));
             opacity: 0;
             transition: opacity 0.4s ease;
             z-index: 1000;
             pointer-events: none;
         }
 
-        body.scrolling::before {
+        body.scrolling .scroll-indicator {
             opacity: 1;
         }
 
-        h1 {
-            color: #0ea5e9;
-            margin: 30px 0 24px;
-            font-size: 32px;
+        .header {
             text-align: center;
-            text-shadow: 0 2px 10px rgba(14, 165, 233, 0.25);
-            letter-spacing: 1px;
-            font-weight: 800;
-            line-height: 1.3;
+            margin: 30px 0 24px;
+            position: relative;
             padding: 0 10px;
         }
 
+        h1 {
+            color: var(--primary);
+            font-size: 2.8rem;
+            text-shadow: 0 2px 15px var(--shadow-light);
+            letter-spacing: 1px;
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 12px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary-light), transparent);
+            border-radius: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #94a3b8;
+            margin-top: 12px;
+            max-width: 500px;
+            line-height: 1.6;
+        }
+
         .lang-buttons {
-            margin-bottom: 28px;
+            margin: 28px 0 36px;
             display: flex;
-            gap: 12px;
+            gap: 14px;
             flex-wrap: wrap;
             justify-content: center;
+            position: relative;
         }
 
         .lang-buttons button {
-            background: rgba(14, 165, 233, 0.12);
-            border: 2px solid #0ea5e9;
-            color: #f1f5f9;
-            padding: 10px 20px;
-            border-radius: 16px;
+            background: rgba(14, 165, 233, 0.15);
+            border: 2px solid var(--primary);
+            color: var(--text-light);
+            padding: 12px 24px;
+            border-radius: 18px;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            font-size: 16px;
-            min-width: 100px;
+            transition: var(--transition);
+            font-size: 1rem;
+            min-width: 110px;
             outline: none;
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
-        .lang-buttons button::after {
+        .lang-buttons button::before {
             content: '';
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateX(-100%);
-            transition: transform 0.5s ease;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
         }
 
-        .lang-buttons button:hover::after {
-            transform: translateX(0);
+        .lang-buttons button:hover::before {
+            left: 100%;
         }
 
         .lang-buttons button:hover {
-            background: #0ea5e9;
-            color: #0f172a;
-            transform: translateY(-4px) scale(1.03);
-            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
+            background: var(--primary);
+            color: var(--text-dark);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 25px var(--shadow-heavy);
+            border-color: var(--primary-light);
         }
 
-        .lang-buttons button:focus-visible {
-            outline: 3px solid #00eaff;
-            outline-offset: 4px;
+        .lang-buttons button.active {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--text-dark);
+            border-color: transparent;
+            box-shadow: 0 0 20px var(--shadow-medium);
         }
 
         .menu {
             width: 100%;
-            max-width: 600px;
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
+            max-width: 680px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 22px;
+            margin-bottom: 40px;
         }
 
         .item {
-            background: rgba(30, 41, 59, 0.6);
+            background: var(--bg-light);
             border: 1px solid rgba(14, 165, 233, 0.3);
-            border-radius: 20px;
-            padding: 20px 22px;
+            border-radius: 22px;
+            padding: 24px;
             display: flex;
             align-items: center;
-            gap: 18px;
-            font-size: 21px;
+            gap: 20px;
+            font-size: 1.3rem;
             font-weight: 700;
-            color: #0ea5e9;
+            color: var(--primary);
             text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
             position: relative;
             overflow: hidden;
             outline: none;
+            backdrop-filter: blur(10px);
+            height: 100%;
         }
 
         .item::before {
             content: '';
             position: absolute;
-            top: 0; left: 0;
-            width: 4px;
+            top: 0;
+            right: 0;
+            width: 5px;
             height: 100%;
-            background: linear-gradient(to bottom, #0ea5e9, #00eaff);
+            background: linear-gradient(to bottom, var(--primary), var(--primary-light));
             transform: scaleY(0);
             transform-origin: top;
             transition: transform 0.4s ease;
@@ -155,45 +223,96 @@
             transform: scaleY(1);
         }
 
+        .item::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 24px;
+            transform: translateY(-50%) rotate(-45deg);
+            width: 12px;
+            height: 12px;
+            border-right: 3px solid var(--primary-light);
+            border-bottom: 3px solid var(--primary-light);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .item:hover::after {
+            opacity: 1;
+            right: 20px;
+        }
+
+        .icon-wrapper {
+            width: 60px;
+            height: 60px;
+            background: rgba(14, 165, 233, 0.15);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+
         .item i {
-            font-size: 26px;
-            min-width: 36px;
-            text-align: center;
-            color: #00eaff;
+            font-size: 28px;
+            color: var(--primary-light);
             transition: transform 0.3s ease;
         }
 
+        .item:hover .icon-wrapper {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
         .item:hover i {
-            transform: scale(1.2) rotate(8deg);
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .item-content {
+            flex: 1;
         }
 
         .item:hover {
-            background: linear-gradient(135deg, #0ea5e9, #00eaff, #0aff9d);
-            color: #0f172a;
-            transform: translateY(-6px) scale(1.015);
-            box-shadow: 0 10px 25px rgba(0, 234, 255, 0.4);
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.9), rgba(0, 234, 255, 0.8), rgba(10, 255, 157, 0.6));
+            color: var(--text-dark);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 35px var(--shadow-heavy);
+            border-color: transparent;
         }
 
-        .item:active {
-            transform: translateY(-2px) scale(1);
-            box-shadow: 0 4px 12px rgba(0, 234, 255, 0.3);
+        .item-desc {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-top: 6px;
+            font-weight: 500;
+            opacity: 0.8;
+            transition: color 0.3s ease;
         }
 
-        .item:focus-visible {
-            outline: 3px solid #00eaff;
-            outline-offset: 4px;
-            border-radius: 20px;
+        .item:hover .item-desc {
+            color: var(--text-dark);
+            opacity: 0.9;
         }
 
         /* رسوم متحركة عند تحميل الصفحة */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
             }
         }
 
@@ -202,17 +321,78 @@
             opacity: 0;
         }
 
+        .item {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .item:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .item:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .item:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+
+        .item:nth-child(5) {
+            animation-delay: 0.8s;
+        }
+
+        .item:nth-child(6) {
+            animation-delay: 1s;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.9rem;
+            padding: 20px;
+            border-top: 1px solid rgba(100, 116, 139, 0.2);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        /* إضافة سلسة لتغيير الاتجاه */
+        html[dir="ltr"] .item::before {
+            right: auto;
+            left: 0;
+        }
+
+        html[dir="ltr"] .item::after {
+            right: auto;
+            left: 24px;
+            transform: translateY(-50%) rotate(135deg);
+        }
+
+        html[dir="ltr"] .item:hover::after {
+            left: 20px;
+        }
+
         /* تحسين للهواتف */
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             h1 {
-                font-size: 26px;
-                margin: 20px 0 20px;
+                font-size: 2.2rem;
+                margin: 20px 0 16px;
+            }
+
+            .menu {
+                grid-template-columns: 1fr;
+                gap: 18px;
             }
 
             .item {
-                font-size: 19px;
-                padding: 18px;
-                gap: 16px;
+                font-size: 1.2rem;
+                padding: 20px;
+                gap: 18px;
+            }
+
+            .icon-wrapper {
+                width: 54px;
+                height: 54px;
             }
 
             .item i {
@@ -220,71 +400,163 @@
             }
 
             .lang-buttons button {
-                padding: 9px 16px;
-                font-size: 15px;
-                min-width: 90px;
+                padding: 10px 20px;
+                font-size: 0.95rem;
+                min-width: 100px;
             }
         }
 
-        @media (max-width: 400px) {
-            .item {
-                font-size: 17px;
-                padding: 16px;
-                gap: 14px;
-            }
-
+        @media (max-width: 480px) {
             h1 {
-                font-size: 24px;
+                font-size: 1.9rem;
+            }
+
+            .item {
+                font-size: 1.1rem;
+                padding: 18px;
+                gap: 16px;
+            }
+
+            .icon-wrapper {
+                width: 48px;
+                height: 48px;
+            }
+
+            .item-desc {
+                font-size: 0.85rem;
+            }
+
+            .lang-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .lang-buttons button {
+                width: 200px;
             }
         }
 
-        /* إضافة سلسة لتغيير الاتجاه */
-        html {
-            transition: direction 0.3s ease, text-align 0.3s ease;
+        /* تأثيرات النقر */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* تحسين الوصول */
+        .item:focus-visible,
+        .lang-buttons button:focus-visible {
+            outline: 3px solid var(--secondary);
+            outline-offset: 3px;
         }
     </style>
 </head>
 <body>
 
-<h1 data-lang-key="title">القائمة الرئيسية — لغة C</h1>
+<!-- مؤشر التمرير -->
+<div class="scroll-indicator" id="scrollIndicator"></div>
+
+<!-- الجسيمات المتحركة -->
+<div id="particles-js"></div>
+
+<div class="header">
+    <h1 data-lang-key="title">القائمة الرئيسية — لغة C</h1>
+    <p class="subtitle" data-lang-key="subtitle">بوابة شاملة لمطوري لغة C - ابدأ رحلتك البرمجية</p>
+</div>
 
 <div class="lang-buttons">
-    <button onclick="setLang('ar')">العربية</button>
-    <button onclick="setLang('en')">English</button>
-    <button onclick="setLang('fr')">Français</button>
+    <button onclick="setLang('ar')" class="active">
+        <i class="fas fa-globe"></i>
+        <span>العربية</span>
+    </button>
+    <button onclick="setLang('en')">
+        <i class="fas fa-globe"></i>
+        <span>English</span>
+    </button>
+    <button onclick="setLang('fr')">
+        <i class="fas fa-globe"></i>
+        <span>Français</span>
+    </button>
 </div>
 
 <div class="menu">
     <a class="item" href="home.html" data-key="codes">
-        <i class="fa-solid fa-code"></i>
-        <span data-lang-key="codes">أكواد C</span>
+        <div class="icon-wrapper">
+            <i class="fa-solid fa-code"></i>
+        </div>
+        <div class="item-content">
+            <span data-lang-key="codes">أكواد C</span>
+            <div class="item-desc" data-lang-key="codes_desc">مجموعة من الأكواد الجاهزة للاستخدام</div>
+        </div>
     </a>
 
     <a class="item" href="amtla.html" data-key="examples">
-        <i class="fa-solid fa-lightbulb"></i>
-        <span data-lang-key="examples">أمثلة</span>
+        <div class="icon-wrapper">
+            <i class="fa-solid fa-lightbulb"></i>
+        </div>
+        <div class="item-content">
+            <span data-lang-key="examples">أمثلة تطبيقية</span>
+            <div class="item-desc" data-lang-key="examples_desc">أمثلة عملية لمفاهيم البرمجة</div>
+        </div>
     </a>
 
     <a class="item" href="i5.html" data-key="shortcuts">
-        <i class="fa-solid fa-keyboard"></i>
-        <span data-lang-key="shortcuts">اختصارات الكيبورد</span>
+        <div class="icon-wrapper">
+            <i class="fa-solid fa-keyboard"></i>
+        </div>
+        <div class="item-content">
+            <span data-lang-key="shortcuts">اختصارات الكيبورد</span>
+            <div class="item-desc" data-lang-key="shortcuts_desc">اختصارات لتسريع عملية التطوير</div>
+        </div>
     </a>
 
     <a class="item" href="contact.html" data-key="contact">
-        <i class="fa-solid fa-envelope"></i>
-        <span data-lang-key="contact">تواصل معي</span>
+        <div class="icon-wrapper">
+            <i class="fa-solid fa-envelope"></i>
+        </div>
+        <div class="item-content">
+            <span data-lang-key="contact">تواصل معي</span>
+            <div class="item-desc" data-lang-key="contact_desc">اطرح أسئلتك واستفساراتك</div>
+        </div>
     </a>
 
     <a class="item" href="ms.html" data-key="resources">
-        <i class="fa-solid fa-book"></i>
-        <span data-lang-key="resources">مصادر للشرح</span>
+        <div class="icon-wrapper">
+            <i class="fa-solid fa-book"></i>
+        </div>
+        <div class="item-content">
+            <span data-lang-key="resources">مصادر للشرح</span>
+            <div class="item-desc" data-lang-key="resources_desc">موارد تعليمية ومراجع</div>
+        </div>
     </a>
 
     <a class="item" href="apps.html" data-key="apps">
-        <i class="fa-solid fa-mobile-screen-button"></i>
-        <span data-lang-key="apps">تطبيقات C</span>
+        <div class="icon-wrapper">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+        </div>
+        <div class="item-content">
+            <span data-lang-key="apps">تطبيقات C</span>
+            <div class="item-desc" data-lang-key="apps_desc">أدوات وبيئات تطوير لغة C</div>
+        </div>
     </a>
 </div>
+
+<footer>
+    <p data-lang-key="footer">© 2025 بوابة لغة C - جميع الحقوق محفوظة</p>
+</footer>
+
+<!-- مكتبة الجسيمات -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
 <script>
 // نظام الترجمة المركزي
@@ -294,73 +566,194 @@ const translations = {
         en: "Main Menu — C Language",
         fr: "Menu Principal — Langage C"
     },
+    subtitle: {
+        ar: "بوابة شاملة لمطوري لغة C - ابدأ رحلتك البرمجية",
+        en: "Comprehensive portal for C developers - Start your coding journey",
+        fr: "Portail complet pour développeurs C - Commencez votre parcours de codage"
+    },
     codes: {
         ar: "أكواد C",
         en: "C Codes",
         fr: "Codes C"
     },
+    codes_desc: {
+        ar: "مجموعة من الأكواد الجاهزة للاستخدام",
+        en: "Collection of ready-to-use code snippets",
+        fr: "Collection d'extraits de code prêts à l'emploi"
+    },
     examples: {
-        ar: "أمثلة",
-        en: "Examples",
-        fr: "Exemples"
+        ar: "أمثلة تطبيقية",
+        en: "Practical Examples",
+        fr: "Exemples Pratiques"
+    },
+    examples_desc: {
+        ar: "أمثلة عملية لمفاهيم البرمجة",
+        en: "Practical examples of programming concepts",
+        fr: "Exemples pratiques de concepts de programmation"
     },
     shortcuts: {
         ar: "اختصارات الكيبورد",
         en: "Keyboard Shortcuts",
         fr: "Raccourcis Clavier"
     },
+    shortcuts_desc: {
+        ar: "اختصارات لتسريع عملية التطوير",
+        en: "Shortcuts to speed up development",
+        fr: "Raccourcis pour accélérer le développement"
+    },
     contact: {
         ar: "تواصل معي",
         en: "Contact Me",
         fr: "Contactez-moi"
+    },
+    contact_desc: {
+        ar: "اطرح أسئلتك واستفساراتك",
+        en: "Ask your questions and inquiries",
+        fr: "Posez vos questions et demandes"
     },
     resources: {
         ar: "مصادر للشرح",
         en: "Learning Resources",
         fr: "Sources d'Apprentissage"
     },
+    resources_desc: {
+        ar: "موارد تعليمية ومراجع",
+        en: "Educational resources and references",
+        fr: "Ressources éducatives et références"
+    },
     apps: {
         ar: "تطبيقات C",
-        en: "C Apps",
+        en: "C Applications",
         fr: "Applications C"
+    },
+    apps_desc: {
+        ar: "أدوات وبيئات تطوير لغة C",
+        en: "Tools and development environments for C",
+        fr: "Outils et environnements de développement pour C"
+    },
+    footer: {
+        ar: "© 2025 بوابة لغة C - جميع الحقوق محفوظة",
+        en: "© 2025 C Language Portal - All rights reserved",
+        fr: "© 2025 Portail Langage C - Tous droits réservés"
     }
 };
 
 let currentLang = "ar";
 
-// إضافة كلاس عند التمرير (لتأثير الشريط)
-window.addEventListener('scroll', () => {
-    document.body.classList.toggle('scrolling', window.scrollY > 10);
-});
+// تأثيرات الجسيمات
+function initParticles() {
+    particlesJS("particles-js", {
+        particles: {
+            number: { value: 50, density: { enable: true, value_area: 800 } },
+            color: { value: "#0ea5e9" },
+            shape: { type: "circle" },
+            opacity: { value: 0.3, random: true },
+            size: { value: 3, random: true },
+            line_linked: {
+                enable: true,
+                distance: 150,
+                color: "#00eaff",
+                opacity: 0.2,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: 2,
+                direction: "none",
+                random: true,
+                straight: false,
+                out_mode: "out",
+                bounce: false
+            }
+        },
+        interactivity: {
+            detect_on: "canvas",
+            events: {
+                onhover: { enable: true, mode: "repulse" },
+                onclick: { enable: true, mode: "push" }
+            }
+        }
+    });
+}
 
+// تأثير النقر
+function createRipple(event) {
+    const button = event.currentTarget;
+    const circle = document.createElement("span");
+    const diameter = Math.max(button.clientWidth, button.clientHeight);
+    const radius = diameter / 2;
+
+    circle.style.width = circle.style.height = `${diameter}px`;
+    circle.style.left = `${event.clientX - button.getBoundingClientRect().left - radius}px`;
+    circle.style.top = `${event.clientY - button.getBoundingClientRect().top - radius}px`;
+    circle.classList.add("ripple");
+
+    button.appendChild(circle);
+
+    setTimeout(() => circle.remove(), 600);
+}
+
+// تحديث مؤشر التمرير
+function updateScrollIndicator() {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    document.getElementById("scrollIndicator").style.width = scrolled + "%";
+}
+
+// تغيير اللغة
 function setLang(lang) {
     currentLang = lang;
-    // تحديث العناوين
+    
+    // تحديث الأزرار النشطة
+    document.querySelectorAll('.lang-buttons button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.currentTarget.classList.add('active');
+    
+    // تحديث اتجاه الصفحة
+    const dir = lang === "ar" ? "rtl" : "ltr";
+    document.documentElement.setAttribute("dir", dir);
+    document.documentElement.setAttribute("lang", lang);
+    
+    // تحديث النصوص
     document.querySelectorAll("[data-lang-key]").forEach(el => {
         const key = el.getAttribute("data-lang-key");
         if (translations[key] && translations[key][lang] !== undefined) {
             el.textContent = translations[key][lang];
         }
     });
-    // تحديث اتجاه الصفحة بلطف
-    const dir = lang === "ar" ? "rtl" : "ltr";
-    document.documentElement.setAttribute("dir", dir);
-    document.documentElement.setAttribute("lang", lang);
-
+    
     // إعادة تشغيل الرسوم المتحركة
     const menu = document.querySelector('.menu');
     menu.style.animation = 'none';
     setTimeout(() => {
         menu.style.animation = 'fadeInUp 0.8s ease-out forwards';
     }, 10);
+    
+    // حفظ التفضيلات
+    localStorage.setItem('preferredLang', lang);
 }
 
-// تهيئة الواجهة عند التحميل
+// تهيئة الصفحة
 document.addEventListener("DOMContentLoaded", () => {
-    setLang("ar");
+    // تهيئة الجسيمات
+    initParticles();
+    
+    // تحميل اللغة المحفوظة
+    const savedLang = localStorage.getItem('preferredLang') || 'ar';
+    setLang(savedLang);
+    
+    // إضافة تأثير النقر للأزرار
+    document.querySelectorAll('.lang-buttons button, .item').forEach(btn => {
+        btn.addEventListener('click', createRipple);
+    });
+    
+    // تحديث مؤشر التمرير
+    window.addEventListener('scroll', updateScrollIndicator);
+    updateScrollIndicator(); // تهيئة أولية
 });
 </script>
 
 </body>
 </html>
-

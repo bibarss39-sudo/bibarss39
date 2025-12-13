@@ -3,28 +3,32 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>أكواد C</title>
+    <title>أكواد C - معمل الترميز التفاعلي</title>
     <link rel="icon" href="1.png" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700&family=Poppins:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --bg-primary: #0b1120;
             --bg-secondary: #141c2f;
-            --card-bg: rgba(25, 35, 55, 0.75);
+            --card-bg: rgba(25, 35, 55, 0.85);
             --accent: #3b82f6;
             --accent-light: #60a5fa;
             --accent-dark: #2563eb;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
             --text-primary: #f1f5f9;
             --text-secondary: #cbd5e1;
+            --code-bg: rgba(0, 0, 0, 0.3);
             --border: rgba(148, 163, 184, 0.15);
             --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
             --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.35);
             --shadow-lg: 0 16px 40px rgba(59, 130, 246, 0.2);
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -105,7 +109,8 @@
             transition: var(--transition);
         }
 
-        .search-box:focus {
+        .search-box:focus,
+        .search-box.highlighted {
             border-color: var(--accent-light);
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
             background: rgba(255, 255, 255, 0.1);
@@ -131,14 +136,25 @@
             box-shadow: 0 6px 16px rgba(96, 165, 250, 0.5);
         }
 
-        h1 {
+        .header-container {
             text-align: center;
+            margin-bottom: 25px;
+        }
+
+        h1 {
             font-size: 2.4rem;
-            margin: 20px 0 15px;
+            margin-bottom: 10px;
             color: var(--accent-light);
             text-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
             font-weight: 700;
             letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         /* ✨ Enhanced Hint Box */
@@ -147,7 +163,7 @@
             background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(14, 165, 233, 0.1));
             border: 1px solid rgba(59, 130, 246, 0.3);
             border-radius: 18px;
-            padding: 16px 24px;
+            padding: 18px 24px;
             margin: 0 auto 28px;
             max-width: 720px;
             font-size: 1.1rem;
@@ -157,22 +173,9 @@
             box-shadow: 
                 0 4px 20px rgba(0, 0, 0, 0.15),
                 0 0 0 0 rgba(59, 130, 246, 0.4);
-            transition: 
-                all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-                box-shadow 0.5s ease;
+            transition: var(--transition);
             animation: fadeInUp 0.6s ease-out, pulseGlow 3s ease-in-out 1.2s infinite;
             overflow: hidden;
-        }
-
-        .hint-box::before {
-            content: '';
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.3rem;
-            opacity: 0;
-            transition: opacity 0.3s;
         }
 
         .hint-box:hover {
@@ -182,16 +185,6 @@
                 0 8px 25px rgba(0, 0, 0, 0.25),
                 0 0 12px rgba(59, 130, 246, 0.5);
             border-color: rgba(96, 165, 250, 0.7);
-        }
-
-        .hint-box::after {
-            content: '';
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.2rem;
-            opacity: 0.6;
         }
 
         @keyframes fadeInUp {
@@ -218,6 +211,39 @@
             }
         }
 
+        /* فلاتر التصنيف */
+        .category-filters {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
         #codesContainer {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -233,13 +259,16 @@
             cursor: pointer;
             text-align: center;
             font-size: 18px;
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
             transition: var(--transition);
             box-shadow: var(--shadow-md);
             color: #e0f2fe;
             position: relative;
             overflow: hidden;
             will-change: transform, box-shadow;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
         .code-box::before {
@@ -265,7 +294,22 @@
             background: rgba(30, 45, 75, 0.85);
         }
 
-        /* ✨ تأثير النقر (Pulse + Bounce) */
+        .code-content {
+            flex: 1;
+        }
+
+        .code-category {
+            font-size: 0.8rem;
+            padding: 4px 12px;
+            background: rgba(59, 130, 246, 0.2);
+            border-radius: 20px;
+            color: var(--accent-light);
+            font-family: 'Tajawal', sans-serif;
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        /* ✨ تأثير النقر */
         .code-box.pulse {
             animation: clickPulse 0.6s ease-out;
         }
@@ -304,7 +348,7 @@
 
         .modal-content {
             width: 90%;
-            max-width: 560px;
+            max-width: 550px;
             background: rgba(25, 35, 55, 0.95);
             padding: 32px;
             border-radius: 22px;
@@ -314,6 +358,18 @@
             border: 1px solid var(--border);
             position: relative;
             overflow: hidden;
+            animation: modalSlideIn 0.4s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         .modal-content::before {
@@ -326,26 +382,77 @@
             background: linear-gradient(90deg, var(--accent), #0ea5e9);
         }
 
-        .modal-content h2 {
-            font-size: 1.8rem;
-            margin: 0 0 20px;
-            color: var(--accent-light);
-            font-family: 'Courier New', monospace;
-            font-weight: 600;
+        .modal-header {
+            margin-bottom: 25px;
         }
 
-        .modal-content p {
-            font-size: 1.25rem;
-            line-height: 1.7;
-            margin-bottom: 28px;
+        .modal-title {
+            font-size: 1.8rem;
+            color: var(--accent-light);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .modal-category {
             color: var(--text-secondary);
+            font-size: 0.9rem;
+            background: rgba(59, 130, 246, 0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .modal-body {
+            text-align: right;
+            margin-bottom: 30px;
+        }
+
+        .explanation {
+            background: var(--code-bg);
+            padding: 25px;
+            border-radius: 12px;
+            border-right: 3px solid var(--accent);
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .explanation p {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+        }
+
+        .step-indicator {
+            display: flex;
+            gap: 8px;
+        }
+
+        .step-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        .step-dot.active {
+            background: var(--accent);
+            transform: scale(1.2);
         }
 
         .buttons {
             display: flex;
             gap: 14px;
-            justify-content: center;
-            margin-top: 20px;
         }
 
         button {
@@ -360,6 +467,7 @@
             color: white;
             min-width: 100px;
             box-shadow: var(--shadow-sm);
+            font-family: 'Tajawal', sans-serif;
         }
 
         button:hover {
@@ -378,6 +486,12 @@
             color: white;
         }
 
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
         /* لغة LTR */
         body.lang-en nav,
         body.lang-fr nav {
@@ -387,6 +501,11 @@
         body.lang-en .home-btn,
         body.lang-fr .home-btn {
             flex-direction: row-reverse;
+        }
+
+        body.lang-en .modal-body,
+        body.lang-fr .modal-body {
+            text-align: left;
         }
 
         /* Responsive */
@@ -402,12 +521,25 @@
             .search-box {
                 max-width: 100%;
             }
+            .header-container {
+                padding: 0 10px;
+            }
             h1 {
                 font-size: 2rem;
+            }
+            .subtitle {
+                font-size: 1rem;
             }
             .hint-box {
                 font-size: 1rem;
                 padding: 14px 20px;
+            }
+            .category-filters {
+                gap: 8px;
+            }
+            .filter-btn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
             }
             #codesContainer {
                 grid-template-columns: 1fr;
@@ -416,6 +548,21 @@
             .code-box {
                 padding: 20px 16px;
                 font-size: 17px;
+            }
+            .modal-content {
+                padding: 24px 18px;
+            }
+            .modal-footer {
+                flex-direction: column;
+                gap: 15px;
+                align-items: stretch;
+            }
+            .buttons {
+                order: -1;
+                flex-direction: column;
+            }
+            button {
+                width: 100%;
             }
         }
 
@@ -428,26 +575,24 @@
                 padding: 12px 16px;
             }
             .modal-content {
-                padding: 24px 18px;
+                padding: 20px 15px;
             }
-            .modal-content h2 {
+            .modal-title {
                 font-size: 1.5rem;
             }
-            .modal-content p {
-                font-size: 1.15rem;
+            .explanation {
+                padding: 20px;
+                min-height: 120px;
             }
-            .buttons {
-                flex-direction: column;
-            }
-            button {
-                width: 100%;
+            .explanation p {
+                font-size: 1.1rem;
             }
         }
     </style>
 </head>
 
 <body class="lang-ar">
-    <!-- NAVIGATION -->
+    
     <nav>
         <a href="asasi.html" class="home-btn">
             <i class="fas fa-home"></i>
@@ -459,53 +604,63 @@
         <button class="translate-btn" onclick="toggleLanguage()" id="langBtn">AR</button>
     </nav>
 
-    <h1 id="pageTitle">أكواد C</h1>
+    <div class="header-container">
+        <h1 id="pageTitle">معمل أكواد C التفاعلي</h1>
+        <p class="subtitle" id="subtitle">تعلم وفهم أهم أوامر لغة C من خلال شرح متعدد اللغات وأمثلة تطبيقية</p>
+    </div>
 
-    <!-- ✨ Enhanced Hint Box -->
+    
     <div class="hint-box">
         <span id="hintText">انقر على أي صندوق لعرض شرح مفصّل باللغات: العربية / الفرنسية / الإنجليزية</span>
     </div>
 
+    
+    <div class="category-filters">
+        <button class="filter-btn active" onclick="filterCodes('all')">الكل</button>
+        <button class="filter-btn" onclick="filterCodes('output')">الإخراج</button>
+        <button class="filter-btn" onclick="filterCodes('input')">الإدخال</button>
+        <button class="filter-btn" onclick="filterCodes('loop')">الحلقات</button>
+        <button class="filter-btn" onclick="filterCodes('condition')">الشروط</button>
+        <button class="filter-btn" onclick="filterCodes('operator')">المشغلات</button>
+        <button class="filter-btn" onclick="filterCodes('type')">أنواع البيانات</button>
+        <button class="filter-btn" onclick="filterCodes('control')">التحكم</button>
+        <button class="filter-btn" onclick="filterCodes('comment')">التعليقات</button>
+    </div>
+
     <div id="codesContainer">
-       
-        <div class="code-box" onclick="handleClick(this, 1)">printf("Hello, World!");</div>
-        <div class="code-box" onclick="handleClick(this, 2)">scanf("%d", &x);</div>
-        <div class="code-box" onclick="handleClick(this, 3)">for (int i = 0; i < 10; i++)</div>
-        <div class="code-box" onclick="handleClick(this, 4)">do { } while (x < 10)</div>
-        <div class="code-box" onclick="handleClick(this, 5)">while (x < 10)</div>
-        <div class="code-box" onclick="handleClick(this, 6)">!x</div>
-        <div class="code-box" onclick="handleClick(this, 7)">%d</div>
-        <div class="code-box" onclick="handleClick(this, 8)">%f</div>
-        <div class="code-box" onclick="handleClick(this, 9)">%c</div>
-        <div class="code-box" onclick="handleClick(this, 10)">+=</div>
-        <div class="code-box" onclick="handleClick(this, 11)">int</div>
-        <div class="code-box" onclick="handleClick(this, 12)">float</div>
-        <div class="code-box" onclick="handleClick(this, 13)">char</div>
-        <div class="code-box" onclick="handleClick(this, 14)">chaine</div>
-        <div class="code-box" onclick="handleClick(this, 15)">#include</div>
-        <div class="code-box" onclick="handleClick(this, 16)">return 0;</div>
-        <div class="code-box" onclick="handleClick(this, 17)">i++</div>
-        <div class="code-box" onclick="handleClick(this, 18)">i--</div>
-        <div class="code-box" onclick="handleClick(this, 19)">mat[40]</div>
-        <div class="code-box" onclick="handleClick(this, 20)">if</div>
-        <div class="code-box" onclick="handleClick(this, 21)">else</div>
-        <div class="code-box" onclick="handleClick(this, 22)">switch(x)</div>
-        <div class="code-box" onclick="handleClick(this, 23)">break;</div>
-        <div class="code-box" onclick="handleClick(this, 24)">continue;</div>
-        <div class="code-box" onclick="handleClick(this, 25)">// comment</div>
-        <div class="code-box" onclick="handleClick(this, 26)">/* comment */</div>
+        
     </div>
 
    
     <div id="modal" class="modal">
         <div class="modal-content">
-            <h2 id="title"></h2>
-            <p id="content"></p>
+            <div class="modal-header">
+                <h2 class="modal-title" id="title"></h2>
+                <div class="modal-category" id="modalCategory"></div>
+            </div>
+            
+            <div class="modal-body">
+                <div class="explanation">
+                    <p id="content"></p>
+                </div>
+            </div>
 
-            <div class="buttons">
-                <button class="secondary" onclick="closeModal()" id="closeBtn">غلق</button>
-                <button class="secondary" onclick="prevStep()" id="prevBtn" style="display: none;">رجوع</button>
-                <button onclick="nextStep()" id="nextBtn">التالي</button>
+            <div class="modal-footer">
+                <div class="step-indicator" id="stepIndicator">
+                    <div class="step-dot active" data-step="1"></div>
+                    <div class="step-dot" data-step="2"></div>
+                    <div class="step-dot" data-step="3"></div>
+                </div>
+
+                <div class="buttons">
+                    <button class="secondary" onclick="closeModal()" id="closeBtn">غلق</button>
+                    <button class="secondary" onclick="prevStep()" id="prevBtn" style="display: none;">
+                        <i class="fas fa-arrow-right"></i> رجوع
+                    </button>
+                    <button onclick="nextStep()" id="nextBtn">
+                        التالي <i class="fas fa-arrow-left"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -514,6 +669,7 @@
         let current = 1;
         let step = 1;
         let lang = "ar";
+        let currentFilter = 'all';
 
         const data = {
             1: {
@@ -528,7 +684,8 @@
                     ar: 'تُظهر مخرجات مباشرة للمستخدم على الشاشة.',
                     fr: 'Produit une sortie textuelle.',
                     en: 'Produces textual output for the user.'
-                }
+                },
+                category: 'output'
             },
             2: {
                 title: { ar: 'scanf("%d", &x)', fr: 'scanf("%d", &x)', en: 'scanf("%d", &x)' },
@@ -542,49 +699,53 @@
                     ar: 'تسمح بإدخال بيانات من المستخدم أثناء تشغيل البرنامج.',
                     fr: 'Permet à l’utilisateur d’entrer une valeur.',
                     en: 'Allows user input into a variable.'
-                }
+                },
+                category: 'input'
             },
             3: {
                 title: { ar: 'for (int i = 0; i < 10; i++)', fr: 'for (int i = 0; i < 10; i++)', en: 'for (int i = 0; i < 10; i++)' },
                 exp: {
-                    ar: 'حلقة تُكرّر تنفيذ كتلة من الأوامر 10 مرات (من 0 إلى 9).',
+                    ar: 'حلقة تُكرّر تنفيذ شرط من الأوامر 10 مرات (من 0 إلى 9).',
                     fr: 'Boucle qui s’exécute exactement 10 fois (de 0 à 9).',
                     en: 'Loop that executes exactly 10 times (from 0 to 9).'
                 },
-                algFr: 'Pour i  de 0 à 9  faire',
+                algFr: 'Pour i de 0 à 9 faire',
                 algExp: {
                     ar: 'تُستخدم عندما تعرف عدد مرات التكرار مسبقًا.',
                     fr: 'Répète un bloc un nombre fixe de fois.',
                     en: 'Repeats a block a fixed number of times.'
-                }
+                },
+                category: 'loop'
             },
             4: {
                 title: { ar: 'do { } while (x < 10)', fr: 'do { } while (x < 10)', en: 'do { } while (x < 10)' },
                 exp: {
-                    ar: 'تنفّذ الكتلة مرة واحدة على الأقل، ثم تكررها طالما أن x أقل من 10.',
+                    ar: 'تنفّذ شرط مرة واحدة على الأقل، ثم تكررها طالما أن x أقل من 10.',
                     fr: 'Exécute le bloc au moins une fois, puis répète tant que la condition est vraie.',
                     en: 'Executes the block at least once, then repeats while condition is true.'
                 },
-                algFr: 'Répéter ... jusqu’à (x >= 10)',
+                algFr: 'Répéter ... jusqu\'à (x >= 10)',
                 algExp: {
-                    ar: 'مثالية عندما تريد تنفيذ الكتلة قبل التحقق من الشرط.',
-                    fr: 'Utilisée quand le bloc doit s’exécuter avant la vérification.',
+                    ar: 'مثالية عندما تريد تنفيذ شرط قبل التحقق من الشرط.',
+                    fr: 'Utilisée quand le bloc doit s\'exécuter avant la vérification.',
                     en: 'Used when the block must run before checking the condition.'
-                }
+                },
+                category: 'loop'
             },
             5: {
                 title: { ar: 'while (x < 10)', fr: 'while (x < 10)', en: 'while (x < 10)' },
                 exp: {
-                    ar: 'تكرّر تنفيذ الكتلة طالما أن الشرط (x < 10) صحيح.',
+                    ar: 'تكرّر تنفيذ شرط طالما أن الشرط (x < 10) صحيح.',
                     fr: 'Répète le bloc tant que x < 10 est vrai.',
                     en: 'Repeats the block while x < 10 is true.'
                 },
                 algFr: 'Tant que (x < 10)',
                 algExp: {
                     ar: 'لا تُنفّذ الكتلة أبدًا إذا كان الشرط خاطئًا من البداية.',
-                    fr: 'N’exécute pas le bloc si la condition est fausse au départ.',
+                    fr: 'N\'exécute pas le bloc si la condition est fausse au départ.',
                     en: 'Does not run the block if condition is initially false.'
-                }
+                },
+                category: 'loop'
             },
             6: {
                 title: { ar: '!x', fr: '!x', en: '!x' },
@@ -596,9 +757,10 @@
                 algFr: 'Non(x)',
                 algExp: {
                     ar: 'يُستخدم للتأكد من أن قيمة ما غير صحيحة (أو تساوي صفر).',
-                    fr: 'Permet de tester qu’une valeur est fausse (ou nulle).',
+                    fr: 'Permet de tester qu\'une valeur est fausse (ou nulle).',
                     en: 'Used to test that a value is false (or zero).'
-                }
+                },
+                category: 'operator'
             },
             7: {
                 title: { ar: '%d', fr: '%d', en: '%d' },
@@ -612,7 +774,8 @@
                     ar: 'يُستخدم مع printf أو scanf للتعامل مع الأعداد الصحيحة.',
                     fr: 'Utilisé avec printf/scanf pour les entiers.',
                     en: 'Used with printf/scanf for integer values.'
-                }
+                },
+                category: 'output'
             },
             8: {
                 title: { ar: '%f', fr: '%f', en: '%f' },
@@ -626,7 +789,8 @@
                     ar: 'يُستخدم للأرقام ذات الفاصلة العشرية.',
                     fr: 'Utilisé pour les nombres décimaux.',
                     en: 'Used for decimal numbers.'
-                }
+                },
+                category: 'output'
             },
             9: {
                 title: { ar: '%c', fr: '%c', en: '%c' },
@@ -640,7 +804,8 @@
                     ar: 'يتعامل مع متغير يحتوي على حرف واحد فقط.',
                     fr: 'Traite une variable contenant un seul caractère.',
                     en: 'Handles a variable holding one character.'
-                }
+                },
+                category: 'output'
             },
             10: {
                 title: { ar: '+=', fr: '+=', en: '+=' },
@@ -652,9 +817,10 @@
                 algFr: 'x ← x + 3',
                 algExp: {
                     ar: 'طريقة مختصرة لكتابة عملية الجمع والتخزين معًا.',
-                    fr: 'Forme abrégée pour l’addition et l’affectation.',
+                    fr: 'Forme abrégée pour l\'addition et l\'affectation.',
                     en: 'Shorthand for addition and assignment.'
-                }
+                },
+                category: 'operator'
             },
             11: {
                 title: { ar: 'int', fr: 'int', en: 'int' },
@@ -668,7 +834,8 @@
                     ar: 'لا يدعم الأعداد ذات الفاصلة العشرية.',
                     fr: 'Stocke des valeurs numériques sans décimales.',
                     en: 'Stores numeric values without decimals.'
-                }
+                },
+                category: 'type'
             },
             12: {
                 title: { ar: 'float', fr: 'float', en: 'float' },
@@ -682,7 +849,8 @@
                     ar: 'يُستخدم للأرقام التي تحتوي على فاصلة عشرية.',
                     fr: 'Utilisé pour les nombres à virgule flottante.',
                     en: 'Used for floating-point numbers.'
-                }
+                },
+                category: 'type'
             },
             13: {
                 title: { ar: 'char', fr: 'char', en: 'char' },
@@ -696,7 +864,8 @@
                     ar: 'يحتوي على رمز واحد من جدول الحروف (مثل ASCII).',
                     fr: 'Contient un symbole du tableau ASCII.',
                     en: 'Holds one symbol from the ASCII table.'
-                }
+                },
+                category: 'type'
             },
             14: {
                 title: { ar: 'chaine', fr: 'chaine', en: 'string' },
@@ -710,7 +879,8 @@
                     ar: 'تُخزّن كلمات أو جمل كاملة (مثل "مرحبا").',
                     fr: 'Sert à stocker des mots ou des phrases.',
                     en: 'Used to store words or sentences.'
-                }
+                },
+                category: 'type'
             },
             15: {
                 title: { ar: '#include', fr: '#include', en: '#include' },
@@ -722,9 +892,10 @@
                 algFr: 'Utiliser Bibliothèque',
                 algExp: {
                     ar: 'بدونه، لا يمكنك استخدام دوال مثل printf أو scanf.',
-                    fr: 'Permet d’utiliser des fonctions prédéfinies.',
+                    fr: 'Permet d\'utiliser des fonctions prédéfinies.',
                     en: 'Enables use of predefined functions like printf and scanf.'
-                }
+                },
+                category: 'control'
             },
             16: {
                 title: { ar: 'return 0;', fr: 'return 0;', en: 'return 0;' },
@@ -736,9 +907,10 @@
                 algFr: 'Retourner 0',
                 algExp: {
                     ar: 'القيمة 0 تعني "نجاح"، وأي رقم آخر يدل على خطأ.',
-                    fr: 'Indique que l’algorithme s’est terminé sans erreur.',
+                    fr: 'Indique que l\'algorithme s\'est terminé sans erreur.',
                     en: 'Means the algorithm ended without errors.'
-                }
+                },
+                category: 'control'
             },
             17: {
                 title: { ar: 'i++', fr: 'i++', en: 'i++' },
@@ -752,7 +924,8 @@
                     ar: 'طريقة مختصرة لكتابة i = i + 1.',
                     fr: 'Forme abrégée pour incrémenter la variable.',
                     en: 'Shorthand to increase the variable by one.'
-                }
+                },
+                category: 'operator'
             },
             18: {
                 title: { ar: 'i--', fr: 'i--', en: 'i--' },
@@ -766,7 +939,8 @@
                     ar: 'طريقة مختصرة لكتابة i = i - 1.',
                     fr: 'Forme abrégée pour décrémenter la variable.',
                     en: 'Shorthand to decrease the variable by one.'
-                }
+                },
+                category: 'operator'
             },
             19: {
                 title: { ar: 'mat[40]', fr: 'mat[40]', en: 'mat[40]' },
@@ -780,7 +954,8 @@
                     ar: 'تُخزّن عدة قيم من نفس النوع في مكان واحد.',
                     fr: 'Stocke un ensemble de valeurs du même type.',
                     en: 'Stores a collection of values of the same type.'
-                }
+                },
+                category: 'type'
             },
             20: {
                 title: { ar: 'if', fr: 'if', en: 'if' },
@@ -794,7 +969,8 @@
                     ar: 'تُستخدم لاتخاذ قرارات داخل البرنامج.',
                     fr: 'Utilisée pour prendre des décisions dans le programme.',
                     en: 'Used to make decisions in the program.'
-                }
+                },
+                category: 'condition'
             },
             21: {
                 title: { ar: 'else', fr: 'else', en: 'else' },
@@ -808,7 +984,8 @@
                     ar: 'توفر بديلاً عند عدم تحقق الشرط الأول.',
                     fr: 'Fournit une alternative lorsque la condition échoue.',
                     en: 'Provides an alternative path when condition fails.'
-                }
+                },
+                category: 'condition'
             },
             22: {
                 title: { ar: 'switch(x)', fr: 'switch(x)', en: 'switch(x)' },
@@ -822,7 +999,8 @@
                     ar: 'بديل أكثر تنظيمًا لعدة عبارات if-else.',
                     fr: 'Alternative élégante aux if-else imbriqués.',
                     en: 'Clean alternative to nested if-else statements.'
-                }
+                },
+                category: 'condition'
             },
             23: {
                 title: { ar: 'break;', fr: 'break;', en: 'break;' },
@@ -834,15 +1012,16 @@
                 algFr: 'Quitter',
                 algExp: {
                     ar: 'يُستخدم لإيقاف الحلقة قبل انتهائها الطبيعي.',
-                    fr: 'Permet une sortie anticipée d’une boucle ou switch.',
+                    fr: 'Permet une sortie anticipée d\'une boucle ou switch.',
                     en: 'Used for early exit from a loop or switch.'
-                }
+                },
+                category: 'control'
             },
             24: {
                 title: { ar: 'continue;', fr: 'continue;', en: 'continue;' },
                 exp: {
                     ar: 'يتخطى باقي الحلقة الحالية ويبدأ التكرار التالي فورًا.',
-                    fr: 'Ignore le reste de la boucle et passe à l’itération suivante.',
+                    fr: 'Ignore le reste de la boucle et passe à l\'itération suivante.',
                     en: 'Skips the rest of the loop and jumps to the next iteration.'
                 },
                 algFr: 'Continuer',
@@ -850,7 +1029,8 @@
                     ar: 'مفيد لتخطي بعض القيم دون إيقاف الحلقة بالكامل.',
                     fr: 'Utile pour ignorer certaines itérations.',
                     en: 'Useful to skip certain iterations without breaking the loop.'
-                }
+                },
+                category: 'control'
             },
             25: {
                 title: { ar: '// comment', fr: '// comment', en: '// comment' },
@@ -864,7 +1044,8 @@
                     ar: 'لا يؤثر على البرنامج، فقط للمطورين.',
                     fr: 'Sert à expliquer ou désactiver temporairement du code.',
                     en: 'Used to explain code or temporarily disable a line.'
-                }
+                },
+                category: 'comment'
             },
             26: {
                 title: { ar: '/* comment */', fr: '/* comment */', en: '/* comment */' },
@@ -878,21 +1059,83 @@
                     ar: 'يبدأ بـ /* وينتهي بـ */، ولا يُنفّذ أبدًا.',
                     fr: 'Commence par /* et finit par */, ignoré à la compilation.',
                     en: 'Begins with /* and ends with */, completely ignored during compilation.'
-                }
+                },
+                category: 'comment'
             }
         };
 
-              function handleClick(element, index) {
-        
+        const categoryLabels = {
+            all: { ar: 'الكل', fr: 'Tous', en: 'All' },
+            output: { ar: 'الإخراج', fr: 'Sortie', en: 'Output' },
+            input: { ar: 'الإدخال', fr: 'Entrée', en: 'Input' },
+            loop: { ar: 'الحلقات', fr: 'Boucles', en: 'Loops' },
+            condition: { ar: 'الشروط', fr: 'Conditions', en: 'Conditions' },
+            operator: { ar: 'المشغلات', fr: 'Opérateurs', en: 'Operators' },
+            type: { ar: 'أنواع البيانات', fr: 'Types', en: 'Data Types' },
+            control: { ar: 'التحكم', fr: 'Contrôle', en: 'Control' },
+            comment: { ar: 'التعليقات', fr: 'Commentaires', en: 'Comments' }
+        };
+
+        // إنشاء الأكواد ديناميكياً
+        function initializeCodes() {
+            const container = document.getElementById('codesContainer');
+            container.innerHTML = '';
+            
+            Object.keys(data).forEach(key => {
+                const item = data[key];
+                const box = document.createElement('div');
+                box.className = 'code-box';
+                box.setAttribute('data-category', item.category);
+                box.setAttribute('onclick', `handleClick(this, ${key})`);
+                
+                box.innerHTML = `
+                    <div class="code-content">${item.title[lang]}</div>
+                    <div class="code-category">${categoryLabels[item.category][lang]}</div>
+                `;
+                
+                container.appendChild(box);
+            });
+            
+            filterCodes(currentFilter);
+        }
+
+        function handleClick(element, index) {
             element.classList.add('pulse');
             setTimeout(() => {
                 element.classList.remove('pulse');
-            }, 600); 
-           
+            }, 600);
+            
+            // تمييز البحث بالكود المختار
+            const searchBox = document.getElementById('search');
+            searchBox.value = data[index].title[lang];
+            searchBox.classList.add('highlighted');
+            setTimeout(() => {
+                searchBox.classList.remove('highlighted');
+            }, 2000);
+            
             openModal(index);
         }
 
-       
+        function filterCodes(category) {
+            currentFilter = category;
+            const boxes = document.querySelectorAll('.code-box');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            
+            filterBtns.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.querySelector(`.filter-btn[onclick="filterCodes('${category}')"]`).classList.add('active');
+            
+            boxes.forEach(box => {
+                if (category === 'all' || box.getAttribute('data-category') === category) {
+                    box.style.display = 'flex';
+                } else {
+                    box.style.display = 'none';
+                }
+            });
+        }
+
         function updateLangBtn() {
             const labels = { ar: 'AR', fr: 'FR', en: 'EN' };
             document.getElementById("langBtn").textContent = labels[lang];
@@ -904,25 +1147,52 @@
             document.body.className = `lang-${lang}`;
 
             const labels = {
-                ar: { home: "الرئيسية", search: "بحث / Search / Recherche", close: "غلق", next: "التالي", back: "رجوع" },
-                fr: { home: "Accueil", search: "Recherche / Search / بحث", close: "Fermer", next: "Suivant", back: "Précédent" },
-                en: { home: "Home", search: "Search / Recherche / بحث", close: "Close", next: "Next", back: "Back" }
+                ar: { 
+                    home: "الرئيسية", 
+                    search: "بحث عن كود...", 
+                    close: "غلق", 
+                    next: "التالي", 
+                    back: "رجوع",
+                    subtitle: "تعلم وفهم أهم أوامر لغة C من خلال شرح متعدد اللغات",
+                    hint: "انقر على أي صندوق لعرض شرح مفصّل باللغات: العربية / الفرنسية / الإنجليزية"
+                },
+                fr: { 
+                    home: "Accueil", 
+                    search: "Rechercher un code...", 
+                    close: "Fermer", 
+                    next: "Suivant", 
+                    back: "Précédent",
+                    subtitle: "Apprenez et comprenez les commandes C importantes via des explications multilingues",
+                    hint: "Cliquez sur une boîte pour afficher une explication détaillée en arabe / français / anglais"
+                },
+                en: { 
+                    home: "Home", 
+                    search: "Search for code...", 
+                    close: "Close", 
+                    next: "Next", 
+                    back: "Back",
+                    subtitle: "Learn and understand important C commands through multilingual explanations",
+                    hint: "Click any box to see a detailed explanation in Arabic / French / English"
+                }
             };
 
             const t = labels[lang];
             document.getElementById("homeText").textContent = t.home;
             document.getElementById("search").placeholder = t.search;
             document.getElementById("closeBtn").textContent = t.close;
-            document.getElementById("nextBtn").textContent = step === 3 ? t.close : t.next;
-            document.getElementById("prevBtn").textContent = t.back;
+            document.getElementById("nextBtn").innerHTML = t.next + ' <i class="fas fa-arrow-left"></i>';
+            document.getElementById("prevBtn").innerHTML = '<i class="fas fa-arrow-right"></i> ' + t.back;
+            document.getElementById("subtitle").textContent = t.subtitle;
+            document.getElementById("hintText").textContent = t.hint;
 
-            
-            const hints = {
-                ar: "انقر على أي صندوق لعرض شرح مفصّل باللغات: العربية / الفرنسية / الإنجليزية",
-                fr: "Cliquez sur une boîte pour afficher une explication détaillée en arabe / français / anglais",
-                en: "Click any box to see a detailed explanation in Arabic / French / English"
-            };
-            document.getElementById("hintText").textContent = hints[lang];
+            // تحديث فلاتر التصنيف
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                const category = btn.getAttribute('onclick').match(/'([^']+)'/)[1];
+                btn.textContent = categoryLabels[category][lang];
+            });
+
+            // تحديث الأكواد
+            initializeCodes();
 
             updateLangBtn();
 
@@ -936,46 +1206,73 @@
             translateUI();
         }
 
-       
         function openModal(i) {
             current = i;
             step = 1;
             document.getElementById("modal").style.display = "flex";
-            document.getElementById("title").textContent = data[i].title[lang];
-            document.getElementById("content").textContent = data[i].exp[lang];
-            document.getElementById("prevBtn").style.display = "none";
-            document.getElementById("nextBtn").textContent = 
-                lang === "ar" ? "التالي" : (lang === "fr" ? "Suivant" : "Next");
+            
+            const item = data[i];
+            document.getElementById("title").textContent = item.title[lang];
+            document.getElementById("modalCategory").textContent = categoryLabels[item.category][lang];
+            document.getElementById("content").textContent = item.exp[lang];
+            
+            updateModalButtons();
+            updateStepIndicator();
         }
 
         function nextStep() {
             if (step === 1) {
                 document.getElementById("content").textContent = data[current].algFr;
                 step = 2;
-                document.getElementById("prevBtn").style.display = "inline-block";
             } else if (step === 2) {
                 document.getElementById("content").textContent = data[current].algExp[lang];
                 step = 3;
-                document.getElementById("nextBtn").textContent = 
-                    lang === "ar" ? "إغلاق" : (lang === "fr" ? "Fermer" : "Close");
             } else {
                 closeModal();
+                return;
             }
+            
+            updateModalButtons();
+            updateStepIndicator();
         }
 
         function prevStep() {
             if (step === 2) {
                 document.getElementById("content").textContent = data[current].exp[lang];
                 step = 1;
-                document.getElementById("prevBtn").style.display = "none";
-                document.getElementById("nextBtn").textContent = 
-                    lang === "ar" ? "التالي" : (lang === "fr" ? "Suivant" : "Next");
             } else if (step === 3) {
                 document.getElementById("content").textContent = data[current].algFr;
                 step = 2;
-                document.getElementById("nextBtn").textContent = 
-                    lang === "ar" ? "التالي" : (lang === "fr" ? "Suivant" : "Next");
             }
+            
+            updateModalButtons();
+            updateStepIndicator();
+        }
+
+        function updateModalButtons() {
+            const prevBtn = document.getElementById("prevBtn");
+            const nextBtn = document.getElementById("nextBtn");
+            
+            prevBtn.style.display = step > 1 ? "inline-block" : "none";
+            
+            if (step === 3) {
+                nextBtn.innerHTML = (lang === "ar" ? "إغلاق" : (lang === "fr" ? "Fermer" : "Close")) + 
+                    ' <i class="fas fa-arrow-left"></i>';
+            } else {
+                nextBtn.innerHTML = (lang === "ar" ? "التالي" : (lang === "fr" ? "Suivant" : "Next")) + 
+                    ' <i class="fas fa-arrow-left"></i>';
+            }
+        }
+
+        function updateStepIndicator() {
+            const dots = document.querySelectorAll('.step-dot');
+            dots.forEach((dot, index) => {
+                if (index + 1 === step) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
         }
 
         function closeModal() {
@@ -985,14 +1282,21 @@
         document.getElementById("search").addEventListener("input", function () {
             const text = this.value.trim().toLowerCase();
             const boxes = document.querySelectorAll(".code-box");
-
+            
             boxes.forEach(box => {
-                const code = box.textContent.toLowerCase();
-                box.style.display = code.includes(text) ? "flex" : "none";
+                const code = box.querySelector('.code-content').textContent.toLowerCase();
+                const category = box.querySelector('.code-category').textContent.toLowerCase();
+                
+                // البحث في النص أو التصنيف
+                if (code.includes(text) || category.includes(text)) {
+                    box.style.display = currentFilter === 'all' || box.getAttribute('data-category') === currentFilter ? 'flex' : 'none';
+                } else {
+                    box.style.display = 'none';
+                }
             });
         });
 
-       
+        // تهيئة
         translateUI();
 
         window.addEventListener('scroll', () => {
@@ -1001,6 +1305,13 @@
 
         document.getElementById("modal").addEventListener("click", function (e) {
             if (e.target === this) closeModal();
+        });
+
+        // إغلاق المودال بالضغط على ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && document.getElementById("modal").style.display === "flex") {
+                closeModal();
+            }
         });
     </script>
 </body>
