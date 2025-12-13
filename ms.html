@@ -1,198 +1,1132 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>غير متوفر حاليًا</title>
-  <link rel="icon" href="1.png" />
-  <!-- خط عربي جميل -->
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      background: linear-gradient(135deg, #1b1f24, #14171a);
-      color: #e0e0e0;
-      font-family: 'Tajawal', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      overflow-x: hidden;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دروس الخوارزميات </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-light: #60a5fa;
+            --secondary: #0ea5e9;
+            --accent: #0aff9d;
+            --accent-red: #ff4757;
+            --dark-bg: #0b0e1a;
+            --medium-bg: #141b2d;
+            --card-bg: rgba(25, 35, 55, 0.9);
+            --text-light: #f1f5f9;
+            --text-medium: #cbd5e1;
+            --text-muted: #94a3b8;
+            --shadow-light: rgba(96, 165, 250, 0.15);
+            --shadow-medium: rgba(59, 130, 246, 0.25);
+            --shadow-heavy: rgba(10, 255, 157, 0.3);
+            --youtube-red: #ff0000;
+            --border-radius-sm: 12px;
+            --border-radius-md: 18px;
+            --border-radius-lg: 24px;
+            --transition-fast: all 0.25s ease;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
 
-    .container {
-      max-width: 600px;
-      padding: 30px;
-      background: rgba(30, 34, 39, 0.7);
-      border-radius: 24px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5),
-                  0 0 20px #00eaff20;
-      backdrop-filter: blur(4px);
-      animation: fadeIn 0.8s ease-out;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    .icon {
-      font-size: 90px;
-      color: #00eaff;
-      margin-bottom: 24px;
-      text-shadow: 0 0 20px #00eaff70;
-      animation: pulse 2s infinite ease-in-out;
-    }
+        body {
+            background: linear-gradient(135deg, var(--dark-bg), var(--medium-bg));
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+            position: relative;
+        }
 
-    h1 {
-      font-size: 36px;
-      margin-bottom: 28px;
-      font-weight: 700;
-      color: #0aff9d;
-      text-shadow: 0 0 12px #0aff9d40;
-      line-height: 1.4;
-    }
+        /* تأثيرات الخلفية */
+        .background-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+        }
 
-    /* أزرار الترجمة */
-    .lang-buttons {
-      margin: 24px 0;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
+        .stars-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
 
-    .lang-buttons button {
-      background: rgba(0, 234, 255, 0.15);
-      border: 2px solid #00eaff;
-      color: #ffffff;
-      padding: 10px 20px;
-      cursor: pointer;
-      border-radius: 14px;
-      font-weight: 600;
-      font-size: 16px;
-      transition: all 0.3s ease;
-      min-width: 100px;
-    }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: star-twinkle 5s infinite;
+        }
 
-    .lang-buttons button:hover {
-      background: #00eaff;
-      color: #000;
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px #00eaff60;
-    }
+        @keyframes star-twinkle {
+            0%, 100% { opacity: 0.1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.2); }
+        }
 
-    .lang-buttons button:active {
-      transform: translateY(-1px);
-    }
+        .gradient-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(96, 165, 250, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(14, 165, 233, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(10, 255, 157, 0.05) 0%, transparent 50%);
+        }
 
-    /* زر الهوم */
-    .home-btn {
-      margin-top: 20px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: linear-gradient(135deg, #0aff9d, #00eaff);
-      padding: 14px 32px;
-      border-radius: 16px;
-      color: #000;
-      text-decoration: none;
-      font-size: 18px;
-      font-weight: 700;
-      box-shadow: 0 6px 20px #00eaff60;
-      transition: all 0.35s ease;
-    }
+        /* رأس الصفحة */
+        header {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(96, 165, 250, 0.2);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
 
-    .home-btn:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 25px #0aff9d80;
-      background: linear-gradient(135deg, #00eaff, #0aff9d);
-    }
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
 
-    .home-btn:active {
-      transform: translateY(-1px);
-    }
+        .header-glow {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);
+            opacity: 0.2;
+            filter: blur(40px);
+        }
 
-    /* الحركات */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 20px rgba(96, 165, 250, 0.2);
+            animation: title-float 3s ease-in-out infinite;
+        }
 
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); opacity: 0.9; }
-    }
+        @keyframes title-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
 
-    /* تحسين للهواتف */
-    @media (max-width: 600px) {
-      .container {
-        margin: 20px;
-        padding: 24px 20px;
-      }
+        .subtitle {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            color: var(--text-medium);
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
-      h1 {
-        font-size: 28px;
-      }
+        /* أزرار الترجمة */
+        .language-switcher {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
 
-      .icon {
-        font-size: 70px;
-      }
-    }
-  </style>
+        .lang-btn {
+            background: rgba(96, 165, 250, 0.1);
+            border: 2px solid rgba(96, 165, 250, 0.3);
+            color: var(--text-light);
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius-md);
+            cursor: pointer;
+            font-weight: bold;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lang-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .lang-btn:hover::before {
+            left: 100%;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            background: rgba(96, 165, 250, 0.3);
+            border-color: var(--primary-light);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px var(--shadow-medium);
+        }
+
+        .lang-btn i {
+            font-size: 1.1rem;
+        }
+
+        /* المحتوى الرئيسي */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* بطاقة المقدمة */
+        .intro-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(96, 165, 250, 0.2);
+            border-radius: var(--border-radius-lg);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            animation: card-appear 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes card-appear {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .intro-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(96, 165, 250, 0.1) 0%, transparent 70%);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .intro h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro p {
+            color: var(--text-medium);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* شبكة الدروس */
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .lesson-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(96, 165, 250, 0.1);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .lesson-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.6s ease;
+        }
+
+        .lesson-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            background: rgba(96, 165, 250, 0.1);
+            border-color: var(--primary-light);
+            box-shadow: 
+                0 25px 50px var(--shadow-medium),
+                0 0 0 1px rgba(96, 165, 250, 0.2);
+        }
+
+        /* قسم رأس البطاقة */
+        .lesson-header {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(14, 165, 233, 0.1));
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lesson-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .lesson-card:hover .lesson-header::after {
+            transform: translateX(100%);
+        }
+
+        /* عنوان الدرس والأستاذ */
+        .lesson-title-section {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .lesson-number {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3rem;
+            box-shadow: 0 8px 20px var(--shadow-medium);
+            animation: number-float 4s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes number-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .lesson-title-wrapper {
+            flex-grow: 1;
+            margin-right: 15px;
+        }
+
+        .lesson-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-light);
+            margin-bottom: 5px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            line-height: 1.3;
+        }
+
+        /* الأستاذ */
+        .professor-section {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .professor-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .professor-name {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .professor-name i {
+            color: var(--primary-light);
+        }
+
+        /* محتوى البطاقة */
+        .lesson-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* شرح الدرس */
+        .lesson-description {
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            font-size: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--border-radius-sm);
+            border-right: 3px solid var(--primary-light);
+            flex-grow: 1;
+        }
+
+        .description-label {
+            font-size: 0.9rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* رابط يوتيوب */
+        .lesson-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: linear-gradient(135deg, var(--youtube-red), #cc0000);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius-md);
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            width: 100%;
+        }
+
+        .lesson-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .lesson-link:hover::before {
+            left: 100%;
+        }
+
+        .lesson-link:hover {
+            background: linear-gradient(135deg, #cc0000, var(--youtube-red));
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 0, 0, 0.3);
+        }
+
+        .youtube-icon {
+            font-size: 1.3rem;
+            color: white;
+        }
+
+        .link-text {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* تذييل الصفحة */
+        footer {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            color: var(--text-medium);
+            text-align: center;
+            padding: 3rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(96, 165, 250, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .copyright {
+            margin-top: 1.5rem;
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+
+        /* تأثيرات التمرير */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* تأثيرات اللمس */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* تصميم متجاوب */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+                margin: 2rem auto;
+            }
+            
+            header {
+                padding: 1.5rem;
+            }
+            
+            .intro-card {
+                padding: 2rem;
+            }
+            
+            .language-switcher {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .lang-btn {
+                width: 200px;
+                justify-content: center;
+            }
+            
+            .lesson-title-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .lesson-number {
+                align-self: center;
+            }
+            
+            .lesson-content {
+                padding: 1.5rem;
+            }
+            
+            footer {
+                padding: 2rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .intro-card {
+                padding: 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.3rem;
+            }
+            
+            .professor-name {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
+    <!-- تأثيرات الخلفية -->
+    <div class="background-effects">
+        <div class="stars-bg" id="starsBg"></div>
+        <div class="gradient-bg"></div>
+    </div>
 
-<div class="container">
-  <div class="icon">⏳</div>
+    <!-- رأس الصفحة -->
+    <header>
+        <div class="header-glow"></div>
+        <div class="header-content">
+            <h1 data-ar="دروس الخوارزميات" data-fr="Cours d'Algorithmique" data-en="Algorithm Lessons">دروس الخوارزميات</h1>
+            <p class="subtitle" data-ar="مصادر تعليمية شاملة للخوارزميات وبنى البيانات" data-fr="Ressources complètes pour l'algorithmique et les structures de données" data-en="Comprehensive learning resources for algorithms and data structures">مصادر تعليمية شاملة للخوارزميات وبنى البيانات</p>
+            
+            <!-- أزرار الترجمة -->
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="ar">
+                    <i class="fas fa-language"></i>
+                    <span>العربية</span>
+                </button>
+                <button class="lang-btn" data-lang="fr">
+                    <i class="fas fa-language"></i>
+                    <span>Français</span>
+                </button>
+                <button class="lang-btn" data-lang="en">
+                    <i class="fas fa-language"></i>
+                    <span>English</span>
+                </button>
+            </div>
+        </div>
+    </header>
 
-  <!-- النصوص بثلاث لغات -->
-  <h1 data-lang="ar">لم يُنشَأ هذا المحتوى بعد</h1>
-  <h1 data-lang="en" style="display:none">This content is not ready yet</h1>
-  <h1 data-lang="fr" style="display:none">Ce contenu n’est pas encore prêt</h1>
+    <!-- المحتوى الرئيسي -->
+    <main class="container">
+        <!-- مقدمة -->
+        <section class="intro-card intro fade-in">
+            <h2 data-ar="مرحباً بكم في صفحة مصادر دروس الخوارزميات" data-fr="Bienvenue sur la page des ressources algorithmiques" data-en="Welcome to the Algorithm Lessons Resources Page">مرحباً بكم في صفحة مصادر دروس الخوارزميات</h2>
+            <p data-ar="هذه الصفحة تحتوي على مجموعة من الدروس المصورة التي يقدمها الأستاذ حسن البحيري، والتي تشرح أساسيات الخوارزميات وبنى البيانات باللغة العربية. يمكنك مشاهدة كل درس عن طريق الضغط على زر 'مشاهدة على يوتيوب'." data-fr="Cette page contient une série de leçons vidéo présentées par le professeur Hassan EL BAHI, qui expliquent les bases de l'algorithmique et des structures de données en arabe. Vous pouvez regarder chaque leçon en cliquant sur le bouton 'Voir sur YouTube'." data-en="This page contains a series of video lessons presented by Professor Hassan EL BAHI, which explain the basics of algorithms and data structures in Arabic. You can watch each lesson by clicking the 'Watch on YouTube' button.">هذه الصفحة تحتوي على مجموعة من الدروس المصورة التي يقدمها الأستاذ حسن البحيري، والتي تشرح أساسيات الخوارزميات وبنى البيانات باللغة العربية. يمكنك مشاهدة كل درس عن طريق الضغط على زر 'مشاهدة على يوتيوب'.</p>
+        </section>
 
-  <!-- أزرار التبديل بين اللغات -->
-  <div class="lang-buttons">
-    <button onclick="setLang('ar')">العربية</button>
-    <button onclick="setLang('en')">English</button>
-    <button onclick="setLang('fr')">Français</button>
-  </div>
+        <!-- شبكة الدروس -->
+        <section class="lessons-grid" id="lessons-container">
+            <!-- سيتم إضافة الدروس هنا عبر JavaScript -->
+        </section>
+    </main>
 
-  <!-- زر العودة للرئيسية -->
-  <a href="asasi.html" class="home-btn">
-    <span>🏠</span> العودة إلى الرئيسية
-  </a>
-</div>
+    <!-- تذييل الصفحة -->
 
-<script>
-  // تعيين اللغة عند التحميل
-  document.addEventListener("DOMContentLoaded", () => {
-    // حاول قراءة اللغة المحفوظة أو استخدم العربية كافتراضي
-    const savedLang = localStorage.getItem("lang") || "ar";
-    setLang(savedLang);
-  });
 
-  function setLang(lang) {
-    // حفظ اللغة لجلسة مستقبلية
-    localStorage.setItem("lang", lang);
+    <script>
+        // بيانات الدروس
+        const lessons = [
+            {
+                id: 1,
+                titleAr: "درس 1: C'est quoi un algorithme ?",
+                titleFr: "Leçon 1: C'est quoi un algorithme ?",
+                titleEn: "Lesson 1: C'est quoi un algorithme ?",
+                descriptionAr: "تعريف الخوارزمية، تاريخها، خصائصها، وأهميتها في البرمجة وحل المشكلات.",
+                descriptionFr: "Définition d'un algorithme, son histoire, ses caractéristiques et son importance en programmation et résolution de problèmes.",
+                descriptionEn: "Definition of an algorithm, its history, characteristics, and importance in programming and problem solving.",
+                link: "https://youtu.be/m_yj2p6SCEM?si=SvSmZDn-ioY0sMGF",
+                professor: "Hassan EL BAHI"
+            },
+            {
+                id: 2,
+                titleAr: "درس 2: Notion de variable et de constante",
+                titleFr: "Leçon 2: Notion de variable et de constante",
+                titleEn: "Lesson 2: Notion de variable et de constante",
+                descriptionAr: "الفرق بين المتغير والثابت، أنواع البيانات، وكيفية استخدامها في تخزين المعلومات.",
+                descriptionFr: "Différence entre variable et constante, types de données et comment les utiliser pour stocker des informations.",
+                descriptionEn: "Difference between variable and constant, data types, and how to use them to store information.",
+                link: "https://youtu.be/ZHEqnG8eLI8?si=evxiM76rHtvB-Z5c",
+                professor: "Hassan EL BAHI"
+            },
+            {
+                id: 3,
+                titleAr: "درس 3: Déclaration des variables et des constantes",
+                titleFr: "Leçon 3: Déclaration des variables et des constantes",
+                titleEn: "Lesson 3: Déclaration des variables et des constantes",
+                descriptionAr: "طريقة تعريف المتغيرات والثوابت، قواعد التسمية، والنطاق في الخوارزميات.",
+                descriptionFr: "Méthode de déclaration des variables et constantes, règles de nommage et portée dans les algorithmes.",
+                descriptionEn: "Method of declaring variables and constants, naming rules, and scope in algorithms.",
+                link: "https://youtu.be/WrUoWImriI0?si=KsPNR-nPEvFSzY4H",
+                professor: "Hassan EL BAHI"
+            },
+            {
+                id: 4,
+                titleAr: "درس 4: Affectation",
+                titleFr: "Leçon 4: Affectation",
+                titleEn: "Lesson 4: Affectation",
+                descriptionAr: "عملية إسناد القيم للمتغيرات، تحديث القيم، والعوامل الرياضية الأساسية.",
+                descriptionFr: "Processus d'affectation de valeurs aux variables, mise à jour des valeurs et opérateurs mathématiques de base.",
+                descriptionEn: "Process of assigning values to variables, updating values, and basic mathematical operators.",
+                link: "https://youtu.be/3_3E0AW3qJM?si=neEKLutuHH_JVoTx",
+                professor: "Hassan EL BAHI"
+            },
+            {
+                id: 5,
+                titleAr: "درس 5: Ecrire - Lire",
+                titleFr: "Leçon 5: Ecrire - Lire",
+                titleEn: "Lesson 5: Ecrire - Lire",
+                descriptionAr: "كيفية قراءة المدخلات من المستخدم وكتابة المخرجات في الخوارزميات.",
+                descriptionFr: "Comment lire les entrées de l'utilisateur et écrire les sorties dans les algorithmes.",
+                descriptionEn: "How to read user inputs and write outputs in algorithms.",
+                link: "https://youtu.be/zvhbb8KqczM?si=RBEFAJzM2S_zQTmX",
+                professor: "Hassan EL BAHI"
+            },
+            {
+                id: 6,
+                titleAr: "درس 6: La structure d'un algorithme",
+                titleFr: "Leçon 6: La structure d'un algorithme",
+                titleEn: "Lesson 6: La structure d'un algorithme",
+                descriptionAr: "المكونات الأساسية للخوارزمية: البداية، الإعلانات، المعالجة، والنهاية.",
+                descriptionFr: "Composants de base d'un algorithme: début, déclarations, traitement et fin.",
+                descriptionEn: "Basic components of an algorithm: start, declarations, processing, and end.",
+                link: "https://youtu.be/w6s-CXq9zZ0?si=sTsbwkhfJZHKvZmN",
+                professor: "Hassan EL BAHI"
+            },
+            {
+                id: 7,
+                titleAr: "درس 7: Les commentaires",
+                titleFr: "Leçon 7: Les commentaires",
+                titleEn: "Lesson 7: Les commentaires",
+                descriptionAr: "أهمية التعليقات في البرمجة، كيفية كتابتها، وتحسين قابلية قراءة الكود.",
+                descriptionFr: "Importance des commentaires en programmation, comment les écrire et améliorer la lisibilité du code.",
+                descriptionEn: "Importance of comments in programming, how to write them, and improve code readability.",
+                link: "https://youtu.be/J92BbddBw64?si=EpxaUG10QCmxblBT",
+                professor: "Hassan EL BAHI"
+            },
+            {
+                id: 8,
+                titleAr: "درس 8: Expressions arithmétiques",
+                titleFr: "Leçon 8: Expressions arithmétiques",
+                titleEn: "Lesson 8: Expressions arithmétiques",
+                descriptionAr: "التعبيرات الحسابية، الأولويات، والدوال الرياضية الأساسية.",
+                descriptionFr: "Expressions arithmétiques, priorités et fonctions mathématiques de base.",
+                descriptionEn: "Arithmetic expressions, priorities, and basic mathematical functions.",
+                link: "https://youtu.be/gGXSxPkD0P0?si=NrFdcyh-O6L7HWe2",
+                professor: "Hassan EL BAHI"
+            },
+            {
+                id: 9,
+                titleAr: "درس 9: Expressions de comparaison",
+                titleFr: "Leçon 9: Expressions de comparaison",
+                titleEn: "Lesson 9: Expressions de comparaison",
+                descriptionAr: "عوامل المقارنة (>, <, =, ≠) واستخدامها في اتخاذ القرارات المنطقية.",
+                descriptionFr: "Opérateurs de comparaison (>, <, =, ≠) et leur utilisation dans les décisions logiques.",
+                descriptionEn: "Comparison operators (>, <, =, ≠) and their use in logical decisions.",
+                link: "https://youtu.be/PvKMleuBiAo?si=TRPraovcA8IlMOFP",
+                professor: "Hassan EL BAHI"
+            },
+            {
+                id: 10,
+                titleAr: "درس 10: Expressions logiques",
+                titleFr: "Leçon 10: Expressions logiques",
+                titleEn: "Lesson 10: Expressions logiques",
+                descriptionAr: "العمليات المنطقية (AND, OR, NOT) وجداول الحقيقة والتعبيرات المركبة.",
+                descriptionFr: "Opérations logiques (ET, OU, NON), tables de vérité et expressions composées.",
+                descriptionEn: "Logical operations (AND, OR, NOT), truth tables and compound expressions.",
+                link: "https://youtu.be/UV6B3AW6h50?si=NOsytgvhp9bTi93f",
+                professor: "Hassan EL BAHI"
+            },
+            {
+                id: 11,
+                titleAr: "درس 11: Si ... Alors ... Fin Si (الجزء 1)",
+                titleFr: "Leçon 11: Si ... Alors ... Fin Si (part1)",
+                titleEn: "Lesson 11: Si ... Alors ... Fin Si (part1)",
+                descriptionAr: "الهياكل الشرطية البسيطة وكيفية اتخاذ القرارات في البرمجة.",
+                descriptionFr: "Structures conditionnelles simples et comment prendre des décisions en programmation.",
+                descriptionEn: "Simple conditional structures and how to make decisions in programming.",
+                link: "https://youtu.be/9KAgoYwUH4s?si=F3aFmq8UTL0Ncer_",
+                professor: "Hassan EL BAHI"
+            },
+            {
+                id: 12,
+                titleAr: "درس 12: Si ... Alors ... Sinon .... Fin Si (الجزء 2)",
+                titleFr: "Leçon 12: Si ... Alors ... Sinon .... Fin Si (part2)",
+                titleEn: "Lesson 12: Si ... Alors ... Sinon .... Fin Si (part2)",
+                descriptionAr: "الهياكل الشرطية البديلة مع خيارين أو أكثر ومعالجة الحالات المختلفة.",
+                descriptionFr: "Structures conditionnelles alternatives avec deux options ou plus et traitement de différents cas.",
+                descriptionEn: "Alternative conditional structures with two or more options and handling different cases.",
+                link: "https://youtu.be/S3V-dhUbaRo?si=Lv73FOwB0GvMiZAx",
+                professor: "Hassan EL BAHI"
+            },
+            {
+                id: 13,
+                titleAr: "درس 13: Structure alternative Si imbriquée",
+                titleFr: "Leçon 13: Structure alternative Si imbriquée",
+                titleEn: "Lesson 13: Structure alternative Si imbriquée",
+                descriptionAr: "الهياكل الشرطية المتداخلة لاتخاذ قرارات معقدة ومعالجة شروط متعددة.",
+                descriptionFr: "Structures conditionnelles imbriquées pour prendre des décisions complexes et traiter plusieurs conditions.",
+                descriptionEn: "Nested conditional structures for making complex decisions and handling multiple conditions.",
+                link: "https://youtu.be/ElSX191_Q8o?si=awe4Wqcp6-ycluH1",
+                professor: "Hassan EL BAHI"
+            },
+            {
+                id: 14,
+                titleAr: "درس 14: Structure conditionnelle à choix multiple",
+                titleFr: "Leçon 14: Structure conditionnelle à choix multiple",
+                titleEn: "Lesson 14: Structure conditionnelle à choix multiple",
+                descriptionAr: "هياكل الحالات المتعددة (case/switch) لتبسيط الشروط المعقدة.",
+                descriptionFr: "Structures à cas multiples (case/switch) pour simplifier les conditions complexes.",
+                descriptionEn: "Multiple case structures (case/switch) to simplify complex conditions.",
+                link: "https://youtu.be/tZl-rBMPg1o?si=Pj8jm1oRm6UMja_o",
+                professor: "Hassan EL BAHI"
+            },
+            {
+                id: 15,
+                titleAr: "درس 15: La Boucle Pour",
+                titleFr: "Leçon 15: La Boucle Pour",
+                titleEn: "Lesson 15: La Boucle Pour",
+                descriptionAr: "الحلقات التكرارية المعروفة بعدد تكرارات محدد باستخدام FOR.",
+                descriptionFr: "Boucles itératives avec un nombre d'itérations prédéfini en utilisant FOR.",
+                descriptionEn: "Iterative loops with a predefined number of iterations using FOR.",
+                link: "https://youtu.be/GkRsyvj72YU?si=TP6j43kahoR0tnpz",
+                professor: "Hassan EL BAHI"
+            },
+            {
+                id: 16,
+                titleAr: "درس 16: La boucle Tant que .... faire ....",
+                titleFr: "Leçon 16: La boucle Tant que .... faire ....",
+                titleEn: "Lesson 16: La boucle Tant que .... faire ....",
+                descriptionAr: "الحلقات التكرارية التي تستمر طالما تحقق شرط معين باستخدام WHILE.",
+                descriptionFr: "Boucles itératives qui continuent tant qu'une condition est remplie en utilisant WHILE.",
+                descriptionEn: "Iterative loops that continue as long as a condition is met using WHILE.",
+                link: "https://youtu.be/Q8aIy_qtm4o?si=wEJJgHH385youVqG",
+                professor: "Hassan EL BAHI"
+            },
+            {
+                id: 17,
+                titleAr: "درس 17: La Boucle Répéter ... Jusqu'à ...",
+                titleFr: "Leçon 17: La Boucle Répéter ... Jusqu'à ...",
+                titleEn: "Lesson 17: La Boucle Répéter ... Jusqu'à ...",
+                descriptionAr: "الحلقات التكرارية التي تنفذ مرة واحدة على الأقل باستخدام REPEAT-UNTIL.",
+                descriptionFr: "Boucles itératives qui s'exécutent au moins une fois en utilisant REPEAT-UNTIL.",
+                descriptionEn: "Iterative loops that execute at least once using REPEAT-UNTIL.",
+                link: "https://youtu.be/1FTN0HP_9EA?si=_nPgEPLUasYNQ55W",
+                professor: "Hassan EL BAHI"
+            },
+            {
+                id: 18,
+                titleAr: "درس 18: Tableaux",
+                titleFr: "Leçon 18: Tableaux",
+                titleEn: "Lesson 18: Tableaux",
+                descriptionAr: "المصفوفات أحادية البعد: التعريف، الاستخدام، ومعالجة العناصر.",
+                descriptionFr: "Tableaux à une dimension: définition, utilisation et traitement des éléments.",
+                descriptionEn: "One-dimensional arrays: definition, use, and element processing.",
+                link: "https://youtu.be/qk_Z54ebWkY?si=UBJ208pHBBrS4tsC",
+                professor: "Hassan EL BAHI"
+            },
+            {
+                id: 19,
+                titleAr: "درس 19: Procédures et fonctions",
+                titleFr: "Leçon 19: Procédures et fonctions",
+                titleEn: "Lesson 19: Procédures et fonctions",
+                descriptionAr: "التجزئة في البرمجة: كيفية إنشاء واستدعاء الإجراءات والدوال.",
+                descriptionFr: "Modularisation en programmation: comment créer et appeler des procédures et fonctions.",
+                descriptionEn: "Modularization in programming: how to create and call procedures and functions.",
+                link: "https://youtu.be/FvWvI0i8vkE?si=EK6gixTRvrxRxAC0",
+                professor: "Hassan EL BAHI"
+            },
+            {
+                id: 20,
+                titleAr: "درس 20: Tableaux à deux dimensions - Matrices",
+                titleFr: "Leçon 20: Tableaux à deux dimensions - Matrices",
+                titleEn: "Lesson 20: Tableaux à deux dimensions - Matrices",
+                descriptionAr: "المصفوفات ثنائية الأبعاد: التمثيل، الوصول للعناصر، والتطبيقات العملية.",
+                descriptionFr: "Tableaux à deux dimensions: représentation, accès aux éléments et applications pratiques.",
+                descriptionEn: "Two-dimensional arrays: representation, element access, and practical applications.",
+                link: "https://youtu.be/HcISlv4HA0k?si=pjSn_9KQwLzqcDoA",
+                professor: "Hassan EL BAHI"
+            },
+            {
+                id: 21,
+                titleAr: "درس 21: Récursivité",
+                titleFr: "Leçon 21: Récursivité",
+                titleEn: "Lesson 21: Récursivité",
+                descriptionAr: "الدوال العودية: حساب المضروب وسلسلة فيبوناتشي مع أمثلة تطبيقية.",
+                descriptionFr: "Fonctions récursives: calcul factoriel et suite de Fibonacci avec exemples pratiques.",
+                descriptionEn: "Recursive functions: factorial calculation and Fibonacci sequence with practical examples.",
+                link: "https://youtu.be/yGO4PRhs6m8?si=F2vPV2eRCIRP6KBf",
+                professor: "Hassan EL BAHI"
+            }
+        ];
 
-    // إظهار النص المطلوب وإخفاء الباقي
-    document.querySelectorAll("[data-lang]").forEach(el => {
-      el.style.display = el.getAttribute("data-lang") === lang ? "block" : "none";
-    });
+        // توليد النجوم
+        function createStars() {
+            const starsBg = document.getElementById('starsBg');
+            const starCount = window.innerWidth < 768 ? 60 : 120;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                const size = Math.random() * 3 + 1;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const duration = Math.random() * 4 + 2;
+                const delay = Math.random() * 5;
+                
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${posX}%`;
+                star.style.top = `${posY}%`;
+                star.style.animationDuration = `${duration}s`;
+                star.style.animationDelay = `${delay}s`;
+                star.style.backgroundColor = `rgba(255, 255, 255, ${Math.random() * 0.5 + 0.3})`;
+                
+                starsBg.appendChild(star);
+            }
+        }
 
-    // تحديث اتجاه النص ( rtl / ltr )
-    document.body.setAttribute("lang", lang);
-    document.body.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+        // تأثير الريبل عند النقر
+        function addRippleEffect(e) {
+            const ripple = document.createElement('div');
+            ripple.className = 'ripple';
+            
+            const rect = e.currentTarget.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.cssText = `
+                width: ${size}px;
+                height: ${size}px;
+                left: ${x}px;
+                top: ${y}px;
+            `;
+            
+            e.currentTarget.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        }
 
-    // تحديث عنوان الصفحة
-    const titles = {
-      ar: "غير متوفر حاليًا",
-      en: "Not Available Yet",
-      fr: "Pas encore disponible"
-    };
-    document.title = titles[lang] || "غير متوفر";
-  }
-</script>
+        // وظيفة تغيير اللغة
+        function changeLanguage(lang) {
+            document.documentElement.lang = lang;
+            
+            if (lang === 'ar') {
+                document.documentElement.dir = 'rtl';
+            } else {
+                document.documentElement.dir = 'ltr';
+            }
+            
+            // تحديث النصوص العامة (لا تشمل عناوين الدروس)
+            document.querySelectorAll('[data-ar]:not(.lesson-title):not(.lesson-title *)').forEach(element => {
+                if (lang === 'ar') {
+                    element.textContent = element.getAttribute('data-ar');
+                } else if (lang === 'fr') {
+                    element.textContent = element.getAttribute('data-fr');
+                } else if (lang === 'en') {
+                    element.textContent = element.getAttribute('data-en');
+                }
+            });
+            
+            // تحديث أزرار اللغة
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // تحديث أوصاف الدروس فقط
+            updateLessonsContent(lang);
+            localStorage.setItem('preferredLanguage', lang);
+        }
 
+        // تحديث محتوى الدروس (الأوصاف فقط)
+        function updateLessonsContent(lang) {
+            const lessonCards = document.querySelectorAll('.lesson-card');
+            
+            lessonCards.forEach(card => {
+                const lessonId = parseInt(card.getAttribute('data-id'));
+                const lesson = lessons.find(l => l.id === lessonId);
+                
+                if (lesson) {
+                    const descriptionElement = card.querySelector('.lesson-description');
+                    
+                    if (lang === 'ar') {
+                        descriptionElement.textContent = lesson.descriptionAr;
+                    } else if (lang === 'fr') {
+                        descriptionElement.textContent = lesson.descriptionFr;
+                    } else if (lang === 'en') {
+                        descriptionElement.textContent = lesson.descriptionEn;
+                    }
+                }
+            });
+        }
+
+        // إنشاء بطاقات الدروس
+        function createLessonCards() {
+            const container = document.getElementById('lessons-container');
+            container.innerHTML = '';
+            
+            lessons.forEach(lesson => {
+                const lessonCard = document.createElement('div');
+                lessonCard.className = 'lesson-card fade-in';
+                lessonCard.setAttribute('data-id', lesson.id);
+                
+                lessonCard.innerHTML = `
+                    <div class="lesson-header">
+                        <div class="lesson-title-section">
+                            <div class="lesson-title-wrapper">
+                                <div class="lesson-title">${lesson.titleAr}</div>
+                            </div>
+                            <div class="lesson-number">${lesson.id}</div>
+                        </div>
+                        <div class="professor-section">
+                            <div class="professor-label">الأستاذ:</div>
+                            <div class="professor-name">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                <span>${lesson.professor}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-content">
+                        <div class="lesson-description">
+                            <span class="description-label">شرح الدرس:</span>
+                            ${lesson.descriptionAr}
+                        </div>
+                        <a href="${lesson.link}" target="_blank" class="lesson-link">
+                            <div class="link-text">
+                                <i class="fab fa-youtube youtube-icon"></i>
+                                <span>مشاهدة على يوتيوب</span>
+                            </div>
+                        </a>
+                    </div>
+                `;
+                
+                container.appendChild(lessonCard);
+            });
+        }
+
+        // اكتشاف العناصر عند التمرير
+        function observeElements() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '50px'
+            });
+            
+            document.querySelectorAll('.fade-in').forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // تهيئة الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            createLessonCards();
+            createStars();
+            observeElements();
+            
+            const savedLang = localStorage.getItem('preferredLanguage') || 'ar';
+            changeLanguage(savedLang);
+            
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    addRippleEffect(e);
+                    const lang = this.getAttribute('data-lang');
+                    changeLanguage(lang);
+                });
+            });
+            
+            document.querySelectorAll('.lesson-link').forEach(btn => {
+                btn.addEventListener('click', addRippleEffect);
+            });
+            
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 50) {
+                    header.style.padding = '1rem';
+                    header.style.backdropFilter = 'blur(20px)';
+                } else {
+                    header.style.padding = '2rem';
+                    header.style.backdropFilter = 'blur(10px)';
+                }
+            });
+            
+            if ('connection' in navigator) {
+                const connection = navigator.connection;
+                if (connection.saveData || connection.effectiveType.includes('2g')) {
+                    document.querySelectorAll('*').forEach(el => {
+                        el.style.animation = 'none';
+                        el.style.transition = 'none';
+                    });
+                }
+            }
+            
+            window.addEventListener('resize', () => {
+                document.getElementById('starsBg').innerHTML = '';
+                createStars();
+            });
+        });
+        
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+            document.body.style.transition = 'opacity 0.3s ease';
+        });
+    </script>
 </body>
 </html>
