@@ -19,6 +19,7 @@
             --primary-dark: #0f172a;
             --secondary: #0aff9d;
             --ai-color: #8b5cf6; /* لون جديد للذكاء الاصطناعي */
+            --download-color: #f97316; /* لون جديد لخانة التحميل */
             --bg-dark: #0f172a;
             --bg-medium: #1e293b;
             --bg-light: rgba(30, 41, 59, 0.6);
@@ -28,6 +29,7 @@
             --shadow-medium: rgba(0, 234, 255, 0.3);
             --shadow-heavy: rgba(0, 234, 255, 0.4);
             --ai-shadow: rgba(139, 92, 246, 0.3); /* ظل للذكاء الاصطناعي */
+            --download-shadow: rgba(249, 115, 22, 0.3); /* ظل لخانة التحميل */
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
@@ -68,7 +70,7 @@
             left: 0;
             width: 0;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--primary-light), var(--secondary), var(--ai-color));
+            background: linear-gradient(90deg, var(--primary), var(--primary-light), var(--secondary), var(--ai-color), var(--download-color));
             opacity: 0;
             transition: opacity 0.4s ease;
             z-index: 1000;
@@ -106,7 +108,7 @@
             transform: translateX(50%);
             width: 120px;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary-light), var(--secondary), var(--ai-color));
+            background: linear-gradient(90deg, var(--primary-light), var(--secondary), var(--ai-color), var(--download-color));
             border-radius: 2px;
         }
 
@@ -230,6 +232,48 @@
             animation: pulse 2s infinite;
         }
 
+        /* خانة تحميل التطبيق المميزة */
+        .item.download-special {
+            background: rgba(249, 115, 22, 0.15);
+            border: 2px solid var(--download-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .item.download-special::before {
+            background: linear-gradient(to bottom, var(--download-color), #fb923c);
+        }
+
+        .item.download-special .icon-wrapper {
+            background: rgba(249, 115, 22, 0.25);
+        }
+
+        .item.download-special i {
+            color: #fb923c;
+        }
+
+        .item.download-special:hover {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.9), rgba(251, 146, 60, 0.8), rgba(253, 186, 116, 0.6));
+            box-shadow: 0 15px 35px var(--download-shadow);
+            border-color: transparent;
+        }
+
+        .item.download-special .download-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--download-color);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            animation: pulse-download 2s infinite;
+        }
+
         @keyframes pulse {
             0%, 100% {
                 transform: scale(1);
@@ -238,6 +282,17 @@
             50% {
                 transform: scale(1.05);
                 box-shadow: 0 0 0 8px rgba(139, 92, 246, 0);
+            }
+        }
+
+        @keyframes pulse-download {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 8px rgba(249, 115, 22, 0);
             }
         }
 
@@ -406,6 +461,11 @@
             animation-duration: 5s;
         }
 
+        .item.download-special {
+            animation-delay: 0.3s;
+            animation-duration: 5.5s;
+        }
+
         footer {
             margin-top: 40px;
             text-align: center;
@@ -434,6 +494,11 @@
         }
 
         html[dir="ltr"] .item.ai-special .ai-badge {
+            left: auto;
+            right: 10px;
+        }
+
+        html[dir="ltr"] .item.download-special .download-badge {
             left: auto;
             right: 10px;
         }
@@ -534,6 +599,10 @@
         .item.ai-special:focus-visible {
             outline-color: var(--ai-color);
         }
+
+        .item.download-special:focus-visible {
+            outline-color: var(--download-color);
+        }
     </style>
 </head>
 <body>
@@ -577,6 +646,21 @@
         <div class="item-content">
             <span data-lang-key="ai">مساعد الذكاء الاصطناعي</span>
             <div class="item-desc" data-lang-key="ai_desc">تصحيح وتحليل أكواد C تلقائياً</div>
+        </div>
+    </a>
+
+    <!-- خانة تحميل التطبيق -->
+    <a class="item download-special" href="t.html" data-key="download">
+        <div class="download-badge">
+            <i class="fas fa-download"></i>
+            <span data-lang-key="download_badge">مباشر</span>
+        </div>
+        <div class="icon-wrapper">
+            <i class="fa-solid fa-mobile-alt"></i>
+        </div>
+        <div class="item-content">
+            <span data-lang-key="download">تحميل تطبيق</span>
+            <div class="item-desc" data-lang-key="download_desc">نزّل تطبيق C على هاتفك</div>
         </div>
     </a>
 
@@ -676,6 +760,21 @@ const translations = {
         en: "NEW",
         fr: "NOUVEAU"
     },
+    download: {
+        ar: "تحميل تطبيق",
+        en: "Download App",
+        fr: "Télécharger l'application"
+    },
+    download_desc: {
+        ar: "نزّل تطبيق C على هاتفك",
+        en: "Download C app to your phone",
+        fr: "Téléchargez l'application C sur votre téléphone"
+    },
+    download_badge: {
+        ar: "مباشر",
+        en: "DIRECT",
+        fr: "DIRECT"
+    },
     codes: {
         ar: "أكواد C",
         en: "C Codes",
@@ -750,7 +849,7 @@ function initParticles() {
     particlesJS("particles-js", {
         particles: {
             number: { value: 60, density: { enable: true, value_area: 800 } },
-            color: { value: ["#0ea5e9", "#8b5cf6", "#00eaff"] }, // ألوان متعددة تشمل لون الذكاء الاصطناعي
+            color: { value: ["#0ea5e9", "#8b5cf6", "#00eaff", "#f97316"] }, // ألوان متعددة تشمل لون الذكاء الاصطناعي والتحميل
             shape: { type: "circle" },
             opacity: { value: 0.3, random: true },
             size: { value: 3, random: true },
@@ -796,6 +895,8 @@ function createRipple(event) {
     // تغيير لون الـ ripple حسب نوع العنصر
     if (button.classList.contains('ai-special')) {
         circle.style.background = 'rgba(139, 92, 246, 0.6)';
+    } else if (button.classList.contains('download-special')) {
+        circle.style.background = 'rgba(249, 115, 22, 0.6)';
     }
 
     button.appendChild(circle);
@@ -965,6 +1066,69 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
     
+    // إضافة تأثير خاص لزر تحميل التطبيق
+    const downloadItem = document.querySelector('.item.download-special');
+    if (downloadItem) {
+        downloadItem.addEventListener('click', function(e) {
+            // منع التنقل الفوري لإظهار التأثير
+            e.preventDefault();
+            
+            // تأثيرات بصرية
+            this.style.transform = 'translateY(-8px) scale(1.02)';
+            this.style.boxShadow = '0 20px 40px var(--download-shadow)';
+            
+            // تغيير مؤشر الفأرة
+            document.body.style.cursor = 'wait';
+            
+            // تنبيه تحفيزي
+            const messages = {
+                ar: ["⬇️ جاري تحضير التحميل...", "📱 التطبيق جاهز للتنزيل!", "🚀 ابدأ البرمجة على هاتفك!"],
+                en: ["⬇️ Preparing download...", "📱 App ready to download!", "🚀 Start coding on your phone!"],
+                fr: ["⬇️ Préparation du téléchargement...", "📱 Application prête à télécharger!", "🚀 Commencez à coder sur votre téléphone!"]
+            };
+            
+            const randomMessage = messages[currentLang][Math.floor(Math.random() * messages[currentLang].length)];
+            
+            // إضافة رسالة مؤقتة
+            const tempMsg = document.createElement('div');
+            tempMsg.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(249, 115, 22, 0.9);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 15px;
+                font-weight: bold;
+                z-index: 9999;
+                animation: fadeInOut 1.5s ease;
+                backdrop-filter: blur(10px);
+                border: 2px solid white;
+            `;
+            
+            // تعريف animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeInOut {
+                    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                    20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                    80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            tempMsg.textContent = randomMessage;
+            document.body.appendChild(tempMsg);
+            
+            // الانتقال بعد التأثير
+            setTimeout(() => {
+                window.location.href = "t.html";
+            }, 1500);
+        });
+    }
+    
     // تحديث مؤشر التمرير
     window.addEventListener('scroll', updateScrollIndicator);
     updateScrollIndicator(); // تهيئة أولية
@@ -972,6 +1136,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // تأثيرات إضافية عند تحميل الصفحة
     setTimeout(() => {
         document.querySelector('.item.ai-special')?.classList.add('loaded');
+        document.querySelector('.item.download-special')?.classList.add('loaded');
     }, 100);
 });
 </script>

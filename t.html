@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <title>تحميل تطبيق C</title>
+    <link rel="icon" href="1.png" />
+
+    <!-- خط عربي جميل -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+        :root {
+            --primary: #0ea5e9;
+            --primary-light: #00eaff;
+            --primary-dark: #0f172a;
+            --secondary: #0aff9d;
+            --ai-color: #8b5cf6;
+            --download-color: #f97316;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --bg-dark: #0f172a;
+            --bg-medium: #1e293b;
+            --bg-light: rgba(30, 41, 59, 0.7);
+            --card-bg: rgba(30, 41, 59, 0.85);
+            --text-light: #e2e8f0;
+            --text-muted: #94a3b8;
+            --text-dark: #0f172a;
+            --shadow-light: rgba(14, 165, 233, 0.15);
+            --shadow-medium: rgba(0, 234, 255, 0.25);
+            --shadow-heavy: rgba(0, 234, 255, 0.35);
+            --download-shadow: rgba(249, 115, 22, 0.25);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 16px;
+            --border-radius-lg: 24px;
+            --border-radius-sm: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-medium) 50%, #1a2538 100%);
+            font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-light);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* تحسين العرض على الشاشات الكبيرة */
+        @media (min-width: 1400px) {
+            body {
+                background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-medium) 30%, #1a2538 70%, var(--bg-dark) 100%);
+            }
+        }
+
+        /* تأثير الجسيمات المتحركة */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.4;
+        }
+
+        /* تأثير خلفية إضافية */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(14, 165, 233, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(249, 115, 22, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* شريط التنقل العلوي - متجاوب */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 5%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(14, 165, 233, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            min-height: 70px;
+        }
+
+        .navbar.scrolled {
+            padding: 12px 5%;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* شريط التنقل على الهواتف */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 12px 4%;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .navbar.scrolled {
+                padding: 10px 4%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 10px 3%;
+            }
+        }
+
+        /* زر الرجوع للرئيسية */
+        .home-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: rgba(14, 165, 233, 0.1);
+            border: 2px solid rgba(14, 165, 233, 0.3);
+            border-radius: var(--border-radius);
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .home-btn:hover, .home-btn:focus {
+            background: var(--primary);
+            color: var(--text-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--shadow-medium);
+            border-color: transparent;
+            outline: none;
+        }
+
+        /* أزرار اللغة - تصميم متجاوب */
+        .lang-selector {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .lang-btn {
+            padding: 10px 18px;
+            background: rgba(14, 165, 233, 0.08);
+            border: 2px solid rgba(14, 165, 233, 0.2);
+            border-radius: var(--border-radius-sm);
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            min-width: fit-content;
+            flex: 1;
+            justify-content: center;
+            max-width: 110px;
+        }
+
+        .lang-btn:hover {
+            background: rgba(14, 165, 233, 0.2);
+            transform: translateY(-2px);
+            border-color: rgba(14, 165, 233, 0.4);
+        }
+
+        .lang-btn.active {
+            background: var(--primary);
+            color: var(--text-dark);
+            border-color: var(--primary);
+            box-shadow: 0 4px 15px var(--shadow-medium);
+        }
+
+        /* تحسين أزرار اللغة على الهواتف */
+        @media (max-width: 768px) {
+            .lang-selector {
+                width: 100%;
+                max-width: 100%;
+                order: 3;
+                margin-top: 10px;
+                justify-content: center;
+            }
+            
+            .lang-btn {
+                padding: 8px 15px;
+                font-size: 0.85rem;
+                flex: 0 1 calc(33.333% - 6px);
+                max-width: calc(33.333% - 6px);
+            }
+            
+            .home-btn {
+                order: 1;
+                flex: 1;
+                min-width: 120px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .lang-btn {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+                gap: 4px;
+            }
+            
+            .lang-btn i {
+                font-size: 0.9rem;
+            }
+            
+            .home-btn {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* الحاوية الرئيسية */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            width: 100%;
+        }
+
+        @media (min-width: 1400px) {
+            .container {
+                max-width: 1400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px 12px;
+            }
+        }
+
+        /* بطاقة التطبيق الرئيسية */
+        .app-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: var(--border-radius-lg);
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(14, 165, 233, 0.15);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            animation: fadeIn 0.8s ease-out;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--download-color), var(--ai-color));
+            z-index: 1;
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px) scale(0.98);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .app-card {
+                padding: 30px;
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .app-card {
+                padding: 25px 20px;
+                margin-bottom: 25px;
+                border-radius: var(--border-radius);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .app-card {
+                padding: 20px 15px;
+                border-radius: 14px;
+            }
+        }
+
+        /* رأس التطبيق */
+        .app-header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .app-title {
+            color: var(--primary);
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 15px;
+            font-weight: 800;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px var(--shadow-light);
+        }
+
+        .app-subtitle {
+            color: var(--text-muted);
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .app-header {
+                margin-bottom: 30px;
+            }
+            
+            .app-title {
+                font-size: 1.8rem;
+                margin-bottom: 12px;
+            }
+            
+            .app-subtitle {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .app-title {
+                font-size: 1.6rem;
+            }
+            
+            .app-subtitle {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* قسم معلومات التطبيق */
+        .app-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .app-info {
+                gap: 25px;
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .app-info {
+                gap: 20px;
+            }
+        }
+
+        .app-details {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            border: 1px solid rgba(14, 165, 233, 0.1);
+            transition: var(--transition);
+        }
+
+        .app-details:hover {
+            border-color: rgba(14, 165, 233, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .app-details {
+                padding: 20px;
+            }
+        }
+
+        .app-icon {
+            width: clamp(80px, 10vw, 120px);
+            height: clamp(80px, 10vw, 120px);
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            box-shadow: 0 8px 25px var(--shadow-medium);
+        }
+
+        .app-icon i {
+            font-size: clamp(40px, 5vw, 60px);
+            color: white;
+        }
+
+        .app-details h3 {
+            color: var(--primary-light);
+            margin-bottom: 20px;
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .app-details ul {
+            list-style: none;
+            padding-right: 0;
+        }
+
+        .app-details li {
+            margin-bottom: 12px;
+            color: var(--text-light);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
+            line-height: 1.5;
+        }
+
+        .app-details li i {
+            color: var(--secondary);
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        /* قسم التحميل */
+        .download-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.6), rgba(30, 41, 59, 0.4));
+            border-radius: var(--border-radius-lg);
+            border: 2px dashed rgba(249, 115, 22, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(249, 115, 22, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .download-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .download-section {
+                margin: 30px 0;
+                padding: 25px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .download-section {
+                margin: 25px 0;
+                padding: 20px 15px;
+            }
+        }
+
+        /* زر التحميل الرئيسي */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: clamp(16px, 3vw, 20px) clamp(30px, 5vw, 50px);
+            background: linear-gradient(135deg, var(--download-color), #fb923c, #f97316);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-weight: 800;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.3);
+            border: none;
+            cursor: pointer;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+            min-width: min(300px, 90%);
+            white-space: nowrap;
+            z-index: 1;
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+            z-index: -1;
+        }
+
+        .download-btn:hover::before {
+            left: 100%;
+        }
+
+        .download-btn:hover, .download-btn:focus {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(249, 115, 22, 0.5);
+            background: linear-gradient(135deg, #fb923c, var(--download-color), #fb923c);
+            outline: none;
+        }
+
+        .download-btn:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .download-btn i {
+            font-size: 1.3em;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .download-size {
+            color: var(--text-muted);
+            font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+            margin-top: 10px;
+        }
+
+        /* خطوات التحميل */
+        .steps-section {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-top: 40px;
+            border: 1px solid rgba(249, 115, 22, 0.2);
+            position: relative;
+        }
+
+        .steps-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--download-color), transparent);
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        @media (max-width: 768px) {
+            .steps-section {
+                padding: 25px 20px;
+                margin-top: 30px;
+            }
+            
+            .steps-section::after {
+                width: 3px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .steps-section {
+                padding: 20px 15px;
+                margin-top: 25px;
+            }
+        }
+
+        .steps-title {
+            color: var(--download-color);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            font-weight: 700;
+        }
+
+        @media (max-width: 480px) {
+            .steps-title {
+                flex-direction: column;
+                gap: 10px;
+                margin-bottom: 25px;
+            }
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .steps-grid {
+                gap: 15px;
+            }
+        }
+
+        .step {
+            background: var(--bg-light);
+            padding: clamp(20px, 3vw, 25px);
+            border-radius: var(--border-radius);
+            border-right: 4px solid var(--download-color);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-right-color: #fb923c;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: clamp(36px, 4vw, 40px);
+            height: clamp(36px, 4vw, 40px);
+            background: var(--download-color);
+            color: white;
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(249, 115, 22, 0.3);
+        }
+
+        .step h3 {
+            color: var(--primary-light);
+            margin-bottom: 10px;
+            font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+            font-weight: 700;
+        }
+
+        .step p {
+            color: var(--text-light);
+            line-height: 1.6;
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
+            opacity: 0.9;
+        }
+
+        /* قسم الملاحظات */
+        .notes-section {
+            background: rgba(245, 158, 11, 0.08);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-top: 30px;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .notes-section {
+                padding: 20px;
+                margin-top: 25px;
+            }
+        }
+
+        .notes-title {
+            color: var(--warning-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            font-size: clamp(1.2rem, 2vw, 1.4rem);
+            font-weight: 700;
+        }
+
+        .notes-list {
+            list-style: none;
+            padding-right: 0;
+        }
+
+        .notes-list li {
+            margin-bottom: 12px;
+            color: #fef3c7;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
+            line-height: 1.5;
+        }
+
+        .notes-list li i {
+            color: var(--warning-color);
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        /* تحذير الأمان */
+        .warning-box {
+            background: rgba(239, 68, 68, 0.08);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-top: 30px;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            animation: warning-pulse 3s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .warning-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.05), transparent);
+            transform: translateX(-100%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            100% { transform: translateX(100%); }
+        }
+
+        @keyframes warning-pulse {
+            0%, 100% {
+                border-color: rgba(239, 68, 68, 0.2);
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+            }
+            50% {
+                border-color: rgba(239, 68, 68, 0.4);
+                box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .warning-box {
+                padding: 20px;
+                margin-top: 25px;
+            }
+        }
+
+        .warning-title {
+            color: var(--danger-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            font-size: clamp(1.2rem, 2vw, 1.4rem);
+            font-weight: 700;
+        }
+
+        .warning-text {
+            color: #fecaca;
+            line-height: 1.6;
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
+        }
+
+        /* الفوتر */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(100, 116, 139, 0.2);
+            color: var(--text-muted);
+            font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                padding: 25px 15px;
+                margin-top: 40px;
+            }
+        }
+
+        /* زر العودة للأعلى */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+            box-shadow: 0 5px 15px var(--shadow-medium);
+            border: 2px solid white;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-light);
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .back-to-top {
+                bottom: 20px;
+                left: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+        }
+
+        /* تأثيرات النقر */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* تحسينات للشاشات الكبيرة جداً */
+        @media (min-width: 1600px) {
+            .container {
+                padding: 50px 40px;
+            }
+            
+            .app-card {
+                padding: 50px;
+            }
+            
+            .steps-grid {
+                gap: 30px;
+            }
+            
+            .step {
+                padding: 30px;
+            }
+        }
+
+        /* تحسينات للشاشات الصغيرة جداً */
+        @media (max-width: 360px) {
+            .home-btn {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .lang-btn {
+                padding: 6px 10px;
+                font-size: 0.75rem;
+            }
+            
+            .app-title {
+                font-size: 1.4rem;
+            }
+            
+            .download-btn {
+                padding: 14px 20px;
+                font-size: 1rem;
+                min-width: 260px;
+            }
+        }
+
+        /* تحسينات للأجهزة التي تدعم hover */
+        @media (hover: hover) {
+            .home-btn:hover .ripple,
+            .lang-btn:hover .ripple,
+            .download-btn:hover .ripple {
+                animation: ripple-animation 0.6s linear;
+            }
+        }
+
+        /* تحسينات للأجهزة التي لا تدعم hover */
+        @media (hover: none) {
+            .home-btn:active,
+            .lang-btn:active,
+            .download-btn:active {
+                transform: scale(0.95);
+            }
+            
+            .step, .app-details {
+                cursor: default;
+            }
+        }
+
+        /* تحسين التمرير على iOS */
+        .ios-scroll-fix {
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* منع تكبير النص على iOS */
+        body {
+            -webkit-text-size-adjust: 100%;
+        }
+
+        /* تحسين الوصول وإمكانية الاستخدام */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--secondary);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="ios-scroll-fix">
+
+<!-- الجسيمات المتحركة -->
+<div id="particles-js"></div>
+
+<!-- تأثير خلفية إضافي -->
+<div class="bg-gradient"></div>
+
+<!-- زر العودة للأعلى -->
+<div class="back-to-top" id="backToTop" aria-label="العودة للأعلى">
+    <i class="fas fa-arrow-up"></i>
+</div>
+
+<!-- شريط التنقل -->
+<nav class="navbar" id="navbar">
+    <a href="asasi.html" class="home-btn" id="homeBtn" aria-label="العودة للصفحة الرئيسية">
+        <i class="fas fa-home"></i>
+        <span data-lang-key="home">الرئيسية</span>
+    </a>
+    
+    <div class="lang-selector">
+        <button class="lang-btn active" onclick="changeLanguage('ar')" data-lang="ar" aria-label="تغيير اللغة إلى العربية">
+            <i class="fas fa-language"></i>
+            <span>العربية</span>
+        </button>
+        <button class="lang-btn" onclick="changeLanguage('en')" data-lang="en" aria-label="Change language to English">
+            <i class="fas fa-language"></i>
+            <span>English</span>
+        </button>
+        <button class="lang-btn" onclick="changeLanguage('fr')" data-lang="fr" aria-label="Changer la langue en Français">
+            <i class="fas fa-language"></i>
+            <span>Français</span>
+        </button>
+    </div>
+</nav>
+
+<!-- المحتوى الرئيسي -->
+<div class="container">
+    <!-- بطاقة التطبيق -->
+    <div class="app-card">
+        <div class="app-header">
+            <h1 class="app-title" data-lang-key="app_title">تطبيق C Programming</h1>
+            <p class="app-subtitle" data-lang-key="app_subtitle">تطبيق شامل لتعلم لغة C على هاتفك الأندرويد</p>
+        </div>
+
+        <!-- معلومات التطبيق -->
+        <div class="app-info">
+            <div class="app-details">
+                <div class="app-icon" aria-hidden="true">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3 data-lang-key="features_title">مميزات التطبيق</h3>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> <span data-lang-key="feature1">أكثر من 100 مثال برمجي</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span data-lang-key="feature2">مترجم كود مدمج</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span data-lang-key="feature3">دروس تفاعلية</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span data-lang-key="feature4">اختبارات وتحديات</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span data-lang-key="feature5">يعمل بدون إنترنت</span></li>
+                </ul>
+            </div>
+
+            <div class="app-details">
+                <h3 data-lang-key="requirements_title">متطلبات النظام</h3>
+                <ul>
+                    <li><i class="fas fa-mobile-alt"></i> <span data-lang-key="req1">أندرويد 5.0 أو أعلى</span></li>
+                    <li><i class="fas fa-microchip"></i> <span data-lang-key="req2">1GB RAM على الأقل</span></li>
+                    <li><i class="fas fa-hdd"></i> <span data-lang-key="req3">50MB مساحة تخزين</span></li>
+                    <li><i class="fas fa-shield-alt"></i> <span data-lang-key="req4">صلاحية تثبيت مصادر غير معروفة</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- زر التحميل -->
+        <div class="download-section">
+            <div class="download-content">
+                <a href="app-debug.apk" class="download-btn" id="downloadBtn" download 
+                   aria-label="تحميل تطبيق C Programming للأندرويد">
+                    <i class="fas fa-download"></i>
+                    <span data-lang-key="download_btn">تحميل التطبيق للأندرويد</span>
+                </a>
+                <p class="download-size" data-lang-key="file_size">حجم الملف: 15MB</p>
+            </div>
+        </div>
+
+        <!-- خطوات التحميل والتثبيت -->
+        <div class="steps-section">
+            <h2 class="steps-title">
+                <i class="fas fa-list-ol"></i>
+                <span data-lang-key="steps_title">خطوات التحميل والتثبيت</span>
+            </h2>
+            
+            <div class="steps-grid">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3 data-lang-key="step1_title">التحميل</h3>
+                    <p data-lang-key="step1_desc">اضغط على زر "تحميل التطبيق للأندرويد" أعلاه</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3 data-lang-key="step2_title">السماح بالتثبيت</h3>
+                    <p data-lang-key="step2_desc">اسمح بتثبيت التطبيقات من مصادر غير معروفة في إعدادات الأمان</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3 data-lang-key="step3_title">تجاوز حماية جوجل بلاي</h3>
+                    <p data-lang-key="step3_desc">إذا ظهر تحذير من جوجل بلاي، اضغط على "تحليل" ثم "تثبيت على أي حال"</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3 data-lang-key="step4_title">التثبيت</h3>
+                    <p data-lang-key="step4_desc">انتظر اكتمال التثبيت ثم افتح التطبيق من الشاشة الرئيسية</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ملاحظات مهمة -->
+        <div class="notes-section">
+            <h3 class="notes-title">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span data-lang-key="notes_title">ملاحظات مهمة</span>
+            </h3>
+            <ul class="notes-list">
+                <li>
+                    <i class="fas fa-info-circle"></i>
+                    <span data-lang-key="note1">يجب تفعيل خيار "مصادر غير معروفة" في إعدادات الأمان قبل التثبيت</span>
+                </li>
+                <li>
+                    <i class="fas fa-info-circle"></i>
+                    <span data-lang-key="note2">التطبيق آمن 100% ولا يحتوي على أي برامج ضارة</span>
+                </li>
+                <li>
+                    <i class="fas fa-info-circle"></i>
+                    <span data-lang-key="note3">جوجل بلاي قد يحذر من التثبيت لأن التطبيق غير مدرج في المتجر</span>
+                </li>
+                <li>
+                    <i class="fas fa-info-circle"></i>
+                    <span data-lang-key="note4">يمكنك استخدام "تحليل" للتأكد من أمان التطبيق قبل التثبيت</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- تحذير الأمان -->
+        <div class="warning-box">
+            <h3 class="warning-title">
+                <i class="fas fa-shield-alt"></i>
+                <span data-lang-key="warning_title">تنبيه أمان مهم</span>
+            </h3>
+            <p class="warning-text" data-lang-key="warning_text">
+                تحذير جوجل بلاي يعرض لجميع التطبيقات غير المدرجة في المتجر الرسمي. 
+                هذا التطبيق تم تطويره لأغراض تعليمية وهو آمن تماماً للاستخدام.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- الفوتر -->
+<footer class="footer">
+    <p data-lang-key="footer">© 2025 تطبيق C Programming - جميع الحقوق محفوظة</p>
+</footer>
+
+<!-- مكتبة الجسيمات -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+<script>
+// نظام الترجمة المركزي
+const translations = {
+    // شريط التنقل
+    home: {
+        ar: "الرئيسية",
+        en: "Home",
+        fr: "Accueil"
+    },
+    
+    // العناوين الرئيسية
+    app_title: {
+        ar: "تطبيق C Programming",
+        en: "C Programming App",
+        fr: "Application C Programming"
+    },
+    app_subtitle: {
+        ar: "تطبيق شامل لتعلم لغة C على هاتفك الأندرويد",
+        en: "Comprehensive app to learn C language on your Android phone",
+        fr: "Application complète pour apprendre le langage C sur votre téléphone Android"
+    },
+    
+    // المميزات
+    features_title: {
+        ar: "مميزات التطبيق",
+        en: "App Features",
+        fr: "Fonctionnalités de l'application"
+    },
+    feature1: {
+        ar: "أكثر من 100 مثال برمجي",
+        en: "Over 100 code examples",
+        fr: "Plus de 100 exemples de code"
+    },
+    feature2: {
+        ar: "مترجم كود مدمج",
+        en: "Built-in code compiler",
+        fr: "Compilateur de code intégré"
+    },
+    feature3: {
+        ar: "دروس تفاعلية",
+        en: "Interactive lessons",
+        fr: "Leçons interactives"
+    },
+    feature4: {
+        ar: "اختبارات وتحديات",
+        en: "Tests and challenges",
+        fr: "Tests et défis"
+    },
+    feature5: {
+        ar: "يعمل بدون إنترنت",
+        en: "Works offline",
+        fr: "Fonctionne hors ligne"
+    },
+    
+    // متطلبات النظام
+    requirements_title: {
+        ar: "متطلبات النظام",
+        en: "System Requirements",
+        fr: "Configuration requise"
+    },
+    req1: {
+        ar: "أندرويد 5.0 أو أعلى",
+        en: "Android 5.0 or higher",
+        fr: "Android 5.0 ou supérieur"
+    },
+    req2: {
+        ar: "1GB RAM على الأقل",
+        en: "At least 1GB RAM",
+        fr: "Au moins 1 Go de RAM"
+    },
+    req3: {
+        ar: "50MB مساحة تخزين",
+        en: "50MB storage space",
+        fr: "50 Mo d'espace de stockage"
+    },
+    req4: {
+        ar: "صلاحية تثبيت مصادر غير معروفة",
+        en: "Permission to install unknown sources",
+        fr: "Autorisation d'installer des sources inconnues"
+    },
+    
+    // زر التحميل
+    download_btn: {
+        ar: "تحميل التطبيق للأندرويد",
+        en: "Download App for Android",
+        fr: "Télécharger l'application pour Android"
+    },
+    file_size: {
+        ar: "حجم الملف: 15MB",
+        en: "File size: 15MB",
+        fr: "Taille du fichier : 15 Mo"
+    },
+    
+    // خطوات التحميل
+    steps_title: {
+        ar: "خطوات التحميل والتثبيت",
+        en: "Download and Installation Steps",
+        fr: "Étapes de téléchargement et d'installation"
+    },
+    step1_title: {
+        ar: "التحميل",
+        en: "Download",
+        fr: "Téléchargement"
+    },
+    step1_desc: {
+        ar: "اضغط على زر \"تحميل التطبيق للأندرويد\" أعلاه",
+        en: "Click the \"Download App for Android\" button above",
+        fr: "Cliquez sur le bouton \"Télécharger l'application pour Android\" ci-dessus"
+    },
+    step2_title: {
+        ar: "السماح بالتثبيت",
+        en: "Allow Installation",
+        fr: "Autoriser l'installation"
+    },
+    step2_desc: {
+        ar: "اسمح بتثبيت التطبيقات من مصادر غير معروفة في إعدادات الأمان",
+        en: "Allow installation from unknown sources in security settings",
+        fr: "Autorisez l'installation à partir de sources inconnues dans les paramètres de sécurité"
+    },
+    step3_title: {
+        ar: "تجاوز حماية جوجل بلاي",
+        en: "Bypass Google Play Protect",
+        fr: "Contourner Google Play Protect"
+    },
+    step3_desc: {
+        ar: "إذا ظهر تحذير من جوجل بلاي، اضغط على \"تحليل\" ثم \"تثبيت على أي حال\"",
+        en: "If Google Play Protect warning appears, click \"Scan\" then \"Install anyway\"",
+        fr: "Si un avertissement Google Play Protect apparaît, cliquez sur \"Analyser\" puis \"Installer quand même\""
+    },
+    step4_title: {
+        ar: "التثبيت",
+        en: "Installation",
+        fr: "Installation"
+    },
+    step4_desc: {
+        ar: "انتظر اكتمال التثبيت ثم افتح التطبيق من الشاشة الرئيسية",
+        en: "Wait for installation to complete then open app from home screen",
+        fr: "Attendez la fin de l'installation puis ouvrez l'application depuis l'écran d'accueil"
+    },
+    
+    // ملاحظات
+    notes_title: {
+        ar: "ملاحظات مهمة",
+        en: "Important Notes",
+        fr: "Notes importantes"
+    },
+    note1: {
+        ar: "يجب تفعيل خيار \"مصادر غير معروفة\" في إعدادات الأمان قبل التثبيت",
+        en: "You must enable \"Unknown Sources\" option in security settings before installation",
+        fr: "Vous devez activer l'option \"Sources inconnues\" dans les paramètres de sécurité avant l'installation"
+    },
+    note2: {
+        ar: "التطبيق آمن 100% ولا يحتوي على أي برامج ضارة",
+        en: "The app is 100% safe and contains no malware",
+        fr: "L'application est 100% sûre et ne contient aucun logiciel malveillant"
+    },
+    note3: {
+        ar: "جوجل بلاي قد يحذر من التثبيت لأن التطبيق غير مدرج في المتجر",
+        en: "Google Play may warn about installation because the app is not listed in the store",
+        fr: "Google Play peut avertir de l'installation car l'application n'est pas répertoriée dans le magasin"
+    },
+    note4: {
+        ar: "يمكنك استخدام \"تحليل\" للتأكد من أمان التطبيق قبل التثبيت",
+        en: "You can use \"Scan\" to verify app safety before installation",
+        fr: "Vous pouvez utiliser \"Analyser\" pour vérifier la sécurité de l'application avant l'installation"
+    },
+    
+    // تحذير الأمان
+    warning_title: {
+        ar: "تنبيه أمان مهم",
+        en: "Important Security Alert",
+        fr: "Alerte de sécurité importante"
+    },
+    warning_text: {
+        ar: "تحذير جوجل بلاي يعرض لجميع التطبيقات غير المدرجة في المتجر الرسمي. هذا التطبيق تم تطويره لأغراض تعليمية وهو آمن تماماً للاستخدام.",
+        en: "Google Play Protect warning appears for all apps not listed in the official store. This app was developed for educational purposes and is completely safe to use.",
+        fr: "L'avertissement Google Play Protect apparaît pour toutes les applications non répertoriées dans le magasin officiel. Cette application a été développée à des fins éducatives et est totalement sûre à utiliser."
+    },
+    
+    // الفوتر
+    footer: {
+        ar: "© 2025 تطبيق C Programming - جميع الحقوق محفوظة",
+        en: "© 2025 C Programming App - All rights reserved",
+        fr: "© 2025 Application C Programming - Tous droits réservés"
+    }
+};
+
+let currentLanguage = "ar";
+
+// تأثيرات الجسيمات
+function initParticles() {
+    if (typeof particlesJS !== 'undefined') {
+        particlesJS("particles-js", {
+            particles: {
+                number: { 
+                    value: window.innerWidth < 768 ? 40 : 60,
+                    density: { enable: true, value_area: 800 }
+                },
+                color: { value: ["#0ea5e9", "#f97316", "#00eaff", "#8b5cf6"] },
+                shape: { type: "circle" },
+                opacity: { value: 0.3, random: true },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#f97316",
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: window.innerWidth < 768 ? 1.5 : 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "repulse" },
+                    onclick: { enable: true, mode: "push" }
+                }
+            },
+            retina_detect: true
+        });
+    }
+}
+
+// تغيير اللغة
+function changeLanguage(lang) {
+    currentLanguage = lang;
+    
+    // تأثير النقر
+    createRipple(event);
+    
+    // تحديث الأزرار النشطة
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.lang === lang) {
+            btn.classList.add('active');
+        }
+    });
+    
+    // تحديث اتجاه الصفحة
+    const dir = lang === "ar" ? "rtl" : "ltr";
+    document.documentElement.setAttribute("dir", dir);
+    document.documentElement.setAttribute("lang", lang);
+    
+    // تحديث النصوص
+    document.querySelectorAll("[data-lang-key]").forEach(el => {
+        const key = el.getAttribute("data-lang-key");
+        if (translations[key] && translations[key][lang] !== undefined) {
+            el.textContent = translations[key][lang];
+        }
+    });
+    
+    // حفظ التفضيلات
+    localStorage.setItem('appDownloadLang', lang);
+    
+    // تحديث title الصفحة
+    document.title = lang === "ar" ? "تحميل تطبيق C" : 
+                    lang === "en" ? "Download C App" : 
+                    "Télécharger l'application C";
+}
+
+// تأثير النقر
+function createRipple(event) {
+    if (!event || !event.currentTarget) return;
+    
+    const button = event.currentTarget;
+    const circle = document.createElement("span");
+    const rect = button.getBoundingClientRect();
+    const diameter = Math.max(rect.width, rect.height);
+    const radius = diameter / 2;
+
+    circle.style.width = circle.style.height = `${diameter}px`;
+    circle.style.left = `${event.clientX - rect.left - radius}px`;
+    circle.style.top = `${event.clientY - rect.top - radius}px`;
+    circle.classList.add("ripple");
+
+    // تغيير لون الـ ripple حسب نوع العنصر
+    if (button.classList.contains('download-btn')) {
+        circle.style.background = 'rgba(249, 115, 22, 0.6)';
+    } else if (button.classList.contains('home-btn')) {
+        circle.style.background = 'rgba(14, 165, 233, 0.6)';
+    } else {
+        circle.style.background = 'rgba(255, 255, 255, 0.4)';
+    }
+
+    button.appendChild(circle);
+
+    setTimeout(() => {
+        if (circle.parentNode === button) {
+            button.removeChild(circle);
+        }
+    }, 600);
+}
+
+// التنزيل مع تأثير
+function handleDownload(event) {
+    event.preventDefault();
+    
+    // تأثيرات بصرية
+    const btn = event.currentTarget;
+    const originalTransform = btn.style.transform;
+    const originalBoxShadow = btn.style.boxShadow;
+    
+    btn.style.transform = 'scale(0.95)';
+    btn.style.boxShadow = '0 5px 20px rgba(249, 115, 22, 0.5)';
+    
+    // رسالة مؤقتة
+    const messages = {
+        ar: ["⬇️ جاري بدء التحميل...", "📱 التحميل سيبدأ خلال ثوان", "🚀 استعد للبرمجة!"],
+        en: ["⬇️ Starting download...", "📱 Download will start in seconds", "🚀 Get ready to code!"],
+        fr: ["⬇️ Démarrage du téléchargement...", "📱 Le téléchargement va commencer dans quelques secondes", "🚀 Préparez-vous à coder!"]
+    };
+    
+    const randomMessage = messages[currentLanguage][Math.floor(Math.random() * messages[currentLanguage].length)];
+    
+    // إضافة رسالة مؤقتة
+    const tempMsg = document.createElement('div');
+    tempMsg.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(249, 115, 22, 0.95);
+        color: white;
+        padding: 20px 30px;
+        border-radius: 20px;
+        font-weight: bold;
+        font-size: 1.1rem;
+        z-index: 9999;
+        animation: fadeInOut 1.5s ease;
+        backdrop-filter: blur(10px);
+        border: 3px solid white;
+        text-align: center;
+        max-width: 90%;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    `;
+    
+    // تعريف animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    tempMsg.textContent = randomMessage;
+    document.body.appendChild(tempMsg);
+    
+    // استعادة التنسيق الأصلي بعد 300ms
+    setTimeout(() => {
+        btn.style.transform = originalTransform;
+        btn.style.boxShadow = originalBoxShadow;
+    }, 300);
+    
+    // بدء التنزيل بعد التأثير
+    setTimeout(() => {
+        // إزالة الرسالة المؤقتة
+        if (tempMsg.parentNode) {
+            tempMsg.parentNode.removeChild(tempMsg);
+        }
+        
+        // بدء التنزيل
+        const link = document.createElement('a');
+        link.href = 'app-debug.apk';
+        link.download = 'C-Programming-App.apk';
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }, 1500);
+}
+
+// إدارة شريط التنقل عند التمرير
+function handleScroll() {
+    const navbar = document.getElementById('navbar');
+    const backToTop = document.getElementById('backToTop');
+    
+    // تأثير شريط التنقل
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+    
+    // زر العودة للأعلى
+    if (window.scrollY > 300) {
+        backToTop.classList.add('show');
+    } else {
+        backToTop.classList.remove('show');
+    }
+}
+
+// العودة للأعلى
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// إعادة حساب الجسيمات عند تغيير حجم النافذة
+let resizeTimeout;
+function handleResize() {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        if (typeof particlesJS !== 'undefined') {
+            initParticles();
+        }
+    }, 250);
+}
+
+// تهيئة الصفحة
+document.addEventListener("DOMContentLoaded", () => {
+    // تهيئة الجسيمات
+    initParticles();
+    
+    // تحميل اللغة المحفوظة
+    const savedLang = localStorage.getItem('appDownloadLang') || 'ar';
+    currentLanguage = savedLang;
+    
+    // تعيين اللغة
+    const dir = savedLang === "ar" ? "rtl" : "ltr";
+    document.documentElement.setAttribute("dir", dir);
+    document.documentElement.setAttribute("lang", savedLang);
+    
+    // تحديث الأزرار
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.lang === savedLang) {
+            btn.classList.add('active');
+        }
+    });
+    
+    // تحديث النصوص
+    document.querySelectorAll("[data-lang-key]").forEach(el => {
+        const key = el.getAttribute("data-lang-key");
+        if (translations[key] && translations[key][savedLang] !== undefined) {
+            el.textContent = translations[key][savedLang];
+        }
+    });
+    
+    // تحديث title الصفحة
+    document.title = savedLang === "ar" ? "تحميل تطبيق C" : 
+                    savedLang === "en" ? "Download C App" : 
+                    "Télécharger l'application C";
+    
+    // إضافة معالج التنزيل
+    const downloadBtn = document.getElementById('downloadBtn');
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', handleDownload);
+        downloadBtn.addEventListener('click', createRipple);
+    }
+    
+    // إضافة معالجات النقر للأزرار الأخرى
+    document.querySelectorAll('.home-btn, .lang-btn').forEach(btn => {
+        btn.addEventListener('click', createRipple);
+    });
+    
+    // إضافة معالج التمرير
+    window.addEventListener('scroll', handleScroll);
+    
+    // إضافة معالج تغيير الحجم
+    window.addEventListener('resize', handleResize);
+    
+    // زر العودة للأعلى
+    document.getElementById('backToTop').addEventListener('click', scrollToTop);
+    
+    // تهيئة حالة التمرير
+    handleScroll();
+    
+    // تحسينات للأجهزة المحمولة
+    if ('ontouchstart' in window || navigator.maxTouchPoints) {
+        document.body.classList.add('touch-device');
+        
+        // تحسين الاستجابة للمس
+        document.querySelectorAll('button, a').forEach(el => {
+            el.style.cursor = 'pointer';
+        });
+    }
+    
+    // تحميل سلس للصور (إن وجدت)
+    document.querySelectorAll('img').forEach(img => {
+        img.loading = 'lazy';
+    });
+});
+
+// دعم المتصفحات القديمة
+if (!Element.prototype.closest) {
+    Element.prototype.closest = function(s) {
+        var el = this;
+        do {
+            if (Element.prototype.matches.call(el, s)) return el;
+            el = el.parentElement || el.parentNode;
+        } while (el !== null && el.nodeType === 1);
+        return null;
+    };
+}
+</script>
+
+</body>
+</html>
