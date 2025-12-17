@@ -1,48 +1,79 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" id="html-root">
 <head>
-    <meta property="og:site_name" content="Algorithmes & C">
-
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Algorithmes & C",
-  "alternateName": "تعلم لغة C والخوارزميات",
-  "url": "https://bibarss39-sudo.github.io/bibarss39/"
-}
-</script>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>اختصارات ورموز مهمة — Code::Blocks</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>موسوعة رموز واختصارات C و Code::Blocks</title>
     <link rel="icon" type="image/png" href="favicon.png">
+    
+    <meta property="og:site_name" content="Algorithmes & C">
+    <meta name="description" content="موسوعة شاملة لرموز لغة C، اختصارات Code::Blocks، نصائح برمجية وتأثيرات تفاعلية للمبرمجين">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Algorithmes & C",
+        "alternateName": "تعلم لغة C والخوارزميات",
+        "url": "https://bibarss39-sudo.github.io/bibarss39/",
+        "description": "موسوعة شاملة لرموز لغة C، اختصارات Code::Blocks، نصائح برمجية وتأثيرات تفاعلية للمبرمجين"
+    }
+    </script>
 
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;600;700;800&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+    <!-- استيراد CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" crossorigin="anonymous">
 
     <style>
         :root {
-            --bg-primary: #0b1120;
-            --bg-secondary: #141c2f;
-            --card-bg: rgba(25, 35, 55, 0.85);
-            --card-bg-hover: rgba(35, 50, 80, 0.95);
-            --accent: #3b82f6;
-            --accent-light: #60a5fa;
-            --accent-dark: #2563eb;
-            --secondary: #0ea5e9;
+            /* الألوان الأساسية */
+            --bg-primary: #0a0e17;
+            --bg-secondary: #121826;
+            --bg-gradient: linear-gradient(135deg, #0a0e17 0%, #121826 50%, #0d1117 100%);
+            
+            /* ألوان البطاقات */
+            --card-bg: rgba(20, 25, 40, 0.9);
+            --card-bg-hover: rgba(30, 40, 65, 0.95);
+            --card-border: rgba(59, 130, 246, 0.25);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            
+            /* ألوان التمييز */
+            --accent-primary: #3b82f6;
+            --accent-secondary: #8b5cf6;
+            --accent-tertiary: #0ea5e9;
             --success: #10b981;
-            --text-primary: #f1f5f9;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            
+            /* تدرجات اللون الأزرق */
+            --blue-gradient: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            --blue-gradient-light: linear-gradient(135deg, var(--accent-tertiary), #60a5fa);
+            --purple-gradient: linear-gradient(135deg, #8b5cf6, #a855f7);
+            
+            /* النصوص */
+            --text-primary: #f8fafc;
             --text-secondary: #cbd5e1;
             --text-muted: #94a3b8;
-            --border: rgba(148, 163, 184, 0.15);
-            --border-hover: rgba(96, 165, 250, 0.4);
-            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
-            --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.35);
-            --shadow-lg: 0 16px 40px rgba(59, 130, 246, 0.25);
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            --transition-fast: all 0.25s ease;
+            --text-code: #7dd3fc;
+            
+            /* الظلال */
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 50px rgba(59, 130, 246, 0.25);
+            --shadow-xl: 0 25px 60px rgba(59, 130, 246, 0.35);
+            
+            /* التحولات */
+            --transition-fast: all 0.2s ease;
+            --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            
+            /* الأنيميشن */
+            --glow-animation: glow 3s ease-in-out infinite alternate;
+            --float-animation: float 6s ease-in-out infinite;
+            --pulse-animation: pulse 2s ease-in-out infinite;
         }
 
         * {
@@ -52,99 +83,130 @@
         }
 
         body {
-            font-family: 'Tajawal', 'Poppins', sans-serif;
-            background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+            font-family: 'Tajawal', 'Cairo', 'Poppins', sans-serif;
+            background: var(--bg-gradient);
             color: var(--text-primary);
-            padding: 20px;
             min-height: 100vh;
             overflow-x: hidden;
-            line-height: 1.6;
+            line-height: 1.7;
+            position: relative;
         }
 
+        /* تأثيرات الخلفية الديناميكية */
+        .bg-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(14, 165, 233, 0.1) 0%, transparent 50%);
+            filter: blur(40px);
+            opacity: 0.6;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 50%;
+            animation: var(--float-animation);
+        }
+
+        .shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 5%;
+            background: rgba(59, 130, 246, 0.08);
+            animation-delay: 0s;
+            animation-duration: 20s;
+        }
+
+        .shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: 10%;
+            background: rgba(139, 92, 246, 0.08);
+            animation-delay: -5s;
+            animation-duration: 25s;
+        }
+
+        .shape:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            bottom: 20%;
+            left: 20%;
+            background: rgba(14, 165, 233, 0.08);
+            animation-delay: -10s;
+            animation-duration: 18s;
+        }
+
+        /* شريط التقدم */
         .scroll-progress {
             position: fixed;
             top: 0;
             left: 0;
             width: 0;
             height: 4px;
-            background: linear-gradient(90deg, var(--accent), var(--secondary), #0aff9d);
-            z-index: 1000;
+            background: var(--blue-gradient);
+            z-index: 10000;
             transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
         }
 
-        .light-effect {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(14, 165, 233, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.08) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: -1;
-        }
-
+        /* شريط التنقل العلوي */
         .top-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 16px;
-            padding: 10px;
-            background: rgba(15, 23, 42, 0.4);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 1px solid var(--border);
+            padding: 1rem 2rem;
+            background: rgba(20, 25, 40, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            margin-bottom: 2rem;
+            animation: slideDown 0.5s ease-out;
         }
 
         .home-btn {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 0.75rem;
             text-decoration: none;
             color: white;
-            background: linear-gradient(135deg, var(--accent), var(--secondary));
-            padding: 12px 24px;
-            border-radius: 16px;
-            font-size: 17px;
-            font-weight: 700;
-            transition: var(--transition);
-            box-shadow: var(--shadow-sm);
+            background: var(--blue-gradient);
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition-normal);
+            box-shadow: var(--shadow-md);
             border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .home-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: var(--shadow-lg);
-            background: linear-gradient(135deg, var(--secondary), var(--accent-light));
-        }
-
-        .lang-buttons {
-            display: flex;
-            gap: 8px;
-        }
-
-        .lang-btn {
-            width: 44px;
-            height: 36px;
-            border-radius: 10px;
-            border: 2px solid var(--border);
-            background: rgba(255, 255, 255, 0.07);
-            color: var(--text-secondary);
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
             position: relative;
             overflow: hidden;
         }
 
-        .lang-btn::before {
+        .home-btn::before {
             content: '';
             position: absolute;
             top: 0;
@@ -155,147 +217,214 @@
             transition: left 0.6s ease;
         }
 
-        .lang-btn:hover::before {
+        .home-btn:hover::before {
             left: 100%;
         }
 
-        .lang-btn:hover {
-            transform: scale(1.12);
-            border-color: var(--accent-light);
-            background: rgba(96, 165, 250, 0.25);
-            color: white;
+        .home-btn:hover,
+        .home-btn:focus {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--accent-primary);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .lang-buttons {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .lang-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-normal);
+            position: relative;
+            overflow: hidden;
         }
 
         .lang-btn.active {
-            background: var(--accent);
+            background: var(--accent-primary);
             color: white;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .lang-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.1);
+        }
+
+        /* العنوان الرئيسي */
+        .hero-section {
+            text-align: center;
+            padding: 3rem 1rem;
+            position: relative;
+            overflow: hidden;
         }
 
         .main-title {
-            text-align: center;
-            color: var(--accent-light);
-            margin: 25px 0 30px;
-            font-size: 2.6rem;
-            text-shadow: 0 2px 10px rgba(59, 130, 246, 0.3);
+            font-size: 3rem;
             font-weight: 800;
-            letter-spacing: -0.5px;
+            background: var(--blue-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+            text-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
             position: relative;
+            display: inline-block;
         }
 
         .main-title::after {
             content: '';
             position: absolute;
-            bottom: -12px;
+            bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
+            width: 200px;
             height: 4px;
-            background: linear-gradient(90deg, transparent, var(--accent), var(--secondary), transparent);
+            background: var(--blue-gradient);
             border-radius: 2px;
+            animation: expandWidth 1s ease-out 0.5s forwards;
         }
 
-        .hint-container {
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        /* تلميحات ونصائح */
+        .tips-container {
+            max-width: 900px;
+            margin: 0 auto 3rem;
             position: relative;
-            max-width: 800px;
-            margin: 0 auto 40px;
         }
 
-        .hint-box {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(14, 165, 233, 0.1));
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 20px;
-            padding: 20px 30px;
-            font-size: 1.1rem;
-            color: var(--accent-light);
-            text-align: center;
-            font-weight: 600;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
+        .tips-slider {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding: 1rem;
+            scrollbar-width: none;
+        }
+
+        .tips-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tip-card {
+            flex: 0 0 300px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: var(--transition-normal);
+            animation: fadeInUp 0.8s ease-out;
             position: relative;
             overflow: hidden;
-            animation: fadeInUp 0.8s ease-out;
         }
 
-        .hint-box:hover {
-            transform: translateY(-3px);
+        .tip-card:hover {
+            transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
-            border-color: var(--accent-light);
+            border-color: var(--accent-primary);
         }
 
-        .hint-icon {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.4rem;
-            animation: float 3s ease-in-out infinite;
+        .tip-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-tertiary);
+            animation: var(--pulse-animation);
         }
 
-        .hint-text {
-            padding-right: 40px;
+        .tip-text {
+            color: var(--text-secondary);
+            font-size: 1rem;
         }
 
+        /* قسم الرموز */
         .section {
-            max-width: 900px;
-            margin: 0 auto 50px;
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+            padding: 0 1rem;
+            animation: fadeInUp 0.8s ease-out;
         }
 
         .section-header {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-            padding: 0 10px;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 16px;
+            border-left: 4px solid var(--accent-primary);
         }
 
         .section-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--accent), var(--secondary));
-            border-radius: 14px;
+            width: 60px;
+            height: 60px;
+            background: var(--blue-gradient);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             color: white;
             box-shadow: var(--shadow-md);
         }
 
         .section-title {
-            color: #93c5fd;
-            font-size: 1.9rem;
-            font-weight: 800;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
             flex: 1;
-            position: relative;
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            right: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--border), transparent);
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
         }
 
+        /* شبكة الرموز */
         .symbols-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
-            gap: 18px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
         }
 
         .symbol-card {
             background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 20px 10px;
+            border: 2px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.5rem;
             cursor: pointer;
-            font-size: 26px;
+            font-size: 2rem;
             font-weight: 700;
-            transition: var(--transition);
+            transition: var(--transition-bounce);
             box-shadow: var(--shadow-md);
             position: relative;
             overflow: hidden;
@@ -303,7 +432,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            aspect-ratio: 1/1;
+            aspect-ratio: 1;
+            color: var(--text-code);
         }
 
         .symbol-card::before {
@@ -311,88 +441,64 @@
             position: absolute;
             top: 0;
             right: 0;
-            width: 5px;
+            width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, var(--accent), var(--secondary));
-            transform: scaleY(0);
-            transform-origin: top;
-            transition: transform 0.4s ease;
-        }
-
-        .symbol-card::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            right: 10px;
-            transform: translateY(-50%) rotate(-45deg);
-            width: 10px;
-            height: 10px;
-            border-right: 2px solid var(--accent-light);
-            border-bottom: 2px solid var(--accent-light);
+            background: linear-gradient(135deg, 
+                rgba(59, 130, 246, 0.1) 0%, 
+                rgba(139, 92, 246, 0.1) 100%);
             opacity: 0;
-            transition: all 0.3s ease;
+            transition: opacity 0.3s ease;
         }
 
         .symbol-card:hover::before {
-            transform: scaleY(1);
-        }
-
-        .symbol-card:hover::after {
             opacity: 1;
-            right: 15px;
         }
 
         .symbol-card:hover {
-            background: var(--card-bg-hover);
-            transform: translateY(-8px) scale(1.1);
-            box-shadow: var(--shadow-lg), 0 0 0 1px var(--border-hover);
+            transform: translateY(-10px) scale(1.1);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--accent-primary);
             color: white;
             z-index: 10;
         }
 
-        .symbol-card.clicked {
-            animation: symbolClickEffect 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        .symbol-category {
+            background: rgba(139, 92, 246, 0.1);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin: 2rem 0 1rem;
+            border-left: 4px solid var(--accent-secondary);
         }
 
-        @keyframes symbolClickEffect {
-            0% {
-                transform: scale(1);
-                box-shadow: var(--shadow-md);
-            }
-            20% {
-                transform: scale(1.25) rotate(5deg);
-                box-shadow: 
-                    0 15px 40px rgba(59, 130, 246, 0.6),
-                    0 0 0 15px rgba(59, 130, 246, 0.2);
-            }
-            40% {
-                transform: scale(1.2) rotate(-3deg);
-                box-shadow: 
-                    0 15px 40px rgba(14, 165, 233, 0.6),
-                    0 0 0 10px rgba(14, 165, 233, 0.15);
-            }
-            100% {
-                transform: scale(1) rotate(0);
-                box-shadow: var(--shadow-md);
-            }
+        .category-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
         }
 
+        .category-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* قائمة الاختصارات */
         .shortcuts-list {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 20px;
+            gap: 1.5rem;
         }
 
         .shortcut-card {
             background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 22px;
-            transition: var(--transition);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: var(--transition-normal);
             box-shadow: var(--shadow-md);
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 1.5rem;
             position: relative;
             overflow: hidden;
         }
@@ -404,7 +510,7 @@
             right: 0;
             width: 5px;
             height: 100%;
-            background: linear-gradient(to bottom, var(--accent), var(--secondary));
+            background: var(--blue-gradient);
             transform: scaleY(0);
             transform-origin: top;
             transition: transform 0.4s ease;
@@ -415,44 +521,44 @@
         }
 
         .shortcut-card:hover {
-            background: var(--card-bg-hover);
             transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
-            border-color: var(--border-hover);
+            border-color: var(--accent-primary);
         }
 
         .shortcut-key {
-            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            background: var(--blue-gradient);
             color: white;
-            padding: 10px 20px;
-            border-radius: 14px;
-            font-weight: 700;
-            font-size: 18px;
-            min-width: 150px;
+            padding: 0.8rem 1.2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            min-width: 140px;
             text-align: center;
             font-family: 'Consolas', monospace;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            box-shadow: var(--shadow-sm);
+            white-space: nowrap;
         }
 
         .shortcut-desc {
             color: var(--text-secondary);
-            font-size: 1.1rem;
+            font-size: 1rem;
             flex: 1;
-            line-height: 1.7;
         }
 
+        /* نافذة البوب أب */
         .overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.9);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 10000;
-            backdrop-filter: blur(6px);
+            backdrop-filter: blur(10px);
             opacity: 0;
             transition: opacity 0.4s ease;
         }
@@ -462,21 +568,19 @@
         }
 
         .popup {
-            background: linear-gradient(135deg, rgba(25, 35, 55, 0.95), rgba(30, 45, 75, 0.95));
-            border: 1px solid var(--border-hover);
-            border-radius: 26px;
-            padding: 40px;
+            background: var(--card-bg);
+            border: 2px solid var(--accent-primary);
+            border-radius: 24px;
+            padding: 3rem;
             width: 90%;
-            max-width: 480px;
+            max-width: 500px;
             text-align: center;
             color: white;
-            box-shadow: 
-                var(--shadow-lg),
-                0 0 0 1px rgba(255, 255, 255, 0.05);
+            box-shadow: var(--shadow-xl);
             position: relative;
             overflow: hidden;
             transform: translateY(30px) scale(0.95);
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .overlay.active .popup {
@@ -490,95 +594,99 @@
             left: 0;
             width: 100%;
             height: 6px;
-            background: linear-gradient(90deg, var(--accent), var(--secondary), #0aff9d);
+            background: var(--blue-gradient);
         }
 
         .popup-symbol {
-            font-size: 72px;
-            color: var(--accent-light);
-            margin-bottom: 20px;
+            font-size: 4rem;
+            color: var(--text-code);
+            margin-bottom: 1.5rem;
             font-family: 'Consolas', monospace;
             font-weight: 700;
-            text-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            text-shadow: 0 5px 20px rgba(59, 130, 246, 0.5);
+            animation: var(--pulse-animation);
         }
 
         .popup-desc {
             color: var(--text-secondary);
-            margin: 15px 0;
-            font-size: 1.3rem;
-            line-height: 1.7;
+            margin: 1rem 0;
+            font-size: 1.2rem;
+            line-height: 1.6;
             min-height: 60px;
         }
 
         .popup-key {
             background: rgba(59, 130, 246, 0.15);
-            padding: 12px 20px;
-            border-radius: 14px;
-            font-size: 1.1rem;
-            color: #dbeafe;
-            margin-top: 15px;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            color: var(--text-code);
+            margin-top: 1rem;
             font-family: 'Consolas', monospace;
             border: 1px solid rgba(96, 165, 250, 0.3);
         }
 
         .popup-actions {
-            margin-top: 30px;
+            margin-top: 2rem;
             display: flex;
-            gap: 15px;
+            gap: 1rem;
             justify-content: center;
         }
 
         .popup-btn {
-            padding: 14px 32px;
-            border-radius: 16px;
-            font-weight: 700;
-            font-size: 17px;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
             cursor: pointer;
-            transition: var(--transition);
+            transition: var(--transition-normal);
             border: none;
             outline: none;
-        }
-
-        .popup-btn.close {
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            color: white;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .popup-btn.close:hover {
-            background: linear-gradient(135deg, var(--accent-light), var(--secondary));
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .popup-btn.copy {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-light);
-            border: 2px solid var(--border);
+            background: var(--blue-gradient);
+            color: white;
+            box-shadow: var(--shadow-md);
         }
 
         .popup-btn.copy:hover {
-            background: rgba(14, 165, 233, 0.2);
-            border-color: var(--accent-light);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
         }
 
+        .popup-btn.close {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .popup-btn.close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        /* إشعار النسخ */
         .copy-notification {
             position: fixed;
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
-            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            background: var(--blue-gradient);
             color: white;
-            padding: 15px 30px;
-            border-radius: 16px;
-            font-weight: 700;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
             box-shadow: var(--shadow-lg);
             z-index: 10001;
             opacity: 0;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: var(--transition-normal);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 0.5rem;
         }
 
         .copy-notification.show {
@@ -586,6 +694,51 @@
             opacity: 1;
         }
 
+        /* قسم النصائح المتقدمة */
+        .advanced-tips {
+            background: rgba(59, 130, 246, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .advanced-tips h3 {
+            color: var(--accent-primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tip-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .tip-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 3px solid var(--success);
+        }
+
+        /* التذييل */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+            background: rgba(20, 25, 40, 0.8);
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .footer p {
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        /* الأنيميشن */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -597,78 +750,154 @@
             }
         }
 
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(-50%);
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
             }
-            50% {
-                transform: translateY(-60%);
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        @media (max-width: 992px) {
-            .shortcuts-list {
-                grid-template-columns: 1fr;
+        @keyframes expandWidth {
+            from {
+                width: 0;
+            }
+            to {
+                width: 200px;
+            }
+        }
+
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+            }
+            to {
+                box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-20px) rotate(120deg);
+            }
+            66% {
+                transform: translateY(20px) rotate(240deg);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes symbolClickEffect {
+            0% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.3) rotate(10deg);
+            }
+            50% {
+                transform: scale(1.2) rotate(-10deg);
+            }
+            100% {
+                transform: scale(1) rotate(0);
+            }
+        }
+
+        /* تحسينات للوصول */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* تحسينات للاستجابة */
+        @media (max-width: 1024px) {
+            .symbols-grid {
+                grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
             }
             
-            .symbols-grid {
-                grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+            .shortcuts-list {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             }
         }
 
         @media (max-width: 768px) {
             .top-bar {
                 flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .home-btn, .lang-buttons {
-                width: 100%;
-                justify-content: center;
+                gap: 1rem;
+                padding: 1rem;
             }
             
             .main-title {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             
             .section-title {
                 font-size: 1.7rem;
             }
             
-            .hint-box {
-                padding: 18px 24px;
-                font-size: 1rem;
-            }
-            
-            .hint-icon {
-                position: relative;
-                left: auto;
-                top: auto;
-                transform: none;
-                margin-bottom: 10px;
-                display: block;
-            }
-            
-            .hint-text {
-                padding-right: 0;
-            }
-            
             .symbols-grid {
-                grid-template-columns: repeat(5, 1fr);
-                gap: 12px;
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+                gap: 0.8rem;
             }
             
             .symbol-card {
-                padding: 15px 8px;
-                font-size: 22px;
+                padding: 1rem;
+                font-size: 1.8rem;
+            }
+            
+            .shortcuts-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .shortcut-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .shortcut-key {
+                width: 100%;
             }
             
             .popup {
-                padding: 30px 20px;
+                padding: 2rem;
             }
             
-            .popup-symbol {
-                font-size: 60px;
+            .popup-actions {
+                flex-direction: column;
+            }
+            
+            .popup-btn {
+                width: 100%;
             }
         }
 
@@ -683,82 +912,134 @@
             
             .symbols-grid {
                 grid-template-columns: repeat(4, 1fr);
-                gap: 10px;
             }
             
             .symbol-card {
-                font-size: 20px;
-                padding: 12px 6px;
+                font-size: 1.5rem;
+                padding: 0.8rem;
             }
             
-            .shortcut-card {
-                flex-direction: column;
-                text-align: center;
-                gap: 15px;
-            }
-            
-            .shortcut-key {
-                width: 100%;
-            }
-            
-            .popup-actions {
-                flex-direction: column;
-            }
-            
-            .popup-btn {
-                width: 100%;
+            .tip-card {
+                flex: 0 0 250px;
             }
         }
     </style>
 </head>
 
-<body class="lang-ar">
-    <div class="scroll-progress" id="scrollProgress"></div>
-    
-    <div class="light-effect"></div>
+<body>
+    <!-- تأثيرات الخلفية -->
+    <div class="bg-effects">
+        <div class="particles"></div>
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+    </div>
 
+    <!-- شريط التقدم -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- شريط التنقل -->
     <div class="top-bar">
         <a href="asasi.html" class="home-btn">
             <i class="fas fa-home"></i>
             <span class="lang-key" data-key="home">الرئيسية</span>
         </a>
 
-        <div class="lang-buttons">
-            <button class="lang-btn active" data-lang="ar" onclick="setLang('ar')">🇸🇦</button>
-            <button class="lang-btn" data-lang="fr" onclick="setLang('fr')">🇫🇷</button>
-            <button class="lang-btn" data-lang="en" onclick="setLang('en')">🇬🇧</button>
+        <div class="nav-controls">
+            <div class="lang-buttons">
+                <button class="lang-btn active" data-lang="ar" onclick="setLang('ar')" aria-label="اللغة العربية">
+                    <span>🇸🇦</span>
+                </button>
+                <button class="lang-btn" data-lang="fr" onclick="setLang('fr')" aria-label="اللغة الفرنسية">
+                    <span>🇫🇷</span>
+                </button>
+                <button class="lang-btn" data-lang="en" onclick="setLang('en')" aria-label="اللغة الإنجليزية">
+                    <span>🇬🇧</span>
+                </button>
+            </div>
         </div>
     </div>
 
-    <h1 class="main-title lang-key" data-key="page-title">اختصارات ورموز Code::Blocks ولغة C</h1>
+    <!-- القسم الرئيسي -->
+    <section class="hero-section">
+        <h1 class="main-title lang-key" data-key="page-title">موسوعة رموز واختصارات C و Code::Blocks</h1>
+        <p class="subtitle lang-key" data-key="subtitle">كل ما تحتاجه للبرمجة بلغة C في مكان واحد - رموز، اختصارات، نصائح وتأثيرات تفاعلية</p>
+    </section>
 
-    <div class="hint-container">
-        <div class="hint-box">
-            <div class="hint-icon">💡</div>
-            <div class="hint-text" id="hintText">انقر على أي رمز لعرض شرحه - يمكنك نسخ الرموز بسهولة!</div>
+    <!-- النصائح السريعة -->
+    <div class="tips-container">
+        <div class="tips-slider" id="tipsSlider">
+            <!-- سيتم ملؤها جافاسكريبت -->
         </div>
     </div>
 
-    <div class="section">
+    <!-- قسم الرموز الأساسية -->
+    <section class="section">
         <div class="section-header">
             <div class="section-icon">
                 <i class="fas fa-code"></i>
             </div>
-            <h2 class="section-title lang-key" data-key="symbols">الرموز الأساسية في C</h2>
+            <div>
+                <h2 class="section-title lang-key" data-key="symbols">الرموز الأساسية في لغة C</h2>
+                <p class="section-subtitle lang-key" data-key="symbols-subtitle">تعرف على جميع الرموز المستخدمة في لغة C ووظيفة كل رمز</p>
+            </div>
         </div>
-        <div class="symbols-grid" id="symbolGrid"></div>
-    </div>
 
-    <div class="section">
+        <!-- المشغلات الحسابية -->
+        <div class="symbol-category">
+            <h3 class="category-title">المشغلات الحسابية</h3>
+            <p class="category-desc">رموز العمليات الحسابية الأساسية</p>
+        </div>
+        <div class="symbols-grid" id="arithmeticSymbols"></div>
+
+        <!-- المشغلات المنطقية -->
+        <div class="symbol-category">
+            <h3 class="category-title">المشغلات المنطقية والمقارنة</h3>
+            <p class="category-desc">رموز المقارنات والعمليات المنطقية</p>
+        </div>
+        <div class="symbols-grid" id="logicalSymbols"></div>
+
+        <!-- الرموز الخاصة -->
+        <div class="symbol-category">
+            <h3 class="category-title">الرموز الخاصة والتركيبية</h3>
+            <p class="category-desc">رموز بناء الجملة والتركيب</p>
+        </div>
+        <div class="symbols-grid" id="specialSymbols"></div>
+
+        <!-- مشغلات البت -->
+        <div class="symbol-category">
+            <h3 class="category-title">مشغلات البت (Bitwise)</h3>
+            <p class="category-desc">عمليات المستوى الثنائي</p>
+        </div>
+        <div class="symbols-grid" id="bitwiseSymbols"></div>
+    </section>
+
+    <!-- قسم الاختصارات -->
+    <section class="section">
         <div class="section-header">
             <div class="section-icon">
                 <i class="fas fa-keyboard"></i>
             </div>
-            <h2 class="section-title lang-key" data-key="shortcuts">اختصارات Code::Blocks</h2>
+            <div>
+                <h2 class="section-title lang-key" data-key="shortcuts">اختصارات Code::Blocks المتقدمة</h2>
+                <p class="section-subtitle lang-key" data-key="shortcuts-subtitle">اختصر وقتك وزد إنتاجيتك مع هذه الاختصارات</p>
+            </div>
         </div>
-        <div class="shortcuts-list" id="shortcutsList"></div>
-    </div>
 
+        <div class="shortcuts-list" id="shortcutsList"></div>
+    </section>
+
+    <!-- النصائح المتقدمة -->
+    <section class="section">
+        <div class="advanced-tips">
+            <h3><i class="fas fa-lightbulb"></i> <span class="lang-key" data-key="advanced-tips">نصائح متقدمة للمبرمجين</span></h3>
+            <div class="tip-list" id="advancedTips"></div>
+        </div>
+    </section>
+
+    <!-- نافذة البوب أب -->
     <div class="overlay" id="overlay" onclick="event.target === this && closePopup()">
         <div class="popup">
             <div class="popup-symbol" id="pSymbol"></div>
@@ -777,27 +1058,155 @@
         </div>
     </div>
 
-    <div class="copy-notification" id="copyNotification">
+    <!-- إشعار النسخ -->
+    <div class="copy-notification" id="copyNotification" role="alert" aria-live="assertive">
         <i class="fas fa-check-circle"></i>
         <span id="notificationText">تم نسخ الرمز بنجاح!</span>
     </div>
 
+    <!-- التذييل -->
+    <footer class="footer">
+        <p>© 2024 موسوعة رموز واختصارات C و Code::Blocks</p>
+        <p class="lang-key" data-key="footer">جميع الحقوق محفوظة - تصميم تفاعلي للمبرمجين</p>
+    </footer>
+
     <script>
+        // =========== الحماية من XSS ===========
+        const escapeHTML = (str) => {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        };
+
+        // =========== البيانات المحصنة ===========
+        const data = {
+            symbols: {
+                arithmetic: [
+                    { char: "+", key: "مفتاح +", desc: { ar: "عملية الجمع أو الموجب الأحادي", en: "Addition or unary plus", fr: "Addition ou plus unaire" }, usage: "a + b, +5" },
+                    { char: "-", key: "مفتاح -", desc: { ar: "عملية الطرح أو السالب الأحادي", en: "Subtraction or unary minus", fr: "Soustraction ou moins unaire" }, usage: "a - b, -x" },
+                    { char: "*", key: "Shift + 8", desc: { ar: "عملية الضرب أو تفريغ المؤشر", en: "Multiplication or pointer dereference", fr: "Multiplication ou déréférencement" }, usage: "a * b, *ptr" },
+                    { char: "/", key: "مفتاح /", desc: { ar: "عملية القسمة أو التعليق السطري", en: "Division or single-line comment", fr: "Division ou commentaire ligne" }, usage: "a / b, // تعليق" },
+                    { char: "%", key: "Shift + 5", desc: { ar: "عملية باقي القسمة", en: "Modulo operator", fr: "Opérateur modulo" }, usage: "a % b" },
+                    { char: "++", key: "+ +", desc: { ar: "زيادة بمقدار واحد", en: "Increment by one", fr: "Incrémentation" }, usage: "i++, ++i" },
+                    { char: "--", key: "- -", desc: { ar: "نقصان بمقدار واحد", en: "Decrement by one", fr: "Décrémentation" }, usage: "i--, --i" },
+                    { char: "=", key: "مفتاح =", desc: { ar: "عامل الإسناد", en: "Assignment operator", fr: "Opérateur d'affectation" }, usage: "x = 5" },
+                    { char: "+=", key: "+ =", desc: { ar: "جمع وإسناد", en: "Add and assign", fr: "Addition et affectation" }, usage: "x += 3" },
+                    { char: "-=", key: "- =", desc: { ar: "طرح وإسناد", en: "Subtract and assign", fr: "Soustraction et affectation" }, usage: "x -= 2" },
+                    { char: "*=", key: "* =", desc: { ar: "ضرب وإسناد", en: "Multiply and assign", fr: "Multiplication et affectation" }, usage: "x *= 4" },
+                    { char: "/=", key: "/ =", desc: { ar: "قسمة وإسناد", en: "Divide and assign", fr: "Division et affectation" }, usage: "x /= 2" }
+                ],
+                logical: [
+                    { char: "==", key: "Shift + =", desc: { ar: "المساواة", en: "Equality comparison", fr: "Égalité" }, usage: "a == b" },
+                    { char: "!=", key: "Alt Gr + Shift + =", desc: { ar: "عدم المساواة", en: "Inequality", fr: "Différence" }, usage: "a != b" },
+                    { char: "<", key: "Shift + ,", desc: { ar: "أصغر من", en: "Less than", fr: "Inférieur à" }, usage: "a < b" },
+                    { char: ">", key: "Shift + .", desc: { ar: "أكبر من", en: "Greater than", fr: "Supérieur à" }, usage: "a > b" },
+                    { char: "<=", key: "Shift + , =", desc: { ar: "أصغر أو يساوي", en: "Less than or equal", fr: "Inférieur ou égal" }, usage: "a <= b" },
+                    { char: ">=", key: "Shift + . =", desc: { ar: "أكبر أو يساوي", en: "Greater than or equal", fr: "Supérieur ou égal" }, usage: "a >= b" },
+                    { char: "&&", key: "Shift + 7 Shift + 7", desc: { ar: "AND المنطقي", en: "Logical AND", fr: "ET logique" }, usage: "a && b" },
+                    { char: "||", key: "Alt Gr + 6 Alt Gr + 6", desc: { ar: "OR المنطقي", en: "Logical OR", fr: "OU logique" }, usage: "a || b" },
+                    { char: "!", key: "Shift + 1", desc: { ar: "NOT المنطقي", en: "Logical NOT", fr: "NON logique" }, usage: "!condition" },
+                    { char: "?", key: "Shift + /", desc: { ar: "العامل الثلاثي", en: "Ternary operator", fr: "Opérateur ternaire" }, usage: "a ? b : c" }
+                ],
+                special: [
+                    { char: "{", key: "Shift + [", desc: { ar: "بداية كتلة تعليمات", en: "Start of block", fr: "Début de bloc" }, usage: "if (x) { ... }" },
+                    { char: "}", key: "Shift + ]", desc: { ar: "نهاية كتلة تعليمات", en: "End of block", fr: "Fin de bloc" }, usage: "}" },
+                    { char: "(", key: "Shift + 9", desc: { ar: "قوس فتح للتعبيرات", en: "Opening parenthesis", fr: "Parenthèse ouvrante" }, usage: "if (x)" },
+                    { char: ")", key: "Shift + 0", desc: { ar: "قوس إغلاق", en: "Closing parenthesis", fr: "Parenthèse fermante" }, usage: ")" },
+                    { char: "[", key: "Alt Gr + 5", desc: { ar: "قوس فتح للمصفوفات", en: "Opening bracket", fr: "Crochet ouvrant" }, usage: "arr[5]" },
+                    { char: "]", key: "Alt Gr + °", desc: { ar: "قوس إغلاق للمصفوفات", en: "Closing bracket", fr: "Crochet fermant" }, usage: "]" },
+                    { char: ";", key: "مفتاح ;", desc: { ar: "نهاية العبارة", en: "Statement terminator", fr: "Fin d'instruction" }, usage: "int x = 5;" },
+                    { char: ":", key: "Shift + .", desc: { ar: "النقطتان للتبديل والتسميات", en: "Colon for switch/labels", fr: "Deux-points" }, usage: "case 5: x = 10;" },
+                    { char: ",", key: "مفتاح ,", desc: { ar: "فاصلة لفصل العناصر", en: "Comma separator", fr: "Virgule séparatrice" }, usage: "int a, b, c;" },
+                    { char: ".", key: "مفتاح .", desc: { ar: "نقطة للوصول إلى الأعضاء", en: "Member access", fr: "Accès membre" }, usage: "obj.member" },
+                    { char: "->", key: "- >", desc: { ar: "وصول لعناصر المؤشر", en: "Pointer member access", fr: "Accès membre pointeur" }, usage: "ptr->member" },
+                    { char: "#", key: "Alt Gr + 3", desc: { ar: "توجيهات الماكرو", en: "Preprocessor directive", fr: "Directive préprocesseur" }, usage: "#include <stdio.h>" }
+                ],
+                bitwise: [
+                    { char: "&", key: "Shift + 7", desc: { ar: "AND ثنائي البت", en: "Bitwise AND", fr: "ET bit à bit" }, usage: "a & b" },
+                    { char: "|", key: "Alt Gr + 6", desc: { ar: "OR ثنائي البت", en: "Bitwise OR", fr: "OU bit à bit" }, usage: "a | b" },
+                    { char: "^", key: "Alt Gr + 9", desc: { ar: "XOR ثنائي البت", en: "Bitwise XOR", fr: "XOR bit à bit" }, usage: "a ^ b" },
+                    { char: "~", key: "Alt Gr + 2", desc: { ar: "NOT ثنائي البت", en: "Bitwise NOT", fr: "NON bit à bit" }, usage: "~a" },
+                    { char: "<<", key: "Shift + , Shift + ,", desc: { ar: "تحويل لليسار", en: "Left shift", fr: "Décalage à gauche" }, usage: "a << 2" },
+                    { char: ">>", key: "Shift + . Shift + .", desc: { ar: "تحويل لليمين", en: "Right shift", fr: "Décalage à droite" }, usage: "a >> 3" },
+                    { char: "&=", key: "& =", desc: { ar: "AND ثنائي وإسناد", en: "Bitwise AND and assign", fr: "ET bit à bit et affectation" }, usage: "a &= b" },
+                    { char: "|=", key: "| =", desc: { ar: "OR ثنائي وإسناد", en: "Bitwise OR and assign", fr: "OU bit à bit et affectation" }, usage: "a |= b" },
+                    { char: "^=", key: "^ =", desc: { ar: "XOR ثنائي وإسناد", en: "Bitwise XOR and assign", fr: "XOR bit à bit et affectation" }, usage: "a ^= b" }
+                ]
+            },
+            shortcuts: [
+                { keys: "F9", desc: { ar: "ترجمة وتشغيل البرنامج", en: "Build and run program", fr: "Compiler et exécuter" }, category: "build" },
+                { keys: "Ctrl + F9", desc: { ar: "ترجمة فقط بدون تشغيل", en: "Build without running", fr: "Compiler sans exécuter" }, category: "build" },
+                { keys: "F8", desc: { ar: "الخطوة التالية في التصحيح", en: "Step over in debugger", fr: "Pas à pas par dessus" }, category: "debug" },
+                { keys: "F7", desc: { ar: "الدخول إلى الدالة في التصحيح", en: "Step into function", fr: "Pas à pas dans" }, category: "debug" },
+                { keys: "Ctrl + F8", desc: { ar: "إضافة/إزالة نقطة توقف", en: "Toggle breakpoint", fr: "Basculer point d'arrêt" }, category: "debug" },
+                { keys: "Ctrl + Shift + N", desc: { ar: "إنشاء ملف C/C++ جديد", en: "Create new C/C++ file", fr: "Créer nouveau fichier" }, category: "file" },
+                { keys: "Ctrl + O", desc: { ar: "فتح ملف موجود", en: "Open existing file", fr: "Ouvrir fichier" }, category: "file" },
+                { keys: "Ctrl + S", desc: { ar: "حفظ الملف الحالي", en: "Save current file", fr: "Enregistrer fichier" }, category: "file" },
+                { keys: "Ctrl + Shift + S", desc: { ar: "حفظ جميع الملفات", en: "Save all files", fr: "Tout enregistrer" }, category: "file" },
+                { keys: "Ctrl + F", desc: { ar: "بحث عن نص", en: "Find text", fr: "Rechercher texte" }, category: "edit" },
+                { keys: "Ctrl + H", desc: { ar: "استبدال نص", en: "Replace text", fr: "Remplacer texte" }, category: "edit" },
+                { keys: "Ctrl + Z", desc: { ar: "تراجع عن التعديل", en: "Undo", fr: "Annuler" }, category: "edit" },
+                { keys: "Ctrl + Y", desc: { ar: "إعادة التعديل", en: "Redo", fr: "Rétablir" }, category: "edit" },
+                { keys: "Ctrl + /", desc: { ar: "تعليق/إلغاء تعليق السطر", en: "Comment/uncomment line", fr: "Commenter/décommenter" }, category: "edit" },
+                { keys: "Ctrl + D", desc: { ar: "نسخ السطر الحالي", en: "Duplicate line", fr: "Dupliquer ligne" }, category: "edit" },
+                { keys: "Ctrl + L", desc: { ar: "حذف السطر الحالي", en: "Delete line", fr: "Supprimer ligne" }, category: "edit" },
+                { keys: "Ctrl + Shift + C", desc: { ar: "فتح سطر الأوامر", en: "Open command line", fr: "Ouvrir ligne de commande" }, category: "tools" },
+                { keys: "Alt + F8", desc: { ar: "إعادة تنسيق الكود", en: "Reformat code", fr: "Reformater code" }, category: "tools" },
+                { keys: "Ctrl + Shift + F", desc: { ar: "البحث في جميع الملفات", en: "Search in all files", fr: "Rechercher dans fichiers" }, category: "search" },
+                { keys: "Ctrl + B", desc: { ar: "البحث في المرجع", en: "Search in reference", fr: "Rechercher référence" }, category: "search" }
+            ],
+            tips: [
+                { icon: "🚀", text: { ar: "استخدم F9 لتشغيل البرنامج بسرعة", en: "Use F9 to quickly run your program", fr: "Utilisez F9 pour exécuter rapidement" } },
+                { icon: "🐛", text: { ar: "اضغط F8 للتنقل بين نقاط التوقف", en: "Press F8 to navigate through breakpoints", fr: "Appuyez sur F8 pour naviguer" } },
+                { icon: "💡", text: { ar: "Ctrl+/ لتعليق/إلغاء تعليق الأسطر", en: "Ctrl+/ to comment/uncomment lines", fr: "Ctrl+/ pour commenter/décommenter" } },
+                { icon: "⚡", text: { ar: "استخدم Ctrl+D لنسخ السطر الحالي", en: "Use Ctrl+D to duplicate current line", fr: "Utilisez Ctrl+D pour dupliquer" } },
+                { icon: "🎯", text: { ar: "Alt+F8 لإعادة تنسيق الكود تلقائياً", en: "Alt+F8 to auto-format your code", fr: "Alt+F8 pour reformater automatiquement" } }
+            ],
+            advancedTips: [
+                { text: { ar: "استخدم التعليقات الوصفية للوظائف المعقدة", en: "Use descriptive comments for complex functions", fr: "Utilisez des commentaires descriptifs" } },
+                { text: { ar: "اختر أسماء متغيرات توضح الغرض منها", en: "Choose variable names that indicate purpose", fr: "Choisissez des noms de variables clairs" } },
+                { text: { ar: "قسم الكود الطويل إلى دوال صغيرة", en: "Break long code into small functions", fr: "Divisez le code long en petites fonctions" } },
+                { text: { ar: "اختبر كل دالة على حدة قبل التكامل", en: "Test each function separately before integration", fr: "Testez chaque fonction séparément" } },
+                { text: { ar: "استخدم نقاط التوقف للتصحيح بدلاً من printf", en: "Use breakpoints for debugging instead of printf", fr: "Utilisez des points d'arrêt pour déboguer" } }
+            ]
+        };
+
+        // =========== الترجمات ===========
         const translations = {
             "page-title": {
-                ar: "اختصارات ورموز Code::Blocks ولغة C",
-                en: "Code::Blocks Shortcuts & C Language Symbols",
-                fr: "Raccourcis Code::Blocks & Symboles Langage C"
+                ar: "موسوعة رموز واختصارات C و Code::Blocks",
+                en: "C & Code::Blocks Symbols & Shortcuts Encyclopedia",
+                fr: "Encyclopédie des Symboles et Raccourcis C & Code::Blocks"
+            },
+            "subtitle": {
+                ar: "كل ما تحتاجه للبرمجة بلغة C في مكان واحد - رموز، اختصارات، نصائح وتأثيرات تفاعلية",
+                en: "Everything you need for C programming in one place - symbols, shortcuts, tips, and interactive effects",
+                fr: "Tout ce dont vous avez besoin pour programmer en C au même endroit - symboles, raccourcis, conseils et effets interactifs"
             },
             "symbols": {
-                ar: "الرموز الأساسية في C",
-                en: "Essential C Symbols",
-                fr: "Symboles essentiels en C"
+                ar: "الرموز الأساسية في لغة C",
+                en: "Essential C Language Symbols",
+                fr: "Symboles Essentiels du Langage C"
+            },
+            "symbols-subtitle": {
+                ar: "تعرف على جميع الرموز المستخدمة في لغة C ووظيفة كل رمز",
+                en: "Learn all symbols used in C language and each symbol's function",
+                fr: "Apprenez tous les symboles utilisés en C et la fonction de chaque symbole"
             },
             "shortcuts": {
-                ar: "اختصارات Code::Blocks",
-                en: "Code::Blocks Shortcuts",
-                fr: "Raccourcis Code::Blocks"
+                ar: "اختصارات Code::Blocks المتقدمة",
+                en: "Advanced Code::Blocks Shortcuts",
+                fr: "Raccourcis Avancés Code::Blocks"
+            },
+            "shortcuts-subtitle": {
+                ar: "اختصر وقتك وزد إنتاجيتك مع هذه الاختصارات",
+                en: "Save time and increase productivity with these shortcuts",
+                fr: "Gagnez du temps et augmentez votre productivité avec ces raccourcis"
+            },
+            "advanced-tips": {
+                ar: "نصائح متقدمة للمبرمجين",
+                en: "Advanced Tips for Programmers",
+                fr: "Conseils Avancés pour Programmeurs"
             },
             "home": {
                 ar: "الرئيسية",
@@ -812,80 +1221,27 @@
             "copy": {
                 ar: "نسخ الرمز",
                 en: "Copy Symbol",
-                fr: "Copier le symbole"
-            },
-            "hint": {
-                ar: "انقر على أي رمز لعرض شرحه - يمكنك نسخ الرموز بسهولة!",
-                en: "Click any symbol to see details - you can easily copy symbols!",
-                fr: "Cliquez sur un symbole pour voir les détails - vous pouvez copier facilement!"
+                fr: "Copier Symbole"
             },
             "copied": {
                 ar: "تم نسخ الرمز بنجاح!",
                 en: "Symbol copied successfully!",
                 fr: "Symbole copié avec succès!"
+            },
+            "footer": {
+                ar: "جميع الحقوق محفوظة - تصميم تفاعلي للمبرمجين",
+                en: "All rights reserved - Interactive design for programmers",
+                fr: "Tous droits réservés - Conception interactive pour programmeurs"
             }
         };
 
-        const symbols = [
-            { char: "{", key: "Shift + [", desc: { ar: "بداية كتلة تعليمات (دالة، if، while)", en: "Start of code block (function, if, while)", fr: "Début de bloc (fonction, if, while)" } },
-            { char: "}", key: "Shift + ]", desc: { ar: "نهاية كتلة تعليمات", en: "End of code block", fr: "Fin de bloc de code" } },
-            { char: "(", key: "Shift + 9", desc: { ar: "فتح قوس للدوال والتعبيرات", en: "Opening parenthesis for functions/expressions", fr: "Parenthèse ouvrante pour fonctions/expressions" } },
-            { char: ")", key: "Shift + 0", desc: { ar: "إغلاق قوس", en: "Closing parenthesis", fr: "Parenthèse fermante" } },
-            { char: "[", key: "Alt Gr + 5", desc: { ar: "فتح قوس مصفوفة أو مؤشر", en: "Opening bracket for arrays/pointers", fr: "Crochet ouvrant pour tableaux/pointeurs" } },
-            { char: "]", key: "Alt Gr + °", desc: { ar: "إغلاق قوس مصفوفة", en: "Closing bracket", fr: "Crochet fermant" } },
-            { char: ";", key: ";", desc: { ar: "فاصلة منقوطة - نهاية العبارة", en: "Semicolon - ends a statement", fr: "Point-virgule - fin d'instruction" } },
-            { char: ":", key: "Shift + .", desc: { ar: "نقطتان - في switch، ternary، labels", en: "Colon - in switch, ternary, labels", fr: "Deux-points - dans switch, ternaire, labels" } },
-            { char: "!", key: "Shift + 1", desc: { ar: "NOT منطقي - يعكس القيمة (!x)", en: "Logical NOT - inverts value (!x)", fr: "NON logique - inverse la valeur (!x)" } },
-            { char: "&", key: "Shift + 7", desc: { ar: "AND منطقي (&&) أو عنوان متغير (&)", en: "Logical AND (&&) or address-of (&)", fr: "ET logique (&&) ou adresse de (&)" } },
-            { char: "|", key: "Alt Gr + 6", desc: { ar: "OR منطقي (||) أو OR ثنائي (|)", en: "Logical OR (||) or bitwise OR (|)", fr: "OU logique (||) ou OU bit à bit (|)" } },
-            { char: "=", key: "=", desc: { ar: "إسناد قيمة للمتغير", en: "Assignment operator", fr: "Opérateur d'affectation" } },
-            { char: "==", key: "Shift + =", desc: { ar: "مساواة في المقارنة", en: "Equality comparison", fr: "Égalité (comparaison)" } },
-            { char: "!=", key: "Alt Gr + Shift + =", desc: { ar: "عدم المساواة", en: "Inequality comparison", fr: "Différence (≠)" } },
-            { char: "<", key: "Shift + ,", desc: { ar: "أصغر من", en: "Less than", fr: "Inférieur à" } },
-            { char: ">", key: "Shift + .", desc: { ar: "أكبر من", en: "Greater than", fr: "Supérieur à" } },
-            { char: "+", key: "+", desc: { ar: "جمع أو موجب", en: "Addition or unary plus", fr: "Addition ou signe plus" } },
-            { char: "-", key: "-", desc: { ar: "طرح أو سالب", en: "Subtraction or unary minus", fr: "Soustraction ou signe moins" } },
-            { char: "*", key: "Shift + 8", desc: { ar: "ضرب أو مؤشر (*ptr)", en: "Multiplication or pointer dereference", fr: "Multiplication ou déréférencement" } },
-            { char: "/", key: "/", desc: { ar: "قسمة أو تعليق سطر (//)", en: "Division or single-line comment", fr: "Division ou commentaire ligne" } },
-            { char: "%", key: "Shift + 5", desc: { ar: "باقي القسمة (Modulo)", en: "Modulo (remainder)", fr: "Modulo (reste)" } },
-            { char: "++", key: "+ ثم +", desc: { ar: "زيادة بمقدار 1 (i++ أو ++i)", en: "Increment by 1 (i++ or ++i)", fr: "Incrémentation (i++ ou ++i)" } },
-            { char: "--", key: "- ثم -", desc: { ar: "نقصان بمقدار 1 (i-- أو --i)", en: "Decrement by 1 (i-- or --i)", fr: "Décrémentation (i-- ou --i)" } },
-            { char: "+=", key: "+ ثم =", desc: { ar: "جمع ثم إسناد (x += 3)", en: "Add and assign (x += 3)", fr: "Addition et affectation (x += 3)" } },
-            { char: "-=", key: "- ثم =", desc: { ar: "طرح ثم إسناد", en: "Subtract and assign", fr: "Soustraction et affectation" } },
-            { char: "/* */", key: "/* ... */", desc: { ar: "تعليق متعدد الأسطر", en: "Multi-line comment", fr: "Commentaire multi-lignes" } },
-            { char: "\"", key: "Shift + 2", desc: { ar: "علامة اقتباس للسلاسل النصية", en: "Double quote for string literals", fr: "Guillemets pour chaînes" } },
-            { char: "'", key: "'", desc: { ar: "علامة اقتباس مفردة للحروف", en: "Single quote for characters", fr: "Apostrophe pour caractères" } },
-            { char: "#", key: "Alt Gr + 3", desc: { ar: "رمز التوجيه المسبق (#include)", en: "Preprocessor directive (#include)", fr: "Directive préprocesseur (#include)" } },
-            { char: "?", key: "Shift + /", desc: { ar: "تعبير شرطي: a ? b : c", en: "Ternary operator: a ? b : c", fr: "Opérateur ternaire: a ? b : c" } }
-        ];
-
-        const shortcuts = [
-            { keys: "Ctrl + Shift + N", desc: { ar: "إنشاء ملف C/C++ جديد", en: "Create new C/C++ file", fr: "Créer nouveau fichier C/C++" } },
-            { keys: "Ctrl + O", desc: { ar: "فتح ملف موجود", en: "Open existing file", fr: "Ouvrir fichier existant" } },
-            { keys: "Ctrl + S", desc: { ar: "حفظ الملف الحالي", en: "Save current file", fr: "Enregistrer fichier actuel" } },
-            { keys: "F9", desc: { ar: "ترجمة وتشغيل البرنامج", en: "Build and run program", fr: "Compiler et exécuter programme" } },
-            { keys: "Ctrl + F9", desc: { ar: "ترجمة فقط (بدون تشغيل)", en: "Build only (no run)", fr: "Compiler seulement (sans exécuter)" } },
-            { keys: "Ctrl + F8", desc: { ar: "إضافة/إزالة نقطة توقف", en: "Toggle breakpoint", fr: "Activer/désactiver point d'arrêt" } },
-            { keys: "F8", desc: { ar: "الخطوة التالية في التصحيح", en: "Step over in debugger", fr: "Pas à pas (sans entrer)" } },
-            { keys: "Ctrl + F7", desc: { ar: "الذهاب إلى تعريف الدالة", en: "Go to definition", fr: "Aller à la définition" } },
-            { keys: "Ctrl + /", desc: { ar: "تحويل السطر إلى تعليق", en: "Toggle comment for lines", fr: "Basculer commentaire" } },
-            { keys: "Ctrl + Z", desc: { ar: "تراجع عن آخر تعديل", en: "Undo last action", fr: "Annuler dernière action" } },
-            { keys: "Ctrl + Y", desc: { ar: "إعادة آخر تعديل", en: "Redo last undone", fr: "Rétablir dernière action" } },
-            { keys: "Ctrl + C", desc: { ar: "نسخ النص المحدد", en: "Copy selected text", fr: "Copier texte sélectionné" } },
-            { keys: "Ctrl + V", desc: { ar: "لصق النص", en: "Paste copied text", fr: "Coller texte copié" } },
-            { keys: "Ctrl + X", desc: { ar: "قص النص المحدد", en: "Cut selected text", fr: "Couper texte sélectionné" } },
-            { keys: "Ctrl + F", desc: { ar: "البحث عن نص", en: "Find text in file", fr: "Rechercher texte" } },
-            { keys: "Ctrl + H", desc: { ar: "استبدال النص", en: "Replace text", fr: "Remplacer texte" } },
-            { keys: "Ctrl + D", desc: { ar: "نسخ السطر الحالي", en: "Duplicate current line", fr: "Dupliquer ligne actuelle" } },
-            { keys: "Ctrl + L", desc: { ar: "حذف السطر الحالي", en: "Delete current line", fr: "Supprimer ligne actuelle" } },
-            { keys: "Ctrl + Shift + C", desc: { ar: "فتح نافذة الأوامر", en: "Open command window", fr: "Ouvrir fenêtre commande" } },
-            { keys: "Alt + F8", desc: { ar: "إعادة ترتيب التعليمات البرمجية", en: "Code reformatting", fr: "Reformatage du code" } }
-        ];
-
+        // =========== الحالة ===========
         let currentLang = "ar";
         let currentSymbol = null;
         let currentSymbolChar = "";
+        let isPopupOpen = false;
 
+        // =========== الدوال الأساسية ===========
         function updateScrollProgress() {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -894,51 +1250,51 @@
         }
 
         function showPopup(symbol, char) {
+            if (isPopupOpen) return;
+            isPopupOpen = true;
+            
             currentSymbol = symbol;
             currentSymbolChar = char;
             
-            const descLabel = {
-                ar: "الوصف: ",
-                en: "Description: ",
-                fr: "Description: "
-            }[currentLang];
-            
-            const keyLabel = {
-                ar: "طريقة الكتابة: ",
-                en: "Key combination: ",
-                fr: "Combinaison de touches: "
-            }[currentLang];
-            
             document.getElementById("pSymbol").textContent = char;
-            document.getElementById("pDesc").textContent = descLabel + symbol.desc[currentLang];
-            document.getElementById("pKey").textContent = keyLabel + symbol.key;
+            document.getElementById("pDesc").textContent = symbol.desc[currentLang];
+            document.getElementById("pKey").textContent = symbol.key;
             
             const overlay = document.getElementById("overlay");
             overlay.style.display = "flex";
             setTimeout(() => overlay.classList.add('active'), 10);
+            
+            setTimeout(() => document.getElementById("closeBtn").focus(), 100);
         }
 
         function closePopup() {
+            isPopupOpen = false;
             const overlay = document.getElementById("overlay");
             overlay.classList.remove('active');
-            setTimeout(() => overlay.style.display = "none", 400);
+            setTimeout(() => {
+                overlay.style.display = "none";
+            }, 400);
         }
 
-        function copySymbol() {
-            if (currentSymbolChar) {
-                navigator.clipboard.writeText(currentSymbolChar)
-                    .then(() => {
-                        showNotification(translations.copied[currentLang]);
-                    })
-                    .catch(() => {
-                        const textarea = document.createElement('textarea');
-                        textarea.value = currentSymbolChar;
-                        document.body.appendChild(textarea);
-                        textarea.select();
-                        document.execCommand('copy');
-                        document.body.removeChild(textarea);
-                        showNotification(translations.copied[currentLang]);
-                    });
+        async function copySymbol() {
+            if (!currentSymbolChar) return;
+            
+            try {
+                await navigator.clipboard.writeText(currentSymbolChar);
+                showNotification(translations.copied[currentLang]);
+            } catch (err) {
+                const textarea = document.createElement('textarea');
+                textarea.value = currentSymbolChar;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                const success = document.execCommand('copy');
+                document.body.removeChild(textarea);
+                
+                if (success) {
+                    showNotification(translations.copied[currentLang]);
+                }
             }
         }
 
@@ -953,38 +1309,81 @@
         }
 
         function renderSymbols() {
-            const container = document.getElementById("symbolGrid");
-            container.innerHTML = "";
-            
-            symbols.forEach(symbol => {
-                const card = document.createElement("div");
-                card.className = "symbol-card";
-                card.textContent = symbol.char;
-                card.title = symbol.desc[currentLang];
+            const categories = ['arithmetic', 'logical', 'special', 'bitwise'];
+            categories.forEach(category => {
+                const container = document.getElementById(category + 'Symbols');
+                if (!container) return;
                 
-                card.addEventListener("click", () => {
-                    card.classList.add("clicked");
-                    setTimeout(() => card.classList.remove("clicked"), 800);
+                container.innerHTML = '';
+                data.symbols[category].forEach(symbol => {
+                    const card = document.createElement("button");
+                    card.className = "symbol-card";
+                    card.textContent = symbol.char;
+                    card.title = symbol.desc[currentLang];
+                    card.setAttribute('aria-label', `${symbol.char}: ${symbol.desc[currentLang]}`);
+                    card.setAttribute('tabindex', '0');
                     
-                    showPopup(symbol, symbol.char);
+                    card.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        card.classList.add("clicked");
+                        setTimeout(() => card.classList.remove("clicked"), 800);
+                        showPopup(symbol, symbol.char);
+                    });
+                    
+                    card.addEventListener("keydown", (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            showPopup(symbol, symbol.char);
+                        }
+                    });
+                    
+                    container.appendChild(card);
                 });
-                
-                container.appendChild(card);
             });
         }
 
         function renderShortcuts() {
             const container = document.getElementById("shortcutsList");
-            container.innerHTML = "";
+            if (!container) return;
             
-            shortcuts.forEach(shortcut => {
+            container.innerHTML = '';
+            data.shortcuts.forEach(shortcut => {
                 const card = document.createElement("div");
                 card.className = "shortcut-card";
                 card.innerHTML = `
-                    <div class="shortcut-key">${shortcut.keys}</div>
-                    <div class="shortcut-desc">${shortcut.desc[currentLang]}</div>
+                    <div class="shortcut-key">${escapeHTML(shortcut.keys)}</div>
+                    <div class="shortcut-desc">${escapeHTML(shortcut.desc[currentLang])}</div>
                 `;
                 container.appendChild(card);
+            });
+        }
+
+        function renderTips() {
+            const container = document.getElementById("tipsSlider");
+            if (!container) return;
+            
+            container.innerHTML = '';
+            data.tips.forEach(tip => {
+                const card = document.createElement("div");
+                card.className = "tip-card";
+                card.innerHTML = `
+                    <div class="tip-icon">${tip.icon}</div>
+                    <div class="tip-text">${escapeHTML(tip.text[currentLang])}</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderAdvancedTips() {
+            const container = document.getElementById("advancedTips");
+            if (!container) return;
+            
+            container.innerHTML = '';
+            data.advancedTips.forEach(tip => {
+                const item = document.createElement("div");
+                item.className = "tip-item";
+                item.textContent = tip.text[currentLang];
+                container.appendChild(item);
             });
         }
 
@@ -996,6 +1395,7 @@
 
             document.querySelectorAll(".lang-btn").forEach(btn => {
                 btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+                btn.setAttribute('aria-pressed', btn.getAttribute("data-lang") === lang);
             });
 
             document.querySelectorAll("[data-key]").forEach(el => {
@@ -1005,15 +1405,13 @@
                 }
             });
 
-            document.getElementById("hintText").textContent = translations.hint[currentLang];
-
-            document.getElementById("copyBtnText").textContent = translations.copy[currentLang];
-            document.getElementById("closeBtnText").textContent = translations.close[currentLang];
-
             renderSymbols();
             renderShortcuts();
+            renderTips();
+            renderAdvancedTips();
         }
 
+        // =========== التهيئة ===========
         document.addEventListener("DOMContentLoaded", () => {
             setLang("ar");
             
@@ -1023,9 +1421,31 @@
             document.getElementById("closeBtn").addEventListener("click", closePopup);
             
             document.addEventListener("keydown", (e) => {
-                if (e.key === "Escape") closePopup();
+                if (e.key === "Escape" && isPopupOpen) {
+                    closePopup();
+                }
+            });
+
+            // إضافة تأثيرات للأشكال العائمة
+            const shapes = document.querySelectorAll('.shape');
+            shapes.forEach((shape, index) => {
+                shape.style.animationDelay = `${index * 2}s`;
+            });
+
+            // تأثيرات تفاعلية إضافية
+            document.querySelectorAll('.symbol-card').forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'scale(1.1) rotate(5deg)';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'scale(1) rotate(0deg)';
+                });
             });
         });
+
+        // =========== حماية إضافية ===========
+        Object.freeze(data);
+        Object.freeze(translations);
     </script>
 </body>
 </html>
