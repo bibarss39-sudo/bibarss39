@@ -2,14 +2,14 @@
 <html lang="ar" dir="rtl" id="html-root">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; img-src 'self' data:;">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <title>موسوعة رموز واختصارات C و Code::Blocks</title>
+    <title>رموز واختصارات C و Code::Blocks</title>
     <link rel="icon" type="image/png" href="favicon.png">
     
     <meta property="og:site_name" content="Algorithmes & C">
-    <meta name="description" content="موسوعة شاملة لرموز لغة C، اختصارات Code::Blocks، نصائح برمجية وتأثيرات تفاعلية للمبرمجين">
+    <meta name="description" content="موسوعة شاملة لرموز لغة C واختصارات Code::Blocks للمبرمجين">
     
     <script type="application/ld+json">
     {
@@ -18,26 +18,26 @@
         "name": "Algorithmes & C",
         "alternateName": "تعلم لغة C والخوارزميات",
         "url": "https://bibarss39-sudo.github.io/bibarss39/",
-        "description": "موسوعة شاملة لرموز لغة C، اختصارات Code::Blocks، نصائح برمجية وتأثيرات تفاعلية للمبرمجين"
+        "description": "موسوعة شاملة لرموز لغة C واختصارات Code::Blocks للمبرمجين"
     }
     </script>
 
     <!-- استيراد CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" crossorigin="anonymous">
 
     <style>
         :root {
             /* الألوان الأساسية */
             --bg-primary: #0a0e17;
             --bg-secondary: #121826;
-            --bg-gradient: linear-gradient(135deg, #0a0e17 0%, #121826 50%, #0d1117 100%);
+            --bg-gradient: linear-gradient(135deg, #0a0e17 0%, #121826 100%);
             
             /* ألوان البطاقات */
-            --card-bg: rgba(20, 25, 40, 0.9);
-            --card-bg-hover: rgba(30, 40, 65, 0.95);
-            --card-border: rgba(59, 130, 246, 0.25);
-            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            --card-bg: rgba(20, 25, 40, 0.95);
+            --card-bg-hover: rgba(30, 40, 65, 0.98);
+            --card-border: rgba(59, 130, 246, 0.3);
+            --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
             
             /* ألوان التمييز */
             --accent-primary: #3b82f6;
@@ -47,10 +47,9 @@
             --warning: #f59e0b;
             --danger: #ef4444;
             
-            /* تدرجات اللون الأزرق */
+            /* تدرجات اللون */
             --blue-gradient: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
             --blue-gradient-light: linear-gradient(135deg, var(--accent-tertiary), #60a5fa);
-            --purple-gradient: linear-gradient(135deg, #8b5cf6, #a855f7);
             
             /* النصوص */
             --text-primary: #f8fafc;
@@ -59,104 +58,42 @@
             --text-code: #7dd3fc;
             
             /* الظلال */
-            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
-            --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.4);
-            --shadow-lg: 0 20px 50px rgba(59, 130, 246, 0.25);
-            --shadow-xl: 0 25px 60px rgba(59, 130, 246, 0.35);
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
+            --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.35);
+            --shadow-lg: 0 15px 40px rgba(59, 130, 246, 0.2);
             
             /* التحولات */
             --transition-fast: all 0.2s ease;
             --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            
-            /* الأنيميشن */
-            --glow-animation: glow 3s ease-in-out infinite alternate;
-            --float-animation: float 6s ease-in-out infinite;
-            --pulse-animation: pulse 2s ease-in-out infinite;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Tajawal', 'Cairo', 'Poppins', sans-serif;
+            font-family: 'Tajawal', sans-serif;
             background: var(--bg-gradient);
             color: var(--text-primary);
             min-height: 100vh;
             overflow-x: hidden;
-            line-height: 1.7;
-            position: relative;
+            line-height: 1.6;
+            padding: 0;
+            font-size: 16px;
         }
 
-        /* تأثيرات الخلفية الديناميكية */
-        .bg-effects {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -2;
-            overflow: hidden;
-        }
-
-        .particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(14, 165, 233, 0.1) 0%, transparent 50%);
-            filter: blur(40px);
-            opacity: 0.6;
-        }
-
-        .floating-shapes {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        .shape {
-            position: absolute;
-            background: rgba(59, 130, 246, 0.1);
-            border-radius: 50%;
-            animation: var(--float-animation);
-        }
-
-        .shape:nth-child(1) {
-            width: 300px;
-            height: 300px;
-            top: 10%;
-            left: 5%;
-            background: rgba(59, 130, 246, 0.08);
-            animation-delay: 0s;
-            animation-duration: 20s;
-        }
-
-        .shape:nth-child(2) {
-            width: 200px;
-            height: 200px;
-            top: 60%;
-            right: 10%;
-            background: rgba(139, 92, 246, 0.08);
-            animation-delay: -5s;
-            animation-duration: 25s;
-        }
-
-        .shape:nth-child(3) {
-            width: 150px;
-            height: 150px;
-            bottom: 20%;
-            left: 20%;
-            background: rgba(14, 165, 233, 0.08);
-            animation-delay: -10s;
-            animation-duration: 18s;
+        /* إصلاح الأيقونات */
+        i.fas, i.fab {
+            font-family: 'Font Awesome 6 Free' !important;
+            font-weight: 900;
         }
 
         /* شريط التقدم */
@@ -165,384 +102,272 @@
             top: 0;
             left: 0;
             width: 0;
-            height: 4px;
+            height: 3px;
             background: var(--blue-gradient);
             z-index: 10000;
             transition: width 0.3s ease;
             box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
         }
 
-        /* شريط التنقل العلوي */
+        /* شريط التنقل العلوي - محسن للهواتف */
         .top-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
-            background: rgba(20, 25, 40, 0.85);
+            padding: 12px 16px;
+            background: rgba(20, 25, 40, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(59, 130, 246, 0.2);
             position: sticky;
             top: 0;
             z-index: 1000;
-            margin-bottom: 2rem;
-            animation: slideDown 0.5s ease-out;
+            margin-bottom: 0;
+            gap: 12px;
         }
 
         .home-btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 8px;
             text-decoration: none;
             color: white;
             background: var(--blue-gradient);
-            padding: 0.8rem 1.5rem;
-            border-radius: 12px;
-            font-size: 1rem;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 15px;
             font-weight: 600;
             transition: var(--transition-normal);
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-sm);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .home-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .home-btn:hover::before {
-            left: 100%;
+            white-space: nowrap;
         }
 
         .home-btn:hover,
         .home-btn:focus {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: var(--shadow-xl);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
             border-color: var(--accent-primary);
         }
 
         .nav-controls {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 10px;
         }
 
         .lang-buttons {
             display: flex;
-            gap: 0.5rem;
+            gap: 6px;
             background: rgba(255, 255, 255, 0.05);
-            padding: 0.5rem;
-            border-radius: 10px;
+            padding: 6px;
+            border-radius: 8px;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .lang-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
             border: none;
             background: transparent;
             color: var(--text-secondary);
-            font-size: 1rem;
+            font-size: 14px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: var(--transition-normal);
-            position: relative;
-            overflow: hidden;
         }
 
         .lang-btn.active {
             background: var(--accent-primary);
             color: white;
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
         }
 
         .lang-btn:hover:not(.active) {
             background: rgba(255, 255, 255, 0.1);
-            transform: scale(1.1);
+        }
+
+        /* المحتوى الرئيسي */
+        .main-content {
+            padding: 20px 16px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         /* العنوان الرئيسي */
         .hero-section {
             text-align: center;
-            padding: 3rem 1rem;
-            position: relative;
-            overflow: hidden;
+            padding: 24px 0 32px;
+            margin-bottom: 24px;
         }
 
         .main-title {
-            font-size: 3rem;
+            font-size: 24px;
             font-weight: 800;
             background: var(--blue-gradient);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s ease-out;
-            text-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
-            position: relative;
-            display: inline-block;
-        }
-
-        .main-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 4px;
-            background: var(--blue-gradient);
-            border-radius: 2px;
-            animation: expandWidth 1s ease-out 0.5s forwards;
+            margin-bottom: 12px;
+            line-height: 1.3;
         }
 
         .subtitle {
             color: var(--text-secondary);
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            animation: fadeInUp 1s ease-out 0.3s both;
+            font-size: 16px;
+            max-width: 500px;
+            margin: 0 auto;
         }
 
-        /* تلميحات ونصائح */
-        .tips-container {
-            max-width: 900px;
-            margin: 0 auto 3rem;
-            position: relative;
-        }
-
-        .tips-slider {
+        /* التلميحات */
+        .hint-container {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 32px;
             display: flex;
-            gap: 1rem;
-            overflow-x: auto;
-            padding: 1rem;
-            scrollbar-width: none;
+            align-items: center;
+            gap: 12px;
+            animation: fadeIn 0.8s ease-out;
         }
 
-        .tips-slider::-webkit-scrollbar {
-            display: none;
-        }
-
-        .tip-card {
-            flex: 0 0 300px;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            transition: var(--transition-normal);
-            animation: fadeInUp 0.8s ease-out;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tip-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--accent-primary);
-        }
-
-        .tip-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
+        .hint-icon {
+            font-size: 20px;
             color: var(--accent-tertiary);
-            animation: var(--pulse-animation);
+            flex-shrink: 0;
         }
 
-        .tip-text {
+        .hint-text {
             color: var(--text-secondary);
-            font-size: 1rem;
+            font-size: 15px;
+            flex: 1;
         }
 
         /* قسم الرموز */
         .section {
-            max-width: 1200px;
-            margin: 0 auto 4rem;
-            padding: 0 1rem;
-            animation: fadeInUp 0.8s ease-out;
+            margin-bottom: 40px;
         }
 
         .section-header {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            padding: 1rem;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding: 12px;
             background: rgba(59, 130, 246, 0.1);
-            border-radius: 16px;
-            border-left: 4px solid var(--accent-primary);
+            border-radius: 12px;
+            border-right: 4px solid var(--accent-primary);
         }
 
         .section-icon {
-            width: 60px;
-            height: 60px;
+            width: 48px;
+            height: 48px;
             background: var(--blue-gradient);
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
+            font-size: 20px;
             color: white;
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-sm);
+            flex-shrink: 0;
         }
 
         .section-title {
-            font-size: 2rem;
+            font-size: 20px;
             font-weight: 700;
             color: var(--text-primary);
             flex: 1;
         }
 
-        .section-subtitle {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            margin-top: 0.5rem;
-        }
-
-        /* شبكة الرموز */
+        /* شبكة الرموز - محسنة للهواتف */
         .symbols-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 1rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
         }
 
         .symbol-card {
             background: var(--card-bg);
             border: 2px solid var(--card-border);
-            border-radius: 16px;
-            padding: 1.5rem;
+            border-radius: 12px;
+            padding: 16px 8px;
             cursor: pointer;
-            font-size: 2rem;
+            font-size: 22px;
             font-weight: 700;
-            transition: var(--transition-bounce);
-            box-shadow: var(--shadow-md);
+            transition: var(--transition-normal);
+            box-shadow: var(--shadow-sm);
             position: relative;
             overflow: hidden;
-            font-family: 'Consolas', 'Courier New', monospace;
+            font-family: 'Courier New', monospace;
             display: flex;
             align-items: center;
             justify-content: center;
             aspect-ratio: 1;
             color: var(--text-code);
+            touch-action: manipulation;
         }
 
-        .symbol-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, 
-                rgba(59, 130, 246, 0.1) 0%, 
-                rgba(139, 92, 246, 0.1) 100%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .symbol-card:hover::before {
-            opacity: 1;
-        }
-
-        .symbol-card:hover {
-            transform: translateY(-10px) scale(1.1);
-            box-shadow: var(--shadow-xl);
+        .symbol-card:hover,
+        .symbol-card:focus {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: var(--shadow-lg);
             border-color: var(--accent-primary);
             color: white;
-            z-index: 10;
         }
 
-        .symbol-category {
-            background: rgba(139, 92, 246, 0.1);
-            padding: 1rem 1.5rem;
-            border-radius: 12px;
-            margin: 2rem 0 1rem;
-            border-left: 4px solid var(--accent-secondary);
-        }
-
-        .category-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .category-desc {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
+        .symbol-card:active {
+            transform: translateY(-2px) scale(1.03);
+            transition: var(--transition-fast);
         }
 
         /* قائمة الاختصارات */
         .shortcuts-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: 1fr;
+            gap: 16px;
         }
 
         .shortcut-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 1.5rem;
+            border-radius: 12px;
+            padding: 16px;
             transition: var(--transition-normal);
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-sm);
             display: flex;
             align-items: center;
-            gap: 1.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .shortcut-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 5px;
-            height: 100%;
-            background: var(--blue-gradient);
-            transform: scaleY(0);
-            transform-origin: top;
-            transition: transform 0.4s ease;
-        }
-
-        .shortcut-card:hover::before {
-            transform: scaleY(1);
+            gap: 16px;
         }
 
         .shortcut-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
             border-color: var(--accent-primary);
         }
 
         .shortcut-key {
             background: var(--blue-gradient);
             color: white;
-            padding: 0.8rem 1.2rem;
-            border-radius: 10px;
+            padding: 10px 16px;
+            border-radius: 8px;
             font-weight: 600;
-            font-size: 0.9rem;
-            min-width: 140px;
+            font-size: 14px;
             text-align: center;
-            font-family: 'Consolas', monospace;
+            font-family: 'Courier New', monospace;
             box-shadow: var(--shadow-sm);
             white-space: nowrap;
+            min-width: 120px;
+            flex-shrink: 0;
         }
 
         .shortcut-desc {
             color: var(--text-secondary);
-            font-size: 1rem;
+            font-size: 15px;
             flex: 1;
         }
 
@@ -558,9 +383,10 @@
             justify-content: center;
             align-items: center;
             z-index: 10000;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(8px);
             opacity: 0;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.3s ease;
+            padding: 16px;
         }
 
         .overlay.active {
@@ -570,17 +396,17 @@
         .popup {
             background: var(--card-bg);
             border: 2px solid var(--accent-primary);
-            border-radius: 24px;
-            padding: 3rem;
-            width: 90%;
-            max-width: 500px;
+            border-radius: 16px;
+            padding: 24px;
+            width: 100%;
+            max-width: 400px;
             text-align: center;
             color: white;
-            box-shadow: var(--shadow-xl);
+            box-shadow: var(--shadow-lg);
             position: relative;
             overflow: hidden;
-            transform: translateY(30px) scale(0.95);
-            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform: translateY(20px) scale(0.95);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .overlay.active .popup {
@@ -593,69 +419,67 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 6px;
+            height: 4px;
             background: var(--blue-gradient);
         }
 
         .popup-symbol {
-            font-size: 4rem;
+            font-size: 48px;
             color: var(--text-code);
-            margin-bottom: 1.5rem;
-            font-family: 'Consolas', monospace;
+            margin-bottom: 16px;
+            font-family: 'Courier New', monospace;
             font-weight: 700;
-            text-shadow: 0 5px 20px rgba(59, 130, 246, 0.5);
-            animation: var(--pulse-animation);
         }
 
         .popup-desc {
             color: var(--text-secondary);
-            margin: 1rem 0;
-            font-size: 1.2rem;
-            line-height: 1.6;
-            min-height: 60px;
+            margin: 12px 0;
+            font-size: 16px;
+            line-height: 1.5;
+            min-height: 48px;
         }
 
         .popup-key {
             background: rgba(59, 130, 246, 0.15);
-            padding: 1rem 1.5rem;
-            border-radius: 12px;
-            font-size: 1rem;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
             color: var(--text-code);
-            margin-top: 1rem;
-            font-family: 'Consolas', monospace;
+            margin-top: 12px;
+            font-family: 'Courier New', monospace;
             border: 1px solid rgba(96, 165, 250, 0.3);
         }
 
         .popup-actions {
-            margin-top: 2rem;
+            margin-top: 24px;
             display: flex;
-            gap: 1rem;
-            justify-content: center;
+            gap: 12px;
         }
 
         .popup-btn {
-            padding: 1rem 2rem;
-            border-radius: 12px;
+            padding: 12px 20px;
+            border-radius: 8px;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 15px;
             cursor: pointer;
             transition: var(--transition-normal);
             border: none;
             outline: none;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            justify-content: center;
+            gap: 8px;
+            flex: 1;
         }
 
         .popup-btn.copy {
             background: var(--blue-gradient);
             color: white;
-            box-shadow: var(--shadow-md);
         }
 
         .popup-btn.copy:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
         .popup-btn.close {
@@ -672,13 +496,13 @@
         /* إشعار النسخ */
         .copy-notification {
             position: fixed;
-            bottom: 30px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
             background: var(--blue-gradient);
             color: white;
-            padding: 1rem 2rem;
-            border-radius: 12px;
+            padding: 12px 24px;
+            border-radius: 10px;
             font-weight: 600;
             box-shadow: var(--shadow-lg);
             z-index: 10001;
@@ -686,7 +510,9 @@
             transition: var(--transition-normal);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 8px;
+            max-width: 90%;
+            white-space: nowrap;
         }
 
         .copy-notification.show {
@@ -694,55 +520,58 @@
             opacity: 1;
         }
 
-        /* قسم النصائح المتقدمة */
+        /* النصائح المتقدمة */
         .advanced-tips {
             background: rgba(59, 130, 246, 0.05);
-            border-radius: 20px;
-            padding: 2rem;
-            margin: 3rem 0;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 32px 0;
             border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
         .advanced-tips h3 {
             color: var(--accent-primary);
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
+            margin-bottom: 16px;
+            font-size: 18px;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 8px;
         }
 
         .tip-list {
             display: grid;
-            gap: 1rem;
+            gap: 12px;
         }
 
         .tip-item {
             background: rgba(255, 255, 255, 0.05);
-            padding: 1rem;
-            border-radius: 10px;
-            border-left: 3px solid var(--success);
+            padding: 12px;
+            border-radius: 8px;
+            border-right: 3px solid var(--success);
+            font-size: 14px;
+            color: var(--text-secondary);
         }
 
         /* التذييل */
         .footer {
             text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
+            padding: 24px 16px;
+            margin-top: 40px;
             background: rgba(20, 25, 40, 0.8);
             border-top: 1px solid rgba(59, 130, 246, 0.2);
         }
 
         .footer p {
             color: var(--text-muted);
-            margin-bottom: 0.5rem;
+            font-size: 14px;
+            margin-bottom: 8px;
         }
 
         /* الأنيميشن */
-        @keyframes fadeInUp {
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(10px);
             }
             to {
                 opacity: 1;
@@ -750,70 +579,150 @@
             }
         }
 
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes expandWidth {
-            from {
-                width: 0;
-            }
-            to {
-                width: 200px;
-            }
-        }
-
-        @keyframes glow {
-            from {
-                box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
-            }
-            to {
-                box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
-            }
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
-            }
-            33% {
-                transform: translateY(-20px) rotate(120deg);
-            }
-            66% {
-                transform: translateY(20px) rotate(240deg);
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.05);
-                opacity: 0.8;
-            }
-        }
-
-        @keyframes symbolClickEffect {
+        @keyframes symbolClick {
             0% {
                 transform: scale(1);
             }
-            25% {
-                transform: scale(1.3) rotate(10deg);
-            }
             50% {
-                transform: scale(1.2) rotate(-10deg);
+                transform: scale(1.2);
             }
             100% {
-                transform: scale(1) rotate(0);
+                transform: scale(1);
+            }
+        }
+
+        /* تحسينات للهواتف */
+        @media (max-width: 768px) {
+            .top-bar {
+                padding: 10px 12px;
+            }
+            
+            .home-btn {
+                padding: 8px 14px;
+                font-size: 14px;
+            }
+            
+            .main-title {
+                font-size: 22px;
+            }
+            
+            .subtitle {
+                font-size: 15px;
+                padding: 0 8px;
+            }
+            
+            .section-header {
+                padding: 10px;
+            }
+            
+            .section-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 18px;
+            }
+            
+            .symbols-grid {
+                grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+                gap: 10px;
+            }
+            
+            .symbol-card {
+                padding: 14px 6px;
+                font-size: 20px;
+            }
+            
+            .shortcut-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+            }
+            
+            .shortcut-key {
+                width: 100%;
+                min-width: auto;
+            }
+            
+            .popup {
+                padding: 20px;
+            }
+            
+            .popup-actions {
+                flex-direction: column;
+            }
+            
+            .popup-btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .symbols-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .symbol-card {
+                font-size: 18px;
+                padding: 12px 4px;
+            }
+            
+            .main-title {
+                font-size: 20px;
+            }
+            
+            .hint-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 8px;
+            }
+            
+            .hint-icon {
+                font-size: 18px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .main-content {
+                padding: 24px 20px;
+            }
+            
+            .hero-section {
+                padding: 32px 0 40px;
+            }
+            
+            .main-title {
+                font-size: 28px;
+            }
+            
+            .shortcuts-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .main-content {
+                padding: 32px 24px;
+            }
+            
+            .hero-section {
+                padding: 40px 0 48px;
+            }
+            
+            .main-title {
+                font-size: 32px;
+            }
+            
+            .symbols-grid {
+                grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+                gap: 16px;
+            }
+            
+            .symbol-card {
+                font-size: 24px;
+                padding: 20px 10px;
             }
         }
 
@@ -838,105 +747,25 @@
             border: 0;
         }
 
-        /* تحسينات للاستجابة */
-        @media (max-width: 1024px) {
-            .symbols-grid {
-                grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+        /* تحسين اللمس على الهواتف */
+        @media (hover: none) {
+            .symbol-card:hover,
+            .shortcut-card:hover,
+            .home-btn:hover {
+                transform: none;
             }
             
-            .shortcuts-list {
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            }
-        }
-
-        @media (max-width: 768px) {
-            .top-bar {
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1rem;
-            }
-            
-            .main-title {
-                font-size: 2.2rem;
-            }
-            
-            .section-title {
-                font-size: 1.7rem;
-            }
-            
-            .symbols-grid {
-                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-                gap: 0.8rem;
-            }
-            
-            .symbol-card {
-                padding: 1rem;
-                font-size: 1.8rem;
-            }
-            
-            .shortcuts-list {
-                grid-template-columns: 1fr;
-            }
-            
-            .shortcut-card {
-                flex-direction: column;
-                text-align: center;
-                gap: 1rem;
-            }
-            
-            .shortcut-key {
-                width: 100%;
-            }
-            
-            .popup {
-                padding: 2rem;
-            }
-            
-            .popup-actions {
-                flex-direction: column;
-            }
-            
-            .popup-btn {
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .main-title {
-                font-size: 1.8rem;
-            }
-            
-            .section-title {
-                font-size: 1.5rem;
-            }
-            
-            .symbols-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            
-            .symbol-card {
-                font-size: 1.5rem;
-                padding: 0.8rem;
-            }
-            
-            .tip-card {
-                flex: 0 0 250px;
+            .symbol-card:active,
+            .shortcut-card:active,
+            .home-btn:active {
+                transform: scale(0.98);
+                opacity: 0.9;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- تأثيرات الخلفية -->
-    <div class="bg-effects">
-        <div class="particles"></div>
-        <div class="floating-shapes">
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
-        </div>
-    </div>
-
     <!-- شريط التقدم -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
@@ -962,82 +791,56 @@
         </div>
     </div>
 
-    <!-- القسم الرئيسي -->
-    <section class="hero-section">
-        <h1 class="main-title lang-key" data-key="page-title">موسوعة رموز واختصارات C و Code::Blocks</h1>
-        <p class="subtitle lang-key" data-key="subtitle">كل ما تحتاجه للبرمجة بلغة C في مكان واحد - رموز، اختصارات، نصائح وتأثيرات تفاعلية</p>
-    </section>
+    <!-- المحتوى الرئيسي -->
+    <main class="main-content">
+        <!-- القسم الرئيسي -->
+        <section class="hero-section">
+            <h1 class="main-title lang-key" data-key="page-title">رموز واختصارات C و Code::Blocks</h1>
+            <p class="subtitle lang-key" data-key="subtitle">كل ما تحتاجه للبرمجة بلغة C في مكان واحد</p>
+        </section>
 
-    <!-- النصائح السريعة -->
-    <div class="tips-container">
-        <div class="tips-slider" id="tipsSlider">
-            <!-- سيتم ملؤها جافاسكريبت -->
+        <!-- التلميحات -->
+        <div class="hint-container">
+            <div class="hint-icon">💡</div>
+            <div class="hint-text" id="hintText">انقر على أي رمز لعرض شرحه - يمكنك نسخ الرموز بسهولة!</div>
         </div>
-    </div>
 
-    <!-- قسم الرموز الأساسية -->
-    <section class="section">
-        <div class="section-header">
-            <div class="section-icon">
-                <i class="fas fa-code"></i>
-            </div>
-            <div>
+        <!-- قسم الرموز الأساسية -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-code"></i>
+                </div>
                 <h2 class="section-title lang-key" data-key="symbols">الرموز الأساسية في لغة C</h2>
-                <p class="section-subtitle lang-key" data-key="symbols-subtitle">تعرف على جميع الرموز المستخدمة في لغة C ووظيفة كل رمز</p>
             </div>
-        </div>
-
-        <!-- المشغلات الحسابية -->
-        <div class="symbol-category">
-            <h3 class="category-title">المشغلات الحسابية</h3>
-            <p class="category-desc">رموز العمليات الحسابية الأساسية</p>
-        </div>
-        <div class="symbols-grid" id="arithmeticSymbols"></div>
-
-        <!-- المشغلات المنطقية -->
-        <div class="symbol-category">
-            <h3 class="category-title">المشغلات المنطقية والمقارنة</h3>
-            <p class="category-desc">رموز المقارنات والعمليات المنطقية</p>
-        </div>
-        <div class="symbols-grid" id="logicalSymbols"></div>
-
-        <!-- الرموز الخاصة -->
-        <div class="symbol-category">
-            <h3 class="category-title">الرموز الخاصة والتركيبية</h3>
-            <p class="category-desc">رموز بناء الجملة والتركيب</p>
-        </div>
-        <div class="symbols-grid" id="specialSymbols"></div>
-
-        <!-- مشغلات البت -->
-        <div class="symbol-category">
-            <h3 class="category-title">مشغلات البت (Bitwise)</h3>
-            <p class="category-desc">عمليات المستوى الثنائي</p>
-        </div>
-        <div class="symbols-grid" id="bitwiseSymbols"></div>
-    </section>
-
-    <!-- قسم الاختصارات -->
-    <section class="section">
-        <div class="section-header">
-            <div class="section-icon">
-                <i class="fas fa-keyboard"></i>
+            <div class="symbols-grid" id="symbolsGrid">
+                <!-- سيتم ملؤها جافاسكريبت -->
             </div>
-            <div>
-                <h2 class="section-title lang-key" data-key="shortcuts">اختصارات Code::Blocks المتقدمة</h2>
-                <p class="section-subtitle lang-key" data-key="shortcuts-subtitle">اختصر وقتك وزد إنتاجيتك مع هذه الاختصارات</p>
+        </section>
+
+        <!-- قسم الاختصارات -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-keyboard"></i>
+                </div>
+                <h2 class="section-title lang-key" data-key="shortcuts">اختصارات Code::Blocks</h2>
             </div>
-        </div>
+            <div class="shortcuts-list" id="shortcutsList">
+                <!-- سيتم ملؤها جافاسكريبت -->
+            </div>
+        </section>
 
-        <div class="shortcuts-list" id="shortcutsList"></div>
-    </section>
-
-    <!-- النصائح المتقدمة -->
-    <section class="section">
-        <div class="advanced-tips">
-            <h3><i class="fas fa-lightbulb"></i> <span class="lang-key" data-key="advanced-tips">نصائح متقدمة للمبرمجين</span></h3>
-            <div class="tip-list" id="advancedTips"></div>
-        </div>
-    </section>
+        <!-- النصائح المتقدمة -->
+        <section class="section">
+            <div class="advanced-tips">
+                <h3><i class="fas fa-lightbulb"></i> <span class="lang-key" data-key="advanced-tips">نصائح للمبرمجين</span></h3>
+                <div class="tip-list" id="advancedTips">
+                    <!-- سيتم ملؤها جافاسكريبت -->
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- نافذة البوب أب -->
     <div class="overlay" id="overlay" onclick="event.target === this && closePopup()">
@@ -1066,147 +869,128 @@
 
     <!-- التذييل -->
     <footer class="footer">
-        <p>© 2024 موسوعة رموز واختصارات C و Code::Blocks</p>
-        <p class="lang-key" data-key="footer">جميع الحقوق محفوظة - تصميم تفاعلي للمبرمجين</p>
+        <p>© 2024 رموز واختصارات C و Code::Blocks</p>
+        <p class="lang-key" data-key="footer">جميع الحقوق محفوظة</p>
     </footer>
 
     <script>
         // =========== الحماية من XSS ===========
         const escapeHTML = (str) => {
+            if (!str) return '';
             const div = document.createElement('div');
             div.textContent = str;
             return div.innerHTML;
         };
 
-        // =========== البيانات المحصنة ===========
-        const data = {
-            symbols: {
-                arithmetic: [
-                    { char: "+", key: "مفتاح +", desc: { ar: "عملية الجمع أو الموجب الأحادي", en: "Addition or unary plus", fr: "Addition ou plus unaire" }, usage: "a + b, +5" },
-                    { char: "-", key: "مفتاح -", desc: { ar: "عملية الطرح أو السالب الأحادي", en: "Subtraction or unary minus", fr: "Soustraction ou moins unaire" }, usage: "a - b, -x" },
-                    { char: "*", key: "Shift + 8", desc: { ar: "عملية الضرب أو تفريغ المؤشر", en: "Multiplication or pointer dereference", fr: "Multiplication ou déréférencement" }, usage: "a * b, *ptr" },
-                    { char: "/", key: "مفتاح /", desc: { ar: "عملية القسمة أو التعليق السطري", en: "Division or single-line comment", fr: "Division ou commentaire ligne" }, usage: "a / b, // تعليق" },
-                    { char: "%", key: "Shift + 5", desc: { ar: "عملية باقي القسمة", en: "Modulo operator", fr: "Opérateur modulo" }, usage: "a % b" },
-                    { char: "++", key: "+ +", desc: { ar: "زيادة بمقدار واحد", en: "Increment by one", fr: "Incrémentation" }, usage: "i++, ++i" },
-                    { char: "--", key: "- -", desc: { ar: "نقصان بمقدار واحد", en: "Decrement by one", fr: "Décrémentation" }, usage: "i--, --i" },
-                    { char: "=", key: "مفتاح =", desc: { ar: "عامل الإسناد", en: "Assignment operator", fr: "Opérateur d'affectation" }, usage: "x = 5" },
-                    { char: "+=", key: "+ =", desc: { ar: "جمع وإسناد", en: "Add and assign", fr: "Addition et affectation" }, usage: "x += 3" },
-                    { char: "-=", key: "- =", desc: { ar: "طرح وإسناد", en: "Subtract and assign", fr: "Soustraction et affectation" }, usage: "x -= 2" },
-                    { char: "*=", key: "* =", desc: { ar: "ضرب وإسناد", en: "Multiply and assign", fr: "Multiplication et affectation" }, usage: "x *= 4" },
-                    { char: "/=", key: "/ =", desc: { ar: "قسمة وإسناد", en: "Divide and assign", fr: "Division et affectation" }, usage: "x /= 2" }
-                ],
-                logical: [
-                    { char: "==", key: "Shift + =", desc: { ar: "المساواة", en: "Equality comparison", fr: "Égalité" }, usage: "a == b" },
-                    { char: "!=", key: "Alt Gr + Shift + =", desc: { ar: "عدم المساواة", en: "Inequality", fr: "Différence" }, usage: "a != b" },
-                    { char: "<", key: "Shift + ,", desc: { ar: "أصغر من", en: "Less than", fr: "Inférieur à" }, usage: "a < b" },
-                    { char: ">", key: "Shift + .", desc: { ar: "أكبر من", en: "Greater than", fr: "Supérieur à" }, usage: "a > b" },
-                    { char: "<=", key: "Shift + , =", desc: { ar: "أصغر أو يساوي", en: "Less than or equal", fr: "Inférieur ou égal" }, usage: "a <= b" },
-                    { char: ">=", key: "Shift + . =", desc: { ar: "أكبر أو يساوي", en: "Greater than or equal", fr: "Supérieur ou égal" }, usage: "a >= b" },
-                    { char: "&&", key: "Shift + 7 Shift + 7", desc: { ar: "AND المنطقي", en: "Logical AND", fr: "ET logique" }, usage: "a && b" },
-                    { char: "||", key: "Alt Gr + 6 Alt Gr + 6", desc: { ar: "OR المنطقي", en: "Logical OR", fr: "OU logique" }, usage: "a || b" },
-                    { char: "!", key: "Shift + 1", desc: { ar: "NOT المنطقي", en: "Logical NOT", fr: "NON logique" }, usage: "!condition" },
-                    { char: "?", key: "Shift + /", desc: { ar: "العامل الثلاثي", en: "Ternary operator", fr: "Opérateur ternaire" }, usage: "a ? b : c" }
-                ],
-                special: [
-                    { char: "{", key: "Shift + [", desc: { ar: "بداية كتلة تعليمات", en: "Start of block", fr: "Début de bloc" }, usage: "if (x) { ... }" },
-                    { char: "}", key: "Shift + ]", desc: { ar: "نهاية كتلة تعليمات", en: "End of block", fr: "Fin de bloc" }, usage: "}" },
-                    { char: "(", key: "Shift + 9", desc: { ar: "قوس فتح للتعبيرات", en: "Opening parenthesis", fr: "Parenthèse ouvrante" }, usage: "if (x)" },
-                    { char: ")", key: "Shift + 0", desc: { ar: "قوس إغلاق", en: "Closing parenthesis", fr: "Parenthèse fermante" }, usage: ")" },
-                    { char: "[", key: "Alt Gr + 5", desc: { ar: "قوس فتح للمصفوفات", en: "Opening bracket", fr: "Crochet ouvrant" }, usage: "arr[5]" },
-                    { char: "]", key: "Alt Gr + °", desc: { ar: "قوس إغلاق للمصفوفات", en: "Closing bracket", fr: "Crochet fermant" }, usage: "]" },
-                    { char: ";", key: "مفتاح ;", desc: { ar: "نهاية العبارة", en: "Statement terminator", fr: "Fin d'instruction" }, usage: "int x = 5;" },
-                    { char: ":", key: "Shift + .", desc: { ar: "النقطتان للتبديل والتسميات", en: "Colon for switch/labels", fr: "Deux-points" }, usage: "case 5: x = 10;" },
-                    { char: ",", key: "مفتاح ,", desc: { ar: "فاصلة لفصل العناصر", en: "Comma separator", fr: "Virgule séparatrice" }, usage: "int a, b, c;" },
-                    { char: ".", key: "مفتاح .", desc: { ar: "نقطة للوصول إلى الأعضاء", en: "Member access", fr: "Accès membre" }, usage: "obj.member" },
-                    { char: "->", key: "- >", desc: { ar: "وصول لعناصر المؤشر", en: "Pointer member access", fr: "Accès membre pointeur" }, usage: "ptr->member" },
-                    { char: "#", key: "Alt Gr + 3", desc: { ar: "توجيهات الماكرو", en: "Preprocessor directive", fr: "Directive préprocesseur" }, usage: "#include <stdio.h>" }
-                ],
-                bitwise: [
-                    { char: "&", key: "Shift + 7", desc: { ar: "AND ثنائي البت", en: "Bitwise AND", fr: "ET bit à bit" }, usage: "a & b" },
-                    { char: "|", key: "Alt Gr + 6", desc: { ar: "OR ثنائي البت", en: "Bitwise OR", fr: "OU bit à bit" }, usage: "a | b" },
-                    { char: "^", key: "Alt Gr + 9", desc: { ar: "XOR ثنائي البت", en: "Bitwise XOR", fr: "XOR bit à bit" }, usage: "a ^ b" },
-                    { char: "~", key: "Alt Gr + 2", desc: { ar: "NOT ثنائي البت", en: "Bitwise NOT", fr: "NON bit à bit" }, usage: "~a" },
-                    { char: "<<", key: "Shift + , Shift + ,", desc: { ar: "تحويل لليسار", en: "Left shift", fr: "Décalage à gauche" }, usage: "a << 2" },
-                    { char: ">>", key: "Shift + . Shift + .", desc: { ar: "تحويل لليمين", en: "Right shift", fr: "Décalage à droite" }, usage: "a >> 3" },
-                    { char: "&=", key: "& =", desc: { ar: "AND ثنائي وإسناد", en: "Bitwise AND and assign", fr: "ET bit à bit et affectation" }, usage: "a &= b" },
-                    { char: "|=", key: "| =", desc: { ar: "OR ثنائي وإسناد", en: "Bitwise OR and assign", fr: "OU bit à bit et affectation" }, usage: "a |= b" },
-                    { char: "^=", key: "^ =", desc: { ar: "XOR ثنائي وإسناد", en: "Bitwise XOR and assign", fr: "XOR bit à bit et affectation" }, usage: "a ^= b" }
-                ]
-            },
-            shortcuts: [
-                { keys: "F9", desc: { ar: "ترجمة وتشغيل البرنامج", en: "Build and run program", fr: "Compiler et exécuter" }, category: "build" },
-                { keys: "Ctrl + F9", desc: { ar: "ترجمة فقط بدون تشغيل", en: "Build without running", fr: "Compiler sans exécuter" }, category: "build" },
-                { keys: "F8", desc: { ar: "الخطوة التالية في التصحيح", en: "Step over in debugger", fr: "Pas à pas par dessus" }, category: "debug" },
-                { keys: "F7", desc: { ar: "الدخول إلى الدالة في التصحيح", en: "Step into function", fr: "Pas à pas dans" }, category: "debug" },
-                { keys: "Ctrl + F8", desc: { ar: "إضافة/إزالة نقطة توقف", en: "Toggle breakpoint", fr: "Basculer point d'arrêt" }, category: "debug" },
-                { keys: "Ctrl + Shift + N", desc: { ar: "إنشاء ملف C/C++ جديد", en: "Create new C/C++ file", fr: "Créer nouveau fichier" }, category: "file" },
-                { keys: "Ctrl + O", desc: { ar: "فتح ملف موجود", en: "Open existing file", fr: "Ouvrir fichier" }, category: "file" },
-                { keys: "Ctrl + S", desc: { ar: "حفظ الملف الحالي", en: "Save current file", fr: "Enregistrer fichier" }, category: "file" },
-                { keys: "Ctrl + Shift + S", desc: { ar: "حفظ جميع الملفات", en: "Save all files", fr: "Tout enregistrer" }, category: "file" },
-                { keys: "Ctrl + F", desc: { ar: "بحث عن نص", en: "Find text", fr: "Rechercher texte" }, category: "edit" },
-                { keys: "Ctrl + H", desc: { ar: "استبدال نص", en: "Replace text", fr: "Remplacer texte" }, category: "edit" },
-                { keys: "Ctrl + Z", desc: { ar: "تراجع عن التعديل", en: "Undo", fr: "Annuler" }, category: "edit" },
-                { keys: "Ctrl + Y", desc: { ar: "إعادة التعديل", en: "Redo", fr: "Rétablir" }, category: "edit" },
-                { keys: "Ctrl + /", desc: { ar: "تعليق/إلغاء تعليق السطر", en: "Comment/uncomment line", fr: "Commenter/décommenter" }, category: "edit" },
-                { keys: "Ctrl + D", desc: { ar: "نسخ السطر الحالي", en: "Duplicate line", fr: "Dupliquer ligne" }, category: "edit" },
-                { keys: "Ctrl + L", desc: { ar: "حذف السطر الحالي", en: "Delete line", fr: "Supprimer ligne" }, category: "edit" },
-                { keys: "Ctrl + Shift + C", desc: { ar: "فتح سطر الأوامر", en: "Open command line", fr: "Ouvrir ligne de commande" }, category: "tools" },
-                { keys: "Alt + F8", desc: { ar: "إعادة تنسيق الكود", en: "Reformat code", fr: "Reformater code" }, category: "tools" },
-                { keys: "Ctrl + Shift + F", desc: { ar: "البحث في جميع الملفات", en: "Search in all files", fr: "Rechercher dans fichiers" }, category: "search" },
-                { keys: "Ctrl + B", desc: { ar: "البحث في المرجع", en: "Search in reference", fr: "Rechercher référence" }, category: "search" }
-            ],
-            tips: [
-                { icon: "🚀", text: { ar: "استخدم F9 لتشغيل البرنامج بسرعة", en: "Use F9 to quickly run your program", fr: "Utilisez F9 pour exécuter rapidement" } },
-                { icon: "🐛", text: { ar: "اضغط F8 للتنقل بين نقاط التوقف", en: "Press F8 to navigate through breakpoints", fr: "Appuyez sur F8 pour naviguer" } },
-                { icon: "💡", text: { ar: "Ctrl+/ لتعليق/إلغاء تعليق الأسطر", en: "Ctrl+/ to comment/uncomment lines", fr: "Ctrl+/ pour commenter/décommenter" } },
-                { icon: "⚡", text: { ar: "استخدم Ctrl+D لنسخ السطر الحالي", en: "Use Ctrl+D to duplicate current line", fr: "Utilisez Ctrl+D pour dupliquer" } },
-                { icon: "🎯", text: { ar: "Alt+F8 لإعادة تنسيق الكود تلقائياً", en: "Alt+F8 to auto-format your code", fr: "Alt+F8 pour reformater automatiquement" } }
-            ],
-            advancedTips: [
-                { text: { ar: "استخدم التعليقات الوصفية للوظائف المعقدة", en: "Use descriptive comments for complex functions", fr: "Utilisez des commentaires descriptifs" } },
-                { text: { ar: "اختر أسماء متغيرات توضح الغرض منها", en: "Choose variable names that indicate purpose", fr: "Choisissez des noms de variables clairs" } },
-                { text: { ar: "قسم الكود الطويل إلى دوال صغيرة", en: "Break long code into small functions", fr: "Divisez le code long en petites fonctions" } },
-                { text: { ar: "اختبر كل دالة على حدة قبل التكامل", en: "Test each function separately before integration", fr: "Testez chaque fonction séparément" } },
-                { text: { ar: "استخدم نقاط التوقف للتصحيح بدلاً من printf", en: "Use breakpoints for debugging instead of printf", fr: "Utilisez des points d'arrêt pour déboguer" } }
-            ]
-        };
+        // =========== البيانات ===========
+        const symbols = [
+            // المشغلات الحسابية
+            { char: "+", key: "مفتاح +", desc: { ar: "عملية الجمع أو الموجب الأحادي", en: "Addition or unary plus", fr: "Addition ou plus unaire" } },
+            { char: "-", key: "مفتاح -", desc: { ar: "عملية الطرح أو السالب الأحادي", en: "Subtraction or unary minus", fr: "Soustraction ou moins unaire" } },
+            { char: "*", key: "Shift + 8", desc: { ar: "عملية الضرب أو تفريغ المؤشر", en: "Multiplication or pointer dereference", fr: "Multiplication ou déréférencement" } },
+            { char: "/", key: "مفتاح /", desc: { ar: "عملية القسمة أو التعليق السطري", en: "Division or single-line comment", fr: "Division ou commentaire ligne" } },
+            { char: "%", key: "Shift + 5", desc: { ar: "عملية باقي القسمة", en: "Modulo operator", fr: "Opérateur modulo" } },
+            { char: "++", key: "+ +", desc: { ar: "زيادة بمقدار واحد", en: "Increment by one", fr: "Incrémentation" } },
+            { char: "--", key: "- -", desc: { ar: "نقصان بمقدار واحد", en: "Decrement by one", fr: "Décrémentation" } },
+            { char: "=", key: "مفتاح =", desc: { ar: "عامل الإسناد", en: "Assignment operator", fr: "Opérateur d'affectation" } },
+            
+            // المشغلات المركبة
+            { char: "+=", key: "+ =", desc: { ar: "جمع وإسناد", en: "Add and assign", fr: "Addition et affectation" } },
+            { char: "-=", key: "- =", desc: { ar: "طرح وإسناد", en: "Subtract and assign", fr: "Soustraction et affectation" } },
+            { char: "*=", key: "* =", desc: { ar: "ضرب وإسناد", en: "Multiply and assign", fr: "Multiplication et affectation" } },
+            { char: "/=", key: "/ =", desc: { ar: "قسمة وإسناد", en: "Divide and assign", fr: "Division et affectation" } },
+            
+            // المشغلات المنطقية
+            { char: "==", key: "Shift + =", desc: { ar: "المساواة", en: "Equality comparison", fr: "Égalité" } },
+            { char: "!=", key: "Alt Gr + Shift + =", desc: { ar: "عدم المساواة", en: "Inequality", fr: "Différence" } },
+            { char: "<", key: "Shift + ,", desc: { ar: "أصغر من", en: "Less than", fr: "Inférieur à" } },
+            { char: ">", key: "Shift + .", desc: { ar: "أكبر من", en: "Greater than", fr: "Supérieur à" } },
+            { char: "<=", key: "Shift + , =", desc: { ar: "أصغر أو يساوي", en: "Less than or equal", fr: "Inférieur ou égal" } },
+            { char: ">=", key: "Shift + . =", desc: { ar: "أكبر أو يساوي", en: "Greater than or equal", fr: "Supérieur ou égal" } },
+            { char: "&&", key: "Shift + 7 Shift + 7", desc: { ar: "AND المنطقي", en: "Logical AND", fr: "ET logique" } },
+            { char: "||", key: "Alt Gr + 6 Alt Gr + 6", desc: { ar: "OR المنطقي", en: "Logical OR", fr: "OU logique" } },
+            { char: "!", key: "Shift + 1", desc: { ar: "NOT المنطقي", en: "Logical NOT", fr: "NON logique" } },
+            
+            // الرموز الخاصة
+            { char: "{", key: "Shift + [", desc: { ar: "بداية كتلة تعليمات", en: "Start of block", fr: "Début de bloc" } },
+            { char: "}", key: "Shift + ]", desc: { ar: "نهاية كتلة تعليمات", en: "End of block", fr: "Fin de bloc" } },
+            { char: "(", key: "Shift + 9", desc: { ar: "قوس فتح للتعبيرات", en: "Opening parenthesis", fr: "Parenthèse ouvrante" } },
+            { char: ")", key: "Shift + 0", desc: { ar: "قوس إغلاق", en: "Closing parenthesis", fr: "Parenthèse fermante" } },
+            { char: "[", key: "Alt Gr + 5", desc: { ar: "قوس فتح للمصفوفات", en: "Opening bracket", fr: "Crochet ouvrant" } },
+            { char: "]", key: "Alt Gr + °", desc: { ar: "قوس إغلاق للمصفوفات", en: "Closing bracket", fr: "Crochet fermant" } },
+            { char: ";", key: "مفتاح ;", desc: { ar: "نهاية العبارة", en: "Statement terminator", fr: "Fin d'instruction" } },
+            { char: ":", key: "Shift + .", desc: { ar: "النقطتان للتبديل والتسميات", en: "Colon for switch/labels", fr: "Deux-points" } },
+            { char: ",", key: "مفتاح ,", desc: { ar: "فاصلة لفصل العناصر", en: "Comma separator", fr: "Virgule séparatrice" } },
+            { char: ".", key: "مفتاح .", desc: { ar: "نقطة للوصول إلى الأعضاء", en: "Member access", fr: "Accès membre" } },
+            { char: "->", key: "- >", desc: { ar: "وصول لعناصر المؤشر", en: "Pointer member access", fr: "Accès membre pointeur" } },
+            { char: "#", key: "Alt Gr + 3", desc: { ar: "توجيهات الماكرو", en: "Preprocessor directive", fr: "Directive préprocesseur" } },
+            
+            // مشغلات البت
+            { char: "&", key: "Shift + 7", desc: { ar: "AND ثنائي البت", en: "Bitwise AND", fr: "ET bit à bit" } },
+            { char: "|", key: "Alt Gr + 6", desc: { ar: "OR ثنائي البت", en: "Bitwise OR", fr: "OU bit à bit" } },
+            { char: "^", key: "Alt Gr + 9", desc: { ar: "XOR ثنائي البت", en: "Bitwise XOR", fr: "XOR bit à bit" } },
+            { char: "~", key: "Alt Gr + 2", desc: { ar: "NOT ثنائي البت", en: "Bitwise NOT", fr: "NON bit à bit" } },
+            { char: "<<", key: "Shift + , Shift + ,", desc: { ar: "تحويل لليسار", en: "Left shift", fr: "Décalage à gauche" } },
+            { char: ">>", key: "Shift + . Shift + .", desc: { ar: "تحويل لليمين", en: "Right shift", fr: "Décalage à droite" } }
+        ];
+
+        const shortcuts = [
+            { keys: "F9", desc: { ar: "ترجمة وتشغيل البرنامج", en: "Build and run program", fr: "Compiler et exécuter" } },
+            { keys: "Ctrl + F9", desc: { ar: "ترجمة فقط بدون تشغيل", en: "Build without running", fr: "Compiler sans exécuter" } },
+            { keys: "F8", desc: { ar: "الخطوة التالية في التصحيح", en: "Step over in debugger", fr: "Pas à pas par dessus" } },
+            { keys: "Ctrl + F8", desc: { ar: "إضافة/إزالة نقطة توقف", en: "Toggle breakpoint", fr: "Basculer point d'arrêt" } },
+            { keys: "Ctrl + Shift + N", desc: { ar: "إنشاء ملف C/C++ جديد", en: "Create new C/C++ file", fr: "Créer nouveau fichier" } },
+            { keys: "Ctrl + O", desc: { ar: "فتح ملف موجود", en: "Open existing file", fr: "Ouvrir fichier" } },
+            { keys: "Ctrl + S", desc: { ar: "حفظ الملف الحالي", en: "Save current file", fr: "Enregistrer fichier" } },
+            { keys: "Ctrl + /", desc: { ar: "تعليق/إلغاء تعليق السطر", en: "Comment/uncomment line", fr: "Commenter/décommenter" } },
+            { keys: "Ctrl + Z", desc: { ar: "تراجع عن التعديل", en: "Undo", fr: "Annuler" } },
+            { keys: "Ctrl + Y", desc: { ar: "إعادة التعديل", en: "Redo", fr: "Rétablir" } },
+            { keys: "Ctrl + F", desc: { ar: "بحث عن نص", en: "Find text", fr: "Rechercher texte" } },
+            { keys: "Ctrl + H", desc: { ar: "استبدال نص", en: "Replace text", fr: "Remplacer texte" } },
+            { keys: "Ctrl + D", desc: { ar: "نسخ السطر الحالي", en: "Duplicate line", fr: "Dupliquer ligne" } },
+            { keys: "Ctrl + L", desc: { ar: "حذف السطر الحالي", en: "Delete line", fr: "Supprimer ligne" } },
+            { keys: "Alt + F8", desc: { ar: "إعادة تنسيق الكود", en: "Reformat code", fr: "Reformater code" } }
+        ];
+
+        const advancedTips = [
+            { text: { ar: "استخدم التعليقات لشرح الكود المعقد", en: "Use comments to explain complex code", fr: "Utilisez des commentaires pour expliquer le code complexe" } },
+            { text: { ar: "اختر أسماء متغيرات توضح الغرض منها", en: "Choose variable names that indicate purpose", fr: "Choisissez des noms de variables clairs" } },
+            { text: { ar: "قسم الكود الطويل إلى دوال صغيرة", en: "Break long code into small functions", fr: "Divisez le code long en petites fonctions" } },
+            { text: { ar: "اختبر كل دالة على حدة قبل التكامل", en: "Test each function separately before integration", fr: "Testez chaque fonction séparément" } }
+        ];
+
+        const hints = [
+            { ar: "انقر على أي رمز لعرض شرحه - يمكنك نسخ الرموز بسهولة!", en: "Click any symbol to see details - you can easily copy symbols!", fr: "Cliquez sur un symbole pour voir les détails - vous pouvez copier facilement!" },
+            { ar: "استخدم F9 لتشغيل البرنامج بسرعة في Code::Blocks", en: "Use F9 to quickly run your program in Code::Blocks", fr: "Utilisez F9 pour exécuter rapidement votre programme dans Code::Blocks" },
+            { ar: "استخدم Ctrl+/ لتعليق أو إلغاء تعليق الأسطر", en: "Use Ctrl+/ to comment or uncomment lines", fr: "Utilisez Ctrl+/ pour commenter ou décommenter des lignes" }
+        ];
 
         // =========== الترجمات ===========
         const translations = {
             "page-title": {
-                ar: "موسوعة رموز واختصارات C و Code::Blocks",
-                en: "C & Code::Blocks Symbols & Shortcuts Encyclopedia",
-                fr: "Encyclopédie des Symboles et Raccourcis C & Code::Blocks"
+                ar: "رموز واختصارات C و Code::Blocks",
+                en: "C & Code::Blocks Symbols & Shortcuts",
+                fr: "Symboles et Raccourcis C & Code::Blocks"
             },
             "subtitle": {
-                ar: "كل ما تحتاجه للبرمجة بلغة C في مكان واحد - رموز، اختصارات، نصائح وتأثيرات تفاعلية",
-                en: "Everything you need for C programming in one place - symbols, shortcuts, tips, and interactive effects",
-                fr: "Tout ce dont vous avez besoin pour programmer en C au même endroit - symboles, raccourcis, conseils et effets interactifs"
+                ar: "كل ما تحتاجه للبرمجة بلغة C في مكان واحد",
+                en: "Everything you need for C programming in one place",
+                fr: "Tout ce dont vous avez besoin pour programmer en C au même endroit"
             },
             "symbols": {
                 ar: "الرموز الأساسية في لغة C",
                 en: "Essential C Language Symbols",
                 fr: "Symboles Essentiels du Langage C"
             },
-            "symbols-subtitle": {
-                ar: "تعرف على جميع الرموز المستخدمة في لغة C ووظيفة كل رمز",
-                en: "Learn all symbols used in C language and each symbol's function",
-                fr: "Apprenez tous les symboles utilisés en C et la fonction de chaque symbole"
-            },
             "shortcuts": {
-                ar: "اختصارات Code::Blocks المتقدمة",
-                en: "Advanced Code::Blocks Shortcuts",
-                fr: "Raccourcis Avancés Code::Blocks"
-            },
-            "shortcuts-subtitle": {
-                ar: "اختصر وقتك وزد إنتاجيتك مع هذه الاختصارات",
-                en: "Save time and increase productivity with these shortcuts",
-                fr: "Gagnez du temps et augmentez votre productivité avec ces raccourcis"
+                ar: "اختصارات Code::Blocks",
+                en: "Code::Blocks Shortcuts",
+                fr: "Raccourcis Code::Blocks"
             },
             "advanced-tips": {
-                ar: "نصائح متقدمة للمبرمجين",
-                en: "Advanced Tips for Programmers",
-                fr: "Conseils Avancés pour Programmeurs"
+                ar: "نصائح للمبرمجين",
+                en: "Tips for Programmers",
+                fr: "Conseils pour Programmeurs"
             },
             "home": {
                 ar: "الرئيسية",
@@ -1229,9 +1013,9 @@
                 fr: "Symbole copié avec succès!"
             },
             "footer": {
-                ar: "جميع الحقوق محفوظة - تصميم تفاعلي للمبرمجين",
-                en: "All rights reserved - Interactive design for programmers",
-                fr: "Tous droits réservés - Conception interactive pour programmeurs"
+                ar: "جميع الحقوق محفوظة",
+                en: "All rights reserved",
+                fr: "Tous droits réservés"
             }
         };
 
@@ -1273,7 +1057,7 @@
             overlay.classList.remove('active');
             setTimeout(() => {
                 overlay.style.display = "none";
-            }, 400);
+            }, 300);
         }
 
         async function copySymbol() {
@@ -1283,6 +1067,7 @@
                 await navigator.clipboard.writeText(currentSymbolChar);
                 showNotification(translations.copied[currentLang]);
             } catch (err) {
+                // الطريقة القديمة للنسخ
                 const textarea = document.createElement('textarea');
                 textarea.value = currentSymbolChar;
                 textarea.style.position = 'fixed';
@@ -1309,36 +1094,33 @@
         }
 
         function renderSymbols() {
-            const categories = ['arithmetic', 'logical', 'special', 'bitwise'];
-            categories.forEach(category => {
-                const container = document.getElementById(category + 'Symbols');
-                if (!container) return;
+            const container = document.getElementById("symbolsGrid");
+            if (!container) return;
+            
+            container.innerHTML = '';
+            symbols.forEach(symbol => {
+                const card = document.createElement("button");
+                card.className = "symbol-card";
+                card.textContent = symbol.char;
+                card.title = symbol.desc[currentLang];
+                card.setAttribute('aria-label', `${symbol.char}: ${symbol.desc[currentLang]}`);
+                card.setAttribute('tabindex', '0');
                 
-                container.innerHTML = '';
-                data.symbols[category].forEach(symbol => {
-                    const card = document.createElement("button");
-                    card.className = "symbol-card";
-                    card.textContent = symbol.char;
-                    card.title = symbol.desc[currentLang];
-                    card.setAttribute('aria-label', `${symbol.char}: ${symbol.desc[currentLang]}`);
-                    card.setAttribute('tabindex', '0');
-                    
-                    card.addEventListener("click", (e) => {
-                        e.preventDefault();
-                        card.classList.add("clicked");
-                        setTimeout(() => card.classList.remove("clicked"), 800);
-                        showPopup(symbol, symbol.char);
-                    });
-                    
-                    card.addEventListener("keydown", (e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            showPopup(symbol, symbol.char);
-                        }
-                    });
-                    
-                    container.appendChild(card);
+                card.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    card.style.animation = 'symbolClick 0.3s ease';
+                    setTimeout(() => card.style.animation = '', 300);
+                    showPopup(symbol, symbol.char);
                 });
+                
+                card.addEventListener("keydown", (e) => {
+                    if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+                        e.preventDefault();
+                        showPopup(symbol, symbol.char);
+                    }
+                });
+                
+                container.appendChild(card);
             });
         }
 
@@ -1347,7 +1129,7 @@
             if (!container) return;
             
             container.innerHTML = '';
-            data.shortcuts.forEach(shortcut => {
+            shortcuts.forEach(shortcut => {
                 const card = document.createElement("div");
                 card.className = "shortcut-card";
                 card.innerHTML = `
@@ -1358,33 +1140,23 @@
             });
         }
 
-        function renderTips() {
-            const container = document.getElementById("tipsSlider");
-            if (!container) return;
-            
-            container.innerHTML = '';
-            data.tips.forEach(tip => {
-                const card = document.createElement("div");
-                card.className = "tip-card";
-                card.innerHTML = `
-                    <div class="tip-icon">${tip.icon}</div>
-                    <div class="tip-text">${escapeHTML(tip.text[currentLang])}</div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
         function renderAdvancedTips() {
             const container = document.getElementById("advancedTips");
             if (!container) return;
             
             container.innerHTML = '';
-            data.advancedTips.forEach(tip => {
+            advancedTips.forEach(tip => {
                 const item = document.createElement("div");
                 item.className = "tip-item";
                 item.textContent = tip.text[currentLang];
                 container.appendChild(item);
             });
+        }
+
+        function updateHint() {
+            const hintText = document.getElementById("hintText");
+            const randomHint = hints[Math.floor(Math.random() * hints.length)];
+            hintText.textContent = randomHint[currentLang];
         }
 
         function setLang(lang) {
@@ -1393,11 +1165,13 @@
             document.getElementById("html-root").setAttribute("lang", lang);
             document.getElementById("html-root").setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
 
+            // تحديث أزرار اللغة
             document.querySelectorAll(".lang-btn").forEach(btn => {
                 btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
                 btn.setAttribute('aria-pressed', btn.getAttribute("data-lang") === lang);
             });
 
+            // تحديث النصوص المترجمة
             document.querySelectorAll("[data-key]").forEach(el => {
                 const key = el.getAttribute("data-key");
                 if (translations[key] && translations[key][lang] !== undefined) {
@@ -1405,46 +1179,50 @@
                 }
             });
 
+            // تحديث النصوص الديناميكية
+            document.getElementById("copyBtnText").textContent = translations.copy[currentLang];
+            document.getElementById("closeBtnText").textContent = translations.close[currentLang];
+
+            // إعادة عرض المحتوى
             renderSymbols();
             renderShortcuts();
-            renderTips();
             renderAdvancedTips();
+            updateHint();
         }
 
         // =========== التهيئة ===========
         document.addEventListener("DOMContentLoaded", () => {
+            // تعيين اللغة الافتراضية
             setLang("ar");
             
+            // إضافة مستمع التمرير
             window.addEventListener("scroll", updateScrollProgress);
             
+            // إضافة مستمعي الأزرار
             document.getElementById("copyBtn").addEventListener("click", copySymbol);
             document.getElementById("closeBtn").addEventListener("click", closePopup);
             
+            // إغلاق البوب أب بالزر Escape
             document.addEventListener("keydown", (e) => {
                 if (e.key === "Escape" && isPopupOpen) {
                     closePopup();
                 }
             });
 
-            // إضافة تأثيرات للأشكال العائمة
-            const shapes = document.querySelectorAll('.shape');
-            shapes.forEach((shape, index) => {
-                shape.style.animationDelay = `${index * 2}s`;
-            });
+            // تحديث التلميحات كل 10 ثواني
+            setInterval(updateHint, 10000);
 
-            // تأثيرات تفاعلية إضافية
-            document.querySelectorAll('.symbol-card').forEach(card => {
-                card.addEventListener('mouseenter', () => {
-                    card.style.transform = 'scale(1.1) rotate(5deg)';
-                });
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'scale(1) rotate(0deg)';
-                });
-            });
+            // تحسين اللمس على الهواتف
+            if ('ontouchstart' in window) {
+                document.body.classList.add('touch-device');
+            }
         });
 
         // =========== حماية إضافية ===========
-        Object.freeze(data);
+        Object.freeze(symbols);
+        Object.freeze(shortcuts);
+        Object.freeze(advancedTips);
+        Object.freeze(hints);
         Object.freeze(translations);
     </script>
 </body>
