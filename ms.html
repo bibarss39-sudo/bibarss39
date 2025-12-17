@@ -823,7 +823,7 @@
     </footer>
 
     <script>
-        // بيانات الدروس
+        // بيانات الدروس الكاملة
         const lessons = [
             {
                 id: 1,
@@ -1124,7 +1124,7 @@
                 document.querySelector('.home-link span').textContent = 'Home';
             }
             
-            // تحديث النصوص العامة (لا تشمل عناوين الدروس)
+            // تحديث النصوص العامة
             document.querySelectorAll('[data-ar]:not(.lesson-title):not(.lesson-title *)').forEach(element => {
                 if (lang === 'ar') {
                     element.textContent = element.getAttribute('data-ar');
@@ -1144,12 +1144,12 @@
                 }
             });
             
-            // تحديث أوصاف الدروس فقط
+            // تحديث أوصاف الدروس
             updateLessonsContent(lang);
             localStorage.setItem('preferredLanguage', lang);
         }
 
-        // تحديث محتوى الدروس (الأوصاف فقط)
+        // تحديث محتوى الدروس
         function updateLessonsContent(lang) {
             const lessonCards = document.querySelectorAll('.lesson-card');
             
@@ -1159,13 +1159,23 @@
                 
                 if (lesson) {
                     const descriptionElement = card.querySelector('.lesson-description');
+                    const youtubeText = card.querySelector('.link-text span');
                     
                     if (lang === 'ar') {
                         descriptionElement.textContent = lesson.descriptionAr;
+                        if (youtubeText && youtubeText.hasAttribute('data-ar')) {
+                            youtubeText.textContent = youtubeText.getAttribute('data-ar');
+                        }
                     } else if (lang === 'fr') {
                         descriptionElement.textContent = lesson.descriptionFr;
+                        if (youtubeText && youtubeText.hasAttribute('data-fr')) {
+                            youtubeText.textContent = youtubeText.getAttribute('data-fr');
+                        }
                     } else if (lang === 'en') {
                         descriptionElement.textContent = lesson.descriptionEn;
+                        if (youtubeText && youtubeText.hasAttribute('data-en')) {
+                            youtubeText.textContent = youtubeText.getAttribute('data-en');
+                        }
                     }
                 }
             });
@@ -1202,7 +1212,7 @@
                             <span class="description-label">شرح الدرس:</span>
                             ${lesson.descriptionAr}
                         </div>
-                        <a href="${lesson.link}" target="_blank" class="lesson-link">
+                        <a href="${lesson.link}" target="_blank" rel="noopener noreferrer" class="lesson-link">
                             <div class="link-text">
                                 <i class="fab fa-youtube youtube-icon"></i>
                                 <span data-ar="مشاهدة على يوتيوب" data-fr="Voir sur YouTube" data-en="Watch on YouTube">مشاهدة على يوتيوب</span>

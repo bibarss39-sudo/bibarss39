@@ -11,26 +11,21 @@
     <meta property="og:site_name" content="Algorithmes & C">
     <meta name="description" content="موسوعة شاملة لرموز لغة C واختصارات Code::Blocks للمبرمجين">
     
-    <!-- Font Awesome باستخدام CDN موثوق -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" crossorigin="anonymous">
 
     <style>
         :root {
-            /* الألوان الأساسية */
             --bg-primary: #0a0e17;
             --bg-secondary: #121826;
             --bg-gradient: linear-gradient(135deg, #0a0e17 0%, #121826 100%);
             
-            /* ألوان البطاقات */
             --card-bg: rgba(20, 25, 40, 0.95);
             --card-bg-hover: rgba(30, 40, 65, 0.98);
             --card-border: rgba(59, 130, 246, 0.3);
             --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
             
-            /* ألوان التمييز */
             --accent-primary: #3b82f6;
             --accent-secondary: #8b5cf6;
             --accent-tertiary: #0ea5e9;
@@ -38,22 +33,18 @@
             --warning: #f59e0b;
             --danger: #ef4444;
             
-            /* تدرجات اللون */
             --blue-gradient: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
             --blue-gradient-light: linear-gradient(135deg, var(--accent-tertiary), #60a5fa);
             
-            /* النصوص */
             --text-primary: #f8fafc;
             --text-secondary: #cbd5e1;
             --text-muted: #94a3b8;
             --text-code: #7dd3fc;
             
-            /* الظلال */
             --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
             --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.35);
             --shadow-lg: 0 15px 40px rgba(59, 130, 246, 0.2);
             
-            /* التحولات */
             --transition-fast: all 0.2s ease;
             --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -81,7 +72,6 @@
             font-size: 16px;
         }
 
-        /* إصلاح نهائي للأيقونات */
         .fas, .fab, .fa {
             font-family: "Font Awesome 6 Free" !important;
             font-weight: 900 !important;
@@ -95,7 +85,6 @@
         .fa-times:before { content: "\f00d"; }
         .fa-check-circle:before { content: "\f058"; }
 
-        /* شريط التقدم */
         .scroll-progress {
             position: fixed;
             top: 0;
@@ -108,7 +97,6 @@
             box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
         }
 
-        /* شريط التنقل العلوي - محسن للهواتف */
         .top-bar {
             display: flex;
             justify-content: space-between;
@@ -188,14 +176,12 @@
             background: rgba(255, 255, 255, 0.1);
         }
 
-        /* المحتوى الرئيسي */
         .main-content {
             padding: 20px 16px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        /* العنوان الرئيسي */
         .hero-section {
             text-align: center;
             padding: 24px 0 32px;
@@ -220,7 +206,6 @@
             margin: 0 auto;
         }
 
-        /* التلميحات */
         .hint-container {
             background: rgba(59, 130, 246, 0.1);
             border: 1px solid rgba(59, 130, 246, 0.3);
@@ -245,7 +230,6 @@
             flex: 1;
         }
 
-        /* قسم الرموز */
         .section {
             margin-bottom: 40px;
         }
@@ -282,7 +266,6 @@
             flex: 1;
         }
 
-        /* شبكة الرموز - محسنة للهواتف */
         .symbols-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
@@ -492,7 +475,6 @@
             color: white;
         }
 
-        /* إشعار النسخ */
         .copy-notification {
             position: fixed;
             bottom: 20px;
@@ -519,7 +501,6 @@
             opacity: 1;
         }
 
-        /* النصائح المتقدمة */
         .advanced-tips {
             background: rgba(59, 130, 246, 0.05);
             border-radius: 12px;
@@ -551,7 +532,6 @@
             color: var(--text-secondary);
         }
 
-        /* التذييل */
         .footer {
             text-align: center;
             padding: 24px 16px;
@@ -566,7 +546,6 @@
             margin-bottom: 8px;
         }
 
-        /* الأنيميشن */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -590,7 +569,6 @@
             }
         }
 
-        /* تحسينات للهواتف */
         @media (max-width: 768px) {
             .top-bar {
                 padding: 10px 12px;
@@ -725,7 +703,6 @@
             }
         }
 
-        /* تحسينات للوصول */
         @media (prefers-reduced-motion: reduce) {
             * {
                 animation-duration: 0.01ms !important;
@@ -746,7 +723,6 @@
             border: 0;
         }
 
-        /* تحسين اللمس على الهواتف */
         @media (hover: none) {
             .symbol-card:hover,
             .shortcut-card:hover,
@@ -765,10 +741,8 @@
 </head>
 
 <body>
-    <!-- شريط التقدم -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
-    <!-- شريط التنقل -->
     <div class="top-bar">
         <a href="asasi.html" class="home-btn">
             <i class="fas fa-home"></i>
@@ -790,21 +764,17 @@
         </div>
     </div>
 
-    <!-- المحتوى الرئيسي -->
     <main class="main-content">
-        <!-- القسم الرئيسي -->
         <section class="hero-section">
             <h1 class="main-title lang-key" data-key="page-title">رموز واختصارات C و Code::Blocks</h1>
             <p class="subtitle lang-key" data-key="subtitle">كل ما تحتاجه للبرمجة بلغة C في مكان واحد</p>
         </section>
 
-        <!-- التلميحات -->
         <div class="hint-container">
             <div class="hint-icon">💡</div>
             <div class="hint-text" id="hintText">انقر على أي رمز لعرض شرحه - يمكنك نسخ الرموز بسهولة!</div>
         </div>
 
-        <!-- قسم الرموز الأساسية -->
         <section class="section">
             <div class="section-header">
                 <div class="section-icon">
@@ -813,11 +783,9 @@
                 <h2 class="section-title lang-key" data-key="symbols">الرموز الأساسية في لغة C</h2>
             </div>
             <div class="symbols-grid" id="symbolsGrid">
-                <!-- سيتم ملؤها جافاسكريبت -->
             </div>
         </section>
 
-        <!-- قسم الاختصارات -->
         <section class="section">
             <div class="section-header">
                 <div class="section-icon">
@@ -826,22 +794,18 @@
                 <h2 class="section-title lang-key" data-key="shortcuts">اختصارات Code::Blocks</h2>
             </div>
             <div class="shortcuts-list" id="shortcutsList">
-                <!-- سيتم ملؤها جافاسكريبت -->
             </div>
         </section>
 
-        <!-- النصائح المتقدمة -->
         <section class="section">
             <div class="advanced-tips">
                 <h3><i class="fas fa-lightbulb"></i> <span class="lang-key" data-key="advanced-tips">نصائح للمبرمجين</span></h3>
                 <div class="tip-list" id="advancedTips">
-                    <!-- سيتم ملؤها جافاسكريبت -->
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- نافذة البوب أب -->
     <div class="overlay" id="overlay" onclick="event.target === this && closePopup()">
         <div class="popup">
             <div class="popup-symbol" id="pSymbol"></div>
@@ -860,20 +824,17 @@
         </div>
     </div>
 
-    <!-- إشعار النسخ -->
     <div class="copy-notification" id="copyNotification" role="alert" aria-live="assertive">
         <i class="fas fa-check-circle"></i>
         <span id="notificationText">تم نسخ الرمز بنجاح!</span>
     </div>
 
-    <!-- التذييل -->
     <footer class="footer">
         <p>© 2024 رموز واختصارات C و Code::Blocks</p>
         <p class="lang-key" data-key="footer">جميع الحقوق محفوظة</p>
     </footer>
 
     <script>
-        // =========== الحماية من XSS ===========
         const escapeHTML = (str) => {
             if (!str) return '';
             const div = document.createElement('div');
@@ -881,9 +842,7 @@
             return div.innerHTML;
         };
 
-        // =========== البيانات ===========
         const symbols = [
-            // المشغلات الحسابية
             { char: "+", key: "مفتاح +", desc: { ar: "عملية الجمع أو الموجب الأحادي", en: "Addition or unary plus", fr: "Addition ou plus unaire" } },
             { char: "-", key: "مفتاح -", desc: { ar: "عملية الطرح أو السالب الأحادي", en: "Subtraction or unary minus", fr: "Soustraction ou moins unaire" } },
             { char: "*", key: "Shift + 8", desc: { ar: "عملية الضرب أو تفريغ المؤشر", en: "Multiplication or pointer dereference", fr: "Multiplication ou déréférencement" } },
@@ -893,13 +852,11 @@
             { char: "--", key: "- -", desc: { ar: "نقصان بمقدار واحد", en: "Decrement by one", fr: "Décrémentation" } },
             { char: "=", key: "مفتاح =", desc: { ar: "عامل الإسناد", en: "Assignment operator", fr: "Opérateur d'affectation" } },
             
-            // المشغلات المركبة
             { char: "+=", key: "+ =", desc: { ar: "جمع وإسناد", en: "Add and assign", fr: "Addition et affectation" } },
             { char: "-=", key: "- =", desc: { ar: "طرح وإسناد", en: "Subtract and assign", fr: "Soustraction et affectation" } },
             { char: "*=", key: "* =", desc: { ar: "ضرب وإسناد", en: "Multiply and assign", fr: "Multiplication et affectation" } },
             { char: "/=", key: "/ =", desc: { ar: "قسمة وإسناد", en: "Divide and assign", fr: "Division et affectation" } },
             
-            // المشغلات المنطقية
             { char: "==", key: "Shift + =", desc: { ar: "المساواة", en: "Equality comparison", fr: "Égalité" } },
             { char: "!=", key: "Alt Gr + Shift + =", desc: { ar: "عدم المساواة", en: "Inequality", fr: "Différence" } },
             { char: "<", key: "Shift + ,", desc: { ar: "أصغر من", en: "Less than", fr: "Inférieur à" } },
@@ -910,7 +867,6 @@
             { char: "||", key: "Alt Gr + 6 Alt Gr + 6", desc: { ar: "OR المنطقي", en: "Logical OR", fr: "OU logique" } },
             { char: "!", key: "Shift + 1", desc: { ar: "NOT المنطقي", en: "Logical NOT", fr: "NON logique" } },
             
-            // الرموز الخاصة
             { char: "{", key: "Shift + [", desc: { ar: "بداية كتلة تعليمات", en: "Start of block", fr: "Début de bloc" } },
             { char: "}", key: "Shift + ]", desc: { ar: "نهاية كتلة تعليمات", en: "End of block", fr: "Fin de bloc" } },
             { char: "(", key: "Shift + 9", desc: { ar: "قوس فتح للتعبيرات", en: "Opening parenthesis", fr: "Parenthèse ouvrante" } },
@@ -924,7 +880,6 @@
             { char: "->", key: "- >", desc: { ar: "وصول لعناصر المؤشر", en: "Pointer member access", fr: "Accès membre pointeur" } },
             { char: "#", key: "Alt Gr + 3", desc: { ar: "توجيهات الماكرو", en: "Preprocessor directive", fr: "Directive préprocesseur" } },
             
-            // مشغلات البت
             { char: "&", key: "Shift + 7", desc: { ar: "AND ثنائي البت", en: "Bitwise AND", fr: "ET bit à bit" } },
             { char: "|", key: "Alt Gr + 6", desc: { ar: "OR ثنائي البت", en: "Bitwise OR", fr: "OU bit à bit" } },
             { char: "^", key: "Alt Gr + 9", desc: { ar: "XOR ثنائي البت", en: "Bitwise XOR", fr: "XOR bit à bit" } },
@@ -964,7 +919,6 @@
             { ar: "استخدم Ctrl+/ لتعليق أو إلغاء تعليق الأسطر", en: "Use Ctrl+/ to comment or uncomment lines", fr: "Utilisez Ctrl+/ pour commenter ou décommenter des lignes" }
         ];
 
-        // =========== الترجمات ===========
         const translations = {
             "page-title": {
                 ar: "رموز واختصارات C و Code::Blocks",
@@ -1018,13 +972,11 @@
             }
         };
 
-        // =========== الحالة ===========
         let currentLang = "ar";
         let currentSymbol = null;
         let currentSymbolChar = "";
         let isPopupOpen = false;
 
-        // =========== الدوال الأساسية ===========
         function updateScrollProgress() {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -1066,7 +1018,6 @@
                 await navigator.clipboard.writeText(currentSymbolChar);
                 showNotification(translations.copied[currentLang]);
             } catch (err) {
-                // الطريقة القديمة للنسخ
                 const textarea = document.createElement('textarea');
                 textarea.value = currentSymbolChar;
                 textarea.style.position = 'fixed';
@@ -1164,13 +1115,11 @@
             document.getElementById("html-root").setAttribute("lang", lang);
             document.getElementById("html-root").setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
 
-            // تحديث أزرار اللغة
             document.querySelectorAll(".lang-btn").forEach(btn => {
                 btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
                 btn.setAttribute('aria-pressed', btn.getAttribute("data-lang") === lang);
             });
 
-            // تحديث النصوص المترجمة
             document.querySelectorAll("[data-key]").forEach(el => {
                 const key = el.getAttribute("data-key");
                 if (translations[key] && translations[key][lang] !== undefined) {
@@ -1178,46 +1127,36 @@
                 }
             });
 
-            // تحديث النصوص الديناميكية
             document.getElementById("copyBtnText").textContent = translations.copy[currentLang];
             document.getElementById("closeBtnText").textContent = translations.close[currentLang];
 
-            // إعادة عرض المحتوى
             renderSymbols();
             renderShortcuts();
             renderAdvancedTips();
             updateHint();
         }
 
-        // =========== التهيئة ===========
         document.addEventListener("DOMContentLoaded", () => {
-            // تعيين اللغة الافتراضية
             setLang("ar");
             
-            // إضافة مستمع التمرير
             window.addEventListener("scroll", updateScrollProgress);
             
-            // إضافة مستمعي الأزرار
             document.getElementById("copyBtn").addEventListener("click", copySymbol);
             document.getElementById("closeBtn").addEventListener("click", closePopup);
             
-            // إغلاق البوب أب بالزر Escape
             document.addEventListener("keydown", (e) => {
                 if (e.key === "Escape" && isPopupOpen) {
                     closePopup();
                 }
             });
 
-            // تحديث التلميحات كل 10 ثواني
             setInterval(updateHint, 10000);
 
-            // تحسين اللمس على الهواتف
             if ('ontouchstart' in window) {
                 document.body.classList.add('touch-device');
             }
         });
 
-        // =========== حماية إضافية ===========
         Object.freeze(symbols);
         Object.freeze(shortcuts);
         Object.freeze(advancedTips);
