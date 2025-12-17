@@ -1,28 +1,39 @@
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' 'unsafe-eval';
+        style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline';
+        font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+        img-src 'self' data:;
+        connect-src 'self';
+        frame-ancestors 'none';
+        base-uri 'self';
+        form-action 'self';
+        object-src 'none';
+    ">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
     <meta property="og:site_name" content="Algorithmes & C">
-
     <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Algorithmes & C",
-  "alternateName": "تعلم لغة C والخوارزميات",
-  "url": "https://bibarss39-sudo.github.io/bibarss39/"
-}
-</script>
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Algorithmes & C",
+      "alternateName": "تعلم لغة C والخوارزميات",
+      "url": "https://bibarss39-sudo.github.io/bibarss39/"
+    }
+    </script>
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contactez-moi</title>
-   <link rel="icon" type="image/png" href="favicon.png">
-
+    <link rel="icon" type="image/png" href="favicon.png">
     
-    <!-- خط Poppins أنيق -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     
     <style>
@@ -39,6 +50,8 @@
             --shadow-medium: rgba(0, 234, 255, 0.35);
             --shadow-heavy: rgba(10, 255, 157, 0.5);
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --security-color: #10b981;
+            --security-shadow: rgba(16, 185, 129, 0.3);
         }
 
         * {
@@ -60,7 +73,32 @@
             position: relative;
         }
 
-        /* مؤشر التمرير العلوي */
+        /* فاصل أمني إضافي */
+        .security-notice {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 0.7rem;
+            color: var(--text-light);
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            display: none;
+            animation: pulse-security 3s infinite;
+        }
+
+        @keyframes pulse-security {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+            }
+        }
+
         .scroll-progress {
             position: fixed;
             top: 0;
@@ -72,7 +110,6 @@
             transition: width 0.3s ease;
         }
 
-        /* تأثير الضوء الخلفي */
         .light-effect {
             position: fixed;
             top: 0;
@@ -185,6 +222,7 @@
             animation: cardSlide 0.6s ease-out forwards;
             opacity: 0;
             transform: translateY(20px);
+            cursor: pointer;
         }
 
         .contact-card:nth-child(1) { animation-delay: 0.2s; }
@@ -382,7 +420,6 @@
             background: rgba(14, 165, 233, 0.2);
         }
 
-        /* إشعار النسخ */
         .copy-notification {
             position: fixed;
             bottom: 30px;
@@ -404,7 +441,34 @@
             opacity: 1;
         }
 
-        /* الرسوم المتحركة */
+        /* رسالة تحقق الإدخال */
+        .input-validation {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(239, 68, 68, 0.9);
+            color: white;
+            padding: 12px 18px;
+            border-radius: 10px;
+            z-index: 10000;
+            font-weight: 700;
+            backdrop-filter: blur(10px);
+            border: 2px solid white;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
         @keyframes containerAppear {
             from {
                 opacity: 0;
@@ -445,12 +509,18 @@
             }
         }
 
-        /* الهاتف */
         @media (max-width: 768px) {
             .container {
                 padding: 40px 24px;
                 width: 95%;
                 max-width: 500px;
+            }
+            
+            .security-notice {
+                top: 10px;
+                left: 10px;
+                font-size: 0.65rem;
+                padding: 6px 10px;
             }
             
             h1 {
@@ -510,7 +580,6 @@
             }
         }
 
-        /* تحسينات للوصول */
         .home-btn:focus-visible,
         .contact-card:focus-within {
             outline: 3px solid var(--secondary);
@@ -520,11 +589,10 @@
 </head>
 <body>
 
-    <!-- مؤشر التمرير -->
     <div class="scroll-progress" id="scrollProgress"></div>
-    
-    <!-- تأثير الضوء الخلفي -->
     <div class="light-effect"></div>
+    <div class="security-notice" id="securityNotice">🔒 Page sécurisée</div>
+    <div class="input-validation" id="inputValidation"></div>
 
     <div class="container">
         <div class="header">
@@ -536,14 +604,14 @@
         </div>
 
         <div class="contact-grid">
-            <div class="contact-card" data-copy="https://www.facebook.com/share/1AQqjJ2PhS/">
+            <div class="contact-card" data-copy="https://www.facebook.com/share/1AQqjJ2PhS/" data-type="facebook">
                 <div class="icon-wrapper">
                     <i class="fab fa-facebook-f"></i>
                 </div>
                 <div class="contact-details">
                     <div class="contact-label">Facebook</div>
                     <div class="contact-value">
-                        <a href="https://www.facebook.com/share/1AQqjJ2PhS/" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.facebook.com/share/1AQqjJ2PhS/" target="_blank" rel="noopener noreferrer" id="facebookLink">
                             Bibars Horri
                             <i class="fas fa-external-link-alt" style="font-size: 14px;"></i>
                         </a>
@@ -551,14 +619,14 @@
                 </div>
             </div>
 
-            <div class="contact-card" data-copy="bibarss39@gmail.com">
+            <div class="contact-card" data-copy="bibarss39@gmail.com" data-type="email">
                 <div class="icon-wrapper">
                     <i class="fas fa-envelope"></i>
                 </div>
                 <div class="contact-details">
                     <div class="contact-label">Email</div>
                     <div class="contact-value">
-                        <a href="mailto:bibarss39@gmail.com">
+                        <a href="mailto:bibarss39@gmail.com" id="emailLink">
                             bibarss39@gmail.com
                             <i class="fas fa-paper-plane" style="font-size: 14px;"></i>
                         </a>
@@ -568,7 +636,7 @@
         </div>
 
         <div class="btn-group">
-            <a href="asasi.html" class="home-btn">
+            <a href="asasi.html" class="home-btn" id="homeBtn">
                 <i class="fas fa-home"></i>
                 Retour à l'accueil
             </a>
@@ -580,13 +648,101 @@
         </div>
     </div>
 
-    <!-- إشعار النسخ -->
     <div class="copy-notification" id="copyNotification">
         <i class="fas fa-check-circle"></i> Copié dans le presse-papier !
     </div>
 
     <script>
-        // تحديث مؤشر التمرير
+        const SecurityUtils = {
+            sanitizeInput: function(input) {
+                if (!input) return '';
+                
+                const dangerousPatterns = [
+                    /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
+                    /javascript:/gi,
+                    /on\w+\s*=/gi,
+                    /data:/gi,
+                    /vbscript:/gi,
+                    /expression\s*\(/gi,
+                    /eval\s*\(/gi
+                ];
+                
+                let sanitized = input.toString();
+                dangerousPatterns.forEach(pattern => {
+                    sanitized = sanitized.replace(pattern, '');
+                });
+                
+                const escapeMap = {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#x27;',
+                    '/': '&#x2F;'
+                };
+                
+                return sanitized.replace(/[&<>"'/]/g, char => escapeMap[char] || char);
+            },
+            
+            validateURL: function(url) {
+                if (!url) return false;
+                
+                const allowedProtocols = ['http:', 'https:', 'mailto:', 'tel:'];
+                const allowedDomains = [
+                    window.location.hostname,
+                    'bibarss39-sudo.github.io',
+                    'facebook.com',
+                    'www.facebook.com'
+                ];
+                
+                try {
+                    const urlObj = new URL(url, window.location.origin);
+                    
+                    if (!allowedProtocols.includes(urlObj.protocol)) {
+                        return false;
+                    }
+                    
+                    const isAllowed = allowedDomains.some(domain => 
+                        urlObj.hostname === domain || urlObj.hostname.endsWith('.' + domain)
+                    );
+                    
+                    return isAllowed;
+                } catch (e) {
+                    if (url.startsWith('/') || url.startsWith('./') || url.startsWith('../')) {
+                        return true;
+                    }
+                    return false;
+                }
+            },
+            
+            disableDangerousFunctions: function() {
+                try {
+                    Object.freeze(Object.prototype);
+                } catch (e) {
+                    console.log('Ne peut pas geler Object.prototype:', e);
+                }
+            },
+            
+            logSecurityEvent: function(event, details) {
+                console.log(`🔒 ${event}:`, details);
+            },
+            
+            showSecurityWarning: function(message, type = 'warning') {
+                const validationDiv = document.getElementById('inputValidation');
+                if (!validationDiv) return;
+                
+                validationDiv.textContent = message;
+                validationDiv.style.display = 'block';
+                validationDiv.style.background = type === 'warning' 
+                    ? 'rgba(239, 68, 68, 0.9)' 
+                    : 'rgba(16, 185, 129, 0.9)';
+                
+                setTimeout(() => {
+                    validationDiv.style.display = 'none';
+                }, 5000);
+            }
+        };
+
         function updateScrollProgress() {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -594,8 +750,25 @@
             document.getElementById("scrollProgress").style.width = scrolled + "%";
         }
 
-        // وظيفة نسخ النص
         function copyToClipboard(text) {
+            const sanitizedText = SecurityUtils.sanitizeInput(text);
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(sanitizedText)
+                    .then(() => {
+                        showCopyNotification('Copié avec succès !');
+                        SecurityUtils.logSecurityEvent('Texte copié via Clipboard API', sanitizedText);
+                    })
+                    .catch(err => {
+                        console.error('Erreur Clipboard API:', err);
+                        fallbackCopyText(sanitizedText);
+                    });
+            } else {
+                fallbackCopyText(sanitizedText);
+            }
+        }
+
+        function fallbackCopyText(text) {
             const textarea = document.createElement('textarea');
             textarea.value = text;
             textarea.style.position = 'fixed';
@@ -606,17 +779,18 @@
             try {
                 const successful = document.execCommand('copy');
                 showCopyNotification(successful ? 'Copié avec succès !' : 'Échec de la copie');
+                SecurityUtils.logSecurityEvent('Texte copié via fallback', { text: text.substring(0, 50), success: successful });
             } catch (err) {
                 showCopyNotification('Erreur lors de la copie');
+                SecurityUtils.logSecurityEvent('Erreur de copie', err);
             }
             
             document.body.removeChild(textarea);
         }
 
-        // عرض إشعار النسخ
         function showCopyNotification(message) {
             const notification = document.getElementById('copyNotification');
-            notification.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+            notification.innerHTML = `<i class="fas fa-check-circle"></i> ${SecurityUtils.sanitizeInput(message)}`;
             notification.classList.add('show');
             
             setTimeout(() => {
@@ -624,22 +798,64 @@
             }, 2000);
         }
 
-        // إضافة تأثيرات عند تحميل الصفحة
+        function validateLinkClick(event, url, linkType) {
+            if (!SecurityUtils.validateURL(url)) {
+                event.preventDefault();
+                SecurityUtils.showSecurityWarning('Lien non autorisé pour des raisons de sécurité', 'warning');
+                SecurityUtils.logSecurityEvent('Lien bloqué', { url, linkType });
+                return false;
+            }
+            return true;
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
-            // إضافة حدث التمرير
-            window.addEventListener('scroll', updateScrollProgress);
+            SecurityUtils.disableDangerousFunctions();
             
-            // تهيئة تحديث التمرير
+            const securityNotice = document.getElementById('securityNotice');
+            setTimeout(() => {
+                securityNotice.style.display = 'block';
+                setTimeout(() => {
+                    securityNotice.style.display = 'none';
+                }, 3000);
+            }, 1000);
+            
+            window.addEventListener('scroll', updateScrollProgress);
             updateScrollProgress();
             
-            // زر نسخ الإيميل
-            document.getElementById('copyEmailBtn').addEventListener('click', () => {
+            const homeBtn = document.getElementById('homeBtn');
+            if (homeBtn) {
+                homeBtn.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (!validateLinkClick(e, href, 'home')) {
+                        return false;
+                    }
+                });
+            }
+            
+            const facebookLink = document.getElementById('facebookLink');
+            if (facebookLink) {
+                facebookLink.addEventListener('click', function(e) {
+                    if (!validateLinkClick(e, this.href, 'facebook')) {
+                        return false;
+                    }
+                });
+            }
+            
+            const emailLink = document.getElementById('emailLink');
+            if (emailLink) {
+                emailLink.addEventListener('click', function(e) {
+                    if (!validateLinkClick(e, this.href, 'email')) {
+                        return false;
+                    }
+                });
+            }
+            
+            document.getElementById('copyEmailBtn').addEventListener('click', function(e) {
+                e.stopPropagation();
                 copyToClipboard('bibarss39@gmail.com');
             });
             
-            // تأثيرات على بطاقات الاتصال
             document.querySelectorAll('.contact-card').forEach(card => {
-                // نسخ عند النقر على البطاقة
                 card.addEventListener('click', (e) => {
                     if (!e.target.closest('a')) {
                         const copyText = card.getAttribute('data-copy');
@@ -650,13 +866,58 @@
                 });
             });
             
-            // إعادة تشغيل الرسوم المتحركة
+            document.querySelectorAll('a').forEach(link => {
+                const href = link.getAttribute('href');
+                if (!SecurityUtils.validateURL(href)) {
+                    SecurityUtils.logSecurityEvent('Lien non sécurisé détecté', href);
+                    link.style.opacity = '0.7';
+                    link.title = 'Vérification du lien...';
+                }
+            });
+            
+            if (window.self !== window.top) {
+                SecurityUtils.logSecurityEvent('Page chargée dans un iframe', window.top.location);
+                
+                try {
+                    if (window.top !== window.self) {
+                        window.top.location = window.self.location;
+                    }
+                } catch (e) {
+                    document.body.innerHTML = '<div style="padding: 20px; text-align: center; color: white;"><h2>⚠️ Alerte de sécurité</h2><p>Cette page a été chargée dans un cadre non autorisé.</p><p>Veuillez ouvrir la page directement dans le navigateur.</p></div>';
+                }
+            }
+            
             const container = document.querySelector('.container');
             container.style.animation = 'none';
             setTimeout(() => {
                 container.style.animation = 'containerAppear 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards';
             }, 50);
+            
+            SecurityUtils.logSecurityEvent('Page de contact chargée', {
+                userAgent: navigator.userAgent,
+                language: navigator.language,
+                referrer: document.referrer
+            });
         });
+
+        function addCSRFToken() {
+            const token = Math.random().toString(36).substring(2) + Date.now().toString(36);
+            try {
+                sessionStorage.setItem('csrf_token', token);
+            } catch (e) {
+                console.log('Ne peut pas stocker le token CSRF:', e);
+            }
+            return token;
+        }
+
+        function verifyCSRFToken(token) {
+            try {
+                const storedToken = sessionStorage.getItem('csrf_token');
+                return token === storedToken;
+            } catch (e) {
+                return false;
+            }
+        }
     </script>
 </body>
 </html>

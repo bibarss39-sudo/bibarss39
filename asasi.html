@@ -1,28 +1,40 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline' 'unsafe-eval';
+        style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline';
+        font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+        img-src 'self' data:;
+        connect-src 'self';
+        frame-ancestors 'none';
+        base-uri 'self';
+        form-action 'self';
+        object-src 'none';
+    ">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    
     <meta property="og:site_name" content="Algorithmes & C">
-
     <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Algorithmes & C",
-  "alternateName": "تعلم لغة C والخوارزميات",
-  "url": "https://bibarss39-sudo.github.io/bibarss39/"
-}
-</script>
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Algorithmes & C",
+      "alternateName": "تعلم لغة C والخوارزميات",
+      "url": "https://bibarss39-sudo.github.io/bibarss39/"
+    }
+    </script>
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>القائمة الرئيسية — C Language</title>
     <link rel="icon" type="image/png" href="favicon.png">
 
-
-    <!-- خط عربي جميل -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <style>
@@ -31,8 +43,8 @@
             --primary-light: #00eaff;
             --primary-dark: #0f172a;
             --secondary: #0aff9d;
-            --ai-color: #8b5cf6; /* لون جديد للذكاء الاصطناعي */
-            --download-color: #f97316; /* لون جديد لخانة التحميل */
+            --ai-color: #8b5cf6; 
+            --download-color: #f97316; 
             --bg-dark: #0f172a;
             --bg-medium: #1e293b;
             --bg-light: rgba(30, 41, 59, 0.6);
@@ -41,8 +53,8 @@
             --shadow-light: rgba(14, 165, 233, 0.25);
             --shadow-medium: rgba(0, 234, 255, 0.3);
             --shadow-heavy: rgba(0, 234, 255, 0.4);
-            --ai-shadow: rgba(139, 92, 246, 0.3); /* ظل للذكاء الاصطناعي */
-            --download-shadow: rgba(249, 115, 22, 0.3); /* ظل لخانة التحميل */
+            --ai-shadow: rgba(139, 92, 246, 0.3); 
+            --download-shadow: rgba(249, 115, 22, 0.3); 
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
@@ -65,7 +77,6 @@
             position: relative;
         }
 
-        /* تأثير الجسيمات المتحركة في الخلفية */
         #particles-js {
             position: fixed;
             top: 0;
@@ -76,7 +87,6 @@
             opacity: 0.3;
         }
 
-        /* تأثير ظل عند التمرير */
         .scroll-indicator {
             position: fixed;
             top: 0;
@@ -202,13 +212,12 @@
             margin-bottom: 40px;
         }
 
-        /* خانة الذكاء الاصطناعي المميزة */
         .item.ai-special {
             background: rgba(139, 92, 246, 0.15);
             border: 2px solid var(--ai-color);
             position: relative;
             overflow: hidden;
-            grid-column: 1 / -1; /* تأخذ كامل العرض */
+            grid-column: 1 / -1;
         }
 
         .item.ai-special::before {
@@ -245,7 +254,6 @@
             animation: pulse 2s infinite;
         }
 
-        /* خانة تحميل التطبيق المميزة */
         .item.download-special {
             background: rgba(249, 115, 22, 0.15);
             border: 2px solid var(--download-color);
@@ -419,7 +427,6 @@
             opacity: 0.9;
         }
 
-        /* رسوم متحركة عند تحميل الصفحة */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -490,7 +497,6 @@
             max-width: 600px;
         }
 
-        /* إضافة سلسة لتغيير الاتجاه */
         html[dir="ltr"] .item::before {
             right: auto;
             left: 0;
@@ -516,7 +522,36 @@
             right: 10px;
         }
 
-        /* تحسين للهواتف */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        .item:focus-visible,
+        .lang-buttons button:focus-visible {
+            outline: 3px solid var(--secondary);
+            outline-offset: 3px;
+        }
+
+        .item.ai-special:focus-visible {
+            outline-color: var(--ai-color);
+        }
+
+        .item.download-special:focus-visible {
+            outline-color: var(--download-color);
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.2rem;
@@ -584,47 +619,28 @@
                 width: 200px;
             }
         }
-
-        /* تأثيرات النقر */
-        .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.6);
-            transform: scale(0);
-            animation: ripple-animation 0.6s linear;
-            pointer-events: none;
-        }
-
-        @keyframes ripple-animation {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
-
-        /* تحسين الوصول */
-        .item:focus-visible,
-        .lang-buttons button:focus-visible {
-            outline: 3px solid var(--secondary);
-            outline-offset: 3px;
-        }
-
-        .item.ai-special:focus-visible {
-            outline-color: var(--ai-color);
-        }
-
-        .item.download-special:focus-visible {
-            outline-color: var(--download-color);
+        
+        .security-notice {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 8px;
+            padding: 5px 10px;
+            font-size: 0.7rem;
+            color: #94a3b8;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            display: none;
         }
     </style>
 </head>
 <body>
 
-<!-- مؤشر التمرير -->
 <div class="scroll-indicator" id="scrollIndicator"></div>
-
-<!-- الجسيمات المتحركة -->
 <div id="particles-js"></div>
+<div class="security-notice" id="securityNotice">🔒 الصفحة مؤمنة</div>
 
 <div class="header">
     <h1 data-lang-key="title">القائمة الرئيسية — لغة C</h1>
@@ -647,7 +663,6 @@
 </div>
 
 <div class="menu">
-    <!-- خانة الذكاء الاصطناعي المميزة -->
     <a class="item ai-special" href="nn.html" data-key="ai">
         <div class="ai-badge">
             <i class="fas fa-star"></i>
@@ -662,7 +677,6 @@
         </div>
     </a>
 
-    <!-- خانة تحميل التطبيق -->
     <a class="item download-special" href="t.html" data-key="download">
         <div class="download-badge">
             <i class="fas fa-download"></i>
@@ -742,11 +756,98 @@
     <p data-lang-key="footer">© 2025 بوابة لغة C - جميع الحقوق محفوظة</p>
 </footer>
 
-<!-- مكتبة الجسيمات -->
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
 <script>
-// نظام الترجمة المركزي
+const SecurityUtils = {
+    sanitizeInput: function(input) {
+        if (!input) return '';
+        
+        const dangerousPatterns = [
+            /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
+            /javascript:/gi,
+            /on\w+\s*=/gi,
+            /data:/gi,
+            /vbscript:/gi,
+            /expression\s*\(/gi,
+            /eval\s*\(/gi
+        ];
+        
+        let sanitized = input.toString();
+        dangerousPatterns.forEach(pattern => {
+            sanitized = sanitized.replace(pattern, '');
+        });
+        
+        const escapeMap = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#x27;',
+            '/': '&#x2F;'
+        };
+        
+        return sanitized.replace(/[&<>"'/]/g, char => escapeMap[char] || char);
+    },
+    
+    validateURL: function(url) {
+        if (!url) return false;
+        
+        const allowedProtocols = ['http:', 'https:', 'mailto:', 'tel:'];
+        const allowedDomains = [
+            window.location.hostname,
+            'bibarss39-sudo.github.io',
+            'cdn.jsdelivr.net',
+            'fonts.googleapis.com',
+            'cdnjs.cloudflare.com',
+            'fonts.gstatic.com'
+        ];
+        
+        try {
+            const urlObj = new URL(url, window.location.origin);
+            
+            if (!allowedProtocols.includes(urlObj.protocol)) {
+                return false;
+            }
+            
+            const isAllowed = allowedDomains.some(domain => 
+                urlObj.hostname === domain || urlObj.hostname.endsWith('.' + domain)
+            );
+            
+            return isAllowed;
+        } catch (e) {
+            if (url.startsWith('/') || url.startsWith('./') || url.startsWith('../')) {
+                return true;
+            }
+            return false;
+        }
+    },
+    
+    disableDangerousFunctions: function() {
+        try {
+            Object.freeze(Object.prototype);
+            
+            const originalCookie = Object.getOwnPropertyDescriptor(Document.prototype, 'cookie');
+            if (originalCookie && originalCookie.configurable) {
+                Object.defineProperty(document, 'cookie', {
+                    get: function() {
+                        return originalCookie.get.call(this);
+                    },
+                    set: function(value) {
+                        const sanitizedValue = this.sanitizeInput(value.split('=')[1] || '');
+                        return originalCookie.set.call(this, value.split('=')[0] + '=' + sanitizedValue);
+                    }
+                });
+            }
+        } catch (e) {
+        }
+    },
+    
+    logSecurityEvent: function(event, details) {
+        console.log(`🔒 ${event}:`, details);
+    }
+};
+
 const translations = {
     title: {
         ar: "القائمة الرئيسية — لغة C",
@@ -857,19 +958,17 @@ const translations = {
 
 let currentLang = "ar";
 
-// تأثيرات الجسيمات
 function initParticles() {
     particlesJS("particles-js", {
         particles: {
             number: { value: 60, density: { enable: true, value_area: 800 } },
-            color: { value: ["#0ea5e9", "#8b5cf6", "#00eaff", "#f97316"] }, // ألوان متعددة تشمل لون الذكاء الاصطناعي والتحميل
-            shape: { type: "circle" },
+            color: { value: ["#0ea5e9", "#8b5cf6", "#00eaff", "#f97316"] },
             opacity: { value: 0.3, random: true },
             size: { value: 3, random: true },
             line_linked: {
                 enable: true,
                 distance: 150,
-                color: "#a78bfa", // لون أرجواني فاتح
+                color: "#a78bfa",
                 opacity: 0.2,
                 width: 1
             },
@@ -893,7 +992,6 @@ function initParticles() {
     });
 }
 
-// تأثير النقر
 function createRipple(event) {
     const button = event.currentTarget;
     const circle = document.createElement("span");
@@ -905,7 +1003,6 @@ function createRipple(event) {
     circle.style.top = `${event.clientY - button.getBoundingClientRect().top - radius}px`;
     circle.classList.add("ripple");
 
-    // تغيير لون الـ ripple حسب نوع العنصر
     if (button.classList.contains('ai-special')) {
         circle.style.background = 'rgba(139, 92, 246, 0.6)';
     } else if (button.classList.contains('download-special')) {
@@ -913,11 +1010,9 @@ function createRipple(event) {
     }
 
     button.appendChild(circle);
-
     setTimeout(() => circle.remove(), 600);
 }
 
-// تحديث مؤشر التمرير
 function updateScrollIndicator() {
     const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
     const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -925,85 +1020,109 @@ function updateScrollIndicator() {
     document.getElementById("scrollIndicator").style.width = scrolled + "%";
 }
 
-// تغيير اللغة
 function setLang(lang) {
-    currentLang = lang;
+    const sanitizedLang = SecurityUtils.sanitizeInput(lang);
+    if (!['ar', 'en', 'fr'].includes(sanitizedLang)) {
+        SecurityUtils.logSecurityEvent('رفض محاولة تعيين لغة غير صالحة', lang);
+        return;
+    }
     
-    // تحديث الأزرار النشطة
+    currentLang = sanitizedLang;
+    
     document.querySelectorAll('.lang-buttons button').forEach(btn => {
         btn.classList.remove('active');
     });
     event.currentTarget.classList.add('active');
     
-    // تحديث اتجاه الصفحة
-    const dir = lang === "ar" ? "rtl" : "ltr";
+    const dir = sanitizedLang === "ar" ? "rtl" : "ltr";
     document.documentElement.setAttribute("dir", dir);
-    document.documentElement.setAttribute("lang", lang);
+    document.documentElement.setAttribute("lang", sanitizedLang);
     
-    // تحديث النصوص
     document.querySelectorAll("[data-lang-key]").forEach(el => {
         const key = el.getAttribute("data-lang-key");
-        if (translations[key] && translations[key][lang] !== undefined) {
-            el.textContent = translations[key][lang];
+        if (translations[key] && translations[key][sanitizedLang] !== undefined) {
+            el.textContent = SecurityUtils.sanitizeInput(translations[key][sanitizedLang]);
         }
     });
     
-    // إعادة تشغيل الرسوم المتحركة
     const menu = document.querySelector('.menu');
     menu.style.animation = 'none';
     setTimeout(() => {
         menu.style.animation = 'fadeInUp 0.8s ease-out forwards';
     }, 10);
     
-    // حفظ التفضيلات
-    localStorage.setItem('preferredLang', lang);
+    try {
+        localStorage.setItem('preferredLang', sanitizedLang);
+    } catch (e) {
+        SecurityUtils.logSecurityEvent('خطأ في تخزين اللغة', e);
+    }
+    
+    SecurityUtils.logSecurityEvent('تم تغيير اللغة', sanitizedLang);
 }
 
-// نقل إلى صفحة الذكاء الاصطناعي مع تأثير
-function goToAI() {
-    const aiItem = document.querySelector('.item.ai-special');
+function validateLinkClick(event) {
+    const link = event.currentTarget;
+    const href = link.getAttribute('href');
     
-    // تأثير خاص للعنصر
-    aiItem.style.transform = 'scale(0.95)';
-    aiItem.style.boxShadow = '0 0 30px var(--ai-shadow)';
+    if (!SecurityUtils.validateURL(href)) {
+        event.preventDefault();
+        SecurityUtils.logSecurityEvent('تم رفض رابط غير آمن', href);
+        
+        const notice = document.getElementById('securityNotice');
+        notice.textContent = '🔒 تم رفض الرابط لأسباب أمنية';
+        notice.style.display = 'block';
+        notice.style.background = 'rgba(239, 68, 68, 0.2)';
+        notice.style.borderColor = 'rgba(239, 68, 68, 0.5)';
+        
+        setTimeout(() => {
+            notice.style.display = 'none';
+        }, 3000);
+        return false;
+    }
     
-    // تغيير مؤشر الفأرة
-    document.body.style.cursor = 'wait';
-    
-    // تأثيرات صوتية محاكاة
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    
-    setTimeout(() => {
-        // الانتقال إلى الصفحة
-        window.location.href = "nn.html";
-    }, 500);
+    createRipple(event);
+    return true;
 }
 
-// تهيئة الصفحة
 document.addEventListener("DOMContentLoaded", () => {
-    // تهيئة الجسيمات
+    SecurityUtils.disableDangerousFunctions();
     initParticles();
     
-    // تحميل اللغة المحفوظة
-    const savedLang = localStorage.getItem('preferredLang') || 'ar';
+    const securityNotice = document.getElementById('securityNotice');
+    setTimeout(() => {
+        securityNotice.style.display = 'block';
+        setTimeout(() => {
+            securityNotice.style.display = 'none';
+        }, 2000);
+    }, 1000);
     
-    // تعيين اللغة دون حاجة لـ event
-    const langButtons = document.querySelectorAll('.lang-buttons button');
-    langButtons.forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.querySelector('span').textContent === 
-            (savedLang === 'ar' ? 'العربية' : 
-             savedLang === 'en' ? 'English' : 'Français')) {
-            btn.classList.add('active');
+    let savedLang = 'ar';
+    try {
+        const storedLang = localStorage.getItem('preferredLang');
+        if (storedLang && ['ar', 'en', 'fr'].includes(storedLang)) {
+            savedLang = SecurityUtils.sanitizeInput(storedLang);
         }
-    });
+    } catch (e) {
+        SecurityUtils.logSecurityEvent('خطأ في جلب اللغة المحفوظة', e);
+    }
     
     currentLang = savedLang;
     const dir = savedLang === "ar" ? "rtl" : "ltr";
     document.documentElement.setAttribute("dir", dir);
     document.documentElement.setAttribute("lang", savedLang);
     
-    // تحديث النصوص
+    document.querySelectorAll('.lang-buttons button').forEach(btn => {
+        btn.classList.remove('active');
+        const span = btn.querySelector('span');
+        if (span && (
+            (savedLang === 'ar' && span.textContent === 'العربية') ||
+            (savedLang === 'en' && span.textContent === 'English') ||
+            (savedLang === 'fr' && span.textContent === 'Français')
+        )) {
+            btn.classList.add('active');
+        }
+    });
+    
     document.querySelectorAll("[data-lang-key]").forEach(el => {
         const key = el.getAttribute("data-lang-key");
         if (translations[key] && translations[key][savedLang] !== undefined) {
@@ -1011,148 +1130,75 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
     
-    // إضافة تأثير النقر للأزرار
-    document.querySelectorAll('.lang-buttons button, .item').forEach(btn => {
-        btn.addEventListener('click', createRipple);
+    document.querySelectorAll('.lang-buttons button, .item').forEach(element => {
+        element.addEventListener('click', function(e) {
+            if (this.tagName === 'A') {
+                if (!validateLinkClick(e)) {
+                    return false;
+                }
+            }
+            
+            createRipple(e);
+            return true;
+        });
     });
     
-    // إضافة تأثير خاص لزر الذكاء الاصطناعي
-    const aiItem = document.querySelector('.item.ai-special');
-    if (aiItem) {
-        aiItem.addEventListener('click', function(e) {
-            // منع التنقل الفوري لإظهار التأثير
-            e.preventDefault();
-            
-            // تأثيرات بصرية
-            this.style.transform = 'translateY(-8px) scale(1.02)';
-            this.style.boxShadow = '0 20px 40px var(--ai-shadow)';
-            
-            // تغيير مؤشر الفأرة
-            document.body.style.cursor = 'wait';
-            
-            // تنبيه تحفيزي
-            const messages = {
-                ar: ["⚡ جاري تحميل المساعد الذكي...", "🧠 الذكاء الاصطناعي جاهز لمساعدتك!", "🚀 رحلة تصحيح الكود تبدأ الآن!"],
-                en: ["⚡ Loading smart assistant...", "🧠 AI is ready to help you!", "🚀 Code correction journey starts now!"],
-                fr: ["⚡ Chargement de l'assistant intelligent...", "🧠 L'IA est prête à vous aider!", "🚀 Le voyage de correction de code commence maintenant!"]
-            };
-            
-            const randomMessage = messages[currentLang][Math.floor(Math.random() * messages[currentLang].length)];
-            
-            // إضافة رسالة مؤقتة
-            const tempMsg = document.createElement('div');
-            tempMsg.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: rgba(139, 92, 246, 0.9);
-                color: white;
-                padding: 15px 25px;
-                border-radius: 15px;
-                font-weight: bold;
-                z-index: 9999;
-                animation: fadeInOut 1.5s ease;
-                backdrop-filter: blur(10px);
-                border: 2px solid white;
-            `;
-            
-            // تعريف animation
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes fadeInOut {
-                    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-                    20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-                    80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-                    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
-                }
-            `;
-            document.head.appendChild(style);
-            
-            tempMsg.textContent = randomMessage;
-            document.body.appendChild(tempMsg);
-            
-            // الانتقال بعد التأثير
-            setTimeout(() => {
-                window.location.href = "nn.html";
-            }, 1500);
-        });
+    document.querySelectorAll('a').forEach(link => {
+        const href = link.getAttribute('href');
+        if (!SecurityUtils.validateURL(href)) {
+            SecurityUtils.logSecurityEvent('تم اكتشاف رابط غير آمن', href);
+            link.style.opacity = '0.7';
+            link.title = 'يتم التحقق من الرابط...';
+        }
+    });
+    
+    if (window.self !== window.top) {
+        SecurityUtils.logSecurityEvent('تم اكتشاف تحميل الصفحة في إطار', window.top.location);
+        
+        try {
+            if (window.top !== window.self) {
+                window.top.location = window.self.location;
+            }
+        } catch (e) {
+            document.body.innerHTML = '<div style="padding: 20px; text-align: center; color: white;"><h2>⚠️ تحذير أمني</h2><p>تم تحميل هذه الصفحة في إطار غير مصرح به.</p><p>يرجى فتح الصفحة مباشرة في المتصفح.</p></div>';
+        }
     }
     
-    // إضافة تأثير خاص لزر تحميل التطبيق
-    const downloadItem = document.querySelector('.item.download-special');
-    if (downloadItem) {
-        downloadItem.addEventListener('click', function(e) {
-            // منع التنقل الفوري لإظهار التأثير
-            e.preventDefault();
-            
-            // تأثيرات بصرية
-            this.style.transform = 'translateY(-8px) scale(1.02)';
-            this.style.boxShadow = '0 20px 40px var(--download-shadow)';
-            
-            // تغيير مؤشر الفأرة
-            document.body.style.cursor = 'wait';
-            
-            // تنبيه تحفيزي
-            const messages = {
-                ar: ["⬇️ جاري تحضير التحميل...", "📱 التطبيق جاهز للتنزيل!", "🚀 ابدأ البرمجة على هاتفك!"],
-                en: ["⬇️ Preparing download...", "📱 App ready to download!", "🚀 Start coding on your phone!"],
-                fr: ["⬇️ Préparation du téléchargement...", "📱 Application prête à télécharger!", "🚀 Commencez à coder sur votre téléphone!"]
-            };
-            
-            const randomMessage = messages[currentLang][Math.floor(Math.random() * messages[currentLang].length)];
-            
-            // إضافة رسالة مؤقتة
-            const tempMsg = document.createElement('div');
-            tempMsg.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: rgba(249, 115, 22, 0.9);
-                color: white;
-                padding: 15px 25px;
-                border-radius: 15px;
-                font-weight: bold;
-                z-index: 9999;
-                animation: fadeInOut 1.5s ease;
-                backdrop-filter: blur(10px);
-                border: 2px solid white;
-            `;
-            
-            // تعريف animation
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes fadeInOut {
-                    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-                    20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-                    80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-                    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
-                }
-            `;
-            document.head.appendChild(style);
-            
-            tempMsg.textContent = randomMessage;
-            document.body.appendChild(tempMsg);
-            
-            // الانتقال بعد التأثير
-            setTimeout(() => {
-                window.location.href = "t.html";
-            }, 1500);
-        });
-    }
-    
-    // تحديث مؤشر التمرير
     window.addEventListener('scroll', updateScrollIndicator);
-    updateScrollIndicator(); // تهيئة أولية
+    updateScrollIndicator();
     
-    // تأثيرات إضافية عند تحميل الصفحة
+    SecurityUtils.logSecurityEvent('تم تحميل الصفحة', {
+        userAgent: navigator.userAgent,
+        language: navigator.language,
+        referrer: document.referrer
+    });
+    
     setTimeout(() => {
         document.querySelector('.item.ai-special')?.classList.add('loaded');
         document.querySelector('.item.download-special')?.classList.add('loaded');
     }, 100);
 });
-</script>
 
+function sanitizeSearchInput(input) {
+    return SecurityUtils.sanitizeInput(input).substring(0, 100); 
+}
+
+function addCSRFToken(form) {
+    const token = Math.random().toString(36).substring(2) + Date.now().toString(36);
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'csrf_token';
+    input.value = token;
+    form.appendChild(input);
+    
+    sessionStorage.setItem('csrf_token', token);
+    return token;
+}
+
+function verifyCSRFToken(token) {
+    const storedToken = sessionStorage.getItem('csrf_token');
+    return token === storedToken;
+}
+</script>
 </body>
 </html>

@@ -2,25 +2,23 @@
 <html lang="ar" dir="rtl" id="html-root">
 <head>
     <meta property="og:site_name" content="Algorithmes & C">
-
     <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Algorithmes & C",
-  "alternateName": "تعلم لغة C والخوارزميات",
-  "url": "https://bibarss39-sudo.github.io/bibarss39/"
-}
-</script>
-
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Algorithmes & C",
+      "alternateName": "تعلم لغة C والخوارزميات",
+      "url": "https://bibarss39-sudo.github.io/bibarss39/"
+    }
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>أمثلة أكواد C مع الخوارزميات - المعمل التعليمي</title>
     <link rel="icon" type="image/png" href="favicon.png">
->
-    <!-- Font Awesome -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Tajawal:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -62,7 +60,6 @@
             overflow-x: hidden;
         }
 
-        /* Scroll top bar */
         body::before {
             content: '';
             position: fixed;
@@ -243,7 +240,6 @@
             font-size: 18px;
         }
 
-        /* فلاتر التصنيف */
         .category-filters {
             display: flex;
             justify-content: center;
@@ -464,7 +460,6 @@
             box-shadow: var(--shadow-sm);
         }
 
-        /* Stats counter */
         .stats {
             display: flex;
             justify-content: center;
@@ -488,7 +483,6 @@
             color: var(--accent-light);
         }
 
-        /* نافذة المعلومات الإضافية المحسنة */
         .info-modal {
             display: none;
             position: fixed;
@@ -743,7 +737,6 @@
             .info-header h3 { font-size: 1.3rem; }
         }
 
-        /* Animation for new cards */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -759,7 +752,6 @@
             animation: fadeInUp 0.5s ease-out;
         }
 
-        /* LTR styles for English */
         body.lang-en {
             direction: ltr;
         }
@@ -822,6 +814,8 @@
     </style>
 </head>
 <body class="lang-ar">
+    <meta name="csrf-token" content="" id="csrfMetaToken">
+
     <div class="top-bar">
         <div class="nav-buttons">
             <a href="asasi.html" class="home-btn">
@@ -897,7 +891,6 @@
 
     <div class="examples-grid" id="examplesContainer"></div>
 
-    <!-- نافذة المعلومات الإضافية المحسنة -->
     <div class="info-modal" id="infoModal">
         <div class="info-modal-content">
             <div class="info-header">
@@ -906,33 +899,32 @@
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            
+
             <div class="info-body">
                 <div class="info-section">
                     <h4 class="info-title"><i class="fas fa-code"></i> <span id="infoCodeTitle">التعليمات البرمجية</span></h4>
                     <p class="info-text" id="infoCode"></p>
                 </div>
-                
+
                 <div class="info-section">
                     <h4 class="info-title"><i class="fas fa-tag"></i> <span id="infoCategoryTitle">التصنيف</span></h4>
                     <p class="info-text" id="infoCategory"></p>
                 </div>
-                
+
                 <div class="info-section">
                     <h4 class="info-title"><i class="fas fa-comment-alt"></i> <span id="infoDescriptionTitle">الوصف</span></h4>
                     <p class="info-text" id="infoDescription"></p>
                 </div>
-                
+
                 <div class="info-section">
                     <h4 class="info-title"><i class="fas fa-lightbulb"></i> <span id="infoTipsTitle">نصائح واستخدامات</span></h4>
                     <ul class="info-list" id="infoTips"></ul>
                 </div>
-                
+
                 <div class="info-grid" id="infoGrid">
-                    <!-- سيتم ملؤه ديناميكياً -->
                 </div>
             </div>
-            
+
             <div class="info-footer">
                 <button class="action-btn" onclick="copyCurrentExample()">
                     <i class="fas fa-copy"></i>
@@ -947,12 +939,18 @@
     </div>
 
     <script>
+        const SECURITY_CONFIG = {
+            CSRF_TOKEN: 'csrf_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now(),
+            ALLOWED_ORIGINS: ['https://bibarss39-sudo.github.io'], 
+            CSP_REPORT_URI: null 
+        };
+
         const examples = [
             {
                 code: 'printf("Hello, World!");',
                 c: `#include <stdio.h>\nint main() {\n    printf("Hello, World!\\n");\n    return 0;\n}`,
                 algo: `Algorithme Bonjour\nDébut\n    Écrire("Hello, World!")\nFin`,
-                desc: { 
+                desc: {
                     ar: 'برنامج "مرحباً بالعالم" الكلاسيكي. الخطوة الأولى في برمجة لغة C.',
                     fr: 'Le programme "Hello World" classique. Premier pas en programmation C.',
                     en: 'Classic "Hello World" program. First step in C programming.'
@@ -983,7 +981,7 @@
                 code: 'scanf("%d", &x);',
                 c: `#include <stdio.h>\nint main() {\n    int x;\n    printf("Entrez un entier : ");\n    scanf("%d", &x);\n    printf("Vous avez saisi : %d\\n", x);\n    return 0;\n}`,
                 algo: `Algorithme LireEntier\nVariable x : Entier\nDébut\n    Écrire("Entrez un entier : ")\n    Lire(x)\n    Écrire("Vous avez saisi : ", x)\nFin`,
-                desc: { 
+                desc: {
                     ar: 'قراءة إدخال المستخدم باستخدام scanf. لا تنسى رمز & قبل اسم المتغير.',
                     fr: 'Lecture d\'entrée utilisateur avec scanf. Ne pas oublier l\'esperluette (&) avant la variable.',
                     en: 'User input reading with scanf. Don\'t forget the ampersand (&) before variable.'
@@ -1014,7 +1012,7 @@
                 code: 'for (int i = 0; i < 10; i++)',
                 c: `#include <stdio.h>\nint main() {\n    for (int i = 0; i < 10; i++) {\n        printf("%d ", i);\n    }\n    printf("\\n");\n    return 0;\n}`,
                 algo: `Algorithme BoucleFor\nDébut\n    Pour i allant de 0 à 9 Faire\n        Écrire(i, " ")\n    FinPour\nFin`,
-                desc: { 
+                desc: {
                     ar: 'الحلقة for الكلاسيكية مع التهيئة، الشرط، والزيادة.',
                     fr: 'Boucle for classique avec initialisation, condition et incrémentation.',
                     en: 'Classic for loop with initialization, condition and increment.'
@@ -1045,7 +1043,7 @@
                 code: 'do { } while (x < 10)',
                 c: `#include <stdio.h>\nint main() {\n    int x = 0;\n    do {\n        printf("%d ", x);\n        x++;\n    } while (x < 10);\n    printf("\\n");\n    return 0;\n}`,
                 algo: `Algorithme BoucleDoWhile\nVariable x : Entier\nDébut\n    x ← 0\n    Répéter\n        Écrire(x, " ")\n        x ← x + 1\n    Jusqu\'à (x >= 10)\nFin`,
-                desc: { 
+                desc: {
                     ar: 'حلقة do-while تضمن تنفيذ الكود مرة واحدة على الأقل قبل التحقق من الشرط.',
                     fr: 'Boucle do-while garantissant au moins une exécution avant vérification de condition.',
                     en: 'Do-while loop guarantees at least one execution before condition check.'
@@ -1076,7 +1074,7 @@
                 code: 'while (x < 10)',
                 c: `#include <stdio.h>\nint main() {\n    int x = 0;\n    while (x < 10) {\n        printf("%d ", x);\n        x++;\n    }\n    printf("\\n");\n    return 0;\n}`,
                 algo: `Algorithme BoucleWhile\nVariable x : Entier\nDébut\n    x ← 0\n    Tant que (x < 10) Faire\n        Écrire(x, " ")\n        x ← x + 1\n    FinTantQue\nFin`,
-                desc: { 
+                desc: {
                     ar: 'الحلقة while القياسية. يتم التحقق من الشرط قبل كل تكرار.',
                     fr: 'Boucle while standard. La condition est vérifiée avant chaque itération.',
                     en: 'Standard while loop. Condition checked before each iteration.'
@@ -1107,7 +1105,7 @@
                 code: '!x',
                 c: `#include <stdio.h>\nint main() {\n    int x = 0;\n    if (!x) {\n        printf("x est nul\\n");\n    }\n    return 0;\n}`,
                 algo: `Algorithme NOTLogique\nVariable x : Entier\nDébut\n    x ← 0\n    Si Non(x) Alors\n        Écrire("x est nul")\n    FinSi\nFin`,
-                desc: { 
+                desc: {
                     ar: 'المشغل المنطقي NOT. يعيد القيمة صحيحة (1) إذا كان التعبير خاطئاً (0).',
                     fr: 'Opérateur logique NOT. Renvoie vrai (1) si l\'expression est fausse (0).',
                     en: 'Logical NOT operator. Returns true (1) if expression is false (0).'
@@ -1138,7 +1136,7 @@
                 code: '%d',
                 c: `#include <stdio.h>\nint main() {\n    int age = 25;\n    printf("Âge : %d ans\\n", age);\n    return 0;\n}`,
                 algo: `Algorithme FormatEntier\nDébut\n    Écrire("Âge : ", 25, " ans")\nFin`,
-                desc: { 
+                desc: {
                     ar: 'محدد تنسيق للأعداد الصحيحة ذات الإشارة في النظام العشري.',
                     fr: 'Spécificateur de format pour les entiers signés en base décimale.',
                     en: 'Format specifier for signed decimal integers.'
@@ -1169,7 +1167,7 @@
                 code: '%f',
                 c: `#include <stdio.h>\nint main() {\n    float pi = 3.14159;\n    printf("π ≈ %.2f\\n", pi);\n    return 0;\n}`,
                 algo: `Algorithme FormatReel\nDébut\n    Écrire("π ≈ ", 3.14)\nFin`,
-                desc: { 
+                desc: {
                     ar: 'محدد تنسيق للأعداد العشرية. .2f تعني منزلتين عشريتين.',
                     fr: 'Spécificateur pour les nombres à virgule flottante. .2f signifie 2 décimales.',
                     en: 'Format specifier for floating-point numbers. .2f means 2 decimal places.'
@@ -1200,7 +1198,7 @@
                 code: '%c',
                 c: `#include <stdio.h>\nint main() {\n    char c = \'A\';\n    printf("Caractère : %c\\n", c);\n    return 0;\n}`,
                 algo: `Algorithme FormatCaractere\nDébut\n    Écrire("Caractère : ", \'A\')\nFin`,
-                desc: { 
+                desc: {
                     ar: 'محدد تنسيق لحرف واحد. استخدم %s للسلاسل النصية.',
                     fr: 'Spécificateur pour un seul caractère. Utilisez %s pour les chaînes.',
                     en: 'Format specifier for single character. Use %s for strings.'
@@ -1231,7 +1229,7 @@
                 code: '+=',
                 c: `#include <stdio.h>\nint main() {\n    int x = 5;\n    x += 3;\n    printf("x = %d\\n", x);\n    return 0;\n}`,
                 algo: `Algorithme AdditionAffectation\nVariable x : Entier\nDébut\n    x ← 5\n    x ← x + 3\n    Écrire("x = ", x)\nFin`,
-                desc: { 
+                desc: {
                     ar: 'مشغل الإسناد مع الجمع. يعادل x = x + 3.',
                     fr: 'Opérateur d\'affectation avec addition. Equivalent à x = x + 3.',
                     en: 'Addition assignment operator. Equivalent to x = x + 3.'
@@ -1291,203 +1289,297 @@
         let copiedCount = 0;
         let currentExampleIndex = -1;
 
+  
+        function sanitizeHTML(dirty) {
+            if (typeof DOMPurify !== 'undefined') {
+                return DOMPurify.sanitize(dirty, {
+                    ALLOWED_TAGS: [], 
+                    ALLOWED_ATTR: []
+                });
+            }
+            const div = document.createElement('div');
+            div.textContent = dirty;
+            return div.innerHTML;
+        }
+
+
+        function escapeHTML(str) {
+            if (typeof str !== 'string') return '';
+            return str.replace(/[&<>"']/g, function(m) {
+                return {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#39;'
+                }[m];
+            });
+        }
+
+
+        function isValidOrigin(url) {
+            try {
+                const urlObj = new URL(url, window.location.href);
+                return SECURITY_CONFIG.ALLOWED_ORIGINS.some(allowed => urlObj.origin === allowed);
+            } catch (e) {
+                return false; 
+            }
+        }
+
+
+        function setSecurityHeaders() {
+      
+            console.info('[Security Headers] To be configured on your web server:');
+            const headers = {
+                'Content-Security-Policy': "default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com/ajax/libs/dompurify/ https://cdnjs.cloudflare.com/ajax/libs/font-awesome/ https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com/ajax/libs/font-awesome/ https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self';",
+                'X-Content-Type-Options': 'nosniff',
+                'X-Frame-Options': 'DENY',
+                'Referrer-Policy': 'strict-origin-when-cross-origin',
+                'Permissions-Policy': "geolocation=(), microphone=(), camera=()"
+            };
+            for (const [header, value] of Object.entries(headers)) {
+                console.info(`  ${header}: ${value}`);
+            }
+        }
+
+
+        function setSecureCookie(name, value, days) {
+            const expires = new Date(Date.now() + days * 864e5).toUTCString();
+        
+            document.cookie = `${name}=${value}; expires=${expires}; path=/; SameSite=Strict`; // Secure; HttpOnly; can't be set via JS
+            console.warn(`[Security Note] For maximum security, cookie '${name}' should be set server-side with HttpOnly and Secure flags.`);
+        }
+
+        function initSecurity() {
+            document.getElementById('csrfMetaToken').content = SECURITY_CONFIG.CSRF_TOKEN;
+
+            
+            setSecureCookie('app_session', 'session_id_' + Math.random().toString(36).substr(2), 1);
+
+            setSecurityHeaders();
+
+            console.log('[Security] Application security features initialized.');
+        }
+
         function renderExamples() {
             const container = document.getElementById("examplesContainer");
-            const search = document.getElementById("search").value.toLowerCase();
+            const searchInput = document.getElementById("search").value;
+            const search = sanitizeHTML(searchInput).toLowerCase();
             container.innerHTML = "";
-            
+
             let visibleCount = 0;
-            
+
             examples.forEach((ex, index) => {
-                // Filtrer par catégorie
                 if (currentFilter !== "all" && ex.category !== currentFilter) return;
-                
-                // Filtrer par recherche
+
                 const searchText = search.toLowerCase();
                 if (searchText) {
-                    const codeMatch = ex.code.toLowerCase().includes(searchText);
-                    const descMatch = ex.desc[currentLang].toLowerCase().includes(searchText);
-                    const algoMatch = ex.algo.toLowerCase().includes(searchText);
-                    const cMatch = ex.c.toLowerCase().includes(searchText);
-                    
+                    const codeMatch = sanitizeHTML(ex.code).toLowerCase().includes(searchText);
+                    const descMatch = sanitizeHTML(ex.desc[currentLang]).toLowerCase().includes(searchText);
+                    const algoMatch = sanitizeHTML(ex.algo).toLowerCase().includes(searchText);
+                    const cMatch = sanitizeHTML(ex.c).toLowerCase().includes(searchText);
+
                     if (!codeMatch && !descMatch && !algoMatch && !cMatch) return;
                 }
-                
+
                 visibleCount++;
-                
+
                 const card = document.createElement("div");
                 card.className = "example-card";
                 card.style.animationDelay = `${index * 0.05}s`;
-                
+
                 const categoryLabels = {
-                    'io': currentLang === 'ar' ? 'الإدخال/الإخراج' : 
+                    'io': currentLang === 'ar' ? 'الإدخال/الإخراج' :
                           currentLang === 'fr' ? 'Entrée/Sortie' : 'Input/Output',
-                    'loops': currentLang === 'ar' ? 'الحلقات' : 
+                    'loops': currentLang === 'ar' ? 'الحلقات' :
                              currentLang === 'fr' ? 'Boucles' : 'Loops',
-                    'conditions': currentLang === 'ar' ? 'الشروط' : 
+                    'conditions': currentLang === 'ar' ? 'الشروط' :
                                   currentLang === 'fr' ? 'Conditions' : 'Conditions',
-                    'types': currentLang === 'ar' ? 'أنواع البيانات' : 
+                    'types': currentLang === 'ar' ? 'أنواع البيانات' :
                              currentLang === 'fr' ? 'Types de données' : 'Data Types',
-                    'operators': currentLang === 'ar' ? 'المشغلات' : 
+                    'operators': currentLang === 'ar' ? 'المشغلات' :
                                  currentLang === 'fr' ? 'Opérateurs' : 'Operators',
-                    'control': currentLang === 'ar' ? 'التحكم' : 
+                    'control': currentLang === 'ar' ? 'التحكم' :
                                currentLang === 'fr' ? 'Contrôle' : 'Control',
-                    'misc': currentLang === 'ar' ? 'متنوع' : 
+                    'misc': currentLang === 'ar' ? 'متنوع' :
                             currentLang === 'fr' ? 'Divers' : 'Misc'
                 };
-                
+
+                const safeCodeTag = escapeHTML(ex.code);
+                const safeCategory = escapeHTML(categoryLabels[ex.category] || '');
+                const safeDesc = escapeHTML(ex.desc[currentLang]);
+                const safeCCode = escapeHTML(ex.c);
+                const safeAlgo = escapeHTML(ex.algo);
+
                 card.innerHTML = `
                     <div class="card-header">
                         <div>
-                            <div class="code-tag">${ex.code}</div>
+                            <div class="code-tag">${safeCodeTag}</div>
                             <div class="card-meta">
-                                <span class="category-tag">${categoryLabels[ex.category]}</span>
+                                <span class="category-tag">${safeCategory}</span>
                             </div>
                         </div>
                         <button class="copy-btn" onclick="copyCode(this, \`${ex.c.replace(/`/g, '\\`')}\`)">
                             <i class="fas fa-copy"></i>
                         </button>
                     </div>
-                    
-                    <div class="lang-label"><i class="fas fa-code"></i> ${currentLang === 'ar' ? 'كود C' : 
+
+                    <div class="lang-label"><i class="fas fa-code"></i> ${currentLang === 'ar' ? 'كود C' :
                                                                        currentLang === 'fr' ? 'Code C' : 'C Code'}</div>
-                    <div class="code-block" data-lang="C">${ex.c}</div>
-                    
-                    <div class="lang-label"><i class="fas fa-project-diagram"></i> ${currentLang === 'ar' ? 'خوارزمية' : 
+                    <div class="code-block" data-lang="C">${safeCCode}</div>
+
+                    <div class="lang-label"><i class="fas fa-project-diagram"></i> ${currentLang === 'ar' ? 'خوارزمية' :
                                                                                   currentLang === 'fr' ? 'Algorithme' : 'Algorithm'}</div>
-                    <div class="code-block" data-lang="Algo">${ex.algo}</div>
-                    
-                    <div class="desc">${ex.desc[currentLang]}</div>
-                    
+                    <div class="code-block" data-lang="Algo">${safeAlgo}</div>
+
+                    <div class="desc">${safeDesc}</div>
+
                     <div class="card-footer">
                         <button class="info-btn" onclick="showExampleInfo(${index})">
                             <i class="fas fa-info-circle"></i>
-                            ${currentLang === 'ar' ? 'معلومات إضافية' : 
+                            ${currentLang === 'ar' ? 'معلومات إضافية' :
                              currentLang === 'fr' ? 'Plus d\'info' : 'More info'}
                         </button>
                     </div>
                 `;
-                
+
                 container.appendChild(card);
             });
-            
+
             updateStats(visibleCount);
         }
 
         function copyCode(btn, code) {
+            const isCodeTrusted = examples.some(ex => ex.c === code);
+            if (!isCodeTrusted) {
+                console.error('[Security] Attempted to copy untrusted code.');
+                btn.classList.add('copied');
+                btn.innerHTML = '<i class="fas fa-ban"></i>';
+                btn.style.background = 'var(--warning)';
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btn.innerHTML = '<i class="fas fa-copy"></i>';
+                    btn.style.background = '';
+                }, 1500);
+                return;
+            }
+
             navigator.clipboard.writeText(code).then(() => {
                 btn.classList.add('copied');
                 btn.innerHTML = '<i class="fas fa-check"></i>';
-                
+
                 copiedCount++;
                 localStorage.setItem('copiedCount', copiedCount);
                 updateStats();
-                
+
                 setTimeout(() => {
                     btn.classList.remove('copied');
                     btn.innerHTML = '<i class="fas fa-copy"></i>';
                 }, 1500);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
             });
         }
 
         function showExampleInfo(index) {
+            if (index < 0 || index >= examples.length) {
+                console.error('[Security] Invalid example index requested.');
+                return;
+            }
+
             currentExampleIndex = index;
             const ex = examples[index];
-            
-            // ترجمة العناوين
+
             document.querySelectorAll('[id^="info"]').forEach(el => {
                 const id = el.id.replace('info', '').replace('Title', '');
                 if (translations[`info${id}Title`]) {
                     el.textContent = translations[`info${id}Title`][currentLang];
                 }
             });
-            
-            document.getElementById('infoCode').textContent = ex.code;
-            document.getElementById('infoDescription').textContent = ex.desc[currentLang];
-            
-            // تحديث التصنيف
+
+            document.getElementById('infoCode').textContent = escapeHTML(ex.code);
+            document.getElementById('infoDescription').textContent = escapeHTML(ex.desc[currentLang]);
+
             const categoryLabels = {
-                'io': currentLang === 'ar' ? 'الإدخال/الإخراج' : 
+                'io': currentLang === 'ar' ? 'الإدخال/الإخراج' :
                       currentLang === 'fr' ? 'Entrée/Sortie' : 'Input/Output',
-                'loops': currentLang === 'ar' ? 'الحلقات' : 
+                'loops': currentLang === 'ar' ? 'الحلقات' :
                          currentLang === 'fr' ? 'Boucles' : 'Loops',
-                'conditions': currentLang === 'ar' ? 'الشروط' : 
+                'conditions': currentLang === 'ar' ? 'الشروط' :
                               currentLang === 'fr' ? 'Conditions' : 'Conditions',
-                'types': currentLang === 'ar' ? 'أنواع البيانات' : 
+                'types': currentLang === 'ar' ? 'أنواع البيانات' :
                          currentLang === 'fr' ? 'Types de données' : 'Data Types',
-                'operators': currentLang === 'ar' ? 'المشغلات' : 
+                'operators': currentLang === 'ar' ? 'المشغلات' :
                              currentLang === 'fr' ? 'Opérateurs' : 'Operators',
-                'control': currentLang === 'ar' ? 'التحكم' : 
+                'control': currentLang === 'ar' ? 'التحكم' :
                            currentLang === 'fr' ? 'Contrôle' : 'Control',
-                'misc': currentLang === 'ar' ? 'متنوع' : 
+                'misc': currentLang === 'ar' ? 'متنوع' :
                         currentLang === 'fr' ? 'Divers' : 'Misc'
             };
-            
+
             document.getElementById('infoCategory').textContent = categoryLabels[ex.category];
-            
-            // تحديث النصائح
+
             const tipsList = document.getElementById('infoTips');
             tipsList.innerHTML = '';
             if (ex.tips && ex.tips[currentLang]) {
                 ex.tips[currentLang].forEach(tip => {
                     const li = document.createElement('li');
-                    li.textContent = tip;
+                    li.textContent = escapeHTML(tip);
                     tipsList.appendChild(li);
                 });
             }
-            
-            // تحديث الشبكة المعلوماتية
+
             const infoGrid = document.getElementById('infoGrid');
             infoGrid.innerHTML = '';
-            
+
             const gridItems = [
                 {
                     icon: 'fas fa-file-code',
-                    label: currentLang === 'ar' ? 'نوع الكود' : 
+                    label: currentLang === 'ar' ? 'نوع الكود' :
                           currentLang === 'fr' ? 'Type de code' : 'Code Type',
-                    value: currentLang === 'ar' ? 'بيان/مشغل' : 
+                    value: currentLang === 'ar' ? 'بيان/مشغل' :
                           currentLang === 'fr' ? 'Instruction/Opérateur' : 'Statement/Operator'
                 },
                 {
                     icon: 'fas fa-cogs',
-                    label: currentLang === 'ar' ? 'التعقيد' : 
+                    label: currentLang === 'ar' ? 'التعقيد' :
                           currentLang === 'fr' ? 'Complexité' : 'Complexity',
-                    value: currentLang === 'ar' ? 'بسيط' : 
+                    value: currentLang === 'ar' ? 'بسيط' :
                           currentLang === 'fr' ? 'Simple' : 'Simple'
                 },
                 {
                     icon: 'fas fa-book',
-                    label: currentLang === 'ar' ? 'المكتبة' : 
+                    label: currentLang === 'ar' ? 'المكتبة' :
                           currentLang === 'fr' ? 'Bibliothèque' : 'Library',
-                    value: ex.c.includes('stdio.h') ? 'stdio.h' : 'مختلف'
+                    value: ex.c.includes('stdio.h') ? 'stdio.h' : (currentLang === 'ar' ? 'مختلف' : 'Various')
                 },
                 {
                     icon: 'fas fa-history',
-                    label: currentLang === 'ar' ? 'تاريخ الإضافة' : 
+                    label: currentLang === 'ar' ? 'تاريخ الإضافة' :
                           currentLang === 'fr' ? 'Date d\'ajout' : 'Added Date',
-                    value: currentLang === 'ar' ? 'قريباً' : 
+                    value: currentLang === 'ar' ? 'قريباً' :
                           currentLang === 'fr' ? 'Bientôt' : 'Soon'
                 }
             ];
-            
+
             gridItems.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'info-item';
+                const safeLabel = escapeHTML(item.label);
+                const safeValue = escapeHTML(item.value);
                 div.innerHTML = `
                     <div class="info-item-label">
                         <i class="${item.icon}"></i>
-                        ${item.label}
+                        ${safeLabel}
                     </div>
-                    <div class="info-item-value">${item.value}</div>
+                    <div class="info-item-value">${safeValue}</div>
                 `;
                 infoGrid.appendChild(div);
             });
-            
-            // تحديث أزرار الترجمة
+
             document.getElementById('copyExampleBtn').textContent = translations.copyExampleBtn[currentLang];
             document.getElementById('closeModalBtn').textContent = translations.closeModalBtn[currentLang];
-            
-            // عرض النافذة
+
             document.getElementById('infoModal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -1501,16 +1593,15 @@
             if (currentExampleIndex !== -1) {
                 const ex = examples[currentExampleIndex];
                 navigator.clipboard.writeText(ex.c).then(() => {
-                    // إضافة تأثير مؤقت على الزر
                     const btn = document.querySelector('.action-btn');
                     const originalHTML = btn.innerHTML;
-                    btn.innerHTML = '<i class="fas fa-check"></i> <span id="copyExampleBtn">' + 
-                                   (currentLang === 'ar' ? 'تم النسخ!' : 
+                    btn.innerHTML = '<i class="fas fa-check"></i> <span id="copyExampleBtn">' +
+                                   (currentLang === 'ar' ? 'تم النسخ!' :
                                     currentLang === 'fr' ? 'Copié!' : 'Copied!') + '</span>';
                     btn.style.background = 'var(--success)';
                     btn.style.borderColor = 'var(--success)';
                     btn.style.color = 'white';
-                    
+
                     setTimeout(() => {
                         btn.innerHTML = originalHTML;
                         btn.style.background = '';
@@ -1523,18 +1614,17 @@
 
         function filterExamples(filter) {
             currentFilter = filter;
-            
-            // Update active button
+
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.filter === filter);
             });
-            
+
             renderExamples();
         }
 
         function updateStats(visibleCount = 0) {
             const total = examples.length;
-            
+
             const statTexts = {
                 ar: {
                     total: `${total} مثال`,
@@ -1552,7 +1642,7 @@
                     copied: `${copiedCount} copied`
                 }
             };
-            
+
             document.getElementById('totalExamples').textContent = statTexts[currentLang].total;
             document.getElementById('visibleExamples').textContent = statTexts[currentLang].visible;
             document.getElementById('copiedCount').textContent = statTexts[currentLang].copied;
@@ -1564,12 +1654,10 @@
             document.getElementById("html-root").setAttribute("lang", lang);
             document.getElementById("html-root").setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
 
-            // Update language buttons
             document.querySelectorAll(".lang-btn").forEach(btn => {
                 btn.classList.toggle("active", btn.dataset.lang === lang);
             });
 
-            // Update all translatable text
             document.querySelectorAll("[data-key]").forEach(el => {
                 const k = el.dataset.key;
                 if (translations[k] && translations[k][lang]) {
@@ -1577,47 +1665,59 @@
                 }
             });
 
-            // Update search placeholder
             const searchPlaceholders = {
                 ar: "ابحث في الأكواد أو الخوارزميات أو الوصف...",
                 fr: "Rechercher dans les codes, algorithmes ou descriptions…",
                 en: "Search in codes, algorithms or descriptions…"
             };
-            
+
             document.getElementById("search").placeholder = searchPlaceholders[lang];
 
-            // Load copied count
             copiedCount = parseInt(localStorage.getItem('copiedCount')) || 0;
-            
+
             renderExamples();
         }
 
-        // Initialize
+        const searchBox = document.getElementById("search");
+        if (searchBox) {
+           
+            searchBox.addEventListener('input', function(e) {
+    
+                renderExamples();
+            });
+
+            searchBox.addEventListener('paste', function(e) {
+                setTimeout(() => renderExamples(), 10);
+            });
+        }
+
         window.addEventListener('scroll', () => {
             document.body.classList.toggle('scrolling', window.scrollY > 10);
         });
 
-        document.getElementById("search").addEventListener("input", renderExamples);
-        
         document.querySelectorAll(".lang-btn").forEach(btn => {
             btn.addEventListener("click", () => setLang(btn.dataset.lang));
         });
 
-        // إغلاق النافذة بالضغط على ESC
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && document.getElementById('infoModal').classList.contains('active')) {
                 closeInfoModal();
             }
         });
 
-        // إغلاق النافذة بالنقر خارجها
         document.getElementById('infoModal').addEventListener('click', (e) => {
             if (e.target === document.getElementById('infoModal')) {
                 closeInfoModal();
             }
         });
 
-        // Load initial data
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initSecurity);
+        } else {
+            initSecurity();
+        }
+
         copiedCount = parseInt(localStorage.getItem('copiedCount')) || 0;
         setLang("ar");
     </script>

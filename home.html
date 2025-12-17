@@ -1,26 +1,40 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" id="html-root">
 <head>
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' 'unsafe-eval';
+        style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline';
+        font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+        img-src 'self' data:;
+        connect-src 'self';
+        frame-ancestors 'none';
+        base-uri 'self';
+        form-action 'self';
+        object-src 'none';
+    ">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    
     <meta property="og:site_name" content="Algorithmes & C">
-
     <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Algorithmes & C",
-  "alternateName": "تعلم لغة C والخوارزميات",
-  "url": "https://bibarss39-sudo.github.io/bibarss39/"
-}
-</script>
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Algorithmes & C",
+      "alternateName": "تعلم لغة C والخوارزميات",
+      "url": "https://bibarss39-sudo.github.io/bibarss39/"
+    }
+    </script>
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>أكواد C - معمل الترميز التفاعلي</title>
     <link rel="icon" type="image/png" href="favicon.png">
 
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700&family=Poppins:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <style>
@@ -60,7 +74,6 @@
             line-height: 1.6;
         }
 
-        /* تأثير شريط علوي عند التمرير */
         body::before {
             content: '';
             position: fixed;
@@ -170,7 +183,6 @@
             margin: 0 auto;
         }
 
-        /* ✨ Enhanced Hint Box */
         .hint-box {
             position: relative;
             background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(14, 165, 233, 0.1));
@@ -224,7 +236,6 @@
             }
         }
 
-        /* فلاتر التصنيف */
         .category-filters {
             display: flex;
             justify-content: center;
@@ -322,7 +333,6 @@
             margin-top: 8px;
         }
 
-        /* ✨ تأثير النقر */
         .code-box.pulse {
             animation: clickPulse 0.6s ease-out;
         }
@@ -344,7 +354,6 @@
             }
         }
 
-        /* Modal */
         .modal {
             position: fixed;
             top: 0;
@@ -505,7 +514,6 @@
             transform: none !important;
         }
 
-        /* لغة LTR */
         body.lang-en nav,
         body.lang-fr nav {
             flex-direction: row-reverse;
@@ -521,7 +529,6 @@
             text-align: left;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             nav {
                 flex-direction: column;
@@ -679,6 +686,40 @@
     </div>
 
     <script>
+        const Security = {
+            sanitize: function(text) {
+                if (!text) return '';
+                const temp = document.createElement('div');
+                temp.textContent = text;
+                return temp.innerHTML;
+            },
+            
+            validateLink: function(url) {
+                if (!url) return false;
+                try {
+                    const urlObj = new URL(url, window.location.origin);
+                    const allowedProtocols = ['http:', 'https:', 'mailto:', 'tel:'];
+                    const allowedDomains = [
+                        window.location.hostname,
+                        'bibarss39-sudo.github.io'
+                    ];
+                    
+                    if (!allowedProtocols.includes(urlObj.protocol)) return false;
+                    return allowedDomains.some(domain => 
+                        urlObj.hostname === domain || urlObj.hostname.endsWith('.' + domain)
+                    );
+                } catch (e) {
+                    return url.startsWith('/') || url.startsWith('./') || url.startsWith('../');
+                }
+            },
+            
+            protect: function() {
+                try {
+                    Object.freeze(Object.prototype);
+                } catch (e) {}
+            }
+        };
+
         let current = 1;
         let step = 1;
         let lang = "ar";
@@ -689,7 +730,7 @@
                 title: { ar: 'printf("Hello, World!")', fr: 'printf("Hello, World!")', en: 'printf("Hello, World!")' },
                 exp: {
                     ar: 'تُستخدم لطباعة نص أو قيمة على الشاشة. مثال: طباعة رسالة ترحيب.',
-                    fr: 'Affiche un texte ou une valeur à l’écran.',
+                    fr: 'Affiche un texte ou une valeur à l\'écran.',
                     en: 'Displays text or values on the screen.'
                 },
                 algFr: 'Écrire("Hello World!")',
@@ -704,13 +745,13 @@
                 title: { ar: 'scanf("%d", &x)', fr: 'scanf("%d", &x)', en: 'scanf("%d", &x)' },
                 exp: {
                     ar: 'تقرأ عددًا صحيحًا من المستخدم وتخزّنه في المتغير x.',
-                    fr: 'Lit un entier saisi par l’utilisateur et le stocke dans x.',
+                    fr: 'Lit un entier saisi par l\'utilisateur et le stocke dans x.',
                     en: 'Reads an integer input from the user and stores it in x.'
                 },
                 algFr: 'Lire(x)',
                 algExp: {
                     ar: 'تسمح بإدخال بيانات من المستخدم أثناء تشغيل البرنامج.',
-                    fr: 'Permet à l’utilisateur d’entrer une valeur.',
+                    fr: 'Permet à l\'utilisateur d\'entrer une valeur.',
                     en: 'Allows user input into a variable.'
                 },
                 category: 'input'
@@ -719,7 +760,7 @@
                 title: { ar: 'for (int i = 0; i < 10; i++)', fr: 'for (int i = 0; i < 10; i++)', en: 'for (int i = 0; i < 10; i++)' },
                 exp: {
                     ar: 'حلقة تُكرّر تنفيذ شرط من الأوامر 10 مرات (من 0 إلى 9).',
-                    fr: 'Boucle qui s’exécute exactement 10 fois (de 0 à 9).',
+                    fr: 'Boucle qui s\'exécute exactement 10 fois (de 0 à 9).',
                     en: 'Loop that executes exactly 10 times (from 0 to 9).'
                 },
                 algFr: 'Pour i de 0 à 9 faire',
@@ -1089,7 +1130,6 @@
             comment: { ar: 'التعليقات', fr: 'Commentaires', en: 'Comments' }
         };
 
-        // إنشاء الأكواد ديناميكياً
         function initializeCodes() {
             const container = document.getElementById('codesContainer');
             container.innerHTML = '';
@@ -1099,12 +1139,16 @@
                 const box = document.createElement('div');
                 box.className = 'code-box';
                 box.setAttribute('data-category', item.category);
-                box.setAttribute('onclick', `handleClick(this, ${key})`);
+                box.setAttribute('data-id', key);
                 
                 box.innerHTML = `
-                    <div class="code-content">${item.title[lang]}</div>
-                    <div class="code-category">${categoryLabels[item.category][lang]}</div>
+                    <div class="code-content">${Security.sanitize(item.title[lang])}</div>
+                    <div class="code-category">${Security.sanitize(categoryLabels[item.category][lang])}</div>
                 `;
+                
+                box.addEventListener('click', function(e) {
+                    handleClick(this, parseInt(key));
+                });
                 
                 container.appendChild(box);
             });
@@ -1118,9 +1162,8 @@
                 element.classList.remove('pulse');
             }, 600);
             
-            // تمييز البحث بالكود المختار
             const searchBox = document.getElementById('search');
-            searchBox.value = data[index].title[lang];
+            searchBox.value = Security.sanitize(data[index].title[lang]);
             searchBox.classList.add('highlighted');
             setTimeout(() => {
                 searchBox.classList.remove('highlighted');
@@ -1190,21 +1233,19 @@
             };
 
             const t = labels[lang];
-            document.getElementById("homeText").textContent = t.home;
-            document.getElementById("search").placeholder = t.search;
-            document.getElementById("closeBtn").textContent = t.close;
-            document.getElementById("nextBtn").innerHTML = t.next + ' <i class="fas fa-arrow-left"></i>';
-            document.getElementById("prevBtn").innerHTML = '<i class="fas fa-arrow-right"></i> ' + t.back;
-            document.getElementById("subtitle").textContent = t.subtitle;
-            document.getElementById("hintText").textContent = t.hint;
+            document.getElementById("homeText").textContent = Security.sanitize(t.home);
+            document.getElementById("search").placeholder = Security.sanitize(t.search);
+            document.getElementById("closeBtn").textContent = Security.sanitize(t.close);
+            document.getElementById("nextBtn").innerHTML = Security.sanitize(t.next) + ' <i class="fas fa-arrow-left"></i>';
+            document.getElementById("prevBtn").innerHTML = '<i class="fas fa-arrow-right"></i> ' + Security.sanitize(t.back);
+            document.getElementById("subtitle").textContent = Security.sanitize(t.subtitle);
+            document.getElementById("hintText").textContent = Security.sanitize(t.hint);
 
-            // تحديث فلاتر التصنيف
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 const category = btn.getAttribute('onclick').match(/'([^']+)'/)[1];
-                btn.textContent = categoryLabels[category][lang];
+                btn.textContent = Security.sanitize(categoryLabels[category][lang]);
             });
 
-            // تحديث الأكواد
             initializeCodes();
 
             updateLangBtn();
@@ -1225,9 +1266,9 @@
             document.getElementById("modal").style.display = "flex";
             
             const item = data[i];
-            document.getElementById("title").textContent = item.title[lang];
-            document.getElementById("modalCategory").textContent = categoryLabels[item.category][lang];
-            document.getElementById("content").textContent = item.exp[lang];
+            document.getElementById("title").textContent = Security.sanitize(item.title[lang]);
+            document.getElementById("modalCategory").textContent = Security.sanitize(categoryLabels[item.category][lang]);
+            document.getElementById("content").textContent = Security.sanitize(item.exp[lang]);
             
             updateModalButtons();
             updateStepIndicator();
@@ -1235,10 +1276,10 @@
 
         function nextStep() {
             if (step === 1) {
-                document.getElementById("content").textContent = data[current].algFr;
+                document.getElementById("content").textContent = Security.sanitize(data[current].algFr);
                 step = 2;
             } else if (step === 2) {
-                document.getElementById("content").textContent = data[current].algExp[lang];
+                document.getElementById("content").textContent = Security.sanitize(data[current].algExp[lang]);
                 step = 3;
             } else {
                 closeModal();
@@ -1251,10 +1292,10 @@
 
         function prevStep() {
             if (step === 2) {
-                document.getElementById("content").textContent = data[current].exp[lang];
+                document.getElementById("content").textContent = Security.sanitize(data[current].exp[lang]);
                 step = 1;
             } else if (step === 3) {
-                document.getElementById("content").textContent = data[current].algFr;
+                document.getElementById("content").textContent = Security.sanitize(data[current].algFr);
                 step = 2;
             }
             
@@ -1269,10 +1310,10 @@
             prevBtn.style.display = step > 1 ? "inline-block" : "none";
             
             if (step === 3) {
-                nextBtn.innerHTML = (lang === "ar" ? "إغلاق" : (lang === "fr" ? "Fermer" : "Close")) + 
+                nextBtn.innerHTML = Security.sanitize(lang === "ar" ? "إغلاق" : (lang === "fr" ? "Fermer" : "Close")) + 
                     ' <i class="fas fa-arrow-left"></i>';
             } else {
-                nextBtn.innerHTML = (lang === "ar" ? "التالي" : (lang === "fr" ? "Suivant" : "Next")) + 
+                nextBtn.innerHTML = Security.sanitize(lang === "ar" ? "التالي" : (lang === "fr" ? "Suivant" : "Next")) + 
                     ' <i class="fas fa-arrow-left"></i>';
             }
         }
@@ -1293,14 +1334,13 @@
         }
 
         document.getElementById("search").addEventListener("input", function () {
-            const text = this.value.trim().toLowerCase();
+            const text = Security.sanitize(this.value.trim().toLowerCase());
             const boxes = document.querySelectorAll(".code-box");
             
             boxes.forEach(box => {
                 const code = box.querySelector('.code-content').textContent.toLowerCase();
                 const category = box.querySelector('.code-category').textContent.toLowerCase();
                 
-                // البحث في النص أو التصنيف
                 if (code.includes(text) || category.includes(text)) {
                     box.style.display = currentFilter === 'all' || box.getAttribute('data-category') === currentFilter ? 'flex' : 'none';
                 } else {
@@ -1309,22 +1349,39 @@
             });
         });
 
-        // تهيئة
-        translateUI();
-
-        window.addEventListener('scroll', () => {
-            document.body.classList.toggle('scrolling', window.scrollY > 10);
-        });
-
-        document.getElementById("modal").addEventListener("click", function (e) {
-            if (e.target === this) closeModal();
-        });
-
-        // إغلاق المودال بالضغط على ESC
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && document.getElementById("modal").style.display === "flex") {
-                closeModal();
+        document.querySelector('.home-btn').addEventListener('click', function(e) {
+            if (!Security.validateLink(this.href)) {
+                e.preventDefault();
+                alert('رابط غير صالح لأسباب أمنية');
             }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            Security.protect();
+            
+            translateUI();
+
+            if (window.self !== window.top) {
+                try {
+                    window.top.location = window.self.location;
+                } catch (e) {
+                    document.body.innerHTML = '<div style="padding: 20px; text-align: center; color: white;"><h2>⚠️ تحذير أمني</h2><p>تم تحميل هذه الصفحة في إطار غير مصرح به.</p><p>يرجى فتح الصفحة مباشرة في المتصفح.</p></div>';
+                }
+            }
+
+            window.addEventListener('scroll', () => {
+                document.body.classList.toggle('scrolling', window.scrollY > 10);
+            });
+
+            document.getElementById("modal").addEventListener("click", function (e) {
+                if (e.target === this) closeModal();
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && document.getElementById("modal").style.display === "flex") {
+                    closeModal();
+                }
+            });
         });
     </script>
 </body>
