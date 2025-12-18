@@ -2,32 +2,15 @@
 <html lang="ar" dir="rtl" id="html-root">
 <head>
     <meta property="og:site_name" content="Algorithmes & C">
-
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Algorithmes & C",
-  "alternateName": "تعلم لغة C والخوارزميات",
-  "url": "https://bibarss39-sudo.github.io/bibarss39/"
-}
-</script>
-
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com/ajax/libs/ https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com/ajax/libs/ https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self';">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>أفضل أدوات تطوير لغة C</title>
     <link rel="icon" type="image/png" href="favicon.png">
 
+    <!-- CDN Links -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
     <style>
@@ -44,6 +27,9 @@
             --danger: #ef4444;
             --purple: #8b5cf6;
             --pink: #ec4899;
+            --orange: #f97316;
+            --cyan: #06b6d4;
+            --green: #22c55e;
             --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             --gradient-accent: linear-gradient(135deg, var(--accent), var(--purple));
@@ -64,6 +50,11 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -78,8 +69,193 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             position: relative;
+            opacity: 0;
+            animation: bodyFadeIn 1s ease forwards;
         }
 
+        @keyframes bodyFadeIn {
+            to { opacity: 1; }
+        }
+
+        /* شريط التحميل */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--purple), var(--pink), var(--cyan));
+            z-index: 9999;
+            transform: translateX(-100%);
+            animation: pageLoad 1.5s ease-in-out forwards;
+        }
+
+        @keyframes pageLoad {
+            to { transform: translateX(0); }
+        }
+
+        /* شريط التمرير */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--purple), var(--cyan));
+            z-index: 9998;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+
+        /* شريط التنقل العلوي */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(11, 17, 32, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+            z-index: 1000;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            transition: var(--transition);
+        }
+
+        .top-bar.scrolled {
+            background: rgba(11, 17, 32, 0.98);
+            padding: 10px 20px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        /* زر العودة */
+        .home-btn-top {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            color: white;
+            background: var(--gradient-accent);
+            padding: 10px 18px;
+            border-radius: 15px;
+            transition: var(--transition);
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            position: relative;
+            animation: slideInLeft 0.8s ease-out 0.3s both;
+        }
+
+        .home-btn-top::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .home-btn-top:hover::before {
+            left: 100%;
+        }
+
+        .home-btn-top:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: var(--shadow-lg), 0 0 25px rgba(59, 130, 246, 0.6);
+        }
+
+        /* أزرار اللغة */
+        .lang-switcher-top {
+            display: flex;
+            gap: 8px;
+            animation: slideInRight 0.8s ease-out 0.4s both;
+        }
+
+        .lang-btn-top {
+            width: 45px;
+            height: 40px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            font-size: 16px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lang-btn-top::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .lang-btn-top:hover::before {
+            transform: translateX(100%);
+        }
+
+        .lang-btn-top:hover {
+            transform: scale(1.1);
+            background: rgba(96, 165, 250, 0.3);
+            color: var(--accent-light);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
+        }
+
+        .lang-btn-top.active {
+            background: var(--gradient-accent);
+            color: white;
+            transform: scale(1.08);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5), var(--shadow-glow);
+            animation: langPulse 3s infinite;
+        }
+
+        @keyframes langPulse {
+            0%, 100% { transform: scale(1.08); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5), 0 0 15px rgba(59, 130, 246, 0.5); }
+            50% { transform: scale(1.12); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.6), 0 0 25px rgba(59, 130, 246, 0.7); }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* خلفية الجسيمات */
         .bg-particles {
             position: fixed;
             top: 0;
@@ -93,158 +269,27 @@
 
         .particle {
             position: absolute;
-            background: var(--accent);
             border-radius: 50%;
             opacity: 0.1;
-            animation: float 20s infinite linear;
+            animation: float 25s infinite linear;
         }
 
         @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); }
-            100% { transform: translateY(-100vh) rotate(360deg); }
+            0% { transform: translateY(0) rotate(0deg) scale(1); }
+            50% { transform: translateY(-50vh) rotate(180deg) scale(1.2); }
+            100% { transform: translateY(-100vh) rotate(360deg) scale(1); }
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 6px;
-            background: linear-gradient(90deg, var(--accent), var(--purple), var(--pink));
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            z-index: 1000;
-            pointer-events: none;
-        }
-
-        body.scrolling::before {
-            opacity: 1;
-        }
-
-        .lang-switcher {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            gap: 8px;
-            z-index: 100;
-            backdrop-filter: blur(12px);
-            background: rgba(15, 23, 42, 0.8);
-            padding: 8px;
-            border-radius: 16px;
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-        }
-
-        .lang-switcher:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .lang-btn {
-            width: 45px;
-            height: 35px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.08);
-            color: var(--text-muted);
-            font-size: 16px;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-            will-change: transform, background;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .lang-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s;
-        }
-
-        .lang-btn:hover::before {
-            transform: translateX(100%);
-        }
-
-        .lang-btn:hover {
-            transform: scale(1.15);
-            background: rgba(96, 165, 250, 0.25);
-            color: var(--accent-light);
-            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
-        }
-
-        .lang-btn.active {
-            background: var(--gradient-accent);
-            color: white;
-            transform: scale(1.1);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5), var(--shadow-glow);
-        }
-
-        .home-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 17px;
-            font-weight: 600;
-            text-decoration: none;
-            color: white;
-            background: var(--gradient-accent);
-            padding: 14px 24px;
-            border-radius: 18px;
-            transition: var(--transition);
-            box-shadow: var(--shadow-md);
-            z-index: 10;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            overflow: hidden;
-        }
-
-        .home-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .home-btn:hover::before {
-            opacity: 1;
-        }
-
-        .home-btn:hover {
-            background: var(--gradient-accent);
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: var(--shadow-lg), 0 0 20px rgba(59, 130, 246, 0.5);
-        }
-
+        /* المحتوى */
         .container {
-            max-width: 1000px;
-            margin: 120px auto 80px;
-            padding: 0 25px;
+            max-width: 100%;
+            margin: 100px auto 60px;
+            padding: 0 15px;
         }
 
         header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 50px;
             padding: 0 15px;
             position: relative;
         }
@@ -254,26 +299,33 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 300px;
-            height: 300px;
+            width: 250px;
+            height: 250px;
             background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
             filter: blur(60px);
             z-index: -1;
+            animation: glowPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.1); }
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: 2.2rem;
             margin: 0;
-            background: linear-gradient(135deg, var(--accent-light), var(--purple));
+            background: linear-gradient(135deg, var(--accent-light), var(--purple), var(--cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
-            font-weight: 800;
+            text-shadow: 0 5px 20px rgba(59, 130, 246, 0.4);
+            font-weight: 900;
             letter-spacing: -0.5px;
             position: relative;
             display: inline-block;
-            animation: fadeInDown 1s ease-out;
+            animation: fadeInDown 1.2s ease-out;
+            padding: 0 10px;
         }
 
         h1::after {
@@ -282,82 +334,108 @@
             bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 120px;
-            height: 5px;
-            background: var(--gradient-accent);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent-light), var(--purple), var(--cyan), transparent);
             border-radius: 3px;
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+            animation: lineGlow 3s infinite;
+        }
+
+        @keyframes lineGlow {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
         }
 
         .subtitle {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
-            margin-top: 20px;
-            max-width: 800px;
+            margin-top: 25px;
+            max-width: 100%;
             margin: 25px auto 0;
-            line-height: 1.8;
-            padding: 0 20px;
-            animation: fadeInUp 1s ease-out 0.2s both;
+            line-height: 1.7;
+            padding: 0 10px;
+            animation: fadeInUp 1.2s ease-out 0.3s both;
         }
 
+        /* منصات */
         .platform-tags {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
+            gap: 10px;
+            margin-top: 25px;
             flex-wrap: wrap;
+            padding: 0 10px;
         }
 
         .platform-tag {
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 16px;
+            padding: 8px 15px;
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
+            border-radius: 18px;
             border: 1px solid var(--border);
             color: var(--text-secondary);
             font-size: 0.9rem;
             transition: var(--transition);
+            animation: fadeInUp 0.8s ease-out both;
         }
+
+        .platform-tag:nth-child(2) { animation-delay: 0.1s; }
+        .platform-tag:nth-child(3) { animation-delay: 0.2s; }
+        .platform-tag:nth-child(4) { animation-delay: 0.3s; }
+        .platform-tag:nth-child(5) { animation-delay: 0.4s; }
 
         .platform-tag:hover {
             background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-light);
         }
 
+        /* الأقسام */
         .section {
-            margin-bottom: 80px;
-            animation: fadeInUp 0.8s ease-out both;
+            margin-bottom: 70px;
+            animation: fadeInUp 1s ease-out both;
         }
 
         .section:nth-child(2) { animation-delay: 0.1s; }
         .section:nth-child(3) { animation-delay: 0.2s; }
 
         .section-title {
-            font-size: 2.1rem;
+            font-size: 1.8rem;
             color: #e0f2fe;
-            margin: 50px 0 35px;
+            margin: 40px 0 30px;
             display: flex;
             align-items: center;
             gap: 20px;
             justify-content: center;
-            font-weight: 700;
+            font-weight: 800;
             position: relative;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            padding: 0 15px;
+            text-align: center;
         }
 
         .section-title i {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: white;
             background: var(--gradient-accent);
-            width: 55px;
-            height: 55px;
-            border-radius: 16px;
+            width: 50px;
+            height: 50px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-lg);
+            animation: iconFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(5deg); }
         }
 
         .section-title::before,
@@ -365,46 +443,71 @@
             content: "";
             flex: 1;
             height: 2px;
-            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            background: linear-gradient(90deg, transparent, var(--border), var(--accent-light), var(--border), transparent);
+            border-radius: 2px;
         }
 
+        /* شبكة التطبيقات */
         .app-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            padding: 0 10px;
+        }
+
+        @media (min-width: 768px) {
+            .app-grid {
+                grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+                gap: 30px;
+                padding: 0 20px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .app-grid {
+                grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+                gap: 35px;
+            }
         }
 
         .app-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 32px;
+            background: linear-gradient(135deg, rgba(25, 35, 55, 0.9), rgba(20, 28, 47, 0.9));
+            border: 2px solid rgba(148, 163, 184, 0.2);
+            border-radius: 22px;
+            padding: 25px;
             transition: var(--transition);
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-lg);
             position: relative;
             overflow: hidden;
             will-change: transform, box-shadow;
             text-align: right;
-            backdrop-filter: blur(10px);
-            animation: fadeInUp 0.6s ease-out both;
+            backdrop-filter: blur(15px);
+            animation: cardFloat 0.8s ease-out both;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (min-width: 768px) {
+            .app-card {
+                padding: 30px;
+                min-height: 320px;
+                border-radius: 25px;
+            }
         }
 
         .app-card::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
+            right: 0;
             width: 6px;
             height: 100%;
-            background: var(--gradient-accent);
+            background: linear-gradient(to bottom, var(--accent), var(--purple), var(--cyan));
             transform: scaleY(0);
             transform-origin: top;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s ease;
             z-index: 1;
-        }
-
-        .app-card:hover::before {
-            transform: scaleY(1);
         }
 
         .app-card::after {
@@ -414,9 +517,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, transparent, rgba(59, 130, 246, 0.05), transparent);
+            background: linear-gradient(135deg, transparent, rgba(59, 130, 246, 0.1), transparent);
             opacity: 0;
-            transition: opacity 0.5s;
+            transition: opacity 0.6s;
+        }
+
+        .app-card:hover::before {
+            transform: scaleY(1);
         }
 
         .app-card:hover::after {
@@ -424,36 +531,81 @@
         }
 
         .app-card:hover {
-            background: var(--card-bg-hover);
+            background: linear-gradient(135deg, rgba(30, 45, 85, 0.95), rgba(25, 35, 55, 0.95));
             transform: translateY(-10px) scale(1.02);
-            box-shadow: var(--shadow-lg), var(--shadow-glow);
-            border-color: rgba(96, 165, 250, 0.4);
+            box-shadow: var(--shadow-lg), 0 20px 40px rgba(59, 130, 246, 0.3);
+            border-color: rgba(96, 165, 250, 0.5);
+        }
+
+        @keyframes cardFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .app-card-header {
             display: flex;
             align-items: flex-start;
-            gap: 20px;
+            gap: 18px;
             margin-bottom: 20px;
+            flex-shrink: 0;
+        }
+
+        @media (min-width: 768px) {
+            .app-card-header {
+                gap: 22px;
+                margin-bottom: 25px;
+            }
         }
 
         .app-icon {
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 30px;
-            background: var(--gradient-accent);
+            font-size: 26px;
             color: white;
             flex-shrink: 0;
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-lg);
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .app-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 30px;
+                border-radius: 20px;
+            }
+        }
+
+        .app-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+            opacity: 0;
+            transition: opacity 0.4s;
         }
 
         .app-card:hover .app-icon {
-            transform: scale(1.1) rotate(5deg);
+            transform: scale(1.1) rotate(8deg);
+        }
+
+        .app-card:hover .app-icon::before {
+            opacity: 1;
         }
 
         .app-title-container {
@@ -461,13 +613,21 @@
         }
 
         .app-card h3 {
-            font-size: 1.65rem;
-            margin: 0 0 8px;
+            font-size: 1.5rem;
+            margin: 0 0 10px;
             color: #e0f2fe;
             display: flex;
             align-items: center;
             gap: 12px;
-            font-weight: 700;
+            font-weight: 800;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (min-width: 768px) {
+            .app-card h3 {
+                font-size: 1.7rem;
+                gap: 15px;
+            }
         }
 
         .app-meta {
@@ -477,48 +637,89 @@
             margin-top: 10px;
         }
 
+        @media (min-width: 768px) {
+            .app-meta {
+                gap: 12px;
+                margin-top: 12px;
+            }
+        }
+
         .tag {
             font-size: 0.8rem;
             background: var(--gradient-accent);
             color: white;
-            padding: 6px 14px;
+            padding: 6px 15px;
             border-radius: 30px;
             font-weight: bold;
-            letter-spacing: 0.3px;
-            box-shadow: var(--shadow-sm);
+            letter-spacing: 0.5px;
+            box-shadow: var(--shadow-md);
+            animation: tagPulse 3s infinite;
+        }
+
+        @media (min-width: 768px) {
+            .tag {
+                font-size: 0.85rem;
+                padding: 8px 18px;
+            }
+        }
+
+        @keyframes tagPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .tag.paid {
-            background: var(--gradient-secondary);
+            background: linear-gradient(135deg, var(--orange), #f59e0b);
+        }
+
+        .tag.opensource {
+            background: linear-gradient(135deg, var(--success), #059669);
+        }
+
+        .tag.free {
+            background: linear-gradient(135deg, var(--cyan), #0891b2);
         }
 
         .platform {
             font-size: 0.75rem;
             background: rgba(255, 255, 255, 0.1);
             color: var(--text-secondary);
-            padding: 4px 10px;
+            padding: 5px 12px;
             border-radius: 20px;
             border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        @media (min-width: 768px) {
+            .platform {
+                font-size: 0.8rem;
+                padding: 6px 14px;
+            }
+        }
+
+        .platform:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.03);
         }
 
         .app-card p {
             color: var(--text-secondary);
-            font-size: 1.08rem;
+            font-size: 1.05rem;
             margin-bottom: 25px;
             line-height: 1.8;
             position: relative;
             z-index: 2;
-            padding-right: 10px;
+            padding-right: 12px;
+            flex: 1;
         }
 
-        .app-card p code {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.95em;
-            color: #ffedd5;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        @media (min-width: 768px) {
+            .app-card p {
+                font-size: 1.1rem;
+                margin-bottom: 30px;
+                padding-right: 15px;
+                line-height: 1.9;
+            }
         }
 
         .app-stats {
@@ -526,9 +727,18 @@
             gap: 20px;
             margin: 20px 0;
             padding: 15px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 14px;
             border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+
+        @media (min-width: 768px) {
+            .app-stats {
+                gap: 25px;
+                padding: 18px;
+                border-radius: 16px;
+            }
         }
 
         .stat-item {
@@ -539,15 +749,30 @@
         }
 
         .stat-value {
-            font-size: 1.2rem;
-            font-weight: 700;
+            font-size: 1.1rem;
+            font-weight: 800;
             color: var(--accent-light);
-            margin-bottom: 4px;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
+        }
+
+        @media (min-width: 768px) {
+            .stat-value {
+                font-size: 1.3rem;
+                margin-bottom: 6px;
+            }
         }
 
         .stat-label {
             font-size: 0.8rem;
             color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        @media (min-width: 768px) {
+            .stat-label {
+                font-size: 0.85rem;
+            }
         }
 
         .links {
@@ -557,52 +782,67 @@
             margin-top: 20px;
         }
 
+        @media (min-width: 768px) {
+            .links {
+                gap: 15px;
+                margin-top: 25px;
+            }
+        }
+
         .link-btn {
             text-decoration: none;
             background: var(--gradient-accent);
             color: white;
-            padding: 12px 22px;
-            border-radius: 16px;
-            font-weight: 600;
+            padding: 12px 20px;
+            border-radius: 15px;
+            font-weight: 700;
             font-size: 1rem;
             display: inline-flex;
             align-items: center;
             gap: 10px;
             transition: var(--transition);
             box-shadow: var(--shadow-md);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             min-width: 140px;
             justify-content: center;
             position: relative;
             overflow: hidden;
             z-index: 1;
+            flex: 1;
+            max-width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .link-btn {
+                padding: 14px 25px;
+                min-width: 160px;
+                font-size: 1.05rem;
+                border-radius: 18px;
+            }
         }
 
         .link-btn::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
+            left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
-            transform: translateX(-100%);
-            transition: transform 0.6s;
-            z-index: -1;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
         }
 
         .link-btn:hover::before {
-            transform: translateX(0);
+            left: 100%;
         }
 
         .link-btn:hover {
-            background: var(--gradient-accent);
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: var(--shadow-lg), 0 10px 25px rgba(59, 130, 246, 0.4);
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: var(--shadow-lg), 0 12px 30px rgba(59, 130, 246, 0.5);
         }
 
         .link-btn.secondary {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.1);
             color: var(--text-secondary);
             border: 1px solid var(--border);
         }
@@ -612,45 +852,93 @@
             color: white;
         }
 
+        /* المميزات */
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 25px;
             margin-top: 40px;
+            padding: 0 15px;
+        }
+
+        @media (min-width: 768px) {
+            .features-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 30px;
+            }
         }
 
         .feature-card {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 20px;
             padding: 25px;
             text-align: center;
             border: 1px solid var(--border);
             transition: var(--transition);
+            backdrop-filter: blur(10px);
+            animation: featureFloat 5s ease-in-out infinite;
+        }
+
+        @media (min-width: 768px) {
+            .feature-card {
+                padding: 30px;
+                border-radius: 22px;
+            }
+        }
+
+        @keyframes featureFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
 
         .feature-card:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.05);
-            box-shadow: var(--shadow-md);
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-light);
         }
 
         .feature-icon {
             width: 60px;
             height: 60px;
             background: var(--gradient-accent);
-            border-radius: 16px;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 15px;
+            margin: 0 auto 18px;
             font-size: 24px;
             color: white;
+            box-shadow: var(--shadow-md);
+            animation: iconSpin 10s linear infinite;
+        }
+
+        @media (min-width: 768px) {
+            .feature-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 28px;
+                border-radius: 20px;
+            }
+        }
+
+        @keyframes iconSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .feature-card h4 {
             color: #e0f2fe;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        @media (min-width: 768px) {
+            .feature-card h4 {
+                font-size: 1.3rem;
+                margin-bottom: 15px;
+            }
         }
 
         .feature-card p {
@@ -659,6 +947,67 @@
             line-height: 1.6;
         }
 
+        @media (min-width: 768px) {
+            .feature-card p {
+                font-size: 1rem;
+                line-height: 1.7;
+            }
+        }
+
+        /* فلتر التصنيفات */
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            padding: 0 15px;
+        }
+
+        @media (min-width: 768px) {
+            .category-filter {
+                gap: 15px;
+                margin: 40px 0;
+            }
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--border);
+            border-radius: 18px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media (min-width: 768px) {
+            .filter-btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+                border-radius: 20px;
+            }
+        }
+
+        .filter-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .filter-btn.active {
+            background: var(--gradient-accent);
+            color: white;
+            border-color: transparent;
+            box-shadow: var(--shadow-md);
+            transform: scale(1.05);
+        }
+
+        /* الفوتر */
         footer {
             text-align: center;
             margin-top: 80px;
@@ -667,6 +1016,14 @@
             font-size: 0.95rem;
             color: var(--text-muted);
             position: relative;
+            padding: 30px 15px 20px;
+        }
+
+        @media (min-width: 768px) {
+            footer {
+                margin-top: 100px;
+                padding: 40px 20px 30px;
+            }
         }
 
         footer::before {
@@ -676,9 +1033,10 @@
             left: 50%;
             transform: translateX(-50%);
             width: 100px;
-            height: 4px;
+            height: 3px;
             background: var(--gradient-accent);
             border-radius: 2px;
+            box-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
         }
 
         .footer-links {
@@ -689,6 +1047,13 @@
             flex-wrap: wrap;
         }
 
+        @media (min-width: 768px) {
+            .footer-links {
+                gap: 30px;
+                margin: 30px 0;
+            }
+        }
+
         .footer-link {
             color: var(--accent-light);
             text-decoration: none;
@@ -696,11 +1061,20 @@
             align-items: center;
             gap: 8px;
             transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-link {
+                font-size: 1.05rem;
+                gap: 10px;
+            }
         }
 
         .footer-link:hover {
             color: white;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            text-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
         }
 
         @keyframes fadeInDown {
@@ -725,12 +1099,185 @@
             }
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        /* تحسينات للأجهزة المحمولة */
+        @media (max-width: 767px) {
+            /* تحسينات الهواتف */
+            .top-bar {
+                padding: 10px 15px;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .home-btn-top {
+                width: 100%;
+                justify-content: center;
+                order: 2;
+                padding: 10px 16px;
+                font-size: 14px;
+                border-radius: 12px;
+            }
+            
+            .lang-switcher-top {
+                width: 100%;
+                justify-content: center;
+                order: 1;
+                gap: 6px;
+            }
+            
+            .lang-btn-top {
+                width: 42px;
+                height: 38px;
+                font-size: 15px;
+                border-radius: 10px;
+            }
+            
+            .container {
+                margin-top: 130px;
+                padding: 0 10px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+                padding: 0 5px;
+            }
+            
+            h1::after {
+                width: 80px;
+                bottom: -12px;
+                height: 3px;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+                padding: 0 5px;
+                line-height: 1.6;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+                margin: 30px 0 25px;
+            }
+            
+            .section-title i {
+                width: 45px;
+                height: 45px;
+                font-size: 1.4rem;
+            }
+            
+            .section-title::before,
+            .section-title::after {
+                display: none;
+            }
+            
+            .app-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 5px;
+            }
+            
+            .app-card {
+                padding: 20px;
+                min-height: auto;
+                border-radius: 18px;
+            }
+            
+            .app-icon {
+                width: 55px;
+                height: 55px;
+                font-size: 24px;
+                border-radius: 16px;
+            }
+            
+            .app-card h3 {
+                font-size: 1.4rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .app-card p {
+                font-size: 1rem;
+                padding-right: 8px;
+                line-height: 1.7;
+            }
+            
+            .platform-tags {
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+            }
+            
+            .platform-tag {
+                width: 100%;
+                max-width: 200px;
+                justify-content: center;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 10px;
+            }
+            
+            .filter-btn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+            
+            .links {
+                flex-direction: column;
+            }
+            
+            .link-btn {
+                width: 100%;
+                max-width: none;
+                padding: 12px 20px;
+            }
+            
+            .app-stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .stat-item {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            
+            .stat-value, .stat-label {
+                margin-bottom: 0;
+            }
         }
 
+        /* تحسينات للأجهزة اللوحية */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .container {
+                max-width: 95%;
+                padding: 0 20px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .app-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 25px;
+            }
+        }
+
+        /* تحسينات للأجهزة الكبيرة */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1200px;
+                padding: 0 30px;
+            }
+        }
+
+        /* LTR Support */
         body.lang-en, body.lang-fr {
             direction: ltr;
             text-align: left;
@@ -739,160 +1286,120 @@
             text-align: left;
         }
         body.lang-en .app-card::before, body.lang-fr .app-card::before {
-            left: auto;
-            right: 0;
+            right: auto;
+            left: 0;
         }
         body.lang-en .app-card p, body.lang-fr .app-card p {
             padding-right: 0;
-            padding-left: 10px;
+            padding-left: 12px;
         }
-
-        @media (max-width: 1100px) {
-            .app-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
+        @media (min-width: 768px) {
+            body.lang-en .app-card p, body.lang-fr .app-card p {
+                padding-left: 15px;
             }
         }
+        body.lang-en .section-title::before,
+        body.lang-fr .section-title::before {
+            order: 2;
+        }
+        body.lang-en .section-title::after,
+        body.lang-fr .section-title::after {
+            order: 1;
+        }
 
-        @media (max-width: 768px) {
-            .container { 
-                margin-top: 100px; 
-                padding: 0 20px;
+        /* تحسينات اللمس */
+        @media (hover: none) {
+            .app-card:hover {
+                transform: none;
             }
-            h1 { 
-                font-size: 2.3rem; 
+            
+            .app-card:hover .app-icon {
+                transform: none;
             }
-            h1::after { 
-                width: 80px; 
-                bottom: -12px; 
+            
+            .link-btn:hover, .home-btn-top:hover, .lang-btn-top:hover, 
+            .platform-tag:hover, .feature-card:hover, .filter-btn:hover {
+                transform: none;
             }
-            .subtitle { 
-                font-size: 1.1rem; 
-                padding: 0 15px;
-            }
-            .section-title { 
-                font-size: 1.8rem; 
-                gap: 15px;
-            }
-            .section-title i { 
-                width: 50px; 
-                height: 50px; 
-                font-size: 1.6rem; 
-            }
-            .app-card { 
-                padding: 25px 20px; 
-            }
-            .app-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 26px;
-            }
-            .app-card h3 { 
-                font-size: 1.5rem; 
-            }
-            .lang-switcher { 
-                top: 70px; 
-                right: 12px; 
-            }
-            .home-btn { 
-                top: 70px; 
-                left: 12px; 
-                padding: 12px 20px; 
-                font-size: 16px; 
-            }
-            .links { 
-                flex-direction: column; 
-            }
-            .link-btn { 
-                width: 100%; 
+            
+            .link-btn:active, .home-btn-top:active, .lang-btn-top:active, 
+            .platform-tag:active, .feature-card:active, .filter-btn:active {
+                transform: scale(0.98);
             }
         }
 
-        @media (max-width: 480px) {
-            .container { 
-                margin-top: 110px; 
-                padding: 0 16px; 
+        /* تحسينات الأداء */
+        @media (prefers-reduced-motion: reduce) {
+            *, ::before, ::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
-            h1 { 
-                font-size: 2rem; 
+        }
+
+        /* تحسين القراءة */
+        @media (prefers-contrast: high) {
+            :root {
+                --bg-primary: #000000;
+                --bg-secondary: #0a0a0a;
+                --text-primary: #ffffff;
+                --text-secondary: #cccccc;
             }
-            .subtitle { 
-                font-size: 1rem; 
+        }
+
+        /* وضع التوفير في الطاقة */
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg-primary: #f8fafc;
+                --bg-secondary: #e2e8f0;
+                --card-bg: rgba(255, 255, 255, 0.9);
+                --card-bg-hover: rgba(255, 255, 255, 0.95);
+                --text-primary: #1e293b;
+                --text-secondary: #475569;
+                --text-muted: #64748b;
+                --border: rgba(100, 116, 139, 0.2);
             }
-            .section-title { 
-                font-size: 1.6rem; 
-                flex-direction: column;
-                text-align: center;
-                gap: 10px;
-            }
-            .section-title::before,
-            .section-title::after {
-                display: none;
-            }
-            .app-card { 
-                padding: 22px 18px; 
-            }
-            .app-card h3 { 
-                font-size: 1.4rem; 
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-            }
-            .app-icon {
-                width: 50px;
-                height: 50px;
-                font-size: 22px;
-            }
-            .app-card p { 
-                font-size: 1rem; 
-            }
-            .lang-switcher { 
-                gap: 6px; 
-                padding: 6px;
-            }
-            .lang-btn { 
-                width: 40px; 
-                height: 32px; 
-                font-size: 14px; 
-            }
-            .home-btn {
-                padding: 10px 16px;
-                font-size: 15px;
-            }
-            .platform-tags {
-                flex-direction: column;
-                align-items: center;
+            
+            body {
+                background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
             }
         }
     </style>
 </head>
 
 <body class="lang-ar">
-    <meta name="csrf-token" content="csrf_<?php echo bin2hex(random_bytes(16)); ?>" id="csrfMetaToken">
+    <!-- شريط التحميل -->
+    <div class="page-loader"></div>
+    <div class="scroll-progress" id="scrollProgress"></div>
 
-    <div class="bg-particles" id="bgParticles"></div>
+    <!-- شريط التنقل العلوي -->
+    <div class="top-bar" id="topBar">
+        <a href="asasi.html" class="home-btn-top">
+            <i class="fas fa-home"></i> 
+            <span class="lang-key" data-key="home">العودة للرئيسية</span>
+        </a>
 
-    <div class="lang-switcher">
-        <button class="lang-btn active" data-lang="ar" title="العربية">🇸🇦</button>
-        <button class="lang-btn" data-lang="fr" title="Français">🇫🇷</button>
-        <button class="lang-btn" data-lang="en" title="English">🇬🇧</button>
+        <div class="lang-switcher-top">
+            <button class="lang-btn-top active" data-lang="ar" title="العربية">🇸🇦</button>
+            <button class="lang-btn-top" data-lang="fr" title="Français">🇫🇷</button>
+            <button class="lang-btn-top" data-lang="en" title="English">🇬🇧</button>
+        </div>
     </div>
 
-    <a href="asasi.html" class="home-btn animate__animated animate__fadeIn">
-        <i class="fas fa-home"></i> 
-        <span class="lang-key" data-key="home">العودة للرئيسية</span>
-    </a>
+    <!-- خلفية الجسيمات -->
+    <div class="bg-particles" id="bgParticles"></div>
 
+    <!-- المحتوى الرئيسي -->
     <div class="container">
         <header>
             <div class="header-glow"></div>
             <h1 class="animate__animated animate__fadeInDown">
                 <i class="fas fa-code"></i> 
-                <span class="lang-key" data-key="title">أفضل أدوات تطوير لغة C</span>
+                <span class="lang-key" data-key="title">أدوات تطوير لغة C المتكاملة</span>
             </h1>
             <p class="subtitle animate__animated animate__fadeIn">
                 <span class="lang-key" data-key="subtitle">
-                    بيئات تطوير ومحررات موثوقة — للحاسوب والهاتف — لكتابة، ترجمة، وتصحيح أكواد C/C++ باحترافية
+                    اكبر مجموعة من بيئات التطوير والمحررات الاحترافية للحاسوب والهاتف المحمول، مصممة لتحسين تجربة البرمجة بلغة C/C++ 
                 </span>
             </p>
             
@@ -915,57 +1422,84 @@
             </div>
         </header>
 
+        <!-- فلتر التصنيفات -->
+        <div class="category-filter">
+            <button class="filter-btn active" data-filter="all">
+                <i class="fas fa-th-large"></i>
+                <span class="lang-key" data-key="filter_all">الكل</span>
+            </button>
+            <button class="filter-btn" data-filter="desktop">
+                <i class="fas fa-desktop"></i>
+                <span class="lang-key" data-key="filter_desktop">الحاسوب</span>
+            </button>
+            <button class="filter-btn" data-filter="mobile">
+                <i class="fas fa-mobile-alt"></i>
+                <span class="lang-key" data-key="filter_mobile">الهاتف</span>
+            </button>
+            <button class="filter-btn" data-filter="free">
+                <i class="fas fa-gift"></i>
+                <span class="lang-key" data-key="filter_free">مجاني</span>
+            </button>
+            <button class="filter-btn" data-filter="professional">
+                <i class="fas fa-crown"></i>
+                <span class="lang-key" data-key="filter_pro">احترافي</span>
+            </button>
+        </div>
+
+        <!-- قسم المميزات -->
         <section class="section animate__animated animate__fadeIn">
             <h2 class="section-title">
                 <i class="fas fa-star"></i>
-                <span class="lang-key" data-key="features_title">✨ لماذا هذه الأدوات؟</span>
+                <span class="lang-key" data-key="features_title">✨ مميزات الأدوات المختارة</span>
             </h2>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-bolt"></i>
                     </div>
-                    <h4 class="lang-key" data-key="feature1_title">أداء فائق</h4>
-                    <p class="lang-key" data-key="feature1_desc">ترجمة وتنفيذ سريع مع تحسينات للأداء</p>
+                    <h4 class="lang-key" data-key="feature1_title">سرعة فائقة</h4>
+                    <p class="lang-key" data-key="feature1_desc">ترجمة وتنفيذ سريع مع تحسينات متقدمة للأداء</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h4 class="lang-key" data-key="feature2_title">موثوق وآمن</h4>
-                    <p class="lang-key" data-key="feature2_desc">مصادر رسمية وتحديثات مستمرة</p>
+                    <h4 class="lang-key" data-key="feature2_title">أمان وحماية</h4>
+                    <p class="lang-key" data-key="feature2_desc">مصادر رسمية مع تحديثات أمنية مستمرة</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-users"></i>
                     </div>
                     <h4 class="lang-key" data-key="feature3_title">مجتمع داعم</h4>
-                    <p class="lang-key" data-key="feature3_desc">توثيق شامل ودعم فني</p>
+                    <p class="lang-key" data-key="feature3_desc">توثيق شامل ودعم فني من مطورين خبراء</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-rocket"></i>
                     </div>
-                    <h4 class="lang-key" data-key="feature4_title">سهولة الاستخدام</h4>
-                    <p class="lang-key" data-key="feature4_desc">واجهات بديهية للمبتدئين والمحترفين</p>
+                    <h4 class="lang-key" data-key="feature4_title">واجهة بديهية</h4>
+                    <p class="lang-key" data-key="feature4_desc">تصميم سهل الاستخدام للمبتدئين والمحترفين</p>
                 </div>
             </div>
         </section>
 
+        <!-- قسم الحواسيب -->
         <section class="section">
             <h2 class="section-title">
                 <i class="fas fa-desktop"></i> 
-                <span class="lang-key" data-key="desktop_section">🖥️ لأجهزة الحاسوب (Windows / macOS / Linux)</span>
+                <span class="lang-key" data-key="desktop_section">💻 بيئات تطوير الحاسوب</span>
             </h2>
 
             <div class="app-grid">
-                <div class="app-card animate__animated animate__fadeInUp">
+                <!-- CLion -->
+                <div class="app-card animate__animated animate__fadeInUp" data-category="desktop professional">
                     <div class="app-card-header">
                         <div class="app-icon" style="background: linear-gradient(135deg, #8A2BE2, #4B0082);">
                             <i class="fas fa-jet-fighter-up"></i>
                         </div>
                         <div class="app-title-container">
-                            <h3>CLion <span class="tag">مميز</span></h3>
+                            <h3>CLion <span class="tag">ممتاز</span></h3>
                             <div class="app-meta">
                                 <span class="platform"><i class="fab fa-windows"></i> Windows</span>
                                 <span class="platform"><i class="fab fa-apple"></i> macOS</span>
@@ -1000,21 +1534,22 @@
                     </div>
                 </div>
 
-                <div class="app-card animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+                <!-- Visual Studio -->
+                <div class="app-card animate__animated animate__fadeInUp" data-category="desktop free">
                     <div class="app-card-header">
                         <div class="app-icon" style="background: linear-gradient(135deg, #5C2D91, #00A4EF);">
                             <i class="fab fa-microsoft"></i>
                         </div>
                         <div class="app-title-container">
-                            <h3><i class="fab fa-windows"></i> Visual Studio</h3>
+                            <h3><i class="fab fa-windows"></i> Visual Studio 2022</h3>
                             <div class="app-meta">
-                                <span class="tag" style="background: var(--success);">مجاني</span>
+                                <span class="tag free">مجاني</span>
                                 <span class="platform"><i class="fab fa-windows"></i> Windows</span>
                             </div>
                         </div>
                     </div>
                     <p class="lang-key" data-key="vs_desc">
-                        أقوى بيئة تطوير من مايكروسوفت. تدعم C/C++ عبر مُجمّع MSVC أو Clang، مع أدوات تحليل، تصحيح، وواجهة متكاملة. مثالية لمشاريع كبيرة (ألعاب، تطبيقات سطح مكتب، خوادم).
+                        أقوى بيئة تطوير من مايكروسوفت. تدعم C/C++ عبر مُجمّع MSVC أو Clang، مع أدوات تحليل، تصحيح، وواجهة متكاملة. مثالية لمشاريع الألعاب والتطبيقات الكبيرة.
                     </p>
                     <div class="app-stats">
                         <div class="stat-item">
@@ -1022,8 +1557,8 @@
                             <span class="stat-label">التقييم</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-value">50+</span>
-                            <span class="stat-label">إضافة متاحة</span>
+                            <span class="stat-value">💪</span>
+                            <span class="stat-label">الأقوى</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-value">🚀</span>
@@ -1032,15 +1567,57 @@
                     </div>
                     <div class="links">
                         <a href="https://visualstudio.microsoft.com/downloads/" target="_blank" rel="noopener noreferrer" class="link-btn">
-                            <i class="fas fa-download"></i> <span class="lang-key" data-key="vs_community">Community (مجاني)</span>
+                            <i class="fas fa-download"></i> <span class="lang-key" data-key="vs_community">Community</span>
                         </a>
-                        <a href="https://learn.microsoft.com/fr-fr/cpp/build/vscpp-step-0-installation" target="_blank" rel="noopener noreferrer" class="link-btn secondary">
-                            <i class="fas fa-book"></i> <span class="lang-key" data-key="guide">الدليل</span>
+                        <a href="https://learn.microsoft.com/cpp/" target="_blank" rel="noopener noreferrer" class="link-btn secondary">
+                            <i class="fas fa-book"></i> <span class="lang-key" data-key="docs">الدليل</span>
                         </a>
                     </div>
                 </div>
 
-                <div class="app-card animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                <!-- VS Code -->
+                <div class="app-card animate__animated animate__fadeInUp" data-category="desktop free">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: linear-gradient(135deg, #0078D7, #005A9E);">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="app-title-container">
+                            <h3>Visual Studio Code</h3>
+                            <div class="app-meta">
+                                <span class="tag free">مجاني</span>
+                                <span class="platform"><i class="fas fa-globe"></i> جميع الأنظمة</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="lang-key" data-key="vscode_desc">
+                        محرر خفيف وقوي من مايكروسوفت. مع إضافات C/C++، يمكنه التحول إلى بيئة تطوير كاملة. يدعم Git، تصحيح الأخطاء، وإدارة المشاريع.
+                    </p>
+                    <div class="app-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">⭐⭐⭐⭐⭐</span>
+                            <span class="stat-label">التقييم</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">15K+</span>
+                            <span class="stat-label">إضافة</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">⚡</span>
+                            <span class="stat-label">خفيف وسريع</span>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <a href="https://code.visualstudio.com/download" target="_blank" rel="noopener noreferrer" class="link-btn">
+                            <i class="fas fa-download"></i> <span class="lang-key" data-key="download">تحميل</span>
+                        </a>
+                        <a href="https://code.visualstudio.com/docs/languages/cpp" target="_blank" rel="noopener noreferrer" class="link-btn secondary">
+                            <i class="fas fa-plug"></i> <span class="lang-key" data-key="extensions">إضافات C++</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Code::Blocks -->
+                <div class="app-card animate__animated animate__fadeInUp" data-category="desktop free opensource">
                     <div class="app-card-header">
                         <div class="app-icon" style="background: linear-gradient(135deg, #FF6B6B, #FF8E53);">
                             <i class="fas fa-cube"></i>
@@ -1048,7 +1625,7 @@
                         <div class="app-title-container">
                             <h3>Code::Blocks</h3>
                             <div class="app-meta">
-                                <span class="tag" style="background: var(--success);">مفتوح المصدر</span>
+                                <span class="tag opensource">مفتوح المصدر</span>
                                 <span class="platform"><i class="fab fa-windows"></i> Windows</span>
                                 <span class="platform"><i class="fab fa-apple"></i> macOS</span>
                                 <span class="platform"><i class="fab fa-linux"></i> Linux</span>
@@ -1056,7 +1633,7 @@
                         </div>
                     </div>
                     <p class="lang-key" data-key="codeblocks_desc">
-                        بيئة تطوير مفتوحة المصدر وخفيفة، تعتمد على GCC أو Clang. مناسبة للمبتدئين والمشاريع المتوسطة. تدعم أنظمة Windows، Linux، وmacOS.
+                        بيئة تطوير مفتوحة المصدر وخفيفة الوزن، تعتمد على GCC أو Clang. مناسبة للمبتدئين والمشاريع المتوسطة الحجم. واجهة سهلة الاستخدام مع دعم للعديد من الميزات الأساسية.
                     </p>
                     <div class="app-stats">
                         <div class="stat-item">
@@ -1068,8 +1645,8 @@
                             <span class="stat-label">للمبتدئين</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-value">⚡</span>
-                            <span class="stat-label">خفيف وسريع</span>
+                            <span class="stat-value">📦</span>
+                            <span class="stat-label">خفيف الوزن</span>
                         </div>
                     </div>
                     <div class="links">
@@ -1079,13 +1656,216 @@
                         <a href="https://formulae.brew.sh/formula/codeblocks" target="_blank" rel="noopener noreferrer" class="link-btn secondary">
                             <i class="fab fa-apple"></i> macOS
                         </a>
-                        <a href="https://packages.ubuntu.com/search?keywords=codeblocks" target="_blank" rel="noopener noreferrer" class="link-btn secondary">
-                            <i class="fab fa-linux"></i> Linux
+                    </div>
+                </div>
+
+                <!-- Qt Creator -->
+                <div class="app-card animate__animated animate__fadeInUp" data-category="desktop free opensource">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: linear-gradient(135deg, #41CD52, #2E8B57);">
+                            <i class="fab fa-qt"></i>
+                        </div>
+                        <div class="app-title-container">
+                            <h3>Qt Creator</h3>
+                            <div class="app-meta">
+                                <span class="tag opensource">مفتوح المصدر</span>
+                                <span class="platform"><i class="fas fa-globe"></i> جميع الأنظمة</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="lang-key" data-key="qt_desc">
+                        بيئة تطوير متكاملة لبرمجة واجهات المستخدم باستخدام Qt Framework. ممتاز لتطوير تطبيقات GUI مع C++. يدعم تصميم الواجهات بصرياً.
+                    </p>
+                    <div class="app-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">⭐⭐⭐⭐⭐</span>
+                            <span class="stat-label">التقييم</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">🎨</span>
+                            <span class="stat-label">واجهات GUI</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">📱</span>
+                            <span class="stat-label">متعدد المنصات</span>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <a href="https://www.qt.io/download-qt-installer" target="_blank" rel="noopener noreferrer" class="link-btn">
+                            <i class="fas fa-download"></i> <span class="lang-key" data-key="download">تحميل</span>
+                        </a>
+                        <a href="https://doc.qt.io/qtcreator/" target="_blank" rel="noopener noreferrer" class="link-btn secondary">
+                            <i class="fas fa-graduation-cap"></i> <span class="lang-key" data-key="tutorial">تعليمي</span>
                         </a>
                     </div>
                 </div>
 
-                <div class="app-card animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+                <!-- Eclipse CDT -->
+                <div class="app-card animate__animated animate__fadeInUp" data-category="desktop free opensource">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: linear-gradient(135deg, #9B59B6, #8E44AD);">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                        <div class="app-title-container">
+                            <h3>Eclipse CDT</h3>
+                            <div class="app-meta">
+                                <span class="tag opensource">مفتوح المصدر</span>
+                                <span class="platform"><i class="fas fa-globe"></i> جميع الأنظمة</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="lang-key" data-key="eclipse_desc">
+                        بيئة تطوير متكاملة قوية لمطوري C/C++. تدخل في إطار مشروع Eclipse. مناسبة للمشاريع الكبيرة والمعقدة مع دعم ممتاز لأدوات التطوير المتقدمة.
+                    </p>
+                    <div class="app-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">⭐⭐⭐⭐</span>
+                            <span class="stat-label">التقييم</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">🏢</span>
+                            <span class="stat-label">للمشاريع الكبيرة</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">🔧</span>
+                            <span class="stat-label">أدوات متقدمة</span>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <a href="https://www.eclipse.org/cdt/downloads.php" target="_blank" rel="noopener noreferrer" class="link-btn">
+                            <i class="fas fa-download"></i> <span class="lang-key" data-key="download">تحميل</span>
+                        </a>
+                        <a href="https://wiki.eclipse.org/CDT" target="_blank" rel="noopener noreferrer" class="link-btn secondary">
+                            <i class="fas fa-info-circle"></i> <span class="lang-key" data-key="info">معلومات</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- NetBeans -->
+                <div class="app-card animate__animated animate__fadeInUp" data-category="desktop free opensource">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: linear-gradient(135deg, #1B6EC2, #1861A7);">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <div class="app-title-container">
+                            <h3>Apache NetBeans</h3>
+                            <div class="app-meta">
+                                <span class="tag opensource">مفتوح المصدر</span>
+                                <span class="platform"><i class="fas fa-globe"></i> جميع الأنظمة</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="lang-key" data-key="netbeans_desc">
+                        بيئة تطوير متكاملة تدعم العديد من لغات البرمجة بما فيها C/C++. تتميز بواجهة سهلة الاستخدام وأدوات قوية لإدارة المشاريع.
+                    </p>
+                    <div class="app-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">⭐⭐⭐⭐</span>
+                            <span class="stat-label">التقييم</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">🌐</span>
+                            <span class="stat-label">متعدد اللغات</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">📊</span>
+                            <span class="stat-label">إدارة مشاريع</span>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <a href="https://netbeans.apache.org/download/index.html" target="_blank" rel="noopener noreferrer" class="link-btn">
+                            <i class="fas fa-download"></i> <span class="lang-key" data-key="download">تحميل</span>
+                        </a>
+                        <a href="https://netbeans.apache.org/kb/docs/cnd/" target="_blank" rel="noopener noreferrer" class="link-btn secondary">
+                            <i class="fas fa-book"></i> <span class="lang-key" data-key="docs">توثيق</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Dev-C++ -->
+                <div class="app-card animate__animated animate__fadeInUp" data-category="desktop free">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: linear-gradient(135deg, #FF9A9E, #FAD0C4);">
+                            <i class="fas fa-terminal"></i>
+                        </div>
+                        <div class="app-title-container">
+                            <h3>Dev-C++ 7</h3>
+                            <div class="app-meta">
+                                <span class="tag free">للمبتدئين</span>
+                                <span class="platform"><i class="fab fa-windows"></i> Windows</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="lang-key" data-key="devcpp_desc">
+                        بيئة بسيطة ومناسبة جداً للمبتدئين. تحتوي على مُجمّع TDM-GCC مدمج. نسخة مُحدّثة مدعومة من Embarcadero عبر GitHub.
+                    </p>
+                    <div class="app-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">⭐⭐⭐⭐</span>
+                            <span class="stat-label">التقييم</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">🎯</span>
+                            <span class="stat-label">للتعلّم</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">📦</span>
+                            <span class="stat-label">مجمّع مدمج</span>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <a href="https://github.com/Embarcadero/Dev-Cpp/releases" target="_blank" rel="noopener noreferrer" class="link-btn">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                        <a href="https://sourceforge.net/projects/orwelldevcpp/" target="_blank" rel="noopener noreferrer" class="link-btn secondary">
+                            <i class="fas fa-archive"></i> SourceForge
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Xcode -->
+                <div class="app-card animate__animated animate__fadeInUp" data-category="desktop free">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: linear-gradient(135deg, #0D96F6, #007AFF);">
+                            <i class="fab fa-apple"></i>
+                        </div>
+                        <div class="app-title-container">
+                            <h3>Xcode</h3>
+                            <div class="app-meta">
+                                <span class="tag free">مجاني</span>
+                                <span class="platform"><i class="fab fa-apple"></i> macOS</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="lang-key" data-key="xcode_desc">
+                        بيئة التطوير الرسمية لنظام macOS وiOS. تدعم C/C++ بشكل ممتاز مع محرر قوي، مصحح أخطاء، ومجموعة أدوات تطوير متكاملة.
+                    </p>
+                    <div class="app-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">⭐⭐⭐⭐⭐</span>
+                            <span class="stat-label">التقييم</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">🍎</span>
+                            <span class="stat-label">لـ macOS</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">📱</span>
+                            <span class="stat-label">iOS تطوير</span>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <a href="https://apps.apple.com/us/app/xcode/id497799835" target="_blank" rel="noopener noreferrer" class="link-btn">
+                            <i class="fab fa-app-store"></i> App Store
+                        </a>
+                        <a href="https://developer.apple.com/xcode/" target="_blank" rel="noopener noreferrer" class="link-btn secondary">
+                            <i class="fas fa-external-link-alt"></i> <span class="lang-key" data-key="official">الموقع الرسمي</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- GCC / Clang -->
+                <div class="app-card animate__animated animate__fadeInUp" data-category="desktop free opensource">
                     <div class="app-card-header">
                         <div class="app-icon" style="background: linear-gradient(135deg, #00B4DB, #0083B0);">
                             <i class="fas fa-gears"></i>
@@ -1093,13 +1873,13 @@
                         <div class="app-title-container">
                             <h3>GCC / Clang</h3>
                             <div class="app-meta">
-                                <span class="tag" style="background: var(--success);">مجاني</span>
+                                <span class="tag opensource">مفتوح المصدر</span>
                                 <span class="platform"><i class="fas fa-globe"></i> متعدد الأنظمة</span>
                             </div>
                         </div>
                     </div>
                     <p class="lang-key" data-key="gcc_desc">
-                        المُجمّع الأساسي لكتابة أكواد C/C++. ضروري لتشغيل معظم البيئات. على macOS: استخدم <code>xcode-select --install</code>. على Windows: استخدم <a href="https://www.msys2.org/" target="_blank" rel="noopener noreferrer">MSYS2</a>.
+                        المُجمّع الأساسي لكتابة أكواد C/C++. ضروري لتشغيل معظم بيئات التطوير. على macOS: استخدم <code>xcode-select --install</code>. على Windows: استخدم MinGW أو MSYS2.
                     </p>
                     <div class="app-stats">
                         <div class="stat-item">
@@ -1124,58 +1904,19 @@
                         </a>
                     </div>
                 </div>
-
-                
-                <div class="app-card animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
-                    <div class="app-card-header">
-                        <div class="app-icon" style="background: linear-gradient(135deg, #FF9A9E, #FAD0C4);">
-                            <i class="fas fa-terminal"></i>
-                        </div>
-                        <div class="app-title-container">
-                            <h3>Dev-C++ (Embarcadero)</h3>
-                            <div class="app-meta">
-                                <span class="tag" style="background: var(--success);">للمبتدئين</span>
-                                <span class="platform"><i class="fab fa-windows"></i> Windows</span>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="lang-key" data-key="devcpp_desc">
-                        بيئة بسيطة مناسبة جداً للمبتدئين. تحتوي على مُجمّع TDM-GCC مدمج. نسخة مُحدّثة من Orwell (مدعومة من Embarcadero عبر GitHub).
-                    </p>
-                    <div class="app-stats">
-                        <div class="stat-item">
-                            <span class="stat-value">⭐⭐⭐⭐</span>
-                            <span class="stat-label">التقييم</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-value">🎯</span>
-                            <span class="stat-label">للتعلّم</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-value">📦</span>
-                            <span class="stat-label">مجمّع مدمج</span>
-                        </div>
-                    </div>
-                    <div class="links">
-                        <a href="https://github.com/Embarcadero/Dev-Cpp/releases" target="_blank" rel="noopener noreferrer" class="link-btn">
-                            <i class="fab fa-github"></i> GitHub
-                        </a>
-                        <a href="https://github.com/tdm-gcc/tdm-gcc/releases" target="_blank" rel="noopener noreferrer" class="link-btn secondary">
-                            <i class="fas fa-microchip"></i> TDM-GCC
-                        </a>
-                    </div>
-                </div>
             </div>
         </section>
 
+        <!-- قسم الهواتف -->
         <section class="section">
             <h2 class="section-title">
                 <i class="fas fa-mobile-screen-button"></i> 
-                <span class="lang-key" data-key="mobile_section">📱 للهواتف الذكية</span>
+                <span class="lang-key" data-key="mobile_section">📱 تطبيقات الهواتف الذكية</span>
             </h2>
 
             <div class="app-grid">
-                <div class="app-card animate__animated animate__fadeInUp">
+                <!-- C4droid -->
+                <div class="app-card animate__animated animate__fadeInUp" data-category="mobile professional">
                     <div class="app-card-header">
                         <div class="app-icon" style="background: linear-gradient(135deg, #4CAF50, #2E7D32);">
                             <i class="fas fa-mobile-alt"></i>
@@ -1189,7 +1930,7 @@
                         </div>
                     </div>
                     <p class="lang-key" data-key="c4droid_desc">
-                        أقوى محرر C/C++ على أندرويد. يدعم GCC وClang، ويسمح بالكتابة، الترجمة، والتشغيل مباشرةً على الجهاز. يتطلب ترخيصاً لفتح الميزات الكاملة.
+                        أقوى محرر C/C++ على نظام أندرويد. يدعم GCC وClang، ويسمح بالكتابة، الترجمة، والتشغيل مباشرةً على الجهاز. يتطلب ترخيصاً لفتح الميزات الكاملة.
                     </p>
                     <div class="app-stats">
                         <div class="stat-item">
@@ -1209,10 +1950,14 @@
                         <a href="https://play.google.com/store/apps/details?id=com.n0n3m4.droidc" target="_blank" rel="noopener noreferrer" class="link-btn">
                             <i class="fab fa-google-play"></i> Google Play
                         </a>
+                        <a href="https://c4droid.app/" target="_blank" rel="noopener noreferrer" class="link-btn secondary">
+                            <i class="fas fa-globe"></i> الموقع الرسمي
+                        </a>
                     </div>
                 </div>
 
-                <div class="app-card animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+                <!-- Termux -->
+                <div class="app-card animate__animated animate__fadeInUp" data-category="mobile free opensource">
                     <div class="app-card-header">
                         <div class="app-icon" style="background: linear-gradient(135deg, #795548, #5D4037);">
                             <i class="fas fa-terminal"></i>
@@ -1220,13 +1965,13 @@
                         <div class="app-title-container">
                             <h3>Termux</h3>
                             <div class="app-meta">
-                                <span class="tag" style="background: var(--success);">مجاني</span>
+                                <span class="tag opensource">مفتوح المصدر</span>
                                 <span class="platform"><i class="fab fa-android"></i> Android</span>
                             </div>
                         </div>
                     </div>
                     <p class="lang-key" data-key="termux_desc">
-                        طرفية لينكس حقيقية على أندرويد. بعد التثبيت، نفّذ <code>pkg install clang</code> لتطوير C/C++. مثالي للمستخدمين المتقدمين.
+                        طرفية لينكس حقيقية على أندرويد. بعد التثبيت، نفّذ <code>pkg install clang</code> لتطوير C/C++. مثالي للمستخدمين المتقدمين. يدعم Vim, Emacs, وبيئات التطوير الكاملة.
                     </p>
                     <div class="app-stats">
                         <div class="stat-item">
@@ -1244,7 +1989,7 @@
                     </div>
                     <div class="links">
                         <a href="https://f-droid.org/packages/com.termux/" target="_blank" rel="noopener noreferrer" class="link-btn">
-                            <i class="fas fa-shield-alt"></i> F-Droid (موصى به)
+                            <i class="fas fa-shield-alt"></i> F-Droid
                         </a>
                         <a href="https://wiki.termux.com/wiki/Main_Page" target="_blank" rel="noopener noreferrer" class="link-btn secondary">
                             <i class="fas fa-book"></i> الدليل
@@ -1252,21 +1997,22 @@
                     </div>
                 </div>
 
-                <div class="app-card animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                <!-- Acode -->
+                <div class="app-card animate__animated animate__fadeInUp" data-category="mobile free opensource">
                     <div class="app-card-header">
                         <div class="app-icon" style="background: linear-gradient(135deg, #2196F3, #0D47A1);">
                             <i class="fas fa-edit"></i>
                         </div>
                         <div class="app-title-container">
-                            <h3>Acode + C Plugin</h3>
+                            <h3>Acode Editor</h3>
                             <div class="app-meta">
-                                <span class="tag" style="background: var(--success);">مفتوح المصدر</span>
+                                <span class="tag opensource">مفتوح المصدر</span>
                                 <span class="platform"><i class="fab fa-android"></i> Android</span>
                             </div>
                         </div>
                     </div>
                     <p class="lang-key" data-key="acode_desc">
-                        محرر خفيف وسريع (مفتوح المصدر). مع إضافة دعم C وTermux، يمكنك تطوير C بكفاءة على أندرويد.
+                        محرر خفيف وسريع ومفتوح المصدر. مع إضافة دعم C وTermux، يمكنك تطوير C بكفاءة على أندرويد. يدعم الإضافات، Git، والعديد من الميزات الأخرى.
                     </p>
                     <div class="app-stats">
                         <div class="stat-item">
@@ -1286,10 +2032,177 @@
                         <a href="https://play.google.com/store/apps/details?id=com.foxdebug.acodefree" target="_blank" rel="noopener noreferrer" class="link-btn">
                             <i class="fab fa-google-play"></i> مجاني
                         </a>
+                        <a href="https://acode.foxdebug.com/" target="_blank" rel="noopener noreferrer" class="link-btn secondary">
+                            <i class="fas fa-globe"></i> الموقع
+                        </a>
                     </div>
                 </div>
 
-                <div class="app-card animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+                <!-- Dcoder -->
+                <div class="app-card animate__animated animate__fadeInUp" data-category="mobile free">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: linear-gradient(135deg, #FF5722, #E64A19);">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="app-title-container">
+                            <h3>Dcoder</h3>
+                            <div class="app-meta">
+                                <span class="tag free">مجاني</span>
+                                <span class="platform"><i class="fab fa-android"></i> Android</span>
+                                <span class="platform"><i class="fab fa-apple"></i> iOS</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="lang-key" data-key="dcoder_desc">
+                        محرر كود يدعم أكثر من 50 لغة برمجة بما فيها C/C++. يتيح كتابة وتنفيذ الأكواد مباشرة على الهاتف. مناسب للتعلم وحل المشكلات البرمجية.
+                    </p>
+                    <div class="app-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">⭐⭐⭐⭐</span>
+                            <span class="stat-label">التقييم</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">🌐</span>
+                            <span class="stat-label">50+ لغة</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">🎓</span>
+                            <span class="stat-label">للتعلم</span>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <a href="https://play.google.com/store/apps/details?id=com.paprbit.dcoder" target="_blank" rel="noopener noreferrer" class="link-btn">
+                            <i class="fab fa-google-play"></i> Android
+                        </a>
+                        <a href="https://apps.apple.com/us/app/dcoder-code-compiler-ide/id1263622321" target="_blank" rel="noopener noreferrer" class="link-btn secondary">
+                            <i class="fab fa-app-store"></i> iOS
+                        </a>
+                    </div>
+                </div>
+
+                <!-- C++ Compiler IDE -->
+                <div class="app-card animate__animated animate__fadeInUp" data-category="mobile free">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: linear-gradient(135deg, #9C27B0, #7B1FA2);">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="app-title-container">
+                            <h3>C++ Compiler IDE</h3>
+                            <div class="app-meta">
+                                <span class="tag free">مجاني</span>
+                                <span class="platform"><i class="fab fa-android"></i> Android</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="lang-key" data-key="cppcompiler_desc">
+                        تطبيق بسيط وسريع لكتابة وتنفيذ أكواد C/C++ على أندرويد. مناسب للمبتدئين والاختبارات السريعة. لا يتطلب اتصال إنترنت للتشغيل.
+                    </p>
+                    <div class="app-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">⭐⭐⭐</span>
+                            <span class="stat-label">التقييم</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">🚀</span>
+                            <span class="stat-label">سريع</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">📱</span>
+                            <span class="stat-label">خفيف</span>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <a href="https://play.google.com/store/apps/details?id=com.cpp.compiler" target="_blank" rel="noopener noreferrer" class="link-btn">
+                            <i class="fab fa-google-play"></i> Google Play
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Programming Hub -->
+                <div class="app-card animate__animated animate__fadeInUp" data-category="mobile free">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: linear-gradient(135deg, #FF9800, #F57C00);">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="app-title-container">
+                            <h3>Programming Hub</h3>
+                            <div class="app-meta">
+                                <span class="tag free">مجاني</span>
+                                <span class="platform"><i class="fab fa-android"></i> Android</span>
+                                <span class="platform"><i class="fab fa-apple"></i> iOS</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="lang-key" data-key="programminghub_desc">
+                        منصة تعليمية متكاملة تحتوي على دورات في C/C++ مع محرر مدمج لتجربة الأكواد. مناسب للمبتدئين الذين يريدون تعلم البرمجة.
+                    </p>
+                    <div class="app-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">⭐⭐⭐⭐</span>
+                            <span class="stat-label">التقييم</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">🎓</span>
+                            <span class="stat-label">تعليمي</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">📚</span>
+                            <span class="stat-label">دورات</span>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <a href="https://play.google.com/store/apps/details?id=com.freeit.java" target="_blank" rel="noopener noreferrer" class="link-btn">
+                            <i class="fab fa-google-play"></i> Android
+                        </a>
+                        <a href="https://apps.apple.com/us/app/programming-hub-learn-to-code/id1226179589" target="_blank" rel="noopener noreferrer" class="link-btn secondary">
+                            <i class="fab fa-app-store"></i> iOS
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Sololearn -->
+                <div class="app-card animate__animated animate__fadeInUp" data-category="mobile free">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: linear-gradient(135deg, #00BCD4, #0097A7);">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="app-title-container">
+                            <h3>Sololearn</h3>
+                            <div class="app-meta">
+                                <span class="tag free">مجاني</span>
+                                <span class="platform"><i class="fas fa-globe"></i> جميع الأنظمة</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="lang-key" data-key="sololearn_desc">
+                        تطبيق تعليمي ممتاز لتعلم C/C++ مع مجتمع نشط. يحتوي على دروس تفاعلية، تمارين، ومحرر كود مدمج للتجربة والتعلم.
+                    </p>
+                    <div class="app-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">⭐⭐⭐⭐⭐</span>
+                            <span class="stat-label">التقييم</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">👥</span>
+                            <span class="stat-label">مجتمع</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">📝</span>
+                            <span class="stat-label">تمارين</span>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <a href="https://play.google.com/store/apps/details?id=com.sololearn" target="_blank" rel="noopener noreferrer" class="link-btn">
+                            <i class="fab fa-google-play"></i> Android
+                        </a>
+                        <a href="https://apps.apple.com/us/app/sololearn-learn-to-code/id1210079064" target="_blank" rel="noopener noreferrer" class="link-btn secondary">
+                            <i class="fab fa-app-store"></i> iOS
+                        </a>
+                    </div>
+                </div>
+
+                <!-- VS Code for iPad -->
+                <div class="app-card animate__animated animate__fadeInUp" data-category="mobile free">
                     <div class="app-card-header">
                         <div class="app-icon" style="background: linear-gradient(135deg, #0078D7, #005A9E);">
                             <i class="fab fa-apple"></i>
@@ -1297,13 +2210,13 @@
                         <div class="app-title-container">
                             <h3>VS Code (iPad)</h3>
                             <div class="app-meta">
-                                <span class="tag" style="background: var(--success);">مجاني</span>
+                                <span class="tag free">مجاني</span>
                                 <span class="platform"><i class="fab fa-apple"></i> iPadOS</span>
                             </div>
                         </div>
                     </div>
                     <p class="lang-key" data-key="vscode_ipad_desc">
-                        تطبيق Visual Studio Code رسمي على iPadOS. مع إضافات C/C++ وGitHub Codespaces، يمكنك تطوير C/C++ باحترافية.
+                        تطبيق Visual Studio Code رسمي على iPadOS. مع إضافات C/C++ وGitHub Codespaces، يمكنك تطوير C/C++ باحترافية كاملة على جهاز iPad.
                     </p>
                     <div class="app-stats">
                         <div class="stat-item">
@@ -1323,400 +2236,476 @@
                         <a href="https://apps.apple.com/us/app/visual-studio-code/id1605891240" target="_blank" rel="noopener noreferrer" class="link-btn">
                             <i class="fab fa-app-store"></i> App Store
                         </a>
+                        <a href="https://code.visualstudio.com/docs/editor/ipad" target="_blank" rel="noopener noreferrer" class="link-btn secondary">
+                            <i class="fas fa-info-circle"></i> الدليل
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Pythonista (with C support) -->
+                <div class="app-card animate__animated animate__fadeInUp" data-category="mobile professional">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: linear-gradient(135deg, #FFD700, #FFA500);">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <div class="app-title-container">
+                            <h3>Pythonista 3</h3>
+                            <div class="app-meta">
+                                <span class="tag paid">مدفوع</span>
+                                <span class="platform"><i class="fab fa-apple"></i> iOS/iPadOS</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="lang-key" data-key="pythonista_desc">
+                        بيئة تطوير Python متكاملة على iOS، مع دعم لكتابة وتنفيذ نصوص C عبر Python C-API. مثالي لمطوري Python الذين يعملون مع مكتبات C.
+                    </p>
+                    <div class="app-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">⭐⭐⭐⭐⭐</span>
+                            <span class="stat-label">التقييم</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">🐍</span>
+                            <span class="stat-label">Python + C</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">📱</span>
+                            <span class="stat-label">لـ iOS</span>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <a href="https://apps.apple.com/us/app/pythonista-3/id1085978097" target="_blank" rel="noopener noreferrer" class="link-btn">
+                            <i class="fab fa-app-store"></i> App Store
+                        </a>
+                        <a href="http://omz-software.com/pythonista/" target="_blank" rel="noopener noreferrer" class="link-btn secondary">
+                            <i class="fas fa-globe"></i> الموقع
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- قسم التوصيات -->
         <section class="section animate__animated animate__fadeIn">
             <h2 class="section-title">
                 <i class="fas fa-lightbulb"></i>
-                <span class="lang-key" data-key="recommendation_title">💡 توصياتنا</span>
+                <span class="lang-key" data-key="recommendation_title">🎯 توصياتنا واحصائيات</span>
             </h2>
-            <div class="app-card" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1)); border-color: rgba(59, 130, 246, 0.3);">
-                <div class="app-card-header">
-                    <div class="app-icon" style="background: linear-gradient(135deg, #FFD700, #FFA500);">
-                        <i class="fas fa-crown"></i>
+            
+            <div class="app-grid">
+                <!-- احصائيات -->
+                <div class="app-card" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15)); border-color: rgba(59, 130, 246, 0.4);">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: linear-gradient(135deg, #FFD700, #FFA500);">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="app-title-container">
+                            <h3 class="lang-key" data-key="stats_title">إحصائيات الأدوات</h3>
+                        </div>
                     </div>
-                    <div class="app-title-container">
-                        <h3 class="lang-key" data-key="recommendation_subtitle">ما ننصح به للمبتدئين والمحترفين</h3>
+                    <div class="app-stats" style="background: transparent; border: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                        <div class="stat-item">
+                            <span class="stat-value">18+</span>
+                            <span class="stat-label">أداة مختلفة</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">12</span>
+                            <span class="stat-label">مجانية</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">6</span>
+                            <span class="stat-label">مفتوحة المصدر</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">5</span>
+                            <span class="stat-label">أنظمة تشغيل</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">9</span>
+                            <span class="stat-label">للحاسوب</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">9</span>
+                            <span class="stat-label">للجوال</span>
+                        </div>
                     </div>
                 </div>
-                <p style="color: var(--text-primary); font-size: 1.1rem;">
-                    <span class="lang-key" data-key="recommendation_text">
-                        <strong>للمبتدئين:</strong> ابدأ بـ Code::Blocks أو Dev-C++ لسهولة الاستخدام.<br>
-                        <strong>للمشاريع الكبيرة:</strong> استخدم Visual Studio (Windows) أو CLion (متعدد الأنظمة).<br>
-                        <strong>للأندرويد:</strong> C4droid هو الخيار الأفضل مع دعم كامل.<br>
-                        <strong>للآيباد:</strong> VS Code يوفر تجربة احترافية كاملة.
-                    </span>
-                </p>
+
+                <!-- توصيات -->
+                <div class="app-card" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(6, 182, 212, 0.15)); border-color: rgba(16, 185, 129, 0.4);">
+                    <div class="app-card-header">
+                        <div class="app-icon" style="background: linear-gradient(135deg, #10B981, #059669);">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div class="app-title-container">
+                            <h3 class="lang-key" data-key="recommendation_subtitle">التوصيات الذهبية</h3>
+                        </div>
+                    </div>
+                    <p style="color: var(--text-primary); font-size: 1.05rem; line-height: 1.7;">
+                        <span class="lang-key" data-key="recommendation_text">
+                            <strong>🚀 للمشاريع الاحترافية:</strong> Visual Studio (Windows) أو CLion (متعدد الأنظمة)<br>
+                            <strong>🎓 للمبتدئين:</strong> Code::Blocks أو Dev-C++ لسهولة الاستخدام<br>
+                            <strong>📱 للأندرويد:</strong> C4droid (مدفوع) أو Termux (مجاني)<br>
+                            <strong>🍎 للآيباد:</strong> VS Code مع إضافات C++<br>
+                            <strong>💡 للتعلم:</strong> Sololearn أو Programming Hub
+                        </span>
+                    </p>
+                    <div class="links">
+                        <a href="asasi.html" class="link-btn" style="background: linear-gradient(135deg, #10B981, #059669);">
+                            <i class="fas fa-home"></i> <span class="lang-key" data-key="home">العودة للرئيسية</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
 
+        <!-- الفوتر -->
         <footer>
             <div class="footer-links">
                 <a href="asasi.html" class="footer-link">
                     <i class="fas fa-home"></i>
-                    <span class="lang-key" data-key="home">الرئيسية</span>
-                </a>
-                <a href="https://bibarss39-sudo.github.io/bibarss39/" target="_blank" rel="noopener noreferrer" class="footer-link">
-                    <i class="fas fa-external-link-alt"></i>
-                    <span class="lang-key" data-key="website">الموقع الرسمي</span>
+                    <span class="lang-key" data-key="home">الصفحة الرئيسية</span>
                 </a>
                 <a href="contact.html" class="footer-link">
                     <i class="fas fa-envelope"></i>
-                    <span class="lang-key" data-key="contact">اتصل بنا</span>
+                    <span class="lang-key" data-key="contact">تواصل معنا</span>
                 </a>
-           
+                <a href="https://bibarss39-sudo.github.io/bibarss39/" target="_blank" rel="noopener noreferrer" class="footer-link">
+                    <i class="fas fa-globe"></i>
+                    <span class="lang-key" data-key="website">الموقع الرسمي</span>
+                </a>
+            </div>
+            <p style="margin-top: 20px; font-size: 0.9rem; color: var(--text-muted);">
+                <span class="lang-key" data-key="footer_text">© 2025 Algorithmes & C - أكبر مجموعة أدوات تطوير C/C++ | جميع الروابط من مصادر موثوقة</span>
+            </p>
         </footer>
     </div>
 
     <script>
-        const SECURITY_CONFIG = {
-            CSRF_TOKEN: 'csrf_' + Math.random().toString(36).substr(2, 16) + '_' + Date.now(),
-            ALLOWED_ORIGINS: [
-                'https://bibarss39-sudo.github.io',
-                'https://www.jetbrains.com',
-                'https://visualstudio.microsoft.com',
-                'https://www.codeblocks.org',
-                'https://gcc.gnu.org',
-                'https://clang.llvm.org',
-                'https://github.com',
-                'https://play.google.com',
-                'https://f-droid.org',
-                'https://apps.apple.com',
-                'https://cdnjs.cloudflare.com',
-                'https://fonts.googleapis.com',
-                'https://fonts.gstatic.com'
-            ],
-            CSP_REPORT_URI: null
+        // الترجمة الكاملة
+        const translations = {
+            ar: {
+                // Navigation
+                home: "العودة للرئيسية",
+                filter_all: "الكل",
+                filter_desktop: "الحاسوب",
+                filter_mobile: "الهاتف",
+                filter_free: "مجاني",
+                filter_pro: "احترافي",
+                
+                // Header
+                title: "أدوات تطوير لغة C المتكاملة",
+                subtitle: "اكبر مجموعة من بيئات التطوير والمحررات الاحترافية للحاسوب والهاتف المحمول، مصممة لتحسين تجربة البرمجة بلغة C/C++",
+                
+                // Sections
+                desktop_section: "💻 بيئات تطوير الحاسوب",
+                mobile_section: "📱 تطبيقات الهواتف الذكية",
+                features_title: "✨ مميزات الأدوات المختارة",
+                recommendation_title: "🎯 توصياتنا واحصائيات",
+                
+                // Features
+                feature1_title: "سرعة فائقة",
+                feature1_desc: "ترجمة وتنفيذ سريع مع تحسينات متقدمة للأداء",
+                feature2_title: "أمان وحماية",
+                feature2_desc: "مصادر رسمية مع تحديثات أمنية مستمرة",
+                feature3_title: "مجتمع داعم",
+                feature3_desc: "توثيق شامل ودعم فني من مطورين خبراء",
+                feature4_title: "واجهة بديهية",
+                feature4_desc: "تصميم سهل الاستخدام للمبتدئين والمحترفين",
+                
+                // Buttons
+                download: "تحميل",
+                features: "الميزات",
+                vs_community: "Community",
+                docs: "الدليل",
+                extensions: "إضافات C++",
+                tutorial: "تعليمي",
+                info: "معلومات",
+                official: "الموقع الرسمي",
+                
+                // App Descriptions
+                clion_desc: "بيئة تطوير احترافية من JetBrains لمطوري C/C++. تدعم CMake، GDB/LLDB، Docker، WSL، وتطوير مضمن (Embedded)، مع تحليل ذكي للشفرة، إكمال تلقائي، وتصحيح أخطاء متقدم.",
+                vs_desc: "أقوى بيئة تطوير من مايكروسوفت. تدعم C/C++ عبر مُجمّع MSVC أو Clang، مع أدوات تحليل، تصحيح، وواجهة متكاملة. مثالية لمشاريع الألعاب والتطبيقات الكبيرة.",
+                vscode_desc: "محرر خفيف وقوي من مايكروسوفت. مع إضافات C/C++، يمكنه التحول إلى بيئة تطوير كاملة. يدعم Git، تصحيح الأخطاء، وإدارة المشاريع.",
+                codeblocks_desc: "بيئة تطوير مفتوحة المصدر وخفيفة الوزن، تعتمد على GCC أو Clang. مناسبة للمبتدئين والمشاريع المتوسطة الحجم. واجهة سهلة الاستخدام مع دعم للعديد من الميزات الأساسية.",
+                qt_desc: "بيئة تطوير متكاملة لبرمجة واجهات المستخدم باستخدام Qt Framework. ممتاز لتطوير تطبيقات GUI مع C++. يدعم تصميم الواجهات بصرياً.",
+                eclipse_desc: "بيئة تطوير متكاملة قوية لمطوري C/C++. تدخل في إطار مشروع Eclipse. مناسبة للمشاريع الكبيرة والمعقدة مع دعم ممتاز لأدوات التطوير المتقدمة.",
+                netbeans_desc: "بيئة تطوير متكاملة تدعم العديد من لغات البرمجة بما فيها C/C++. تتميز بواجهة سهلة الاستخدام وأدوات قوية لإدارة المشاريع.",
+                devcpp_desc: "بيئة بسيطة ومناسبة جداً للمبتدئين. تحتوي على مُجمّع TDM-GCC مدمج. نسخة مُحدّثة مدعومة من Embarcadero عبر GitHub.",
+                xcode_desc: "بيئة التطوير الرسمية لنظام macOS وiOS. تدعم C/C++ بشكل ممتاز مع محرر قوي، مصحح أخطاء، ومجموعة أدوات تطوير متكاملة.",
+                gcc_desc: "المُجمّع الأساسي لكتابة أكواد C/C++. ضروري لتشغيل معظم بيئات التطوير. على macOS: استخدم <code>xcode-select --install</code>. على Windows: استخدم MinGW أو MSYS2.",
+                c4droid_desc: "أقوى محرر C/C++ على نظام أندرويد. يدعم GCC وClang، ويسمح بالكتابة، الترجمة، والتشغيل مباشرةً على الجهاز. يتطلب ترخيصاً لفتح الميزات الكاملة.",
+                termux_desc: "طرفية لينكس حقيقية على أندرويد. بعد التثبيت، نفّذ <code>pkg install clang</code> لتطوير C/C++. مثالي للمستخدمين المتقدمين. يدعم Vim, Emacs, وبيئات التطوير الكاملة.",
+                acode_desc: "محرر خفيف وسريع ومفتوح المصدر. مع إضافة دعم C وTermux، يمكنك تطوير C بكفاءة على أندرويد. يدعم الإضافات، Git، والعديد من الميزات الأخرى.",
+                dcoder_desc: "محرر كود يدعم أكثر من 50 لغة برمجة بما فيها C/C++. يتيح كتابة وتنفيذ الأكواد مباشرة على الهاتف. مناسب للتعلم وحل المشكلات البرمجية.",
+                cppcompiler_desc: "تطبيق بسيط وسريع لكتابة وتنفيذ أكواد C/C++ على أندرويد. مناسب للمبتدئين والاختبارات السريعة. لا يتطلب اتصال إنترنت للتشغيل.",
+                programminghub_desc: "منصة تعليمية متكاملة تحتوي على دورات في C/C++ مع محرر مدمج لتجربة الأكواد. مناسب للمبتدئين الذين يريدون تعلم البرمجة.",
+                sololearn_desc: "تطبيق تعليمي ممتاز لتعلم C/C++ مع مجتمع نشط. يحتوي على دروس تفاعلية، تمارين، ومحرر كود مدمج للتجربة والتعلم.",
+                vscode_ipad_desc: "تطبيق Visual Studio Code رسمي على iPadOS. مع إضافات C/C++ وGitHub Codespaces، يمكنك تطوير C/C++ باحترافية كاملة على جهاز iPad.",
+                pythonista_desc: "بيئة تطوير Python متكاملة على iOS، مع دعم لكتابة وتنفيذ نصوص C عبر Python C-API. مثالي لمطوري Python الذين يعملون مع مكتبات C.",
+                
+                // Recommendations
+                stats_title: "إحصائيات الأدوات",
+                recommendation_subtitle: "التوصيات الذهبية",
+                recommendation_text: "<strong>🚀 للمشاريع الاحترافية:</strong> Visual Studio (Windows) أو CLion (متعدد الأنظمة)<br><strong>🎓 للمبتدئين:</strong> Code::Blocks أو Dev-C++ لسهولة الاستخدام<br><strong>📱 للأندرويد:</strong> C4droid (مدفوع) أو Termux (مجاني)<br><strong>🍎 للآيباد:</strong> VS Code مع إضافات C++<br><strong>💡 للتعلم:</strong> Sololearn أو Programming Hub",
+                
+                // Footer
+                contact: "تواصل معنا",
+                website: "الموقع الرسمي",
+                footer_text: "© 2025 Algorithmes & C - أكبر مجموعة أدوات تطوير C/C++ | جميع الروابط من مصادر موثوقة"
+            },
+            fr: {
+                home: "Accueil",
+                filter_all: "Tout",
+                filter_desktop: "Ordinateur",
+                filter_mobile: "Mobile",
+                filter_free: "Gratuit",
+                filter_pro: "Professionnel",
+                title: "Outils de développement C complets",
+                subtitle: "La plus grande collection d'IDE et éditeurs professionnels pour ordinateur et mobile, conçus pour améliorer l'expérience de programmation en C/C++",
+                desktop_section: "💻 Environnements de développement",
+                mobile_section: "📱 Applications mobiles",
+                features_title: "✨ Caractéristiques",
+                recommendation_title: "🎯 Recommandations & Statistiques",
+                feature1_title: "Vitesse exceptionnelle",
+                feature1_desc: "Compilation et exécution rapides avec optimisations avancées",
+                feature2_title: "Sécurité et protection",
+                feature2_desc: "Sources officielles avec mises à jour de sécurité régulières",
+                feature3_title: "Communauté active",
+                feature3_desc: "Documentation complète et support technique",
+                feature4_title: "Interface intuitive",
+                feature4_desc: "Conception facile à utiliser pour débutants et pros",
+                download: "Télécharger",
+                features: "Fonctionnalités",
+                vs_community: "Community",
+                docs: "Documentation",
+                extensions: "Extensions C++",
+                tutorial: "Tutoriel",
+                info: "Informations",
+                official: "Site officiel",
+                contact: "Contactez-nous",
+                website: "Site officiel",
+                footer_text: "© 2025 Algorithmes & C - Plus grande collection d'outils C/C++ | Tous les liens de sources fiables"
+            },
+            en: {
+                home: "Home",
+                filter_all: "All",
+                filter_desktop: "Desktop",
+                filter_mobile: "Mobile",
+                filter_free: "Free",
+                filter_pro: "Professional",
+                title: "Complete C Development Tools",
+                subtitle: "Largest collection of professional IDEs and editors for desktop and mobile, designed to enhance C/C++ programming experience",
+                desktop_section: "💻 Desktop Environments",
+                mobile_section: "📱 Mobile Applications",
+                features_title: "✨ Key Features",
+                recommendation_title: "🎯 Recommendations & Statistics",
+                feature1_title: "Exceptional Speed",
+                feature1_desc: "Fast compilation and execution with advanced optimizations",
+                feature2_title: "Security & Protection",
+                feature2_desc: "Official sources with regular security updates",
+                feature3_title: "Active Community",
+                feature3_desc: "Complete documentation and technical support",
+                feature4_title: "Intuitive Interface",
+                feature4_desc: "Easy-to-use design for beginners and professionals",
+                download: "Download",
+                features: "Features",
+                vs_community: "Community",
+                docs: "Documentation",
+                extensions: "C++ Extensions",
+                tutorial: "Tutorial",
+                info: "Information",
+                official: "Official Website",
+                contact: "Contact Us",
+                website: "Official Website",
+                footer_text: "© 2025 Algorithmes & C - Largest C/C++ tools collection | All links from trusted sources"
+            }
         };
 
-        /**
-         */
-        function initSecurity() {
-            document.getElementById('csrfMetaToken').content = SECURITY_CONFIG.CSRF_TOKEN;
-            
-            console.log('[Security] Page security initialized with CSRF token');
-            
+        // تهيئة الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            initPage();
+        });
+
+        function initPage() {
+            // إنشاء الجسيمات المتحركة
             createParticles();
             
-            validateExternalLinks();
+            // تهيئة اللغة
+            const savedLang = localStorage.getItem('preferredLang') || 'ar';
+            setLanguage(savedLang);
+            
+            // إضافة مستمعي الأحداث لأزرار اللغة
+            document.querySelectorAll('.lang-btn-top').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const lang = this.getAttribute('data-lang');
+                    if (['ar', 'fr', 'en'].includes(lang)) {
+                        setLanguage(lang);
+                        localStorage.setItem('preferredLang', lang);
+                        
+                        // تأثير عند النقر
+                        this.classList.add('animate__animated', 'animate__pulse');
+                        setTimeout(() => {
+                            this.classList.remove('animate__animated', 'animate__pulse');
+                        }, 300);
+                    }
+                });
+            });
+            
+            // فلتر التصنيفات
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // تحديث الأزرار النشطة
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // تصفية البطاقات
+                    filterCards(filter);
+                });
+            });
+            
+            // متابعة التمرير
+            window.addEventListener('scroll', handleScroll);
+            
+            // تأثيرات الظهور
+            initScrollAnimations();
+            
+            // إخفاء شريط التحميل
+            setTimeout(() => {
+                document.querySelector('.page-loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.querySelector('.page-loader').remove();
+                }, 500);
+            }, 2000);
+            
+            // تحسينات للأجهزة المحمولة
+            if ('ontouchstart' in window) {
+                document.body.classList.add('touch-device');
+            }
         }
 
-        /**
-         */
+        // إنشاء الجسيمات
         function createParticles() {
             const container = document.getElementById('bgParticles');
-            const colors = ['#3b82f6', '#8b5cf6', '#ec4899', '#0ea5e9'];
+            const colors = ['#3b82f6', '#8b5cf6', '#ec4899', '#0ea5e9', '#10b981', '#f59e0b'];
+            const particleCount = window.innerWidth < 768 ? 10 : 20;
             
-            for (let i = 0; i < 20; i++) {
+            for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 
-                const size = Math.random() * 100 + 20;
+                const size = Math.random() * 60 + 20;
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
                 particle.style.left = `${Math.random() * 100}%`;
                 particle.style.top = `${Math.random() * 100}%`;
                 particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-                particle.style.opacity = Math.random() * 0.1 + 0.05;
-                particle.style.animationDuration = `${Math.random() * 30 + 20}s`;
-                particle.style.animationDelay = `${Math.random() * 5}s`;
+                particle.style.opacity = Math.random() * 0.15 + 0.05;
+                particle.style.animationDuration = `${Math.random() * 30 + 25}s`;
+                particle.style.animationDelay = `${Math.random() * 10}s`;
                 
                 container.appendChild(particle);
             }
         }
 
-        /**
-         */
-        function escapeHTML(str) {
-            if (typeof str !== 'string') return '';
-            return str.replace(/[&<>"']/g, function(m) {
-                return {
-                    '&': '&amp;',
-                    '<': '&lt;',
-                    '>': '&gt;',
-                    '"': '&quot;',
-                    "'": '&#39;'
-                }[m];
-            });
-        }
-
-        /**
-         */
-        function isValidOrigin(url) {
-            try {
-                const urlObj = new URL(url, window.location.href);
-                return SECURITY_CONFIG.ALLOWED_ORIGINS.some(allowed => {
-                    return urlObj.origin === allowed || urlObj.hostname.endsWith('.' + allowed.replace('https://', ''));
-                });
-            } catch (e) {
-                return false;
-            }
-        }
-
-        /**
-         */
-        function validateExternalLinks() {
-            const links = document.querySelectorAll('a[href^="http"]');
-            let validLinks = 0;
-            let invalidLinks = 0;
+        // إدارة التمرير
+        function handleScroll() {
+            // شريط التقدم
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + '%';
             
-            links.forEach(link => {
-                const href = link.getAttribute('href');
-                if (href && isValidOrigin(href)) {
-                    validLinks++;
-                    
-                    if (!link.hasAttribute('rel')) {
-                        link.setAttribute('rel', 'noopener noreferrer');
-                    }
-                    
-                    if (href.startsWith('http://')) {
-                        console.warn('[Security] Non-HTTPS link found:', href);
-                    }
-                } else {
-                    invalidLinks++;
-                    console.warn('[Security] Blocked potentially unsafe link:', href);
-                    
-                    link.setAttribute('href', '#');
-                    link.setAttribute('onclick', 'return false;');
-                    link.style.color = 'var(--danger)';
-                    link.title = 'رابط غير آمن - تم حظره';
-                }
-            });
-            
-            if (invalidLinks > 0) {
-                console.log(`[Security] Link validation: ${validLinks} valid, ${invalidLinks} blocked`);
+            // شريط التنقل العلوي
+            const topBar = document.getElementById('topBar');
+            if (winScroll > 30) {
+                topBar.classList.add('scrolled');
+            } else {
+                topBar.classList.remove('scrolled');
             }
         }
 
-
-        const translations = {
-            ar: {
-                home: "العودة للرئيسية",
-                title: "أفضل أدوات تطوير لغة C",
-                subtitle: "بيئات تطوير ومحررات موثوقة — للحاسوب والهاتف — لكتابة، ترجمة، وتصحيح أكواد C/C++ باحترافية",
-                desktop_section: "🖥️ لأجهزة الحاسوب (Windows / macOS / Linux)",
-                mobile_section: "📱 للهواتف الذكية",
-                features_title: "✨ لماذا هذه الأدوات؟",
-                recommendation_title: "💡 توصياتنا",
-                recommendation_subtitle: "ما ننصح به للمبتدئين والمحترفين",
-                recommendation_text: "للمبتدئين: ابدأ بـ Code::Blocks أو Dev-C++ لسهولة الاستخدام.<br><strong>للمشاريع الكبيرة:</strong> استخدم Visual Studio (Windows) أو CLion (متعدد الأنظمة).<br><strong>للأندرويد:</strong> C4droid هو الخيار الأفضل مع دعم كامل.<br><strong>للآيباد:</strong> VS Code يوفر تجربة احترافية كاملة.",
-                feature1_title: "أداء فائق",
-                feature1_desc: "ترجمة وتنفيذ سريع مع تحسينات للأداء",
-                feature2_title: "موثوق وآمن",
-                feature2_desc: "مصادر رسمية وتحديثات مستمرة",
-                feature3_title: "مجتمع داعم",
-                feature3_desc: "توثيق شامل ودعم فني",
-                feature4_title: "سهولة الاستخدام",
-                feature4_desc: "واجهات بديهية للمبتدئين والمحترفين",
-                download: "تحميل",
-                features: "الميزات",
-                vs_community: "Community (مجاني)",
-                guide: "الدليل",
-                clion_desc: "بيئة تطوير احترافية من JetBrains لمطوري C/C++. تدعم CMake، GDB/LLDB، Docker، WSL، وتطوير مضمن (Embedded)، مع تحليل ذكي للشفرة، إكمال تلقائي، وتصحيح أخطاء متقدم.",
-                vs_desc: "أقوى بيئة تطوير من مايكروسوفت. تدعم C/C++ عبر مُجمّع MSVC أو Clang، مع أدوات تحليل، تصحيح، وواجهة متكاملة. مثالية لمشاريع كبيرة (ألعاب، تطبيقات سطح مكتب، خوادم).",
-                codeblocks_desc: "بيئة تطوير مفتوحة المصدر وخفيفة، تعتمد على GCC أو Clang. مناسبة للمبتدئين والمشاريع المتوسطة. تدعم أنظمة Windows، Linux، وmacOS.",
-                gcc_desc: "المُجمّع الأساسي لكتابة أكواد C/C++. ضروري لتشغيل معظم البيئات. على macOS: استخدم <code>xcode-select --install</code>. على Windows: استخدم <a href='https://www.msys2.org/' target='_blank'>MSYS2</a>.",
-                devcpp_desc: "بيئة بسيطة مناسبة جداً للمبتدئين. تحتوي على مُجمّع TDM-GCC مدمج. نسخة مُحدّثة من Orwell (مدعومة من Embarcadero عبر GitHub).",
-                c4droid_desc: "أقوى محرر C/C++ على أندرويد. يدعم GCC وClang، ويسمح بالكتابة، الترجمة، والتشغيل مباشرةً على الجهاز. يتطلب ترخيصاً لفتح الميزات الكاملة.",
-                termux_desc: "طرفية لينكس حقيقية على أندرويد. بعد التثبيت، نفّذ <code>pkg install clang</code> لتطوير C/C++. مثالي للمستخدمين المتقدمين.",
-                acode_desc: "محرر خفيف وسريع (مفتوح المصدر). مع إضافة دعم C وTermux، يمكنك تطوير C بكفاءة على أندرويد.",
-                vscode_ipad_desc: "تطبيق Visual Studio Code رسمي على iPadOS. مع إضافات C/C++ وGitHub Codespaces، يمكنك تطوير C/C++ باحترافية.",
-                footer1: "✅ جميع الروابط مُختارة من مصادر رسمية أو مجتمعات موثوقة (GitHub, JetBrains, Microsoft, F-Droid).",
-                footer2: "آخر تحديث: ديسمبر ٢٠٢٥ | تصميم محسن مع حماية متكاملة",
-                security_note: "الصفحة محمية ضد الهجمات الإلكترونية الشائعة",
-                website: "الموقع الرسمي",
-                contact: "اتصل بنا"
-            },
-            fr: {
-                home: "Accueil",
-                title: "Meilleurs outils pour développer en C",
-                subtitle: "Environnements de développement fiables — ordinateur et mobile — pour coder, compiler et déboguer en C/C++",
-                desktop_section: "🖥️ Pour ordinateur (Windows / macOS / Linux)",
-                mobile_section: "📱 Pour smartphone",
-                features_title: "✨ Pourquoi ces outils ?",
-                recommendation_title: "💡 Nos recommandations",
-                recommendation_subtitle: "Nos conseils pour débutants et professionnels",
-                recommendation_text: "<strong>Pour les débutants:</strong> Commencez avec Code::Blocks ou Dev-C++ pour la simplicité.<br><strong>Pour les grands projets:</strong> Utilisez Visual Studio (Windows) ou CLion (multi-plateforme).<br><strong>Pour Android:</strong> C4droid est le meilleur choix avec support complet.<br><strong>Pour iPad:</strong> VS Code offre une expérience professionnelle.",
-                feature1_title: "Performance exceptionnelle",
-                feature1_desc: "Compilation et exécution rapides avec optimisations",
-                feature2_title: "Fiable et sécurisé",
-                feature2_desc: "Sources officielles et mises à jour régulières",
-                feature3_title: "Communauté supportive",
-                feature3_desc: "Documentation complète et support technique",
-                feature4_title: "Facile à utiliser",
-                feature4_desc: "Interfaces intuitives pour débutants et pros",
-                download: "Télécharger",
-                features: "Fonctionnalités",
-                vs_community: "Community (gratuit)",
-                guide: "Guide",
-                clion_desc: "IDE professionnel de JetBrains pour C/C++. Supporte CMake, GDB/LLDB, Docker, WSL et le développement embarqué, avec analyse intelligente, auto-complétion et débogage avancé.",
-                vs_desc: "L'IDE le plus puissant de Microsoft. Supporte C/C++ via MSVC ou Clang. Idéal pour les gros projets (jeux, applications desktop, serveurs).",
-                codeblocks_desc: "IDE léger, open-source, basé sur GCC/Clang. Idéal pour débutants et projets moyens.",
-                gcc_desc: "Le compilateur standard pour C/C++. Sur macOS : <code>xcode-select --install</code>. Sur Windows : utilisez <a href='https://www.msys2.org/' target='_blank'>MSYS2</a>.",
-                devcpp_desc: "IDE simple, idéal pour l'apprentissage. Inclut TDM-GCC. Version maintenue par Embarcadero (GitHub).",
-                c4droid_desc: "Le meilleur IDE C/C++ sur Android. Compilation et exécution directe sur l'appareil.",
-                termux_desc: "Terminal Linux sur Android. Installez Clang via <code>pkg install clang</code> pour coder en C/C++.",
-                acode_desc: "Éditeur léger et open-source. Avec le plugin C et Termux, parfait pour Android.",
-                vscode_ipad_desc: "VS Code officiel sur iPadOS. Développez en C/C++ avec GitHub Codespaces.",
-                footer1: "✅ Tous les liens proviennent de sources officielles (GitHub, JetBrains, Microsoft, F-Droid).",
-                footer2: "Dernière mise à jour : Décembre 2025 | Design amélioré avec protection complète",
-                security_note: "Page protégée contre les attaques électroniques courantes",
-                website: "Site officiel",
-                contact: "Contactez-nous"
-            },
-            en: {
-                home: "Home",
-                title: "Best Tools for C Development",
-                subtitle: "Trusted IDEs & editors — desktop & mobile — to write, compile, and debug C/C++ code professionally",
-                desktop_section: "🖥️ For Desktop (Windows / macOS / Linux)",
-                mobile_section: "📱 For Mobile",
-                features_title: "✨ Why These Tools?",
-                recommendation_title: "💡 Our Recommendations",
-                recommendation_subtitle: "Our advice for beginners and professionals",
-                recommendation_text: "<strong>For beginners:</strong> Start with Code::Blocks or Dev-C++ for simplicity.<br><strong>For large projects:</strong> Use Visual Studio (Windows) or CLion (cross-platform).<br><strong>For Android:</strong> C4droid is the best choice with full support.<br><strong>For iPad:</strong> VS Code offers professional experience.",
-                feature1_title: "Exceptional Performance",
-                feature1_desc: "Fast compilation and execution with optimizations",
-                feature2_title: "Reliable & Secure",
-                feature2_desc: "Official sources and regular updates",
-                feature3_title: "Supportive Community",
-                feature3_desc: "Complete documentation and technical support",
-                feature4_title: "Easy to Use",
-                feature4_desc: "Intuitive interfaces for beginners and pros",
-                download: "Download",
-                features: "Features",
-                vs_community: "Community (Free)",
-                guide: "Guide",
-                clion_desc: "Professional C/C++ IDE by JetBrains. Supports CMake, GDB/LLDB, Docker, WSL, and embedded dev, with smart code analysis and advanced debugging.",
-                vs_desc: "Microsoft's most powerful IDE. Supports C/C++ via MSVC or Clang. Ideal for large projects (games, desktop apps, servers).",
-                codeblocks_desc: "Lightweight, open-source IDE based on GCC/Clang. Great for beginners and medium projects.",
-                gcc_desc: "The standard compiler for C/C++. On macOS: <code>xcode-select --install</code>. On Windows: use <a href='https://www.msys2.org/' target='_blank'>MSYS2</a>.",
-                devcpp_desc: "Simple IDE, perfect for learning. Bundles TDM-GCC. Maintained by Embarcadero (GitHub).",
-                c4droid_desc: "The most powerful C/C++ IDE on Android. Compile and run directly on device.",
-                termux_desc: "Linux terminal on Android. Run <code>pkg install clang</code> to develop in C/C++.",
-                acode_desc: "Lightweight, open-source editor. With C plugin + Termux, great for Android development.",
-                vscode_ipad_desc: "Official VS Code for iPadOS. Develop C/C++ with GitHub Codespaces.",
-                footer1: "✅ All links are from official sources (GitHub, JetBrains, Microsoft, F-Droid).",
-                footer2: "Last updated: December 2025 | Enhanced design with complete protection",
-                security_note: "Page protected against common electronic attacks",
-                website: "Official Website",
-                contact: "Contact Us"
-            }
-        };
-
-        const savedLang = localStorage.getItem('preferredLang') || 'ar';
-        setLanguage(savedLang);
-
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const lang = btn.getAttribute('data-lang');
-                if (['ar', 'fr', 'en'].includes(lang)) {
-                    setLanguage(lang);
-                    localStorage.setItem('preferredLang', lang);
-                    
-                    btn.classList.add('animate__animated', 'animate__pulse');
-                    setTimeout(() => {
-                        btn.classList.remove('animate__animated', 'animate__pulse');
-                    }, 300);
-                } else {
-                    console.error('[Security] Invalid language attempted:', lang);
-                    e.preventDefault();
-                }
-            });
-        });
-
+        // تغيير اللغة
         function setLanguage(lang) {
             if (!['ar', 'fr', 'en'].includes(lang)) {
                 lang = 'ar';
             }
             
+            // تحديث جسم الصفحة
             document.body.className = `lang-${lang}`;
             document.getElementById('html-root').setAttribute('lang', lang);
             document.getElementById('html-root').setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-
-            document.querySelectorAll('.lang-btn').forEach(btn => {
+            
+            // تحديث أزرار اللغة النشطة
+            document.querySelectorAll('.lang-btn-top').forEach(btn => {
                 btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
             });
-
+            
+            // تحديث النصوص
             document.querySelectorAll('[data-key]').forEach(el => {
                 const key = el.getAttribute('data-key');
                 if (translations[lang] && translations[lang][key]) {
                     let content = translations[lang][key];
+                    // تنظيف HTML
                     if (typeof DOMPurify !== 'undefined') {
                         content = DOMPurify.sanitize(content);
-                    } else {
-                        content = escapeHTML(content);
                     }
                     el.innerHTML = content;
                 }
             });
             
-            setTimeout(validateExternalLinks, 100);
+            // تأثير سلس
+            document.querySelectorAll('.app-card').forEach(card => {
+                card.style.transition = 'opacity 0.3s ease';
+                card.style.opacity = '0.7';
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                }, 300);
+            });
         }
 
-        
-        window.addEventListener('scroll', () => {
-            document.body.classList.toggle('scrolling', window.scrollY > 10);
-            
+        // تصفية البطاقات
+        function filterCards(filter) {
             const cards = document.querySelectorAll('.app-card');
+            let visibleCount = 0;
+            
             cards.forEach(card => {
-                const rect = card.getBoundingClientRect();
-                if (rect.top < window.innerHeight - 100) {
-                    card.classList.add('animate__animated', 'animate__fadeInUp');
-                }
-            });
-        });
-
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => {
-                initSecurity();
-            });
-        } else {
-            initSecurity();
-        }
-
-        if (self !== top) {
-            top.location = self.location;
-            console.warn('[Security] Clickjacking attempt detected and prevented');
-        }
-
-        document.querySelectorAll('.app-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-12px) scale(1.03)';
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-
-        document.querySelectorAll('.platform-tag').forEach(tag => {
-            tag.addEventListener('mouseenter', () => {
-                tag.style.transform = 'translateY(-4px)';
-            });
-            
-            tag.addEventListener('mouseleave', () => {
-                tag.style.transform = 'translateY(0)';
-            });
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
+                const categories = card.getAttribute('data-category') || '';
                 
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
+                if (filter === 'all' || categories.includes(filter)) {
+                    card.style.display = 'flex';
+                    card.style.animation = 'fadeInUp 0.5s ease';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
                 }
             });
-        });
+            
+            // إذا لم توجد بطاقات، عرض رسالة
+            if (visibleCount === 0) {
+                // يمكن إضافة رسالة هنا
+            }
+        }
+
+        // تأثيرات الظهور عند التمرير
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.app-card').forEach(card => {
+                observer.observe(card);
+            });
+        }
+
+        // تهيئة التصفية
+        filterCards('all');
     </script>
 </body>
 </html>

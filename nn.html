@@ -15,11 +15,12 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>مساعد الذكاء الاصطناعي المتقدم لتصحيح أكواد C</title>
+    <title>مساعد الذكاء الاصطناعي المتقدم لتصحيح أكواد C والخوارزميات</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <link rel="icon" type="image/png" href="favicon.png">
 
     <style>
@@ -40,7 +41,9 @@
             --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             --gradient-success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             --gradient-copy: linear-gradient(135deg, #4ade80 0%, #22d3ee 100%);
-            --home-color: #8b5cf6; /* لون جديد لزر HOME */
+            --home-color: #8b5cf6;
+            --capture-color: #ec4899;
+            --algorithms-color: #f59e0b;
         }
 
         * {
@@ -68,7 +71,6 @@
             width: 100%;
         }
 
-        /* ========== تحسينات الهواتف المتقدمة ========== */
         @media (max-width: 768px) {
             body {
                 padding: 10px 8px;
@@ -79,13 +81,7 @@
             }
         }
 
-        @media (max-width: 480px) {
-            body {
-                padding: 8px 5px;
-            }
-        }
-
-        /* ========== الهيدر المحسن مع زر HOME ========== */
+        /* ========== الهيدر المحسن ========== */
         header {
             display: flex;
             justify-content: space-between;
@@ -103,44 +99,12 @@
             position: relative;
         }
 
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                text-align: center;
-                padding: 15px 12px;
-                margin-bottom: 15px;
-                border-radius: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            header {
-                padding: 12px 10px;
-                border-radius: 8px;
-            }
-        }
-
         .logo {
             display: flex;
             align-items: center;
             gap: 12px;
             flex: 1;
             min-width: 250px;
-        }
-
-        @media (max-width: 768px) {
-            .logo {
-                min-width: auto;
-                justify-content: center;
-                width: 100%;
-                gap: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo {
-                gap: 8px;
-            }
         }
 
         .logo-icon {
@@ -154,31 +118,13 @@
             flex-shrink: 0;
         }
 
-        @media (max-width: 768px) {
-            .logo-icon {
-                font-size: 2.2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo-icon {
-                font-size: 1.8rem;
-            }
-        }
-
         .logo-text {
             flex: 1;
             min-width: 0;
         }
 
-        @media (max-width: 768px) {
-            .logo-text {
-                text-align: center;
-            }
-        }
-
         .logo-text h1 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 800;
             background: linear-gradient(to right, #60a5fa, #34d399);
             -webkit-background-clip: text;
@@ -189,53 +135,29 @@
             word-break: break-word;
         }
 
-        @media (max-width: 1024px) {
-            .logo-text h1 {
-                font-size: 1.6rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .logo-text h1 {
-                font-size: 1.5rem;
-                margin-bottom: 4px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo-text h1 {
-                font-size: 1.3rem;
-                line-height: 1.2;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .logo-text h1 {
-                font-size: 1.2rem;
-            }
-        }
-
         .logo-text p {
             font-size: 0.85rem;
             color: #94a3b8;
             line-height: 1.4;
         }
 
+        /* ========== أزرار التحكم في الهيدر ========== */
+        .header-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
         @media (max-width: 768px) {
-            .logo-text p {
-                font-size: 0.8rem;
-                line-height: 1.3;
+            .header-controls {
+                width: 100%;
+                justify-content: center;
+                margin-top: 10px;
             }
         }
 
-        @media (max-width: 480px) {
-            .logo-text p {
-                font-size: 0.75rem;
-            }
-        }
-
-        /* ========== زر HOME الجديد ========== */
-        .home-btn {
+        .home-btn, .capture-btn, .algorithms-btn {
             background: var(--home-color);
             color: white;
             border: none;
@@ -253,10 +175,19 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
-            margin-left: 15px;
         }
 
-        .home-btn::before {
+        .capture-btn {
+            background: var(--capture-color);
+            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        }
+
+        .algorithms-btn {
+            background: var(--algorithms-color);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+
+        .home-btn::before, .capture-btn::before, .algorithms-btn::before {
             content: '';
             position: absolute;
             top: 0;
@@ -268,7 +199,7 @@
             z-index: -1;
         }
 
-        .home-btn:hover::before {
+        .home-btn:hover::before, .capture-btn:hover::before, .algorithms-btn:hover::before {
             left: 100%;
         }
 
@@ -278,38 +209,16 @@
             background: #7c3aed;
         }
 
-        @media (max-width: 768px) {
-            .home-btn {
-                padding: 8px 16px;
-                font-size: 0.85rem;
-                margin-left: 0;
-                margin-top: 10px;
-                order: 3;
-                width: 100%;
-                justify-content: center;
-            }
+        .capture-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(236, 72, 153, 0.4);
+            background: #db2777;
         }
 
-        @media (max-width: 480px) {
-            .home-btn {
-                padding: 8px 12px;
-                font-size: 0.8rem;
-                gap: 6px;
-            }
-            
-            .home-btn span {
-                font-size: 0.75rem;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .home-btn span {
-                font-size: 0.7rem;
-            }
-            
-            .home-btn i {
-                font-size: 0.9rem;
-            }
+        .algorithms-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
+            background: #d97706;
         }
 
         /* ========== محسّن لمبدّل اللغة ========== */
@@ -324,25 +233,6 @@
             flex-wrap: wrap;
             justify-content: center;
             min-width: 200px;
-        }
-
-        @media (max-width: 768px) {
-            .language-switcher {
-                width: 100%;
-                justify-content: center;
-                padding: 6px;
-                border-radius: 8px;
-                min-width: auto;
-                margin-top: 10px;
-                order: 2;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .language-switcher {
-                padding: 5px;
-                gap: 4px;
-            }
         }
 
         .lang-btn {
@@ -380,44 +270,6 @@
             left: 100%;
         }
 
-        @media (max-width: 768px) {
-            .lang-btn {
-                min-width: 65px;
-                padding: 8px 10px;
-                font-size: 0.82rem;
-                border-radius: 5px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .lang-btn {
-                min-width: 60px;
-                padding: 7px 8px;
-                font-size: 0.8rem;
-                gap: 4px;
-            }
-            
-            .lang-btn span {
-                font-size: 0.75rem;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .lang-btn {
-                min-width: 55px;
-                padding: 6px;
-            }
-            
-            .lang-btn span {
-                display: none;
-            }
-            
-            .lang-btn i {
-                margin: 0;
-                font-size: 0.9rem;
-            }
-        }
-
         .lang-btn:hover {
             background: rgba(255, 255, 255, 0.1);
             transform: translateY(-2px);
@@ -432,21 +284,186 @@
             font-weight: 700;
         }
 
-        .lang-btn.active::before {
+        /* ========== مودال تصوير الكود ========== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: rgba(30, 41, 59, 0.95);
+            border-radius: var(--radius);
+            padding: 25px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transform: translateY(-30px);
+            transition: var(--transition);
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-header h3 {
+            font-size: 1.4rem;
+            color: #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-close {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #94a3b8;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            transform: rotate(90deg);
+        }
+
+        .capture-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .capture-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .capture-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--capture-color);
+            transform: translateY(-5px);
+        }
+
+        .capture-option i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .capture-option h4 {
+            color: #f1f5f9;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .capture-option p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .capture-preview {
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             display: none;
         }
 
-        .lang-btn i {
-            font-size: 0.9rem;
+        .capture-preview.active {
+            display: block;
         }
 
-        @media (max-width: 480px) {
-            .lang-btn i {
-                font-size: 0.85rem;
-            }
+        #capturePreview {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        /* ========== بقية الأنماط بدون تغيير ========== */
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+        }
+
+        .modal-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .modal-btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #e2e8f0;
+        }
+
+        .modal-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .modal-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* ========== بقية الأنماط ========== */
         .main-content {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
@@ -458,12 +475,6 @@
             .main-content {
                 grid-template-columns: 1fr;
                 gap: 20px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .main-content {
-                gap: 15px;
             }
         }
 
@@ -479,30 +490,10 @@
             overflow: hidden;
         }
 
-        @media (max-width: 768px) {
-            .panel {
-                padding: 16px;
-                border-radius: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .panel {
-                padding: 14px;
-                border-radius: 8px;
-            }
-        }
-
         .panel:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
             border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        @media (max-width: 768px) {
-            .panel:hover {
-                transform: translateY(-3px);
-            }
         }
 
         .panel-header {
@@ -516,14 +507,6 @@
             flex-wrap: wrap;
         }
 
-        @media (max-width: 768px) {
-            .panel-header {
-                margin-bottom: 15px;
-                padding-bottom: 10px;
-                gap: 10px;
-            }
-        }
-
         .panel-header i {
             font-size: 1.6rem;
             background: var(--gradient-primary);
@@ -531,12 +514,6 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             flex-shrink: 0;
-        }
-
-        @media (max-width: 480px) {
-            .panel-header i {
-                font-size: 1.4rem;
-            }
         }
 
         .panel-header h2 {
@@ -548,79 +525,6 @@
             flex: 1;
         }
 
-        @media (max-width: 768px) {
-            .panel-header h2 {
-                font-size: 1.3rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .panel-header h2 {
-                font-size: 1.2rem;
-            }
-        }
-
-        /* زر نسخ الكود المصحح */
-        .copy-btn-container {
-            flex-shrink: 0;
-        }
-
-        .copy-btn {
-            background: var(--gradient-copy);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.9rem;
-            box-shadow: 0 4px 6px rgba(74, 222, 128, 0.2);
-        }
-
-        .copy-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(74, 222, 128, 0.3);
-        }
-
-        .copy-btn.copied {
-            background: var(--gradient-success);
-            animation: bounce 0.5s;
-        }
-
-        @media (max-width: 768px) {
-            .copy-btn {
-                padding: 7px 12px;
-                font-size: 0.85rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .copy-btn {
-                padding: 6px 10px;
-                font-size: 0.8rem;
-                gap: 4px;
-            }
-            
-            .copy-btn span {
-                font-size: 0.75rem;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .copy-btn span {
-                display: none;
-            }
-            
-            .copy-btn i {
-                margin: 0;
-            }
-        }
-
-        /* منطقة إدخال الكود */
         .code-container {
             position: relative;
             margin-bottom: 15px;
@@ -641,27 +545,6 @@
             line-height: 1.6;
             tab-size: 4;
             -webkit-appearance: none;
-            -webkit-touch-callout: default;
-        }
-
-        @media (max-width: 768px) {
-            .code-input {
-                min-height: 280px;
-                padding: 16px 16px 16px 35px;
-                font-size: 13px;
-                line-height: 1.5;
-                border-radius: 8px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .code-input {
-                min-height: 220px;
-                padding: 14px 14px 14px 32px;
-                font-size: 12px;
-                line-height: 1.4;
-                border-radius: 6px;
-            }
         }
 
         .code-input:focus {
@@ -684,24 +567,6 @@
             pointer-events: none;
         }
 
-        @media (max-width: 768px) {
-            .line-numbers {
-                font-size: 13px;
-                left: 6px;
-                top: 16px;
-                line-height: 1.5;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .line-numbers {
-                font-size: 12px;
-                left: 5px;
-                top: 14px;
-                line-height: 1.4;
-            }
-        }
-
         [dir="rtl"] .line-numbers {
             left: auto;
             right: 8px;
@@ -710,26 +575,11 @@
             padding-left: 10px;
         }
 
-        /* مجموعة الأزرار المحسنة */
         .button-group {
             display: flex;
             gap: 12px;
             margin-top: 15px;
             flex-wrap: wrap;
-        }
-
-        @media (max-width: 768px) {
-            .button-group {
-                gap: 10px;
-                margin-top: 12px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .button-group {
-                gap: 8px;
-                margin-top: 10px;
-            }
         }
 
         .btn {
@@ -751,71 +601,6 @@
             position: relative;
             overflow: hidden;
             user-select: none;
-        }
-
-        .btn::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 5px;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.4);
-            opacity: 0;
-            border-radius: 100%;
-            transform: scale(1, 1) translate(-50%);
-            transform-origin: 50% 50%;
-        }
-
-        .btn:focus:not(:active)::after {
-            animation: ripple 1s ease-out;
-        }
-
-        @media (max-width: 1024px) {
-            .btn {
-                min-width: 120px;
-                padding: 12px 15px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .btn {
-                min-width: 100px;
-                padding: 12px 10px;
-                font-size: 0.9rem;
-                border-radius: 8px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .btn {
-                min-width: 0;
-                flex-basis: calc(50% - 4px);
-                padding: 11px 8px;
-                font-size: 0.85rem;
-                gap: 6px;
-                border-radius: 6px;
-            }
-            
-            .button-group .btn:nth-child(3) {
-                flex-basis: 100%;
-                margin-top: 8px;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .btn {
-                flex-basis: 100%;
-                margin-bottom: 5px;
-            }
-            
-            .button-group .btn:nth-child(3) {
-                margin-top: 0;
-            }
-            
-            .btn span {
-                font-size: 0.8rem;
-            }
         }
 
         .btn-primary {
@@ -849,7 +634,6 @@
             box-shadow: 0 10px 20px rgba(16, 185, 129, 0.4);
         }
 
-        /* زر نسخ */
         .btn-copy {
             background: var(--gradient-copy);
             color: white;
@@ -860,7 +644,6 @@
             box-shadow: 0 10px 20px rgba(74, 222, 128, 0.4);
         }
 
-        /* شريط الإحصائيات */
         .stats-bar {
             display: flex;
             gap: 15px;
@@ -872,21 +655,6 @@
             justify-content: space-around;
         }
 
-        @media (max-width: 768px) {
-            .stats-bar {
-                gap: 12px;
-                padding: 10px;
-                border-radius: 8px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .stats-bar {
-                gap: 8px;
-                padding: 8px;
-            }
-        }
-
         .stat-item {
             display: flex;
             align-items: center;
@@ -894,29 +662,6 @@
             flex: 1;
             min-width: 120px;
             justify-content: center;
-        }
-
-        @media (max-width: 768px) {
-            .stat-item {
-                min-width: 110px;
-                gap: 6px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .stat-item {
-                min-width: 48%;
-                margin-bottom: 5px;
-                gap: 5px;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .stat-item {
-                min-width: 100%;
-                justify-content: flex-start;
-                margin-bottom: 8px;
-            }
         }
 
         .stat-icon {
@@ -931,22 +676,6 @@
             flex-shrink: 0;
         }
 
-        @media (max-width: 768px) {
-            .stat-icon {
-                width: 32px;
-                height: 32px;
-                font-size: 1.2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .stat-icon {
-                width: 30px;
-                height: 30px;
-                font-size: 1.1rem;
-            }
-        }
-
         .stat-text h3 {
             font-size: 1.5rem;
             font-weight: 800;
@@ -957,47 +686,15 @@
             line-height: 1;
         }
 
-        @media (max-width: 768px) {
-            .stat-text h3 {
-                font-size: 1.4rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .stat-text h3 {
-                font-size: 1.3rem;
-            }
-        }
-
         .stat-text p {
             font-size: 0.8rem;
             color: #94a3b8;
         }
 
-        @media (max-width: 480px) {
-            .stat-text p {
-                font-size: 0.75rem;
-            }
-        }
-
-        /* منطقة الأخطاء */
         .errors-container {
             max-height: 500px;
             overflow-y: auto;
             margin-bottom: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .errors-container {
-                max-height: 400px;
-                margin-bottom: 15px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .errors-container {
-                max-height: 350px;
-            }
         }
 
         .error-item {
@@ -1010,32 +707,9 @@
             transition: var(--transition);
         }
 
-        @media (max-width: 768px) {
-            .error-item {
-                padding: 12px;
-                margin-bottom: 10px;
-                border-radius: 8px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .error-item {
-                padding: 10px;
-                margin-bottom: 8px;
-                border-radius: 6px;
-                border-left-width: 4px;
-            }
-        }
-
         .error-item:hover {
             transform: translateX(5px);
             background: rgba(239, 68, 68, 0.15);
-        }
-
-        @media (max-width: 768px) {
-            .error-item:hover {
-                transform: translateX(3px);
-            }
         }
 
         .error-item.warning {
@@ -1043,26 +717,14 @@
             background: rgba(245, 158, 11, 0.1);
         }
 
-        .error-item.warning:hover {
-            background: rgba(245, 158, 11, 0.15);
-        }
-
         .error-item.info {
             border-left-color: var(--info-color);
             background: rgba(59, 130, 246, 0.1);
         }
 
-        .error-item.info:hover {
-            background: rgba(59, 130, 246, 0.15);
-        }
-
         .error-item.success {
             border-left-color: var(--success-color);
             background: rgba(16, 185, 129, 0.1);
-        }
-
-        .error-item.success:hover {
-            background: rgba(16, 185, 129, 0.15);
         }
 
         .error-header {
@@ -1087,43 +749,9 @@
             flex-shrink: 0;
         }
 
-        @media (max-width: 480px) {
-            .error-title i {
-                font-size: 1.1rem;
-            }
-        }
-
-        .error-item .error-title i {
-            color: var(--error-color);
-        }
-
-        .error-item.warning .error-title i {
-            color: var(--warning-color);
-        }
-
-        .error-item.info .error-title i {
-            color: var(--info-color);
-        }
-
-        .error-item.success .error-title i {
-            color: var(--success-color);
-        }
-
         .error-title strong {
             font-size: 1rem;
             word-break: break-word;
-        }
-
-        @media (max-width: 768px) {
-            .error-title strong {
-                font-size: 0.95rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .error-title strong {
-                font-size: 0.9rem;
-            }
         }
 
         .error-line {
@@ -1135,31 +763,11 @@
             flex-shrink: 0;
         }
 
-        @media (max-width: 480px) {
-            .error-line {
-                font-size: 0.8rem;
-                padding: 3px 8px;
-            }
-        }
-
         .error-body {
             margin-bottom: 12px;
             line-height: 1.5;
             color: #e2e8f0;
             font-size: 0.95rem;
-        }
-
-        @media (max-width: 768px) {
-            .error-body {
-                font-size: 0.9rem;
-                line-height: 1.4;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .error-body {
-                font-size: 0.85rem;
-            }
         }
 
         .error-fix {
@@ -1168,13 +776,6 @@
             border-radius: 8px;
             border: 1px dashed rgba(255, 255, 255, 0.1);
             margin-top: 8px;
-        }
-
-        @media (max-width: 480px) {
-            .error-fix {
-                padding: 10px;
-                border-radius: 6px;
-            }
         }
 
         .error-fix pre {
@@ -1186,40 +787,12 @@
             overflow-x: auto;
         }
 
-        @media (max-width: 768px) {
-            .error-fix pre {
-                font-size: 12px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .error-fix pre {
-                font-size: 11px;
-            }
-        }
-
-        /* اقتراحات الذكاء الاصطناعي */
         .ai-suggestions {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
             padding: 15px;
             margin-top: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        @media (max-width: 768px) {
-            .ai-suggestions {
-                padding: 12px;
-                margin-top: 15px;
-                border-radius: 8px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .ai-suggestions {
-                padding: 10px;
-                border-radius: 6px;
-            }
         }
 
         .ai-suggestions h3 {
@@ -1231,43 +804,12 @@
             font-size: 1.2rem;
         }
 
-        @media (max-width: 768px) {
-            .ai-suggestions h3 {
-                font-size: 1.1rem;
-                gap: 8px;
-                margin-bottom: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .ai-suggestions h3 {
-                font-size: 1rem;
-                gap: 6px;
-            }
-        }
-
-        .ai-suggestions h3 i {
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            flex-shrink: 0;
-        }
-
         .suggestion-item {
             display: flex;
             gap: 12px;
             margin-bottom: 12px;
             padding-bottom: 12px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        @media (max-width: 480px) {
-            .suggestion-item {
-                gap: 10px;
-                margin-bottom: 10px;
-                padding-bottom: 10px;
-            }
         }
 
         .suggestion-item:last-child {
@@ -1283,13 +825,6 @@
             flex-shrink: 0;
         }
 
-        @media (max-width: 480px) {
-            .suggestion-icon {
-                font-size: 1rem;
-                margin-top: 2px;
-            }
-        }
-
         .suggestion-content {
             flex: 1;
             min-width: 0;
@@ -1302,39 +837,12 @@
             word-break: break-word;
         }
 
-        @media (max-width: 768px) {
-            .suggestion-content h4 {
-                font-size: 0.95rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .suggestion-content h4 {
-                font-size: 0.9rem;
-                margin-bottom: 4px;
-            }
-        }
-
         .suggestion-content p {
             color: #94a3b8;
             line-height: 1.5;
             font-size: 0.9rem;
         }
 
-        @media (max-width: 768px) {
-            .suggestion-content p {
-                font-size: 0.85rem;
-                line-height: 1.4;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .suggestion-content p {
-                font-size: 0.8rem;
-            }
-        }
-
-        /* مؤشر التحميل */
         .loading {
             display: none;
             justify-content: center;
@@ -1349,20 +857,6 @@
             display: flex;
         }
 
-        @media (max-width: 768px) {
-            .loading {
-                padding: 25px;
-                gap: 12px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .loading {
-                padding: 20px;
-                gap: 10px;
-            }
-        }
-
         .spinner {
             width: 50px;
             height: 50px;
@@ -1372,42 +866,12 @@
             animation: spin 1s linear infinite;
         }
 
-        @media (max-width: 768px) {
-            .spinner {
-                width: 45px;
-                height: 45px;
-                border-width: 3.5px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .spinner {
-                width: 40px;
-                height: 40px;
-                border-width: 3px;
-            }
-        }
-
         .loading-text {
             color: #cbd5e1;
             font-size: 1rem;
             text-align: center;
             line-height: 1.4;
             max-width: 300px;
-        }
-
-        @media (max-width: 768px) {
-            .loading-text {
-                font-size: 0.95rem;
-                max-width: 250px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .loading-text {
-                font-size: 0.9rem;
-                max-width: 200px;
-            }
         }
 
         .progress-bar {
@@ -1419,19 +883,6 @@
             margin-top: 8px;
         }
 
-        @media (max-width: 768px) {
-            .progress-bar {
-                width: 160px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .progress-bar {
-                width: 140px;
-                height: 4px;
-            }
-        }
-
         .progress-fill {
             height: 100%;
             background: var(--gradient-primary);
@@ -1439,7 +890,6 @@
             animation: progress 2s ease-in-out infinite;
         }
 
-        /* الفوتر */
         footer {
             text-align: center;
             color: #94a3b8;
@@ -1452,35 +902,6 @@
             font-size: 0.9rem;
         }
 
-        @media (max-width: 768px) {
-            footer {
-                padding: 15px;
-                margin-top: 20px;
-                font-size: 0.85rem;
-                border-radius: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            footer {
-                padding: 12px;
-                border-radius: 8px;
-                font-size: 0.8rem;
-            }
-        }
-
-        footer p {
-            margin-bottom: 8px;
-            line-height: 1.5;
-        }
-
-        @media (max-width: 480px) {
-            footer p {
-                margin-bottom: 6px;
-                line-height: 1.4;
-            }
-        }
-
         .ai-model {
             display: inline-block;
             background: var(--gradient-primary);
@@ -1491,46 +912,12 @@
             font-size: 0.9rem;
         }
 
-        @media (max-width: 768px) {
-            .ai-model {
-                padding: 4px 10px;
-                font-size: 0.85rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .ai-model {
-                display: block;
-                margin: 8px auto;
-                width: fit-content;
-                padding: 3px 8px;
-                font-size: 0.8rem;
-            }
-        }
-
-        /* الأمثلة */
         .code-example {
             background: rgba(15, 23, 42, 0.9);
             border-radius: 10px;
             padding: 15px;
             margin-top: 15px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        @media (max-width: 768px) {
-            .code-example {
-                padding: 12px;
-                border-radius: 8px;
-                margin-top: 12px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .code-example {
-                padding: 10px;
-                border-radius: 6px;
-                margin-top: 10px;
-            }
         }
 
         .code-example-header {
@@ -1549,20 +936,6 @@
             min-width: 200px;
         }
 
-        @media (max-width: 768px) {
-            .code-example-header h3 {
-                font-size: 1rem;
-                min-width: 150px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .code-example-header h3 {
-                font-size: 0.95rem;
-                min-width: auto;
-            }
-        }
-
         .example-btn {
             background: rgba(255, 255, 255, 0.1);
             color: #cbd5e1;
@@ -1579,26 +952,6 @@
             user-select: none;
         }
 
-        @media (max-width: 768px) {
-            .example-btn {
-                padding: 7px 10px;
-                font-size: 0.82rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .example-btn {
-                padding: 6px 8px;
-                font-size: 0.8rem;
-                gap: 4px;
-                border-radius: 5px;
-            }
-            
-            .example-btn span {
-                font-size: 0.75rem;
-            }
-        }
-
         .example-btn:hover {
             background: rgba(255, 255, 255, 0.2);
         }
@@ -1609,13 +962,6 @@
             gap: 10px;
         }
 
-        @media (max-width: 768px) {
-            #examplesList {
-                grid-template-columns: 1fr;
-                gap: 8px;
-            }
-        }
-
         .example-item {
             padding: 10px;
             background: rgba(255, 255, 255, 0.05);
@@ -1624,20 +970,6 @@
             transition: var(--transition);
             border: 1px solid rgba(255, 255, 255, 0.1);
             user-select: none;
-        }
-
-        @media (max-width: 768px) {
-            .example-item {
-                padding: 9px;
-                border-radius: 5px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .example-item {
-                padding: 8px;
-                border-radius: 4px;
-            }
         }
 
         .example-item:hover {
@@ -1651,22 +983,10 @@
             gap: 8px;
         }
 
-        @media (max-width: 480px) {
-            .example-item > div {
-                gap: 6px;
-            }
-        }
-
         .example-item strong {
             color: #e2e8f0;
             font-size: 0.9rem;
             word-break: break-word;
-        }
-
-        @media (max-width: 768px) {
-            .example-item strong {
-                font-size: 0.85rem;
-            }
         }
 
         .example-item div div {
@@ -1675,27 +995,9 @@
             margin-top: 2px;
         }
 
-        @media (max-width: 768px) {
-            .example-item div div {
-                font-size: 0.75rem;
-            }
-        }
-
         #noErrorsMessage {
             text-align: center;
             padding: 30px;
-        }
-
-        @media (max-width: 768px) {
-            #noErrorsMessage {
-                padding: 25px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            #noErrorsMessage {
-                padding: 20px;
-            }
         }
 
         #noErrorsMessage i {
@@ -1704,37 +1006,10 @@
             margin-bottom: 15px;
         }
 
-        @media (max-width: 768px) {
-            #noErrorsMessage i {
-                font-size: 2.5rem;
-                margin-bottom: 12px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            #noErrorsMessage i {
-                font-size: 2.2rem;
-                margin-bottom: 10px;
-            }
-        }
-
         #noErrorsMessage h3 {
             color: #10b981;
             margin-bottom: 10px;
             font-size: 1.3rem;
-        }
-
-        @media (max-width: 768px) {
-            #noErrorsMessage h3 {
-                font-size: 1.2rem;
-                margin-bottom: 8px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            #noErrorsMessage h3 {
-                font-size: 1.1rem;
-            }
         }
 
         #noErrorsMessage p {
@@ -1742,13 +1017,6 @@
             font-size: 0.95rem;
         }
 
-        @media (max-width: 768px) {
-            #noErrorsMessage p {
-                font-size: 0.9rem;
-            }
-        }
-
-        /* الإشعارات */
         .notification {
             position: fixed;
             top: 20px;
@@ -1777,27 +1045,55 @@
             font-size: 1.2rem;
         }
 
-        @media (max-width: 768px) {
-            .notification {
-                top: 15px;
-                right: 15px;
-                left: 15px;
-                padding: 12px 15px;
-                border-radius: 8px;
-            }
+        /* ========== تبويب تصحيح الخوارزميات ========== */
+        .algorithms-tab {
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        @media (max-width: 480px) {
-            .notification {
-                top: 10px;
-                right: 10px;
-                left: 10px;
-                padding: 10px 12px;
-                font-size: 0.9rem;
-            }
+        .algorithms-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
         }
 
-        /* الأنيميشن */
+        .algorithms-header i {
+            font-size: 1.4rem;
+            color: var(--algorithms-color);
+        }
+
+        .algorithms-header h4 {
+            color: #f1f5f9;
+            font-size: 1.1rem;
+        }
+
+        .algorithm-analysis {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+
+        .algorithm-analysis h5 {
+            color: #cbd5e1;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .algorithm-analysis p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* ========== الأنيميشن ========== */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -1835,17 +1131,6 @@
             50% { transform: translateY(-10px); }
         }
 
-        @keyframes ripple {
-            0% {
-                transform: scale(0, 0);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(40, 40);
-                opacity: 0;
-            }
-        }
-
         @keyframes slideDown {
             from {
                 transform: translateY(-100px);
@@ -1857,7 +1142,6 @@
             }
         }
 
-        /* تأثيرات إضافية */
         .highlighted {
             animation: highlight 2s ease;
         }
@@ -1870,17 +1154,9 @@
             direction: ltr;
         }
 
-        /* تخصيص شريط التمرير */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
-        }
-
-        @media (max-width: 768px) {
-            ::-webkit-scrollbar {
-                width: 6px;
-                height: 6px;
-            }
         }
 
         ::-webkit-scrollbar-track {
@@ -1897,53 +1173,80 @@
             background: var(--secondary-color);
         }
 
-        /* تحسينات للوضع الأفقي على الهواتف */
-        @media (max-height: 500px) and (orientation: landscape) {
-            .code-input {
-                min-height: 200px;
-            }
-            
-            .errors-container {
-                max-height: 200px;
+        /* تحسينات للظهور على الشاشات الصغيرة */
+        @media (max-width: 768px) {
+            .main-content {
+                gap: 15px;
             }
             
             .panel {
-                padding: 10px;
+                padding: 16px;
+                border-radius: 10px;
             }
             
-            .logo-text h1 {
-                font-size: 1.2rem;
-            }
-            
-            .logo-text p {
-                display: none;
-            }
-        }
-
-        /* منع تكبير النص على iOS مع السماح بالتكبير عند الضرورة */
-        @media (max-width: 768px) {
-            input, textarea {
-                font-size: 16px !important;
-            }
-        }
-
-        /* تحسينات للظهور على الشاشات الصغيرة جداً */
-        @media (max-width: 320px) {
-            .lang-btn {
-                min-width: 50px;
-                padding: 5px;
+            .code-input {
+                min-height: 280px;
+                padding: 16px 16px 16px 35px;
+                font-size: 13px;
             }
             
             .btn {
-                padding: 10px 5px;
+                min-width: 100px;
+                padding: 12px 10px;
+                font-size: 0.9rem;
             }
             
-            .btn span {
-                font-size: 0.75rem;
+            .header-controls {
+                width: 100%;
+                justify-content: center;
+                margin-top: 10px;
             }
             
-            .logo-text h1 {
-                font-size: 1.1rem;
+            .home-btn, .capture-btn, .algorithms-btn {
+                flex: 1;
+                min-width: 120px;
+                justify-content: center;
+            }
+            
+            .modal {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            .capture-options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 8px 5px;
+            }
+            
+            .panel {
+                padding: 14px;
+                border-radius: 8px;
+            }
+            
+            .code-input {
+                min-height: 220px;
+                padding: 14px 14px 14px 32px;
+                font-size: 12px;
+            }
+            
+            .button-group {
+                gap: 8px;
+            }
+            
+            .btn {
+                flex-basis: calc(50% - 4px);
+                padding: 11px 8px;
+                font-size: 0.85rem;
+            }
+            
+            .home-btn, .capture-btn, .algorithms-btn {
+                padding: 8px 12px;
+                font-size: 0.8rem;
             }
         }
 
@@ -1952,33 +1255,22 @@
             .btn:hover, 
             .lang-btn:hover,
             .example-btn:hover,
-            .error-item:hover,
-            .home-btn:hover {
+            .home-btn:hover,
+            .capture-btn:hover,
+            .algorithms-btn:hover {
                 transform: none;
             }
             
             .btn:active,
             .lang-btn:active,
             .example-btn:active,
-            .home-btn:active {
+            .home-btn:active,
+            .capture-btn:active,
+            .algorithms-btn:active {
                 transform: scale(0.98);
             }
         }
 
-        /* تحسين إمكانية الوصول */
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
-        }
-
-        /* تأثير اللمس للأزرار */
         .touch-feedback {
             animation: touchFeedback 0.3s ease;
         }
@@ -1997,36 +1289,102 @@
         <span id="notification-text">تم نسخ الكود بنجاح!</span>
     </div>
 
+    <!-- مودال تصوير الكود -->
+    <div id="captureModal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>
+                    <i class="fas fa-camera"></i>
+                    <span id="capture-modal-title">تصوير الكود البرمجي</span>
+                </h3>
+                <button class="modal-close" id="closeCaptureModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="capture-options">
+                <div class="capture-option" id="captureCodeOnly">
+                    <i class="fas fa-code"></i>
+                    <h4 id="capture-code-title">تصوير الكود فقط</h4>
+                    <p id="capture-code-desc">احفظ الكود البرمجي كصورة عالية الجودة</p>
+                </div>
+                
+                <div class="capture-option" id="captureWithResults">
+                    <i class="fas fa-chart-bar"></i>
+                    <h4 id="capture-results-title">الكود مع النتائج</h4>
+                    <p id="capture-results-desc">احفظ الكود مع نتائج التحليل كصورة واحدة</p>
+                </div>
+                
+                <div class="capture-option" id="captureFullPanel">
+                    <i class="fas fa-expand"></i>
+                    <h4 id="capture-full-title">تصوير اللوحة كاملة</h4>
+                    <p id="capture-full-desc">احفظ لوحة المدخلات أو النتائج كاملة</p>
+                </div>
+            </div>
+            
+            <div class="capture-preview" id="capturePreviewContainer">
+                <h4 id="preview-title">معاينة الصورة:</h4>
+                <img id="capturePreview" src="" alt="معاينة التصوير">
+            </div>
+            
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-secondary" id="cancelCaptureBtn">
+                    <i class="fas fa-times"></i>
+                    <span id="cancel-capture-text">إلغاء</span>
+                </button>
+                <button class="modal-btn modal-btn-primary" id="downloadCaptureBtn">
+                    <i class="fas fa-download"></i>
+                    <span id="download-capture-text">تحميل الصورة</span>
+                </button>
+                <button class="modal-btn modal-btn-primary" id="copyImageBtn">
+                    <i class="fas fa-copy"></i>
+                    <span id="copy-image-text">نسخ للذاكرة</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <header>
             <div class="logo">
                 <i class="fas fa-robot logo-icon"></i>
                 <div class="logo-text">
-                    <h1 id="header-title">مساعد الذكاء الاصطناعي المتقدم لتصحيح أكواد C</h1>
-                    <p id="header-subtitle">مدعوم بذكاء اصطناعي قادر على اكتشاف وتصحيح عشرات الأخطاء البرمجية</p>
+                    <h1 id="header-title">مساعد الذكاء الاصطناعي المتقدم لتصحيح أكواد C والخوارزميات</h1>
+                    <p id="header-subtitle">مدعوم بذكاء اصطناعي قادر على اكتشاف وتصحيح عشرات الأخطاء البرمجية والخوارزمية</p>
                 </div>
             </div>
             
-            <div class="language-switcher">
-                <button class="lang-btn active" data-lang="ar">
-                    <i class="fas fa-language"></i>
-                    <span>العربية</span>
+            <div class="header-controls">
+                <div class="language-switcher">
+                    <button class="lang-btn active" data-lang="ar">
+                        <i class="fas fa-language"></i>
+                        <span>العربية</span>
+                    </button>
+                    <button class="lang-btn" data-lang="en">
+                        <i class="fas fa-language"></i>
+                        <span>English</span>
+                    </button>
+                    <button class="lang-btn" data-lang="fr">
+                        <i class="fas fa-language"></i>
+                        <span>Français</span>
+                    </button>
+                </div>
+                
+                <a href="asasi.html" class="home-btn">
+                    <i class="fas fa-home"></i>
+                    <span id="home-text">HOME</span>
+                </a>
+                
+                <button class="capture-btn" id="captureCodeBtn">
+                    <i class="fas fa-camera"></i>
+                    <span id="capture-text">تصوير الكود</span>
                 </button>
-                <button class="lang-btn" data-lang="en">
-                    <i class="fas fa-language"></i>
-                    <span>English</span>
-                </button>
-                <button class="lang-btn" data-lang="fr">
-                    <i class="fas fa-language"></i>
-                    <span>Français</span>
+                
+                <button class="algorithms-btn" id="algorithmsModeBtn">
+                    <i class="fas fa-brain"></i>
+                    <span id="algorithms-text">وضع الخوارزميات</span>
                 </button>
             </div>
-            
-            <!-- زر HOME الجديد -->
-            <a href="asasi.html" class="home-btn">
-                <i class="fas fa-home"></i>
-                <span>HOME</span>
-            </a>
         </header>
 
         <div class="main-content">
@@ -2062,6 +1420,17 @@ int main() {
     
     return 0;
 }</textarea>
+                </div>
+                
+                <!-- تبويب تصحيح الخوارزميات -->
+                <div class="algorithms-tab" id="algorithmsTab" style="display: none;">
+                    <div class="algorithms-header">
+                        <i class="fas fa-brain"></i>
+                        <h4 id="algorithms-tab-title">تحليل الخوارزميات</h4>
+                    </div>
+                    <div id="algorithmsAnalysis">
+                        <!-- سيتم تعبئتها ديناميكياً -->
+                    </div>
                 </div>
                 
                 <div class="code-example">
@@ -2178,15 +1547,18 @@ int main() {
             </div>
         </div>
 
-       
+        <footer>
+            <p id="footer-text">تم تطوير هذا المساعد باستخدام ذكاء اصطناعي متقدم قادر على اكتشاف وتصحيح أكثر من 50 نوعاً من الأخطاء الشائعة في لغة C وتحليل الخوارزميات</p>
+            <p id="copyright-text">© 2023 جميع الحقوق محفوظة</p>
+        </footer>
     </div>
 
     <script>
         // بيانات الترجمة للغات المختلفة
         const translations = {
             ar: {
-                title: "مساعد الذكاء الاصطناعي المتقدم لتصحيح أكواد C",
-                subtitle: "مدعوم بذكاء اصطناعي قادر على اكتشاف وتصحيح عشرات الأخطاء البرمجية",
+                title: "مساعد الذكاء الاصطناعي المتقدم لتصحيح أكواد C والخوارزميات",
+                subtitle: "مدعوم بذكاء اصطناعي قادر على اكتشاف وتصحيح عشرات الأخطاء البرمجية والخوارزمية",
                 inputTitle: "أدخل كود C الخاص بك هنا",
                 analyzeText: "تحليل ذكي للكود",
                 clearText: "مسح الكل",
@@ -2198,7 +1570,7 @@ int main() {
                 noErrorsTitle: "لا توجد أخطاء!",
                 noErrorsText: "الكود الخاص بك خالٍ من الأخطاء. عمل رائع!",
                 suggestionsTitle: "اقتراحات الذكاء الاصطناعي",
-                footerText: "تم تطوير هذا المساعد باستخدام ذكاء اصطناعي متقدم قادر على اكتشاف وتصحيح أكثر من 50 نوعاً من الأخطاء الشائعة في لغة C",
+                footerText: "تم تطوير هذا المساعد باستخدام ذكاء اصطناعي متقدم قادر على اكتشاف وتصحيح أكثر من 50 نوعاً من الأخطاء الشائعة في لغة C وتحليل الخوارزميات",
                 copyrightText: "© 2023 جميع الحقوق محفوظة",
                 errorsText: "أخطاء",
                 warningsText: "تحذيرات",
@@ -2208,6 +1580,20 @@ int main() {
                 loadExampleText: "تحميل مثال",
                 notificationText: "تم نسخ الكود بنجاح!",
                 homeText: "HOME",
+                captureText: "تصوير الكود",
+                algorithmsText: "وضع الخوارزميات",
+                captureModalTitle: "تصوير الكود البرمجي",
+                captureCodeTitle: "تصوير الكود فقط",
+                captureCodeDesc: "احفظ الكود البرمجي كصورة عالية الجودة",
+                captureResultsTitle: "الكود مع النتائج",
+                captureResultsDesc: "احفظ الكود مع نتائج التحليل كصورة واحدة",
+                captureFullTitle: "تصوير اللوحة كاملة",
+                captureFullDesc: "احفظ لوحة المدخلات أو النتائج كاملة",
+                previewTitle: "معاينة الصورة:",
+                cancelCaptureText: "إلغاء",
+                downloadCaptureText: "تحميل الصورة",
+                copyImageText: "نسخ للذاكرة",
+                algorithmsTabTitle: "تحليل الخوارزميات",
                 examples: [
                     {
                         name: "أخطاء بناء الجملة الأساسية",
@@ -2235,19 +1621,39 @@ int main() {
 }`
                     },
                     {
-                        name: "أخطاء المنطق والمقارنات",
+                        name: "خوارزميات البحث والترتيب",
                         code: `#include <stdio.h>
 
+// خوارزمية بحث خطي بها أخطاء
+int linearSearch(int arr[], int n, int x) {
+    for (int i = 0; i <= n; i++) {
+        if (arr[i] = x)
+            return i;
+    }
+    return -1
+}
+
+// خوارزمية فقاعية بها أخطاء كفاءة
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (arr[j] > arr[j+1]) {
+                int temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = arr[j];
+            }
+        }
+    }
+}
+
 int main() {
-    int x = 5;
+    int arr[] = {64, 34, 25, 12, 22, 11, 90};
+    int n = sizeof(arr) / sizeof(arr[0]);
     
-    if (x = 10) {
-        printf("x تساوي 10\\n");
-    }
+    bubbleSort(arr, n);
     
-    for(int i = 0; i < 10; i--);
-        printf("الرقم: %d\\n", i);
-    }
+    int result = linearSearch(arr, n, 25);
+    printf("العنصر موجود في الفهرس: %d\\n", result);
     
     return 0;
 }`
@@ -2255,8 +1661,8 @@ int main() {
                 ]
             },
             en: {
-                title: "Advanced AI Assistant for C Code Correction",
-                subtitle: "Powered by AI capable of detecting and correcting dozens of programming errors",
+                title: "Advanced AI Assistant for C Code and Algorithms Correction",
+                subtitle: "Powered by AI capable of detecting and correcting dozens of programming and algorithmic errors",
                 inputTitle: "Enter Your C Code Here",
                 analyzeText: "Smart Code Analysis",
                 clearText: "Clear All",
@@ -2268,7 +1674,7 @@ int main() {
                 noErrorsTitle: "No Errors Found!",
                 noErrorsText: "Your code is error-free. Excellent work!",
                 suggestionsTitle: "AI Suggestions",
-                footerText: "This assistant was developed using advanced AI capable of detecting and correcting over 50 common C language errors",
+                footerText: "This assistant was developed using advanced AI capable of detecting and correcting over 50 common C language and algorithmic errors",
                 copyrightText: "© 2023 All Rights Reserved",
                 errorsText: "Errors",
                 warningsText: "Warnings",
@@ -2278,6 +1684,20 @@ int main() {
                 loadExampleText: "Load Example",
                 notificationText: "Code copied successfully!",
                 homeText: "HOME",
+                captureText: "Capture Code",
+                algorithmsText: "Algorithms Mode",
+                captureModalTitle: "Capture Code",
+                captureCodeTitle: "Capture Code Only",
+                captureCodeDesc: "Save code as high-quality image",
+                captureResultsTitle: "Code with Results",
+                captureResultsDesc: "Save code with analysis results as single image",
+                captureFullTitle: "Capture Full Panel",
+                captureFullDesc: "Save complete input or results panel",
+                previewTitle: "Image Preview:",
+                cancelCaptureText: "Cancel",
+                downloadCaptureText: "Download Image",
+                copyImageText: "Copy to Clipboard",
+                algorithmsTabTitle: "Algorithms Analysis",
                 examples: [
                     {
                         name: "Basic Syntax Errors",
@@ -2305,19 +1725,39 @@ int main() {
 }`
                     },
                     {
-                        name: "Logic and Comparison Errors",
+                        name: "Search and Sort Algorithms",
                         code: `#include <stdio.h>
 
+// Linear search algorithm with errors
+int linearSearch(int arr[], int n, int x) {
+    for (int i = 0; i <= n; i++) {
+        if (arr[i] = x)
+            return i;
+    }
+    return -1
+}
+
+// Bubble sort algorithm with efficiency errors
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (arr[j] > arr[j+1]) {
+                int temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = arr[j];
+            }
+        }
+    }
+}
+
 int main() {
-    int x = 5;
+    int arr[] = {64, 34, 25, 12, 22, 11, 90};
+    int n = sizeof(arr) / sizeof(arr[0]);
     
-    if (x = 10) {
-        printf("x equals 10\\n");
-    }
+    bubbleSort(arr, n);
     
-    for(int i = 0; i < 10; i--);
-        printf("Number: %d\\n", i);
-    }
+    int result = linearSearch(arr, n, 25);
+    printf("Element found at index: %d\\n", result);
     
     return 0;
 }`
@@ -2325,8 +1765,8 @@ int main() {
                 ]
             },
             fr: {
-                title: "Assistant IA Avancé pour la Correction de Code C",
-                subtitle: "Propulsé par une IA capable de détecter et de corriger des dizaines d'erreurs de programmation",
+                title: "Assistant IA Avancé pour la Correction de Code C et d'Algorithmes",
+                subtitle: "Propulsé par une IA capable de détecter et de corriger des dizaines d'erreurs de programmation et algorithmiques",
                 inputTitle: "Entrez Votre Code C Ici",
                 analyzeText: "Analyse Intelligente du Code",
                 clearText: "Tout Effacer",
@@ -2338,7 +1778,7 @@ int main() {
                 noErrorsTitle: "Aucune Erreur Trouvée!",
                 noErrorsText: "Votre code est exempt d'erreurs. Excellent travail!",
                 suggestionsTitle: "Suggestions de l'IA",
-                footerText: "Cet assistant a été développé avec une IA avancée capable de détecter et de corriger plus de 50 erreurs courantes en langage C",
+                footerText: "Cet assistant a été développé avec une IA avancée capable de détecter et de corriger plus de 50 erreurs courantes en langage C et algorithmiques",
                 copyrightText: "© 2023 Tous Droits Réservés",
                 errorsText: "Erreurs",
                 warningsText: "Avertissements",
@@ -2348,6 +1788,20 @@ int main() {
                 loadExampleText: "Charger un Exemple",
                 notificationText: "Code copié avec succès!",
                 homeText: "ACCUEIL",
+                captureText: "Capturer le Code",
+                algorithmsText: "Mode Algorithmes",
+                captureModalTitle: "Capture de Code",
+                captureCodeTitle: "Capturer le Code Seulement",
+                captureCodeDesc: "Enregistrer le code en image haute qualité",
+                captureResultsTitle: "Code avec Résultats",
+                captureResultsDesc: "Enregistrer code et résultats d'analyse en une seule image",
+                captureFullTitle: "Capturer le Panneau Complet",
+                captureFullDesc: "Enregistrer le panneau d'entrée ou de résultats complet",
+                previewTitle: "Aperçu de l'Image:",
+                cancelCaptureText: "Annuler",
+                downloadCaptureText: "Télécharger l'Image",
+                copyImageText: "Copier dans le Presse-papier",
+                algorithmsTabTitle: "Analyse des Algorithmes",
                 examples: [
                     {
                         name: "Erreurs de Syntaxe de Base",
@@ -2375,19 +1829,39 @@ int main() {
 }`
                     },
                     {
-                        name: "Erreurs de Logique et Comparaisons",
+                        name: "Algorithmes de Recherche et Tri",
                         code: `#include <stdio.h>
 
+// Algorithme de recherche linéaire avec erreurs
+int rechercheLineaire(int tab[], int n, int x) {
+    for (int i = 0; i <= n; i++) {
+        if (tab[i] = x)
+            return i;
+    }
+    return -1
+}
+
+// Algorithme de tri à bulles avec erreurs d'efficacité
+void triABulles(int tab[], int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (tab[j] > tab[j+1]) {
+                int temp = tab[j];
+                tab[j] = tab[j+1];
+                tab[j+1] = tab[j];
+            }
+        }
+    }
+}
+
 int main() {
-    int x = 5;
+    int tab[] = {64, 34, 25, 12, 22, 11, 90};
+    int n = sizeof(tab) / sizeof(tab[0]);
     
-    if (x = 10) {
-        printf("x égale 10\\n");
-    }
+    triABulles(tab, n);
     
-    for(int i = 0; i < 10; i--);
-        printf("Numéro: %d\\n", i);
-    }
+    int resultat = rechercheLineaire(tab, n, 25);
+    printf("Élément trouvé à l'indice: %d\\n", resultat);
     
     return 0;
 }`
@@ -2398,11 +1872,24 @@ int main() {
 
         // حالة التطبيق
         let currentLang = 'ar';
-        let dir = 'rtl';
-        let lineCount = 15;
         let lastAnalysisResult = null;
+        let currentCaptureType = null;
+        let isAlgorithmsMode = false;
 
         // عناصر DOM
+        const captureModal = document.getElementById('captureModal');
+        const closeCaptureModal = document.getElementById('closeCaptureModal');
+        const cancelCaptureBtn = document.getElementById('cancelCaptureBtn');
+        const captureCodeOnly = document.getElementById('captureCodeOnly');
+        const captureWithResults = document.getElementById('captureWithResults');
+        const captureFullPanel = document.getElementById('captureFullPanel');
+        const downloadCaptureBtn = document.getElementById('downloadCaptureBtn');
+        const copyImageBtn = document.getElementById('copyImageBtn');
+        const capturePreview = document.getElementById('capturePreview');
+        const capturePreviewContainer = document.getElementById('capturePreviewContainer');
+        const algorithmsModeBtn = document.getElementById('algorithmsModeBtn');
+        const algorithmsTab = document.getElementById('algorithmsTab');
+        const algorithmsAnalysis = document.getElementById('algorithmsAnalysis');
         const langButtons = document.querySelectorAll('.lang-btn');
         const codeInput = document.getElementById('codeInput');
         const lineNumbers = document.getElementById('lineNumbers');
@@ -2414,19 +1901,17 @@ int main() {
         const loadingIndicator = document.getElementById('loadingIndicator');
         const errorsContainer = document.getElementById('errorsContainer');
         const noErrorsMessage = document.getElementById('noErrorsMessage');
-        const aiSuggestions = document.getElementById('aiSuggestions');
         const suggestionsList = document.getElementById('suggestionsList');
         const statsBar = document.getElementById('statsBar');
         const examplesList = document.getElementById('examplesList');
         const loadExampleBtn = document.getElementById('loadExampleBtn');
         const copyNotification = document.getElementById('copyNotification');
         const notificationText = document.getElementById('notification-text');
-        const homeBtn = document.querySelector('.home-btn span');
 
         // تحديث أرقام الأسطر
         function updateLineNumbers() {
             const lines = codeInput.value.split('\n').length;
-            lineCount = Math.max(lines, 15);
+            const lineCount = Math.max(lines, 15);
             
             let numbers = '';
             for (let i = 1; i <= lineCount; i++) {
@@ -2447,7 +1932,6 @@ int main() {
 
         // نسخ النص إلى الحافظة
         function copyToClipboard(text) {
-            // إنشاء عنصر نصي مؤقت
             const textArea = document.createElement('textarea');
             textArea.value = text;
             textArea.style.position = 'fixed';
@@ -2455,7 +1939,6 @@ int main() {
             textArea.style.top = '-999999px';
             document.body.appendChild(textArea);
             
-            // تحديد النص ونسخه
             textArea.focus();
             textArea.select();
             
@@ -2485,7 +1968,6 @@ int main() {
             if (success) {
                 showNotification(translations[currentLang].notificationText);
                 
-                // تأثير على زر النسخ
                 copyCorrectedCodeBtn.classList.add('copied');
                 copyCorrectedCodeBtn.innerHTML = '<i class="fas fa-check"></i> <span id="copy-corrected-text">' + 
                     (currentLang === 'ar' ? 'تم النسخ!' : 
@@ -2517,7 +1999,6 @@ int main() {
             if (success) {
                 showNotification(translations[currentLang].notificationText);
                 
-                // تأثير على زر النسخ
                 copyCodeBtn.classList.add('touch-feedback');
                 setTimeout(() => {
                     copyCodeBtn.classList.remove('touch-feedback');
@@ -2533,10 +2014,8 @@ int main() {
             // تحديث اتجاه النص
             if (lang === 'ar') {
                 document.documentElement.dir = 'rtl';
-                dir = 'rtl';
             } else {
                 document.documentElement.dir = 'ltr';
-                dir = 'ltr';
             }
             
             // تحديث النصوص
@@ -2562,12 +2041,21 @@ int main() {
             document.getElementById('example-title').textContent = texts.exampleTitle;
             document.getElementById('load-example-text').textContent = texts.loadExampleText;
             document.getElementById('notification-text').textContent = texts.notificationText;
-            
-            // تحديث نص زر HOME
-            homeBtn.textContent = texts.homeText;
-            
-            // تحديث أمثلة الكود
-            updateExamplesList();
+            document.getElementById('home-text').textContent = texts.homeText;
+            document.getElementById('capture-text').textContent = texts.captureText;
+            document.getElementById('algorithms-text').textContent = texts.algorithmsText;
+            document.getElementById('capture-modal-title').textContent = texts.captureModalTitle;
+            document.getElementById('capture-code-title').textContent = texts.captureCodeTitle;
+            document.getElementById('capture-code-desc').textContent = texts.captureCodeDesc;
+            document.getElementById('capture-results-title').textContent = texts.captureResultsTitle;
+            document.getElementById('capture-results-desc').textContent = texts.captureResultsDesc;
+            document.getElementById('capture-full-title').textContent = texts.captureFullTitle;
+            document.getElementById('capture-full-desc').textContent = texts.captureFullDesc;
+            document.getElementById('preview-title').textContent = texts.previewTitle;
+            document.getElementById('cancel-capture-text').textContent = texts.cancelCaptureText;
+            document.getElementById('download-capture-text').textContent = texts.downloadCaptureText;
+            document.getElementById('copy-image-text').textContent = texts.copyImageText;
+            document.getElementById('algorithms-tab-title').textContent = texts.algorithmsTabTitle;
             
             // تحديث زر اللغة النشط
             langButtons.forEach(btn => {
@@ -2577,6 +2065,14 @@ int main() {
                     btn.classList.remove('active');
                 }
             });
+            
+            // تحديث أمثلة الكود
+            updateExamplesList();
+            
+            // تحديث تحليل الخوارزميات إذا كان مفعلاً
+            if (isAlgorithmsMode && lastAnalysisResult) {
+                displayAlgorithmsAnalysis(lastAnalysisResult);
+            }
         }
 
         // تحديث قائمة الأمثلة
@@ -2609,7 +2105,6 @@ int main() {
             codeInput.value = example.code;
             updateLineNumbers();
             
-            // تأثير مرئي
             codeInput.classList.add('highlighted');
             setTimeout(() => {
                 codeInput.classList.remove('highlighted');
@@ -2623,41 +2118,13 @@ int main() {
             }
         };
 
-        // محاكاة تحليل الذكاء الاصطناعي المتقدم
-        function analyzeCode() {
-            const code = codeInput.value.trim();
-            
-            if (!code) {
-                showNotification(
-                    currentLang === 'ar' ? "الرجاء إدخال كود C لتحليله" : 
-                    currentLang === 'en' ? "Please enter C code to analyze" : 
-                    "Veuillez entrer du code C à analyser"
-                );
-                return;
-            }
-            
-            // إظهار مؤشر التحميل
-            loadingIndicator.classList.add('active');
-            errorsContainer.innerHTML = '';
-            noErrorsMessage.style.display = 'none';
-            statsBar.style.display = 'none';
-            suggestionsList.innerHTML = '';
-            
-            // محاكاة وقت المعالجة
-            setTimeout(() => {
-                loadingIndicator.classList.remove('active');
-                const analysisResult = advancedCodeAnalysis(code);
-                lastAnalysisResult = analysisResult;
-                displayAnalysisResults(analysisResult);
-            }, 1800);
-        }
-
-        // تحليل متقدم للكود - يحاكي ذكاء اصطناعي حقيقي
+        // تحليل متقدم للكود مع تحليل الخوارزميات
         function advancedCodeAnalysis(code) {
             const lines = code.split('\n');
             const errors = [];
             const warnings = [];
             const suggestions = [];
+            const algorithmIssues = [];
             let correctedCode = code;
             
             // 1. تحليل بناء الجملة الأساسية
@@ -2669,7 +2136,6 @@ int main() {
                     !line.includes('{') && !line.includes('}') && !line.trim().endsWith(';') && 
                     !line.trim().endsWith('{') && !line.trim().endsWith('}')) {
                     
-                    // استثناءات مثل if, for, while بدون {}
                     if (!line.includes('if(') && !line.includes('for(') && !line.includes('while(') && 
                         !line.includes('else') && !line.includes('do {')) {
                         
@@ -2684,32 +2150,12 @@ int main() {
                             code: line.trim(),
                             fix: line.trim() + ';',
                             explanation: {
-                                ar: `في لغة C، يجب إنهاء معظم الجمل بنقطة منقوطة (;). هذا يشمل تعريف المتغيرات، استدعاء الدوال، والتعابير.`,
-                                en: `In C language, most statements must end with a semicolon (;). This includes variable declarations, function calls, and expressions.`,
-                                fr: `En langage C, la plupart des instructions doivent se terminer par un point-virgule (;). Cela inclut les déclarations de variables, les appels de fonctions et les expressions.`
+                                ar: `في لغة C، يجب إنهاء معظم الجمل بنقطة منقوطة (;).`,
+                                en: `In C language, most statements must end with a semicolon (;).`,
+                                fr: `En langage C, la plupart des instructions doivent se terminer par un point-virgule (;).`
                             }
                         });
                     }
-                }
-                
-                // البحث عن أخطاء في printf
-                if (line.includes('printf(') && line.includes('"') && !line.includes('\\n"')) {
-                    warnings.push({
-                        type: 'warning',
-                        line: lineNum,
-                        message: {
-                            ar: `ينصح بإضافة \\n في نهاية سطر الطباعة`,
-                            en: `Consider adding \\n at the end of the print line`,
-                            fr: `Envisagez d'ajouter \\n à la fin de la ligne d'impression`
-                        },
-                        code: line.trim(),
-                        fix: line.trim().replace('")', '\\n")'),
-                        explanation: {
-                            ar: `إضافة \\n تضمن أن يبدأ الإخراج التالي في سطر جديد، مما يحسن من شكل الإخراج ويجعل القراءة أسهل.`,
-                            en: `Adding \\n ensures that the next output starts on a new line, improving output formatting and making it easier to read.`,
-                            fr: `Ajouter \\n garantit que la sortie suivante commence sur une nouvelle ligne, améliorant la mise en forme de la sortie et la rendant plus facile à lire.`
-                        }
-                    });
                 }
                 
                 // البحث عن = بدلاً من == في الشروط
@@ -2729,9 +2175,9 @@ int main() {
                             code: line.trim(),
                             fix: line.trim().replace('=', '=='),
                             explanation: {
-                                ar: `في الشروط، يجب استخدام عامل المقارنة (==) للتحقق من التساوي، وليس عامل الإسناد (=). استخدام = في الشروط يعين قيمة للمتغير بدلاً من مقارنته.`,
-                                en: `In conditions, you should use the comparison operator (==) to check for equality, not the assignment operator (=). Using = in conditions assigns a value to the variable instead of comparing it.`,
-                                fr: `Dans les conditions, vous devez utiliser l'opérateur de comparaison (==) pour vérifier l'égalité, pas l'opérateur d'affectation (=). Utiliser = dans les conditions assigne une valeur à la variable au lieu de la comparer.`
+                                ar: `في الشروط، يجب استخدام عامل المقارنة (==) للتحقق من التساوي.`,
+                                en: `In conditions, you should use the comparison operator (==) to check for equality.`,
+                                fr: `Dans les conditions, vous devez utiliser l'opérateur de comparaison (==) pour vérifier l'égalité.`
                             }
                         });
                     }
@@ -2745,7 +2191,6 @@ int main() {
                         const arrayName = match[1];
                         const index = parseInt(match[2]);
                         
-                        // البحث عن تعريف المصفوفة
                         for (let i = 0; i < lines.length; i++) {
                             if (lines[i].includes(arrayName) && lines[i].includes('[') && lines[i].includes(']')) {
                                 const sizeMatch = lines[i].match(/(\w+)\[(\d+)\]/);
@@ -2763,9 +2208,9 @@ int main() {
                                             code: line.trim(),
                                             fix: line.trim().replace(`${arrayName}[${index}]`, `${arrayName}[${size-1}]`),
                                             explanation: {
-                                                ar: `المصفوفة ${arrayName} بحجم ${size}، لذا المؤشرات الصالحة هي من 0 إلى ${size-1}. المؤشر ${index} خارج النطاق وقد يسبب سلوكًا غير متوقع أو تعطيل البرنامج.`,
-                                                en: `Array ${arrayName} has size ${size}, so valid indices are from 0 to ${size-1}. Index ${index} is out of bounds and may cause unexpected behavior or crash the program.`,
-                                                fr: `Le tableau ${arrayName} a une taille de ${size}, donc les indices valides vont de 0 à ${size-1}. L'index ${index} est hors limites et peut provoquer un comportement inattendu ou un plantage du programme.`
+                                                ar: `المصفوفة ${arrayName} بحجم ${size}، لذا المؤشرات الصالحة هي من 0 إلى ${size-1}.`,
+                                                en: `Array ${arrayName} has size ${size}, so valid indices are from 0 to ${size-1}.`,
+                                                fr: `Le tableau ${arrayName} a une taille de ${size}, donc les indices valides vont de 0 à ${size-1}.`
                                             }
                                         });
                                     }
@@ -2777,24 +2222,10 @@ int main() {
                 }
             });
             
-            // 2. تحليل شامل للوظائف
-            if (!code.includes('int main()') && !code.includes('void main()') && !code.includes('main()')) {
-                errors.push({
-                    type: 'error',
-                    line: 1,
-                    message: {
-                        ar: `الدالة الرئيسية main() مفقودة`,
-                        en: `Main function main() is missing`,
-                        fr: `Fonction principale main() manquante`
-                    },
-                    code: 'الدالة الرئيسية',
-                    fix: 'أضف int main() { ... }',
-                    explanation: {
-                        ar: `كل برنامج C يجب أن يحتوي على دالة رئيسية تسمى main. هذه هي نقطة بداية تنفيذ البرنامج.`,
-                        en: `Every C program must have a main function called main. This is the starting point of program execution.`,
-                        fr: `Chaque programme C doit avoir une fonction principale appelée main. C'est le point de départ de l'exécution du programme.`
-                    }
-                });
+            // 2. تحليل الخوارزميات إذا كان الوضع مفعلاً
+            if (isAlgorithmsMode) {
+                const algorithmAnalysis = analyzeAlgorithms(code);
+                algorithmIssues.push(...algorithmAnalysis);
             }
             
             // 3. تحليل المكتبات المستخدمة
@@ -2810,45 +2241,27 @@ int main() {
                     code: 'printf',
                     fix: 'أضف #include <stdio.h> في الأعلى',
                     explanation: {
-                        ar: `دالة printf معرفة في مكتبة stdio.h. يجب تضمين هذه المكتبة لاستخدام دوال الإدخال والإخراج.`,
-                        en: `The printf function is defined in the stdio.h library. This library must be included to use input/output functions.`,
-                        fr: `La fonction printf est définie dans la bibliothèque stdio.h. Cette bibliothèque doit être incluse pour utiliser les fonctions d'entrée/sortie.`
+                        ar: `دالة printf معرفة في مكتبة stdio.h.`,
+                        en: `The printf function is defined in the stdio.h library.`,
+                        fr: `La fonction printf est définie dans la bibliothèque stdio.h.`
                     }
                 });
             }
             
             // 4. اقتراحات لتحسين الكود
-            if (code.includes('int main()')) {
-                suggestions.push({
-                    type: 'suggestion',
-                    message: {
-                        ar: `إضافة تعليقات توضيحية للكود`,
-                        en: `Add explanatory comments to the code`,
-                        fr: `Ajouter des commentaires explicatifs au code`
-                    },
-                    explanation: {
-                        ar: `التعليقات تجعل الكود أكثر قابلية للقراءة والصيانة. استخدم // للتعليقات ذات السطر الواحد و /* */ للتعليقات المتعددة الأسطر.`,
-                        en: `Comments make code more readable and maintainable. Use // for single-line comments and /* */ for multi-line comments.`,
-                        fr: `Les commentaires rendent le code plus lisible et maintenable. Utilisez // pour les commentaires d'une ligne et /* */ pour les commentaires multilignes.`
-                    }
-                });
-                
-                if (code.includes('for(') || code.includes('while(')) {
-                    suggestions.push({
-                        type: 'suggestion',
-                        message: {
-                            ar: `استخدم دوال المكتبة القياسية بدلاً من كتابة دوال مخصصة للأعمال الشائعة`,
-                            en: `Use standard library functions instead of writing custom functions for common tasks`,
-                            fr: `Utilisez les fonctions de la bibliothèque standard au lieu d'écrire des fonctions personnalisées pour les tâches courantes`
-                        },
-                        explanation: {
-                            ar: `لغة C تحتوي على مكتبة قياسية غنية (مثل stdlib.h, string.h, math.h) التي توفر دوال فعالة ومختبرة جيدًا.`,
-                            en: `C language has a rich standard library (e.g., stdlib.h, string.h, math.h) that provides efficient and well-tested functions.`,
-                            fr: `Le langage C possède une bibliothèque standard riche (par exemple, stdlib.h, string.h, math.h) qui fournit des fonctions efficaces et bien testées.`
-                        }
-                    });
+            suggestions.push({
+                type: 'suggestion',
+                message: {
+                    ar: `إضافة تعليقات توضيحية للكود`,
+                    en: `Add explanatory comments to the code`,
+                    fr: `Ajouter des commentaires explicatifs au code`
+                },
+                explanation: {
+                    ar: `التعليقات تجعل الكود أكثر قابلية للقراءة والصيانة.`,
+                    en: `Comments make code more readable and maintainable.`,
+                    fr: `Les commentaires rendent le code plus lisible et maintenable.`
                 }
-            }
+            });
             
             // 5. إنشاء كود مصحح
             correctedCode = applyFixes(correctedCode, errors);
@@ -2857,17 +2270,131 @@ int main() {
                 errors: errors,
                 warnings: warnings,
                 suggestions: suggestions,
+                algorithmIssues: algorithmIssues,
                 correctedCode: correctedCode,
                 score: calculateQualityScore(code, errors, warnings, suggestions)
             };
         }
 
-        // تطبيق التصحيحات على الكود
+        // تحليل الخوارزميات
+        function analyzeAlgorithms(code) {
+            const issues = [];
+            const lines = code.split('\n');
+            
+            // تحليل خوارزميات البحث
+            if (code.includes('linearSearch') || code.includes('binarySearch') || code.includes('search')) {
+                issues.push({
+                    type: 'algorithm',
+                    message: {
+                        ar: 'تحليل خوارزمية البحث',
+                        en: 'Search algorithm analysis',
+                        fr: 'Analyse de l\'algorithme de recherche'
+                    },
+                    analysis: {
+                        ar: `• تعقيد الوقت: O(n) للبحث الخطي\n• اقتراح: استخدم البحث الثنائي (O(log n)) إذا كانت البيانات مرتبة\n• تحقق من حدود المصفوفة في الحلقات`,
+                        en: `• Time complexity: O(n) for linear search\n• Suggestion: Use binary search (O(log n)) if data is sorted\n• Check array bounds in loops`,
+                        fr: `• Complexité temporelle: O(n) pour la recherche linéaire\n• Suggestion: Utilisez la recherche binaire (O(log n)) si les données sont triées\n• Vérifiez les limites du tableau dans les boucles`
+                    }
+                });
+            }
+            
+            // تحليل خوارزميات الترتيب
+            if (code.includes('bubbleSort') || code.includes('quickSort') || code.includes('sort')) {
+                issues.push({
+                    type: 'algorithm',
+                    message: {
+                        ar: 'تحليل خوارزمية الترتيب',
+                        en: 'Sort algorithm analysis',
+                        fr: 'Analyse de l\'algorithme de tri'
+                    },
+                    analysis: {
+                        ar: `• تعقيد الوقت: O(n²) للفقاعة\n• اقتراح: استخدم خوارزمية سريعة (O(n log n)) للبيانات الكبيرة\n• تأكد من عدم تكرار التبادلات غير الضرورية`,
+                        en: `• Time complexity: O(n²) for bubble sort\n• Suggestion: Use quicksort (O(n log n)) for large data\n• Ensure no unnecessary swaps repetition`,
+                        fr: `• Complexité temporelle: O(n²) pour le tri à bulles\n• Suggestion: Utilisez le tri rapide (O(n log n)) pour les grandes données\n• Assurez-vous qu'il n'y a pas de répétition d'échanges inutiles`
+                    }
+                });
+            }
+            
+            // تحليل خوارزميات العودية
+            if (code.includes('recursive') || code.includes('factorial') || (code.includes('function') && code.match(/\(\s*\w+\s*\)/g))) {
+                issues.push({
+                    type: 'algorithm',
+                    message: {
+                        ar: 'تحليل الخوارزميات العودية',
+                        en: 'Recursive algorithms analysis',
+                        fr: 'Analyse des algorithmes récursifs'
+                    },
+                    analysis: {
+                        ar: `• تأكد من وجود حالة أساسية لوقف العودية\n• تحقق من تعقيد الذاكرة O(n) للعودة\n• اقتراح: فكر في حلول تكرارية للبيانات الكبيرة`,
+                        en: `• Ensure there is a base case to stop recursion\n• Check memory complexity O(n) for recursion\n• Suggestion: Consider iterative solutions for large data`,
+                        fr: `• Assurez-vous qu'il y a un cas de base pour arrêter la récursion\n• Vérifiez la complexité mémoire O(n) pour la récursion\n• Suggestion: Envisagez des solutions itératives pour les grandes données`
+                    }
+                });
+            }
+            
+            // تحليل هياكل البيانات
+            if (code.includes('struct') || code.includes('linked') || code.includes('tree')) {
+                issues.push({
+                    type: 'algorithm',
+                    message: {
+                        ar: 'تحليل هياكل البيانات',
+                        en: 'Data structures analysis',
+                        fr: 'Analyse des structures de données'
+                    },
+                    analysis: {
+                        ar: `• تحقق من إدارة الذاكرة الديناميكية\n• تأكد من تحرير الذاكرة بعد الاستخدام\n• اقتراح: استخدم هياكل بيانات مناسبة لمشكلتك`,
+                        en: `• Check dynamic memory management\n• Ensure memory is freed after use\n• Suggestion: Use appropriate data structures for your problem`,
+                        fr: `• Vérifiez la gestion dynamique de la mémoire\n• Assurez-vous que la mémoire est libérée après utilisation\n• Suggestion: Utilisez des structures de données appropriées pour votre problème`
+                    }
+                });
+            }
+            
+            return issues;
+        }
+
+        // عرض تحليل الخوارزميات
+        function displayAlgorithmsAnalysis(results) {
+            algorithmsAnalysis.innerHTML = '';
+            
+            if (results.algorithmIssues && results.algorithmIssues.length > 0) {
+                results.algorithmIssues.forEach(issue => {
+                    const analysisElement = document.createElement('div');
+                    analysisElement.className = 'algorithm-analysis';
+                    
+                    analysisElement.innerHTML = `
+                        <h5>
+                            <i class="fas fa-chart-line"></i>
+                            ${issue.message[currentLang]}
+                        </h5>
+                        <p style="white-space: pre-line;">${issue.analysis[currentLang]}</p>
+                    `;
+                    
+                    algorithmsAnalysis.appendChild(analysisElement);
+                });
+            } else {
+                algorithmsAnalysis.innerHTML = `
+                    <div class="algorithm-analysis">
+                        <h5>
+                            <i class="fas fa-info-circle"></i>
+                            ${currentLang === 'ar' ? 'لا توجد خوارزميات للتحليل' : 
+                              currentLang === 'en' ? 'No algorithms to analyze' : 
+                              'Aucun algorithme à analyser'}
+                        </h5>
+                        <p>
+                            ${currentLang === 'ar' ? 'أدخل كود يحتوي على خوارزميات (بحث، ترتيب، عودية، إلخ) للحصول على تحليل مفصل.' : 
+                              currentLang === 'en' ? 'Enter code containing algorithms (search, sort, recursion, etc.) for detailed analysis.' : 
+                              'Entrez du code contenant des algorithmes (recherche, tri, récursion, etc.) pour une analyse détaillée.'}
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+        // تطبيق التصحيحات
         function applyFixes(code, errors) {
             let corrected = code;
             const lines = corrected.split('\n');
             
-            // تطبيق التصحيحات بترتيب عكسي لتجنب تأثير على أرقام الأسطر
             errors.sort((a, b) => b.line - a.line).forEach(error => {
                 if (error.fix && error.line <= lines.length) {
                     const originalLine = lines[error.line - 1];
@@ -2894,11 +2421,42 @@ int main() {
             score -= warnings.length * warningPenalty;
             score += suggestions.length * suggestionBonus;
             
-            // مكافأة للكود الطويل
             const lineCount = code.split('\n').length;
             if (lineCount > 20) score += 10;
             
             return Math.max(0, Math.min(100, score));
+        }
+
+        // تحليل الكود
+        function analyzeCode() {
+            const code = codeInput.value.trim();
+            
+            if (!code) {
+                showNotification(
+                    currentLang === 'ar' ? "الرجاء إدخال كود C لتحليله" : 
+                    currentLang === 'en' ? "Please enter C code to analyze" : 
+                    "Veuillez entrer du code C à analyser"
+                );
+                return;
+            }
+            
+            loadingIndicator.classList.add('active');
+            errorsContainer.innerHTML = '';
+            noErrorsMessage.style.display = 'none';
+            statsBar.style.display = 'none';
+            suggestionsList.innerHTML = '';
+            algorithmsAnalysis.innerHTML = '';
+            
+            setTimeout(() => {
+                loadingIndicator.classList.remove('active');
+                const analysisResult = advancedCodeAnalysis(code);
+                lastAnalysisResult = analysisResult;
+                displayAnalysisResults(analysisResult);
+                
+                if (isAlgorithmsMode) {
+                    displayAlgorithmsAnalysis(analysisResult);
+                }
+            }, 1800);
         }
 
         // عرض نتائج التحليل
@@ -2907,31 +2465,26 @@ int main() {
             const warnings = results.warnings;
             const suggestions = results.suggestions;
             
-            // تحديث الإحصائيات
             document.getElementById('errorsCount').textContent = errors.length;
             document.getElementById('warningsCount').textContent = warnings.length;
             document.getElementById('suggestionsCount').textContent = suggestions.length;
             document.getElementById('scoreValue').textContent = results.score;
             statsBar.style.display = 'flex';
             
-            // عرض الأخطاء والتحذيرات
             errorsContainer.innerHTML = '';
             
             if (errors.length === 0 && warnings.length === 0) {
                 noErrorsMessage.style.display = 'block';
             } else {
-                // عرض الأخطاء
                 errors.forEach(error => {
                     addIssueToContainer(error, 'error');
                 });
                 
-                // عرض التحذيرات
                 warnings.forEach(warning => {
                     addIssueToContainer(warning, 'warning');
                 });
             }
             
-            // عرض اقتراحات الذكاء الاصطناعي
             suggestionsList.innerHTML = '';
             suggestions.forEach(suggestion => {
                 const suggestionItem = document.createElement('div');
@@ -2950,7 +2503,6 @@ int main() {
                 suggestionsList.appendChild(suggestionItem);
             });
             
-            // عرض اقتراحات إضافية بناءً على النتيجة
             if (results.score < 70) {
                 const extraSuggestion = document.createElement('div');
                 extraSuggestion.className = 'suggestion-item';
@@ -2963,16 +2515,15 @@ int main() {
                         <h4>${currentLang === 'ar' ? 'تحتاج إلى مزيد من التحسين' : 
                               currentLang === 'en' ? 'Needs more improvement' : 
                               'Nécessite plus d\'amélioration'}</h4>
-                        <p>${currentLang === 'ar' ? 'نقاط جودة كودك أقل من 70. راجع الأخطاء والتحذيرات أعلاه وحاول تحسين بنية الكود وإضافة تعليقات توضيحية.' : 
-                            currentLang === 'en' ? 'Your code quality score is below 70. Review the errors and warnings above and try to improve code structure and add explanatory comments.' : 
-                            'Votre score de qualité de code est inférieur à 70. Examinez les erreurs et avertissements ci-dessus et essayez d\'améliorer la structure du code et d\'ajouter des commentaires explicatifs.'}</p>
+                        <p>${currentLang === 'ar' ? 'نقاط جودة كودك أقل من 70. راجع الأخطاء والتحذيرات أعلاه.' : 
+                            currentLang === 'en' ? 'Your code quality score is below 70. Review the errors and warnings above.' : 
+                            'Votre score de qualité de code est inférieur à 70. Examinez les erreurs et avertissements ci-dessus.'}</p>
                     </div>
                 `;
                 
                 suggestionsList.appendChild(extraSuggestion);
             }
             
-            // عرض الكود المصحح إذا كان هناك أخطاء
             if (errors.length > 0) {
                 const correctedSection = document.createElement('div');
                 correctedSection.className = 'error-item success';
@@ -2997,7 +2548,6 @@ int main() {
                 
                 errorsContainer.appendChild(correctedSection);
                 
-                // تمييز النص بعد إضافته
                 setTimeout(() => {
                     hljs.highlightAll();
                 }, 100);
@@ -3062,8 +2612,6 @@ int main() {
                 loadingIndicator.classList.remove('active');
                 
                 let optimized = code;
-                
-                // تحسينات تلقائية
                 optimized = optimized.replace(/int main\(\)/g, 'int main(void)');
                 optimized = optimized.replace(/printf\("(.*?)"\);/g, (match, p1) => {
                     if (!p1.includes('\\n')) {
@@ -3072,7 +2620,6 @@ int main() {
                     return match;
                 });
                 
-                // إضافة تعليق في الأعلى
                 if (!optimized.includes('/*') && !optimized.includes('//')) {
                     const comment = currentLang === 'ar' ? 
                         '/*\n * كود C محسن تلقائيًا\n * تم التحسين بواسطة مساعد الذكاء الاصطناعي\n */\n' :
@@ -3086,7 +2633,6 @@ int main() {
                 codeInput.value = optimized;
                 updateLineNumbers();
                 
-                // تأثير مرئي
                 codeInput.classList.add('highlighted');
                 setTimeout(() => {
                     codeInput.classList.remove('highlighted');
@@ -3107,6 +2653,7 @@ int main() {
             noErrorsMessage.style.display = 'none';
             statsBar.style.display = 'none';
             suggestionsList.innerHTML = '';
+            algorithmsAnalysis.innerHTML = '';
             updateLineNumbers();
             
             showNotification(
@@ -3114,6 +2661,140 @@ int main() {
                 currentLang === 'en' ? "All cleared successfully" : 
                 "Tout effacé avec succès"
             );
+        }
+
+        // ========== وظائف تصوير الكود ==========
+        function openCaptureModal() {
+            captureModal.classList.add('active');
+            capturePreviewContainer.classList.remove('active');
+        }
+
+        function closeCaptureModalFunc() {
+            captureModal.classList.remove('active');
+            currentCaptureType = null;
+        }
+
+        async function captureCodeOnlyFunc() {
+            currentCaptureType = 'code';
+            capturePreviewContainer.classList.add('active');
+            
+            const codeContainer = document.querySelector('.code-container');
+            const canvas = await html2canvas(codeContainer, {
+                backgroundColor: '#0f172a',
+                scale: 2,
+                logging: false
+            });
+            
+            capturePreview.src = canvas.toDataURL('image/png');
+        }
+
+        async function captureWithResultsFunc() {
+            currentCaptureType = 'with-results';
+            capturePreviewContainer.classList.add('active');
+            
+            const inputPanel = document.querySelector('.panel:first-child');
+            const canvas = await html2canvas(inputPanel, {
+                backgroundColor: '#0f172a',
+                scale: 2,
+                logging: false
+            });
+            
+            capturePreview.src = canvas.toDataURL('image/png');
+        }
+
+        async function captureFullPanelFunc() {
+            currentCaptureType = 'full-panel';
+            capturePreviewContainer.classList.add('active');
+            
+            const resultsPanel = document.querySelector('.panel:last-child');
+            const canvas = await html2canvas(resultsPanel, {
+                backgroundColor: '#0f172a',
+                scale: 2,
+                logging: false
+            });
+            
+            capturePreview.src = canvas.toDataURL('image/png');
+        }
+
+        function downloadCapture() {
+            if (!currentCaptureType || !capturePreview.src) {
+                showNotification(
+                    currentLang === 'ar' ? 'الرجاء اختيار نوع التصوير أولاً' :
+                    currentLang === 'en' ? 'Please select capture type first' :
+                    'Veuillez d\'abord sélectionner le type de capture'
+                );
+                return;
+            }
+            
+            const link = document.createElement('a');
+            link.download = `code_capture_${new Date().getTime()}.png`;
+            link.href = capturePreview.src;
+            link.click();
+            
+            showNotification(
+                currentLang === 'ar' ? 'تم تحميل الصورة بنجاح' :
+                currentLang === 'en' ? 'Image downloaded successfully' :
+                'Image téléchargée avec succès'
+            );
+        }
+
+        async function copyImageToClipboard() {
+            if (!currentCaptureType || !capturePreview.src) {
+                showNotification(
+                    currentLang === 'ar' ? 'الرجاء اختيار نوع التصوير أولاً' :
+                    currentLang === 'en' ? 'Please select capture type first' :
+                    'Veuillez d\'abord sélectionner le type de capture'
+                );
+                return;
+            }
+            
+            try {
+                const response = await fetch(capturePreview.src);
+                const blob = await response.blob();
+                
+                await navigator.clipboard.write([
+                    new ClipboardItem({
+                        'image/png': blob
+                    })
+                ]);
+                
+                showNotification(
+                    currentLang === 'ar' ? 'تم نسخ الصورة إلى الحافظة' :
+                    currentLang === 'en' ? 'Image copied to clipboard' :
+                    'Image copiée dans le presse-papier'
+                );
+            } catch (err) {
+                console.error('Failed to copy image: ', err);
+                showNotification(
+                    currentLang === 'ar' ? 'فشل نسخ الصورة' :
+                    currentLang === 'en' ? 'Failed to copy image' :
+                    'Échec de la copie de l\'image'
+                );
+            }
+        }
+
+        // تبديل وضع الخوارزميات
+        function toggleAlgorithmsMode() {
+            isAlgorithmsMode = !isAlgorithmsMode;
+            
+            if (isAlgorithmsMode) {
+                algorithmsTab.style.display = 'block';
+                algorithmsModeBtn.innerHTML = '<i class="fas fa-brain"></i> <span id="algorithms-text">' + 
+                    (currentLang === 'ar' ? 'إغلاق وضع الخوارزميات' : 
+                     currentLang === 'en' ? 'Close Algorithms Mode' : 
+                     'Fermer le Mode Algorithmes') + '</span>';
+                algorithmsModeBtn.classList.add('active');
+                
+                if (lastAnalysisResult) {
+                    displayAlgorithmsAnalysis(lastAnalysisResult);
+                }
+            } else {
+                algorithmsTab.style.display = 'none';
+                algorithmsModeBtn.innerHTML = '<i class="fas fa-brain"></i> <span id="algorithms-text">' + 
+                    translations[currentLang].algorithmsText + '</span>';
+                algorithmsModeBtn.classList.remove('active');
+                algorithmsAnalysis.innerHTML = '';
+            }
         }
 
         // إضافة المستمعين للأحداث
@@ -3124,15 +2805,22 @@ int main() {
         copyCodeBtn.addEventListener('click', copyCurrentCode);
         copyCorrectedCodeBtn.addEventListener('click', copyCorrectedCode);
         loadExampleBtn.addEventListener('click', () => loadExample(0));
+        captureCodeOnly.addEventListener('click', captureCodeOnlyFunc);
+        captureWithResults.addEventListener('click', captureWithResultsFunc);
+        captureFullPanel.addEventListener('click', captureFullPanelFunc);
+        downloadCaptureBtn.addEventListener('click', downloadCapture);
+        copyImageBtn.addEventListener('click', copyImageToClipboard);
+        closeCaptureModal.addEventListener('click', closeCaptureModalFunc);
+        cancelCaptureBtn.addEventListener('click', closeCaptureModalFunc);
+        document.getElementById('captureCodeBtn').addEventListener('click', openCaptureModal);
+        algorithmsModeBtn.addEventListener('click', toggleAlgorithmsMode);
 
-        // السماح باستخدام Ctrl+Enter لتحليل الكود
         codeInput.addEventListener('keydown', (e) => {
             if (e.ctrlKey && e.key === 'Enter') {
                 analyzeCode();
             }
         });
 
-        // تغيير اللغة
         langButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 const lang = btn.dataset.lang;
@@ -3140,8 +2828,7 @@ int main() {
             });
         });
 
-        // تحسين تجربة اللمس
-        const touchElements = document.querySelectorAll('.btn, .lang-btn, .example-btn, .home-btn');
+        const touchElements = document.querySelectorAll('.btn, .lang-btn, .example-btn, .home-btn, .capture-btn, .algorithms-btn');
         touchElements.forEach(el => {
             el.addEventListener('touchstart', function() {
                 this.classList.add('touch-feedback');
@@ -3154,17 +2841,14 @@ int main() {
             });
         });
 
-        // التهيئة الأولية
         updateLanguage('ar');
         updateLineNumbers();
         updateExamplesList();
         
-        // تمييز النص بعد التحميل
         setTimeout(() => {
             hljs.highlightAll();
         }, 500);
         
-        // إضافة تأثير للمرة الأولى
         setTimeout(() => {
             document.querySelector('.logo-icon').classList.add('touch-feedback');
         }, 1000);
