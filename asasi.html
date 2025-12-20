@@ -16,6 +16,7 @@
             --secondary: #0aff9d;
             --ai-color: #8b5cf6;
             --download-color: #f97316;
+            --youtube-color: #ff0000;
             --bg-dark: #0f172a;
             --bg-medium: #1e293b;
             --text-light: #e2e8f0;
@@ -222,6 +223,23 @@
             }
         }
 
+        .item.youtube-special {
+            background: rgba(255, 0, 0, 0.15);
+            border-color: var(--youtube-color);
+            animation: youtubeFloat 3.4s ease-in-out infinite;
+        }
+
+        @keyframes youtubeFloat {
+            0%, 100% {
+                transform: translateY(0);
+                box-shadow: 0 10px 30px rgba(255, 0, 0, 0.2);
+            }
+            50% {
+                transform: translateY(-12px);
+                box-shadow: 0 25px 50px rgba(255, 0, 0, 0.4);
+            }
+        }
+
         .badge {
             position: absolute;
             top: 12px;
@@ -245,6 +263,10 @@
 
         .download-badge {
             background: linear-gradient(135deg, var(--download-color), #fb923c);
+        }
+
+        .youtube-badge {
+            background: linear-gradient(135deg, var(--youtube-color), #ff4d4d);
         }
 
         @keyframes badgePulse {
@@ -290,6 +312,16 @@
             100% { box-shadow: 0 0 20px rgba(249, 115, 22, 0.6); }
         }
 
+        .item.youtube-special .icon-wrapper {
+            background: rgba(255, 0, 0, 0.15);
+            animation: youtubeIconGlow 2s infinite alternate;
+        }
+
+        @keyframes youtubeIconGlow {
+            0% { box-shadow: 0 0 10px rgba(255, 0, 0, 0.3); }
+            100% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.6); }
+        }
+
         .item i {
             font-size: 28px;
             color: var(--primary-light);
@@ -301,6 +333,10 @@
 
         .item.download-special i {
             color: #fb923c;
+        }
+
+        .item.youtube-special i {
+            color: #ff4d4d;
         }
 
         .item-content {
@@ -436,6 +472,10 @@
             
             .item.download-special {
                 animation-duration: 4.2s;
+            }
+            
+            .item.youtube-special {
+                animation-duration: 4.3s;
             }
             
             .icon-wrapper {
@@ -594,6 +634,20 @@
         </div>
     </a>
 
+    <a class="item youtube-special" href="y.html">
+        <div class="badge youtube-badge">
+            <i class="fab fa-youtube"></i>
+            <span>قناة</span>
+        </div>
+        <div class="icon-wrapper">
+            <i class="fab fa-youtube"></i>
+        </div>
+        <div class="item-content">
+            <span>قناتي على اليوتيوب</span>
+            <div class="item-desc">اشترك في القناة لمشاهدة شروحات ودروس لغة C</div>
+        </div>
+    </a>
+
     <a class="item" href="home.html">
         <div class="icon-wrapper">
             <i class="fa-solid fa-code"></i>
@@ -692,6 +746,16 @@ const translations = {
         en: "Download C app to your phone for learning anytime",
         fr: "Téléchargez l'application C sur votre téléphone pour apprendre à tout moment"
     },
+    youtube: {
+        ar: "قناتي على اليوتيوب",
+        en: "My YouTube Channel",
+        fr: "Ma chaîne YouTube"
+    },
+    youtube_desc: {
+        ar: "اشترك في القناة لمشاهدة شروحات ودروس لغة C",
+        en: "Subscribe to the channel to watch C language tutorials and lessons",
+        fr: "Abonnez-vous à la chaîne pour regarder des tutoriels et leçons de langage C"
+    },
     codes: {
         ar: "أكواد C",
         en: "C Codes",
@@ -742,8 +806,13 @@ function setLang(lang) {
     if (downloadItem) downloadItem.textContent = translations.download[lang];
     if (downloadDesc) downloadDesc.textContent = translations.download_desc[lang];
     
-    const codesItem = document.querySelector('.item:nth-child(3) .item-content span');
-    const codesDesc = document.querySelector('.item:nth-child(3) .item-desc');
+    const youtubeItem = document.querySelector('.item.youtube-special .item-content span');
+    const youtubeDesc = document.querySelector('.item.youtube-special .item-desc');
+    if (youtubeItem) youtubeItem.textContent = translations.youtube[lang];
+    if (youtubeDesc) youtubeDesc.textContent = translations.youtube_desc[lang];
+    
+    const codesItem = document.querySelector('.item:nth-child(4) .item-content span');
+    const codesDesc = document.querySelector('.item:nth-child(4) .item-desc');
     if (codesItem) codesItem.textContent = translations.codes[lang];
     if (codesDesc) codesDesc.textContent = translations.codes_desc[lang];
     
