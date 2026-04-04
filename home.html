@@ -1,1391 +1,4591 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" id="html-root">
 <head>
-    <meta http-equiv="Content-Security-Policy" content="
-        default-src 'self';
-        script-src 'self' 'unsafe-inline' 'unsafe-eval';
-        style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline';
-        font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
-        img-src 'self' data:;
-        connect-src 'self';
-        frame-ancestors 'none';
-        base-uri 'self';
-        form-action 'self';
-        object-src 'none';
-           
-    ">
-        <link rel="icon" type="image/png" href="favicon.jpg">
-
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none';">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
-    
     <meta property="og:site_name" content="Algorithmes & C">
-    <script type="application/ld+json">
-    {
-      "@context": "",
-      "@type": "WebSite",
-      "name": "Algorithmes & C",
-      "alternateName": "تعلم لغة C والخوارزميات",
-      "url": "https://bibarss39-sudo.github.io/bibarss39/"
-    }
-    </script>
-
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>أكواد C - معمل الترميز التفاعلي</title>
-    <link rel="icon" type="image/png" href="favicon.png">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700&family=Poppins:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Algorithmes & C","alternateName":"تعلم لغة C والخوارزميات","url":"https://bibarss39-sudo.github.io/bibarss39/"}</script>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>معمل أكواد C التفاعلي</title>
+    <link rel="icon" type="image/png" href="favicon.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #0b1120;
-            --bg-secondary: #141c2f;
-            --card-bg: rgba(25, 35, 55, 0.85);
-            --accent: #3b82f6;
-            --accent-light: #60a5fa;
-            --accent-dark: #2563eb;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-            --code-bg: rgba(0, 0, 0, 0.3);
-            --border: rgba(148, 163, 184, 0.15);
-            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
-            --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.35);
-            --shadow-lg: 0 16px 40px rgba(59, 130, 246, 0.2);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --bg: #06080f;
+            --bg2: #0c1020;
+            --surface: rgba(13,19,35,0.92);
+            --surface2: rgba(18,27,50,0.97);
+            --sky: #22d3ee;
+            --sky-l: #67e8f9;
+            --sky-dk: #0891b2;
+            --sky-dim: rgba(34,211,238,0.1);
+            --emerald: #34d399;
+            --amber: #fbbf24;
+            --purple: #a78bfa;
+            --pink: #f472b6;
+            --red: #f87171;
+            --text: #f1f5f9;
+            --text-dim: #94a3b8;
+            --text-muted: #475569;
+            --border: rgba(34,211,238,0.13);
+            --border2: rgba(34,211,238,0.3);
+            --code-bg: rgba(3,7,18,0.8);
+            --shadow: 0 8px 32px rgba(0,0,0,0.4);
+            --glow: 0 0 28px rgba(34,211,238,0.2);
+            --tr: 0.3s cubic-bezier(0.4,0,0.2,1);
+        }
+        *{margin:0;padding:0;box-sizing:border-box;}
+        html{scroll-behavior:smooth;}
+        body{
+            font-family:'Cairo',sans-serif;
+            background:var(--bg);
+            color:var(--text);
+            min-height:100vh;
+            overflow-x:hidden;
+            line-height:1.6;
+        }
+        body::before{
+            content:'';position:fixed;inset:0;
+            background:
+                radial-gradient(ellipse 700px 500px at 80% 0%,rgba(34,211,238,0.055) 0%,transparent 60%),
+                radial-gradient(ellipse 500px 400px at 0% 100%,rgba(167,139,250,0.045) 0%,transparent 60%),
+                repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(34,211,238,0.018) 60px),
+                repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(34,211,238,0.018) 60px);
+            pointer-events:none;z-index:0;
+        }
+        .wrap{position:relative;z-index:1;padding:20px 18px 60px;max-width:1400px;margin:0 auto;}
+
+        /* ── NAV ── */
+        nav{
+            display:flex;align-items:center;justify-content:space-between;
+            margin-bottom:24px;padding:14px 20px;
+            background:rgba(8,12,22,0.88);
+            border:1px solid var(--border2);
+            border-radius:16px;
+            backdrop-filter:blur(16px);
+            box-shadow:var(--shadow);
+            flex-wrap:wrap;gap:12px;
+            animation:fadeDown 0.5s ease both;
+        }
+        @keyframes fadeDown{from{opacity:0;transform:translateY(-14px);}to{opacity:1;transform:translateY(0);}}
+
+        .home-btn{
+            display:inline-flex;align-items:center;gap:9px;
+            text-decoration:none;color:var(--bg);
+            background:linear-gradient(135deg,var(--sky),var(--sky-l));
+            padding:11px 22px;border-radius:12px;
+            font-size:15px;font-weight:700;
+            transition:var(--tr);box-shadow:var(--glow);
+        }
+        .home-btn:hover{transform:translateY(-3px);box-shadow:0 0 40px rgba(34,211,238,0.4);}
+
+        .search-box{
+            flex:1;max-width:300px;
+            padding:11px 18px;border-radius:12px;
+            border:1px solid var(--border);
+            background:rgba(255,255,255,0.05);
+            color:var(--text);font-size:14px;
+            outline:none;transition:var(--tr);
+            font-family:'Cairo',sans-serif;
+        }
+        .search-box:focus{
+            border-color:var(--sky-l);
+            background:rgba(255,255,255,0.09);
+            box-shadow:0 0 0 3px rgba(34,211,238,0.2);
+        }
+        .search-box::placeholder{color:var(--text-muted);}
+
+        .lang-bar{
+            display:flex;gap:5px;
+            background:rgba(0,0,0,0.3);
+            border:1px solid var(--border);
+            border-radius:10px;padding:4px;
+        }
+        .lb{
+            background:transparent;border:none;color:var(--text-muted);
+            padding:6px 13px;border-radius:7px;
+            font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;
+            cursor:pointer;transition:var(--tr);
+        }
+        .lb:hover{color:var(--sky);background:rgba(34,211,238,0.07);}
+        .lb.on{background:linear-gradient(135deg,#0c2540,#0d3a60);color:var(--sky);border:1px solid var(--border2);}
+
+        /* ── HERO ── */
+        .hero{
+            text-align:center;margin:0 auto 28px;max-width:680px;
+            animation:fadeUp 0.6s ease 0.1s both;
+        }
+        @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+        .hero-badge{
+            display:inline-flex;align-items:center;gap:7px;
+            background:rgba(34,211,238,0.09);border:1px solid var(--border2);
+            border-radius:100px;padding:5px 16px;
+            font-size:12px;color:var(--sky);font-weight:700;letter-spacing:1px;
+            text-transform:uppercase;margin-bottom:16px;
+        }
+        .hero-badge::before{
+            content:'';width:6px;height:6px;border-radius:50%;
+            background:var(--sky);box-shadow:0 0 8px var(--sky);
+            animation:blink 2s infinite;
+        }
+        @keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+
+        h1{
+            font-size:clamp(1.9rem,4.5vw,3rem);font-weight:900;
+            background:linear-gradient(135deg,var(--sky-l),var(--sky),var(--purple));
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+            background-clip:text;letter-spacing:-0.5px;margin-bottom:12px;
+        }
+        .subtitle{color:var(--text-dim);font-size:1rem;line-height:1.8;}
+
+        /* ── HINT ── */
+        .hint-box{
+            position:relative;
+            background:linear-gradient(135deg,rgba(34,211,238,0.08),rgba(167,139,250,0.07));
+            border:1px solid rgba(34,211,238,0.25);
+            border-radius:16px;padding:15px 22px;
+            margin:0 auto 26px;max-width:700px;
+            text-align:center;color:var(--sky-l);
+            font-weight:600;font-size:0.97rem;
+            animation:fadeUp 0.6s ease 0.2s both,pulseGlow 3s ease-in-out 1.5s infinite;
+            overflow:hidden;
+        }
+        .hint-box::before{
+            content:'';position:absolute;inset:0;
+            background:linear-gradient(90deg,transparent,rgba(34,211,238,0.04),transparent);
+            animation:shimmer 3s infinite;
+        }
+        @keyframes shimmer{0%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
+        @keyframes pulseGlow{
+            0%,100%{box-shadow:none;}
+            50%{box-shadow:0 0 18px rgba(34,211,238,0.14);}
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* ── FILTERS ── */
+        .filters{
+            display:flex;justify-content:center;gap:8px;
+            margin-bottom:24px;flex-wrap:wrap;
+            animation:fadeUp 0.6s ease 0.3s both;
+        }
+        .filter-btn{
+            padding:9px 17px;
+            background:rgba(255,255,255,0.05);
+            border:1px solid var(--border);
+            border-radius:10px;
+            color:var(--text-dim);
+            cursor:pointer;transition:var(--tr);
+            font-family:'Cairo',sans-serif;font-weight:600;font-size:13px;
+        }
+        .filter-btn:hover{background:rgba(34,211,238,0.08);border-color:var(--border2);color:var(--sky);transform:translateY(-2px);}
+        .filter-btn.active{background:var(--sky-dim);color:var(--sky);border-color:var(--border2);box-shadow:0 4px 14px rgba(34,211,238,0.18);}
+
+        /* ── GRID ── */
+        #codesContainer{
+            display:grid;
+            grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+            gap:18px;
         }
 
-        body {
-            font-family: 'Tajawal', 'Poppins', sans-serif;
-            background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
-            color: var(--text-primary);
-            padding: 20px;
-            min-height: 100vh;
-            overflow-x: hidden;
-            line-height: 1.6;
+        /* ── CODE BOX ── */
+        .code-box{
+            background:var(--surface);
+            border:1px solid var(--border);
+            border-radius:16px;
+            padding:20px 16px 16px;
+            cursor:pointer;text-align:center;
+            transition:var(--tr);
+            box-shadow:0 4px 20px rgba(0,0,0,0.25);
+            position:relative;overflow:hidden;
+            display:flex;flex-direction:column;gap:10px;
+            animation:cardIn 0.5s ease both;
+        }
+        @keyframes cardIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+        .code-box::after{
+            content:'';position:absolute;
+            top:0;right:0;width:3px;height:100%;
+            background:linear-gradient(to bottom,var(--sky),var(--purple));
+            transform:scaleY(0);transform-origin:top;
+            transition:transform 0.4s ease;
+        }
+        .code-box:hover::after{transform:scaleY(1);}
+        .code-box:hover{
+            transform:translateY(-6px);
+            box-shadow:var(--glow),0 16px 40px rgba(0,0,0,0.35),0 0 0 1px rgba(34,211,238,0.2);
+            background:var(--surface2);border-color:rgba(34,211,238,0.25);
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 6px;
-            background: linear-gradient(90deg, var(--accent), #0ea5e9, #00eaff);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            z-index: 1000;
-            pointer-events: none;
+        .box-icon{
+            width:34px;height:34px;
+            background:var(--sky-dim);border:1px solid var(--border2);
+            border-radius:9px;display:flex;align-items:center;justify-content:center;
+            font-size:14px;color:var(--sky);margin:0 auto 2px;
+            transition:var(--tr);flex-shrink:0;
+        }
+        .code-box:hover .box-icon{background:rgba(34,211,238,0.2);box-shadow:0 0 12px rgba(34,211,238,0.25);}
+
+        .code-content{
+            font-family:'Fira Code',monospace;
+            font-size:14.5px;font-weight:500;
+            color:#a5f3fc;line-height:1.5;word-break:break-all;
+        }
+        .code-category{
+            font-size:11px;font-weight:700;letter-spacing:0.5px;
+            padding:3px 10px;
+            background:rgba(34,211,238,0.09);border:1px solid var(--border);
+            border-radius:100px;color:var(--sky);display:inline-block;
+        }
+        .code-box.pulse{animation:pulse 0.5s ease-out;}
+        @keyframes pulse{0%{transform:scale(1);}40%{transform:scale(1.04) translateY(-2px);box-shadow:0 0 0 8px rgba(34,211,238,0.1);}100%{transform:scale(1);}}
+
+        /* ── MODAL ── */
+        .modal{
+            position:fixed;inset:0;
+            background:rgba(0,0,0,0.82);
+            display:none;justify-content:center;align-items:center;
+            z-index:2000;backdrop-filter:blur(10px);
+            padding:16px;
+        }
+        .modal.open{display:flex;animation:fadeBg 0.25s ease;}
+        @keyframes fadeBg{from{opacity:0;}to{opacity:1;}}
+
+        .modal-content{
+            width:100%;max-width:580px;
+            background:rgba(10,15,28,0.98);
+            border:1px solid var(--border2);
+            border-radius:22px;overflow:hidden;
+            box-shadow:var(--glow),0 24px 60px rgba(0,0,0,0.65);
+            animation:popUp 0.35s cubic-bezier(0.34,1.56,0.64,1);
+            max-height:92vh;display:flex;flex-direction:column;
+        }
+        @keyframes popUp{from{opacity:0;transform:scale(0.9) translateY(20px);}to{opacity:1;transform:scale(1) translateY(0);}}
+
+        .modal-strip{
+            height:4px;flex-shrink:0;
+            background:linear-gradient(90deg,var(--sky),var(--purple),var(--pink));
         }
 
-        body.scrolling::before {
-            opacity: 1;
+        .modal-header{
+            padding:20px 26px 14px;
+            border-bottom:1px solid rgba(255,255,255,0.06);
+            flex-shrink:0;
+        }
+        .modal-title{
+            font-family:'Fira Code',monospace;
+            font-size:1.45rem;color:var(--sky-l);font-weight:600;
+            margin-bottom:8px;word-break:break-all;
+        }
+        .modal-category{
+            display:inline-flex;align-items:center;gap:5px;
+            color:var(--text-dim);font-size:12px;
+            background:var(--sky-dim);border:1px solid var(--border);
+            padding:3px 11px;border-radius:100px;
         }
 
-        nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            padding: 0 10px;
-            flex-wrap: wrap;
-            gap: 16px;
+        /* Step tabs */
+        .step-tabs{
+            display:flex;gap:0;
+            border-bottom:1px solid rgba(255,255,255,0.06);
+            flex-shrink:0;
+        }
+        .step-tab{
+            flex:1;padding:11px 8px;text-align:center;
+            font-size:12px;font-weight:700;letter-spacing:0.4px;
+            color:var(--text-muted);border:none;background:transparent;
+            cursor:pointer;transition:var(--tr);
+            border-bottom:2px solid transparent;
+            font-family:'Cairo',sans-serif;
+        }
+        .step-tab.on{color:var(--sky);border-bottom-color:var(--sky);background:rgba(34,211,238,0.05);}
+        .step-tab:hover:not(.on){color:var(--text-dim);background:rgba(255,255,255,0.025);}
+
+        .modal-body{
+            padding:20px 26px;
+            overflow-y:auto;flex:1;
         }
 
-        .home-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: white;
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            padding: 12px 20px;
-            border-radius: 16px;
-            font-size: 17px;
-            font-weight: 600;
-            transition: var(--transition);
-            box-shadow: var(--shadow-sm);
+        .step-lbl{
+            display:inline-flex;align-items:center;gap:7px;
+            font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+            color:var(--sky);margin-bottom:12px;
+        }
+        .step-lbl i{color:var(--amber);}
+
+        .explanation{
+            background:var(--code-bg);
+            border:1px solid rgba(255,255,255,0.06);
+            border-radius:12px;
+            padding:18px 20px;
+            min-height:130px;
+            display:flex;align-items:flex-start;
+        }
+        .explanation p{
+            font-size:1rem;line-height:1.9;
+            color:var(--text-dim);white-space:pre-wrap;width:100%;
         }
 
-        .home-btn:hover {
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: var(--shadow-lg);
-        }
+        /* Step accent borders */
+        .step-1 .explanation{border-right:3px solid var(--sky);}
+        .step-2 .explanation{border-right:3px solid var(--purple);}
+        .step-2 .explanation p{font-family:'Fira Code',monospace;font-size:13.5px;color:#c4b5fd;line-height:1.75;}
+        .step-3 .explanation{border-right:3px solid var(--emerald);}
+        .step-3 .explanation p{color:#6ee7b7;}
 
-        .search-box {
-            flex: 1;
-            max-width: 300px;
-            padding: 12px 20px;
-            border-radius: 14px;
-            border: 1px solid var(--border);
-            background: rgba(255, 255, 255, 0.07);
-            color: white;
-            font-size: 16px;
-            outline: none;
-            transition: var(--transition);
-        }
+        /* LTR step borders */
+        body.lang-en .step-1 .explanation,body.lang-fr .step-1 .explanation{border-right:none;border-left:3px solid var(--sky);}
+        body.lang-en .step-2 .explanation,body.lang-fr .step-2 .explanation{border-right:none;border-left:3px solid var(--purple);}
+        body.lang-en .step-3 .explanation,body.lang-fr .step-3 .explanation{border-right:none;border-left:3px solid var(--emerald);}
 
-        .search-box:focus,
-        .search-box.highlighted {
-            border-color: var(--accent-light);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
-            background: rgba(255, 255, 255, 0.1);
+        .modal-footer{
+            padding:16px 26px;
+            border-top:1px solid rgba(255,255,255,0.05);
+            display:flex;justify-content:space-between;align-items:center;
+            flex-shrink:0;flex-wrap:wrap;gap:10px;
         }
+        .step-dots{display:flex;gap:7px;align-items:center;}
+        .dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,0.15);transition:var(--tr);}
+        .dot.on{background:var(--sky);transform:scale(1.3);box-shadow:0 0 8px var(--sky);}
 
-        .translate-btn {
-            width: 60px;
-            height: 42px;
-            background: var(--accent);
-            color: white;
-            border: none;
-            border-radius: 14px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: var(--shadow-sm);
+        .btn-grp{display:flex;gap:9px;}
+        .btn{
+            display:inline-flex;align-items:center;justify-content:center;gap:7px;
+            padding:10px 20px;border:none;border-radius:11px;
+            font-family:'Cairo',sans-serif;font-size:14px;font-weight:700;
+            cursor:pointer;transition:var(--tr);min-width:85px;
         }
+        .btn-pri{background:linear-gradient(135deg,var(--sky),var(--sky-l));color:var(--bg);}
+        .btn-pri:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(34,211,238,0.35);}
+        .btn-pri:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
+        .btn-sec{background:rgba(255,255,255,0.07);color:var(--text-dim);border:1px solid var(--border);}
+        .btn-sec:hover{background:rgba(255,255,255,0.12);color:var(--text);}
 
-        .translate-btn:hover {
-            background: var(--accent-light);
-            transform: scale(1.08);
-            box-shadow: 0 6px 16px rgba(96, 165, 250, 0.5);
+        /* Category icon colors */
+        .ico-output{color:#34d399;}.ico-input{color:#60a5fa;}.ico-loop{color:#a78bfa;}
+        .ico-condition{color:#f472b6;}.ico-operator{color:#fbbf24;}.ico-format{color:#22d3ee;}
+        .ico-type{color:#fb923c;}.ico-control{color:#e879f9;}.ico-comment{color:#94a3b8;}
+
+        /* scrollbar */
+        ::-webkit-scrollbar{width:5px;height:5px;}
+        ::-webkit-scrollbar-track{background:transparent;}
+        ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+        ::-webkit-scrollbar-thumb:hover{background:var(--sky);}
+
+        /* LTR */
+        body.lang-en,body.lang-fr{direction:ltr;}
+        body.lang-en .modal-body,body.lang-fr .modal-body{text-align:left;}
+
+        @media(max-width:768px){
+            nav{flex-direction:column;align-items:stretch;}
+            .home-btn{justify-content:center;}
+            .search-box{max-width:100%;}
+            .lang-bar{justify-content:center;}
+            h1{font-size:2rem;}
+            #codesContainer{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;}
+            .modal-footer{flex-direction:column;align-items:stretch;}
+            .btn-grp{order:-1;flex-direction:column;}
+            .btn{width:100%;}
         }
-
-        .header-container {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        h1 {
-            font-size: 2.4rem;
-            margin-bottom: 10px;
-            color: var(--accent-light);
-            text-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-
-        .subtitle {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .hint-box {
-            position: relative;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(14, 165, 233, 0.1));
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 18px;
-            padding: 18px 24px;
-            margin: 0 auto 28px;
-            max-width: 720px;
-            font-size: 1.1rem;
-            color: var(--accent-light);
-            text-align: center;
-            font-weight: 600;
-            box-shadow: 
-                0 4px 20px rgba(0, 0, 0, 0.15),
-                0 0 0 0 rgba(59, 130, 246, 0.4);
-            transition: var(--transition);
-            animation: fadeInUp 0.6s ease-out, pulseGlow 3s ease-in-out 1.2s infinite;
-            overflow: hidden;
-        }
-
-        .hint-box:hover {
-            transform: translateY(-4px) scale(1.01);
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(14, 165, 233, 0.15));
-            box-shadow: 
-                0 8px 25px rgba(0, 0, 0, 0.25),
-                0 0 12px rgba(59, 130, 246, 0.5);
-            border-color: rgba(96, 165, 250, 0.7);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px) scale(0.98);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        @keyframes pulseGlow {
-            0%, 100% {
-                box-shadow: 
-                    0 4px 20px rgba(0, 0, 0, 0.15),
-                    0 0 0 0 rgba(59, 130, 246, 0.4);
-            }
-            50% {
-                box-shadow: 
-                    0 4px 20px rgba(0, 0, 0, 0.15),
-                    0 0 0 8px rgba(59, 130, 246, 0.15);
-            }
-        }
-
-        .category-filters {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.07);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: 'Tajawal', sans-serif;
-            font-weight: 500;
-        }
-
-        .filter-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .filter-btn.active {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-        }
-
-        #codesContainer {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 22px;
-            margin-top: 10px;
-        }
-
-        .code-box {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 24px 18px;
-            cursor: pointer;
-            text-align: center;
-            font-size: 18px;
-            font-family: 'JetBrains Mono', 'Courier New', monospace;
-            transition: var(--transition);
-            box-shadow: var(--shadow-md);
-            color: #e0f2fe;
-            position: relative;
-            overflow: hidden;
-            will-change: transform, box-shadow;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .code-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--accent), #0ea5e9);
-            transform: scaleY(0);
-            transform-origin: top;
-            transition: transform 0.4s ease;
-        }
-
-        .code-box:hover::before {
-            transform: scaleY(1);
-        }
-
-        .code-box:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-lg), 0 0 0 1px rgba(96, 165, 250, 0.3);
-            background: rgba(30, 45, 75, 0.85);
-        }
-
-        .code-content {
-            flex: 1;
-        }
-
-        .code-category {
-            font-size: 0.8rem;
-            padding: 4px 12px;
-            background: rgba(59, 130, 246, 0.2);
-            border-radius: 20px;
-            color: var(--accent-light);
-            font-family: 'Tajawal', sans-serif;
-            display: inline-block;
-            margin-top: 8px;
-        }
-
-        .code-box.pulse {
-            animation: clickPulse 0.6s ease-out;
-        }
-
-        @keyframes clickPulse {
-            0% {
-                transform: scale(1);
-                box-shadow: var(--shadow-md);
-            }
-            30% {
-                transform: scale(1.04) translateY(-2px);
-                box-shadow: 
-                    0 8px 30px rgba(59, 130, 246, 0.6),
-                    0 0 0 8px rgba(59, 130, 246, 0.2);
-            }
-            100% {
-                transform: scale(1) translateY(0);
-                box-shadow: var(--shadow-md);
-            }
-        }
-
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.75);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            backdrop-filter: blur(4px);
-        }
-
-        .modal-content {
-            width: 90%;
-            max-width: 550px;
-            background: rgba(25, 35, 55, 0.95);
-            padding: 32px;
-            border-radius: 22px;
-            text-align: center;
-            color: var(--text-primary);
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--border);
-            position: relative;
-            overflow: hidden;
-            animation: modalSlideIn 0.4s ease-out;
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .modal-content::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 6px;
-            background: linear-gradient(90deg, var(--accent), #0ea5e9);
-        }
-
-        .modal-header {
-            margin-bottom: 25px;
-        }
-
-        .modal-title {
-            font-size: 1.8rem;
-            color: var(--accent-light);
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .modal-category {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            background: rgba(59, 130, 246, 0.1);
-            padding: 4px 12px;
-            border-radius: 20px;
-            display: inline-block;
-        }
-
-        .modal-body {
-            text-align: right;
-            margin-bottom: 30px;
-        }
-
-        .explanation {
-            background: var(--code-bg);
-            padding: 25px;
-            border-radius: 12px;
-            border-right: 3px solid var(--accent);
-            min-height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .explanation p {
-            font-size: 1.25rem;
-            line-height: 1.8;
-            color: var(--text-secondary);
-        }
-
-        .modal-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 25px;
-        }
-
-        .step-indicator {
-            display: flex;
-            gap: 8px;
-        }
-
-        .step-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transition: var(--transition);
-        }
-
-        .step-dot.active {
-            background: var(--accent);
-            transform: scale(1.2);
-        }
-
-        .buttons {
-            display: flex;
-            gap: 14px;
-        }
-
-        button {
-            padding: 12px 24px;
-            font-size: 16px;
-            font-weight: 600;
-            border: none;
-            border-radius: 14px;
-            cursor: pointer;
-            transition: var(--transition);
-            background: var(--accent);
-            color: white;
-            min-width: 100px;
-            box-shadow: var(--shadow-sm);
-            font-family: 'Tajawal', sans-serif;
-        }
-
-        button:hover {
-            background: var(--accent-light);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
-        }
-
-        button.secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-secondary);
-        }
-
-        button.secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-        }
-
-        button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-
-        body.lang-en nav,
-        body.lang-fr nav {
-            flex-direction: row-reverse;
-        }
-
-        body.lang-en .home-btn,
-        body.lang-fr .home-btn {
-            flex-direction: row-reverse;
-        }
-
-        body.lang-en .modal-body,
-        body.lang-fr .modal-body {
-            text-align: left;
-        }
-
-        @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .home-btn, .translate-btn {
-                width: 100%;
-                justify-content: center;
-            }
-            .search-box {
-                max-width: 100%;
-            }
-            .header-container {
-                padding: 0 10px;
-            }
-            h1 {
-                font-size: 2rem;
-            }
-            .subtitle {
-                font-size: 1rem;
-            }
-            .hint-box {
-                font-size: 1rem;
-                padding: 14px 20px;
-            }
-            .category-filters {
-                gap: 8px;
-            }
-            .filter-btn {
-                padding: 8px 16px;
-                font-size: 0.9rem;
-            }
-            #codesContainer {
-                grid-template-columns: 1fr;
-                gap: 18px;
-            }
-            .code-box {
-                padding: 20px 16px;
-                font-size: 17px;
-            }
-            .modal-content {
-                padding: 24px 18px;
-            }
-            .modal-footer {
-                flex-direction: column;
-                gap: 15px;
-                align-items: stretch;
-            }
-            .buttons {
-                order: -1;
-                flex-direction: column;
-            }
-            button {
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-            .hint-box {
-                font-size: 0.95rem;
-                padding: 12px 16px;
-            }
-            .modal-content {
-                padding: 20px 15px;
-            }
-            .modal-title {
-                font-size: 1.5rem;
-            }
-            .explanation {
-                padding: 20px;
-                min-height: 120px;
-            }
-            .explanation p {
-                font-size: 1.1rem;
-            }
+        @media(prefers-reduced-motion:reduce){
+            *{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}
         }
     </style>
 </head>
-
 <body class="lang-ar">
-    
-    <nav>
-        <a href="asasi.html" class="home-btn">
-            <i class="fas fa-home"></i>
-            <span id="homeText">الرئيسية</span>
-        </a>
+<div class="wrap">
 
-        <input type="text" class="search-box" id="search" placeholder="بحث / Search / Recherche">
-
-        <button class="translate-btn" onclick="toggleLanguage()" id="langBtn">AR</button>
-    </nav>
-
-    <div class="header-container">
-        <h1 id="pageTitle">معمل أكواد C التفاعلي</h1>
-        <p class="subtitle" id="subtitle">تعلم وفهم أهم أوامر لغة C من خلال شرح متعدد اللغات وأمثلة تطبيقية</p>
+<!-- NAV -->
+<nav>
+    <a href="asasi.html" class="home-btn">
+        <i class="fas fa-home"></i>
+        <span id="homeText">الرئيسية</span>
+    </a>
+    <input type="text" class="search-box" id="search" placeholder="ابحث عن كود...">
+    <div class="lang-bar" id="langBar">
+        <button class="lb on" data-l="ar">🇸🇦 AR</button>
+        <button class="lb" data-l="fr">🇫🇷 FR</button>
+        <button class="lb" data-l="en">🇬🇧 EN</button>
     </div>
+</nav>
 
-    
-    <div class="hint-box">
-        <span id="hintText">انقر على أي صندوق لعرض شرح مفصّل باللغات: العربية / الفرنسية / الإنجليزية</span>
-    </div>
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-badge"><span id="badgeText">معمل تفاعلي</span></div>
+    <h1 id="pageTitle">معمل أكواد C التفاعلي</h1>
+    <p class="subtitle" id="subtitle">تعلَّم وافهم أهم أوامر لغة C من خلال شرح تفصيلي متعدد اللغات وأمثلة تطبيقية عملية</p>
+</div>
 
-    
-    <div class="category-filters">
-        <button class="filter-btn active" onclick="filterCodes('all')">الكل</button>
-        <button class="filter-btn" onclick="filterCodes('output')">الإخراج</button>
-        <button class="filter-btn" onclick="filterCodes('input')">الإدخال</button>
-        <button class="filter-btn" onclick="filterCodes('loop')">الحلقات</button>
-        <button class="filter-btn" onclick="filterCodes('condition')">الشروط</button>
-        <button class="filter-btn" onclick="filterCodes('operator')">المشغلات</button>
-        <button class="filter-btn" onclick="filterCodes('type')">أنواع البيانات</button>
-        <button class="filter-btn" onclick="filterCodes('control')">التحكم</button>
-        <button class="filter-btn" onclick="filterCodes('comment')">التعليقات</button>
-    </div>
+<!-- HINT -->
+<div class="hint-box">
+    <i class="fas fa-hand-pointer" style="margin-left:8px;color:var(--amber);"></i>
+    <span id="hintText">انقر على أي بطاقة لعرض شرح مفصَّل من 3 مراحل: الشرح ← الخوارزمية ← التطبيق</span>
+</div>
 
-    <div id="codesContainer">
-        
-    </div>
+<!-- FILTERS -->
+<div class="filters" id="filtersBar">
+    <button class="filter-btn active" data-cat="all">الكل</button>
+    <button class="filter-btn" data-cat="output">الإخراج</button>
+    <button class="filter-btn" data-cat="input">الإدخال</button>
+    <button class="filter-btn" data-cat="loop">الحلقات</button>
+    <button class="filter-btn" data-cat="condition">الشروط</button>
+    <button class="filter-btn" data-cat="operator">المشغلات</button>
+    <button class="filter-btn" data-cat="format">رموز التنسيق</button>
+    <button class="filter-btn" data-cat="type">أنواع البيانات</button>
+    <button class="filter-btn" data-cat="control">التحكم</button>
+    <button class="filter-btn" data-cat="comment">التعليقات</button>
+</div>
 
-   
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title" id="title"></h2>
-                <div class="modal-category" id="modalCategory"></div>
+<!-- GRID -->
+<div id="codesContainer"></div>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-strip"></div>
+        <div class="modal-header">
+            <div class="modal-title" id="mTitle"></div>
+            <div class="modal-category" id="mCat"></div>
+        </div>
+        <div class="step-tabs" id="stepTabs">
+            <button class="step-tab on" data-s="1" id="tab1">📘 الشرح</button>
+            <button class="step-tab" data-s="2" id="tab2">📐 الخوارزمية</button>
+            <button class="step-tab" data-s="3" id="tab3">🔗 التطبيق</button>
+        </div>
+        <div class="modal-body" id="mBody">
+            <div class="step-lbl"><i class="fas fa-info-circle"></i><span id="stepLbl">شرح مفصَّل</span></div>
+            <div class="explanation">
+                <p id="mContent"></p>
             </div>
-            
-            <div class="modal-body">
-                <div class="explanation">
-                    <p id="content"></p>
-                </div>
+        </div>
+        <div class="modal-footer">
+            <div class="step-dots">
+                <div class="dot on" data-d="1"></div>
+                <div class="dot" data-d="2"></div>
+                <div class="dot" data-d="3"></div>
             </div>
-
-            <div class="modal-footer">
-                <div class="step-indicator" id="stepIndicator">
-                    <div class="step-dot active" data-step="1"></div>
-                    <div class="step-dot" data-step="2"></div>
-                    <div class="step-dot" data-step="3"></div>
-                </div>
-
-                <div class="buttons">
-                    <button class="secondary" onclick="closeModal()" id="closeBtn">غلق</button>
-                    <button class="secondary" onclick="prevStep()" id="prevBtn" style="display: none;">
-                        <i class="fas fa-arrow-right"></i> رجوع
-                    </button>
-                    <button onclick="nextStep()" id="nextBtn">
-                        التالي <i class="fas fa-arrow-left"></i>
-                    </button>
-                </div>
+            <div class="btn-grp">
+                <button class="btn btn-sec" id="prevBtn" style="display:none;"><i class="fas fa-arrow-right"></i><span id="prevTxt">رجوع</span></button>
+                <button class="btn btn-sec" id="closeBtn"><i class="fas fa-times"></i><span id="closeTxt">إغلاق</span></button>
+                <button class="btn btn-pri" id="nextBtn"><span id="nextTxt">التالي</span><i class="fas fa-arrow-left"></i></button>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        const Security = {
-            sanitize: function(text) {
-                if (!text) return '';
-                const temp = document.createElement('div');
-                temp.textContent = text;
-                return temp.innerHTML;
-            },
-            
-            validateLink: function(url) {
-                if (!url) return false;
-                try {
-                    const urlObj = new URL(url, window.location.origin);
-                    const allowedProtocols = ['http:', 'https:', 'mailto:', 'tel:'];
-                    const allowedDomains = [
-                        window.location.hostname,
-                        'bibarss39-sudo.github.io'
-                    ];
-                    
-                    if (!allowedProtocols.includes(urlObj.protocol)) return false;
-                    return allowedDomains.some(domain => 
-                        urlObj.hostname === domain || urlObj.hostname.endsWith('.' + domain)
-                    );
-                } catch (e) {
-                    return url.startsWith('/') || url.startsWith('./') || url.startsWith('../');
-                }
-            },
-            
-            protect: function() {
-                try {
-                    Object.freeze(Object.prototype);
-                } catch (e) {}
-            }
-        };
+</div>
 
-        let current = 1;
-        let step = 1;
-        let lang = "ar";
-        let currentFilter = 'all';
+<script>
+// ═══════════════════════════════════════════
+//  SECURITY
+// ═══════════════════════════════════════════
+const Security={
+    sanitize:t=>{if(!t)return'';const d=document.createElement('div');d.textContent=t;return d.innerHTML;},
+    validateLink:u=>{try{const o=new URL(u,location.origin);return['http:','https:'].includes(o.protocol)&&[location.hostname,'bibarss39-sudo.github.io'].includes(o.hostname);}catch{return u.startsWith('/');}},
+    protect(){try{Object.freeze(Object.prototype);}catch(e){}}
+};
 
-        const data = {
-            1: {
-                title: { ar: 'printf("Hello, World!")', fr: 'printf("Hello, World!")', en: 'printf("Hello, World!")' },
-                exp: {
-                    ar: 'تُستخدم لطباعة نص أو قيمة على الشاشة. مثال: طباعة رسالة ترحيب.',
-                    fr: 'Affiche un texte ou une valeur à l\'écran.',
-                    en: 'Displays text or values on the screen.'
-                },
-                algFr: 'Écrire("Hello World!")',
-                algExp: {
-                    ar: 'تُظهر مخرجات مباشرة للمستخدم على الشاشة.',
-                    fr: 'Produit une sortie textuelle.',
-                    en: 'Produces textual output for the user.'
-                },
-                category: 'output'
-            },
-            2: {
-                title: { ar: 'scanf("%d", &x)', fr: 'scanf("%d", &x)', en: 'scanf("%d", &x)' },
-                exp: {
-                    ar: 'تقرأ عددًا صحيحًا من المستخدم وتخزّنه في المتغير x.',
-                    fr: 'Lit un entier saisi par l\'utilisateur et le stocke dans x.',
-                    en: 'Reads an integer input from the user and stores it in x.'
-                },
-                algFr: 'Lire(x)',
-                algExp: {
-                    ar: 'تسمح بإدخال بيانات من المستخدم أثناء تشغيل البرنامج.',
-                    fr: 'Permet à l\'utilisateur d\'entrer une valeur.',
-                    en: 'Allows user input into a variable.'
-                },
-                category: 'input'
-            },
-            3: {
-                title: { ar: 'for (int i = 0; i < 10; i++)', fr: 'for (int i = 0; i < 10; i++)', en: 'for (int i = 0; i < 10; i++)' },
-                exp: {
-                    ar: 'حلقة تُكرّر تنفيذ شرط من الأوامر 10 مرات (من 0 إلى 9).',
-                    fr: 'Boucle qui s\'exécute exactement 10 fois (de 0 à 9).',
-                    en: 'Loop that executes exactly 10 times (from 0 to 9).'
-                },
-                algFr: 'Pour i de 0 à 9 faire',
-                algExp: {
-                    ar: 'تُستخدم عندما تعرف عدد مرات التكرار مسبقًا.',
-                    fr: 'Répète un bloc un nombre fixe de fois.',
-                    en: 'Repeats a block a fixed number of times.'
-                },
-                category: 'loop'
-            },
-            4: {
-                title: { ar: 'do { } while (x < 10)', fr: 'do { } while (x < 10)', en: 'do { } while (x < 10)' },
-                exp: {
-                    ar: 'تنفّذ شرط مرة واحدة على الأقل، ثم تكررها طالما أن x أقل من 10.',
-                    fr: 'Exécute le bloc au moins une fois, puis répète tant que la condition est vraie.',
-                    en: 'Executes the block at least once, then repeats while condition is true.'
-                },
-                algFr: 'Répéter ... jusqu\'à (x >= 10)',
-                algExp: {
-                    ar: 'مثالية عندما تريد تنفيذ شرط قبل التحقق من الشرط.',
-                    fr: 'Utilisée quand le bloc doit s\'exécuter avant la vérification.',
-                    en: 'Used when the block must run before checking the condition.'
-                },
-                category: 'loop'
-            },
-            5: {
-                title: { ar: 'while (x < 10)', fr: 'while (x < 10)', en: 'while (x < 10)' },
-                exp: {
-                    ar: 'تكرّر تنفيذ شرط طالما أن الشرط (x < 10) صحيح.',
-                    fr: 'Répète le bloc tant que x < 10 est vrai.',
-                    en: 'Repeats the block while x < 10 is true.'
-                },
-                algFr: 'Tant que (x < 10)',
-                algExp: {
-                    ar: 'لا تُنفّذ الكتلة أبدًا إذا كان الشرط خاطئًا من البداية.',
-                    fr: 'N\'exécute pas le bloc si la condition est fausse au départ.',
-                    en: 'Does not run the block if condition is initially false.'
-                },
-                category: 'loop'
-            },
-            6: {
-                title: { ar: '!x', fr: '!x', en: '!x' },
-                exp: {
-                    ar: 'يعكس قيمة الشرط: إذا كانت x تساوي 0 يصبح الناتج "صح"، والعكس.',
-                    fr: 'Opérateur logique qui inverse la valeur : vrai si x vaut 0, faux sinon.',
-                    en: 'Logical operator that inverts the value: true if x is 0, false otherwise.'
-                },
-                algFr: 'Non(x)',
-                algExp: {
-                    ar: 'يُستخدم للتأكد من أن قيمة ما غير صحيحة (أو تساوي صفر).',
-                    fr: 'Permet de tester qu\'une valeur est fausse (ou nulle).',
-                    en: 'Used to test that a value is false (or zero).'
-                },
-                category: 'operator'
-            },
-            7: {
-                title: { ar: '%d', fr: '%d', en: '%d' },
-                exp: {
-                    ar: 'رمز تنسيق لطباعة أو قراءة عدد صحيح (مثل 42 أو -5).',
-                    fr: 'Spécificateur de format pour un entier (int).',
-                    en: 'Format specifier for integers (int).'
-                },
-                algFr: 'Entier',
-                algExp: {
-                    ar: 'يُستخدم مع printf أو scanf للتعامل مع الأعداد الصحيحة.',
-                    fr: 'Utilisé avec printf/scanf pour les entiers.',
-                    en: 'Used with printf/scanf for integer values.'
-                },
-                category: 'output'
-            },
-            8: {
-                title: { ar: '%f', fr: '%f', en: '%f' },
-                exp: {
-                    ar: 'رمز تنسيق لطباعة أو قراءة عدد عشري (مثل 3.14).',
-                    fr: 'Spécificateur pour un nombre à virgule flottante.',
-                    en: 'Format specifier for floating-point numbers.'
-                },
-                algFr: 'Réel',
-                algExp: {
-                    ar: 'يُستخدم للأرقام ذات الفاصلة العشرية.',
-                    fr: 'Utilisé pour les nombres décimaux.',
-                    en: 'Used for decimal numbers.'
-                },
-                category: 'output'
-            },
-            9: {
-                title: { ar: '%c', fr: '%c', en: '%c' },
-                exp: {
-                    ar: 'رمز تنسيق لطباعة أو قراءة حرف واحد (مثل \'A\' أو \'?\').',
-                    fr: 'Spécificateur pour un seul caractère.',
-                    en: 'Format specifier for a single character.'
-                },
-                algFr: 'Caractère',
-                algExp: {
-                    ar: 'يتعامل مع متغير يحتوي على حرف واحد فقط.',
-                    fr: 'Traite une variable contenant un seul caractère.',
-                    en: 'Handles a variable holding one character.'
-                },
-                category: 'output'
-            },
-            10: {
-                title: { ar: '+=', fr: '+=', en: '+=' },
-                exp: {
-                    ar: 'يجمع قيمة على المتغير ويخزّن الناتج فيه: x += 3 تعني x = x + 3.',
-                    fr: 'Ajoute une valeur : x += 3 équivaut à x = x + 3.',
-                    en: 'Adds a value: x += 3 is equivalent to x = x + 3.'
-                },
-                algFr: 'x ← x + 3',
-                algExp: {
-                    ar: 'طريقة مختصرة لكتابة عملية الجمع والتخزين معًا.',
-                    fr: 'Forme abrégée pour l\'addition et l\'affectation.',
-                    en: 'Shorthand for addition and assignment.'
-                },
-                category: 'operator'
-            },
-            11: {
-                title: { ar: 'int', fr: 'int', en: 'int' },
-                exp: {
-                    ar: 'نوع بيانات لتخزين الأعداد الصحيحة (مثل 100، -20، 0).',
-                    fr: 'Type de données pour les entiers (ex: -5, 0, 100).',
-                    en: 'Data type for integers (e.g., -5, 0, 100).'
-                },
-                algFr: 'Entier',
-                algExp: {
-                    ar: 'لا يدعم الأعداد ذات الفاصلة العشرية.',
-                    fr: 'Stocke des valeurs numériques sans décimales.',
-                    en: 'Stores numeric values without decimals.'
-                },
-                category: 'type'
-            },
-            12: {
-                title: { ar: 'float', fr: 'float', en: 'float' },
-                exp: {
-                    ar: 'نوع بيانات لتخزين الأعداد العشرية (مثل 2.5 أو -3.1415).',
-                    fr: 'Type pour les nombres décimaux (ex: 3.14, -2.5).',
-                    en: 'Data type for decimal numbers (e.g., 3.14, -2.5).'
-                },
-                algFr: 'Réel',
-                algExp: {
-                    ar: 'يُستخدم للأرقام التي تحتوي على فاصلة عشرية.',
-                    fr: 'Utilisé pour les nombres à virgule flottante.',
-                    en: 'Used for floating-point numbers.'
-                },
-                category: 'type'
-            },
-            13: {
-                title: { ar: 'char', fr: 'char', en: 'char' },
-                exp: {
-                    ar: 'نوع بيانات لتخزين حرف واحد (مثل \'m\' أو \'$\').',
-                    fr: 'Type pour un seul caractère (ex: \'A\', \'7\').',
-                    en: 'Data type for a single character (e.g., \'A\', \'7\').'
-                },
-                algFr: 'Caractère',
-                algExp: {
-                    ar: 'يحتوي على رمز واحد من جدول الحروف (مثل ASCII).',
-                    fr: 'Contient un symbole du tableau ASCII.',
-                    en: 'Holds one symbol from the ASCII table.'
-                },
-                category: 'type'
-            },
-            14: {
-                title: { ar: 'chaine', fr: 'chaine', en: 'string' },
-                exp: {
-                    ar: 'في لغة C، السلسلة النصية هي مصفوفة من الحروف تنتهي بـ \'\\0\'.',
-                    fr: 'En C, une chaîne est un tableau de caractères terminé par \'\\0\'.',
-                    en: 'In C, a string is a char array ending with \'\\0\'.'
-                },
-                algFr: 'Chaîne de caractères',
-                algExp: {
-                    ar: 'تُخزّن كلمات أو جمل كاملة (مثل "مرحبا").',
-                    fr: 'Sert à stocker des mots ou des phrases.',
-                    en: 'Used to store words or sentences.'
-                },
-                category: 'type'
-            },
-            15: {
-                title: { ar: '#include', fr: '#include', en: '#include' },
-                exp: {
-                    ar: 'يُدخل مكتبة خارجية (مثل stdio.h) لاستخدام دوالها الجاهزة.',
-                    fr: 'Inclut une bibliothèque externe (ex: stdio.h).',
-                    en: 'Includes an external library (e.g., stdio.h) to use its functions.'
-                },
-                algFr: 'Utiliser Bibliothèque',
-                algExp: {
-                    ar: 'بدونه، لا يمكنك استخدام دوال مثل printf أو scanf.',
-                    fr: 'Permet d\'utiliser des fonctions prédéfinies.',
-                    en: 'Enables use of predefined functions like printf and scanf.'
-                },
-                category: 'control'
-            },
-            16: {
-                title: { ar: 'return 0;', fr: 'return 0;', en: 'return 0;' },
-                exp: {
-                    ar: 'تنهي دالة main() وتشير إلى أن البرنامج انتهى بنجاح (بدون أخطاء).',
-                    fr: 'Termine main() avec succès (code 0 = succès).',
-                    en: 'Ends main() and indicates successful program termination.'
-                },
-                algFr: 'Retourner 0',
-                algExp: {
-                    ar: 'القيمة 0 تعني "نجاح"، وأي رقم آخر يدل على خطأ.',
-                    fr: 'Indique que l\'algorithme s\'est terminé sans erreur.',
-                    en: 'Means the algorithm ended without errors.'
-                },
-                category: 'control'
-            },
-            17: {
-                title: { ar: 'i++', fr: 'i++', en: 'i++' },
-                exp: {
-                    ar: 'يزيد قيمة المتغير i بمقدار 1. مثال: إذا كانت i=5، تصبح i=6.',
-                    fr: 'Incrémente i de 1 (post-incrémentation).',
-                    en: 'Increments i by 1 (post-increment).'
-                },
-                algFr: 'i ← i + 1',
-                algExp: {
-                    ar: 'طريقة مختصرة لكتابة i = i + 1.',
-                    fr: 'Forme abrégée pour incrémenter la variable.',
-                    en: 'Shorthand to increase the variable by one.'
-                },
-                category: 'operator'
-            },
-            18: {
-                title: { ar: 'i--', fr: 'i--', en: 'i--' },
-                exp: {
-                    ar: 'يقلل قيمة المتغير i بمقدار 1. مثال: إذا كانت i=5، تصبح i=4.',
-                    fr: 'Décrémente i de 1 (post-décrémentation).',
-                    en: 'Decrements i by 1 (post-decrement).'
-                },
-                algFr: 'i ← i - 1',
-                algExp: {
-                    ar: 'طريقة مختصرة لكتابة i = i - 1.',
-                    fr: 'Forme abrégée pour décrémenter la variable.',
-                    en: 'Shorthand to decrease the variable by one.'
-                },
-                category: 'operator'
-            },
-            19: {
-                title: { ar: 'mat[40]', fr: 'mat[40]', en: 'mat[40]' },
-                exp: {
-                    ar: 'مصفوفة تحتوي على 40 عنصرًا مرقّمًا من 0 إلى 39.',
-                    fr: 'Tableau de 40 éléments indexés de 0 à 39.',
-                    en: 'Array with 40 elements, indexed from 0 to 39.'
-                },
-                algFr: 'Tableau[40]',
-                algExp: {
-                    ar: 'تُخزّن عدة قيم من نفس النوع في مكان واحد.',
-                    fr: 'Stocke un ensemble de valeurs du même type.',
-                    en: 'Stores a collection of values of the same type.'
-                },
-                category: 'type'
-            },
-            20: {
-                title: { ar: 'if', fr: 'if', en: 'if' },
-                exp: {
-                    ar: 'تنفّذ كتلة من الأوامر فقط إذا كان الشرط صحيحًا.',
-                    fr: 'Structure conditionnelle : exécute le bloc si la condition est vraie.',
-                    en: 'Conditional statement: executes block if condition is true.'
-                },
-                algFr: 'Si (condition)',
-                algExp: {
-                    ar: 'تُستخدم لاتخاذ قرارات داخل البرنامج.',
-                    fr: 'Utilisée pour prendre des décisions dans le programme.',
-                    en: 'Used to make decisions in the program.'
-                },
-                category: 'condition'
-            },
-            21: {
-                title: { ar: 'else', fr: 'else', en: 'else' },
-                exp: {
-                    ar: 'تنفّذ كتلة بديلة إذا كان شرط if غير صحيح.',
-                    fr: 'Exécute un bloc alternatif si la condition if est fausse.',
-                    en: 'Executes an alternative block if the if condition is false.'
-                },
-                algFr: 'Sinon',
-                algExp: {
-                    ar: 'توفر بديلاً عند عدم تحقق الشرط الأول.',
-                    fr: 'Fournit une alternative lorsque la condition échoue.',
-                    en: 'Provides an alternative path when condition fails.'
-                },
-                category: 'condition'
-            },
-            22: {
-                title: { ar: 'switch(x)', fr: 'switch(x)', en: 'switch(x)' },
-                exp: {
-                    ar: 'يختار ويُنفّذ كتلة من الأوامر بناءً على قيمة المتغير x.',
-                    fr: 'Évalue une expression et exécute le cas correspondant.',
-                    en: 'Evaluates an expression and executes a matching case.'
-                },
-                algFr: 'Selon(x)',
-                algExp: {
-                    ar: 'بديل أكثر تنظيمًا لعدة عبارات if-else.',
-                    fr: 'Alternative élégante aux if-else imbriqués.',
-                    en: 'Clean alternative to nested if-else statements.'
-                },
-                category: 'condition'
-            },
-            23: {
-                title: { ar: 'break;', fr: 'break;', en: 'break;' },
-                exp: {
-                    ar: 'يخرج فورًا من الحلقة (for, while) أو من كتلة switch.',
-                    fr: 'Termine immédiatement la boucle ou le bloc switch.',
-                    en: 'Immediately exits the current loop or switch block.'
-                },
-                algFr: 'Quitter',
-                algExp: {
-                    ar: 'يُستخدم لإيقاف الحلقة قبل انتهائها الطبيعي.',
-                    fr: 'Permet une sortie anticipée d\'une boucle ou switch.',
-                    en: 'Used for early exit from a loop or switch.'
-                },
-                category: 'control'
-            },
-            24: {
-                title: { ar: 'continue;', fr: 'continue;', en: 'continue;' },
-                exp: {
-                    ar: 'يتخطى باقي الحلقة الحالية ويبدأ التكرار التالي فورًا.',
-                    fr: 'Ignore le reste de la boucle et passe à l\'itération suivante.',
-                    en: 'Skips the rest of the loop and jumps to the next iteration.'
-                },
-                algFr: 'Continuer',
-                algExp: {
-                    ar: 'مفيد لتخطي بعض القيم دون إيقاف الحلقة بالكامل.',
-                    fr: 'Utile pour ignorer certaines itérations.',
-                    en: 'Useful to skip certain iterations without breaking the loop.'
-                },
-                category: 'control'
-            },
-            25: {
-                title: { ar: '// comment', fr: '// comment', en: '// comment' },
-                exp: {
-                    ar: 'تعليق أحادي السطر: يُهمل عند تشغيل البرنامج ويُستخدم للشرح.',
-                    fr: 'Commentaire sur une ligne : ignoré par le compilateur.',
-                    en: 'Single-line comment: ignored by the compiler.'
-                },
-                algFr: '// commentaire',
-                algExp: {
-                    ar: 'لا يؤثر على البرنامج، فقط للمطورين.',
-                    fr: 'Sert à expliquer ou désactiver temporairement du code.',
-                    en: 'Used to explain code or temporarily disable a line.'
-                },
-                category: 'comment'
-            },
-            26: {
-                title: { ar: '/* comment */', fr: '/* comment */', en: '/* comment */' },
-                exp: {
-                    ar: 'تعليق متعدد الأسطر: يُستخدم لشرح كتل كبيرة من الكود.',
-                    fr: 'Commentaire multi-lignes : pour expliquer du code étendu.',
-                    en: 'Multi-line comment: used to explain larger code sections.'
-                },
-                algFr: '/* commentaire */',
-                algExp: {
-                    ar: 'يبدأ بـ /* وينتهي بـ */، ولا يُنفّذ أبدًا.',
-                    fr: 'Commence par /* et finit par */, ignoré à la compilation.',
-                    en: 'Begins with /* and ends with */, completely ignored during compilation.'
-                },
-                category: 'comment'
-            }
-        };
+// ═══════════════════════════════════════════
+//  CATEGORY META
+// ═══════════════════════════════════════════
+const catIcons={output:'fa-terminal',input:'fa-keyboard',loop:'fa-rotate',condition:'fa-code-branch',operator:'fa-calculator',format:'fa-hashtag',type:'fa-database',control:'fa-cogs',comment:'fa-comment-dots'};
+const catColors={output:'ico-output',input:'ico-input',loop:'ico-loop',condition:'ico-condition',operator:'ico-operator',format:'ico-format',type:'ico-type',control:'ico-control',comment:'ico-comment'};
 
-        const categoryLabels = {
-            all: { ar: 'الكل', fr: 'Tous', en: 'All' },
-            output: { ar: 'الإخراج', fr: 'Sortie', en: 'Output' },
-            input: { ar: 'الإدخال', fr: 'Entrée', en: 'Input' },
-            loop: { ar: 'الحلقات', fr: 'Boucles', en: 'Loops' },
-            condition: { ar: 'الشروط', fr: 'Conditions', en: 'Conditions' },
-            operator: { ar: 'المشغلات', fr: 'Opérateurs', en: 'Operators' },
-            type: { ar: 'أنواع البيانات', fr: 'Types', en: 'Data Types' },
-            control: { ar: 'التحكم', fr: 'Contrôle', en: 'Control' },
-            comment: { ar: 'التعليقات', fr: 'Commentaires', en: 'Comments' }
-        };
+const catLabels={
+    all:{ar:'الكل',fr:'Tous',en:'All'},
+    output:{ar:'الإخراج',fr:'Sortie',en:'Output'},
+    input:{ar:'الإدخال',fr:'Entrée',en:'Input'},
+    loop:{ar:'الحلقات',fr:'Boucles',en:'Loops'},
+    condition:{ar:'الشروط',fr:'Conditions',en:'Conditions'},
+    operator:{ar:'المشغلات',fr:'Opérateurs',en:'Operators'},
+    format:{ar:'رموز التنسيق',fr:'Formats',en:'Formats'},
+    type:{ar:'أنواع البيانات',fr:'Types',en:'Data Types'},
+    control:{ar:'التحكم',fr:'Contrôle',en:'Control'},
+    comment:{ar:'التعليقات',fr:'Commentaires',en:'Comments'}
+};
 
-        function initializeCodes() {
-            const container = document.getElementById('codesContainer');
-            container.innerHTML = '';
-            
-            Object.keys(data).forEach(key => {
-                const item = data[key];
-                const box = document.createElement('div');
-                box.className = 'code-box';
-                box.setAttribute('data-category', item.category);
-                box.setAttribute('data-id', key);
-                
-                box.innerHTML = `
-                    <div class="code-content">${Security.sanitize(item.title[lang])}</div>
-                    <div class="code-category">${Security.sanitize(categoryLabels[item.category][lang])}</div>
-                `;
-                
-                box.addEventListener('click', function(e) {
-                    handleClick(this, parseInt(key));
-                });
-                
-                container.appendChild(box);
-            });
-            
-            filterCodes(currentFilter);
+// ═══════════════════════════════════════════
+//  UI LABELS  (badge/subtitle/hint/buttons)
+// ═══════════════════════════════════════════
+const UI={
+    ar:{badge:'معمل تفاعلي',title:'معمل أكواد C التفاعلي',subtitle:'تعلَّم وافهم أهم أوامر لغة C من خلال شرح تفصيلي متعدد اللغات وأمثلة تطبيقية عملية',hint:'انقر على أي بطاقة لعرض شرح مفصَّل من 3 مراحل: الشرح ← الخوارزمية ← التطبيق',home:'الرئيسية',search:'ابحث عن كود...',close:'إغلاق',next:'التالي',prev:'رجوع',tab1:'📘 الشرح',tab2:'📐 الخوارزمية',tab3:'🔗 التطبيق',lbl1:'شرح مفصَّل',lbl2:'الخوارزمية',lbl3:'الربط بالكود'},
+    fr:{badge:'Labo Interactif',title:'Laboratoire C Interactif',subtitle:'Apprenez et comprenez les commandes C avec des explications multilingues et des exemples pratiques.',hint:'Cliquez sur une carte pour voir 3 niveaux : Explication → Algorithme → Application',home:'Accueil',search:'Rechercher un code...',close:'Fermer',next:'Suivant',prev:'Précédent',tab1:'📘 Explication',tab2:'📐 Algorithme',tab3:'🔗 Application',lbl1:'Explication détaillée',lbl2:'Algorithme',lbl3:'Lien avec le code'},
+    en:{badge:'Interactive Lab',title:'Interactive C Code Lab',subtitle:'Learn and understand key C commands through multilingual explanations and practical examples.',hint:'Click any card to see 3 levels: Explanation → Algorithm → Application',home:'Home',search:'Search for code...',close:'Close',next:'Next',prev:'Back',tab1:'📘 Explanation',tab2:'📐 Algorithm',tab3:'🔗 Application',lbl1:'Detailed explanation',lbl2:'Algorithm',lbl3:'Code link'}
+};
+
+// ═══════════════════════════════════════════
+//  DATA  — each entry has:
+//    title  { ar, fr, en }
+//    exp    { ar, fr, en }  → Step 1: detailed explanation
+//    algFr  string          → Step 2: algorithm (pseudo-code)
+//    algExp { ar, fr, en }  → Step 3: link / application
+//    category string
+// ═══════════════════════════════════════════
+const data = {
+
+// ──────────────────── OUTPUT ────────────────────
+1:{
+  title:{ar:'printf("Hello, World!")',fr:'printf("Hello, World!")',en:'printf("Hello, World!")'},
+  exp:{
+    ar:`📌 الاستخدام:
+تُستخدم دالة printf لطباعة نصوص وقيم على الشاشة.
+
+💡 أمثلة:
+printf("مرحباً!");          // طباعة نص ثابت
+printf("العمر: %d", 20);   // طباعة متغير
+printf("Pi = %.2f", 3.14); // طباعة عدد عشري
+
+⚙️ بنية البرنامج الكامل:
+#include <stdio.h>
+int main() {
+    printf("Hello, World!\\n");
+    return 0;
+}
+
+⚠️ ملاحظات مهمة:
+• أضف #include <stdio.h> في أعلى الملف دائماً
+• استخدم \\n لإنهاء السطر والانتقال لسطر جديد
+• كل جملة تنتهي بنقطة منقوطة ;`,
+    fr:`📌 Usage:
+printf affiche du texte ou des valeurs à l'écran.
+
+💡 Exemples:
+printf("Bonjour!");          // texte fixe
+printf("Age: %d", 20);      // variable entière
+printf("Pi = %.2f", 3.14);  // nombre décimal
+
+⚙️ Structure complète:
+#include <stdio.h>
+int main() {
+    printf("Hello, World!\\n");
+    return 0;
+}
+
+⚠️ Notes:
+• Toujours ajouter #include <stdio.h> en haut
+• Utiliser \\n pour passer à la ligne
+• Chaque instruction se termine par ;`,
+    en:`📌 Usage:
+printf prints text or values to the screen.
+
+💡 Examples:
+printf("Hello!");            // fixed text
+printf("Age: %d", 20);      // integer variable
+printf("Pi = %.2f", 3.14);  // decimal number
+
+⚙️ Full structure:
+#include <stdio.h>
+int main() {
+    printf("Hello, World!\\n");
+    return 0;
+}
+
+⚠️ Notes:
+• Always add #include <stdio.h> at top
+• Use \\n to end a line and start a new one
+• Every statement ends with semicolon ;`
+  },
+  algFr:`Algorithme Bonjour
+Début
+    Écrire("Hello, World!")
+Fin
+
+// Étape par étape :
+// 1. Le programme commence dans main()
+// 2. printf() → "Écrire()" dans l'algo
+// 3. \\n → passage à la ligne
+// 4. return 0 → fin normale`,
+  algExp:{
+    ar:`🔗 الربط بلغة C:
+• "اكتب" في الخوارزمية → printf() في C
+• الخوارزمية تصف المنطق، والكود يُنفِّذه
+• "ابدأ / انتهِ" → main() { ... return 0; }
+
+📝 قاعدة ذهبية:
+كل خطوة في الخوارزمية = سطر أو كتلة في C`,
+    fr:`🔗 Lien Algo → C:
+• "Écrire()" en algo → printf() en C
+• L'algo décrit la logique, C l'exécute
+• "Début / Fin" → main() { ... return 0; }
+
+📝 Règle d'or:
+Chaque étape de l'algo ≈ une ligne ou bloc en C`,
+    en:`🔗 Algorithm → C link:
+• "Write()" in algorithm → printf() in C
+• Algorithm describes logic, C executes it
+• "Start / End" → main() { ... return 0; }
+
+📝 Golden rule:
+Each algorithm step ≈ one line or block in C`
+  },
+  category:'output'
+},
+
+// ──────────────────── INPUT ─────────────────────
+2:{
+  title:{ar:'scanf("%d", &x)',fr:'scanf("%d", &x)',en:'scanf("%d", &x)'},
+  exp:{
+    ar:`📌 الاستخدام:
+تقرأ scanf قيمةً من المستخدم وتخزِّنها في متغير.
+
+💡 مثال كامل:
+int x;
+printf("أدخل عدداً: ");
+scanf("%d", &x);           // قراءة عدد صحيح
+printf("أدخلتَ: %d\\n", x);
+
+⚠️ قواعد مهمة:
+• & (عنوان) إلزامي قبل اسم المتغير
+• بدون & → البرنامج يتعطَّل!
+• %d للأعداد الصحيحة
+• %f للأعداد العشرية (float)
+• %c لحرف واحد (char)
+• %s للسلاسل النصية (بدون &)`,
+    fr:`📌 Usage:
+scanf lit une valeur et la stocke dans une variable.
+
+💡 Exemple complet:
+int x;
+printf("Entrez un nombre: ");
+scanf("%d", &x);           // lecture entier
+printf("Vous avez entré: %d\\n", x);
+
+⚠️ Règles importantes:
+• & (adresse) OBLIGATOIRE avant la variable
+• Sans & → le programme plante!
+• %d pour entiers, %f pour flottants
+• %c pour char, %s pour chaînes (sans &)`,
+    en:`📌 Usage:
+scanf reads a value from the user and stores it.
+
+💡 Full example:
+int x;
+printf("Enter a number: ");
+scanf("%d", &x);           // read integer
+printf("You entered: %d\\n", x);
+
+⚠️ Important rules:
+• & (address) MANDATORY before variable
+• Without & → program crashes!
+• %d for integers, %f for floats
+• %c for char, %s for strings (no &)`
+  },
+  algFr:`Algorithme LireEntier
+Variable x : Entier
+Début
+    Écrire("Entrez un nombre : ")
+    Lire(x)           ← équivaut à scanf
+    Écrire("Valeur : ", x)
+Fin
+
+// "Lire(x)" en algo = scanf("%d", &x) en C`,
+  algExp:{
+    ar:`🔗 الربط:
+"اقرأ(x)" في الخوارزمية → scanf("%d", &x) في C
+
+📊 جدول محددات التنسيق:
+نوع البيانات │ scanf     │ printf
+─────────────┼───────────┼────────
+int          │ %d        │ %d
+float        │ %f        │ %f / %.2f
+double       │ %lf       │ %lf
+char         │ %c (مسافة)│ %c`,
+    fr:`🔗 Lien:
+"Lire(x)" en algo → scanf("%d", &x) en C
+
+📊 Table des spécificateurs:
+Type    │ scanf     │ printf
+────────┼───────────┼────────
+int     │ %d        │ %d
+float   │ %f        │ %f / %.2f
+double  │ %lf       │ %lf
+char    │ " %c"     │ %c`,
+    en:`🔗 Link:
+"Read(x)" in algorithm → scanf("%d", &x) in C
+
+📊 Format specifier table:
+Type    │ scanf     │ printf
+────────┼───────────┼────────
+int     │ %d        │ %d
+float   │ %f        │ %f / %.2f
+double  │ %lf       │ %lf
+char    │ " %c"     │ %c`
+  },
+  category:'input'
+},
+
+// ──────────────────── LOOPS ─────────────────────
+3:{
+  title:{ar:'for (int i=0; i<10; i++)',fr:'for (int i=0; i<10; i++)',en:'for (int i=0; i<10; i++)'},
+  exp:{
+    ar:`📌 البنية (3 أجزاء مفصولة بـ ;):
+for (تهيئة ; شرط ; زيادة) {
+    // جسم الحلقة
+}
+
+🔢 الأجزاء الثلاثة:
+① int i=0  → ابدأ من الصفر (تُنفَّذ مرة واحدة)
+② i<10     → استمر ما دام i أصغر من 10
+③ i++      → زِد i بواحد بعد كل دورة
+
+💡 مثال — طباعة من 0 إلى 9:
+for (int i=0; i<10; i++) {
+    printf("%d ", i);
+}
+// النتيجة: 0 1 2 3 4 5 6 7 8 9
+
+⚠️ استخدم for عندما تعرف عدد التكرارات مسبقاً.`,
+    fr:`📌 Structure (3 parties séparées par ;):
+for (init ; condition ; incrément) {
+    // corps de la boucle
+}
+
+🔢 Les trois parties:
+① int i=0  → départ à 0 (exécuté une fois)
+② i<10     → continuer si i < 10
+③ i++      → incrémenter après chaque tour
+
+💡 Exemple — afficher 0 à 9:
+for (int i=0; i<10; i++) {
+    printf("%d ", i);
+}
+// Résultat: 0 1 2 3 4 5 6 7 8 9
+
+⚠️ Utiliser for quand on connaît le nb d'itérations.`,
+    en:`📌 Structure (3 parts separated by ;):
+for (init ; condition ; increment) {
+    // loop body
+}
+
+🔢 The three parts:
+① int i=0  → start at 0 (runs once)
+② i<10     → continue while i < 10
+③ i++      → increment after each round
+
+💡 Example — print 0 to 9:
+for (int i=0; i<10; i++) {
+    printf("%d ", i);
+}
+// Result: 0 1 2 3 4 5 6 7 8 9
+
+⚠️ Use for when you know the iteration count.`
+  },
+  algFr:`Algorithme BoucleFor
+Début
+    Pour i de 0 à 9 Faire
+        Écrire(i, " ")
+    FinPour
+Fin
+
+// "Pour i de 0 à 9" = for(int i=0; i<10; i++)
+// Remarque: algo dit "à 9", C dit "i<10"
+// → même résultat car C compte à partir de 0`,
+  algExp:{
+    ar:`🔗 ترجمة سطر بسطر:
+"لكل i من 0 إلى 9 افعل"
+→ for(int i=0; i<10; i++)
+
+تنبيه مهم:
+الخوارزمية: "إلى 9"   (شاملة)
+C:          i < 10   (غير شاملة)
+← نفس النتيجة تماماً!`,
+    fr:`🔗 Traduction ligne par ligne:
+"Pour i de 0 à 9 faire"
+→ for(int i=0; i<10; i++)
+
+Point important:
+Algo: "à 9"    (inclusif)
+C:    i < 10   (exclusif)
+← Même résultat!`,
+    en:`🔗 Line-by-line translation:
+"For i from 0 to 9 do"
+→ for(int i=0; i<10; i++)
+
+Important note:
+Algorithm: "to 9"  (inclusive)
+C:         i < 10  (exclusive)
+← Same result!`
+  },
+  category:'loop'
+},
+
+4:{
+  title:{ar:'do { } while (x < 10)',fr:'do { } while (x < 10)',en:'do { } while (x < 10)'},
+  exp:{
+    ar:`📌 الاستخدام:
+تُنفِّذ الكتلة مرةً واحدة على الأقل ثم تتحقق من الشرط.
+
+💡 مثال — طلب إدخال صحيح من المستخدم:
+int x;
+do {
+    printf("أدخل رقماً بين 1 و 10: ");
+    scanf("%d", &x);
+} while (x < 1 || x > 10);
+// يكرر حتى يُدخِل المستخدم رقماً صحيحاً
+
+🆚 الفرق بين while و do-while:
+while   → يتحقق أولاً، ثم يُنفِّذ (قد لا تعمل أبداً)
+do-while→ يُنفِّذ أولاً، ثم يتحقق (تعمل مرة على الأقل)
+
+⚠️ لا تنسَ الفاصلة المنقوطة بعد while(شرط);`,
+    fr:`📌 Usage:
+Exécute le bloc au moins une fois, PUIS vérifie.
+
+💡 Exemple — saisie validée:
+int x;
+do {
+    printf("Entrez un nb entre 1 et 10: ");
+    scanf("%d", &x);
+} while (x < 1 || x > 10);
+
+🆚 Différence while / do-while:
+while    → vérifie d'abord (peut ne jamais s'exécuter)
+do-while → exécute d'abord (au moins une fois)
+
+⚠️ Ne pas oublier ; après while(condition);`,
+    en:`📌 Usage:
+Executes the block at least once, THEN checks.
+
+💡 Example — validated input:
+int x;
+do {
+    printf("Enter a number between 1 and 10: ");
+    scanf("%d", &x);
+} while (x < 1 || x > 10);
+
+🆚 Difference while / do-while:
+while    → checks first (may never execute)
+do-while → executes first (at least once)
+
+⚠️ Don't forget ; after while(condition);`
+  },
+  algFr:`Algorithme BoucleDoWhile
+Variable x : Entier
+Début
+    x ← 0
+    Répéter
+        Écrire(x, " ")
+        x ← x + 1
+    Jusqu'à (x >= 10)
+Fin
+
+// "Répéter...Jusqu'à" = do{...}while()
+// ⚠️ Le test en algo est INVERSÉ en C:
+//    Algo: "jusqu'à x≥10" (positif)
+//    C:    while(x<10)    (négatif = continuer)`,
+  algExp:{
+    ar:`🔗 الربط:
+"كرِّر...حتى(شرط)" في الخوارزمية
+→ do{...}while(شرط_معكوس) في C
+
+⚠️ الشرط معكوس:
+الخوارزمية: "حتى x ≥ 10" (متى تتوقف)
+C:          while(x < 10)  (متى تستمر)`,
+    fr:`🔗 Lien:
+"Répéter...Jusqu'à(condition)"
+→ do{...}while(condition_inversée) en C
+
+⚠️ Condition inversée:
+Algo: "jusqu'à x ≥ 10" (quand arrêter)
+C:    while(x < 10)    (quand continuer)`,
+    en:`🔗 Link:
+"Repeat...Until(condition)"
+→ do{...}while(inverted_condition) in C
+
+⚠️ Condition is inverted:
+Algorithm: "until x ≥ 10" (when to stop)
+C:         while(x < 10)  (when to continue)`
+  },
+  category:'loop'
+},
+
+5:{
+  title:{ar:'while (x < 10)',fr:'while (x < 10)',en:'while (x < 10)'},
+  exp:{
+    ar:`📌 الاستخدام:
+تُكرِّر تنفيذ كتلة طالما الشرط صحيح.
+
+💡 مثال — حساب مجموع أرقام:
+int s=0, i=1;
+while (i <= 100) {
+    s += i;
+    i++;
+}
+printf("المجموع = %d\\n", s); // 5050
+
+🔑 شروط نجاح while:
+① الشرط صحيح قبل الدخول
+② يُحدَّث المتغير داخل الحلقة
+③ الشرط يصبح خاطئاً في نهاية المطاف
+
+⚠️ تحذير: إذا لم تُحدِّث i → حلقة لانهائية!`,
+    fr:`📌 Usage:
+Répète un bloc tant que la condition est vraie.
+
+💡 Exemple — somme des nombres:
+int s=0, i=1;
+while (i <= 100) {
+    s += i;
+    i++;
+}
+printf("Somme = %d\\n", s); // 5050
+
+🔑 Conditions de succès:
+① Condition vraie avant d'entrer
+② Variable mise à jour dans la boucle
+③ Condition finit par devenir fausse
+
+⚠️ Sans mise à jour → boucle infinie!`,
+    en:`📌 Usage:
+Repeats a block while condition is true.
+
+💡 Example — sum of numbers:
+int s=0, i=1;
+while (i <= 100) {
+    s += i;
+    i++;
+}
+printf("Sum = %d\\n", s); // 5050
+
+🔑 Success conditions:
+① Condition true before entering
+② Variable updated inside loop
+③ Condition eventually becomes false
+
+⚠️ Without update → infinite loop!`
+  },
+  algFr:`Algorithme BoucleWhile
+Variable i, s : Entiers
+Début
+    i ← 1,  s ← 0
+    Tant que (i ≤ 100) Faire
+        s ← s + i
+        i ← i + 1
+    FinTantQue
+    Écrire("Somme =", s)
+Fin`,
+  algExp:{
+    ar:`🔗 الربط:
+"طالما(شرط) افعل" → while(condition){...} في C
+"i ← i+1" → i++ أو i+=1 في C
+
+📊 متى تستخدم كل نوع؟
+for      → عدد التكرارات معروف مسبقاً
+while    → عدد التكرارات غير معروف
+do-while → يجب تنفيذ مرة واحدة على الأقل`,
+    fr:`🔗 Lien:
+"Tant que(cond) faire" → while(cond){...} en C
+"i ← i+1" → i++ ou i+=1 en C
+
+📊 Quand utiliser quoi?
+for      → nombre d'itérations connu
+while    → nombre d'itérations inconnu
+do-while → au moins une exécution requise`,
+    en:`🔗 Link:
+"While(cond) do" → while(cond){...} in C
+"i ← i+1" → i++ or i+=1 in C
+
+📊 When to use which?
+for      → iteration count known
+while    → iteration count unknown
+do-while → at least one execution required`
+  },
+  category:'loop'
+},
+
+// ──────────────────── OPERATORS ─────────────────
+6:{
+  title:{ar:'!x',fr:'!x',en:'!x'},
+  exp:{
+    ar:`📌 الاستخدام:
+! هو مشغِّل النفي المنطقي — يعكس القيمة البوليانية.
+
+💡 جدول الحقيقة:
+القيمة │ !القيمة
+───────┼─────────
+0      │ 1 (صحيح)
+1      │ 0 (خاطئ)
+5      │ 0 (خاطئ)
+-3     │ 0 (خاطئ)
+
+💡 أمثلة عملية:
+if (!found)   printf("غير موجود");
+while (!done) { ... }  // استمر حتى ينتهي
+
+⚠️ قاعدة: أي قيمة ≠ 0 تُعتبر "صحيح"، وعكسها "خاطئ"`,
+    fr:`📌 Usage:
+! est l'opérateur NOT logique — inverse la valeur.
+
+💡 Table de vérité:
+Valeur │ !Valeur
+───────┼─────────
+0      │ 1 (vrai)
+1      │ 0 (faux)
+5      │ 0 (faux)
+-3     │ 0 (faux)
+
+💡 Exemples pratiques:
+if (!found)   printf("Non trouvé");
+while (!done) { ... }
+
+⚠️ Règle: toute valeur ≠ 0 = "vrai"`,
+    en:`📌 Usage:
+! is the logical NOT operator — inverts boolean value.
+
+💡 Truth table:
+Value  │ !Value
+───────┼─────────
+0      │ 1 (true)
+1      │ 0 (false)
+5      │ 0 (false)
+-3     │ 0 (false)
+
+💡 Practical examples:
+if (!found)   printf("Not found");
+while (!done) { ... }
+
+⚠️ Rule: any value ≠ 0 is considered "true"`
+  },
+  algFr:`Algorithme NOTLogique
+Variable x : Entier
+Début
+    x ← 0
+    Si Non(x) Alors
+        Écrire("x est nul")
+    FinSi
+Fin
+
+// "Non(x)" en algo = "!x" en C
+// Non(0) = Vrai  → !0 = 1
+// Non(5) = Faux  → !5 = 0`,
+  algExp:{
+    ar:`🔗 الربط:
+"غير(x)" في الخوارزمية → !x في C
+
+💡 استخدامات شائعة:
+• if(!erreur) → "إذا لم يكن هناك خطأ"
+• while(!fin)  → "طالما لم ننتهِ"
+• if(!strcmp(a,b)) → "إذا تساوت السلسلتان"`,
+    fr:`🔗 Lien:
+"Non(x)" en algo → !x en C
+
+💡 Usages fréquents:
+• if(!erreur) → "si pas d'erreur"
+• while(!fin)  → "tant que pas fini"
+• if(!strcmp(a,b)) → "si chaînes égales"`,
+    en:`🔗 Link:
+"Not(x)" in algorithm → !x in C
+
+💡 Common uses:
+• if(!error)  → "if no error"
+• while(!done) → "while not done"
+• if(!strcmp(a,b)) → "if strings equal"`
+  },
+  category:'operator'
+},
+
+10:{
+  title:{ar:'+=',fr:'+=',en:'+='},
+  exp:{
+    ar:`📌 مشغِّلات الإسناد المركَّبة:
+تجمع عملية حسابية مع الإسناد في خطوة واحدة.
+
+💡 الجدول الكامل:
+مشغِّل │ مثال    │ يعادل
+───────┼─────────┼────────
++=     │ x += 3  │ x = x + 3
+-=     │ x -= 3  │ x = x - 3
+*=     │ x *= 3  │ x = x * 3
+/=     │ x /= 3  │ x = x / 3
+%=     │ x %= 3  │ x = x % 3
+
+💡 مثال عملي — حساب المجموع:
+int sum = 0;
+for (int i=1; i<=10; i++) {
+    sum += i;   // أفضل من sum = sum + i
+}
+printf("المجموع = %d\\n", sum); // 55`,
+    fr:`📌 Opérateurs d'affectation composée:
+Combinent une opération et une affectation.
+
+💡 Tableau complet:
+Op.    │ Exemple │ Équivalent
+───────┼─────────┼────────────
++=     │ x += 3  │ x = x + 3
+-=     │ x -= 3  │ x = x - 3
+*=     │ x *= 3  │ x = x * 3
+/=     │ x /= 3  │ x = x / 3
+%=     │ x %= 3  │ x = x % 3
+
+💡 Exemple pratique:
+int sum = 0;
+for (int i=1; i<=10; i++) {
+    sum += i;
+}
+printf("Somme = %d\\n", sum); // 55`,
+    en:`📌 Compound assignment operators:
+Combine an arithmetic operation and assignment.
+
+💡 Full table:
+Op.    │ Example │ Equivalent
+───────┼─────────┼────────────
++=     │ x += 3  │ x = x + 3
+-=     │ x -= 3  │ x = x - 3
+*=     │ x *= 3  │ x = x * 3
+/=     │ x /= 3  │ x = x / 3
+%=     │ x %= 3  │ x = x % 3
+
+💡 Practical example:
+int sum = 0;
+for (int i=1; i<=10; i++) {
+    sum += i;
+}
+printf("Sum = %d\\n", sum); // 55`
+  },
+  algFr:`Algorithme Somme1a10
+Variable i, s : Entiers
+Début
+    s ← 0
+    Pour i de 1 à 10 Faire
+        s ← s + i   ← équivaut à s += i en C
+    FinPour
+    Écrire("Somme =", s)
+Fin`,
+  algExp:{
+    ar:`🔗 الربط:
+"s ← s + i" في الخوارزمية → s += i في C
+
+📌 لماذا نفضِّل s += i؟
+✅ أقصر وأوضح في القراءة
+✅ تُقلِّل احتمال الأخطاء الإملائية
+✅ تُستخدم في كل الأكواد الاحترافية`,
+    fr:`🔗 Lien:
+"s ← s + i" en algo → s += i en C
+
+📌 Pourquoi préférer s += i?
+✅ Plus court et plus lisible
+✅ Réduit les erreurs de frappe
+✅ Utilisé dans tout code professionnel`,
+    en:`🔗 Link:
+"s ← s + i" in algorithm → s += i in C
+
+📌 Why prefer s += i?
+✅ Shorter and clearer to read
+✅ Reduces typing errors
+✅ Used in all professional code`
+  },
+  category:'operator'
+},
+
+17:{
+  title:{ar:'i++',fr:'i++',en:'i++'},
+  exp:{
+    ar:`📌 مشغِّلات الزيادة والنقصان:
+
+🔢 الأنواع الأربعة:
+i++  → استخدم i، ثم زِد  (post-increment)
+++i  → زِد i، ثم استخدمها (pre-increment)
+i--  → استخدم i، ثم انقص (post-decrement)
+--i  → انقص i، ثم استخدمها (pre-decrement)
+
+💡 فرق عملي مهم:
+int i=5;
+printf("%d", i++); // يطبع 5، ثم i تصبح 6
+printf("%d", ++i); // i تصبح 7، ثم يطبع 7
+
+💡 في الحلقات (لا فرق):
+for(i=0; i<10; i++)  // i++ و ++i متطابقتان هنا`,
+    fr:`📌 Opérateurs d'incrémentation/décrémentation:
+
+🔢 Les quatre types:
+i++  → utilise i, puis incrémente (post)
+++i  → incrémente i, puis utilise (pré)
+i--  → utilise i, puis décrémente
+--i  → décrémente i, puis utilise
+
+💡 Différence pratique:
+int i=5;
+printf("%d", i++); // affiche 5, puis i=6
+printf("%d", ++i); // i devient 7, affiche 7
+
+💡 Dans les boucles (aucune différence):
+for(i=0; i<10; i++) // i++ et ++i identiques`,
+    en:`📌 Increment/decrement operators:
+
+🔢 Four types:
+i++  → use i, then increment (post)
+++i  → increment i, then use (pre)
+i--  → use i, then decrement
+--i  → decrement i, then use
+
+💡 Practical difference:
+int i=5;
+printf("%d", i++); // prints 5, then i=6
+printf("%d", ++i); // i becomes 7, prints 7
+
+💡 In loops (no difference):
+for(i=0; i<10; i++) // i++ and ++i identical`
+  },
+  algFr:`Algorithme Incrementation
+Variable i : Entier
+Début
+    i ← 0
+    i ← i + 1  ← équivaut à i++ en C
+    Écrire(i)   // affiche 1
+Fin
+
+// Variantes en C:
+// i = i + 1; (explicite)
+// i += 1;    (composé)
+// i++;       (le plus court)`,
+  algExp:{
+    ar:`🔗 الربط:
+"i ← i + 1" في الخوارزمية → i++ في C
+
+📊 الكتابات المتكافئة:
+i = i + 1   (الصيغة الكاملة)
+i += 1      (مشغِّل مركَّب)
+i++         (الأكثر شيوعاً)
+++i         (مختلف في السياق)`,
+    fr:`🔗 Lien:
+"i ← i + 1" en algo → i++ en C
+
+📊 Écritures équivalentes:
+i = i + 1   (forme explicite)
+i += 1      (opérateur composé)
+i++         (le plus courant)
+++i         (différent en contexte)`,
+    en:`🔗 Link:
+"i ← i + 1" in algorithm → i++ in C
+
+📊 Equivalent writings:
+i = i + 1   (explicit form)
+i += 1      (compound operator)
+i++         (most common)
+++i         (different in context)`
+  },
+  category:'operator'
+},
+
+18:{
+  title:{ar:'i--',fr:'i--',en:'i--'},
+  exp:{
+    ar:`📌 الاستخدام:
+i-- تُنقِص قيمة المتغير بـ 1 بعد استخدامه.
+
+💡 مثال — عدّ تنازلي:
+for (int i=10; i>=1; i--) {
+    printf("%d ", i);
+}
+// النتيجة: 10 9 8 7 6 5 4 3 2 1
+
+💡 متى تستخدم i-- بدل i++:
+• معالجة مصفوفة من الآخر للأول
+• حساب مضروب: n! = n*(n-1)*(n-2)...*1
+• البحث من اليمين لليسار
+
+💡 مثال — مضروب:
+int fact=1;
+for(int i=n; i>=1; i--) fact *= i;`,
+    fr:`📌 Usage:
+i-- décrémente la variable de 1 après utilisation.
+
+💡 Exemple — compte à rebours:
+for (int i=10; i>=1; i--) {
+    printf("%d ", i);
+}
+// Résultat: 10 9 8 7 6 5 4 3 2 1
+
+💡 Quand utiliser i-- vs i++:
+• Parcourir tableau de la fin au début
+• Calculer factoriel: n! = n*(n-1)*...*1
+• Recherche de droite à gauche
+
+💡 Exemple — factoriel:
+int fact=1;
+for(int i=n; i>=1; i--) fact *= i;`,
+    en:`📌 Usage:
+i-- decrements the variable by 1 after use.
+
+💡 Example — countdown:
+for (int i=10; i>=1; i--) {
+    printf("%d ", i);
+}
+// Result: 10 9 8 7 6 5 4 3 2 1
+
+💡 When to use i-- vs i++:
+• Process array from end to beginning
+• Calculate factorial: n! = n*(n-1)*...*1
+• Search from right to left
+
+💡 Example — factorial:
+int fact=1;
+for(int i=n; i>=1; i--) fact *= i;`
+  },
+  algFr:`Algorithme CompteRebours
+Variable i : Entier
+Début
+    Pour i de 10 à 1 (pas -1) Faire
+        Écrire(i, " ")
+    FinPour
+Fin
+
+// En C: for(int i=10; i>=1; i--)
+// Condition: i>=1 et non i>0 (pour inclure 1)`,
+  algExp:{
+    ar:`🔗 الربط:
+"لكل i من 10 إلى 1 بخطوة -1"
+→ for(int i=10; i>=1; i--) في C
+
+⚠️ انتبه لشرط الاستمرار:
+صاعد → i < 10  أو  i <= 9
+نازل  → i >= 1  أو  i > 0`,
+    fr:`🔗 Lien:
+"Pour i de 10 à 1 (pas -1)"
+→ for(int i=10; i>=1; i--)
+
+⚠️ Attention à la condition:
+Montée → i < 10  ou  i <= 9
+Descente → i >= 1  ou  i > 0`,
+    en:`🔗 Link:
+"For i from 10 to 1 (step -1)"
+→ for(int i=10; i>=1; i--)
+
+⚠️ Note the condition:
+Ascending → i < 10  or  i <= 9
+Descending → i >= 1  or  i > 0`
+  },
+  category:'operator'
+},
+
+31:{
+  title:{ar:'n % 10',fr:'n % 10',en:'n % 10'},
+  exp:{
+    ar:`📌 مشغِّل الباقي (Modulo %):
+يُعطي باقي قسمة عدد على آخر.
+
+💡 أمثلة:
+762 % 10  = 2   (آخر رقم)
+762 % 100 = 62  (آخر رقمين)
+15  % 3   = 0   (قابل للقسمة)
+17  % 2   = 1   (عدد فردي)
+
+💡 تطبيقات شائعة:
+① التحقق من الزوجية: if(n%2==0)
+② استخراج أرقام العدد: n%10
+③ الدوران الدوري: i%n
+④ التحقق من القسمة: n%k==0
+
+💡 استخراج كل أرقام العدد:
+while(n!=0){
+    printf("%d ",n%10); // آخر رقم
+    n/=10;              // حذف آخر رقم
+}`,
+    fr:`📌 Opérateur Modulo %:
+Donne le reste d'une division.
+
+💡 Exemples:
+762 % 10  = 2   (dernier chiffre)
+762 % 100 = 62  (deux derniers)
+15  % 3   = 0   (divisible)
+17  % 2   = 1   (nombre impair)
+
+💡 Applications courantes:
+① Parité: if(n%2==0)
+② Extraire chiffres: n%10
+③ Cyclique: i%n
+④ Divisibilité: n%k==0`,
+    en:`📌 Modulo operator %:
+Gives the remainder of a division.
+
+💡 Examples:
+762 % 10  = 2   (last digit)
+762 % 100 = 62  (last two digits)
+15  % 3   = 0   (divisible)
+17  % 2   = 1   (odd number)
+
+💡 Common applications:
+① Parity check: if(n%2==0)
+② Extract digits: n%10
+③ Cyclic: i%n
+④ Divisibility: n%k==0`
+  },
+  algFr:`Algorithme ExtraireChiffres
+Variable n : Entier
+Début
+    n ← 762
+    Écrire("Chiffres : ")
+    Tant que n ≠ 0 Faire
+        Écrire(n mod 10, " ")
+        n ← n div 10
+    FinTantQue
+Fin
+// Affiche: 2 6 7  (de droite à gauche)`,
+  algExp:{
+    ar:`🔗 الربط:
+"mod" في الخوارزمية → % في C
+"div" في الخوارزمية → / بين int في C
+
+📌 التطبيق في Automorphe:
+n%10  → آخر رقم من n
+carré%10 → آخر رقم من n²
+نقارنهما → إذا تطابقا نكمل`,
+    fr:`🔗 Lien:
+"mod" en algo → % en C
+"div" en algo → / entre ints en C
+
+📌 Application dans Automorphe:
+n%10     → dernier chiffre de n
+carré%10 → dernier chiffre de n²
+On les compare chiffre par chiffre`,
+    en:`🔗 Link:
+"mod" in algorithm → % in C
+"div" in algorithm → / between ints in C
+
+📌 Application in Automorphe:
+n%10     → last digit of n
+square%10 → last digit of n²
+Compare them digit by digit`
+  },
+  category:'operator'
+},
+
+32:{
+  title:{ar:'n / 10',fr:'n / 10',en:'n / 10'},
+  exp:{
+    ar:`📌 القسمة الصحيحة (Integer Division):
+بين عددين صحيحين (int)، القسمة تُقطع الكسر.
+
+💡 أمثلة:
+762 / 10 = 76   (يُزيل آخر رقم)
+76  / 10 = 7
+7   / 10 = 0    (انتهى)
+15  / 2  = 7    (وليس 7.5!)
+
+💡 لماذا هذا مفيد؟
+while(n!=0){
+    printf("%d ", n%10); // آخر رقم
+    n = n/10;            // أزِل آخر رقم
+}
+// يمرّ على كل أرقام العدد من اليمين
+
+⚠️ تحذير: 15/2 = 7 وليس 7.5!
+للحصول على 7.5: استخدم 15.0/2 أو (float)15/2`,
+    fr:`📌 Division entière:
+Entre deux entiers, la division tronque.
+
+💡 Exemples:
+762 / 10 = 76   (supprime dernier chiffre)
+76  / 10 = 7
+7   / 10 = 0    (terminé)
+15  / 2  = 7    (pas 7.5!)
+
+💡 Utilité:
+while(n!=0){
+    printf("%d ", n%10);
+    n = n/10;
+}
+
+⚠️ 15/2 = 7, pas 7.5!
+Pour 7.5: utiliser 15.0/2`,
+    en:`📌 Integer division:
+Between two ints, division truncates.
+
+💡 Examples:
+762 / 10 = 76   (removes last digit)
+76  / 10 = 7
+7   / 10 = 0    (done)
+15  / 2  = 7    (not 7.5!)
+
+💡 Usefulness:
+while(n!=0){
+    printf("%d ", n%10);
+    n = n/10;
+}
+
+⚠️ 15/2 = 7, not 7.5!
+For 7.5: use 15.0/2`
+  },
+  algFr:`Algorithme DivisionEntière
+Variable n : Entier
+Début
+    n ← 762
+    n ← n div 10   // → 76
+    n ← n div 10   // → 7
+    n ← n div 10   // → 0  (fin)
+Fin
+
+// "div" en algo = "/" entre int en C
+// Ne JAMAIS confondre avec la division réelle!`,
+  algExp:{
+    ar:`🔗 الربط:
+"div" في الخوارزمية → / بين int في C
+
+⚠️ الفرق المهم:
+int: 15/2 = 7   (يُقطع الكسر)
+float: 15.0/2 = 7.5 (قسمة حقيقية)
+
+💡 للتحويل:
+(float)15/2 = 7.5
+(float)(15/2) = 7.0 (خطأ! يُقسَّم أولاً)`,
+    fr:`🔗 Lien:
+"div" en algo → / entre int en C
+
+⚠️ Différence importante:
+int: 15/2 = 7   (tronqué)
+float: 15.0/2 = 7.5 (division réelle)
+
+💡 Pour convertir:
+(float)15/2 = 7.5
+(float)(15/2) = 7.0 (erreur!)`,
+    en:`🔗 Link:
+"div" in algorithm → / between int in C
+
+⚠️ Important difference:
+int: 15/2 = 7   (truncated)
+float: 15.0/2 = 7.5 (real division)
+
+💡 To convert:
+(float)15/2 = 7.5
+(float)(15/2) = 7.0 (wrong!)`
+  },
+  category:'operator'
+},
+
+// ──────────────────── FORMAT ─────────────────────
+7:{
+  title:{ar:'%d',fr:'%d',en:'%d'},
+  exp:{
+    ar:`📌 الاستخدام:
+%d محدِّد تنسيق للأعداد الصحيحة مع printf وscanf.
+
+💡 أمثلة متنوعة:
+printf("%d", 42);       // 42
+printf("%5d", 42);      //    42  (عرض 5 محاذاة يمين)
+printf("%-5d|", 42);    // 42   | (محاذاة يسار)
+printf("%05d", 42);     // 00042  (بالأصفار)
+
+💡 مع scanf:
+scanf("%d", &n);   // لا تنسَ &
+
+📊 محدِّدات قريبة:
+%d → int       (عدد صحيح)
+%u → unsigned  (موجب فقط)
+%o → octal     (ثماني)
+%x → hex       (سادس عشر)
+%ld→ long int`,
+    fr:`📌 Usage:
+%d est un spécificateur pour les entiers.
+
+💡 Exemples variés:
+printf("%d", 42);       // 42
+printf("%5d", 42);      //    42  (largeur 5, droite)
+printf("%-5d|", 42);    // 42   | (gauche)
+printf("%05d", 42);     // 00042  (avec zéros)
+
+💡 Avec scanf:
+scanf("%d", &n);   // ne pas oublier &
+
+📊 Spécificateurs proches:
+%d → int,  %u → unsigned
+%o → octal, %x → hex, %ld → long`,
+    en:`📌 Usage:
+%d is a format specifier for integers.
+
+💡 Various examples:
+printf("%d", 42);       // 42
+printf("%5d", 42);      //    42  (width 5, right)
+printf("%-5d|", 42);    // 42   | (left align)
+printf("%05d", 42);     // 00042  (zero-padded)
+
+💡 With scanf:
+scanf("%d", &n);   // don't forget &
+
+📊 Related specifiers:
+%d → int,  %u → unsigned
+%o → octal, %x → hex, %ld → long`
+  },
+  algFr:`Algorithme FormatEntier
+Variable age : Entier
+Début
+    age ← 25
+    Écrire("Âge : ", age, " ans")
+    // En C: printf("Âge : %d ans\\n", age);
+Fin
+
+// %d = "mets la valeur entière ici"
+// Le % est le marqueur de remplacement`,
+  algExp:{
+    ar:`🔗 الربط:
+"اكتب(age)" في الخوارزمية
+→ printf("%d", age) في C
+
+📌 القاعدة الذهبية:
+عدد % في النص = عدد المتغيرات بعد الفاصلة
+
+مثال: printf("%d + %d = %d", a, b, a+b);`,
+    fr:`🔗 Lien:
+"Écrire(age)" en algo
+→ printf("%d", age) en C
+
+📌 Règle d'or:
+Nombre de % = Nombre de variables après la virgule
+
+Exemple: printf("%d + %d = %d", a, b, a+b);`,
+    en:`🔗 Link:
+"Write(age)" in algorithm
+→ printf("%d", age) in C
+
+📌 Golden rule:
+Number of % = Number of variables after comma
+
+Example: printf("%d + %d = %d", a, b, a+b);`
+  },
+  category:'format'
+},
+
+8:{
+  title:{ar:'%f',fr:'%f',en:'%f'},
+  exp:{
+    ar:`📌 الاستخدام:
+%f محدِّد تنسيق للأعداد العشرية.
+
+💡 التحكم في الدقة:
+float pi = 3.14159;
+printf("%f",   pi); // 3.141590 (6 أرقام افتراضياً)
+printf("%.0f", pi); // 3        (بدون عشريات)
+printf("%.2f", pi); // 3.14     (رقمان عشريان)
+printf("%.5f", pi); // 3.14159  (5 أرقام عشرية)
+printf("%8.2f",pi); //     3.14 (عرض 8 مع 2 عشريات)
+
+⚠️ مع scanf:
+float:  scanf("%f",  &x);
+double: scanf("%lf", &x);  // لا تنسَ l!
+
+📊 الفرق بين float و double:
+float  → 4 بايت ≈ 7 أرقام دقة
+double → 8 بايت ≈ 15 رقم دقة`,
+    fr:`📌 Usage:
+%f est le spécificateur pour les flottants.
+
+💡 Contrôle de la précision:
+float pi = 3.14159;
+printf("%f",   pi); // 3.141590 (6 déc. par défaut)
+printf("%.0f", pi); // 3
+printf("%.2f", pi); // 3.14
+printf("%.5f", pi); // 3.14159
+printf("%8.2f",pi); //     3.14
+
+⚠️ Avec scanf:
+float:  scanf("%f",  &x);
+double: scanf("%lf", &x);  // ne pas oublier l!`,
+    en:`📌 Usage:
+%f is the format specifier for floating-point.
+
+💡 Precision control:
+float pi = 3.14159;
+printf("%f",   pi); // 3.141590 (6 dec. default)
+printf("%.0f", pi); // 3
+printf("%.2f", pi); // 3.14
+printf("%.5f", pi); // 3.14159
+printf("%8.2f",pi); //     3.14
+
+⚠️ With scanf:
+float:  scanf("%f",  &x);
+double: scanf("%lf", &x);  // don't forget l!`
+  },
+  algFr:`Algorithme FormatReel
+Variable pi : Réel
+Début
+    pi ← 3.14159
+    Écrire("pi ≈ ", arrondir(pi, 2))
+    // En C: printf("pi ≈ %.2f\\n", pi);
+Fin
+
+// %.2f :
+//   % = début du spécificateur
+//   . = précision décimale
+//   2 = deux décimales
+//   f = flottant (float)`,
+  algExp:{
+    ar:`🔗 الربط:
+"اكتب(pi)" في الخوارزمية
+→ printf("%.2f", pi) في C
+
+📌 تفسير %.2f:
+%   → ابدأ محدِّد التنسيق
+.   → تحكُّم في الدقة
+2   → رقمان عشريان
+f   → عدد عشري (float)`,
+    fr:`🔗 Lien:
+"Écrire(pi)" en algo
+→ printf("%.2f", pi) en C
+
+📌 Décodage de %.2f:
+%   → début spécificateur
+.   → précision
+2   → deux décimales
+f   → flottant`,
+    en:`🔗 Link:
+"Write(pi)" in algorithm
+→ printf("%.2f", pi) in C
+
+📌 Decoding %.2f:
+%   → start specifier
+.   → precision marker
+2   → two decimal places
+f   → float`
+  },
+  category:'format'
+},
+
+9:{
+  title:{ar:'%c',fr:'%c',en:'%c'},
+  exp:{
+    ar:`📌 الاستخدام:
+%c محدِّد تنسيق لحرف واحد (char).
+
+💡 أمثلة:
+char c = 'A';
+printf("%c", c);         // A
+printf("%d", c);         // 65   (كود ASCII)
+printf("%c", 65);        // A    (من الكود)
+
+💡 قراءة حرف بـ scanf:
+char c;
+scanf(" %c", &c);  // المسافة قبل %c مهمة!
+// تتخطى المسافات والأسطر المتبقية
+
+📊 جدول ASCII مفيد:
+'A'=65, 'Z'=90
+'a'=97, 'z'=122
+'0'=48, '9'=57
+
+⚠️ للجمل النصية: استخدم %s لا %c`,
+    fr:`📌 Usage:
+%c est le spécificateur pour un caractère.
+
+💡 Exemples:
+char c = 'A';
+printf("%c", c);     // A
+printf("%d", c);     // 65   (code ASCII)
+printf("%c", 65);    // A    (depuis le code)
+
+💡 Lire un caractère:
+scanf(" %c", &c);  // l'espace avant %c est important!
+
+📊 ASCII utile:
+'A'=65, 'a'=97, '0'=48
+
+⚠️ Pour les chaînes: utiliser %s pas %c`,
+    en:`📌 Usage:
+%c is the format specifier for a single char.
+
+💡 Examples:
+char c = 'A';
+printf("%c", c);     // A
+printf("%d", c);     // 65   (ASCII code)
+printf("%c", 65);    // A    (from code)
+
+💡 Reading a character:
+scanf(" %c", &c);  // space before %c is important!
+
+📊 Useful ASCII:
+'A'=65, 'a'=97, '0'=48
+
+⚠️ For strings: use %s not %c`
+  },
+  algFr:`Algorithme FormatCaractere
+Variable c : Caractère
+Début
+    c ← 'A'
+    Écrire("Char: ", c)
+    Écrire("Code: ", CodeASCII(c))
+    // En C: printf("Char: %c, Code: %d\\n",c,c);
+Fin
+
+// Un caractère = un nombre!
+// 'A' est stocké comme 65 en mémoire`,
+  algExp:{
+    ar:`🔗 الربط:
+"حرف" في الخوارزمية → char en C
+char c = 'A';  // اقتباسات مفردة للأحرف!
+
+💡 حقيقة ممتعة:
+الحرف مجرد رقم في الحاسوب
+printf("%c", 65) يطبع A
+printf("%d", 'A') يطبع 65`,
+    fr:`🔗 Lien:
+"Caractère" en algo → char en C
+char c = 'A';  // guillemets simples!
+
+💡 Fait intéressant:
+Un caractère = un nombre dans l'ordinateur
+printf("%c", 65) affiche A
+printf("%d", 'A') affiche 65`,
+    en:`🔗 Link:
+"Character" in algorithm → char in C
+char c = 'A';  // single quotes!
+
+💡 Fun fact:
+A character is just a number in computer memory
+printf("%c", 65) prints A
+printf("%d", 'A') prints 65`
+  },
+  category:'format'
+},
+
+// ──────────────────── TYPES ─────────────────────
+11:{
+  title:{ar:'int',fr:'int',en:'int'},
+  exp:{
+    ar:`📌 الاستخدام:
+int نوع بيانات للأعداد الصحيحة (بدون فاصلة).
+
+💡 أمثلة للتصريح:
+int age = 20;
+int x, y, z;          // متعدد
+int score = 0, n = 5;
+int arr[10];           // مصفوفة من 10 عناصر
+
+📊 نطاق القيم (32 بت):
+الحد الأدنى: -2,147,483,648
+الحد الأقصى:  2,147,483,647
+الحجم: عادةً 4 بايت
+
+💡 أنواع أخرى مرتبطة:
+short int → 2 بايت (-32768..32767)
+long int  → 4 أو 8 بايت
+unsigned  → موجب فقط (0..4294967295)`,
+    fr:`📌 Usage:
+int est le type pour les entiers (sans décimale).
+
+💡 Exemples:
+int age = 20;
+int x, y, z;
+int score = 0, n = 5;
+int arr[10];
+
+📊 Plage de valeurs (32 bits):
+Min: -2,147,483,648
+Max:  2,147,483,647
+Taille: généralement 4 octets
+
+💡 Types associés:
+short int → 2 octets
+long int  → 4 ou 8 octets
+unsigned  → positif seulement`,
+    en:`📌 Usage:
+int is the data type for integers (no decimal).
+
+💡 Examples:
+int age = 20;
+int x, y, z;
+int score = 0, n = 5;
+int arr[10];
+
+📊 Value range (32-bit):
+Min: -2,147,483,648
+Max:  2,147,483,647
+Size: typically 4 bytes
+
+💡 Related types:
+short int → 2 bytes
+long int  → 4 or 8 bytes
+unsigned  → positive only`
+  },
+  algFr:`Algorithme TypeEntier
+Variables age, score : Entiers
+Début
+    age ← 20
+    score ← 95
+    Écrire("Âge:", age, "Score:", score)
+Fin
+
+// "Entier" en algo = "int" en C
+// Déclaration: int age = 20;
+//              ^^^   ^^^  ^^^
+//         type  nom  valeur`,
+  algExp:{
+    ar:`🔗 الربط:
+"متغير x : عدد صحيح" في الخوارزمية
+→ int x; في C
+
+📌 الفرق في الإعلان:
+الخوارزمية: تُعلَن في قسم "المتغيرات"
+C: تُعلَن في بداية الدالة (قبل الاستخدام)`,
+    fr:`🔗 Lien:
+"Variable x : Entier" en algo
+→ int x; en C
+
+📌 Différence de déclaration:
+Algo: dans la section "Variables"
+C: au début de la fonction`,
+    en:`🔗 Link:
+"Variable x : Integer" in algorithm
+→ int x; in C
+
+📌 Declaration difference:
+Algorithm: in "Variables" section
+C: at beginning of function`
+  },
+  category:'type'
+},
+
+12:{
+  title:{ar:'float',fr:'float',en:'float'},
+  exp:{
+    ar:`📌 الاستخدام:
+float نوع بيانات للأعداد العشرية (بفاصلة).
+
+💡 أمثلة:
+float pi = 3.14f;      // f اختيارية
+float temp = -0.5;
+double pi2 = 3.14159265358979; // دقة أعلى
+
+📊 مقارنة الأنواع العشرية:
+النوع  │ بايت │ دقة
+───────┼──────┼────────────────
+float  │  4   │ ≈ 7 أرقام
+double │  8   │ ≈ 15 رقماً
+long double│16│ ≈ 18 رقماً
+
+⚠️ تحذيرات مهمة:
+• 5/2 = 2 (صحيح)، بينما 5.0/2 = 2.5 (عشري)!
+• لا تستخدم == مع float مباشرةً
+• استخدم double للحسابات الدقيقة`,
+    fr:`📌 Usage:
+float est le type pour les décimaux.
+
+💡 Exemples:
+float pi = 3.14f;
+float temp = -0.5;
+double pi2 = 3.14159265358979;
+
+📊 Comparaison:
+Type   │ Octets│ Précision
+───────┼───────┼──────────
+float  │  4    │ ≈ 7 chiffres
+double │  8    │ ≈ 15 chiffres
+
+⚠️ Attention:
+• 5/2 = 2, mais 5.0/2 = 2.5!
+• Ne jamais comparer float avec ==`,
+    en:`📌 Usage:
+float is the data type for decimal numbers.
+
+💡 Examples:
+float pi = 3.14f;
+float temp = -0.5;
+double pi2 = 3.14159265358979;
+
+📊 Comparison:
+Type   │ Bytes │ Precision
+───────┼───────┼──────────
+float  │  4    │ ≈ 7 digits
+double │  8    │ ≈ 15 digits
+
+⚠️ Warning:
+• 5/2 = 2, but 5.0/2 = 2.5!
+• Never compare floats with ==`
+  },
+  algFr:`Algorithme TypeReel
+Variables a, b, moy : Réels
+Début
+    a ← 15.5
+    b ← 12.0
+    moy ← (a + b) / 2.0
+    Écrire("Moyenne:", moy)
+Fin
+
+// "Réel" en algo = "float" ou "double" en C
+// ⚠️ Important: (15+12)/2   → 13 (entier!)
+//               (15.0+12)/2 → 13.5 (réel)`,
+  algExp:{
+    ar:`🔗 الربط:
+"متغير x : حقيقي" في الخوارزمية
+→ float x; في C
+
+⚠️ الخطأ الشائع:
+int a=15, b=12;
+float avg = (a+b)/2;    // = 13.0 (خاطئ!)
+float avg = (a+b)/2.0;  // = 13.5 (صحيح✓)`,
+    fr:`🔗 Lien:
+"Variable x : Réel" en algo
+→ float x; en C
+
+⚠️ Erreur classique:
+int a=15, b=12;
+float avg = (a+b)/2;    // = 13.0 (faux!)
+float avg = (a+b)/2.0;  // = 13.5 (correct✓)`,
+    en:`🔗 Link:
+"Variable x : Real" in algorithm
+→ float x; in C
+
+⚠️ Common mistake:
+int a=15, b=12;
+float avg = (a+b)/2;    // = 13.0 (wrong!)
+float avg = (a+b)/2.0;  // = 13.5 (right✓)`
+  },
+  category:'type'
+},
+
+13:{
+  title:{ar:'char',fr:'char',en:'char'},
+  exp:{
+    ar:`📌 الاستخدام:
+char نوع بيانات لحرف واحد (1 بايت).
+
+💡 أمثلة:
+char grade = 'A';   // بين اقتباسات مفردة
+char digit = '7';   // الحرف '7' ≠ الرقم 7
+char nl = '\\n';    // حرف تحكم
+
+💡 الحروف الخاصة:
+'\\n' → سطر جديد
+'\\t' → مسافة جدول
+'\\\\' → شرطة مائلة عكسية
+'\\'' → اقتباس مفرد
+
+📊 ASCII مفيد:
+'A'=65  'a'=97  ' '=32  '0'=48
+
+💡 للجمل النصية:
+char name[20] = "أحمد"; // مصفوفة char`,
+    fr:`📌 Usage:
+char est le type pour un seul caractère (1 octet).
+
+💡 Exemples:
+char grade = 'A';
+char digit = '7';   // caractère '7' ≠ entier 7
+char nl = '\\n';
+
+💡 Caractères spéciaux:
+'\\n' → nouvelle ligne
+'\\t' → tabulation
+'\\\\' → anti-slash
+'\\'' → apostrophe
+
+📊 ASCII utile:
+'A'=65  'a'=97  ' '=32  '0'=48`,
+    en:`📌 Usage:
+char is the data type for a single character (1 byte).
+
+💡 Examples:
+char grade = 'A';
+char digit = '7';   // char '7' ≠ integer 7
+char nl = '\\n';
+
+💡 Special characters:
+'\\n' → newline
+'\\t' → tab
+'\\\\' → backslash
+'\\'' → single quote
+
+📊 Useful ASCII:
+'A'=65  'a'=97  ' '=32  '0'=48`
+  },
+  algFr:`Algorithme TypeCaractere
+Variable c : Caractère
+Début
+    c ← 'A'
+    Écrire("Lettre: ", c)
+    Écrire("Code : ", CodeASCII(c))  // 65
+Fin
+
+// char c = 'A';  ← guillemets SIMPLES
+// "A" est une chaîne (différent de 'A')`,
+  algExp:{
+    ar:`🔗 الربط:
+"حرف" في الخوارزمية → char في C
+
+📌 قاعدة الاقتباسات:
+'A'  → حرف (char)   ← اقتباسات مفردة
+"A"  → سلسلة (char[]) ← اقتباسات مزدوجة
+
+هذا الفرق مهم جداً في C!`,
+    fr:`🔗 Lien:
+"Caractère" en algo → char en C
+
+📌 Règle des guillemets:
+'A'  → caractère (char)     ← simples
+"A"  → chaîne (char[])      ← doubles
+
+Cette différence est cruciale en C!`,
+    en:`🔗 Link:
+"Character" in algorithm → char in C
+
+📌 Quote rule:
+'A'  → character (char)    ← single quotes
+"A"  → string (char[])     ← double quotes
+
+This difference is crucial in C!`
+  },
+  category:'type'
+},
+
+14:{
+  title:{ar:'char str[50]',fr:'char str[50]',en:'char str[50]'},
+  exp:{
+    ar:`📌 السلاسل النصية في C:
+لا يوجد نوع "string" — السلسلة = مصفوفة char + '\\0'
+
+💡 الإعلان والتهيئة:
+char name[20] = "أحمد";   // مع تهيئة
+char city[50];             // بدون تهيئة
+
+💡 قراءة سلسلة:
+fgets(name, 20, stdin);   // الطريقة الآمنة ✓
+scanf("%s", name);         // للكلمات فقط (بدون &)
+
+💡 دوال مفيدة (string.h):
+strlen(s)        → عدد الأحرف
+strcpy(dst, src) → نسخ سلسلة
+strcmp(a, b)     → مقارنة (0=متساوية)
+strcat(dst, src) → دمج سلسلتين
+
+⚠️ حجم المصفوفة = عدد الأحرف + 1 (للـ\\0)`,
+    fr:`📌 Chaînes en C:
+Pas de type "string" — chaîne = tableau char + '\\0'
+
+💡 Déclaration:
+char nom[20] = "Ahmed";
+char ville[50];
+
+💡 Lire une chaîne:
+fgets(nom, 20, stdin);   // méthode sûre ✓
+scanf("%s", nom);         // mots seulement (sans &)
+
+💡 Fonctions utiles (string.h):
+strlen(s)        → longueur
+strcpy(dst, src) → copier
+strcmp(a, b)     → comparer (0=égal)
+strcat(dst, src) → concaténer
+
+⚠️ Taille = nb caractères + 1 (pour \\0)`,
+    en:`📌 Strings in C:
+No "string" type — string = char array + '\\0'
+
+💡 Declaration:
+char name[20] = "Ahmed";
+char city[50];
+
+💡 Reading a string:
+fgets(name, 20, stdin);  // safe method ✓
+scanf("%s", name);        // words only (no &)
+
+💡 Useful functions (string.h):
+strlen(s)        → length
+strcpy(dst, src) → copy
+strcmp(a, b)     → compare (0=equal)
+strcat(dst, src) → concatenate
+
+⚠️ Size = number of characters + 1 (for \\0)`
+  },
+  algFr:`Algorithme TypeChaine
+Variable nom : Chaîne[20]
+Début
+    Lire(nom)
+    Écrire("Bonjour, ", nom)
+    Écrire("Longueur: ", Longueur(nom))
+Fin
+
+// "Chaîne" en algo = char nom[20] en C
+// \\0 = caractère de fin (terminateur nul)
+// "Ahmed" = {'A','h','m','e','d','\\0'}`,
+  algExp:{
+    ar:`🔗 الربط:
+"متغير s : سلسلة نصية" في الخوارزمية
+→ char s[50]; في C
+
+⚠️ الفخ الكلاسيكي:
+"Ahmed" له 5 أحرف
+→ احتاج char[6] كحد أدنى
+(لأن '\\0' يأخذ خانة)`,
+    fr:`🔗 Lien:
+"Variable s : Chaîne" en algo
+→ char s[50]; en C
+
+⚠️ Piège classique:
+"Ahmed" a 5 caractères
+→ il faut char[6] au minimum
+(le '\\0' occupe une case)`,
+    en:`🔗 Link:
+"Variable s : String" in algorithm
+→ char s[50]; in C
+
+⚠️ Classic trap:
+"Ahmed" has 5 characters
+→ need char[6] at minimum
+(the '\\0' takes one slot)`
+  },
+  category:'type'
+},
+
+19:{
+  title:{ar:'mat[40]',fr:'mat[40]',en:'mat[40]'},
+  exp:{
+    ar:`📌 الاستخدام:
+المصفوفة تُخزِّن عدة قيم من نفس النوع تحت اسم واحد.
+
+💡 إعلان ومعالجة:
+int arr[5] = {10,20,30,40,50};
+// الفهارس: [0]=10 [1]=20 [2]=30 [3]=40 [4]=50
+
+💡 قراءة وطباعة:
+for(int i=0; i<5; i++)
+    scanf("%d", &arr[i]);  // قراءة
+for(int i=0; i<5; i++)
+    printf("%d ", arr[i]); // طباعة
+
+⚠️ قواعد مهمة:
+• الفهارس تبدأ من 0 دائماً
+• arr[5] خطأ خطير! (تجاوز حدود)
+• arr[0] إلى arr[n-1] فقط
+• #define N 40 → int arr[N]; (أفضل)`,
+    fr:`📌 Usage:
+Un tableau stocke plusieurs valeurs du même type.
+
+💡 Déclaration et traitement:
+int arr[5] = {10,20,30,40,50};
+// Indices: [0]=10 [1]=20 ... [4]=50
+
+💡 Lire et afficher:
+for(int i=0; i<5; i++)
+    scanf("%d", &arr[i]);
+for(int i=0; i<5; i++)
+    printf("%d ", arr[i]);
+
+⚠️ Règles importantes:
+• Indices commencent toujours à 0
+• arr[5] = erreur grave!
+• Indices de 0 à n-1 seulement`,
+    en:`📌 Usage:
+An array stores multiple values of the same type.
+
+💡 Declaration and processing:
+int arr[5] = {10,20,30,40,50};
+// Indices: [0]=10 [1]=20 ... [4]=50
+
+💡 Read and print:
+for(int i=0; i<5; i++)
+    scanf("%d", &arr[i]);
+for(int i=0; i<5; i++)
+    printf("%d ", arr[i]);
+
+⚠️ Important rules:
+• Indices always start at 0
+• arr[5] is a serious error!
+• Valid indices: 0 to n-1`
+  },
+  algFr:`Algorithme Tableau5Entiers
+Variables arr[5] : Entiers,  i : Entier
+Début
+    Pour i de 0 à 4 Faire
+        Lire(arr[i])
+    FinPour
+    Pour i de 0 à 4 Faire
+        Écrire(arr[i], " ")
+    FinPour
+Fin
+// "Tableau[5]" en algo = "int arr[5]" en C`,
+  algExp:{
+    ar:`🔗 الربط:
+"مصفوفة[5] من الأعداد الصحيحة"
+→ int arr[5]; في C
+
+📌 حساب الحجم تلقائياً:
+#define N 40
+int mat[N];
+for(int i=0; i<N; i++) ...
+// إذا غيَّرت N تتغير الحلقة تلقائياً!`,
+    fr:`🔗 Lien:
+"Tableau[5] d'Entiers"
+→ int arr[5]; en C
+
+📌 Taille automatique:
+#define N 40
+int mat[N];
+for(int i=0; i<N; i++) ...
+// Changer N → la boucle s'adapte!`,
+    en:`🔗 Link:
+"Array[5] of Integers"
+→ int arr[5]; in C
+
+📌 Automatic size:
+#define N 40
+int mat[N];
+for(int i=0; i<N; i++) ...
+// Change N → loop adapts automatically!`
+  },
+  category:'type'
+},
+
+29:{
+  title:{ar:'bool',fr:'bool',en:'bool'},
+  exp:{
+    ar:`📌 الاستخدام:
+bool نوع منطقي بقيمتين: true (1) أو false (0).
+يتطلب: #include <stdbool.h>
+
+💡 أمثلة:
+bool found = false;
+bool isEven = (x % 2 == 0);
+bool ok = true;
+
+if (isEven) printf("زوجي");
+
+💡 في تعريف الدوال:
+bool IsPrime(int n) {
+    if(n < 2) return false;
+    for(int i=2; i*i<=n; i++)
+        if(n%i==0) return false;
+    return true;
+}
+
+💡 بدون stdbool.h → استخدم int:
+int found = 0;  // 0=خاطئ, 1=صحيح`,
+    fr:`📌 Usage:
+bool est un type logique avec deux valeurs.
+Nécessite: #include <stdbool.h>
+
+💡 Exemples:
+bool found = false;
+bool isEven = (x % 2 == 0);
+bool ok = true;
+
+if (isEven) printf("Pair");
+
+💡 Dans une fonction:
+bool IsPrime(int n) {
+    if(n < 2) return false;
+    for(int i=2; i*i<=n; i++)
+        if(n%i==0) return false;
+    return true;
+}`,
+    en:`📌 Usage:
+bool is a logical type with two values.
+Requires: #include <stdbool.h>
+
+💡 Examples:
+bool found = false;
+bool isEven = (x % 2 == 0);
+bool ok = true;
+
+if (isEven) printf("Even");
+
+💡 In a function:
+bool IsPrime(int n) {
+    if(n < 2) return false;
+    for(int i=2; i*i<=n; i++)
+        if(n%i==0) return false;
+    return true;
+}`
+  },
+  algFr:`Algorithme FonctionBooléenne
+Fonction EstPremier(n) : Booléen
+Début
+    Si n < 2 alors Retourner Faux
+    Pour i de 2 à racine(n) Faire
+        Si n mod i = 0 alors Retourner Faux
+    FinPour
+    Retourner Vrai
+Fin`,
+  algExp:{
+    ar:`🔗 الربط:
+"الدالة ترجع منطقي" في الخوارزمية → bool في C
+"صحيح" → true
+"خاطئ" → false
+
+📌 نصيحة: استخدم bool للدوال التي تُجيب
+على أسئلة: هل...؟ → IsPrime, IsEven, Automorphe`,
+    fr:`🔗 Lien:
+"La fonction retourne booléen" → bool en C
+"Vrai" → true
+"Faux" → false
+
+📌 Conseil: utiliser bool pour les fonctions
+qui répondent à des questions Oui/Non`,
+    en:`🔗 Link:
+"Function returns boolean" → bool in C
+"True" → true, "False" → false
+
+📌 Tip: use bool for functions that answer
+Yes/No questions: IsPrime, IsEven, Automorphe`
+  },
+  category:'type'
+},
+
+30:{
+  title:{ar:'true / false',fr:'true / false',en:'true / false'},
+  exp:{
+    ar:`📌 الاستخدام:
+قيمتان منطقيتان جاهزتان (مع stdbool.h).
+
+💡 الاستخدام الصحيح:
+bool check(int n) {
+    if(n < 0) return false;  // فشل فوري
+    // ... منطق إضافي ...
+    return true;              // نجاح
+}
+
+💡 جدول الحقيقة:
+true  = 1 = أي قيمة ≠ 0
+false = 0 = الصفر فقط
+
+💡 في if و while:
+if (true)        // يُنفَّذ دائماً
+while (false)    // لا يُنفَّذ أبداً
+if (x > 0)       // true إذا x موجب
+
+⚠️ في C: true و false بالإنجليزية الصغيرة فقط!
+True أو FALSE خطأ!`,
+    fr:`📌 Usage:
+Deux valeurs logiques prêtes (avec stdbool.h).
+
+💡 Utilisation correcte:
+bool check(int n) {
+    if(n < 0) return false;
+    return true;
+}
+
+💡 Table de vérité:
+true  = 1 = toute valeur ≠ 0
+false = 0 = zéro seulement
+
+⚠️ En C: true et false en minuscules uniquement!
+True ou FALSE = erreur!`,
+    en:`📌 Usage:
+Two ready-made logical values (with stdbool.h).
+
+💡 Correct usage:
+bool check(int n) {
+    if(n < 0) return false;
+    return true;
+}
+
+💡 Truth table:
+true  = 1 = any non-zero value
+false = 0 = zero only
+
+⚠️ In C: true and false ONLY in lowercase!
+True or FALSE = error!`
+  },
+  algFr:`Algorithme UtilisationBool
+Fonction Automorphe(n) : Booléen
+Début
+    carre ← n × n
+    Pour i de 1 à Compter(n) Faire
+        Si (carre mod 10) ≠ (n mod 10)
+            Retourner Faux  ← return false
+        carre ← carre div 10
+        n ← n div 10
+    FinPour
+    Retourner Vrai  ← return true
+Fin`,
+  algExp:{
+    ar:`🔗 الربط:
+"إرجع صحيح" → return true; في C
+"إرجع خاطئ" → return false; في C
+
+📌 في Automorphe:
+→ return false عند أول رقم مختلف
+→ return true إذا كلّ الأرقام تطابقت`,
+    fr:`🔗 Lien:
+"Retourner Vrai"  → return true; en C
+"Retourner Faux"  → return false; en C
+
+📌 Dans Automorphe:
+→ return false au premier chiffre différent
+→ return true si tous les chiffres correspondent`,
+    en:`🔗 Link:
+"Return True"  → return true; in C
+"Return False" → return false; in C
+
+📌 In Automorphe:
+→ return false at first digit mismatch
+→ return true if all digits match`
+  },
+  category:'condition'
+},
+
+// ──────────────────── CONDITIONS ────────────────
+20:{
+  title:{ar:'if',fr:'if',en:'if'},
+  exp:{
+    ar:`📌 البنية الكاملة:
+if (شرط1) {
+    // إذا شرط1 صحيح
+} else if (شرط2) {
+    // إذا شرط2 صحيح
+} else {
+    // إذا كل الشروط خاطئة
+}
+
+💡 مثال — تقدير الدرجات:
+if (score >= 90) printf("ممتاز");
+else if (score >= 75) printf("جيد جداً");
+else if (score >= 60) printf("جيد");
+else printf("راسب");
+
+⚠️ الخطأ الأشهر:
+if (x = 5)   // خطأ! إسناد وليس مقارنة
+if (x == 5)  // صحيح ✓ (علامتا تساوٍ)`,
+    fr:`📌 Structure complète:
+if (cond1) {
+    // si cond1 vraie
+} else if (cond2) {
+    // si cond2 vraie
+} else {
+    // si tout est faux
+}
+
+💡 Exemple — notes:
+if (score >= 90)      printf("Excellent");
+else if (score >= 75) printf("Bien");
+else if (score >= 60) printf("Passable");
+else                  printf("Insuffisant");
+
+⚠️ Erreur classique:
+if (x = 5)  // faux! affectation
+if (x == 5) // correct ✓`,
+    en:`📌 Full structure:
+if (cond1) {
+    // if cond1 true
+} else if (cond2) {
+    // if cond2 true
+} else {
+    // if all conditions false
+}
+
+💡 Example — grades:
+if (score >= 90)      printf("Excellent");
+else if (score >= 75) printf("Good");
+else if (score >= 60) printf("Pass");
+else                  printf("Fail");
+
+⚠️ Classic error:
+if (x = 5)  // wrong! assignment
+if (x == 5) // correct ✓`
+  },
+  algFr:`Algorithme ConditionIf
+Variable age : Entier
+Début
+    Lire(age)
+    Si age >= 18 Alors
+        Écrire("Majeur")
+    SinonSi age >= 13 Alors
+        Écrire("Adolescent")
+    Sinon
+        Écrire("Enfant")
+    FinSi
+Fin`,
+  algExp:{
+    ar:`🔗 ترجمة سطر بسطر:
+"إذا"       → if
+"وإلا إذا"  → else if
+"وإلا"      → else
+"نهاية إذا" → } (قوس إغلاق)
+
+📌 متى تستخدم switch بدل if؟
+إذا كان الشرط يُقارن قيمة واحدة مع حالات عديدة`,
+    fr:`🔗 Traduction:
+"Si"     → if
+"SinonSi"→ else if
+"Sinon"  → else
+"FinSi"  → }
+
+📌 Quand utiliser switch plutôt que if?
+Quand on compare une valeur à plusieurs cas`,
+    en:`🔗 Translation:
+"If"     → if
+"ElseIf" → else if
+"Else"   → else
+"EndIf"  → }
+
+📌 When to use switch instead of if?
+When comparing one value to multiple cases`
+  },
+  category:'condition'
+},
+
+21:{
+  title:{ar:'else',fr:'else',en:'else'},
+  exp:{
+    ar:`📌 الاستخدام:
+else يُنفِّذ كتلة بديلة إذا كان شرط if خاطئاً.
+
+💡 مثال عملي:
+int n;
+scanf("%d", &n);
+if (n % 2 == 0)
+    printf("%d زوجي\\n", n);
+else
+    printf("%d فردي\\n", n);
+
+💡 قواعد مهمة:
+• else دائماً يتبع if مباشرةً
+• else اختياري (يمكن if بدونه)
+• لا يمكن else بدون if
+
+💡 else if للحالات المتعددة:
+if(x>0)      printf("موجب");
+else if(x<0) printf("سالب");
+else         printf("صفر");`,
+    fr:`📌 Usage:
+else exécute un bloc alternatif si if est faux.
+
+💡 Exemple:
+if (n % 2 == 0)
+    printf("%d est pair\\n", n);
+else
+    printf("%d est impair\\n", n);
+
+💡 Règles:
+• else suit toujours directement un if
+• else est optionnel
+• else if pour les cas multiples`,
+    en:`📌 Usage:
+else executes an alternative block when if is false.
+
+💡 Example:
+if (n % 2 == 0)
+    printf("%d is even\\n", n);
+else
+    printf("%d is odd\\n", n);
+
+💡 Rules:
+• else always immediately follows if
+• else is optional
+• else if for multiple cases`
+  },
+  algFr:`Algorithme PariteNombre
+Variable n : Entier
+Début
+    Lire(n)
+    Si (n mod 2 = 0) Alors
+        Écrire(n, "est pair")
+    Sinon
+        Écrire(n, "est impair")
+    FinSi
+Fin
+
+// "Sinon" en algo = "else" en C`,
+  algExp:{
+    ar:`🔗 الربط:
+"وإلا" في الخوارزمية → else في C
+
+📌 قاعدة:
+if واحدة → else واحدة بحدِّها
+للمزيد من الحالات → else if`,
+    fr:`🔗 Lien:
+"Sinon" en algo → else en C
+
+📌 Règle:
+Un if → un seul else maximum
+Plus de cas → utiliser else if`,
+    en:`🔗 Link:
+"Else" in algorithm → else in C
+
+📌 Rule:
+One if → at most one else
+More cases → use else if`
+  },
+  category:'condition'
+},
+
+22:{
+  title:{ar:'switch(x)',fr:'switch(x)',en:'switch(x)'},
+  exp:{
+    ar:`📌 الاستخدام:
+switch يختار حالةً بناءً على قيمة متغير.
+
+💡 مثال — أيام الأسبوع:
+switch(jour) {
+    case 1: printf("الأحد");    break;
+    case 2: printf("الاثنين");  break;
+    case 6: printf("الجمعة");   break;
+    case 7: printf("السبت");    break;
+    default: printf("يوم عمل");
+}
+
+⚠️ break إلزامي!
+بدون break → تنتقل للحالة التالية (Fall-through)
+
+💡 يعمل مع: int، char، enum فقط
+لا يعمل مع: float، سلاسل نصية
+
+💡 يمكن دمج حالات:
+case 1: case 7: printf("عطلة"); break;`,
+    fr:`📌 Usage:
+switch sélectionne un cas selon une valeur.
+
+💡 Exemple — jours:
+switch(jour) {
+    case 1: printf("Dimanche"); break;
+    case 7: printf("Samedi");   break;
+    default: printf("Jour ouvrable");
+}
+
+⚠️ break obligatoire!
+Sans break → "fall-through" vers le suivant
+
+💡 Fonctionne: int, char, enum seulement
+Ne fonctionne pas: float, chaînes
+
+💡 Regrouper des cas:
+case 1: case 7: printf("Weekend"); break;`,
+    en:`📌 Usage:
+switch selects a case based on variable value.
+
+💡 Example — days:
+switch(day) {
+    case 1: printf("Sunday");  break;
+    case 7: printf("Saturday"); break;
+    default: printf("Weekday");
+}
+
+⚠️ break is mandatory!
+Without break → "fall-through" to next case
+
+💡 Works with: int, char, enum only
+Doesn't work: float, strings
+
+💡 Group cases:
+case 1: case 7: printf("Weekend"); break;`
+  },
+  algFr:`Algorithme SelonJour
+Variable jour : Entier
+Début
+    Selon (jour) Faire
+        Cas 1 : Écrire("Dimanche")
+        Cas 2 : Écrire("Lundi")
+        Cas 7 : Écrire("Samedi")
+        Autrement : Écrire("Jour ouvrable")
+    FinSelon
+Fin`,
+  algExp:{
+    ar:`🔗 ترجمة:
+"حسب(x) افعل" → switch(x) {
+"حالة N:"      → case N:
+"وإلا:"        → default:
+"نهاية حسب"   → }
+
+⚠️ break ليس له مقابل في الخوارزمية عادةً
+لكن ضروري في C لمنع Fall-through`,
+    fr:`🔗 Traduction:
+"Selon(x) Faire" → switch(x) {
+"Cas N:"         → case N:
+"Autrement:"     → default:
+"FinSelon"       → }
+
+⚠️ break n'a pas d'équivalent en pseudo-code`,
+    en:`🔗 Translation:
+"Select(x) Do" → switch(x) {
+"Case N:"      → case N:
+"Otherwise:"   → default:
+"EndSelect"    → }
+
+⚠️ break has no equivalent in pseudocode`
+  },
+  category:'condition'
+},
+
+33:{
+  title:{ar:'if (n == 0)',fr:'if (n == 0)',en:'if (n == 0)'},
+  exp:{
+    ar:`📌 مشغِّلات المقارنة:
+==  يساوي       !=  لا يساوي
+<   أصغر         >   أكبر
+<=  أصغر أو يساوي  >= أكبر أو يساوي
+
+⚠️ الخطأ الأكثر شيوعاً في C:
+if (n = 0)   // إسناد! n تصبح 0 دائماً
+if (n == 0)  // مقارنة صحيحة ✓
+
+💡 حيلة لتجنُّب الخطأ:
+if (0 == n)  // Yoda condition — خطأ التجميع فوري
+// إذا كتبت = عوضاً عن == → خطأ تجميع
+
+💡 مثال في Compter:
+if (n == 0) return 1;  // 0 له رقم واحد
+// else continue counting digits`,
+    fr:`📌 Opérateurs de comparaison:
+==  égal     !=  différent
+<   inférieur  >   supérieur
+<=  inf. ou égal  >= sup. ou égal
+
+⚠️ Erreur la plus courante en C:
+if (n = 0)   // affectation! n devient 0
+if (n == 0)  // comparaison correcte ✓
+
+💡 Astuce Yoda:
+if (0 == n)  // si on écrit = → erreur compil`,
+    en:`📌 Comparison operators:
+==  equal      !=  not equal
+<   less than  >   greater than
+<=  less/equal  >= greater/equal
+
+⚠️ Most common C error:
+if (n = 0)   // assignment! n becomes 0
+if (n == 0)  // correct comparison ✓
+
+💡 Yoda condition trick:
+if (0 == n)  // if you write = → compile error`
+  },
+  algFr:`Algorithme CasParticulier
+Fonction Compter(n) : Entier
+Début
+    Si n = 0 alors
+        Retourner 1     ← cas spécial
+    FinSi
+    nbr ← 0
+    Tant que n ≠ 0 faire
+        nbr ← nbr + 1
+        n ← n div 10
+    Retourner nbr
+Fin`,
+  algExp:{
+    ar:`🔗 الربط:
+"إذا n = 0" في الخوارزمية
+→ if (n == 0) في C (علامتا تساوٍ!)
+
+📌 في C: = للإسناد، == للمقارنة
+الخطأ فيهما من أكثر الأخطاء شيوعاً!`,
+    fr:`🔗 Lien:
+"Si n = 0" en algo
+→ if (n == 0) en C (deux signes =!)
+
+📌 En C: = pour affecter, == pour comparer
+Confondre les deux = erreur très fréquente!`,
+    en:`🔗 Link:
+"If n = 0" in algorithm
+→ if (n == 0) in C (two equal signs!)
+
+📌 In C: = assigns, == compares
+Confusing them is one of the most common bugs!`
+  },
+  category:'condition'
+},
+
+34:{
+  title:{ar:'while (n != 0)',fr:'while (n != 0)',en:'while (n != 0)'},
+  exp:{
+    ar:`📌 الاستخدام في عدّ أرقام العدد:
+while (n != 0) {
+    count++;    // عدد رقم
+    n /= 10;    // احذف آخر رقم
+}
+
+💡 مثال كامل — عدّ أرقام 762:
+n=762: count=1, n=76
+n=76:  count=2, n=7
+n=7:   count=3, n=0  ← توقف
+
+💡 تطبيقات أخرى:
+while(n!=0) printf("%d ",n%10), n/=10; // طباعة أرقام
+
+⚠️ لا تنسَ معالجة n==0 قبل الحلقة!
+الصفر ← حلقة لا تعمل ← نتيجة خاطئة
+
+💡 الشرط !=  يساوي "لا يساوي":
+while(n != 0)  ≡  while(n)  (أقصر)`,
+    fr:`📌 Usage pour compter les chiffres:
+while (n != 0) {
+    count++;
+    n /= 10;
+}
+
+💡 Exemple — compter les chiffres de 762:
+n=762 → count=1, n=76
+n=76  → count=2, n=7
+n=7   → count=3, n=0 ← stop
+
+⚠️ Ne pas oublier le cas n==0 avant la boucle!
+
+💡 while(n != 0) ≡ while(n) (plus court)`,
+    en:`📌 Usage for counting digits:
+while (n != 0) {
+    count++;
+    n /= 10;
+}
+
+💡 Example — count digits of 762:
+n=762 → count=1, n=76
+n=76  → count=2, n=7
+n=7   → count=3, n=0 ← stop
+
+⚠️ Don't forget the n==0 case before the loop!
+
+💡 while(n != 0) ≡ while(n) (shorter)`
+  },
+  algFr:`Algorithme CompterChiffres
+Fonction Compter(n) : Entier
+Début
+    Si n = 0 alors Retourner 1
+    nbr ← 0
+    Tant que n ≠ 0 Faire   ← while(n!=0)
+        nbr ← nbr + 1
+        n ← n div 10
+    FinTantQue
+    Retourner nbr
+Fin`,
+  algExp:{
+    ar:`🔗 الربط:
+"طالما n ≠ 0 افعل"
+→ while(n != 0) { ... } في C
+
+📌 في Compter():
+كل دورة → عداد+1 ونحذف رقماً
+انتهت الأرقام → n=0 → نوقف`,
+    fr:`🔗 Lien:
+"Tant que n ≠ 0"
+→ while(n != 0) { ... } en C
+
+📌 Dans Compter():
+Chaque tour → compteur+1 et supprimer chiffre
+Plus de chiffres → n=0 → on arrête`,
+    en:`🔗 Link:
+"While n ≠ 0"
+→ while(n != 0) { ... } in C
+
+📌 In Compter():
+Each round → counter+1 and remove digit
+No more digits → n=0 → we stop`
+  },
+  category:'loop'
+},
+
+39:{
+  title:{ar:'while (n <= m)',fr:'while (n <= m)',en:'while (n <= m)'},
+  exp:{
+    ar:`📌 الاستخدام — المرور على نطاق:
+while (n <= m) {
+    // معالجة n
+    n++;
+}
+
+💡 مثال — طباعة الأعداد من 1 إلى 10:
+int i = 1;
+while (i <= 10) {
+    printf("%d ", i);
+    i++;
+}
+
+💡 مقارنة with for:
+while(i<=m){ ... i++; }  // equivalent to
+for(i=n; i<=m; i++) { ... }
+
+⚠️ الفرق بين < و <=:
+i < 10  → يتوقف عند 9
+i <= 10 → يتوقف عند 10
+i < n   vs  i <= n-1 ← نفس النتيجة`,
+    fr:`📌 Usage — parcourir un intervalle:
+while (n <= m) {
+    // traiter n
+    n++;
+}
+
+💡 Différence < vs <=:
+i < 10  → s'arrête à 9
+i <= 10 → s'arrête à 10
+
+💡 Équivalent for:
+for(i=n; i<=m; i++) { ... }`,
+    en:`📌 Usage — walk through a range:
+while (n <= m) {
+    // process n
+    n++;
+}
+
+💡 Difference < vs <=:
+i < 10  → stops at 9
+i <= 10 → stops at 10
+
+💡 Equivalent for:
+for(i=n; i<=m; i++) { ... }`
+  },
+  algFr:`Algorithme ParcoursIntervalle
+Variable n, m : Entiers
+Début
+    Lire(n, m)
+    Tant que n ≤ m Faire
+        // traiter n
+        n ← n + 1
+    FinTantQue
+Fin
+
+// "Tant que n ≤ m" = while(n <= m)
+// n ← n+1 = n++ en C`,
+  algExp:{
+    ar:`🔗 الربط:
+"طالما n ≤ m" → while(n <= m) في C
+"n ← n+1"    → n++ في C
+
+📌 في AfficherNbrAutomorphe:
+كل قيمة من n إلى m تُفحص
+إذا كانت أوتومورف → تُطبع`,
+    fr:`🔗 Lien:
+"Tant que n ≤ m" → while(n <= m) en C
+"n ← n+1"       → n++ en C
+
+📌 Dans AfficherNbrAutomorphe:
+Chaque valeur de n à m est vérifiée
+Si automorphe → affichée`,
+    en:`🔗 Link:
+"While n ≤ m" → while(n <= m) in C
+"n ← n+1"    → n++ in C
+
+📌 In AfficherNbrAutomorphe:
+Each value from n to m is checked
+If automorphic → printed`
+  },
+  category:'loop'
+},
+
+// ──────────────────── CONTROL ────────────────────
+15:{
+  title:{ar:'#include',fr:'#include',en:'#include'},
+  exp:{
+    ar:`📌 الاستخدام:
+#include يُدرج محتوى ملف ترويسة قبل التجميع.
+
+💡 المكتبات الأشهر:
+#include <stdio.h>   // printf, scanf, fgets...
+#include <stdlib.h>  // malloc, free, rand, exit...
+#include <string.h>  // strlen, strcpy, strcmp...
+#include <math.h>    // sqrt, pow, fabs, sin...
+#include <stdbool.h> // bool, true, false (C99)
+
+💡 الفرق بين <> و "":
+#include <stdio.h>   // مكتبة نظام (في مجلد النظام)
+#include "myfunc.h"  // ملفك الخاص (في نفس المجلد)
+
+⚠️ ترتيب الإدراج:
+1. #include أولاً
+2. #define ثانياً
+3. الدوال ثالثاً
+4. main() أخيراً`,
+    fr:`📌 Usage:
+#include insère le contenu d'un fichier en-tête.
+
+💡 Bibliothèques principales:
+#include <stdio.h>   // printf, scanf...
+#include <stdlib.h>  // malloc, free, rand...
+#include <string.h>  // strlen, strcpy...
+#include <math.h>    // sqrt, pow, sin...
+#include <stdbool.h> // bool, true, false
+
+💡 Différence <> vs "":
+<stdio.h>  → bibliothèque système
+"myfunc.h" → votre fichier (même dossier)`,
+    en:`📌 Usage:
+#include inserts a header file before compilation.
+
+💡 Main libraries:
+#include <stdio.h>   // printf, scanf...
+#include <stdlib.h>  // malloc, free, rand...
+#include <string.h>  // strlen, strcpy...
+#include <math.h>    // sqrt, pow, sin...
+#include <stdbool.h> // bool, true, false
+
+💡 Difference <> vs "":
+<stdio.h>  → system library
+"myfunc.h" → your file (same directory)`
+  },
+  algFr:`// Étape préprocesseur (conceptuel):
+// 1. Lire "#include <stdio.h>"
+// 2. Trouver le fichier stdio.h sur le disque
+// 3. Copier son contenu ici
+// 4. Compiler le tout
+
+// Ordre recommandé dans le fichier:
+#include <stdio.h>    // ← en premier
+#include <string.h>
+#define MAX 100       // ← ensuite les constantes
+int maFonction() { } // ← puis les fonctions
+int main() { }       // ← main en dernier`,
+  algExp:{
+    ar:`🔗 المفهوم:
+الخوارزمية لا تحتاج #include
+لكن في C كل دالة تأتي من مكتبة
+
+📌 القاعدة:
+استخدمتَ printf/scanf → أضف stdio.h
+استخدمتَ strlen       → أضف string.h
+استخدمتَ sqrt         → أضف math.h`,
+    fr:`🔗 Concept:
+L'algo n'a pas besoin de #include
+Mais en C, chaque fonction vient d'une bibliothèque
+
+📌 La règle:
+Utiliser printf/scanf → ajouter stdio.h
+Utiliser strlen       → ajouter string.h
+Utiliser sqrt         → ajouter math.h`,
+    en:`🔗 Concept:
+Algorithm doesn't need #include
+But in C, every function comes from a library
+
+📌 The rule:
+Use printf/scanf → add stdio.h
+Use strlen       → add string.h
+Use sqrt         → add math.h`
+  },
+  category:'control'
+},
+
+16:{
+  title:{ar:'return 0;',fr:'return 0;',en:'return 0;'},
+  exp:{
+    ar:`📌 الاستخدام:
+return يُنهي الدالة الحالية ويُعيد قيمة للمُستدعي.
+
+💡 في main():
+return 0;  // نجاح — البرنامج انتهى بدون أخطاء
+return 1;  // فشل عام
+return -1; // فشل مخصَّص
+
+💡 في الدوال الأخرى:
+int square(int n) { return n*n; }
+bool isPositive(int n) { return n > 0; }
+void greet() { printf("سلام"); return; } // اختياري
+
+⚠️ تذكَّر:
+• return يُنهي الدالة فوراً
+• أي كود بعد return لا يُنفَّذ
+• نوع القيمة يجب مطابقة نوع الإرجاع`,
+    fr:`📌 Usage:
+return termine la fonction et retourne une valeur.
+
+💡 Dans main():
+return 0;   // succès
+return 1;   // échec général
+return -1;  // échec personnalisé
+
+💡 Dans d'autres fonctions:
+int carre(int n) { return n*n; }
+bool isPositive(int n) { return n > 0; }
+
+⚠️ Rappel:
+• return termine la fonction immédiatement
+• Le code après return n'est jamais exécuté`,
+    en:`📌 Usage:
+return ends the current function and returns a value.
+
+💡 In main():
+return 0;   // success
+return 1;   // general failure
+return -1;  // custom failure
+
+💡 In other functions:
+int square(int n) { return n*n; }
+bool isPositive(int n) { return n > 0; }
+
+⚠️ Remember:
+• return ends the function immediately
+• Code after return is never executed`
+  },
+  algFr:`Algorithme Principal
+Début
+    // ... instructions ...
+    Retourner 0    ← return 0;
+Fin
+
+// Dans une fonction:
+Fonction Carré(n) : Entier
+Début
+    Retourner n × n  ← return n*n;
+Fin`,
+  algExp:{
+    ar:`🔗 الربط:
+"أرجع 0" في الخوارزمية → return 0; في C
+
+📌 معاني أكواد الإرجاع:
+0  → نجاح (Exit Success)
+1  → خطأ عام
+-1 → خطأ مخصَّص
+(يمكن استخدام return EXIT_SUCCESS من stdlib.h)`,
+    fr:`🔗 Lien:
+"Retourner 0" en algo → return 0; en C
+
+📌 Signification des codes:
+0  → succès (EXIT_SUCCESS)
+1  → erreur générale
+-1 → erreur personnalisée`,
+    en:`🔗 Link:
+"Return 0" in algorithm → return 0; in C
+
+📌 Return code meanings:
+0  → success (EXIT_SUCCESS)
+1  → general error
+-1 → custom error`
+  },
+  category:'control'
+},
+
+23:{
+  title:{ar:'break;',fr:'break;',en:'break;'},
+  exp:{
+    ar:`📌 الاستخدام:
+break يخرج فوراً من الحلقة أو switch الحالية.
+
+💡 في الحلقات:
+for(int i=0; i<100; i++) {
+    if(i == 5) break;   // خروج عند i=5
+    printf("%d ", i);
+}
+// يطبع: 0 1 2 3 4
+
+💡 في البحث (استخدام شائع):
+for(int i=0; i<n; i++) {
+    if(arr[i] == target) {
+        printf("وُجد في [%d]\\n", i);
+        break;  // لا داعي للاستمرار
+    }
+}
+
+⚠️ تذكَّر:
+• break لا يخرج من الدالة (فقط الحلقة)
+• يُغادر الحلقة المباشرة فقط (ليس المتداخلة)`,
+    fr:`📌 Usage:
+break sort immédiatement de la boucle ou switch.
+
+💡 Dans les boucles:
+for(int i=0; i<100; i++) {
+    if(i == 5) break;
+    printf("%d ", i);
+}
+// affiche: 0 1 2 3 4
+
+💡 Dans une recherche:
+for(int i=0; i<n; i++) {
+    if(arr[i] == target) {
+        printf("Trouvé en [%d]\\n", i);
+        break;
+    }
+}`,
+    en:`📌 Usage:
+break immediately exits the current loop or switch.
+
+💡 In loops:
+for(int i=0; i<100; i++) {
+    if(i == 5) break;
+    printf("%d ", i);
+}
+// prints: 0 1 2 3 4
+
+💡 In search:
+for(int i=0; i<n; i++) {
+    if(arr[i] == target) {
+        printf("Found at [%d]\\n", i);
+        break;
+    }
+}`
+  },
+  algFr:`Algorithme RechercheSéquentielle
+Variables arr[n], cible, i : Entiers
+Début
+    Pour i de 0 à n-1 Faire
+        Si arr[i] = cible Alors
+            Écrire("Trouvé à", i)
+            Quitter   ← break en C
+        FinSi
+    FinPour
+Fin`,
+  algExp:{
+    ar:`🔗 الربط:
+"اخرج" أو "توقف" في الخوارزمية → break; في C
+
+📌 كفاءة البحث مع break:
+بدون break → تفحص كل العناصر دائماً
+مع break   → تتوقف عند العثور على القيمة`,
+    fr:`🔗 Lien:
+"Quitter" ou "Sortir" en algo → break; en C
+
+📌 Efficacité avec break:
+Sans break → toujours parcourir tout
+Avec break → s'arrêter dès qu'on trouve`,
+    en:`🔗 Link:
+"Exit" or "Quit" in algorithm → break; in C
+
+📌 Efficiency with break:
+Without break → always scan everything
+With break   → stop as soon as found`
+  },
+  category:'control'
+},
+
+24:{
+  title:{ar:'continue;',fr:'continue;',en:'continue;'},
+  exp:{
+    ar:`📌 الاستخدام:
+continue يتخطى الدورة الحالية ويبدأ التالية.
+
+💡 مثال — طباعة الأعداد الفردية فقط:
+for(int i=0; i<10; i++) {
+    if(i % 2 == 0) continue;  // تخطَّ الزوجية
+    printf("%d ", i);
+}
+// يطبع: 1 3 5 7 9
+
+💡 مثال — تجاهل القيم السالبة:
+for(int i=0; i<n; i++) {
+    if(arr[i] < 0) continue;
+    sum += arr[i];
+}
+
+🆚 الفرق بين break و continue:
+break    → يُنهي الحلقة نهائياً
+continue → يتخطى الدورة ويكمل الحلقة`,
+    fr:`📌 Usage:
+continue saute l'itération actuelle.
+
+💡 Exemple — nombres impairs:
+for(int i=0; i<10; i++) {
+    if(i%2==0) continue;
+    printf("%d ", i);
+}
+// affiche: 1 3 5 7 9
+
+🆚 break vs continue:
+break    → termine la boucle définitivement
+continue → saute seulement l'itération actuelle`,
+    en:`📌 Usage:
+continue skips the current iteration.
+
+💡 Example — odd numbers only:
+for(int i=0; i<10; i++) {
+    if(i%2==0) continue;
+    printf("%d ", i);
+}
+// prints: 1 3 5 7 9
+
+🆚 break vs continue:
+break    → ends loop permanently
+continue → skips current iteration only`
+  },
+  algFr:`Algorithme NombresFiltres
+Variable i : Entier
+Début
+    Pour i de 0 à 9 Faire
+        Si (i mod 2 = 0) Alors
+            Passer au suivant  ← continue
+        FinSi
+        Écrire(i, " ")
+    FinPour
+Fin`,
+  algExp:{
+    ar:`🔗 الربط:
+"انتقل للتالي" أو "تخطَّ" → continue; في C
+
+📌 استخدام ذكي:
+بدلاً من كتابة:
+if(cond) { ... }  // كتلة كاملة
+
+يمكن كتابة:
+if(!cond) continue;
+// ... باقي الكود (أوضح وأقل تداخلاً)`,
+    fr:`🔗 Lien:
+"Passer au suivant" → continue; en C
+
+📌 Usage élégant:
+Au lieu de:
+if(cond) { ... }
+
+On peut écrire:
+if(!cond) continue;
+// ... reste du code (moins imbriqué)`,
+    en:`🔗 Link:
+"Skip to next" → continue; in C
+
+📌 Elegant usage:
+Instead of:
+if(cond) { ... }
+
+Write:
+if(!cond) continue;
+// ... rest of code (less nesting)`
+  },
+  category:'control'
+},
+
+27:{
+  title:{ar:'#include <stdio.h>',fr:'#include <stdio.h>',en:'#include <stdio.h>'},
+  exp:{
+    ar:`📌 ما يُقدِّمه stdio.h:
+دوال الإدخال/الإخراج القياسية.
+
+💡 الدوال الرئيسية:
+printf()   → طباعة على الشاشة
+scanf()    → قراءة من لوحة المفاتيح
+fgets()    → قراءة سطر نصي (آمن)
+puts()     → طباعة نص + سطر جديد
+getchar()  → قراءة حرف واحد
+fopen/fclose → فتح/إغلاق ملفات
+
+💡 بدون stdio.h:
+#include <stdio.h>  ← بدون هذا
+int main() {
+    printf("مرحبا");  // ← خطأ! المترجم لا يعرف printf
+    return 0;
+}
+
+⚠️ دائماً في السطر الأول تقريباً في كل برنامج C!`,
+    fr:`📌 Ce que fournit stdio.h:
+Fonctions d'entrées/sorties standard.
+
+💡 Fonctions principales:
+printf()   → afficher à l'écran
+scanf()    → lire depuis le clavier
+fgets()    → lire une ligne (sécurisé)
+puts()     → afficher + nouvelle ligne
+getchar()  → lire un caractère
+fopen/fclose → ouvrir/fermer fichiers
+
+⚠️ Toujours en première ligne (presque) de tout programme C!`,
+    en:`📌 What stdio.h provides:
+Standard input/output functions.
+
+💡 Main functions:
+printf()   → display on screen
+scanf()    → read from keyboard
+fgets()    → read a line (safe)
+puts()     → print + newline
+getchar()  → read one character
+fopen/fclose → open/close files
+
+⚠️ Always (nearly) first line of every C program!`
+  },
+  algFr:`// Ce qui se passe avant la compilation:
+//
+// Étape 1: Le préprocesseur lit "#include <stdio.h>"
+// Étape 2: Il trouve le fichier stdio.h
+// Étape 3: Il le copie dans votre programme
+// Étape 4: Le compilateur compile tout ensemble
+//
+// C'est AVANT l'exécution (pas pendant!)
+
+#include <stdio.h>   // ← toujours ici
+int main() {
+    printf("Hello!\\n");
+    return 0;
+}`,
+  algExp:{
+    ar:`🔗 المفهوم:
+#include لا تُوجَد في الخوارزمية لأنها تقنية
+لكنها ضرورية في كل برنامج C!
+
+📌 القاعدة البسيطة:
+إذا استخدمتَ printf أو scanf
+→ أضف #include <stdio.h> في الأعلى!`,
+    fr:`🔗 Concept:
+#include n'existe pas en algo car c'est technique
+Mais obligatoire dans tout programme C!
+
+📌 Règle simple:
+Si vous utilisez printf ou scanf
+→ Ajouter #include <stdio.h> en haut!`,
+    en:`🔗 Concept:
+#include doesn't exist in algorithm as it's technical
+But required in every C program!
+
+📌 Simple rule:
+If you use printf or scanf
+→ Add #include <stdio.h> at the top!`
+  },
+  category:'control'
+},
+
+28:{
+  title:{ar:'#include <stdbool.h>',fr:'#include <stdbool.h>',en:'#include <stdbool.h>'},
+  exp:{
+    ar:`📌 الاستخدام:
+يُفعِّل النوع المنطقي bool والقيمتين true وfalse.
+
+💡 قبل وبعد stdbool.h:
+// بدونه: نستخدم int
+int isEven = (n%2 == 0);  // 1 أو 0
+
+// معه: أوضح وأكثر تعبيراً
+#include <stdbool.h>
+bool isEven = (n%2 == 0);  // true أو false
+
+💡 يُستخدم في:
+• دوال الفحص: Automorphe, IsPrime, IsEven
+• إشارات الحالة: bool found, bool done
+• نتائج الشروط المعقدة
+
+⚠️ متاح من معيار C99 فصاعداً
+(مع خيار التجميع: gcc -std=c99)`,
+    fr:`📌 Usage:
+Active le type bool et true/false (C99).
+
+💡 Avant/après stdbool.h:
+// Sans: utiliser int
+int isEven = (n%2 == 0);
+
+// Avec: plus clair
+#include <stdbool.h>
+bool isEven = (n%2 == 0);
+
+💡 Utilisé pour:
+• Fonctions de vérification
+• Indicateurs d'état
+• Résultats de conditions complexes`,
+    en:`📌 Usage:
+Enables bool type and true/false literals (C99).
+
+💡 Before/after stdbool.h:
+// Without: use int
+int isEven = (n%2 == 0);
+
+// With: clearer
+#include <stdbool.h>
+bool isEven = (n%2 == 0);
+
+💡 Used for:
+• Check functions
+• State flags
+• Complex condition results`
+  },
+  algFr:`Inclusion (pseudo-code conceptuel):
+  Si besoin de booléens lisibles
+    Alors ajouter: #include <stdbool.h>
+  Sinon (ancien C ou sans C99)
+    Utiliser int: 0=faux, 1=vrai
+
+// Exemple d'utilisation:
+#include <stdio.h>
+#include <stdbool.h>
+bool IsPrime(int n) {
+    if(n<2) return false;
+    for(int i=2; i*i<=n; i++)
+        if(n%i==0) return false;
+    return true;
+}`,
+  algExp:{
+    ar:`🔗 الربط:
+"الدالة ترجع منطقي" في الخوارزمية
+→ يتطلب bool → يتطلب #include <stdbool.h>
+
+📌 ترتيب الإدراج:
+#include <stdio.h>    // أولاً
+#include <stdbool.h>  // ثانياً
+... باقي المكتبات ...`,
+    fr:`🔗 Lien:
+"La fonction retourne booléen" en algo
+→ nécessite bool → nécessite #include <stdbool.h>
+
+📌 Ordre d'inclusion:
+#include <stdio.h>    // en premier
+#include <stdbool.h>  // ensuite`,
+    en:`🔗 Link:
+"Function returns boolean" in algorithm
+→ needs bool → needs #include <stdbool.h>
+
+📌 Inclusion order:
+#include <stdio.h>    // first
+#include <stdbool.h>  // then`
+  },
+  category:'control'
+},
+
+35:{
+  title:{ar:'int Compter(int n)',fr:'int Compter(int n)',en:'int Compter(int n)'},
+  exp:{
+    ar:`📌 تشريح رأس الدالة:
+int  Compter  (int n)
+───  ───────  ──────
+↑      ↑         ↑
+نوع   الاسم    المعاملات
+
+1. int → نوع القيمة المُرجَعة (عدد الأرقام)
+2. Compter → اسم الدالة (وصفي)
+3. (int n) → معامل واحد: نسخة من العدد
+
+💡 الدالة كاملة:
+int Compter(int n) {
+    if(n==0) return 1;
+    int count=0;
+    while(n!=0){ count++; n/=10; }
+    return count;
+}
+
+💡 الاستدعاء:
+int digits = Compter(762); // digits=3`,
+    fr:`📌 Anatomie de l'en-tête:
+int  Compter  (int n)
+↑    ↑        ↑
+Type Nom      Paramètres
+
+1. int → type de retour (nb de chiffres)
+2. Compter → nom descriptif
+3. (int n) → une copie du nombre
+
+💡 Appel:
+int digits = Compter(762); // digits=3`,
+    en:`📌 Function header anatomy:
+int  Compter  (int n)
+↑    ↑        ↑
+Type Name     Parameters
+
+1. int → return type (digit count)
+2. Compter → descriptive name
+3. (int n) → one copy of the number
+
+💡 Calling:
+int digits = Compter(762); // digits=3`
+  },
+  algFr:`Fonction Compter(n) : Entier
+Début
+    Si n = 0 alors Retourner 1
+    nbr ← 0
+    Tant que n ≠ 0 Faire
+        nbr ← nbr + 1
+        n ← n div 10
+    FinTantQue
+    Retourner nbr
+Fin
+
+// Chaque ligne algo ≈ une ligne C:
+// "Fonction Compter(n):Entier" = "int Compter(int n){"
+// "Retourner nbr"              = "return nbr;"`,
+  algExp:{
+    ar:`🔗 ترجمة خط بخط:
+"دالة Compter(n): عدد صحيح"
+→ int Compter(int n) {
+
+"أرجع nbr"
+→ return nbr;
+
+"نهاية الدالة"
+→ } (قوس إغلاق)`,
+    fr:`🔗 Traduction ligne par ligne:
+"Fonction Compter(n): Entier"
+→ int Compter(int n) {
+
+"Retourner nbr"
+→ return nbr;
+
+"Fin"
+→ }`,
+    en:`🔗 Line-by-line translation:
+"Function Compter(n): Integer"
+→ int Compter(int n) {
+
+"Return nbr"
+→ return nbr;
+
+"End"
+→ }`
+  },
+  category:'control'
+},
+
+36:{
+  title:{ar:'return 1;',fr:'return 1;',en:'return 1;'},
+  exp:{
+    ar:`📌 الاستخدام في Compter:
+إذا كان n == 0 → العدد 0 له رقم واحد
+نُرجع 1 مباشرةً دون دخول الحلقة.
+
+💡 الكود:
+int Compter(int n) {
+    if(n == 0) return 1;  // ← هنا
+    int c=0;
+    while(n!=0){ c++; n/=10; }
+    return c;
+}
+
+💡 قاعدة مهمة:
+return يُنهي الدالة فوراً!
+كل ما بعده لا يُنفَّذ.
+
+🆚 الفرق:
+return 0  في main()    → البرنامج نجح
+return 1  في Compter() → "عدد الأرقام = 1"`,
+    fr:`📌 Usage dans Compter:
+Si n == 0 → le nombre 0 a un seul chiffre
+On retourne 1 directement sans boucle.
+
+💡 Règle importante:
+return termine la fonction immédiatement!
+Ce qui suit n'est jamais exécuté.
+
+🆚 Différence:
+return 0  dans main()    → succès du programme
+return 1  dans Compter() → "nb de chiffres = 1"`,
+    en:`📌 Usage in Compter:
+If n == 0 → the number 0 has one digit
+Return 1 directly without entering the loop.
+
+💡 Important rule:
+return ends the function immediately!
+Nothing after it executes.
+
+🆚 Difference:
+return 0  in main()    → program success
+return 1  in Compter() → "digit count = 1"`
+  },
+  algFr:`Fonction Compter(n) : Entier
+Début
+    Si n = 0 alors
+        Retourner 1   ← return 1; en C
+        // Fin immédiate de la fonction
+    FinSi
+    // Suite: compter les chiffres...
+Fin`,
+  algExp:{
+    ar:`🔗 الربط:
+"أرجع 1 وانتهِ" في الخوارزمية → return 1; في C
+
+📌 لماذا الحالة الخاصة للصفر؟
+بدونها: while(0!=0) لا تعمل → count=0 (خطأ!)
+معها:   نُرجع 1 مباشرةً (صحيح ✓)`,
+    fr:`🔗 Lien:
+"Retourner 1" en algo → return 1; en C
+
+📌 Pourquoi le cas spécial pour zéro?
+Sans: while(0!=0) ne s'exécute pas → count=0 (faux!)
+Avec: on retourne 1 directement (correct ✓)`,
+    en:`🔗 Link:
+"Return 1" in algorithm → return 1; in C
+
+📌 Why special case for zero?
+Without: while(0!=0) doesn't run → count=0 (wrong!)
+With: return 1 directly (correct ✓)`
+  },
+  category:'control'
+},
+
+37:{
+  title:{ar:'bool Automorphe(int n)',fr:'bool Automorphe(int n)',en:'bool Automorphe(int n)'},
+  exp:{
+    ar:`📌 العدد الأوتومورف:
+عدد مربعه ينتهي بنفس أرقامه.
+مثال: 25² = 625 ✓ | 76² = 5776 ✓
+
+💡 خوارزمية الفحص:
+bool Automorphe(int n) {
+    int carre = n * n;
+    int nbr   = n;
+    int k     = Compter(n);
+    for(int i=0; i<k; i++) {
+        if(carre%10 != nbr%10)
+            return false;  // رقم مختلف → لا
+        carre /= 10;
+        nbr   /= 10;
+    }
+    return true;  // كل الأرقام تطابقت → نعم
+}
+
+💡 الأعداد الأوتومورفية حتى 100:
+1, 5, 6, 25, 76`,
+    fr:`📌 Nombre automorphe:
+Son carré se termine par ses propres chiffres.
+Exemple: 25² = 625 ✓ | 76² = 5776 ✓
+
+💡 Algorithme:
+bool Automorphe(int n) {
+    int carre=n*n, nbr=n, k=Compter(n);
+    for(int i=0;i<k;i++){
+        if(carre%10!=nbr%10) return false;
+        carre/=10; nbr/=10;
+    }
+    return true;
+}
+
+💡 Automorphes ≤ 100: 1,5,6,25,76`,
+    en:`📌 Automorphic number:
+Its square ends with its own digits.
+Example: 25² = 625 ✓ | 76² = 5776 ✓
+
+💡 Algorithm:
+bool Automorphe(int n) {
+    int sq=n*n, nbr=n, k=Compter(n);
+    for(int i=0;i<k;i++){
+        if(sq%10!=nbr%10) return false;
+        sq/=10; nbr/=10;
+    }
+    return true;
+}
+
+💡 Automorphic ≤ 100: 1,5,6,25,76`
+  },
+  algFr:`Fonction Automorphe(n) : Booléen
+  carre ← n × n
+  nbChiffres ← Compter(n)
+  Pour i de 1 à nbChiffres Faire
+    Si (carre mod 10) ≠ (n mod 10)
+      Retourner Faux
+    carre ← carre div 10
+    n     ← n div 10
+  FinPour
+  Retourner Vrai`,
+  algExp:{
+    ar:`🔗 الخطوة بخطوة لـ n=25:
+carre=625, k=2
+Tour 1: 625%10=5, 25%10=5 ✓ carre=62,n=2
+Tour 2: 62%10=2,  2%10=2  ✓ fin
+→ return true  (25 أوتومورف!)`,
+    fr:`🔗 Pas à pas pour n=25:
+carre=625, k=2
+Tour 1: 625%10=5, 25%10=5 ✓ carre=62,n=2
+Tour 2: 62%10=2,  2%10=2  ✓ fin
+→ return true  (25 est automorphe!)`,
+    en:`🔗 Step by step for n=25:
+square=625, k=2
+Round 1: 625%10=5, 25%10=5 ✓ sq=62,n=2
+Round 2: 62%10=2,  2%10=2  ✓ done
+→ return true  (25 is automorphic!)`
+  },
+  category:'control'
+},
+
+38:{
+  title:{ar:'void AfficherNbrAutomorphe(int n,int m)',fr:'void AfficherNbrAutomorphe(int n,int m)',en:'void AfficherNbrAutomorphe(int n,int m)'},
+  exp:{
+    ar:`📌 void — إجراء بلا قيمة مُرجَعة:
+void تعني "لا أُرجع شيئاً رقمياً".
+الدالة تُنجز عملاً (الطباعة) دون إرجاع قيمة.
+
+💡 الكود الكامل:
+void AfficherNbrAutomorphe(int n, int m) {
+    while(n <= m) {
+        if(Automorphe(n))
+            printf("%d, ", n);
+        n++;
+    }
+}
+
+💡 الاستدعاء من main:
+int n, m;
+scanf("%d %d", &n, &m);
+AfficherNbrAutomorphe(n, m);
+printf("\\n");
+
+📊 أنواع الدوال:
+int xxx()   → تُرجع عدداً صحيحاً
+float xxx() → تُرجع عدداً عشرياً
+bool xxx()  → تُرجع true/false
+void xxx()  → لا تُرجع شيئاً`,
+    fr:`📌 void — procédure sans valeur de retour:
+void = "je ne retourne rien de numérique".
+La fonction effectue une action (affichage).
+
+💡 Code complet:
+void AfficherNbrAutomorphe(int n, int m) {
+    while(n <= m) {
+        if(Automorphe(n))
+            printf("%d, ", n);
+        n++;
+    }
+}
+
+📊 Types de fonctions:
+int xxx()   → retourne un entier
+float xxx() → retourne un flottant
+bool xxx()  → retourne true/false
+void xxx()  → ne retourne rien`,
+    en:`📌 void — procedure with no return value:
+void = "I return nothing numeric".
+Function performs an action (printing).
+
+💡 Full code:
+void AfficherNbrAutomorphe(int n, int m) {
+    while(n <= m) {
+        if(Automorphe(n))
+            printf("%d, ", n);
+        n++;
+    }
+}
+
+📊 Function types:
+int xxx()   → returns integer
+float xxx() → returns float
+bool xxx()  → returns true/false
+void xxx()  → returns nothing`
+  },
+  algFr:`Procédure AfficherNbrAutomorphe(n, m)
+Début
+    Tant que n ≤ m Faire
+        Si Automorphe(n) alors
+            Écrire(n, ", ")
+        FinSi
+        n ← n + 1
+    FinTantQue
+Fin
+
+// "Procédure" = fonction "void" en C
+// Pas de "Retourner valeur"`,
+  algExp:{
+    ar:`🔗 الربط:
+"إجراء" في الخوارزمية → void في C
+"اكتب(n)" → printf("%d, ", n)
+"n←n+1"  → n++
+
+📌 الاستدعاء من main:
+AfficherNbrAutomorphe(1, 100);
+// يطبع: 1, 5, 6, 25, 76,`,
+    fr:`🔗 Lien:
+"Procédure" en algo → void en C
+"Écrire(n)" → printf("%d, ", n)
+"n←n+1"    → n++
+
+📌 Appel depuis main:
+AfficherNbrAutomorphe(1, 100);
+// affiche: 1, 5, 6, 25, 76,`,
+    en:`🔗 Link:
+"Procedure" in algorithm → void in C
+"Write(n)" → printf("%d, ", n)
+"n←n+1"   → n++
+
+📌 Call from main:
+AfficherNbrAutomorphe(1, 100);
+// prints: 1, 5, 6, 25, 76,`
+  },
+  category:'control'
+},
+
+40:{
+  title:{ar:'printf("%d, ", n)',fr:'printf("%d, ", n)',en:'printf("%d, ", n)'},
+  exp:{
+    ar:`📌 تحليل printf:
+printf("تنسيق", قيم...)
+
+"نص تنسيق" يحتوي:
+• نص ثابت: يُطبَع كما هو
+• %d : يُستبدَل بقيمة عدد صحيح
+
+💡 مثال مفصَّل:
+printf("%d, ", n);
+// إذا n=25 → يطبع: 25, 
+// النتيجة النهائية: 1, 5, 6, 25,
+
+💡 أمثلة متقدمة:
+printf("%d + %d = %d\\n", a, b, a+b);
+printf("%-10s|%5d\\n", name, score);
+printf("0x%X\\n", 255);  // 0xFF
+
+⚠️ القاعدة: عدد % = عدد الوسائط بعد الفاصلة`,
+    fr:`📌 Analyse de printf:
+printf("format", valeurs...)
+
+Le format contient:
+• texte fixe: affiché tel quel
+• %d : remplacé par la valeur entière
+
+💡 Exemple:
+printf("%d, ", n);
+// Si n=25 → affiche: 25,
+
+💡 Exemples avancés:
+printf("%d + %d = %d\\n", a, b, a+b);
+printf("0x%X\\n", 255);  // 0xFF`,
+    en:`📌 printf analysis:
+printf("format", values...)
+
+Format string contains:
+• fixed text: printed as-is
+• %d : replaced by integer value
+
+💡 Example:
+printf("%d, ", n);
+// If n=25 → prints: 25,
+
+💡 Advanced examples:
+printf("%d + %d = %d\\n", a, b, a+b);
+printf("0x%X\\n", 255);  // 0xFF`
+  },
+  algFr:`Écrire(n, ", ")
+// En C: printf("%d, ", n);
+
+// Structure:
+// printf( "format",  variables );
+//          ^^^^^^    ^^^^^^^^^
+//        "%d, "       n=25
+//
+// Résultat: "25, "`,
+  algExp:{
+    ar:`🔗 الربط:
+"اكتب(n, ",")" في الخوارزمية
+→ printf("%d, ", n); في C
+
+📌 في نهاية البرنامج:
+printf("\\n");  // لسطر جديد بعد القائمة
+// أو printf("\\b\\b  \\n"); لإزالة الفاصلة الأخيرة`,
+    fr:`🔗 Lien:
+"Écrire(n, ",")" en algo
+→ printf("%d, ", n); en C
+
+📌 À la fin du programme:
+printf("\\n");  // nouvelle ligne après la liste`,
+    en:`🔗 Link:
+"Write(n, ",")" in algorithm
+→ printf("%d, ", n); in C
+
+📌 At end of program:
+printf("\\n");  // newline after the list`
+  },
+  category:'output'
+},
+
+41:{
+  title:{ar:'carre = n * n',fr:'carre = n * n',en:'carre = n * n'},
+  exp:{
+    ar:`📌 الاستخدام في Automorphe:
+نحسب مربع n ونخزِّنه لنقارن أرقامه.
+
+💡 الكود:
+int carre = n * n;
+// مثال: n=25 → carre=625
+
+💡 لماذا نخزِّنه في متغير؟
+• لا نُعيد الحساب في كل دورة
+• يُعدَّل (n /=10 وcarre /=10) بشكل مستقل
+
+💡 المشغِّلات الحسابية في C:
++  جمع         n + 3
+-  طرح         n - 1
+*  ضرب         n * n
+/  قسمة        n / 10
+%  باقي        n % 10
+
+⚠️ إذا كان n كبيراً:
+n=1000000 → n*n = 10^12 > حد int
+→ استخدم long long carre = (long long)n*n`,
+    fr:`📌 Usage dans Automorphe:
+On calcule n² et le stocke pour comparer.
+
+💡 Code:
+int carre = n * n;
+// Exemple: n=25 → carre=625
+
+💡 Opérateurs arithmétiques:
++, -, *, /, %
+
+⚠️ Pour n grand:
+n=1000000 → n*n dépasse int
+→ Utiliser long long`,
+    en:`📌 Usage in Automorphe:
+We calculate n² and store it to compare digits.
+
+💡 Code:
+int carre = n * n;
+// Example: n=25 → carre=625
+
+💡 Arithmetic operators:
++, -, *, /, %
+
+⚠️ For large n:
+n=1000000 → n*n overflows int
+→ Use long long`
+  },
+  algFr:`carre ← n × n
+// En C: int carre = n * n;
+
+// Exemple pour n=25:
+// carre = 25 × 25 = 625
+// On va comparer:
+//   625 % 10 = 5  avec  25 % 10 = 5 ✓
+//   62  % 10 = 2  avec   2 % 10 = 2 ✓
+// → 25 est automorphe!`,
+  algExp:{
+    ar:`🔗 الربط:
+"carre ← n × n" في الخوارزمية
+→ int carre = n * n; في C
+
+📌 ترتيب العمليات:
+int c = n*n; // يحسب أولاً n*n ثم يُسنَد لـc
+c /= 10;     // يُقسَّم c على 10 ويُحفَظ`,
+    fr:`🔗 Lien:
+"carre ← n × n" en algo
+→ int carre = n * n; en C
+
+📌 Ordre des opérations:
+int c = n*n; // calcule d'abord n*n puis affecte
+c /= 10;     // divise c par 10 et sauvegarde`,
+    en:`🔗 Link:
+"square ← n × n" in algorithm
+→ int carre = n * n; in C
+
+📌 Order of operations:
+int c = n*n; // calculates n*n first, then assigns
+c /= 10;     // divides c by 10 and saves`
+  },
+  category:'operator'
+},
+
+42:{
+  title:{ar:'int main()',fr:'int main()',en:'int main()'},
+  exp:{
+    ar:`📌 نقطة انطلاق كل برنامج C:
+main() هي الدالة التي يبدأ منها التنفيذ.
+
+💡 الأشكال المقبولة:
+int main()               // لا معاملات
+int main(void)           // صريح: لا معاملات
+int main(int argc, char* argv[]) // مع وسائط سطر الأوامر
+
+💡 هيكل main المثالي:
+int main() {
+    // 1. الإعلان عن المتغيرات
+    int n, m;
+    // 2. القراءة من المستخدم
+    scanf("%d %d", &n, &m);
+    // 3. عرض رسالة
+    printf("الأعداد الأوتومورفية: ");
+    // 4. استدعاء الدوال
+    AfficherNbrAutomorphe(n, m);
+    // 5. الإنهاء
+    printf("\\n");
+    return 0;
+}
+
+📌 اجعل main قصيرةً! — استدعِ دوالاً أخرى.`,
+    fr:`📌 Point d'entrée de tout programme C.
+
+💡 Structure idéale:
+int main() {
+    int n, m;
+    scanf("%d %d", &n, &m);
+    printf("Nombres automorphes: ");
+    AfficherNbrAutomorphe(n, m);
+    printf("\\n");
+    return 0;
+}
+
+📌 Garder main courte! — déléguer aux fonctions.`,
+    en:`📌 Starting point of every C program.
+
+💡 Ideal structure:
+int main() {
+    int n, m;
+    scanf("%d %d", &n, &m);
+    printf("Automorphic numbers: ");
+    AfficherNbrAutomorphe(n, m);
+    printf("\\n");
+    return 0;
+}
+
+📌 Keep main short! — delegate to functions.`
+  },
+  algFr:`Algorithme Principal
+Début
+    1. Lire n, m
+    2. Afficher le titre
+    3. AfficherNbrAutomorphe(n, m)
+    4. Aller à la ligne
+    5. Retourner 0 au système
+Fin
+
+// Chaque étape = une ou deux lignes en C
+// main() = le "chef d'orchestre"`,
+  algExp:{
+    ar:`🔗 ترجمة:
+"الخوارزمية الرئيسية" → int main() في C
+"ابدأ / انتهِ"          → { ... return 0; }
+
+📌 النمط الجيد:
+main() تُنظِّم وتستدعي
+الدوال الأخرى تُنفِّذ
+→ الكود أوضح وأسهل في الصيانة`,
+    fr:`🔗 Traduction:
+"Algorithme Principal" → int main() en C
+"Début / Fin"          → { ... return 0; }
+
+📌 Bonne pratique:
+main() orchestre et appelle
+Les autres fonctions exécutent`,
+    en:`🔗 Translation:
+"Main Algorithm" → int main() in C
+"Start / End"    → { ... return 0; }
+
+📌 Good practice:
+main() orchestrates and calls
+Other functions execute the work`
+  },
+  category:'control'
+},
+
+// ──────────────────── COMMENTS ────────────────────
+25:{
+  title:{ar:'// تعليق',fr:'// commentaire',en:'// comment'},
+  exp:{
+    ar:`📌 الاستخدام:
+// تعليق أحادي السطر — يتجاهله المترجم تماماً.
+
+💡 متى تكتب تعليقاً؟
+int speed = 60;     // سرعة بالكم/ساعة
+i++;                // زيادة العداد
+// TODO: تحسين الأداء لاحقاً
+
+💡 التعليق الجيد يشرح "لماذا" لا "ماذا":
+// خطأ: i = i + 1; // زِد i بواحد (واضح!)
+// صواب: i++;  // نتخطى الفهرس 0 لأنه حجز للرأس
+
+💡 تعطيل كود مؤقتاً:
+// printf("Debug: x=%d\\n", x);
+// ← سطر معطَّل للاختبار
+
+💡 أنواع التعليقات:
+//       → أحادي السطر (هذا)
+/* */    → متعدد الأسطر (التالي)`,
+    fr:`📌 Usage:
+// commentaire d'une ligne — ignoré par le compilateur.
+
+💡 Quand commenter?
+int vitesse = 60;  // km/h
+i++;               // incrémenter compteur
+
+💡 Un bon commentaire explique "pourquoi" pas "quoi":
+// Mauvais: i++; // incrémenter i
+// Bon: i++;    // sauter l'indice 0 (réservé)
+
+💡 Types de commentaires:
+//    → une ligne (celui-ci)
+/* */ → multi-lignes (suivant)`,
+    en:`📌 Usage:
+// single-line comment — completely ignored.
+
+💡 When to comment?
+int speed = 60;   // km/h
+i++;              // increment counter
+
+💡 Good comment explains "why" not "what":
+// Bad: i++; // increment i
+// Good: i++; // skip index 0 (reserved for header)
+
+💡 Comment types:
+//    → single line (this one)
+/* */ → multi-line (next one)`
+  },
+  algFr:`// En pseudo-code et en C, les commentaires
+// ont le même rôle: expliquer le code
+
+Algorithme AvecCommentaires
+Début
+    // Initialiser le compteur
+    nbr ← 0
+    // Parcourir jusqu'à la fin
+    Tant que (nbr < 10) Faire
+        nbr ← nbr + 1  // incrémenter
+    FinTantQue
+Fin`,
+  algExp:{
+    ar:`🔗 الملاحظة:
+التعليقات متشابهة في الخوارزمية وC
+كلاهما // لتعليق أحادي السطر
+
+📌 قاعدة المحترفين:
+اكتب الكود بوضوح بحيث لا يحتاج تعليقاً
+ثم أضف تعليقاً للأجزاء غير البديهية`,
+    fr:`🔗 Observation:
+Même syntaxe // en algo et en C
+
+📌 Règle des pros:
+Écrire un code clair qui n'a pas besoin
+d'explication, puis commenter les parties
+non évidentes`,
+    en:`🔗 Note:
+Same // syntax in algorithm and C
+
+📌 Pro rule:
+Write clear code that doesn't need
+explanation, then comment the
+non-obvious parts`
+  },
+  category:'comment'
+},
+
+26:{
+  title:{ar:'/* تعليق */',fr:'/* commentaire */',en:'/* comment */'},
+  exp:{
+    ar:`📌 الاستخدام:
+/* */ تعليق متعدد الأسطر — مثالي للتوثيق.
+
+💡 توثيق دالة (النمط الاحترافي):
+/*
+ * حساب الأعداد الأوتومورفية
+ * المدخل: n, m — حدود المجال
+ * المخرج: يطبع الأعداد المطابقة
+ * المؤلف: الطالب
+ * التاريخ: 2025
+ */
+void AfficherNbrAutomorphe(int n, int m) {
+
+💡 تعطيل كتلة كود:
+/*
+if (debug) {
+    printf("n=%d, carre=%d\\n", n, carre);
+}
+*/
+
+⚠️ لا يمكن تعشيق /* */ !
+/* /* خطأ */ */   ← خطأ تجميع`,
+    fr:`📌 Usage:
+/* */ commentaire multi-lignes — pour la documentation.
+
+💡 Documentation (style professionnel):
+/*
+ * Afficher nombres automorphes
+ * Entrée: n, m — bornes de l'intervalle
+ * Sortie: affichage sur écran
+ * Auteur: Étudiant
+ * Date: 2025
+ */
+
+💡 Désactiver du code:
+/*
+if (debug) { printf("debug\\n"); }
+*/
+
+⚠️ /* */ ne s'imbriquent pas!`,
+    en:`📌 Usage:
+/* */ multi-line comment — ideal for documentation.
+
+💡 Documentation (professional style):
+/*
+ * Display automorphic numbers
+ * Input: n, m — interval bounds
+ * Output: prints matching numbers
+ * Author: Student
+ * Date: 2025
+ */
+
+💡 Disable code block:
+/*
+if (debug) { printf("debug\\n"); }
+*/
+
+⚠️ /* */ cannot nest!`
+  },
+  algFr:`/* En C, pour documenter une fonction:
+
+   Fonction: nom de la fonction
+   Rôle: ce qu'elle fait
+   Entrée: paramètres
+   Sortie: valeur de retour
+   
+   Cette pratique s'appelle:
+   "Documentation du code"
+*/
+
+int maFonction(int x) {
+    return x * 2;
+}`,
+  algExp:{
+    ar:`🔗 الاستخدام المهني:
+/* */ يُستخدم لتوثيق كل دالة مهمة
+يشرح: الهدف، المدخلات، المخرجات
+
+📌 أدوات توليد التوثيق:
+Doxygen يقرأ /* */ بصيغة خاصة
+ويُنشئ ملفات HTML أو PDF تلقائياً`,
+    fr:`🔗 Usage professionnel:
+/* */ pour documenter chaque fonction
+Explique: but, entrées, sorties
+
+📌 Outils de doc automatique:
+Doxygen lit les /* */ avec syntaxe spéciale
+et génère des fichiers HTML/PDF`,
+    en:`🔗 Professional use:
+/* */ to document every important function
+Explains: purpose, inputs, outputs
+
+📌 Auto-doc tools:
+Doxygen reads /* */ with special syntax
+and generates HTML/PDF files automatically`
+  },
+  category:'comment'
+}
+
+}; // end data
+
+// ═══════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════
+let lang='ar', filter='all', currentId=1, step=1;
+
+// ═══════════════════════════════════════════
+//  RENDER GRID
+// ═══════════════════════════════════════════
+function renderGrid(){
+    const q=(document.getElementById('search').value||'').toLowerCase();
+    const c=document.getElementById('codesContainer');
+    c.innerHTML='';
+    let idx=0;
+    Object.keys(data).forEach(k=>{
+        const item=data[k];
+        if(filter!=='all'&&item.category!==filter) return;
+        if(q){
+            const hay=(item.title[lang]+(item.exp[lang]||'')+k).toLowerCase();
+            if(!hay.includes(q)) return;
         }
-
-        function handleClick(element, index) {
-            element.classList.add('pulse');
-            setTimeout(() => {
-                element.classList.remove('pulse');
-            }, 600);
-            
-            const searchBox = document.getElementById('search');
-            searchBox.value = Security.sanitize(data[index].title[lang]);
-            searchBox.classList.add('highlighted');
-            setTimeout(() => {
-                searchBox.classList.remove('highlighted');
-            }, 2000);
-            
-            openModal(index);
-        }
-
-        function filterCodes(category) {
-            currentFilter = category;
-            const boxes = document.querySelectorAll('.code-box');
-            const filterBtns = document.querySelectorAll('.filter-btn');
-            
-            filterBtns.forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            document.querySelector(`.filter-btn[onclick="filterCodes('${category}')"]`).classList.add('active');
-            
-            boxes.forEach(box => {
-                if (category === 'all' || box.getAttribute('data-category') === category) {
-                    box.style.display = 'flex';
-                } else {
-                    box.style.display = 'none';
-                }
-            });
-        }
-
-        function updateLangBtn() {
-            const labels = { ar: 'AR', fr: 'FR', en: 'EN' };
-            document.getElementById("langBtn").textContent = labels[lang];
-        }
-
-        function translateUI() {
-            document.getElementById("html-root").setAttribute("lang", lang);
-            document.getElementById("html-root").setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
-            document.body.className = `lang-${lang}`;
-
-            const labels = {
-                ar: { 
-                    home: "الرئيسية", 
-                    search: "بحث عن كود...", 
-                    close: "غلق", 
-                    next: "التالي", 
-                    back: "رجوع",
-                    subtitle: "تعلم وفهم أهم أوامر لغة C من خلال شرح متعدد اللغات",
-                    hint: "انقر على أي صندوق لعرض شرح مفصّل باللغات: العربية / الفرنسية / الإنجليزية"
-                },
-                fr: { 
-                    home: "Accueil", 
-                    search: "Rechercher un code...", 
-                    close: "Fermer", 
-                    next: "Suivant", 
-                    back: "Précédent",
-                    subtitle: "Apprenez et comprenez les commandes C importantes via des explications multilingues",
-                    hint: "Cliquez sur une boîte pour afficher une explication détaillée en arabe / français / anglais"
-                },
-                en: { 
-                    home: "Home", 
-                    search: "Search for code...", 
-                    close: "Close", 
-                    next: "Next", 
-                    back: "Back",
-                    subtitle: "Learn and understand important C commands through multilingual explanations",
-                    hint: "Click any box to see a detailed explanation in Arabic / French / English"
-                }
-            };
-
-            const t = labels[lang];
-            document.getElementById("homeText").textContent = Security.sanitize(t.home);
-            document.getElementById("search").placeholder = Security.sanitize(t.search);
-            document.getElementById("closeBtn").textContent = Security.sanitize(t.close);
-            document.getElementById("nextBtn").innerHTML = Security.sanitize(t.next) + ' <i class="fas fa-arrow-left"></i>';
-            document.getElementById("prevBtn").innerHTML = '<i class="fas fa-arrow-right"></i> ' + Security.sanitize(t.back);
-            document.getElementById("subtitle").textContent = Security.sanitize(t.subtitle);
-            document.getElementById("hintText").textContent = Security.sanitize(t.hint);
-
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                const category = btn.getAttribute('onclick').match(/'([^']+)'/)[1];
-                btn.textContent = Security.sanitize(categoryLabels[category][lang]);
-            });
-
-            initializeCodes();
-
-            updateLangBtn();
-
-            if (document.getElementById("modal").style.display === "flex") {
-                openModal(current);
-            }
-        }
-
-        function toggleLanguage() {
-            lang = lang === "ar" ? "fr" : lang === "fr" ? "en" : "ar";
-            translateUI();
-        }
-
-        function openModal(i) {
-            current = i;
-            step = 1;
-            document.getElementById("modal").style.display = "flex";
-            
-            const item = data[i];
-            document.getElementById("title").textContent = Security.sanitize(item.title[lang]);
-            document.getElementById("modalCategory").textContent = Security.sanitize(categoryLabels[item.category][lang]);
-            document.getElementById("content").textContent = Security.sanitize(item.exp[lang]);
-            
-            updateModalButtons();
-            updateStepIndicator();
-        }
-
-        function nextStep() {
-            if (step === 1) {
-                document.getElementById("content").textContent = Security.sanitize(data[current].algFr);
-                step = 2;
-            } else if (step === 2) {
-                document.getElementById("content").textContent = Security.sanitize(data[current].algExp[lang]);
-                step = 3;
-            } else {
-                closeModal();
-                return;
-            }
-            
-            updateModalButtons();
-            updateStepIndicator();
-        }
-
-        function prevStep() {
-            if (step === 2) {
-                document.getElementById("content").textContent = Security.sanitize(data[current].exp[lang]);
-                step = 1;
-            } else if (step === 3) {
-                document.getElementById("content").textContent = Security.sanitize(data[current].algFr);
-                step = 2;
-            }
-            
-            updateModalButtons();
-            updateStepIndicator();
-        }
-
-        function updateModalButtons() {
-            const prevBtn = document.getElementById("prevBtn");
-            const nextBtn = document.getElementById("nextBtn");
-            
-            prevBtn.style.display = step > 1 ? "inline-block" : "none";
-            
-            if (step === 3) {
-                nextBtn.innerHTML = Security.sanitize(lang === "ar" ? "إغلاق" : (lang === "fr" ? "Fermer" : "Close")) + 
-                    ' <i class="fas fa-arrow-left"></i>';
-            } else {
-                nextBtn.innerHTML = Security.sanitize(lang === "ar" ? "التالي" : (lang === "fr" ? "Suivant" : "Next")) + 
-                    ' <i class="fas fa-arrow-left"></i>';
-            }
-        }
-
-        function updateStepIndicator() {
-            const dots = document.querySelectorAll('.step-dot');
-            dots.forEach((dot, index) => {
-                if (index + 1 === step) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
-            });
-        }
-
-        function closeModal() {
-            document.getElementById("modal").style.display = "none";
-        }
-
-        document.getElementById("search").addEventListener("input", function () {
-            const text = Security.sanitize(this.value.trim().toLowerCase());
-            const boxes = document.querySelectorAll(".code-box");
-            
-            boxes.forEach(box => {
-                const code = box.querySelector('.code-content').textContent.toLowerCase();
-                const category = box.querySelector('.code-category').textContent.toLowerCase();
-                
-                if (code.includes(text) || category.includes(text)) {
-                    box.style.display = currentFilter === 'all' || box.getAttribute('data-category') === currentFilter ? 'flex' : 'none';
-                } else {
-                    box.style.display = 'none';
-                }
-            });
+        idx++;
+        const box=document.createElement('div');
+        box.className='code-box';
+        box.style.animationDelay=(idx*0.04)+'s';
+        const icon=catIcons[item.category]||'fa-code';
+        const clr=catColors[item.category]||'';
+        box.innerHTML=`
+            <div class="box-icon"><i class="fas ${icon} ${clr}"></i></div>
+            <div class="code-content">${Security.sanitize(item.title[lang])}</div>
+            <span class="code-category">${Security.sanitize(catLabels[item.category][lang])}</span>
+        `;
+        box.addEventListener('click',()=>{
+            box.classList.add('pulse');
+            setTimeout(()=>box.classList.remove('pulse'),500);
+            // fill search
+            const sb=document.getElementById('search');
+            sb.value=Security.sanitize(item.title[lang]);
+            sb.classList.add('highlighted');
+            setTimeout(()=>sb.classList.remove('highlighted'),2000);
+            openModal(parseInt(k));
         });
+        c.appendChild(box);
+    });
+}
 
-        document.querySelector('.home-btn').addEventListener('click', function(e) {
-            if (!Security.validateLink(this.href)) {
-                e.preventDefault();
-                alert('رابط غير صالح لأسباب أمنية');
-            }
-        });
+// ═══════════════════════════════════════════
+//  MODAL
+// ═══════════════════════════════════════════
+function openModal(id){
+    currentId=id; step=1;
+    updateModal();
+    document.getElementById('modal').className='modal open';
+    document.body.style.overflow='hidden';
+}
 
-        document.addEventListener('DOMContentLoaded', () => {
-            Security.protect();
-            
-            translateUI();
+function updateModal(){
+    const item=data[currentId];
+    const ui=UI[lang];
+    document.getElementById('mTitle').textContent=item.title[lang];
+    document.getElementById('mCat').textContent=catLabels[item.category][lang];
 
-            if (window.self !== window.top) {
-                try {
-                    window.top.location = window.self.location;
-                } catch (e) {
-                    document.body.innerHTML = '<div style="padding: 20px; text-align: center; color: white;"><h2>⚠️ تحذير أمني</h2><p>تم تحميل هذه الصفحة في إطار غير مصرح به.</p><p>يرجى فتح الصفحة مباشرة في المتصفح.</p></div>';
-                }
-            }
+    // tabs
+    ['tab1','tab2','tab3'].forEach((id,i)=>{
+        const t=document.getElementById(id);
+        t.textContent=ui[id];
+        t.className='step-tab'+(step===i+1?' on':'');
+    });
 
-            window.addEventListener('scroll', () => {
-                document.body.classList.toggle('scrolling', window.scrollY > 10);
-            });
+    // body class
+    document.getElementById('mBody').className='modal-body step-'+step;
 
-            document.getElementById("modal").addEventListener("click", function (e) {
-                if (e.target === this) closeModal();
-            });
+    // content
+    const contents=[item.exp[lang], item.algFr, item.algExp[lang]];
+    const lbls=[ui.lbl1,ui.lbl2,ui.lbl3];
+    document.getElementById('stepLbl').textContent=lbls[step-1];
+    document.getElementById('mContent').textContent=contents[step-1];
 
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && document.getElementById("modal").style.display === "flex") {
-                    closeModal();
-                }
-            });
-        });
-    </script>
+    // dots
+    document.querySelectorAll('.dot').forEach(d=>{
+        d.classList.toggle('on',parseInt(d.dataset.d)===step);
+    });
+
+    // buttons
+    const prevBtn=document.getElementById('prevBtn');
+    const nextTxt=document.getElementById('nextTxt');
+    prevBtn.style.display=step>1?'inline-flex':'none';
+    const closeWord=step===3?(lang==='ar'?'إغلاق':lang==='fr'?'Fermer':'Close'):ui.next;
+    nextTxt.textContent=closeWord;
+    document.getElementById('closeTxt').textContent=ui.close;
+    document.getElementById('prevTxt').textContent=ui.prev;
+}
+
+function closeModal(){
+    document.getElementById('modal').className='modal';
+    document.body.style.overflow='';
+}
+
+function nextStep(){if(step<3){step++;updateModal();}else closeModal();}
+function prevStep(){if(step>1){step--;updateModal();}}
+
+// ═══════════════════════════════════════════
+//  LANGUAGE
+// ═══════════════════════════════════════════
+function setLang(l){
+    lang=l;
+    document.getElementById('html-root').setAttribute('lang',l);
+    document.getElementById('html-root').setAttribute('dir',l==='ar'?'rtl':'ltr');
+    document.body.className='lang-'+l;
+    document.querySelectorAll('#langBar .lb').forEach(b=>b.classList.toggle('on',b.dataset.l===l));
+    const ui=UI[l];
+    document.getElementById('homeText').textContent=ui.home;
+    document.getElementById('pageTitle').textContent=ui.title;
+    document.getElementById('subtitle').textContent=ui.subtitle;
+    document.getElementById('hintText').textContent=ui.hint;
+    document.getElementById('search').placeholder=ui.search;
+    document.getElementById('badgeText').textContent=ui.badge;
+    // update filter labels
+    document.querySelectorAll('.filter-btn').forEach(btn=>{
+        const cat=btn.dataset.cat;
+        if(catLabels[cat]) btn.textContent=catLabels[cat][l];
+    });
+    renderGrid();
+    if(document.getElementById('modal').className.includes('open')) updateModal();
+}
+
+// ═══════════════════════════════════════════
+//  EVENTS
+// ═══════════════════════════════════════════
+document.getElementById('filtersBar').addEventListener('click',e=>{
+    const btn=e.target.closest('.filter-btn');
+    if(!btn) return;
+    filter=btn.dataset.cat;
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderGrid();
+});
+
+document.getElementById('langBar').addEventListener('click',e=>{
+    const btn=e.target.closest('.lb');
+    if(btn&&btn.dataset.l) setLang(btn.dataset.l);
+});
+
+document.getElementById('stepTabs').addEventListener('click',e=>{
+    const btn=e.target.closest('.step-tab');
+    if(btn){step=parseInt(btn.dataset.s);updateModal();}
+});
+
+document.getElementById('nextBtn').addEventListener('click',nextStep);
+document.getElementById('prevBtn').addEventListener('click',prevStep);
+document.getElementById('closeBtn').addEventListener('click',closeModal);
+
+document.getElementById('search').addEventListener('input',renderGrid);
+
+document.addEventListener('keydown',e=>{
+    if(e.key==='Escape') closeModal();
+    const open=document.getElementById('modal').className.includes('open');
+    if(open&&e.key==='ArrowLeft') nextStep();
+    if(open&&e.key==='ArrowRight') prevStep();
+});
+
+document.getElementById('modal').addEventListener('click',e=>{
+    if(e.target===document.getElementById('modal')) closeModal();
+});
+
+document.querySelector('.home-btn').addEventListener('click',e=>{
+    if(!Security.validateLink(e.currentTarget.href)) e.preventDefault();
+});
+
+window.addEventListener('scroll',()=>document.body.classList.toggle('scrolling',scrollY>10));
+
+// ═══════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════
+document.addEventListener('DOMContentLoaded',()=>{
+    Security.protect();
+    if(window.self!==window.top){
+        try{window.top.location=window.self.location;}
+        catch(e){document.body.innerHTML='<div style="padding:20px;text-align:center;color:white;"><h2>⚠️ تحذير أمني</h2><p>يرجى فتح الصفحة مباشرة في المتصفح.</p></div>';}
+    }
+    setLang('ar');
+});
+</script>
 </body>
 </html>

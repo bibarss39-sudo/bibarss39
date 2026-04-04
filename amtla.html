@@ -22,26 +22,25 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Tajawal:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #0b1120;
-            --bg-secondary: #141c2f;
-            --card-bg: rgba(25, 35, 55, 0.85);
-            --card-bg-hover: rgba(30, 40, 65, 0.95);
-            --accent: #3b82f6;
-            --accent-light: #60a5fa;
-            --accent-dark: #2563eb;
+            /* نظام ألوان الأمثلة المتطور */
+            --bg-primary: #020617;
+            --bg-secondary: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.4);
+            --card-bg-hover: rgba(30, 41, 59, 0.7);
+            --accent: #10b981;
+            --accent-light: #34d399;
+            --accent-dark: #059669;
+            --primary-purple: #6366f1;
             --success: #10b981;
             --warning: #f59e0b;
-            --purple: #8b5cf6;
-            --pink: #ec4899;
-            --text-primary: #f1f5f9;
+            --text-primary: #f8fafc;
             --text-secondary: #cbd5e1;
             --code-text: #e2e8f0;
-            --border: rgba(148, 163, 184, 0.2);
-            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
-            --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.35);
-            --shadow-lg: 0 16px 40px rgba(59, 130, 246, 0.25);
-            --glow: 0 0 20px rgba(59, 130, 246, 0.3);
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --border: rgba(255, 255, 255, 0.08);
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -52,12 +51,14 @@
 
         body {
             font-family: 'Tajawal', sans-serif;
-            background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+            background: var(--bg-primary);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.05) 0px, transparent 50%);
             color: var(--text-primary);
             padding: 20px;
             min-height: 100vh;
             line-height: 1.6;
-            overflow-x: hidden;
         }
 
         body::before {
@@ -67,7 +68,7 @@
             right: 0;
             width: 100%;
             height: 6px;
-            background: linear-gradient(90deg, var(--accent), #0ea5e9, #00eaff);
+            background: linear-gradient(90deg, var(--accent), #a78bfa, var(--accent-light));
             opacity: 0;
             transition: opacity 0.4s ease;
             z-index: 1000;
@@ -121,17 +122,17 @@
             gap: 8px;
             text-decoration: none;
             color: var(--accent-light);
-            background: rgba(59, 130, 246, 0.1);
+            background: rgba(34, 211, 238, 0.1);
             padding: 10px 18px;
             border-radius: 14px;
             font-weight: 500;
             font-size: 15px;
             transition: var(--transition);
-            border: 1px solid rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(34, 211, 238, 0.2);
         }
 
         .page-link:hover {
-            background: rgba(59, 130, 246, 0.2);
+            background: rgba(34, 211, 238, 0.2);
             transform: translateY(-2px);
         }
 
@@ -165,7 +166,7 @@
         .lang-btn.active {
             background: var(--accent);
             color: white;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4), var(--shadow-lg);
+            box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.4), var(--shadow-lg);
         }
 
         .header-container {
@@ -180,7 +181,7 @@
             font-size: 2.5rem;
             margin-bottom: 15px;
             color: var(--accent-light);
-            text-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+            text-shadow: 0 2px 8px rgba(34, 211, 238, 0.2);
             font-weight: 700;
             letter-spacing: -0.5px;
             position: relative;
@@ -228,7 +229,7 @@
             outline: none;
             border-color: var(--accent-light);
             background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.3);
         }
 
         .search-icon {
@@ -270,7 +271,7 @@
             background: var(--accent);
             color: white;
             border-color: var(--accent);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 4px 12px rgba(34, 211, 238, 0.3);
         }
 
         .examples-grid {
@@ -306,7 +307,7 @@
             right: 0;
             width: 4px;
             height: 100%;
-            background: linear-gradient(to bottom, var(--accent), #0ea5e9);
+            background: linear-gradient(to bottom, var(--accent), #8b5cf6);
             transform: scaleY(0);
             transform-origin: top;
             transition: transform 0.4s ease;
@@ -344,13 +345,13 @@
             border-radius: 20px;
             font-size: 13px;
             font-weight: 600;
-            background: rgba(59, 130, 246, 0.15);
+            background: rgba(34, 211, 238, 0.15);
             color: var(--accent-light);
-            border: 1px solid rgba(59, 130, 246, 0.3);
+            border: 1px solid rgba(34, 211, 238, 0.3);
         }
 
         .copy-btn {
-            background: rgba(59, 130, 246, 0.15);
+            background: rgba(34, 211, 238, 0.15);
             color: var(--accent-light);
             border: none;
             width: 40px;
@@ -539,7 +540,7 @@
             right: 0;
             width: 100%;
             height: 6px;
-            background: linear-gradient(90deg, var(--accent), var(--purple), var(--pink));
+            background: linear-gradient(90deg, var(--accent), #8b5cf6, #ec4899);
             border-radius: 24px 24px 0 0;
         }
 
@@ -561,7 +562,7 @@
         }
 
         .info-header h3 i {
-            color: var(--purple);
+            color: #8b5cf6;
         }
 
         .close-btn {
@@ -605,7 +606,7 @@
         }
 
         .info-title i {
-            color: var(--purple);
+            color: #8b5cf6;
         }
 
         .info-text {
@@ -676,8 +677,8 @@
         }
 
         .action-btn {
-            background: rgba(59, 130, 246, 0.15);
-            border: 1px solid rgba(59, 130, 246, 0.3);
+            background: rgba(34, 211, 238, 0.15);
+            border: 1px solid rgba(34, 211, 238, 0.3);
             color: var(--accent-light);
             padding: 10px 20px;
             border-radius: 10px;
@@ -692,7 +693,7 @@
         }
 
         .action-btn:hover {
-            background: rgba(59, 130, 246, 0.25);
+            background: rgba(34, 211, 238, 0.25);
             transform: translateY(-2px);
         }
 
@@ -957,24 +958,9 @@
                 },
                 category: 'io',
                 tips: {
-                    ar: [
-                        'استخدم printf لعرض النصوص والقيم على الشاشة',
-                        'يجب تضمين مكتبة stdio.h لاستخدام printf',
-                        'تستخدم \\n لإنهاء السطر والانتقال للسطر التالي',
-                        'return 0 يشير إلى نجاح تنفيذ البرنامج'
-                    ],
-                    fr: [
-                        'Utilisez printf pour afficher du texte et des valeurs à l\'écran',
-                        'Vous devez inclure stdio.h pour utiliser printf',
-                        'Utilisez \\n pour terminer une ligne et passer à la suivante',
-                        'return 0 indique une exécution réussie du programme'
-                    ],
-                    en: [
-                        'Use printf to display text and values on screen',
-                        'You must include stdio.h to use printf',
-                        'Use \\n to end a line and move to next line',
-                        'return 0 indicates successful program execution'
-                    ]
+                    ar: ['استخدم printf لعرض النصوص والقيم', 'تستخدم \\n لإنهاء السطر', 'return 0 يشير لنجاح البرنامج'],
+                    fr: ['Utilisez printf pour afficher du texte', 'Utilisez \\n pour passer à la ligne', 'return 0 indique le succès'],
+                    en: ['Use printf to display text', 'Use \\n for a new line', 'return 0 indicates success']
                 }
             },
             {
@@ -983,277 +969,206 @@
                 algo: `Algorithme LireEntier\nVariable x : Entier\nDébut\n    Écrire("Entrez un entier : ")\n    Lire(x)\n    Écrire("Vous avez saisi : ", x)\nFin`,
                 desc: {
                     ar: 'قراءة إدخال المستخدم باستخدام scanf. لا تنسى رمز & قبل اسم المتغير.',
-                    fr: 'Lecture d\'entrée utilisateur avec scanf. Ne pas oublier l\'esperluette (&) avant la variable.',
-                    en: 'User input reading with scanf. Don\'t forget the ampersand (&) before variable.'
+                    fr: 'Lecture d\'entrée utilisateur avec scanf. Ne pas oublier &.',
+                    en: 'User input reading with scanf. Don\'t forget &.'
                 },
                 category: 'io',
                 tips: {
-                    ar: [
-                        'يجب استخدام & قبل اسم المتغير في scanf',
-                        '%d يقرأ عدداً صحيحاً فقط',
-                        'يمكن استخدام scanf لقراءة أنواع بيانات مختلفة',
-                        'يجب مطابقة نوع المتغير مع محدد التنسيق'
-                    ],
-                    fr: [
-                        'Vous devez utiliser & avant le nom de la variable dans scanf',
-                        '%d lit uniquement un entier',
-                        'scanf peut lire différents types de données',
-                        'Le type de variable doit correspondre au spécificateur de format'
-                    ],
-                    en: [
-                        'You must use & before variable name in scanf',
-                        '%d reads only integer',
-                        'scanf can read different data types',
-                        'Variable type must match format specifier'
-                    ]
+                    ar: ['يجب استخدام & قبل اسم المتغير', '%d يقرأ عدداً صحيحاً', 'يجب مطابقة محدد التنسيق مع النوع'],
+                    fr: ['Utilisez & avant le nom de la variable', '%d lit un entier', 'Faites correspondre le type et le format'],
+                    en: ['Use & before variable name', '%d reads an integer', 'Match format specifier with type']
                 }
             },
             {
-                code: 'for (int i = 0; i < 10; i++)',
-                c: `#include <stdio.h>\nint main() {\n    for (int i = 0; i < 10; i++) {\n        printf("%d ", i);\n    }\n    printf("\\n");\n    return 0;\n}`,
-                algo: `Algorithme BoucleFor\nDébut\n    Pour i allant de 0 à 9 Faire\n        Écrire(i, " ")\n    FinPour\nFin`,
+                code: 'if (age >= 18) { ... }',
+                c: `#include <stdio.h>\nint main() {\n    int age = 20;\n    if (age >= 18) {\n        printf("Adult\\n");\n    } else {\n        printf("Minor\\n");\n    }\n    return 0;\n}`,
+                algo: `Si (age >= 18) Alors\n    Écrire("Adulte")\nSinon\n    Écrire("Mineur")\nFinSi`,
                 desc: {
-                    ar: 'الحلقة for الكلاسيكية مع التهيئة، الشرط، والزيادة.',
-                    fr: 'Boucle for classique avec initialisation, condition et incrémentation.',
-                    en: 'Classic for loop with initialization, condition and increment.'
+                    ar: 'اتخاذ القرارات في الكود باستخدام جملة if-else.',
+                    fr: 'Prise de décision avec if-else.',
+                    en: 'Decision making with if-else.'
                 },
-                category: 'loops',
+                category: 'conditions',
                 tips: {
-                    ar: [
-                        'الحلقة for مثالية عندما تعرف عدد التكرارات مسبقاً',
-                        'i++ تعني زيادة i بواحد بعد كل تكرار',
-                        'يمكن استخدام متغيرات مختلفة غير i',
-                        'يمكن التكرار تنازلياً باستخدام i--'
-                    ],
-                    fr: [
-                        'La boucle for est idéale quand vous connaissez le nombre d\'itérations',
-                        'i++ signifie incrémenter i de un après chaque itération',
-                        'Vous pouvez utiliser des variables différentes de i',
-                        'Vous pouvez itérer en descendant avec i--'
-                    ],
-                    en: [
-                        'For loop is ideal when you know iteration count',
-                        'i++ means increment i by one after each iteration',
-                        'You can use variables other than i',
-                        'You can iterate descending with i--'
-                    ]
+                    ar: ['يستخدم الشرط بين القوسين ()', 'else اختيارية', 'يمكن دمج عدة شروط'],
+                    fr: ['Condition entre parenthèses ()', 'else est optionnel', 'Combinez plusieurs conditions'],
+                    en: ['Condition in parentheses ()', 'else is optional', 'Combine multiple conditions']
                 }
             },
             {
-                code: 'do { } while (x < 10)',
-                c: `#include <stdio.h>\nint main() {\n    int x = 0;\n    do {\n        printf("%d ", x);\n        x++;\n    } while (x < 10);\n    printf("\\n");\n    return 0;\n}`,
-                algo: `Algorithme BoucleDoWhile\nVariable x : Entier\nDébut\n    x ← 0\n    Répéter\n        Écrire(x, " ")\n        x ← x + 1\n    Jusqu\'à (x >= 10)\nFin`,
+                code: 'switch (choice) { ... }',
+                c: `switch (note) {\n    case 20: printf("Parfait"); break;\n    case 10: printf("Passable"); break;\n    default: printf("Autre");\n}`,
+                algo: `Selon note Faire\n    20 : Écrire("Parfait")\n    10 : Écrire("Passable")\n    Autrement : Écrire("Autre")\nFinSelon`,
                 desc: {
-                    ar: 'حلقة do-while تضمن تنفيذ الكود مرة واحدة على الأقل قبل التحقق من الشرط.',
-                    fr: 'Boucle do-while garantissant au moins une exécution avant vérification de condition.',
-                    en: 'Do-while loop guarantees at least one execution before condition check.'
+                    ar: 'اختيار واحد من عدة احتمالات بناءً على قيمة متغير.',
+                    fr: 'Sélection parmi plusieurs cas.',
+                    en: 'Selection among multiple cases.'
                 },
-                category: 'loops',
+                category: 'conditions',
                 tips: {
-                    ar: [
-                        'do-while تضمن تنفيذ الكتلة مرة واحدة على الأقل',
-                        'مفيدة عند الحاجة لتنفيذ الكود قبل التحقق من الشرط',
-                        'تختلف عن while التي قد لا تنفذ أبداً',
-                        'انتبه لنقطة الفاصلة المنقوطة بعد while'
-                    ],
-                    fr: [
-                        'do-while garantit au moins une exécution du bloc',
-                        'Utile quand vous devez exécuter le code avant de vérifier la condition',
-                        'Différent de while qui peut ne jamais s\'exécuter',
-                        'Attention au point-virgule après while'
-                    ],
-                    en: [
-                        'do-while guarantees at least one block execution',
-                        'Useful when you need to execute code before checking condition',
-                        'Different from while which may never execute',
-                        'Pay attention to semicolon after while'
-                    ]
+                    ar: ['لا تنسى break بعد كل حالة', 'default تنفذ إذا لم يتحقق أي شرط'],
+                    fr: ['N\'oubliez pas break', 'default si aucun cas ne correspond'],
+                    en: ['Don\'t forget break', 'default if no cases match']
                 }
             },
             {
-                code: 'while (x < 10)',
-                c: `#include <stdio.h>\nint main() {\n    int x = 0;\n    while (x < 10) {\n        printf("%d ", x);\n        x++;\n    }\n    printf("\\n");\n    return 0;\n}`,
-                algo: `Algorithme BoucleWhile\nVariable x : Entier\nDébut\n    x ← 0\n    Tant que (x < 10) Faire\n        Écrire(x, " ")\n        x ← x + 1\n    FinTantQue\nFin`,
+                code: 'for (int i=0; i<5; i++)',
+                c: `for (int i = 0; i < 5; i++) {\n    printf("%d ", i);\n}`,
+                algo: `Pour i de 0 à 4 Faire\n    Écrire(i)\nFinPour`,
                 desc: {
-                    ar: 'الحلقة while القياسية. يتم التحقق من الشرط قبل كل تكرار.',
-                    fr: 'Boucle while standard. La condition est vérifiée avant chaque itération.',
-                    en: 'Standard while loop. Condition checked before each iteration.'
+                    ar: 'تكرار الكود لعدد محدد من المرات.',
+                    fr: 'Répéter le code un nombre déterminé de fois.',
+                    en: 'Repeat code for a specific number of times.'
                 },
                 category: 'loops',
                 tips: {
-                    ar: [
-                        'while تتحقق من الشرط قبل تنفيذ الكتلة',
-                        'قد لا تنفذ الكتلة أبداً إذا كان الشرط خاطئاً من البداية',
-                        'مفيدة عندما لا تعرف عدد التكرارات مسبقاً',
-                        'تأكد من تحديث متغير الشرط داخل الحلقة'
-                    ],
-                    fr: [
-                        'while vérifie la condition avant d\'exécuter le bloc',
-                        'Le bloc peut ne jamais s\'exécuter si la condition est fausse au départ',
-                        'Utile quand vous ne connaissez pas le nombre d\'itérations',
-                        'Assurez-vous de mettre à jour la variable de condition dans la boucle'
-                    ],
-                    en: [
-                        'while checks condition before executing block',
-                        'Block may never execute if condition is initially false',
-                        'Useful when you don\'t know iteration count',
-                        'Make sure to update condition variable inside loop'
-                    ]
+                    ar: ['مثالي للمصفوفات والتكرارات المعروفة', 'i++ تعني زيادة i بواحد'],
+                    fr: ['Idéal pour les tableaux', 'i++ incrémente i de 1'],
+                    en: ['Ideal for arrays', 'i++ increments i by 1']
+                }
+            },
+            {
+                code: 'while (x < 10) { ... }',
+                c: `int x = 0;\nwhile (x < 5) {\n    printf("%d ", x);\n    x++;\n}`,
+                algo: `Tant que (x < 5) Faire\n    Écrire(x)\n    x <- x + 1\nFinTantQue`,
+                desc: {
+                    ar: 'تكرار الكود طالما الشرط محقق.',
+                    fr: 'Répéter le code tant que la condition est vraie.',
+                    en: 'Repeat code while condition is true.'
+                },
+                category: 'loops',
+                tips: {
+                    ar: ['يتم التحقق من الشرط قبل التنفيذ', 'تأكد من تحديث المتغير داخل الحلقة'],
+                    fr: ['Condition vérifiée avant l\'exécution', 'Mise à jour requise dans la boucle'],
+                    en: ['Condition checked before execution', 'Update required inside the loop']
+                }
+            },
+            {
+                code: 'do { ... } while (cond);',
+                c: `int x = 0;\ndo {\n    printf("%d ", x);\n    x++;\n} while (x < 5);`,
+                algo: `Répéter\n    Écrire(x)\n    x <- x + 1\nJusqu'à (x >= 5)`,
+                desc: {
+                    ar: 'تكرار الكود مرة واحدة على الأقل قبل التحقق من الشرط.',
+                    fr: 'Exécuter au moins une fois avant de vérifier.',
+                    en: 'Execute at least once before checking.'
+                },
+                category: 'loops',
+                tips: {
+                    ar: ['ينفذ الجسم أولاً ثم يتحقق', 'مفيد في التحقق من صحة المدخلات'],
+                    fr: ['Exécute puis vérifie', 'Utile pour la validation'],
+                    en: ['Executes then checks', 'Useful for validation']
+                }
+            },
+            {
+                code: 'int x = 10; float y = 5.5;',
+                c: `int a = 5;\nfloat b = 3.14;\nchar c = 'A';\ndouble d = 1.23456;`,
+                algo: `Variables\n    a : Entier\n    b : Réel\n    c : Caractère`,
+                desc: {
+                    ar: 'تعريف أنواع مختلفة من البيانات لتخزين القيم.',
+                    fr: 'Définition de différents types de données.',
+                    en: 'Defining different data types.'
+                },
+                category: 'types',
+                tips: {
+                    ar: ['int للأعداد الصحيحة', 'float للأعداد العشرية', 'char لحرف واحد'],
+                    fr: ['int pour entiers', 'float pour décimaux', 'char pour un caractère'],
+                    en: ['int for integers', 'float for decimals', 'char for a character']
+                }
+            },
+            {
+                code: 'x + y, a && b, i++',
+                c: `int res = a + b;\nif (x > 0 && y < 10) { ... }\ni++; // i = i + 1`,
+                algo: `res <- a + b\nSi (x > 0 ET y < 10)\ni <- i + 1`,
+                desc: {
+                    ar: 'استخدام العمليات الحسابية والمنطقية والزيادة.',
+                    fr: 'Opérations arithmétiques et logiques.',
+                    en: 'Arithmetic and logical operations.'
+                },
+                category: 'operators',
+                tips: {
+                    ar: ['&& تعني "و"، || تعني "أو"', '++ تزيد القيمة بـ 1'],
+                    fr: ['&& signifie ET, || signifie OU', '++ augmente de 1'],
+                    en: ['&& means AND, || means OR', '++ increases by 1']
+                }
+            },
+            {
+                code: 'break; continue; return 0;',
+                c: `for(i=0;i<10;i++) {\n    if(i==5) break;\n    if(i%2==0) continue;\n}\nreturn 0;`,
+                algo: `Interrompre\nContinuer\nRetourner 0`,
+                desc: {
+                    ar: 'التحكم في تدفق البرنامج داخل الحلقات والدوال.',
+                    fr: 'Contrôle du flux du programme.',
+                    en: 'Controlling program flow.'
+                },
+                category: 'control',
+                tips: {
+                    ar: ['break تخرج من الحلقة', 'continue تنتقل للدورة التالية'],
+                    fr: ['break sort de la boucle', 'continue passe au suivant'],
+                    en: ['break exits the loop', 'continue skips to next']
                 }
             },
             {
                 code: '!x',
-                c: `#include <stdio.h>\nint main() {\n    int x = 0;\n    if (!x) {\n        printf("x est nul\\n");\n    }\n    return 0;\n}`,
-                algo: `Algorithme NOTLogique\nVariable x : Entier\nDébut\n    x ← 0\n    Si Non(x) Alors\n        Écrire("x est nul")\n    FinSi\nFin`,
+                c: `int x = 0;\nif (!x) {\n    printf("x est nul\\n");\n}`,
+                algo: `Si Non(x) Alors\n    Écrire("Nul")\nFinSi`,
                 desc: {
-                    ar: 'المشغل المنطقي NOT. يعيد القيمة صحيحة (1) إذا كان التعبير خاطئاً (0).',
-                    fr: 'Opérateur logique NOT. Renvoie vrai (1) si l\'expression est fausse (0).',
-                    en: 'Logical NOT operator. Returns true (1) if expression is false (0).'
+                    ar: 'المشغل المنطقي NOT لعكس القيمة.',
+                    fr: 'Opérateur logique NOT.',
+                    en: 'Logical NOT operator.'
                 },
                 category: 'operators',
                 tips: {
-                    ar: [
-                        '! تعكس قيمة التعبير المنطقي',
-                        '!0 يعيد 1 (صحيح)',
-                        '!أي قيمة غير صفرية تعيد 0 (خاطئ)',
-                        'مفيد لاختبار إذا ما كانت القيمة صفراً'
-                    ],
-                    fr: [
-                        '! inverse la valeur d\'une expression booléenne',
-                        '!0 retourne 1 (vrai)',
-                        '!toute valeur non nulle retourne 0 (faux)',
-                        'Utile pour tester si une valeur est nulle'
-                    ],
-                    en: [
-                        '! inverts boolean expression value',
-                        '!0 returns 1 (true)',
-                        '!any non-zero value returns 0 (false)',
-                        'Useful to test if value is zero'
-                    ]
+                    ar: ['! تعكس قيمة التعبير المنطقي', '!0 يعيد 1 (صحيح)'],
+                    fr: ['! inverse la valeur', '!0 retourne 1'],
+                    en: ['! inverts the value', '!0 returns 1']
                 }
             },
             {
-                code: '%d',
-                c: `#include <stdio.h>\nint main() {\n    int age = 25;\n    printf("Âge : %d ans\\n", age);\n    return 0;\n}`,
-                algo: `Algorithme FormatEntier\nDébut\n    Écrire("Âge : ", 25, " ans")\nFin`,
+                code: '%d, %f, %c',
+                c: `printf("%d", 10);\nprintf("%.2f", 3.14);\nprintf("%c", 'A');`,
+                algo: `Écrire(10)\nÉcrire(3.14)\nÉcrire('A')`,
                 desc: {
-                    ar: 'محدد تنسيق للأعداد الصحيحة ذات الإشارة في النظام العشري.',
-                    fr: 'Spécificateur de format pour les entiers signés en base décimale.',
-                    en: 'Format specifier for signed decimal integers.'
+                    ar: 'محددات التنسيق لطباعة أنواع مختلفة من البيانات.',
+                    fr: 'Spécificateurs de format.',
+                    en: 'Format specifiers.'
                 },
                 category: 'io',
                 tips: {
-                    ar: [
-                        '%d للأعداد الصحيحة الموقعة (بإشارة)',
-                        '%u للأعداد الصحيحة غير الموقعة',
-                        'يمكن تحديد عرض الحقل مثل %5d',
-                        'يستخدم مع printf و scanf'
-                    ],
-                    fr: [
-                        '%d pour les entiers signés',
-                        '%u pour les entiers non signés',
-                        'Vous pouvez spécifier la largeur comme %5d',
-                        'Utilisé avec printf et scanf'
-                    ],
-                    en: [
-                        '%d for signed integers',
-                        '%u for unsigned integers',
-                        'You can specify width like %5d',
-                        'Used with printf and scanf'
-                    ]
+                    ar: ['%d للانتجر', '%f للفلوت', '%c للشار'],
+                    fr: ['%d pour int', '%f pour float', '%c pour char'],
+                    en: ['%d for int', '%f for float', '%c for char']
                 }
             },
             {
-                code: '%f',
-                c: `#include <stdio.h>\nint main() {\n    float pi = 3.14159;\n    printf("π ≈ %.2f\\n", pi);\n    return 0;\n}`,
-                algo: `Algorithme FormatReel\nDébut\n    Écrire("π ≈ ", 3.14)\nFin`,
+                code: '+=, -=, *=, /=',
+                c: `x += 5; // x = x + 5\ny -= 2; // y = y - 2`,
+                algo: `x <- x + 5\ny <- y - 2`,
                 desc: {
-                    ar: 'محدد تنسيق للأعداد العشرية. .2f تعني منزلتين عشريتين.',
-                    fr: 'Spécificateur pour les nombres à virgule flottante. .2f signifie 2 décimales.',
-                    en: 'Format specifier for floating-point numbers. .2f means 2 decimal places.'
-                },
-                category: 'io',
-                tips: {
-                    ar: [
-                        '%f للأعداد العشرية من نوع float',
-                        '%lf للأعداد العشرية من نوع double',
-                        '%.2f تعرض منزلتين عشريتين',
-                        '%10.3f تعرض 10 أرقام مع 3 منازل عشرية'
-                    ],
-                    fr: [
-                        '%f pour les nombres décimaux de type float',
-                        '%lf pour les nombres décimaux de type double',
-                        '%.2f affiche 2 décimales',
-                        '%10.3f affiche 10 chiffres avec 3 décimales'
-                    ],
-                    en: [
-                        '%f for float decimal numbers',
-                        '%lf for double decimal numbers',
-                        '%.2f displays 2 decimal places',
-                        '%10.3f displays 10 digits with 3 decimals'
-                    ]
-                }
-            },
-            {
-                code: '%c',
-                c: `#include <stdio.h>\nint main() {\n    char c = \'A\';\n    printf("Caractère : %c\\n", c);\n    return 0;\n}`,
-                algo: `Algorithme FormatCaractere\nDébut\n    Écrire("Caractère : ", \'A\')\nFin`,
-                desc: {
-                    ar: 'محدد تنسيق لحرف واحد. استخدم %s للسلاسل النصية.',
-                    fr: 'Spécificateur pour un seul caractère. Utilisez %s pour les chaînes.',
-                    en: 'Format specifier for single character. Use %s for strings.'
-                },
-                category: 'io',
-                tips: {
-                    ar: [
-                        '%c لحرف واحد فقط',
-                        '%s للسلسلة النصية (مصفوفة أحرف)',
-                        'يمكن عرض رمز ASCII باستخدام %d مع char',
-                        'استخدم \\\' للفاصلة العليا داخل char'
-                    ],
-                    fr: [
-                        '%c pour un seul caractère',
-                        '%s pour une chaîne de caractères',
-                        'Vous pouvez afficher le code ASCII avec %d avec char',
-                        'Utilisez \\\' pour l\'apostrophe dans char'
-                    ],
-                    en: [
-                        '%c for single character only',
-                        '%s for string (character array)',
-                        'You can display ASCII code with %d with char',
-                        'Use \\\' for apostrophe inside char'
-                    ]
-                }
-            },
-            {
-                code: '+=',
-                c: `#include <stdio.h>\nint main() {\n    int x = 5;\n    x += 3;\n    printf("x = %d\\n", x);\n    return 0;\n}`,
-                algo: `Algorithme AdditionAffectation\nVariable x : Entier\nDébut\n    x ← 5\n    x ← x + 3\n    Écrire("x = ", x)\nFin`,
-                desc: {
-                    ar: 'مشغل الإسناد مع الجمع. يعادل x = x + 3.',
-                    fr: 'Opérateur d\'affectation avec addition. Equivalent à x = x + 3.',
-                    en: 'Addition assignment operator. Equivalent to x = x + 3.'
+                    ar: 'مشغلات الإسناد المركبة لاختصار العمليات.',
+                    fr: 'Opérateurs d\'affectation composée.',
+                    en: 'Compound assignment operators.'
                 },
                 category: 'operators',
                 tips: {
-                    ar: [
-                        '+= يجمع ويخزن النتيجة في نفس المتغير',
-                        'هناك أيضاً -= *= /= %=',
-                        'يختصر الكود ويجعله أكثر وضوحاً',
-                        'يمكن استخدامه مع جميع أنواع البيانات الرقمية'
-                    ],
-                    fr: [
-                        '+= additionne et stocke le résultat dans la même variable',
-                        'Il y a aussi -= *= /= %=',
-                        'Raccourcit le code et le rend plus clair',
-                        'Peut être utilisé avec tous les types de données numériques'
-                    ],
-                    en: [
-                        '+= adds and stores result in same variable',
-                        'There are also -= *= /= %=',
-                        'Shortens code and makes it clearer',
-                        'Can be used with all numeric data types'
-                    ]
+                    ar: ['تختصر الكود وتجعله أوضح', 'متوفرة لجميع العمليات الحسابية'],
+                    fr: ['Raccourcit le code', 'Disponible pour tout'],
+                    en: ['Shortens code', 'Available for all']
+                }
+            },
+            {
+                code: '// Commentaire',
+                c: `// Ceci est un commentaire\n/* Multi-lignes */`,
+                algo: `// Commentaire`,
+                desc: {
+                    ar: 'إضافة ملاحظات لشرح الكود.',
+                    fr: 'Ajout de notes.',
+                    en: 'Adding notes.'
+                },
+                category: 'misc',
+                tips: {
+                    ar: ['تجعل الكود مفهوماً أكثر', 'لا يتم تنفيذها'],
+                    fr: ['Rend le code lisible', 'Non exécuté'],
+                    en: ['Makes code readable', 'Not executed']
                 }
             }
         ];
@@ -1346,7 +1261,7 @@
         function setSecureCookie(name, value, days) {
             const expires = new Date(Date.now() + days * 864e5).toUTCString();
         
-            document.cookie = `${name}=${value}; expires=${expires}; path=/; SameSite=Strict`; // Secure; HttpOnly; can't be set via JS
+            document.cookie = `${name}=${value}; expires=${expires}; path=/; SameSite=Strict`; 
             console.warn(`[Security Note] For maximum security, cookie '${name}' should be set server-side with HttpOnly and Secure flags.`);
         }
 
