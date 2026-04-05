@@ -4,31 +4,72 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
     <title>القائمة الرئيسية — تعلم لغة C بسهولة | Algorithmes & C</title>
-        <link rel="icon" type="image/png" href="favicon.jpg">
+    <link rel="icon" type="image/png" href="favicon.jpg">
 
-    <!-- خطوط -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <style>
         :root {
-            /* نظام ألوان لوحة التحكم - عصري واحترافي */
-            --primary: #6366f1;
-            --primary-light: #818cf8;
-            --secondary: #10b981;
-            --ai-color: #8b5cf6;
-            --download-color: #f59e0b;
-            --youtube-color: #ef4444;
-            --bg-dark: #030712;
-            --bg-medium: #111827;
-            --card-bg: rgba(30, 41, 59, 0.4);
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --border-subtle: rgba(255, 255, 255, 0.08);
-            --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+            --cyan-300: #67e8f9;
+            --cyan-400: #22d3ee;
+            --cyan-500: #06b6d4;
+            --cyan-600: #0891b2;
+            --cyan-700: #0e7490;
+
+            --emerald-300: #6ee7b7;
+            --emerald-400: #34d399;
+            --emerald-500: #10b981;
+            --emerald-600: #059669;
+
+            --sky-400: #38bdf8;
+            --sky-500: #0ea5e9;
+
+            --violet-400: #a78bfa;
+            --violet-500: #8b5cf6;
+            --violet-600: #7c3aed;
+
+            --amber-300: #fcd34d;
+            --amber-400: #fbbf24;
+            --amber-500: #f59e0b;
+
+            --rose-400: #fb7185;
+            --rose-500: #f43f5e;
+            --rose-600: #e11d48;
+
+            --teal-400: #2dd4bf;
+            --teal-500: #14b8a6;
+
+            --lime-400: #a3e635;
+            --lime-500: #84cc16;
+
+            --dark-950: #020617;
+            --dark-900: #0f172a;
+            --dark-800: #1e293b;
+            --dark-700: #334155;
+            --dark-600: #475569;
+
+            --text-bright: #ffffff;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+
+            --glass-bg: rgba(15, 23, 42, 0.45);
+            --glass-border: rgba(34, 211, 238, 0.06);
+            --glass-border-hover: rgba(34, 211, 238, 0.2);
+
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --ease-spring: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+            --radius-sm: 12px;
+            --radius-md: 18px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
         }
 
-        * {
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -36,453 +77,914 @@
         }
 
         body {
-            background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.1) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.05) 0px, transparent 50%);
+            background: var(--dark-950);
             font-family: 'Tajawal', sans-serif;
             color: var(--text-primary);
             min-height: 100vh;
-            padding: 40px 24px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-x: hidden;
         }
 
-        /* ترويسة الصفحة */
+        /* ===== خلفية المشهد ===== */
+        .scene-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -10;
+            pointer-events: none;
+        }
+
+        .gradient-mesh {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 70% 45% at 10% -5%, rgba(6, 182, 212, 0.15) 0%, transparent 55%),
+                radial-gradient(ellipse 55% 55% at 90% 10%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 45% at 50% 50%, rgba(14, 165, 233, 0.05) 0%, transparent 45%),
+                radial-gradient(ellipse 50% 40% at 5% 85%, rgba(16, 185, 129, 0.08) 0%, transparent 45%),
+                radial-gradient(ellipse 45% 40% at 95% 80%, rgba(245, 158, 11, 0.06) 0%, transparent 40%);
+            animation: meshBreath 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes meshBreath {
+            0% { filter: hue-rotate(0deg) brightness(1); }
+            100% { filter: hue-rotate(6deg) brightness(1.03); }
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(110px);
+            will-change: transform;
+        }
+
+        .orb--cyan {
+            width: 550px; height: 550px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.2) 0%, transparent 70%);
+            top: -12%; right: -6%;
+            animation: drift1 26s ease-in-out infinite;
+        }
+
+        .orb--violet {
+            width: 450px; height: 450px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+            top: 5%; left: -5%;
+            animation: drift2 30s ease-in-out infinite;
+        }
+
+        .orb--emerald {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, transparent 70%);
+            bottom: -5%; right: 15%;
+            animation: drift3 24s ease-in-out infinite;
+        }
+
+        .orb--amber {
+            width: 350px; height: 350px;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, transparent 70%);
+            bottom: 10%; left: 5%;
+            animation: drift1 22s ease-in-out infinite reverse;
+        }
+
+        @keyframes drift1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, 30px) scale(1.06); }
+            50% { transform: translate(-25px, 55px) scale(0.96); }
+            75% { transform: translate(35px, -20px) scale(1.03); }
+        }
+        @keyframes drift2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-40px, -30px) scale(1.08); }
+            66% { transform: translate(25px, 40px) scale(0.94); }
+        }
+        @keyframes drift3 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(55px, -40px) scale(1.1); }
+        }
+
+        .dot-field {
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle at 1px 1px, rgba(34, 211, 238, 0.045) 1px, transparent 0);
+            background-size: 44px 44px;
+            mask-image: radial-gradient(ellipse 65% 50% at 50% 35%, rgba(0,0,0,0.5) 0%, transparent 70%);
+        }
+
+        .particles {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .dot {
+            position: absolute;
+            width: 3px; height: 3px;
+            border-radius: 50%;
+            background: rgba(34, 211, 238, 0.35);
+            animation: floatUp linear infinite;
+        }
+        .dot:nth-child(1)  { left: 8%;  animation-duration: 20s; animation-delay: 0s;    background: rgba(139,92,246,0.4); width: 2px; height: 2px; }
+        .dot:nth-child(2)  { left: 20%; animation-duration: 24s; animation-delay: -4s; }
+        .dot:nth-child(3)  { left: 35%; animation-duration: 18s; animation-delay: -8s;   background: rgba(16,185,129,0.35); }
+        .dot:nth-child(4)  { left: 48%; animation-duration: 22s; animation-delay: -2s;   width: 4px; height: 4px; background: rgba(34,211,238,0.2); }
+        .dot:nth-child(5)  { left: 62%; animation-duration: 26s; animation-delay: -10s;  background: rgba(245,158,11,0.35); width: 2px; height: 2px; }
+        .dot:nth-child(6)  { left: 75%; animation-duration: 19s; animation-delay: -6s; }
+        .dot:nth-child(7)  { left: 88%; animation-duration: 23s; animation-delay: -14s;  background: rgba(244,63,94,0.3); width: 2px; height: 2px; }
+        .dot:nth-child(8)  { left: 95%; animation-duration: 21s; animation-delay: -3s;   background: rgba(16,185,129,0.3); }
+
+        @keyframes floatUp {
+            0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+            8%   { opacity: 1; scale: 1; }
+            92%  { opacity: 1; }
+            100% { transform: translateY(-8vh) translateX(30px) scale(0); opacity: 0; }
+        }
+
+        /* ===== المحتوى ===== */
+        .page {
+            width: 100%;
+            max-width: 1200px;
+            padding: 52px 24px 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1;
+            position: relative;
+        }
+
+        /* ===== الترويسة ===== */
         .header {
             text-align: center;
-            margin-bottom: 50px;
-            width: 100%;
-            max-width: 800px;
+            margin-bottom: 44px;
+            max-width: 720px;
         }
 
-        .main-title {
-            font-size: clamp(2rem, 5vw, 3rem);
+        .header__overline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 18px;
+            background: rgba(6, 182, 212, 0.07);
+            border: 1px solid rgba(6, 182, 212, 0.15);
+            border-radius: 100px;
+            color: var(--cyan-300);
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-bottom: 22px;
+            letter-spacing: 0.5px;
+        }
+
+        .header__overline i { font-size: 0.7rem; }
+
+        .header__title {
+            font-size: clamp(2.2rem, 5.5vw, 3.2rem);
             font-weight: 900;
-            margin-bottom: 16px;
-            background: linear-gradient(to bottom, #fff, #94a3b8);
+            line-height: 1.12;
+            margin-bottom: 18px;
+            letter-spacing: -0.03em;
+            background: linear-gradient(to bottom, var(--text-bright) 25%, var(--text-muted) 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
 
-        .subtitle {
+        .header__desc {
             font-size: 1.1rem;
             color: var(--text-secondary);
-            max-width: 600px;
+            max-width: 560px;
             margin: 0 auto;
+            line-height: 1.85;
         }
 
-        /* محرك البحث */
-        .search-container {
+        /* ===== البحث ===== */
+        .search-wrap {
             width: 100%;
-            max-width: 500px;
-            margin-bottom: 40px;
+            max-width: 520px;
+            margin-bottom: 28px;
             position: relative;
         }
 
-        .search-input {
-            width: 100%;
-            padding: 16px 50px 16px 20px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-subtle);
-            border-radius: 16px;
-            color: white;
-            font-family: 'Tajawal', sans-serif;
-            font-size: 1rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: rgba(30, 41, 59, 0.6);
-            box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
-        }
-
-        .search-icon {
+        .search-wrap__icon {
             position: absolute;
             right: 20px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-secondary);
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            pointer-events: none;
+            transition: color 0.3s;
         }
 
-        /* أزرار اللغة */
-        .lang-buttons {
+        .search-input {
+            width: 100%;
+            padding: 16px 52px 16px 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            color: var(--text-bright);
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            transition: all 0.35s var(--ease-out-expo);
+        }
+
+        .search-input::placeholder { color: var(--text-dim); }
+
+        .search-input:focus {
+            outline: none;
+            border-color: rgba(6, 182, 212, 0.35);
+            background: rgba(15, 23, 42, 0.65);
+            box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.08), 0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        .search-input:focus ~ .search-wrap__icon { color: var(--cyan-400); }
+
+        /* ===== أزرار اللغة ===== */
+        .lang-bar {
             display: flex;
-            gap: 12px;
-            margin-bottom: 50px;
+            gap: 8px;
+            margin-bottom: 52px;
+            padding: 5px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
         }
 
         .lang-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--border-subtle);
-            color: var(--text-secondary);
-            padding: 10px 20px;
-            border-radius: 12px;
+            background: transparent;
+            border: none;
+            color: var(--text-dim);
+            padding: 10px 22px;
+            border-radius: 10px;
             cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s var(--ease-out-expo);
         }
+
+        .lang-btn:hover { color: var(--text-secondary); }
 
         .lang-btn.active {
-            background: var(--primary);
+            background: var(--cyan-600);
             color: white;
-            border-color: var(--primary);
-            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 16px rgba(6, 182, 212, 0.35);
         }
 
-        /* شبكة القائمة */
-        .menu {
+        /* ===== شبكة البطاقات ===== */
+        .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
             width: 100%;
-            max-width: 1100px;
         }
 
-        .item {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-subtle);
-            border-radius: 24px;
-            padding: 30px;
+        /* ===== بطاقة عامة ===== */
+        .card {
+            position: relative;
+            background: var(--glass-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 32px 28px 28px;
             text-decoration: none;
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            transition: all var(--ease-out);
-            position: relative;
+            gap: 18px;
+            transition: all 0.4s var(--ease-out-expo);
             overflow: hidden;
+            cursor: pointer;
         }
 
-        .item:hover {
-            transform: translateY(-10px);
-            background: rgba(30, 41, 59, 0.6);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .item::after {
+        .card::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at top right, rgba(255,255,255,0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
             pointer-events: none;
         }
 
-        .icon-wrapper {
-            width: 56px;
-            height: 56px;
-            border-radius: 16px;
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 200px; height: 200px;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--glass-border-hover);
+        }
+
+        .card:hover::before { opacity: 1; }
+        .card:hover::after { opacity: 1; }
+
+        /* خط علوي متدرج عند التمرير */
+        .card__line {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 2px;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .card:hover .card__line { opacity: 1; }
+
+        /* الأيقونة */
+        .card__icon {
+            width: 54px; height: 54px;
+            border-radius: var(--radius-sm);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.35rem;
             color: white;
-            background: var(--primary);
-            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+            position: relative;
+            z-index: 2;
+            transition: transform 0.4s var(--ease-out-back);
         }
 
-        /* تلوين خاص للأيقونات */
-        .ai-special .icon-wrapper { background: var(--ai-color); box-shadow: 0 10px 20px rgba(139, 92, 246, 0.2); }
-        .download-special .icon-wrapper { background: var(--download-color); box-shadow: 0 10px 20px rgba(245, 158, 11, 0.2); }
-        .youtube-special .icon-wrapper { background: var(--youtube-color); box-shadow: 0 10px 20px rgba(239, 68, 68, 0.2); }
-
-        .badge {
+        .card__icon::after {
+            content: '';
             position: absolute;
-            top: 20px;
-            left: 20px;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent 50%);
+        }
+
+        .card:hover .card__icon {
+            transform: scale(1.1) rotate(-4deg);
+        }
+
+        .card__content {
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .card__title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-bright);
+            transition: color 0.3s;
+        }
+
+        .card__desc {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.75;
+        }
+
+        /* سهم التنقل */
+        .card__arrow {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            transition: all 0.3s var(--ease-out-expo);
+            z-index: 2;
+        }
+
+        .card:hover .card__arrow {
+            background: rgba(255,255,255,0.08);
+            transform: translateX(-4px);
+        }
+
+        /* الشارة */
+        .card__badge {
+            position: absolute;
+            top: 18px; left: 18px;
             padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
+            border-radius: 100px;
+            font-size: 0.7rem;
             font-weight: 800;
             color: white;
-            background: var(--primary);
-            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 3;
         }
 
-        .ai-badge { background: var(--ai-color); }
-        .download-badge { background: var(--download-color); }
-        .youtube-badge { background: var(--youtube-color); }
+        /* ===== ألوان البطاقات الفردية ===== */
 
-        .item-content h3 {
-            font-size: 1.3rem;
-            font-weight: 800;
-            margin-bottom: 8px;
-            color: white;
+        /* 1 — الذكاء الاصطناعي: بنفسجي */
+        .card--ai::before { background: linear-gradient(160deg, rgba(139,92,246,0.06), transparent 55%); }
+        .card--ai::after  { background: rgba(139,92,246,0.15); top: -20px; right: -20px; }
+        .card--ai .card__icon { background: linear-gradient(135deg, var(--violet-600), var(--violet-500)); box-shadow: 0 8px 24px rgba(139,92,246,0.35); }
+        .card--ai .card__line { background: linear-gradient(90deg, transparent, var(--violet-500), transparent); }
+        .card--ai .card__badge { background: var(--violet-600); box-shadow: 0 2px 10px rgba(139,92,246,0.4); }
+        .card--ai:hover { border-color: rgba(139,92,246,0.25); box-shadow: 0 20px 48px rgba(0,0,0,0.35), 0 0 40px rgba(139,92,246,0.1); }
+        .card--ai:hover .card__title { color: var(--violet-400); }
+        .card--ai:hover .card__arrow { color: var(--violet-400); border-color: rgba(139,92,246,0.2); }
+
+        /* 2 — التطبيق: عنبري */
+        .card--app::before { background: linear-gradient(160deg, rgba(245,158,11,0.06), transparent 55%); }
+        .card--app::after  { background: rgba(245,158,11,0.12); top: -20px; right: -20px; }
+        .card--app .card__icon { background: linear-gradient(135deg, var(--amber-500), var(--amber-400)); box-shadow: 0 8px 24px rgba(245,158,11,0.3); }
+        .card--app .card__line { background: linear-gradient(90deg, transparent, var(--amber-400), transparent); }
+        .card--app .card__badge { background: var(--amber-500); box-shadow: 0 2px 10px rgba(245,158,11,0.4); }
+        .card--app:hover { border-color: rgba(245,158,11,0.25); box-shadow: 0 20px 48px rgba(0,0,0,0.35), 0 0 40px rgba(245,158,11,0.1); }
+        .card--app:hover .card__title { color: var(--amber-300); }
+        .card--app:hover .card__arrow { color: var(--amber-400); border-color: rgba(245,158,11,0.2); }
+
+        /* 3 — يوتيوب: أحمر وردي */
+        .card--yt::before { background: linear-gradient(160deg, rgba(244,63,94,0.06), transparent 55%); }
+        .card--yt::after  { background: rgba(244,63,94,0.12); top: -20px; right: -20px; }
+        .card--yt .card__icon { background: linear-gradient(135deg, var(--rose-600), var(--rose-500)); box-shadow: 0 8px 24px rgba(244,63,94,0.3); }
+        .card--yt .card__line { background: linear-gradient(90deg, transparent, var(--rose-500), transparent); }
+        .card--yt .card__badge { background: var(--rose-600); box-shadow: 0 2px 10px rgba(244,63,94,0.4); }
+        .card--yt:hover { border-color: rgba(244,63,94,0.25); box-shadow: 0 20px 48px rgba(0,0,0,0.35), 0 0 40px rgba(244,63,94,0.1); }
+        .card--yt:hover .card__title { color: var(--rose-400); }
+        .card--yt:hover .card__arrow { color: var(--rose-400); border-color: rgba(244,63,94,0.2); }
+
+        /* 4 — الأكواد: سيان */
+        .card--codes::before { background: linear-gradient(160deg, rgba(6,182,212,0.06), transparent 55%); }
+        .card--codes::after  { background: rgba(6,182,212,0.1); top: -20px; right: -20px; }
+        .card--codes .card__icon { background: linear-gradient(135deg, var(--cyan-600), var(--cyan-500)); box-shadow: 0 8px 24px rgba(6,182,212,0.3); }
+        .card--codes .card__line { background: linear-gradient(90deg, transparent, var(--cyan-400), transparent); }
+        .card--codes:hover { border-color: rgba(6,182,212,0.25); box-shadow: 0 20px 48px rgba(0,0,0,0.35), 0 0 40px rgba(6,182,212,0.1); }
+        .card--codes:hover .card__title { color: var(--cyan-300); }
+        .card--codes:hover .card__arrow { color: var(--cyan-400); border-color: rgba(6,182,212,0.2); }
+
+        /* 5 — الأمثلة: زمردي */
+        .card--examples::before { background: linear-gradient(160deg, rgba(16,185,129,0.06), transparent 55%); }
+        .card--examples::after  { background: rgba(16,185,129,0.1); top: -20px; right: -20px; }
+        .card--examples .card__icon { background: linear-gradient(135deg, var(--emerald-600), var(--emerald-500)); box-shadow: 0 8px 24px rgba(16,185,129,0.3); }
+        .card--examples .card__line { background: linear-gradient(90deg, transparent, var(--emerald-400), transparent); }
+        .card--examples:hover { border-color: rgba(16,185,129,0.25); box-shadow: 0 20px 48px rgba(0,0,0,0.35), 0 0 40px rgba(16,185,129,0.1); }
+        .card--examples:hover .card__title { color: var(--emerald-300); }
+        .card--examples:hover .card__arrow { color: var(--emerald-400); border-color: rgba(16,185,129,0.2); }
+
+        /* 6 — الاختصارات: أزرق سماوي */
+        .card--shortcuts::before { background: linear-gradient(160deg, rgba(14,165,233,0.06), transparent 55%); }
+        .card--shortcuts::after  { background: rgba(14,165,233,0.1); top: -20px; right: -20px; }
+        .card--shortcuts .card__icon { background: linear-gradient(135deg, var(--sky-500), var(--sky-400)); box-shadow: 0 8px 24px rgba(14,165,233,0.3); }
+        .card--shortcuts .card__line { background: linear-gradient(90deg, transparent, var(--sky-400), transparent); }
+        .card--shortcuts:hover { border-color: rgba(14,165,233,0.25); box-shadow: 0 20px 48px rgba(0,0,0,0.35), 0 0 40px rgba(14,165,233,0.1); }
+        .card--shortcuts:hover .card__title { color: var(--sky-400); }
+        .card--shortcuts:hover .card__arrow { color: var(--sky-400); border-color: rgba(14,165,233,0.2); }
+
+        /* 7 — التواصل: تيل */
+        .card--contact::before { background: linear-gradient(160deg, rgba(20,184,166,0.06), transparent 55%); }
+        .card--contact::after  { background: rgba(20,184,166,0.1); top: -20px; right: -20px; }
+        .card--contact .card__icon { background: linear-gradient(135deg, var(--teal-500), var(--teal-400)); box-shadow: 0 8px 24px rgba(20,184,166,0.3); }
+        .card--contact .card__line { background: linear-gradient(90deg, transparent, var(--teal-400), transparent); }
+        .card--contact:hover { border-color: rgba(20,184,166,0.25); box-shadow: 0 20px 48px rgba(0,0,0,0.35), 0 0 40px rgba(20,184,166,0.1); }
+        .card--contact:hover .card__title { color: var(--teal-400); }
+        .card--contact:hover .card__arrow { color: var(--teal-400); border-color: rgba(20,184,166,0.2); }
+
+        /* 8 — المصادر: لايم */
+        .card--sources::before { background: linear-gradient(160deg, rgba(132,204,22,0.06), transparent 55%); }
+        .card--sources::after  { background: rgba(132,204,22,0.1); top: -20px; right: -20px; }
+        .card--sources .card__icon { background: linear-gradient(135deg, var(--lime-500), var(--lime-400)); box-shadow: 0 8px 24px rgba(132,204,22,0.3); }
+        .card--sources .card__line { background: linear-gradient(90deg, transparent, var(--lime-400), transparent); }
+        .card--sources:hover { border-color: rgba(132,204,22,0.25); box-shadow: 0 20px 48px rgba(0,0,0,0.35), 0 0 40px rgba(132,204,22,0.1); }
+        .card--sources:hover .card__title { color: var(--lime-400); }
+        .card--sources:hover .card__arrow { color: var(--lime-400); border-color: rgba(132,204,22,0.2); }
+
+        /* 9 — بيئات التطوير: سيان داكن */
+        .card--dev::before { background: linear-gradient(160deg, rgba(6,182,212,0.06), transparent 55%); }
+        .card--dev::after  { background: rgba(6,182,212,0.1); top: -20px; right: -20px; }
+        .card--dev .card__icon { background: linear-gradient(135deg, var(--cyan-700), var(--cyan-600)); box-shadow: 0 8px 24px rgba(6,182,212,0.3); }
+        .card--dev .card__line { background: linear-gradient(90deg, transparent, var(--cyan-500), transparent); }
+        .card--dev:hover { border-color: rgba(6,182,212,0.25); box-shadow: 0 20px 48px rgba(0,0,0,0.35), 0 0 40px rgba(6,182,212,0.1); }
+        .card--dev:hover .card__title { color: var(--cyan-300); }
+        .card--dev:hover .card__arrow { color: var(--cyan-400); border-color: rgba(6,182,212,0.2); }
+
+        /* ===== حالة الإخفاء عند البحث ===== */
+        .card.hidden {
+            display: none;
         }
 
-        .item-desc {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            line-height: 1.5;
-        }
-
-        /* فوتر */
-        footer {
-            margin-top: 80px;
-            padding-top: 40px;
-            border-top: 1px solid var(--border-subtle);
-            width: 100%;
-            max-width: 1100px;
+        /* ===== لا نتائج ===== */
+        .no-results {
+            grid-column: 1 / -1;
             text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+            padding: 60px 20px;
+            color: var(--text-dim);
+            display: none;
         }
 
-        /* تأثيرات الدخول */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .no-results.show { display: block; }
+
+        .no-results i {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            display: block;
+            opacity: 0.4;
         }
 
-        .item {
-            animation: fadeInUp 0.6s var(--ease-out) backwards;
+        .no-results p { font-size: 1.1rem; font-weight: 600; }
+
+        /* ===== التذييل ===== */
+        .site-footer {
+            width: 100%;
+            position: relative;
+            padding: 60px 24px 32px;
+            z-index: 1;
         }
 
-        /* استجابة الهواتف */
-        @media (max-width: 768px) {
-            body { padding: 30px 16px; }
-            .menu { grid-template-columns: 1fr; }
-            .item { padding: 24px; }
+        .site-footer::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 1px;
+            background: linear-gradient(90deg, transparent 5%, var(--cyan-700) 30%, var(--emerald-600) 70%, transparent 95%);
+            opacity: 0.35;
         }
 
-        @media (max-width: 480px) {
-            .main-title { font-size: 1.8rem; }
-            .lang-buttons { flex-wrap: wrap; justify-content: center; }
+        .footer__inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer__copy {
+            color: var(--text-dim);
+            font-size: 0.88rem;
+        }
+
+        .footer__socials {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer__socials a {
+            width: 38px; height: 38px;
+            border-radius: var(--radius-sm);
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s var(--ease-out-expo);
+        }
+
+        .footer__socials a:hover {
+            background: rgba(6,182,212,0.1);
+            border-color: rgba(6,182,212,0.2);
+            color: var(--cyan-300);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(6,182,212,0.15);
+        }
+
+        /* ===== حركات الظهور ===== */
+        [data-reveal] {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.7s var(--ease-spring), transform 0.7s var(--ease-spring);
+        }
+
+        [data-reveal].is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== التجاوب ===== */
+        @media (max-width: 1024px) {
+            .menu-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 640px) {
+            .page { padding: 36px 16px 80px; }
+            .menu-grid { grid-template-columns: 1fr; max-width: 460px; }
+            .card { padding: 28px 24px 24px; }
+            .lang-bar { flex-wrap: wrap; justify-content: center; }
+            .footer__inner { flex-direction: column; gap: 20px; text-align: center; }
+        }
+
+        @media (max-width: 420px) {
+            .header__title { font-size: 1.9rem; }
+            .card__arrow { display: none; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="header">
-    <h1 class="main-title" data-i18n="title">لوحة التحكم التعليمية</h1>
-    <p class="subtitle" data-i18n="subtitle">كل ما تحتاجه لإتقان لغة C في مكان واحد. اختر وجهتك وابدأ رحلة الإبداع.</p>
-</div>
-
-<div class="search-container">
-    <i class="fas fa-search search-icon"></i>
-    <input type="text" class="search-input" id="menuSearch" placeholder="ابحث عن دروس، أدوات، أو أمثلة..." onkeyup="filterMenu()">
-</div>
-
-<div class="lang-buttons">
-    <button type="button" class="lang-btn active" data-lang="ar" onclick="setLang('ar', this)">العربية</button>
-    <button type="button" class="lang-btn" data-lang="en" onclick="setLang('en', this)">English</button>
-    <button type="button" class="lang-btn" data-lang="fr" onclick="setLang('fr', this)">Français</button>
-</div>
-
-<div class="menu" id="menuGrid">
-    <a class="item ai-special" href="nn.html">
-        <div class="badge ai-badge" data-i18n="badge_new">جديد</div>
-        <div class="icon-wrapper"><i class="fa-solid fa-robot"></i></div>
-        <div class="item-content">
-            <h3 data-i18n="ai">مساعد الذكاء الاصطناعي</h3>
-            <p class="item-desc" data-i18n="ai_desc">حلل وصحح أخطاء الكود الخاص بك فوراً باستخدام تقنيات الذكاء الاصطناعي.</p>
+    <!-- خلفية المشهد -->
+    <div class="scene-bg" aria-hidden="true">
+        <div class="gradient-mesh"></div>
+        <div class="orb orb--cyan"></div>
+        <div class="orb orb--violet"></div>
+        <div class="orb orb--emerald"></div>
+        <div class="orb orb--amber"></div>
+        <div class="dot-field"></div>
+        <div class="particles">
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
         </div>
-    </a>
+    </div>
 
-    <a class="item download-special" href="t.html">
-        <div class="badge download-badge" data-i18n="badge_direct">مباشر</div>
-        <div class="icon-wrapper"><i class="fa-solid fa-mobile-alt"></i></div>
-        <div class="item-content">
-            <h3 data-i18n="download">تحميل التطبيق</h3>
-            <p class="item-desc" data-i18n="download_desc">احمل معك مكتبة C في جيبك. تعلم وبرمج في أي وقت ومن أي مكان.</p>
+    <main class="page">
+
+        <!-- الترويسة -->
+        <header class="header" data-reveal>
+            <div class="header__overline">
+                <i class="fas fa-grid-2"></i>
+                لوحة التحكم التعليمية
+            </div>
+            <h1 class="header__title" data-i18n="title">كل ما تحتاجه في مكان واحد</h1>
+            <p class="header__desc" data-i18n="subtitle">اختر وجهتك وابدأ رحلة الإبداع في عالم لغة C والخوارزميات.</p>
+        </header>
+
+        <!-- البحث -->
+        <div class="search-wrap" data-reveal>
+            <input type="text" class="search-input" id="menuSearch" placeholder="ابحث عن دروس، أدوات، أو أمثلة..." oninput="filterMenu()" aria-label="البحث في القائمة">
+            <i class="fas fa-search search-wrap__icon"></i>
         </div>
-    </a>
 
-    <a class="item youtube-special" href="y.html">
-        <div class="badge youtube-badge" data-i18n="badge_channel">قناة</div>
-        <div class="icon-wrapper"><i class="fab fa-youtube"></i></div>
-        <div class="item-content">
-            <h3 data-i18n="youtube">شروحات يوتيوب</h3>
-            <p class="item-desc" data-i18n="youtube_desc">دروس مرئية مبسطة تشرح لك أعقد مفاهيم البرمجة خطوة بخطوة.</p>
+        <!-- اللغات -->
+        <div class="lang-bar" data-reveal>
+            <button type="button" class="lang-btn active" data-lang="ar" onclick="setLang('ar', this)">العربية</button>
+            <button type="button" class="lang-btn" data-lang="en" onclick="setLang('en', this)">English</button>
+            <button type="button" class="lang-btn" data-lang="fr" onclick="setLang('fr', this)">Français</button>
         </div>
-    </a>
 
-    <a class="item" href="home.html">
-        <div class="icon-wrapper"><i class="fa-solid fa-code"></i></div>
-        <div class="item-content">
-            <h3 data-i18n="codes">مكتبة الأكواد</h3>
-            <p class="item-desc" data-i18n="codes_desc">مجموعة ضخمة من النماذج البرمجية الجاهزة للاستخدام والتعلم.</p>
+        <!-- شبكة البطاقات -->
+        <div class="menu-grid" id="menuGrid">
+
+            <a class="card card--ai" href="nn.html" data-reveal data-reveal="d1">
+                <div class="card__line" aria-hidden="true"></div>
+                <span class="card__badge" data-i18n="badge_new">جديد</span>
+                <div class="card__icon"><i class="fa-solid fa-robot"></i></div>
+                <div class="card__content">
+                    <h3 class="card__title" data-i18n="ai">مساعد الذكاء الاصطناعي</h3>
+                    <p class="card__desc" data-i18n="ai_desc">حلل وصحح أخطاء الكود الخاص بك فوراً باستخدام تقنيات الذكاء الاصطناعي.</p>
+                </div>
+                <div class="card__arrow"><i class="fas fa-arrow-left"></i></div>
+            </a>
+
+            <a class="card card--app" href="t.html" data-reveal data-reveal="d2">
+                <div class="card__line" aria-hidden="true"></div>
+                <span class="card__badge" data-i18n="badge_direct">مباشر</span>
+                <div class="card__icon"><i class="fa-solid fa-mobile-alt"></i></div>
+                <div class="card__content">
+                    <h3 class="card__title" data-i18n="download">تحميل التطبيق</h3>
+                    <p class="card__desc" data-i18n="download_desc">احمل معك مكتبة C في جيبك. تعلم وبرمج في أي وقت ومن أي مكان.</p>
+                </div>
+                <div class="card__arrow"><i class="fas fa-arrow-left"></i></div>
+            </a>
+
+            <a class="card card--yt" href="y.html" data-reveal data-reveal="d3">
+                <div class="card__line" aria-hidden="true"></div>
+                <span class="card__badge" data-i18n="badge_channel">قناة</span>
+                <div class="card__icon"><i class="fab fa-youtube"></i></div>
+                <div class="card__content">
+                    <h3 class="card__title" data-i18n="youtube">شروحات يوتيوب</h3>
+                    <p class="card__desc" data-i18n="youtube_desc">قناتي على يوتيوب لشرح مفاهيم البرمجة خطوة بخطوة.</p>
+                </div>
+                <div class="card__arrow"><i class="fas fa-arrow-left"></i></div>
+            </a>
+
+            <a class="card card--codes" href="home.html" data-reveal data-reveal="d4">
+                <div class="card__line" aria-hidden="true"></div>
+                <div class="card__icon"><i class="fa-solid fa-code"></i></div>
+                <div class="card__content">
+                    <h3 class="card__title" data-i18n="codes">مكتبة الأكواد</h3>
+                    <p class="card__desc" data-i18n="codes_desc">مجموعة ضخمة من النماذج البرمجية الجاهزة للاستخدام والتعلم.</p>
+                </div>
+                <div class="card__arrow"><i class="fas fa-arrow-left"></i></div>
+            </a>
+
+            <a class="card card--examples" href="amtla.html" data-reveal data-reveal="d5">
+                <div class="card__line" aria-hidden="true"></div>
+                <div class="card__icon"><i class="fa-solid fa-lightbulb"></i></div>
+                <div class="card__content">
+                    <h3 class="card__title" data-i18n="examples">أمثلة تطبيقية</h3>
+                    <p class="card__desc" data-i18n="examples_desc">تطبيقات واقعية توضح كيف تبني برامج حقيقية باستخدام لغة C.</p>
+                </div>
+                <div class="card__arrow"><i class="fas fa-arrow-left"></i></div>
+            </a>
+
+            <a class="card card--shortcuts" href="i5.html" data-reveal data-reveal="d6">
+                <div class="card__line" aria-hidden="true"></div>
+                <div class="card__icon"><i class="fa-solid fa-keyboard"></i></div>
+                <div class="card__content">
+                    <h3 class="card__title" data-i18n="shortcuts">اختصارات المطورين</h3>
+                    <p class="card__desc" data-i18n="shortcuts_desc">وفر وقتك وجهدك مع قائمة أهم الاختصارات لكل محرر أكواد.</p>
+                </div>
+                <div class="card__arrow"><i class="fas fa-arrow-left"></i></div>
+            </a>
+
+            <a class="card card--contact" href="contact.html" data-reveal data-reveal="d7">
+                <div class="card__line" aria-hidden="true"></div>
+                <div class="card__icon"><i class="fa-solid fa-envelope"></i></div>
+                <div class="card__content">
+                    <h3 class="card__title" data-i18n="contact">تواصل معنا</h3>
+                    <p class="card__desc" data-i18n="contact_desc">هل لديك سؤال؟ نحن هنا لمساعدتك في كل خطوة من رحلتك التعليمية.</p>
+                </div>
+                <div class="card__arrow"><i class="fas fa-arrow-left"></i></div>
+            </a>
+
+            <a class="card card--sources" href="ms.html" data-reveal data-reveal="d8">
+                <div class="card__line" aria-hidden="true"></div>
+                <div class="card__icon"><i class="fa-solid fa-book"></i></div>
+                <div class="card__content">
+                    <h3 class="card__title" data-i18n="sources">مصادر ومراجع</h3>
+                    <p class="card__desc" data-i18n="sources_desc">دليلك لأفضل الكتب والمواقع لتعميق معرفتك في لغة C.</p>
+                </div>
+                <div class="card__arrow"><i class="fas fa-arrow-left"></i></div>
+            </a>
+
+            <a class="card card--dev" href="apps.html" data-reveal data-reveal="d9">
+                <div class="card__line" aria-hidden="true"></div>
+                <div class="card__icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                <div class="card__content">
+                    <h3 class="card__title" data-i18n="apps">بيئات التطوير</h3>
+                    <p class="card__desc" data-i18n="apps_desc">اختر أفضل التطبيقات والمحررات لتبدأ كتابة كود C على جهازك.</p>
+                </div>
+                <div class="card__arrow"><i class="fas fa-arrow-left"></i></div>
+            </a>
+
+            <!-- رسالة لا نتائج -->
+            <div class="no-results" id="noResults">
+                <i class="fas fa-search"></i>
+                <p>لا توجد نتائج مطابقة لبحثك</p>
+            </div>
+
         </div>
-    </a>
+    </main>
 
-    <a class="item" href="amtla.html">
-        <div class="icon-wrapper"><i class="fa-solid fa-lightbulb"></i></div>
-        <div class="item-content">
-            <h3 data-i18n="examples">أمثلة تطبيقية</h3>
-            <p class="item-desc" data-i18n="examples_desc">تطبيقات واقعية توضح لك كيف تبني برامج حقيقية باستخدام لغة C.</p>
+    <!-- التذييل -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer__inner">
+            <p class="footer__copy" data-i18n="footer">&copy; 2026 بوابة لغة C - التميز في البرمجة يبدأ من هنا</p>
+            <div class="footer__socials">
+                <a href="#" aria-label="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="تويتر"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="جيتهب"><i class="fab fa-github"></i></a>
+            </div>
         </div>
-    </a>
+    </footer>
 
-    <a class="item" href="i5.html">
-        <div class="icon-wrapper"><i class="fa-solid fa-keyboard"></i></div>
-        <div class="item-content">
-            <h3 data-i18n="shortcuts">اختصارات المطورين</h3>
-            <p class="item-desc" data-i18n="shortcuts_desc">وفر وقتك وجهدك مع قائمة أهم الاختصارات لكل محرر أكواد.</p>
-        </div>
-    </a>
+    <script>
+        /* ===== مراقب الظهور مع تباطؤ متتابع ===== */
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const delayAttr = el.getAttribute('data-reveal');
+                    let delay = 0;
+                    if (delayAttr && delayAttr.startsWith('d')) {
+                        delay = parseInt(delayAttr.replace('d', ''), 10) * 0.08;
+                    }
+                    el.style.transitionDelay = delay + 's';
+                    el.classList.add('is-visible');
+                    revealObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 
-    <a class="item" href="contact.html">
-        <div class="icon-wrapper"><i class="fa-solid fa-envelope"></i></div>
-        <div class="item-content">
-            <h3 data-i18n="contact">تواصل معنا</h3>
-            <p class="item-desc" data-i18n="contact_desc">هل لديك سؤال؟ نحن هنا لمساعدتك في كل خطوة من رحلتك التعليمية.</p>
-        </div>
-    </a>
+        document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
 
-    <a class="item" href="ms.html">
-        <div class="icon-wrapper"><i class="fa-solid fa-book"></i></div>
-        <div class="item-content">
-            <h3 data-i18n="sources">مصادر ومراجع</h3>
-            <p class="item-desc" data-i18n="sources_desc">دليلك لأفضل الكتب والمواقع لتعميق معرفتك في لغة C.</p>
-        </div>
-    </a>
+        /* ===== البحث ===== */
+        function filterMenu() {
+            const q = document.getElementById('menuSearch').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.card');
+            let visible = 0;
 
-    <a class="item" href="apps.html">
-        <div class="icon-wrapper"><i class="fa-solid fa-mobile-screen-button"></i></div>
-        <div class="item-content">
-            <h3 data-i18n="apps">بيئات التطوير</h3>
-            <p class="item-desc" data-i18n="apps_desc">اختر أفضل التطبيقات والمحررات لتبدأ كتابة كود C على جهازك.</p>
-        </div>
-    </a>
-</div>
+            cards.forEach(card => {
+                const title = card.querySelector('.card__title').textContent.toLowerCase();
+                const desc = card.querySelector('.card__desc').textContent.toLowerCase();
+                const match = title.includes(q) || desc.includes(q);
+                card.classList.toggle('hidden', !match);
+                if (match) visible++;
+            });
 
-<footer>
-    <p data-i18n="footer">© 2026 بوابة لغة C - التميز في البرمجة يبدأ من هنا</p>
-</footer>
-
-<script>
-// تهيئة أنيميشن الدخول المتتابع
-document.addEventListener('DOMContentLoaded', () => {
-    const items = document.querySelectorAll('.item');
-    items.forEach((item, index) => {
-        item.style.animationDelay = `${index * 0.1}s`;
-    });
-});
-
-// وظيفة البحث
-function filterMenu() {
-    const input = document.getElementById('menuSearch');
-    const filter = input.value.toLowerCase();
-    const grid = document.getElementById('menuGrid');
-    const items = grid.getElementsByClassName('item');
-
-    for (let i = 0; i < items.length; i++) {
-        const title = items[i].querySelector('h3').innerText;
-        const desc = items[i].querySelector('.item-desc').innerText;
-        if (title.toLowerCase().indexOf(filter) > -1 || desc.toLowerCase().indexOf(filter) > -1) {
-            items[i].style.display = "";
-        } else {
-            items[i].style.display = "none";
+            document.getElementById('noResults').classList.toggle('show', visible === 0 && q.length > 0);
         }
-    }
-}
 
-const translations = {
-    title: {
-        ar: "لوحة التحكم التعليمية",
-        en: "Educational Dashboard",
-        fr: "Tableau de Bord Éducatif"
-    },
-    subtitle: {
-        ar: "كل ما تحتاجه لإتقان لغة C في مكان واحد. اختر وجهتك وابدأ رحلة الإبداع.",
-        en: "Everything you need to master C in one place. Choose your path and start creating.",
-        fr: "Tout ce dont vous avez besoin pour maîtriser le C. Choisissez votre chemin et créez."
-    },
-    badge_new: { ar: "جديد", en: "NEW", fr: "NOUVEAU" },
-    badge_direct: { ar: "مباشر", en: "DIRECT", fr: "DIRECT" },
-    badge_channel: { ar: "قناة", en: "CHANNEL", fr: "CHAÎNE" },
-    ai: { ar: "مساعد الذكاء الاصطناعي", en: "AI Assistant", fr: "Assistant IA" },
-    ai_desc: {
-        ar: "حلل وصحح أخطاء الكود الخاص بك فوراً باستخدام تقنيات الذكاء الاصطناعي.",
-        en: "Analyze and fix your code instantly using AI technologies.",
-        fr: "Analysez et corrigez votre code instantanément grâce à l'IA."
-    },
-    download: { ar: "تحميل التطبيق", en: "Download App", fr: "Télécharger l'App" },
-    download_desc: {
-        ar: "احمل معك مكتبة C في جيبك. تعلم وبرمج في أي وقت ومن أي مكان.",
-        en: "Carry the C library in your pocket. Learn and code anytime, anywhere.",
-        fr: "Emportez la bibliothèque C avec vous. Apprenez et codez partout."
-    },
-    youtube: { ar: "شروحات يوتيوب", en: "YouTube Tutorials", fr: "Tutoriels YouTube" },
-    youtube_desc: {
-        ar: "  قناتي على يوتيوب .",
-        en: "My YouTube channel.",
-        fr: "Ma chaîne YouTube."
-    },
-    codes: { ar: "مكتبة الأكواد", en: "Code Library", fr: "Bibliothèque de Codes" },
-    codes_desc: {
-        ar: "مجموعة ضخمة من النماذج البرمجية الجاهزة للاستخدام والتعلم.",
-        en: "A massive collection of code snippets ready for use and learning.",
-        fr: "Une vaste collection de codes prêts à l'emploi et à l'apprentissage."
-    },
-    examples: { ar: "أمثلة تطبيقية", en: "Practical Examples", fr: "Exemples Pratiques" },
-    examples_desc: {
-        ar: "تطبيقات واقعية توضح لك كيف تبني برامج حقيقية باستخدام لغة C.",
-        en: "Real-world applications showing you how to build real programs with C.",
-        fr: "Des applications réelles montrant comment créer de vrais programmes en C."
-    },
-    shortcuts: { ar: "اختصارات المطورين", en: "Developer Shortcuts", fr: "Raccourcis Clavier" },
-    shortcuts_desc: {
-        ar: "وفر وقتك وجهدك مع قائمة أهم الاختصارات لكل محرر أكواد.",
-        en: "Save time and effort with a list of the most important shortcuts.",
-        fr: "Gagnez du temps avec une liste des raccourcis les plus importants."
-    },
-    contact: { ar: "تواصل معنا", en: "Contact Us", fr: "Contactez-nous" },
-    contact_desc: {
-        ar: "هل لديك سؤال؟ نحن هنا لمساعدتك في كل خطوة من رحلتك التعليمية.",
-        en: "Have a question? We're here to help you every step of the way.",
-        fr: "Vous avez une question ? Nous sommes là pour vous aider."
-    },
-    sources: { ar: "مصادر ومراجع", en: "Resources & References", fr: "Sources et Références" },
-    sources_desc: {
-        ar: "دليلك لأفضل الكتب والمواقع لتعميق معرفتك في لغة C.",
-        en: "Your guide to the best books and sites to deepen your C knowledge.",
-        fr: "Votre guide des meilleurs livres et sites pour approfondir le C."
-    },
-    apps: { ar: "بيئات التطوير", en: "Development Tools", fr: "Outils de Développement" },
-    apps_desc: {
-        ar: "اختر أفضل التطبيقات والمحررات لتبدأ كتابة كود C على جهازك.",
-        en: "Choose the best IDEs and editors to start writing C on your device.",
-        fr: "Choisissez les meilleurs IDE pour commencer à écrire en C."
-    },
-    footer: {
-        ar: "© 2026 بوابة لغة C - التميز في البرمجة يبدأ من هنا",
-        en: "© 2026 C Language Portal - Excellence in coding starts here",
-        fr: "© 2026 Portail Langage C - L'excellence commence ici"
-    }
-};
+        /* ===== الترجمة ===== */
+        const translations = {
+            title: {
+                ar: "كل ما تحتاجه في مكان واحد",
+                en: "Everything You Need in One Place",
+                fr: "Tout ce dont vous avez besoin au même endroit"
+            },
+            subtitle: {
+                ar: "اختر وجهتك وابدأ رحلة الإبداع في عالم لغة C والخوارزميات.",
+                en: "Choose your path and start creating in the world of C and algorithms.",
+                fr: "Choisissez votre chemin et créez dans le monde du C et des algorithmes."
+            },
+            badge_new: { ar: "جديد", en: "NEW", fr: "NOUVEAU" },
+            badge_direct: { ar: "مباشر", en: "DIRECT", fr: "DIRECT" },
+            badge_channel: { ar: "قناة", en: "CHANNEL", fr: "CHAÎNE" },
+            ai: { ar: "مساعد الذكاء الاصطناعي", en: "AI Assistant", fr: "Assistant IA" },
+            ai_desc: {
+                ar: "حلل وصحح أخطاء الكود الخاص بك فوراً باستخدام تقنيات الذكاء الاصطناعي.",
+                en: "Analyze and fix your code instantly using AI technologies.",
+                fr: "Analysez et corrigez votre code instantanément grâce à l'IA."
+            },
+            download: { ar: "تحميل التطبيق", en: "Download App", fr: "Télécharger l'App" },
+            download_desc: {
+                ar: "احمل معك مكتبة C في جيبك. تعلم وبرمج في أي وقت ومن أي مكان.",
+                en: "Carry the C library in your pocket. Learn and code anytime, anywhere.",
+                fr: "Emportez la bibliothèque C avec vous. Apprenez et codez partout."
+            },
+            youtube: { ar: "شروحات يوتيوب", en: "YouTube Tutorials", fr: "Tutoriels YouTube" },
+            youtube_desc: {
+                ar: "قناتي على يوتيوب لشرح مفاهيم البرمجة خطوة بخطوة.",
+                en: "My YouTube channel for step-by-step programming tutorials.",
+                fr: "Ma chaîne YouTube pour des tutoriels étape par étape."
+            },
+            codes: { ar: "مكتبة الأكواد", en: "Code Library", fr: "Bibliothèque de Codes" },
+            codes_desc: {
+                ar: "مجموعة ضخمة من النماذج البرمجية الجاهزة للاستخدام والتعلم.",
+                en: "A massive collection of code snippets ready for use and learning.",
+                fr: "Une vaste collection de codes prêts à l'emploi et à l'apprentissage."
+            },
+            examples: { ar: "أمثلة تطبيقية", en: "Practical Examples", fr: "Exemples Pratiques" },
+            examples_desc: {
+                ar: "تطبيقات واقعية توضح كيف تبني برامج حقيقية باستخدام لغة C.",
+                en: "Real-world apps showing how to build real programs with C.",
+                fr: "Des applications réelles montrant comment créer des programmes en C."
+            },
+            shortcuts: { ar: "اختصارات المطورين", en: "Developer Shortcuts", fr: "Raccourcis Clavier" },
+            shortcuts_desc: {
+                ar: "وفر وقتك وجهدك مع قائمة أهم الاختصارات لكل محرر أكواد.",
+                en: "Save time with the most important shortcuts for every code editor.",
+                fr: "Gagnez du temps avec les raccourcis les plus importants."
+            },
+            contact: { ar: "تواصل معنا", en: "Contact Us", fr: "Contactez-nous" },
+            contact_desc: {
+                ar: "هل لديك سؤال؟ نحن هنا لمساعدتك في كل خطوة من رحلتك التعليمية.",
+                en: "Have a question? We're here to help every step of the way.",
+                fr: "Vous avez une question ? Nous sommes là pour vous aider."
+            },
+            sources: { ar: "مصادر ومراجع", en: "Resources & References", fr: "Sources et Références" },
+            sources_desc: {
+                ar: "دليلك لأفضل الكتب والمواقع لتعميق معرفتك في لغة C.",
+                en: "Your guide to the best books and sites to deepen your C knowledge.",
+                fr: "Votre guide des meilleurs livres et sites pour approfondir le C."
+            },
+            apps: { ar: "بيئات التطوير", en: "Development Tools", fr: "Outils de Développement" },
+            apps_desc: {
+                ar: "اختر أفضل التطبيقات والمحررات لتبدأ كتابة كود C على جهازك.",
+                en: "Choose the best IDEs and editors to start writing C on your device.",
+                fr: "Choisissez les meilleurs IDE pour commencer à écrire en C."
+            },
+            footer: {
+                ar: "\u00a9 2026 بوابة لغة C - التميز في البرمجة يبدأ من هنا",
+                en: "\u00a9 2026 C Language Portal - Excellence in coding starts here",
+                fr: "\u00a9 2026 Portail Langage C - L'excellence commence ici"
+            }
+        };
 
-function applyLang(lang) {
-    document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-    document.documentElement.setAttribute('lang', lang);
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[key] && translations[key][lang]) {
-            el.textContent = translations[key][lang];
+        function applyLang(lang) {
+            document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+            document.documentElement.setAttribute('lang', lang);
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[key] && translations[key][lang]) {
+                    el.textContent = translations[key][lang];
+                }
+            });
+            localStorage.setItem('lang', lang);
         }
-    });
-    localStorage.setItem('lang', lang);
-}
 
-function setLang(lang, btn) {
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    applyLang(lang);
-}
+        function setLang(lang, btn) {
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            applyLang(lang);
+        }
 
-// استعادة اللغة المفضلة عند التحميل
-window.onload = () => {
-    const savedLang = localStorage.getItem('lang') || 'ar';
-    const activeBtn = document.querySelector(`.lang-btn[data-lang="${savedLang}"]`);
-    if (activeBtn) setLang(savedLang, activeBtn);
-};
-</script>
+        /* استعادة اللغة */
+        window.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem('lang') || 'ar';
+            const btn = document.querySelector('.lang-btn[data-lang="' + saved + '"]');
+            if (btn) setLang(saved, btn);
+        });
+    </script>
 </body>
 </html>
