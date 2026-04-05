@@ -11,2124 +11,1629 @@
       "url": "https://bibarss39-sudo.github.io/bibarss39/"
     }
     </script>
-
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>مساعد الذكاء الاصطناعي المتقدم لتصحيح أكواد C</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مساعد البرمجة الذكي — Algorithmes & C</title>
     <link rel="icon" type="image/png" href="favicon.jpg">
-
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #2563eb;
-            --secondary-color: #3b82f6;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --error-color: #ef4444;
-            --info-color: #3b82f6;
-            --dark-color: #1f2937;
-            --light-color: #f9fafb;
-            --gray-color: #6b7280;
-            --transition: all 0.3s ease;
-            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --radius: 12px;
-            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --gradient-copy: linear-gradient(135deg, #4ade80 0%, #22d3ee 100%);
-            --home-color: #8b5cf6;
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --secondary: #10b981;
+            --bg-dark: #030712;
+            --card-bg: rgba(30, 41, 59, 0.4);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', 'Cairo', Tahoma, Geneva, Verdana, sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: var(--light-color);
-            min-height: 100vh;
-            padding: 15px;
-            transition: var(--transition);
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.05) 0px, transparent 50%);
+            font-family: 'Tajawal', sans-serif;
+            color: var(--text-primary);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
 
-        .container {
-            max-width: 1400px;
+        .navbar {
+            padding: 16px 5%;
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+            z-index: 100;
+        }
+
+        .nav-brand { font-weight: 900; font-size: 1.2rem; color: white; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .nav-brand i { color: var(--primary-light); font-size: 1.5rem; }
+
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            max-width: 900px;
             margin: 0 auto;
             width: 100%;
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 10px 8px;
-            }
-            
-            .container {
-                padding: 0;
-            }
-        }
-
-        /* ========== الهيدر المحسن ========== */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 15px;
-            background: rgba(30, 41, 59, 0.7);
-            border-radius: var(--radius);
-            padding: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: var(--shadow);
-            position: relative;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .logo-icon {
-            font-size: 2.5rem;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.5));
-            animation: pulse 2s infinite;
-            flex-shrink: 0;
-        }
-
-        .logo-text {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .logo-text h1 {
-            font-size: 1.6rem;
-            font-weight: 800;
-            background: linear-gradient(to right, #60a5fa, #34d399);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 5px;
-            line-height: 1.3;
-            word-break: break-word;
-        }
-
-        .logo-text p {
-            font-size: 0.85rem;
-            color: #94a3b8;
-            line-height: 1.4;
-        }
-
-        /* ========== أزرار التحكم في الهيدر ========== */
-        .header-controls {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        @media (max-width: 768px) {
-            .header-controls {
-                width: 100%;
-                justify-content: center;
-                margin-top: 10px;
-            }
-        }
-
-        .home-btn {
-            background: var(--home-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-            text-decoration: none;
-            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
-            position: relative;
+            padding: 10px 20px 20px;
             overflow: hidden;
-            z-index: 1;
-        }
-
-        .home-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
-            z-index: -1;
-        }
-
-        .home-btn:hover::before {
-            left: 100%;
-        }
-
-        .home-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
-            background: #7c3aed;
-        }
-
-        /* ========== محسّن لمبدّل اللغة ========== */
-        .language-switcher {
-            display: flex;
-            gap: 6px;
-            background: rgba(15, 23, 42, 0.7);
-            padding: 8px;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            flex-wrap: wrap;
-            justify-content: center;
-            min-width: 200px;
-        }
-
-        .lang-btn {
-            background: transparent;
-            border: 2px solid transparent;
-            color: #cbd5e1;
-            padding: 8px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.85rem;
-            flex: 1;
-            min-width: 70px;
-            justify-content: center;
             position: relative;
-            overflow: hidden;
         }
 
-        .lang-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: 0.5s;
-        }
-
-        .lang-btn:hover::before {
-            left: 100%;
-        }
-
-        .lang-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .lang-btn.active {
-            background: var(--gradient-primary);
-            color: white;
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
-            font-weight: 700;
-        }
-
-        /* ========== بقية الأنماط ========== */
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-
-        @media (max-width: 1200px) {
-            .main-content {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-        }
-
-        .panel {
-            background: rgba(30, 41, 59, 0.8);
-            border-radius: var(--radius);
-            padding: 20px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            animation: fadeIn 0.5s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            overflow: hidden;
-        }
-
-        .panel:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .panel-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-            flex-wrap: wrap;
-        }
-
-        .panel-header i {
-            font-size: 1.6rem;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            flex-shrink: 0;
-        }
-
-        .panel-header h2 {
-            font-size: 1.4rem;
-            color: #f1f5f9;
-            font-weight: 700;
-            line-height: 1.3;
-            word-break: break-word;
+        .messages-area {
             flex: 1;
-        }
-
-        .code-container {
-            position: relative;
-            margin-bottom: 15px;
-        }
-
-        .code-input {
-            width: 100%;
-            min-height: 350px;
-            padding: 20px 20px 20px 40px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            font-family: 'Cascadia Code', 'Courier New', monospace;
-            font-size: 14px;
-            resize: vertical;
-            transition: var(--transition);
-            background-color: rgba(15, 23, 42, 0.7);
-            color: #e2e8f0;
-            line-height: 1.6;
-            tab-size: 4;
-            -webkit-appearance: none;
-        }
-
-        .code-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
-        }
-
-        .line-numbers {
-            position: absolute;
-            left: 8px;
-            top: 20px;
-            font-family: 'Cascadia Code', 'Courier New', monospace;
-            font-size: 14px;
-            color: #64748b;
-            user-select: none;
-            text-align: right;
-            padding-right: 10px;
-            line-height: 1.6;
-            pointer-events: none;
-        }
-
-        [dir="rtl"] .line-numbers {
-            left: auto;
-            right: 8px;
-            text-align: left;
-            padding-right: 0;
-            padding-left: 10px;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 12px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 14px 20px;
-            border: none;
-            border-radius: 10px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-size: 0.95rem;
-            letter-spacing: 0.5px;
-            flex: 1;
-            min-width: 150px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            user-select: none;
-        }
-
-        .btn-primary {
-            background: var(--gradient-primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: #e2e8f0;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
-        }
-
-        .btn-tertiary {
-            background: var(--gradient-success);
-            color: white;
-        }
-
-        .btn-tertiary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.4);
-        }
-
-        .btn-copy {
-            background: var(--gradient-copy);
-            color: white;
-        }
-
-        .btn-copy:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(74, 222, 128, 0.4);
-        }
-
-        .stats-bar {
-            display: flex;
-            gap: 15px;
-            background: rgba(15, 23, 42, 0.7);
-            border-radius: 10px;
-            padding: 12px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-            justify-content: space-around;
-        }
-
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex: 1;
-            min-width: 120px;
-            justify-content: center;
-        }
-
-        .stat-icon {
-            font-size: 1.3rem;
-            width: 35px;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            flex-shrink: 0;
-        }
-
-        .stat-text h3 {
-            font-size: 1.5rem;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1;
-        }
-
-        .stat-text p {
-            font-size: 0.8rem;
-            color: #94a3b8;
-        }
-
-        .errors-container {
-            max-height: 500px;
             overflow-y: auto;
-            margin-bottom: 20px;
-        }
-
-        .error-item {
-            padding: 15px;
-            margin-bottom: 12px;
-            border-radius: 10px;
-            border-left: 5px solid var(--error-color);
-            background: rgba(239, 68, 68, 0.1);
-            animation: slideIn 0.3s ease;
-            transition: var(--transition);
-        }
-
-        .error-item:hover {
-            transform: translateX(5px);
-            background: rgba(239, 68, 68, 0.15);
-        }
-
-        .error-item.warning {
-            border-left-color: var(--warning-color);
-            background: rgba(245, 158, 11, 0.1);
-        }
-
-        .error-item.info {
-            border-left-color: var(--info-color);
-            background: rgba(59, 130, 246, 0.1);
-        }
-
-        .error-item.success {
-            border-left-color: var(--success-color);
-            background: rgba(16, 185, 129, 0.1);
-        }
-
-        .error-header {
+            padding: 10px 10px 30px;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .error-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex: 1;
-            min-width: 0;
-        }
-
-        .error-title i {
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-
-        .error-title strong {
-            font-size: 1rem;
-            word-break: break-word;
-        }
-
-        .error-line {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            flex-shrink: 0;
-        }
-
-        .error-body {
-            margin-bottom: 12px;
-            line-height: 1.5;
-            color: #e2e8f0;
-            font-size: 0.95rem;
-        }
-
-        .error-fix {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px dashed rgba(255, 255, 255, 0.1);
-            margin-top: 8px;
-        }
-
-        .error-fix pre {
-            font-family: 'Cascadia Code', 'Courier New', monospace;
-            font-size: 13px;
-            color: #7dd3fc;
-            white-space: pre-wrap;
-            margin: 0;
-            overflow-x: auto;
-        }
-
-        .ai-suggestions {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 15px;
-            margin-top: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .ai-suggestions h3 {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 12px;
-            color: #f1f5f9;
-            font-size: 1.2rem;
-        }
-
-        .suggestion-item {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 12px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .suggestion-item:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-
-        .suggestion-icon {
-            font-size: 1.1rem;
-            color: #60a5fa;
-            margin-top: 3px;
-            flex-shrink: 0;
-        }
-
-        .suggestion-content {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .suggestion-content h4 {
-            color: #cbd5e1;
-            margin-bottom: 5px;
-            font-size: 1rem;
-            word-break: break-word;
-        }
-
-        .suggestion-content p {
-            color: #94a3b8;
-            line-height: 1.5;
-            font-size: 0.9rem;
-        }
-
-        .loading {
-            display: none;
-            justify-content: center;
-            align-items: center;
-            padding: 30px;
             flex-direction: column;
-            gap: 15px;
-            text-align: center;
+            gap: 20px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border-subtle) transparent;
         }
 
-        .loading.active {
-            display: flex;
-        }
+        .messages-area::-webkit-scrollbar { width: 6px; }
+        .messages-area::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 10px; }
 
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            border-top: 4px solid var(--primary-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        .loading-text {
-            color: #cbd5e1;
-            font-size: 1rem;
-            text-align: center;
-            line-height: 1.4;
-            max-width: 300px;
-        }
-
-        .progress-bar {
-            width: 180px;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-            overflow: hidden;
-            margin-top: 8px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--gradient-primary);
-            width: 0%;
-            animation: progress 2s ease-in-out infinite;
-        }
-
-        footer {
-            text-align: center;
-            color: #94a3b8;
-            padding: 20px;
-            margin-top: 30px;
-            background: rgba(15, 23, 42, 0.7);
-            border-radius: var(--radius);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-        }
-
-        .ai-model {
-            display: inline-block;
-            background: var(--gradient-primary);
-            padding: 4px 12px;
+        .message {
+            max-width: 85%;
+            padding: 16px 20px;
             border-radius: 20px;
-            font-weight: 700;
-            margin: 0 4px;
-            font-size: 0.9rem;
+            font-size: 1rem;
+            line-height: 1.6;
+            animation: messageFade 0.4s var(--ease-out);
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .code-example {
-            background: rgba(15, 23, 42, 0.9);
-            border-radius: 10px;
-            padding: 15px;
-            margin-top: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        @keyframes messageFade { 
+            from { opacity: 0; transform: translateY(15px) scale(0.95); } 
+            to { opacity: 1; transform: translateY(0) scale(1); } 
         }
 
-        .code-example-header {
+        .message.bot {
+            align-self: flex-start;
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            border-bottom-right-radius: 4px;
+            color: var(--text-primary);
+        }
+
+        .message.user {
+            align-self: flex-end;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border-bottom-left-radius: 4px;
+        }
+
+        .suggestions {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            flex-wrap: wrap;
             gap: 10px;
+            overflow-x: auto;
+            padding: 10px 5px;
+            margin-bottom: 10px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) transparent;
         }
+        .suggestions::-webkit-scrollbar { height: 6px; }
+        .suggestions::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+        .suggestions::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
 
-        .code-example-header h3 {
-            font-size: 1.1rem;
-            color: #f1f5f9;
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .example-btn {
-            background: rgba(255, 255, 255, 0.1);
-            color: #cbd5e1;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-shrink: 0;
-            user-select: none;
-        }
-
-        .example-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        #examplesList {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 10px;
-        }
-
-        .example-item {
-            padding: 10px;
+        .suggestion-chip {
+            padding: 8px 16px;
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 6px;
+            border: 1px solid var(--border-subtle);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            white-space: nowrap;
             cursor: pointer;
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            user-select: none;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
         }
-
-        .example-item:hover {
-            background: rgba(255, 255, 255, 0.1);
+        .suggestion-chip:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
             transform: translateY(-2px);
         }
 
-        .example-item > div {
+        .input-wrapper {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 28px;
+            padding: 8px 12px 8px 20px;
             display: flex;
+            gap: 12px;
             align-items: center;
-            gap: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: border-color 0.3s ease;
         }
+        .input-wrapper:focus-within { border-color: var(--primary); }
 
-        .example-item strong {
-            color: #e2e8f0;
-            font-size: 0.9rem;
-            word-break: break-word;
-        }
-
-        .example-item div div {
-            color: #94a3b8;
-            font-size: 0.8rem;
-            margin-top: 2px;
-        }
-
-        #noErrorsMessage {
-            text-align: center;
-            padding: 30px;
-        }
-
-        #noErrorsMessage i {
-            font-size: 3rem;
-            color: #10b981;
-            margin-bottom: 15px;
-        }
-
-        #noErrorsMessage h3 {
-            color: #10b981;
-            margin-bottom: 10px;
-            font-size: 1.3rem;
-        }
-
-        #noErrorsMessage p {
-            color: #94a3b8;
-            font-size: 0.95rem;
-        }
-
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--gradient-success);
+        .input-wrapper textarea {
+            flex: 1;
+            background: transparent;
+            border: none;
             color: white;
-            padding: 15px 20px;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
+            font-family: inherit;
+            font-size: 1rem;
+            resize: none;
+            max-height: 150px;
+            padding: 12px 0;
+            outline: none;
+        }
+
+        .send-btn {
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-out);
             display: flex;
             align-items: center;
-            gap: 10px;
-            z-index: 1000;
-            animation: slideDown 0.3s ease;
-            transform: translateY(-100px);
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .notification.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .notification i {
+            justify-content: center;
             font-size: 1.2rem;
+            flex-shrink: 0;
         }
 
-        /* ========== الأنيميشن ========== */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .send-btn:hover { background: var(--primary-light); transform: scale(1.08) rotate(-10deg); }
+        .send-btn:active { transform: scale(0.95); }
+
+        .bot-typing {
+            display: flex;
+            gap: 6px;
+            padding: 12px 20px;
+            align-self: flex-start;
         }
 
-        @keyframes slideIn {
-            from { transform: translateX(-20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes progress {
-            0% { width: 0%; }
-            50% { width: 70%; }
-            100% { width: 100%; }
-        }
-
-        @keyframes highlight {
-            0% { background-color: rgba(251, 191, 36, 0.3); }
-            100% { background-color: transparent; }
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .highlighted {
-            animation: highlight 2s ease;
-        }
-
-        /* تحسينات للعربية */
-        [dir="rtl"] .code-input, 
-        [dir="rtl"] .error-fix pre,
-        [dir="rtl"] .code-example pre {
-            text-align: left;
-            direction: ltr;
-        }
-
-        ::-webkit-scrollbar {
+        .dot {
             width: 8px;
             height: 8px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            animation: dotPulse 1.4s infinite;
+        }
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes dotPulse { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.1) translateY(-3px); } }
+
+        code {
+            font-family: 'IBM Plex Mono', monospace;
+            background: rgba(99, 102, 241, 0.15);
+            padding: 2px 6px;
+            border-radius: 6px;
+            color: var(--primary-light);
+            font-weight: 500;
         }
 
-        ::-webkit-scrollbar-track {
-            background: rgba(15, 23, 42, 0.5);
-            border-radius: 10px;
+        pre {
+            background: #0f172a;
+            padding: 16px;
+            border-radius: 12px;
+            margin: 12px 0;
+            overflow-x: auto;
+            direction: ltr;
+            text-align: left;
+            border: 1px solid var(--border-subtle);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.9rem;
+            color: #e2e8f0;
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: var(--gradient-primary);
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--secondary-color);
-        }
-
-        /* تحسينات للظهور على الشاشات الصغيرة */
         @media (max-width: 768px) {
-            .main-content {
-                gap: 15px;
-            }
-            
-            .panel {
-                padding: 16px;
-                border-radius: 10px;
-            }
-            
-            .code-input {
-                min-height: 280px;
-                padding: 16px 16px 16px 35px;
-                font-size: 13px;
-            }
-            
-            .btn {
-                min-width: 100px;
-                padding: 12px 10px;
-                font-size: 0.9rem;
-            }
-            
-            .header-controls {
-                width: 100%;
-                justify-content: center;
-                margin-top: 10px;
-            }
-            
-            .home-btn {
-                flex: 1;
-                min-width: 120px;
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 8px 5px;
-            }
-            
-            .panel {
-                padding: 14px;
-                border-radius: 8px;
-            }
-            
-            .code-input {
-                min-height: 220px;
-                padding: 14px 14px 14px 32px;
-                font-size: 12px;
-            }
-            
-            .button-group {
-                gap: 8px;
-            }
-            
-            .btn {
-                flex-basis: calc(50% - 4px);
-                padding: 11px 8px;
-                font-size: 0.85rem;
-            }
-            
-            .home-btn {
-                padding: 8px 12px;
-                font-size: 0.8rem;
-            }
-        }
-
-        /* تحسينات للأجهزة التي تعمل باللمس */
-        @media (hover: none) and (pointer: coarse) {
-            .btn:hover, 
-            .lang-btn:hover,
-            .example-btn:hover,
-            .home-btn:hover {
-                transform: none;
-            }
-            
-            .btn:active,
-            .lang-btn:active,
-            .example-btn:active,
-            .home-btn:active {
-                transform: scale(0.98);
-            }
-        }
-
-        .touch-feedback {
-            animation: touchFeedback 0.3s ease;
-        }
-
-        @keyframes touchFeedback {
-            0% { transform: scale(1); }
-            50% { transform: scale(0.95); }
-            100% { transform: scale(1); }
+            .chat-container { padding: 5px 15px 15px; }
+            .message { max-width: 90%; font-size: 0.9rem; padding: 14px 18px; }
+            .navbar { padding: 12px 5%; }
+            .input-wrapper { padding: 4px 8px 4px 16px; border-radius: 24px; }
+            .send-btn { width: 42px; height: 42px; }
         }
     </style>
 </head>
 <body>
-    <!-- إشعار نسخ الكود -->
-    <div id="copyNotification" class="notification">
-        <i class="fas fa-check-circle"></i>
-        <span id="notification-text">تم نسخ الكود بنجاح!</span>
-    </div>
 
-    <div class="container">
-        <header>
-            <div class="logo">
-                <i class="fas fa-robot logo-icon"></i>
-                <div class="logo-text">
-                    <h1 id="header-title">مساعد الذكاء الاصطناعي المتقدم لتصحيح أكواد C</h1>
-                    <p id="header-subtitle">مدعوم بذكاء اصطناعي قادر على اكتشاف وتصحيح عشرات الأخطاء البرمجية</p>
-                </div>
-            </div>
-            
-            <div class="header-controls">
-                <div class="language-switcher">
-                    <button class="lang-btn active" data-lang="ar">
-                        <i class="fas fa-language"></i>
-                        <span>العربية</span>
-                    </button>
-                    <button class="lang-btn" data-lang="en">
-                        <i class="fas fa-language"></i>
-                        <span>English</span>
-                    </button>
-                    <button class="lang-btn" data-lang="fr">
-                        <i class="fas fa-language"></i>
-                        <span>Français</span>
-                    </button>
-                </div>
-                
-                <a href="asasi.html" class="home-btn">
-                    <i class="fas fa-home"></i>
-                    <span id="home-text">HOME</span>
-                </a>
-            </div>
-        </header>
+<nav class="navbar">
+    <a href="asasi.html" class="nav-brand">
+        <i class="fas fa-brain"></i>
+        <span>مساعد الذكاء الاصطناعي</span>
+    </a>
+    <a href="asasi.html" class="send-btn" style="width: 36px; height: 36px; background: rgba(255,255,255,0.05); font-size: 1rem;">
+        <i class="fas fa-times"></i>
+    </a>
+</nav>
 
-        <div class="main-content">
-            <div class="panel">
-                <div class="panel-header">
-                    <i class="fas fa-code"></i>
-                    <h2 id="input-title">أدخل كود C الخاص بك هنا</h2>
-                </div>
-                
-                <div class="code-container">
-                    <div class="line-numbers" id="lineNumbers">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15</div>
-                    <textarea class="code-input" id="codeInput" placeholder="#include <stdio.h>" spellcheck="false">#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-
-int main() {
-    int x = 5
-    float y = 3.14;
-    char name[20] = "برمجة";
-    
-    printf("قيمة x هي: %d\n", x);
-    printf("قيمة y هي: %f\n, y);
-    
-    if (x = 5) {
-        printf("x يساوي 5\n");
-    }
-    
-    for(int i = 0; i < 10; i++) {
-        printf("الرقم: %d\n, i);
-    }
-    
-    int arr[5] = {1, 2, 3, 4, 5};
-    printf("العنصر السادس: %d\n", arr[5]);
-    
-    return 0;
-}</textarea>
-                </div>
-                
-                <div class="code-example">
-                    <div class="code-example-header">
-                        <h3 id="example-title">أمثلة أكواد تحتوي على أخطاء شائعة</h3>
-                        <button class="example-btn" id="loadExampleBtn">
-                            <i class="fas fa-code"></i>
-                            <span id="load-example-text">تحميل مثال</span>
-                        </button>
-                    </div>
-                    <div id="examplesList">
-                        <!-- سيتم تعبئتها ديناميكياً -->
-                    </div>
-                </div>
-                
-                <div class="button-group">
-                    <button class="btn btn-primary" id="analyzeBtn">
-                        <i class="fas fa-brain"></i>
-                        <span id="analyze-text">تحليل ذكي للكود</span>
-                    </button>
-                    <button class="btn btn-secondary" id="clearBtn">
-                        <i class="fas fa-broom"></i>
-                        <span id="clear-text">مسح الكل</span>
-                    </button>
-                    <button class="btn btn-tertiary" id="optimizeBtn">
-                        <i class="fas fa-rocket"></i>
-                        <span id="optimize-text">تحسين الكود</span>
-                    </button>
-                    <button class="btn btn-copy" id="copyCodeBtn">
-                        <i class="fas fa-copy"></i>
-                        <span id="copy-text">نسخ الكود</span>
-                    </button>
-                </div>
-                
-                <div class="stats-bar" id="statsBar" style="display: none;">
-                    <div class="stat-item">
-                        <div class="stat-icon">
-                            <i class="fas fa-bug" style="color: #ef4444;"></i>
-                        </div>
-                        <div class="stat-text">
-                            <h3 id="errorsCount">0</h3>
-                            <p id="errors-text">أخطاء</p>
-                        </div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-icon">
-                            <i class="fas fa-exclamation-triangle" style="color: #f59e0b;"></i>
-                        </div>
-                        <div class="stat-text">
-                            <h3 id="warningsCount">0</h3>
-                            <p id="warnings-text">تحذيرات</p>
-                        </div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-icon">
-                            <i class="fas fa-lightbulb" style="color: #3b82f6;"></i>
-                        </div>
-                        <div class="stat-text">
-                            <h3 id="suggestionsCount">0</h3>
-                            <p id="suggestions-text">اقتراحات</p>
-                        </div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-icon">
-                            <i class="fas fa-star" style="color: #10b981;"></i>
-                        </div>
-                        <div class="stat-text">
-                            <h3 id="scoreValue">0</h3>
-                            <p id="score-text">نقاط الجودة</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="loading" id="loadingIndicator">
-                    <div class="spinner"></div>
-                    <div class="loading-text" id="loading-text">جارٍ تحليل الكود باستخدام الذكاء الاصطناعي المتقدم...</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="panel">
-                <div class="panel-header">
-                    <i class="fas fa-search"></i>
-                    <h2 id="results-title">نتائج التحليل الذكي</h2>
-                    <div class="copy-btn-container">
-                        <button class="btn btn-copy" id="copyCorrectedCodeBtn">
-                            <i class="fas fa-copy"></i>
-                            <span id="copy-corrected-text">نسخ الكود المصحح</span>
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="errors-container" id="errorsContainer">
-                    <!-- سيتم إضافة الأخطاء هنا ديناميكياً -->
-                </div>
-                
-                <div id="noErrorsMessage" style="display: none; text-align: center; padding: 40px;">
-                    <i class="fas fa-check-circle" style="font-size: 4rem; color: #10b981; margin-bottom: 20px;"></i>
-                    <h3 id="no-errors-title" style="color: #10b981; margin-bottom: 15px;">لا توجد أخطاء!</h3>
-                    <p id="no-errors-text" style="color: #94a3b8;">الكود الخاص بك خالٍ من الأخطاء. عمل رائع!</p>
-                </div>
-                
-                <div class="ai-suggestions" id="aiSuggestions">
-                    <h3>
-                        <i class="fas fa-robot"></i>
-                        <span id="suggestions-title">اقتراحات الذكاء الاصطناعي</span>
-                    </h3>
-                    <div id="suggestionsList">
-                        <!-- سيتم تعبئتها ديناميكياً -->
-                    </div>
-                </div>
-            </div>
+<div class="chat-container">
+    <div class="messages-area" id="messagesArea">
+        <div class="message bot">
+            مرحباً بك في المختبر البرمجي! أنا مساعدك الذكي المتخصص في لغة C. 
+            يمكنك سؤالي عن أي شيء يخص البرمجة، مثلاً: "ما معنى printf؟" أو "كيف أستخدم loops؟"
         </div>
-
-        <footer>
-            <p id="footer-text">تم تطوير هذا المساعد باستخدام ذكاء اصطناعي متقدم قادر على اكتشاف وتصحيح أكثر من 50 نوعاً من الأخطاء الشائعة في لغة C</p>
-            <p id="copyright-text">© 2023 جميع الحقوق محفوظة</p>
-        </footer>
     </div>
 
-    <script>
-        // بيانات الترجمة للغات المختلفة
-        const translations = {
-            ar: {
-                title: "مساعد الذكاء الاصطناعي المتقدم لتصحيح أكواد C",
-                subtitle: "مدعوم بذكاء اصطناعي قادر على اكتشاف وتصحيح عشرات الأخطاء البرمجية",
-                inputTitle: "أدخل كود C الخاص بك هنا",
-                analyzeText: "تحليل ذكي للكود",
-                clearText: "مسح الكل",
-                optimizeText: "تحسين الكود",
-                copyText: "نسخ الكود",
-                copyCorrectedText: "نسخ الكود المصحح",
-                loadingText: "جارٍ تحليل الكود باستخدام الذكاء الاصطناعي المتقدم...",
-                resultsTitle: "نتائج التحليل الذكي",
-                noErrorsTitle: "لا توجد أخطاء!",
-                noErrorsText: "الكود الخاص بك خالٍ من الأخطاء. عمل رائع!",
-                suggestionsTitle: "اقتراحات الذكاء الاصطناعي",
-                footerText: "تم تطوير هذا المساعد باستخدام ذكاء اصطناعي متقدم قادر على اكتشاف وتصحيح أكثر من 50 نوعاً من الأخطاء الشائعة في لغة C",
-                copyrightText: "© 2023 جميع الحقوق محفوظة",
-                errorsText: "أخطاء",
-                warningsText: "تحذيرات",
-                suggestionsText: "اقتراحات",
-                scoreText: "نقاط الجودة",
-                exampleTitle: "أمثلة أكواد تحتوي على أخطاء شائعة",
-                loadExampleText: "تحميل مثال",
-                notificationText: "تم نسخ الكود بنجاح!",
-                homeText: "HOME",
-                examples: [
-                    {
-                        name: "أخطاء بناء الجملة الأساسية",
-                        code: `#include <stdio.h>
+    <div class="suggestions" id="suggestionsArea">
+        <div class="suggestion-chip" onclick="quickAsk('ما هي الخوارزمية؟')">ما هي الخوارزمية؟</div>
+        <div class="suggestion-chip" onclick="quickAsk('شرح دالة printf')">شرح printf</div>
+        <div class="suggestion-chip" onclick="quickAsk('شرح Linked List')">Linked List</div>
+        <div class="suggestion-chip" onclick="quickAsk('ما هو Stack و Queue؟')">Stack & Queue</div>
+        <div class="suggestion-chip" onclick="quickAsk('شرح Binary Tree')">Binary Tree</div>
+        <div class="suggestion-chip" onclick="quickAsk('خوارزمية BFS و DFS')">BFS & DFS</div>
+        <div class="suggestion-chip" onclick="quickAsk('شرح Dijkstra')">Dijkstra</div>
+        <div class="suggestion-chip" onclick="quickAsk('ما هو الـ Hashing؟')">Hashing</div>
+        <div class="suggestion-chip" onclick="quickAsk('خوارزمية Quick Sort')">Quick Sort</div>
+        <div class="suggestion-chip" onclick="quickAsk('شرح Binary Search')">Binary Search</div>
+        <div class="suggestion-chip" onclick="quickAsk('ما معنى Big O؟')">Big O Notation</div>
+        <div class="suggestion-chip" onclick="quickAsk('كيف أستخدم الـ Bitwise؟')">Bitwise Ops</div>
+        <div class="suggestion-chip" onclick="quickAsk('شرح المصفوفات الديناميكية')">Dynamic Arrays</div>
+        <div class="suggestion-chip" onclick="quickAsk('ما هو الـ Recursion؟')">Recursion</div>
+        <div class="suggestion-chip" onclick="quickAsk('شرح السجلات struct')">Structs</div>
+        <div class="suggestion-chip" onclick="quickAsk('ما هو الـ Union؟')">Union</div>
+        <div class="suggestion-chip" onclick="quickAsk('شرح الـ Dynamic Programming')">DP</div>
+        <div class="suggestion-chip" onclick="quickAsk('كيف أتعامل مع الملفات؟')">Files</div>
+        <div class="suggestion-chip" onclick="quickAsk('ما هو الـ Makefile؟')">Makefile</div>
+        <div class="suggestion-chip" onclick="quickAsk('شرح الـ Multithreading')">Threads</div>
+    </div>
 
-int main() {
-    int x = 5
-    printf("قيمة x هي: %d\\n", x);
-    
-    return 0
-}`
-                    },
-                    {
-                        name: "أخطاء المؤشرات والمصفوفات",
-                        code: `#include <stdio.h>
+    <div class="input-wrapper">
+        <textarea id="userInput" placeholder="اكتب سؤالك البرمجي هنا..." rows="1"></textarea>
+        <button class="send-btn" id="sendBtn">
+            <i class="fas fa-paper-plane"></i>
+        </button>
+    </div>
+</div>
 
-int main() {
-    int arr[5] = {1, 2, 3, 4, 5};
-    printf("العنصر السادس: %d\\n", arr[5]);
-    
-    int *ptr = NULL;
-    *ptr = 10;
-    
-    return 0;
-}`
-                    },
-                    {
-                        name: "أخطاء التنسيق والوظائف",
-                        code: `#include <stdio.h>
+<script>
+    const messagesArea = document.getElementById('messagesArea');
+    const userInput = document.getElementById('userInput');
+    const sendBtn = document.getElementById('sendBtn');
 
-int main() {
-    int x = 5;
-    float y = 3.14;
-    
-    printf("قيمة x هي: %d\\n", x);
-    printf("قيمة y هي: %f\\n, y);
-    
-    for(int i = 0; i < 10; i++) {
-        printf("الرقم: %d\\n, i);
+    function quickAsk(text) {
+        userInput.value = text;
+        handleSend();
     }
-    
-    return 0;
-}`
-                    }
-                ]
+
+    userInput.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    });
+
+    function addMessage(text, side) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `message ${side}`;
+        msgDiv.innerHTML = text;
+        messagesArea.appendChild(msgDiv);
+        messagesArea.scrollTop = messagesArea.scrollHeight;
+    }
+
+    function showTyping() {
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'message bot bot-typing';
+        typingDiv.id = 'typingIndicator';
+        typingDiv.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+        messagesArea.appendChild(typingDiv);
+        messagesArea.scrollTop = messagesArea.scrollHeight;
+    }
+
+    async function handleSend() {
+        const text = userInput.value.trim();
+        if (!text) return;
+
+        userInput.value = '';
+        userInput.style.height = 'auto';
+        addMessage(text, 'user');
+
+        showTyping();
+
+        // Mega Knowledge Base for AI
+        const knowledgeBase = {
+            // I/O & Basic
+            "printf": {
+                title: "دالة printf",
+                desc: "تستخدم دالة <code>printf</code> لعرض النصوص والقيم على الشاشة.",
+                example: "<code>printf(\"العمر هو: %d\", age);</code>",
+                tips: "تأكد من استخدام محدد التنسيق المناسب (مثل %d للأرقام)."
             },
-            en: {
-                title: "Advanced AI Assistant for C Code Correction",
-                subtitle: "Powered by AI capable of detecting and correcting dozens of programming errors",
-                inputTitle: "Enter Your C Code Here",
-                analyzeText: "Smart Code Analysis",
-                clearText: "Clear All",
-                optimizeText: "Optimize Code",
-                copyText: "Copy Code",
-                copyCorrectedText: "Copy Corrected Code",
-                loadingText: "Analyzing code using advanced AI...",
-                resultsTitle: "Smart Analysis Results",
-                noErrorsTitle: "No Errors Found!",
-                noErrorsText: "Your code is error-free. Excellent work!",
-                suggestionsTitle: "AI Suggestions",
-                footerText: "This assistant was developed using advanced AI capable of detecting and correcting over 50 common C language errors",
-                copyrightText: "© 2023 All Rights Reserved",
-                errorsText: "Errors",
-                warningsText: "Warnings",
-                suggestionsText: "Suggestions",
-                scoreText: "Quality Score",
-                exampleTitle: "Code Examples with Common Errors",
-                loadExampleText: "Load Example",
-                notificationText: "Code copied successfully!",
-                homeText: "HOME",
-                examples: [
-                    {
-                        name: "Basic Syntax Errors",
-                        code: `#include <stdio.h>
-
-int main() {
-    int x = 5
-    printf("Value of x is: %d\\n", x);
-    
-    return 0
-}`
-                    },
-                    {
-                        name: "Pointer and Array Errors",
-                        code: `#include <stdio.h>
-
-int main() {
-    int arr[5] = {1, 2, 3, 4, 5};
-    printf("Sixth element: %d\\n", arr[5]);
-    
-    int *ptr = NULL;
-    *ptr = 10;
-    
-    return 0;
-}`
-                    },
-                    {
-                        name: "Format and Function Errors",
-                        code: `#include <stdio.h>
-
-int main() {
-    int x = 5;
-    float y = 3.14;
-    
-    printf("Value of x is: %d\\n", x);
-    printf("Value of y is: %f\\n, y);
-    
-    for(int i = 0; i < 10; i++) {
-        printf("Number: %d\\n, i);
-    }
-    
-    return 0;
-}`
-                    }
-                ]
+            "scanf": {
+                title: "دالة scanf",
+                desc: "تستخدم لاستقبال المدخلات من لوحة المفاتيح.",
+                example: "<code>scanf(\"%f\", &price);</code>",
+                tips: "لا تنسَ رمز <code>&</code> قبل اسم المتغير لتحديد عنوانه في الذاكرة."
             },
-            fr: {
-                title: "Assistant IA Avancé pour la Correction de Code C",
-                subtitle: "Propulsé par une IA capable de détecter et de corriger des dizaines d'erreurs de programmation",
-                inputTitle: "Entrez Votre Code C Ici",
-                analyzeText: "Analyse Intelligente du Code",
-                clearText: "Tout Effacer",
-                optimizeText: "Optimiser le Code",
-                copyText: "Copier le Code",
-                copyCorrectedText: "Copier le Code Corrigé",
-                loadingText: "Analyse du code avec IA avancée...",
-                resultsTitle: "Résultats de l'Analyse Intelligente",
-                noErrorsTitle: "Aucune Erreur Trouvée!",
-                noErrorsText: "Votre code est exempt d'erreurs. Excellent travail!",
-                suggestionsTitle: "Suggestions de l'IA",
-                footerText: "Cet assistant a été développé avec une IA avancée capable de détecter et de corriger plus de 50 erreurs courantes en langage C",
-                copyrightText: "© 2023 Tous Droits Réservés",
-                errorsText: "Erreurs",
-                warningsText: "Avertissements",
-                suggestionsText: "Suggestions",
-                scoreText: "Score de Qualité",
-                exampleTitle: "Exemples de Code avec Erreurs Courantes",
-                loadExampleText: "Charger un Exemple",
-                notificationText: "Code copié avec succès!",
-                homeText: "ACCUEIL",
-                examples: [
-                    {
-                        name: "Erreurs de Syntaxe de Base",
-                        code: `#include <stdio.h>
+            "algorithme": {
+                title: "ما هي الخوارزمية؟",
+                desc: "هي مجموعة من الخطوات المنطقية والمتسلسلة لحل مشكلة معينة.",
+                example: "<code>1. البداية\n2. اقرأ X\n3. إذا X > 0 اطبع 'موجب'\n4. النهاية</code>",
+                tips: "الخوارزمية الجيدة يجب أن تكون دقيقة ولها نهاية محددة."
+            },
+            
+            // Types & Variables
+            "int": {
+                title: "الأعداد الصحيحة (int)",
+                desc: "نوع بيانات لتخزين الأرقام بدون فاصلة عشرية.",
+                example: "<code>int counter = 10;</code>",
+                tips: "يستخدم <code>%d</code> عند طباعته بـ printf."
+            },
+            "float": {
+                title: "الأعداد العشرية (float)",
+                desc: "لتخزين الأرقام التي تحتوي على فاصلة عشرية بدقة عادية.",
+                example: "<code>float weight = 65.5;</code>",
+                tips: "يستخدم <code>%f</code> للطباعة."
+            },
+            "double": {
+                title: "الأعداد العشرية (double)",
+                desc: "مشابه لـ float ولكن بدقة مضاعفة ومساحة أكبر.",
+                example: "<code>double pi = 3.1415926535;</code>",
+                tips: "يستخدم <code>%lf</code> في scanf و <code>%f</code> في printf."
+            },
+            "char": {
+                title: "الحروف (char)",
+                desc: "لتخزين حرف واحد فقط أو رمز.",
+                example: "<code>char grade = 'A';</code>",
+                tips: "الحروف توضع دائماً بين علامتي تنصيص فردية <code>' '</code>."
+            },
+            "string": {
+                title: "السلاسل النصية (Strings)",
+                desc: "في لغة C، النصوص هي عبارة عن مصفوفة من الحروف <code>char</code> تنتهي برمز <code>'\\0'</code>.",
+                example: "<code>char name[] = \"Ali\";</code>",
+                tips: "استخدم <code>%s</code> لطباعة النصوص، ولا تستخدم <code>&</code> في scanf مع النصوص."
+            },
 
-int main() {
-    int x = 5
-    printf("Valeur de x: %d\\n", x);
-    
-    return 0
-}`
-                    },
-                    {
-                        name: "Erreurs de Pointeurs et Tableaux",
-                        code: `#include <stdio.h>
+            // Conditionals
+            "if": {
+                title: "الجملة الشرطية if",
+                desc: "تنفذ الكود إذا كان الشرط صحيحاً.",
+                example: "<code>if (age >= 18) { ... }</code>",
+                tips: "يمكنك إضافة <code>else if</code> لشروط إضافية و <code>else</code> للحالة الافتراضية."
+            },
+            "switch": {
+                title: "جملة switch",
+                desc: "بديل أنيق لـ if المتكررة عند فحص قيم محددة لمتغير واحد.",
+                example: "<code>switch(day) { case 1: ... break; }</code>",
+                tips: "دائماً استخدم <code>break</code> بعد كل حالة لمنع تنفيذ الحالات التالية."
+            },
 
-int main() {
-    int arr[5] = {1, 2, 3, 4, 5};
-    printf("Sixième élément: %d\\n", arr[5]);
-    
-    int *ptr = NULL;
-    *ptr = 10;
-    
-    return 0;
-}`
-                    },
-                    {
-                        name: "Erreurs de Format et Fonctions",
-                        code: `#include <stdio.h>
+            // Loops
+            "for": {
+                title: "حلقة for",
+                desc: "تكرار الكود لعدد محدد مسبقاً من المرات.",
+                example: "<code>for(int i=0; i<5; i++) { ... }</code>",
+                tips: "مثالية للتعامل مع المصفوفات."
+            },
+            "while": {
+                title: "حلقة while",
+                desc: "تكرار الكود طالما الشرط محقق، وتفحص الشرط في البداية.",
+                example: "<code>while(condition) { ... }</code>",
+                tips: "تأكد من تحديث متغير الشرط داخل الحلقة لتجنب 'الحلقة اللانهائية'."
+            },
+            "do while": {
+                title: "حلقة do-while",
+                desc: "تنفذ الكود مرة واحدة على الأقل قبل فحص الشرط.",
+                example: "<code>do { ... } while(condition);</code>",
+                tips: "مفيدة جداً عند طلب مدخلات من المستخدم والتحقق من صحتها."
+            },
 
-int main() {
-    int x = 5;
-    float y = 3.14;
-    
-    printf("Valeur de x: %d\\n", x);
-    printf("Valeur de y: %f\\n, y);
-    
-    for(int i = 0; i < 10; i++) {
-        printf("Numéro: %d\\n, i);
-    }
-    
-    return 0;
-}`
-                    }
-                ]
+            // Advanced Topics
+            "array": {
+                title: "المصفوفات (Arrays)",
+                desc: "مجموعة من العناصر من نفس النوع مخزنة في مواقع ذاكرة متجاورة.",
+                example: "<code>int numbers[5] = {1, 2, 3, 4, 5};</code>",
+                tips: "تذكر أن العد في المصفوفات يبدأ من الصفر <code>[0]</code>."
+            },
+            "pointer": {
+                title: "المؤشرات (Pointers)",
+                desc: "متغير يخزن 'عنوان' متغير آخر في الذاكرة.",
+                example: "<code>int *ptr = &x;</code>",
+                tips: "المؤشرات هي أقوى ميزات لغة C وتستخدم للتعامل المباشر مع الذاكرة."
+            },
+            "struct": {
+                title: "السجلات (Struct)",
+                desc: "تسمح بتجميع متغيرات من أنواع مختلفة تحت اسم واحد.",
+                example: "<code>struct Student { int id; char name[20]; };</code>",
+                tips: "تستخدم لإنشاء أنواع بيانات مخصصة ومعقدة."
+            },
+            "function": {
+                title: "الدوال (Functions)",
+                desc: "كتلة من الكود تؤدي وظيفة معينة ويمكن استدعاؤها عدة مرات.",
+                example: "<code>int sum(int a, int b) { return a + b; }</code>",
+                tips: "تساعد في تنظيم الكود ومنع التكرار."
+            },
+            "recursion": {
+                title: "التكرار المرتد (Recursion)",
+                desc: "هي تقنية تقوم فيها الدالة باستدعاء نفسها لحل مشكلة.",
+                example: "<code>int fact(int n) { if(n==1) return 1; return n * fact(n-1); }</code>",
+                tips: "يجب دائماً وجود 'شرط توقف' (Base Case) لمنع الاستدعاء اللانهائي."
+            },
+            "file": {
+                title: "التعامل مع الملفات (File Handling)",
+                desc: "تسمح لغة C بحفظ البيانات في ملفات خارجية أو قراءتها.",
+                example: "<code>FILE *f = fopen(\"data.txt\", \"w\");\nfprintf(f, \"Hello\");\nfclose(f);</code>",
+                tips: "دائماً تأكد من إغلاق الملف باستخدام <code>fclose</code> بعد الانتهاء."
+            },
+            "memory": {
+                title: "إدارة الذاكرة (Dynamic Memory)",
+                desc: "تخصيص مساحة في الذاكرة أثناء تشغيل البرنامج باستخدام دوال مثل malloc.",
+                example: "<code>int *p = (int*)malloc(sizeof(int) * 5);</code>",
+                tips: "يجب تحرير الذاكرة باستخدام <code>free(p)</code> لتجنب تسرب الذاكرة (Memory Leak)."
+            },
+
+            // Logic & Math
+            "operator": {
+                title: "المشغلات (Operators)",
+                desc: "رموز تستخدم للعمليات الحسابية والمنطقية.",
+                example: "<code>&& (AND), || (OR), ! (NOT), % (Modulus)</code>",
+                tips: "المشغل <code>%</code> يعطي باقي القسمة ويستخدم كثيراً لمعرفة الأعداد الزوجية."
+            },
+            "boolean": {
+                title: "المنطق البرمجي (Boolean)",
+                desc: "في لغة C، الرقم 0 يعني 'خطأ' (False) وأي رقم آخر يعني 'صح' (True).",
+                example: "<code>if (1) { // سينفذ دائماً }</code>",
+                tips: "يمكنك تضمين <code><stdbool.h></code> لاستخدام الكلمات true و false."
+            },
+            "math": {
+                title: "المكتبة الرياضية (math.h)",
+                desc: "توفر دوال جاهزة للعمليات الحسابية المعقدة.",
+                example: "<code>sqrt(16); // الجذر التربيعي\npow(2, 3); // الأس</code>",
+                tips: "يجب تضمين <code>#include <math.h></code> في بداية البرنامج."
+            },
+            "typedef": {
+                title: "تعريف النوع (typedef)",
+                desc: "تستخدم لإعطاء اسم جديد لنوع بيانات موجود بالفعل لجعل الكود أكثر وضوحاً.",
+                example: "<code>typedef unsigned long ulong;</code>",
+                tips: "تستخدم بكثرة مع الـ structs لتبسيط استدعائها."
+            },
+            "enum": {
+                title: "التعداد (enum)",
+                desc: "نوع بيانات مخصص يتكون من مجموعة من الثوابت المسماة.",
+                example: "<code>enum Day {SUN, MON, TUE};</code>",
+                tips: "تساعد في جعل الكود أكثر قابلية للقراءة بدلاً من استخدام أرقام مجردة."
+            },
+            "define": {
+                title: "الماكرو (#define)",
+                desc: "يستخدم لتعريف ثوابت أو اختصارات يتم تعويضها قبل ترجمة الكود.",
+                example: "<code>#define PI 3.14</code>",
+                tips: "الماكرو ليس متغيراً، بل هو مجرد استبدال نصي يقوم به المعالج المسبق (Preprocessor)."
+            },
+            "strlen": {
+                title: "دالة strlen",
+                desc: "تحسب طول السلسلة النصية (عدد الحروف) بدون حساب رمز النهاية <code>\\0</code>.",
+                example: "<code>int len = strlen(\"Hello\"); // len = 5</code>",
+                tips: "يجب تضمين المكتبة <code><string.h></code>."
+            },
+            "strcpy": {
+                title: "دالة strcpy",
+                desc: "تستخدم لنسخ نص من مكان إلى آخر.",
+                example: "<code>strcpy(dest, src);</code>",
+                tips: "تأكد من أن المصفوفة الهدف (dest) كبيرة بما يكفي لاستيعاب النص المنسوخ."
+            },
+            "strcmp": {
+                title: "دالة strcmp",
+                desc: "تقارن بين نصين؛ تعيد 0 إذا كانا متطابقين.",
+                example: "<code>if(strcmp(s1, s2) == 0) { ... }</code>",
+                tips: "لا تستخدم <code>==</code> لمقارنة النصوص في C، استخدم دائماً strcmp."
+            },
+            "void": {
+                title: "النوع الخالي (void)",
+                desc: "يعني 'لا شيء'. يستخدم كنوع إرجاع للدوال التي لا تعيد قيمة.",
+                example: "<code>void printHello() { printf(\"Hi\"); }</code>",
+                tips: "يمكن استخدامه أيضاً مع المؤشرات <code>void*</code> لإنشاء مؤشر عام."
+            },
+            "static": {
+                title: "المتغير الساكن (static)",
+                desc: "متغير يحافظ على قيمته حتى بعد انتهاء الدالة التي عُرف بداخلها.",
+                example: "<code>static int count = 0;</code>",
+                tips: "يتم تهيئته مرة واحدة فقط عند تشغيل البرنامج."
+            },
+            "const": {
+                title: "الثابت (const)",
+                desc: "يستخدم لتعريف متغير لا يمكن تغيير قيمته بعد التهيئة.",
+                example: "<code>const int MAX = 100;</code>",
+                tips: "يساعد في حماية البيانات من التغيير غير المقصود."
+            },
+            "main": {
+                title: "الدالة الرئيسية (main)",
+                desc: "هي نقطة البداية لأي برنامج مكتوب بلغة C.",
+                example: "<code>int main() { return 0; }</code>",
+                tips: "يجب أن تعيد الدالة main رقماً (عادة 0) لنظام التشغيل عند الانتهاء."
+            },
+            "return": {
+                title: "كلمة return",
+                desc: "تستخدم لإنهاء تنفيذ الدالة وإرجاع قيمة للمكان الذي استُدعيت منه.",
+                example: "<code>return x + y;</code>",
+                tips: "في الدوال من نوع void، يمكن استخدام <code>return;</code> فقط للخروج."
+            },
+            "break": {
+                title: "كلمة break",
+                desc: "تستخدم للخروج فوراً من حلقة تكرارية (loop) أو جملة switch.",
+                example: "<code>if(i == 5) break;</code>",
+                tips: "تنهي فقط أقرب حلقة محيطة بها."
+            },
+            "continue": {
+                title: "كلمة continue",
+                desc: "تستخدم لتخطي الدورة الحالية في الحلقة والانتقال للدورة التالية مباشرة.",
+                example: "<code>if(i % 2 == 0) continue;</code>",
+                tips: "مفيدة لتجاوز حالات معينة داخل التكرار."
+            },
+            "sizeof": {
+                title: "المشغل sizeof",
+                desc: "يعيد حجم نوع البيانات أو المتغير بالبايت (Bytes).",
+                example: "<code>printf(\"%d\", sizeof(int)); // يطبع 4 عادة</code>",
+                tips: "مهم جداً عند حجز الذاكرة ديناميكياً."
+            },
+            "stack": {
+                title: "ذاكرة الـ Stack",
+                desc: "منطقة في الذاكرة تخزن المتغيرات المحلية والدوال (تدار تلقائياً).",
+                example: "<code>int x; // متغير في الستك</code>",
+                tips: "سريعة جداً ولكن مساحتها محدودة."
+            },
+            "heap": {
+                title: "ذاكرة الـ Heap",
+                desc: "منطقة في الذاكرة مخصصة لحجز البيانات ديناميكياً (يدوياً).",
+                example: "<code>int *p = malloc(...); // في الهيب</code>",
+                tips: "أكبر مساحة ولكنها أبطأ وتطلب إدارة يدوية (free)."
+            },
+            "abs": {
+                title: "دالة abs",
+                desc: "تعيد القيمة المطلقة (الموجبة) للعدد الصحيح.",
+                example: "<code>abs(-5); // تعيد 5</code>",
+                tips: "موجودة في المكتبة <code><stdlib.h></code>."
+            },
+            "header": {
+                title: "ملفات الرأس (Header Files)",
+                desc: "ملفات تنتهي بـ .h تحتوي على تعريفات الدوال والمكتبات.",
+                example: "<code>#include <stdio.h></code>",
+                tips: "تستخدم لربط الكود بمكتبات جاهزة أو تقسيم الكود لملفات."
+            },
+            "stdio": {
+                title: "المكتبة stdio.h",
+                desc: "المكتبة القياسية للإدخال والإخراج في لغة C.",
+                example: "<code>#include <stdio.h></code>",
+                tips: "تحتوي على دوال أساسية مثل printf و scanf و fopen."
+            },
+            "stdlib": {
+                title: "المكتبة stdlib.h",
+                desc: "المكتبة القياسية للأغراض العامة (General Purpose).",
+                example: "<code>#include <stdlib.h></code>",
+                tips: "تحتوي على دوال إدارة الذاكرة (malloc)، التحكم في البرنامج (exit)، والتحويلات."
+            },
+            "string_h": {
+                title: "المكتبة string.h",
+                desc: "مكتبة متخصصة للتعامل مع السلاسل النصية (Strings).",
+                example: "<code>#include <string.h></code>",
+                tips: "توفر دوال مثل strlen و strcpy و strcat و strcmp."
+            },
+            "getchar": {
+                title: "دالة getchar",
+                desc: "تقرأ حرفاً واحداً من لوحة المفاتيح.",
+                example: "<code>char c = getchar();</code>",
+                tips: "مفيدة جداً لانتظار المستخدم قبل إغلاق الشاشة السوداء."
+            },
+            "putchar": {
+                title: "دالة putchar",
+                desc: "تطبع حرفاً واحداً على الشاشة.",
+                example: "<code>putchar('A');</code>",
+                tips: "أسرع قليلاً من printf عند طباعة حرف واحد فقط."
+            },
+            "rand": {
+                title: "دالة rand",
+                desc: "تولد رقماً عشوائياً.",
+                example: "<code>int r = rand() % 100; // من 0 لـ 99</code>",
+                tips: "يجب استخدامها مع srand() للحصول على أرقام مختلفة في كل مرة."
+            },
+            "srand": {
+                title: "دالة srand",
+                desc: "تستخدم لتحديد 'بذرة' (Seed) للأرقام العشوائية.",
+                example: "<code>srand(time(0));</code>",
+                tips: "تستخدم عادة مع الوقت time(0) لضمان عشوائية حقيقية عند كل تشغيل."
+            },
+            "exit": {
+                title: "دالة exit",
+                desc: "تنهي البرنامج فوراً من أي مكان داخل الكود.",
+                example: "<code>exit(0);</code>",
+                tips: "الرقم 0 يعني خروج ناجح، وأي رقم آخر يعني وجود خطأ."
+            },
+            "comment": {
+                title: "التعليقات (Comments)",
+                desc: "نصوص توضيحية لا يقرأها الكمبيوتر بل المبرمج.",
+                example: "<code>// سطر واحد\n/* عدة أسطر */</code>",
+                tips: "استخدم التعليقات بكثرة لشرح منطق الكود المعقد."
+            },
+            "logical": {
+                title: "المنطق (&&, ||, !)",
+                desc: "تستخدم لربط الشروط ببعضها.",
+                example: "<code>if(a > 0 && b > 0) // 'و' المنطقية</code>",
+                tips: "&& تعني يجب تحقق الشرطين، || تعني يكفي تحقق أحدهما."
+            },
+            // University Level - Data Structures
+            "linked list": {
+                title: "القوائم المرتبطة (Linked Lists)",
+                desc: "هيكل بيانات ديناميكي يتكون من عقد (Nodes)، كل عقدة تحتوي على بيانات ومؤشر للعقدة التالية.",
+                example: "<code>struct Node { int data; struct Node* next; };</code>",
+                tips: "تتميز بسهولة الحذف والإضافة مقارنة بالمصفوفات العادية."
+            },
+            "stack structure": {
+                title: "المكدس (Stack - LIFO)",
+                desc: "هيكل بيانات يعتمد مبدأ (Last In, First Out). آخر عنصر يدخل هو أول عنصر يخرج.",
+                example: "<code>push(x); // إضافة\npop(); // حذف</code>",
+                tips: "يستخدم في إدارة استدعاءات الدوال (Recursion) وعمليات التراجع (Undo)."
+            },
+            "queue structure": {
+                title: "الطابور (Queue - FIFO)",
+                desc: "هيكل بيانات يعتمد مبدأ (First In, First Out). أول عنصر يدخل هو أول عنصر يخرج.",
+                example: "<code>enqueue(x); // دخول\ndequeue(); // خروج</code>",
+                tips: "يستخدم في جدولة المهام في أنظمة التشغيل (CPU Scheduling)."
+            },
+            "binary tree": {
+                title: "الأشجار الثنائية (Binary Trees)",
+                desc: "هيكل بيانات هرمي حيث تملك كل عقدة طفلين على الأكثر (يسار ويمين).",
+                example: "<code>struct Node { int val; struct Node *left, *right; };</code>",
+                tips: "تستخدم في خوارزميات البحث السريع وتقسيم البيانات."
+            },
+            // Algorithms
+            "bubble sort": {
+                title: "ترتيب الفقاعة (Bubble Sort)",
+                desc: "خوارزمية ترتيب بسيطة تقوم بمقارنة العناصر المتجاورة وتبديلها إذا كانت بترتيب خاطئ.",
+                example: "<code>O(n²) Complexity</code>",
+                tips: "ليست فعالة للمصفوفات الكبيرة ولكنها سهلة الفهم."
+            },
+            "quick sort": {
+                title: "الترتيب السريع (Quick Sort)",
+                desc: "خوارزمية تعتمد مبدأ 'فرق تسد' (Divide and Conquer)، تختار عنصراً كمحور (Pivot) وتقسم المصفوفة حوله.",
+                example: "<code>O(n log n) Average Complexity</code>",
+                tips: "واحدة من أسرع خوارزميات الترتيب استخداماً في الواقع."
+            },
+            "binary search": {
+                title: "البحث الثنائي (Binary Search)",
+                desc: "خوارزمية بحث سريعة جداً تعمل على المصفوفات 'المرتبة فقط'. تقسم نطاق البحث للنصف في كل خطوة.",
+                example: "<code>O(log n) Complexity</code>",
+                tips: "أسرع بكثير من البحث الخطي (Linear Search) خاصة في البيانات الضخمة."
+            },
+            "big o": {
+                title: "تعقيد الوقت (Big O Notation)",
+                desc: "مقياس رياضي يستخدم لوصف كفاءة الخوارزمية من حيث الوقت والمساحة المستهلكة.",
+                example: "<code>O(1), O(n), O(n²), O(log n)</code>",
+                tips: "الهدف دائماً هو الوصول لأقل تعقيد ممكن لتحسين أداء البرنامج."
+            },
+            // Advanced C concepts
+            "dynamic array": {
+                title: "المصفوفات الديناميكية",
+                desc: "مصفوفات يمكن تغيير حجمها أثناء تشغيل البرنامج باستخدام المؤشرات ودالة realloc.",
+                example: "<code>int *arr = malloc(n * sizeof(int));</code>",
+                tips: "تمنحك مرونة كاملة في إدارة الذاكرة حسب حاجة المستخدم."
+            },
+            "file processing": {
+                title: "معالجة الملفات المتقدمة",
+                desc: "استخدام الدوال fseek, ftell, rewind للتحكم في موقع القراءة داخل الملف.",
+                example: "<code>fseek(fp, 0, SEEK_END); // الذهاب لآخر الملف</code>",
+                tips: "fseek تسمح لك بالوصول العشوائي (Random Access) لأي جزء في الملف."
+            },
+            "bitwise": {
+                title: "العمليات على البت (Bitwise Operators)",
+                desc: "التعامل المباشر مع الأرقام على مستوى البت (0 و 1).",
+                example: "<code>& (AND), | (OR), ^ (XOR), ~ (NOT), <<, >></code>",
+                tips: "تستخدم بكثرة في تشفير البيانات، ضغط الملفات، وبرمجة الأنظمة المدمجة."
+            },
+            "complexity": {
+                title: "تحليل الخوارزميات",
+                desc: "دراسة سلوك الخوارزمية مع زيادة حجم البيانات المدخلة.",
+                example: "<code>Best case, Worst case, Average case</code>",
+                tips: "Worst case هو الأهم لأنه يضمن أداء البرنامج في أصعب الظروف."
+            },
+            // Additional 100+ Q&A entries starts here
+            "variable naming": {
+                title: "قواعد تسمية المتغيرات",
+                desc: "يجب أن يبدأ الاسم بحرف أو _، ولا يحتوي على مسافات أو رموز خاصة.",
+                example: "<code>int student_age; // صح\nint 1age; // خطأ</code>",
+                tips: "استخدم أسماء معبرة لتسهيل فهم الكود."
+            },
+            "operator precedence": {
+                title: "أولويات العمليات",
+                desc: "الترتيب الذي ينفذ به الكمبيوتر العمليات (الضرب والقسمة قبل الجمع والطرح).",
+                example: "<code>2 + 3 * 4 = 14 (وليس 20)</code>",
+                tips: "استخدم الأقواس <code>()</code> لضمان الترتيب الذي تريده."
+            },
+            "infinite loop": {
+                title: "الحلقة اللانهائية",
+                desc: "حلقة تكرارية لا تتوقف أبداً لأن شرط الخروج لا يتحقق.",
+                example: "<code>while(1) { ... }</code>",
+                tips: "تأكد دائماً من وجود خطوة تحديث للمتغير داخل الحلقة."
+            },
+            "null pointer": {
+                title: "المؤشر الفارغ (NULL)",
+                desc: "مؤشر لا يشير إلى أي عنوان ذاكرة صالح.",
+                example: "<code>int *ptr = NULL;</code>",
+                tips: "دائماً افحص إذا كان المؤشر NULL قبل استخدامه لتجنب انهيار البرنامج."
+            },
+            "dangling pointer": {
+                title: "المؤشر المعلق (Dangling)",
+                desc: "مؤشر يشير إلى موقع ذاكرة تم تحريره (free).",
+                example: "<code>free(ptr); // ptr أصبح معلقاً</code>",
+                tips: "بعد عمل free للمؤشر، اجعل قيمته NULL فوراً."
+            },
+            "memory leak": {
+                title: "تسرب الذاكرة",
+                desc: "يحدث عند حجز ذاكرة (malloc) وعدم تحريرها (free) بعد الانتهاء.",
+                example: "<code>for(...) malloc(100); // بدون free</code>",
+                tips: "تسرب الذاكرة يؤدي لبطء الجهاز واستهلاك الرام بالكامل."
+            },
+            "array overflow": {
+                title: "تجاوز حدود المصفوفة",
+                desc: "محاولة الوصول لعنصر خارج نطاق المصفوفة المعرف.",
+                example: "<code>int a[5]; a[10] = 7; // خطأ خطير</code>",
+                tips: "لغة C لا تمنعك من ذلك، لكنه يسبب أخطاء غير متوقعة."
+            },
+            "call by value": {
+                title: "تمرير بالقيمة",
+                desc: "إرسال نسخة من قيمة المتغير للدالة، التغيير داخل الدالة لا يؤثر على الأصل.",
+                example: "<code>void func(int x);</code>",
+                tips: "هو الأسلوب الافتراضي في لغة C."
+            },
+            "call by reference": {
+                title: "تمرير بالمرجع",
+                desc: "إرسال عنوان المتغير للدالة باستخدام المؤشرات، التغيير يؤثر على الأصل.",
+                example: "<code>void func(int *ptr);</code>",
+                tips: "يستخدم عندما تريد الدالة تغيير قيم المتغيرات الأصلية."
+            },
+            "local variable": {
+                title: "المتغير المحلي",
+                desc: "متغير معرف داخل دالة ولا يمكن الوصول إليه من خارجها.",
+                example: "<code>void f() { int x; }</code>",
+                tips: "يتم حذفه من الذاكرة فور انتهاء الدالة."
+            },
+            "global variable": {
+                title: "المتغير العام",
+                desc: "متغير معرف خارج جميع الدوال ويمكن لأي دالة الوصول إليه.",
+                example: "<code>int x; int main() { ... }</code>",
+                tips: "قلل من استخدامها لأنها تجعل تتبع الأخطاء صعباً."
+            },
+            "type casting": {
+                title: "تحويل النوع (Casting)",
+                desc: "تحويل قيمة من نوع بيانات إلى نوع آخر يدوياً.",
+                example: "<code>float x = (float)5 / 2; // النتيجة 2.5</code>",
+                tips: "مهم جداً عند قسمة الأعداد الصحيحة للحصول على كسور."
+            },
+            "header guard": {
+                title: "حماية ملف الرأس",
+                desc: "منع تضمين نفس ملف الـ .h أكثر من مرة في نفس البرنامج.",
+                example: "<code>#ifndef HEADER_H ... #endif</code>",
+                tips: "تجنب أخطاء 'إعادة التعريف' (Redefinition)."
+            },
+            "recursive factorial": {
+                title: "مضروب العدد (Recursion)",
+                desc: "مثال شهير لاستخدام التكرار المرتد لحساب Factorial.",
+                example: "<code>f(n) = n * f(n-1)</code>",
+                tips: "شرط التوقف هو n == 1."
+            },
+            "fibonacci": {
+                title: "متتالية فيبوناتشي",
+                desc: "سلسلة أرقام حيث كل رقم هو مجموع الرقمين السابقين.",
+                example: "<code>0, 1, 1, 2, 3, 5, 8...</code>",
+                tips: "يمكن حلها بـ recursion أو بحلقة تكرارية (أسرع)."
+            },
+            "linear search": {
+                title: "البحث الخطي",
+                desc: "البحث عن عنصر بالمرور على كل عناصر المصفوفة واحداً تلو الآخر.",
+                example: "<code>O(n) Complexity</code>",
+                tips: "يعمل على المصفوفات المرتبة وغير المرتبة."
+            },
+            "selection sort": {
+                title: "ترتيب الاختيار",
+                desc: "خوارزمية تجد أصغر عنصر وتضعه في البداية، ثم تكرر العملية.",
+                example: "<code>O(n²) Complexity</code>",
+                tips: "أداءها ثابت بغض النظر عن حالة البيانات."
+            },
+            "insertion sort": {
+                title: "ترتيب الإدراج",
+                desc: "بناء المصفوفة المرتبة عن طريق إدراج كل عنصر في مكانه الصحيح.",
+                example: "<code>O(n²) Complexity</code>",
+                tips: "فعالة جداً للمصفوفات الصغيرة أو المرتبة جزئياً."
+            },
+            "merge sort": {
+                title: "الترتيب بالدمج",
+                desc: "تقسيم المصفوفة لنصفين، ترتيب كل نصف، ثم دمجهما.",
+                example: "<code>O(n log n) Complexity</code>",
+                tips: "تستخدم ذاكرة إضافية ولكنها مستقرة وسريعة."
+            },
+            "nested loop": {
+                title: "الحلقات المتداخلة",
+                desc: "وجود حلقة تكرارية داخل حلقة أخرى.",
+                example: "<code>for(...) { for(...) { ... } }</code>",
+                tips: "تستخدم للتعامل مع المصفوفات ثنائية الأبعاد (2D Arrays)."
+            },
+            "2d array": {
+                title: "المصفوفات ثنائية الأبعاد",
+                desc: "مصفوفة تتكون من صفوف وأعمدة (مثل الجدول).",
+                example: "<code>int matrix[3][3];</code>",
+                tips: "الوصول للعنصر يكون بـ <code>matrix[صف][عمود]</code>."
+            },
+            "string concatenation": {
+                title: "دمج النصوص (strcat)",
+                desc: "إضافة نص إلى نهاية نص آخر.",
+                example: "<code>strcat(s1, s2);</code>",
+                tips: "تأكد أن النص الأول (s1) لديه مساحة كافية."
+            },
+            "character input": {
+                title: "إدخال الحروف (fgetc)",
+                desc: "قراءة حرف واحد من ملف أو لوحة المفاتيح.",
+                example: "<code>char c = fgetc(stdin);</code>",
+                tips: "أكثر أماناً من scanf في حالات معينة."
+            },
+            "math power": {
+                title: "دالة الأس (pow)",
+                desc: "حساب رقم مرفوع لأس معين.",
+                example: "<code>pow(base, exp);</code>",
+                tips: "تعيد دائماً قيمة من نوع double."
+            },
+            "ternary operator": {
+                title: "المشغل الثلاثي (?:)",
+                desc: "طريقة مختصرة لكتابة جملة if-else في سطر واحد.",
+                example: "<code>max = (a > b) ? a : b;</code>",
+                tips: "تجعل الكود مختصراً ولكن لا تبالغ في استخدامها للوضوح."
+            },
+            "logical not": {
+                title: "النفي المنطقي (!)",
+                desc: "عكس الحالة المنطقية (الصح يصبح خطأ والعكس).",
+                example: "<code>if (!found) { ... }</code>",
+                tips: "تستخدم كثيراً مع المتغيرات المنطقية (flags)."
+            },
+            "preprocessor": {
+                title: "المعالج المسبق",
+                desc: "مرحلة قبل الترجمة الفعلية، تعالج الأوامر التي تبدأ بـ #.",
+                example: "<code>#include, #define, #ifdef</code>",
+                tips: "تساعد في جعل الكود مرناً للعمل على أنظمة تشغيل مختلفة."
+            },
+            "dynamic memory allocation": {
+                title: "تخصيص الذاكرة الديناميكي",
+                desc: "حجز مساحة من الرام أثناء تشغيل البرنامج وليس قبل ذلك.",
+                example: "<code>malloc, calloc, realloc, free</code>",
+                tips: "تسمح بإنشاء برامج تتعامل مع كميات بيانات متغيرة."
+            },
+            "calloc vs malloc": {
+                title: "الفرق بين calloc و malloc",
+                desc: "malloc تحجز ذاكرة فقط، calloc تحجز وتصفر (تنظف) الذاكرة.",
+                example: "<code>malloc(size); calloc(n, size);</code>",
+                tips: "استخدم calloc إذا كنت تريد تصفير القيم تلقائياً."
+            },
+            "realloc": {
+                title: "دالة realloc",
+                desc: "تغيير حجم مساحة ذاكرة محجوزة مسبقاً (زيادة أو نقصان).",
+                example: "<code>p = realloc(p, new_size);</code>",
+                tips: "تحافظ على البيانات القديمة عند تغيير الحجم."
+            },
+            "exit status": {
+                title: "حالة الخروج",
+                desc: "القيمة التي تعيدها الدالة main لنظام التشغيل.",
+                example: "<code>return 0; // نجاح</code>",
+                tips: "أي قيمة غير الصفر تعني عادة وجود خطأ."
+            },
+            "ascii code": {
+                title: "جدول الآسكي (ASCII)",
+                desc: "نظام رقمي يمثل كل حرف أو رمز برقم معين (مثلاً A = 65).",
+                example: "<code>printf(\"%d\", 'A'); // يطبع 65</code>",
+                tips: "يمكنك إجراء عمليات حسابية على الحروف باستخدام أرقامها."
+            },
+            "prime number": {
+                title: "العدد الأولي (خوارزمية)",
+                desc: "عدد لا يقبل القسمة إلا على نفسه وعلى 1.",
+                example: "<code>if (n % i == 0) // ليس أولياً</code>",
+                tips: "للتحقق، يكفي فحص الأرقام من 2 إلى جذر العدد."
+            },
+            "even or odd": {
+                title: "زوجي أم فردي",
+                desc: "أبسط خوارزمية لمعرفة نوع العدد باستخدام باقي القسمة.",
+                example: "<code>if (n % 2 == 0) // زوجي</code>",
+                tips: "استخدم المشغل <code>%</code> دوماً لهذه المهمة."
+            },
+            "swap variables": {
+                title: "تبديل قيمتين (Swap)",
+                desc: "تبديل قيم متغيرين باستخدام متغير ثالث مؤقت.",
+                example: "<code>temp = a; a = b; b = temp;</code>",
+                tips: "يمكن عمل ذلك بدون متغير ثالث باستخدام العمليات الحسابية (لكنها أقل وضوحاً)."
+            },
+            "constant pointer": {
+                title: "المؤشر الثابت",
+                desc: "مؤشر لا يمكن تغيير العنوان الذي يشير إليه بعد تعريفه.",
+                example: "<code>int *const ptr = &x;</code>",
+                tips: "يستخدم لحماية المؤشر من الإشارة لعنوان آخر بالخطأ."
+            },
+            "pointer to constant": {
+                title: "مؤشر لقيمة ثابتة",
+                desc: "مؤشر يشير لقيمة لا يمكن تغييرها عن طريق هذا المؤشر.",
+                example: "<code>const int *ptr = &x;</code>",
+                tips: "يستخدم بكثرة في تمرير النصوص للدوال لضمان عدم تعديلها."
+            },
+            "void pointer": {
+                title: "المؤشر العام (void*)",
+                desc: "مؤشر يمكنه الإشارة لأي نوع بيانات (int, float, etc).",
+                example: "<code>void *ptr; ptr = &x;</code>",
+                tips: "يجب تحويل نوعه (Casting) قبل استخدامه للقراءة."
+            },
+            "function pointer": {
+                title: "مؤشر الدالة",
+                desc: "متغير يخزن عنوان دالة بدلاً من عنوان متغير.",
+                example: "<code>int (*ptr)(int, int);</code>",
+                tips: "يستخدم في البرمجة المتقدمة لعمل (Callbacks)."
+            },
+            "macro function": {
+                title: "ماكرو الدوال",
+                desc: "كتابة دالة صغيرة باستخدام #define يتم تعويضها قبل الترجمة.",
+                example: "<code>#define SQUARE(x) (x*x)</code>",
+                tips: "أسرع من الدوال العادية لأنها لا تستهلك وقت الاستدعاء، ولكنها أخطر."
+            },
+            "file modes": {
+                title: "أوضاع فتح الملفات",
+                desc: "تحديد غرض فتح الملف: قراءة (r)، كتابة (w)، أو إضافة (a).",
+                example: "<code>fopen(\"f.txt\", \"r\");</code>",
+                tips: "الوضع 'w' يمسح محتوى الملف القديم، أما 'a' فيضيف في نهايته."
+            },
+            "error handling": {
+                title: "معالجة الأخطاء",
+                desc: "استخدام errno والمكتبة perror لمعرفة سبب فشل العمليات.",
+                example: "<code>perror(\"Error\");</code>",
+                tips: "مهم جداً عند التعامل مع الملفات والذاكرة والشبكات."
+            },
+            "binary file": {
+                title: "الملفات الثنائية",
+                desc: "ملفات تخزن البيانات بصيغتها الأصلية في الذاكرة (وليس كنصوص).",
+                example: "<code>fopen(\"data.bin\", \"wb\");</code>",
+                tips: "أصغر حجماً وأسرع في المعالجة من الملفات النصية."
+            },
+            "random access file": {
+                title: "الوصول العشوائي للملفات",
+                desc: "الانتقال مباشرة لأي جزء في الملف دون قراءته من البداية.",
+                example: "<code>fseek(fp, offset, origin);</code>",
+                tips: "تستخدم في قواعد البيانات والملفات الكبيرة جداً."
+            },
+            // University Level - 100 New Entries
+            "union": {
+                title: "الاتحاد (Union)",
+                desc: "يشبه struct ولكنه يستخدم نفس موقع الذاكرة لجميع أعضائه (حجمه هو حجم أكبر عضو).",
+                example: "<code>union Data { int i; float f; };</code>",
+                tips: "يستخدم لتوفير الذاكرة عندما تحتاج لتخزين نوع واحد فقط من عدة أنواع في وقت واحد."
+            },
+            "bitfields": {
+                title: "حقول البت (Bit-fields)",
+                desc: "تسمح بتحديد عدد البتات التي يستهلكها كل عضو في الـ struct.",
+                example: "<code>struct { unsigned int flag : 1; } s;</code>",
+                tips: "مفيدة جداً في برمجة الأنظمة المدمجة (Embedded Systems) لتقليل استهلاك الذاكرة."
+            },
+            "volatile": {
+                title: "المتغير المتقلب (volatile)",
+                desc: "يخبر المترجم (Compiler) بأن قيمة المتغير قد تتغير في أي لحظة دون تدخل من الكود الحالي.",
+                example: "<code>volatile int status;</code>",
+                tips: "يستخدم مع الحساسات (Sensors) أو الذاكرة المشتركة في الأنظمة متعددة المهام."
+            },
+            "register": {
+                title: "مخزن السجل (register)",
+                desc: "اقتراح للمترجم بتخزين المتغير في سجل المعالج (CPU Register) بدلاً من الرام لسرعة الوصول.",
+                example: "<code>register int i;</code>",
+                tips: "المترجمات الحديثة تقوم بذلك تلقائياً، لذا نادراً ما يتم استخدامه يدوياً."
+            },
+            "inline": {
+                title: "الدوال المضمنة (inline)",
+                desc: "تطلب من المترجم وضع كود الدالة مباشرة في مكان استدعائها بدلاً من القفز إليها.",
+                example: "<code>inline int square(int x) { return x*x; }</code>",
+                tips: "تزيد من سرعة البرنامج بتقليل تكلفة استدعاء الدوال الصغيرة والمتكررة."
+            },
+            "pragma": {
+                title: "توجيهات المترجم (#pragma)",
+                desc: "أوامر خاصة للمترجم للتحكم في سلوكه أثناء عملية الترجمة.",
+                example: "<code>#pragma once // منع التضمين المتكرر</code>",
+                tips: "تختلف من مترجم لآخر (غير قياسية تماماً)."
+            },
+            "assert": {
+                title: "التأكيد (assert)",
+                desc: "دالة تستخدم للتأكد من صحة شرط معين أثناء مرحلة التطوير؛ إذا كان الشرط خطأ يتوقف البرنامج.",
+                example: "<code>assert(ptr != NULL);</code>",
+                tips: "يجب تضمين <code><assert.h></code>، وتختفي عند بناء النسخة النهائية (Release)."
+            },
+            "signals": {
+                title: "الإشارات (Signals)",
+                desc: "نظام لإخطار البرنامج بوقوع أحداث خارجية مثل ضغط Ctrl+C أو حدوث خطأ في الذاكرة.",
+                example: "<code>signal(SIGINT, my_handler);</code>",
+                tips: "تستخدم في أنظمة Unix/Linux للتعامل مع المقاطعات (Interrupts)."
+            },
+            "multithreading": {
+                title: "تعدد الخيوط (Multithreading)",
+                desc: "تشغيل عدة أجزاء من الكود في نفس الوقت داخل برنامج واحد.",
+                example: "<code>pthread_create(&tid, NULL, my_func, NULL);</code>",
+                tips: "تتطلب مكتبة مثل <code><pthread.h></code> وتستخدم لتسريع العمليات الحسابية."
+            },
+            "mutex": {
+                title: "قفل المزامنة (Mutex)",
+                desc: "أداة تمنع أكثر من Thread من الوصول لنفس البيانات في نفس الوقت (تجنب التصادم).",
+                example: "<code>pthread_mutex_lock(&lock);</code>",
+                tips: "اختصار لـ Mutual Exclusion."
+            },
+            "deadlock": {
+                title: "الجمود (Deadlock)",
+                desc: "مشكلة تحدث عندما ينتظر Thread قفلاً يحمله Thread آخر، والأخير ينتظر قفلاً يحمله الأول.",
+                example: "<code>Thread1: lock A, wait B | Thread2: lock B, wait A</code>",
+                tips: "يمكن تجنبها عن طريق ترتيب طلب الأقفال دائماً بنفس التسلسل."
+            },
+            "race condition": {
+                title: "حالة السباق (Race Condition)",
+                desc: "خطأ يحدث عندما تعتمد نتيجة البرنامج على ترتيب تنفيذ الـ Threads غير المتوقع.",
+                example: "<code>count = count + 1; // إذا نفذه خيطان معاً</code>",
+                tips: "تستخدم الـ Mutexes لحل هذه المشكلة."
+            },
+            "hashing": {
+                title: "التجزئة (Hashing)",
+                desc: "تحويل البيانات (مثل نص) إلى رقم فريد (Hash Value) للبحث السريع.",
+                example: "<code>index = hash_func(\"Ali\") % table_size;</code>",
+                tips: "تستخدم في بناء الـ Hash Tables وهي أسرع طريقة للبحث عن البيانات."
+            },
+            "avl tree": {
+                title: "شجرة AVL",
+                desc: "شجرة بحث ثنائية توازن نفسها تلقائياً بحيث لا يتجاوز فرق الارتفاع بين أي غصنين القيمة 1.",
+                example: "<code>O(log n) Search, Insert, Delete</code>",
+                tips: "تضمن أداءً مستقراً حتى في أسوأ حالات إدخال البيانات."
+            },
+            "red-black tree": {
+                title: "الشجرة الحمراء والسوداء",
+                desc: "شجرة بحث متوازنة تستخدم قواعد تلوين للعقد لضمان التوازن.",
+                example: "<code>Used in C++ STL (map, set)</code>",
+                tips: "أسرع من AVL في عمليات الإدخال والحذف."
+            },
+            "heap sort": {
+                title: "الترتيب بالكومة (Heap Sort)",
+                desc: "خوارزمية ترتيب تعتمد على هيكل بيانات الـ Heap (شجرة ثنائية كاملة).",
+                example: "<code>O(n log n) Worst Case</code>",
+                tips: "لا تحتاج لذاكرة إضافية وتعتبر خوارزمية ترتيب مستقرة من حيث الوقت."
+            },
+            "graph": {
+                title: "الرسوم البيانية (Graphs)",
+                desc: "هيكل بيانات يتكون من عقد (Nodes) وروابط (Edges) تمثل العلاقات بينها.",
+                example: "<code>Nodes: A, B | Edge: A-B</code>",
+                tips: "تستخدم لتمثيل الخرائط، الشبكات الاجتماعية، ومسارات الإنترنت."
+            },
+            "bfs": {
+                title: "البحث بالعرض (BFS)",
+                desc: "خوارزمية لاستكشاف الرسم البياني تبدأ من عقدة وتزور جميع جيرانها قبل الانتقال للمستوى التالي.",
+                example: "<code>Uses Queue (FIFO)</code>",
+                tips: "مثالية لإيجاد أقصر مسار في الرسم البياني غير الموزون."
+            },
+            "dfs": {
+                title: "البحث بالعمق (DFS)",
+                desc: "خوارزمية تبدأ من عقدة وتتعمق في كل مسار حتى نهايته قبل العودة للوراء.",
+                example: "<code>Uses Stack (LIFO) or Recursion</code>",
+                tips: "تستخدم في اكتشاف الدورات (Cycles) وحل المتاهات."
+            },
+            "dijkstra": {
+                title: "خوارزمية ديكسترا",
+                desc: "أشهر خوارزمية لإيجاد أقصر مسار بين عقدتين في رسم بياني موزون (قيم موجبة).",
+                example: "<code>Used in Google Maps</code>",
+                tips: "تعتمد على مبدأ Greedy (الجشع) لاختيار أقرب عقدة دائماً."
+            },
+            "dynamic programming": {
+                title: "البرمجة الديناميكية (DP)",
+                desc: "تقنية لحل المشاكل المعقدة عن طريق تقسيمها لمشاكل أصغر وحفظ نتائجها (Memoization) لتجنب التكرار.",
+                example: "<code>f(n) = f(n-1) + f(n-2) with table</code>",
+                tips: "تحول الوقت من أسي (Exponential) إلى خطي (Linear) في كثير من المسائل."
+            },
+            "greedy algorithm": {
+                title: "الخوارزمية الجشعة (Greedy)",
+                desc: "خوارزمية تختار الخيار الأفضل المتاح حالياً على أمل الوصول للحل الأمثل الكلي.",
+                example: "<code>Huffman Coding, Dijkstra</code>",
+                tips: "سريعة جداً ولكنها لا تعطي دائماً الحل الأفضل (Optimal) لكل المسائل."
+            },
+            "backtracking": {
+                title: "التراجع (Backtracking)",
+                desc: "خوارزمية تجرب كل الاحتمالات الممكنة وتتراجع عن المسار إذا وجدت أنه لا يؤدي للحل.",
+                example: "<code>N-Queens Problem, Sudoku Solver</code>",
+                tips: "تستخدم بشكل أساسي في مسائل البحث الشامل."
+            },
+            "space complexity": {
+                title: "تعقيد المساحة",
+                desc: "قياس مقدار الذاكرة الإضافية التي تحتاجها الخوارزمية بالنسبة لحجم المدخلات.",
+                example: "<code>O(1) for loops, O(n) for recursive stacks</code>",
+                tips: "في البرمجة الحديثة، قد يكون تعقيد المساحة أهم من الوقت أحياناً في الأجهزة المحدودة."
+            },
+            "doubly linked list": {
+                title: "القائمة المرتبطة المزدوجة",
+                desc: "كل عقدة تحتوي على مؤشر للعقدة التالية والعقدة السابقة.",
+                example: "<code>struct Node { int data; Node *next, *prev; };</code>",
+                tips: "تسمح بالتنقل للأمام وللخلف بسهولة، لكنها تستهلك ذاكرة أكثر قليلاً."
+            },
+            "priority queue": {
+                title: "طابور الأولويات",
+                desc: "طابور يخرج منه العنصر صاحب أعلى أولوية أولاً (وليس بالضرورة من دخل أولاً).",
+                example: "<code>Uses Max-Heap or Min-Heap</code>",
+                tips: "يستخدم في جدولة المهام الهامة في نظام التشغيل."
+            },
+            "trie": {
+                title: "شجرة التراي (Trie)",
+                desc: "شجرة متخصصة للبحث عن الكلمات (Prefix Tree)، فعالة جداً في القواميس.",
+                example: "<code>Each node is a character</code>",
+                tips: "تستخدم في خاصية 'الإكمال التلقائي' (Auto-complete)."
+            },
+            "b-tree": {
+                title: "شجرة B-Tree",
+                desc: "شجرة بحث متوازنة تسمح للعقدة الواحدة بالحصول على أكثر من طفلين، مصممة لأنظمة الملفات.",
+                example: "<code>Used in Databases (MySQL, PostgreSQL)</code>",
+                tips: "تقلل من عدد عمليات القراءة من القرص الصلب (Disk I/O)."
+            },
+            "adjacency matrix": {
+                title: "مصفوفة الجوار",
+                desc: "تمثيل الرسم البياني كمصفوفة ثنائية الأبعاد (0 أو 1).",
+                example: "<code>adj[i][j] = 1 means edge exists</code>",
+                tips: "سريعة جداً لمعرفة هل يوجد رابط بين عقدتين، لكنها تستهلك ذاكرة كبيرة."
+            },
+            "adjacency list": {
+                title: "قائمة الجوار",
+                desc: "تمثيل الرسم البياني كمصفوفة من القوائم المرتبطة.",
+                example: "<code>adj[i] -> list of neighbors</code>",
+                tips: "أكثر كفاءة في استهلاك الذاكرة للرسوم البيانية المتفرقة (Sparse Graphs)."
+            },
+            "stack overflow": {
+                title: "فيضان المكدس",
+                desc: "خطأ يحدث عند استهلاك كامل ذاكرة الـ Stack، غالباً بسبب Recursion لانهائي.",
+                example: "<code>void f() { f(); } // يسبب الانهيار</code>",
+                tips: "دائماً تأكد من وجود شرط توقف صحيح في الدوال المرتدة."
+            },
+            "buffer overflow": {
+                title: "فيضان الذاكرة المؤقتة",
+                desc: "ثغرة أمنية تحدث عند كتابة بيانات أكثر من حجم المصفوفة المحجوزة.",
+                example: "<code>char b[10]; strcpy(b, \"MoreThan10Chars\");</code>",
+                tips: "استخدم <code>strncpy</code> بدلاً من <code>strcpy</code> للحماية."
+            },
+            "endianness": {
+                title: "ترتيب البايتات (Endianness)",
+                desc: "طريقة تخزين الأرقام الكبيرة في الذاكرة (Little Endian أو Big Endian).",
+                example: "<code>0x1234 -> [34 12] (Little) or [12 34] (Big)</code>",
+                tips: "مهم جداً عند نقل البيانات عبر الشبكة بين أجهزة مختلفة."
+            },
+            "memory alignment": {
+                title: "محاذاة الذاكرة",
+                desc: "ترتيب البيانات في الذاكرة على عناوين مضاعفة لـ 4 أو 8 لتحسين سرعة وصول المعالج.",
+                example: "<code>struct { char c; int i; }; // قد يوجد فراغ (padding) بينهما</code>",
+                tips: "تؤدي أحياناً لزيادة حجم الـ struct بشكل غير متوقع."
+            },
+            "segmentation fault": {
+                title: "خطأ التجزئة (Segfault)",
+                desc: "أشهر خطأ في C، يحدث عند محاولة الوصول لمكان غير مسموح به في الذاكرة.",
+                example: "<code>int *p = NULL; *p = 10;</code>",
+                tips: "استخدم المصحح (Debugger) لتحديد السطر الذي تسبب في الخطأ."
+            },
+            "makefile": {
+                title: "ملف الـ Makefile",
+                desc: "ملف يحتوي على أوامر لترجمة المشروع تلقائياً بدلاً من كتابة أوامر المترجم يدوياً كل مرة.",
+                example: "<code>all: gcc main.c -o app</code>",
+                tips: "أداة أساسية للمشاريع الكبيرة التي تحتوي على عشرات الملفات."
+            },
+            "static linking": {
+                title: "الربط الساكن",
+                desc: "دمج مكتبات الكود داخل ملف البرنامج التنفيذي (.exe) عند الترجمة.",
+                example: "<code>gcc -static ...</code>",
+                tips: "البرنامج الناتج يعمل بدون الحاجة لملفات خارجية، لكن حجمه يكون أكبر."
+            },
+            "dynamic linking": {
+                title: "الربط الديناميكي",
+                desc: "تحميل المكتبات فقط عند تشغيل البرنامج (مثل ملفات .dll أو .so).",
+                example: "<code>gcc -lmath ...</code>",
+                tips: "يقلل حجم البرنامج ويسمح بتحديث المكتبات دون إعادة ترجمة البرنامج."
+            },
+            "opaque pointer": {
+                title: "المؤشر الغامض (Opaque)",
+                desc: "تقنية لإخفاء تفاصيل الـ struct عن المستخدم وإظهار المؤشر فقط (لزيادة الأمان والتنظيم).",
+                example: "<code>typedef struct MyObj* MyObjPtr;</code>",
+                tips: "تستخدم بكثرة في بناء المكتبات الاحترافية."
+            },
+            "unit testing": {
+                title: "اختبار الوحدات",
+                desc: "كتابة كود لاختبار كل دالة في برنامجك والتأكد من أنها تعطي النتائج المتوقعة.",
+                example: "<code>test_sum() { assert(sum(2,2) == 4); }</code>",
+                tips: "تساعد في اكتشاف الأخطاء فور حدوثها عند تعديل الكود مستقبلاً."
+            },
+            "isdigit": {
+                title: "دالة isdigit",
+                desc: "تتحقق هل الحرف المعطى هو رقم (0-9) أم لا.",
+                example: "<code>if(isdigit('5')) // True</code>",
+                tips: "موجودة في المكتبة <code><ctype.h></code>."
+            },
+            "isalpha": {
+                title: "دالة isalpha",
+                desc: "تتحقق هل الحرف المعطى هو حرف أبجدي (A-Z) أم لا.",
+                example: "<code>if(isalpha('a')) // True</code>",
+                tips: "موجودة في المكتبة <code><ctype.h></code>."
+            },
+            "toupper": {
+                title: "دالة toupper",
+                desc: "تحول الحرف الصغير (Small) إلى حرف كبير (Capital).",
+                example: "<code>char c = toupper('a'); // 'A'</code>",
+                tips: "موجودة في المكتبة <code><ctype.h></code>."
+            },
+            "time_t": {
+                title: "نوع البيانات time_t",
+                desc: "نوع بيانات مخصص لتخزين عدد الثواني المنقضية منذ عام 1970.",
+                example: "<code>time_t now = time(0);</code>",
+                tips: "يستخدم كأساس لجميع عمليات الوقت في لغة C."
+            },
+            "struct tm": {
+                title: "سجل الوقت (struct tm)",
+                desc: "سجل يحتوي على تفاصيل الوقت (ساعة، دقيقة، ثانية، يوم، شهر، سنة).",
+                example: "<code>printf(\"%d\", ptr->tm_year + 1900);</code>",
+                tips: "تحصل عليه باستخدام دوال مثل <code>localtime</code>."
+            },
+            "strerror": {
+                title: "دالة strerror",
+                desc: "تحول رقم الخطأ (errno) إلى نص مفهوم يوضح سبب المشكلة.",
+                example: "<code>printf(\"Error: %s\", strerror(errno));</code>",
+                tips: "مفيدة جداً لإظهار رسائل خطأ واضحة للمستخدم."
+            },
+            "limits.h": {
+                title: "المكتبة limits.h",
+                desc: "تحتوي على ثوابت تحدد القيم العظمى والصغرى لأنواع البيانات في جهازك.",
+                example: "<code>INT_MAX, CHAR_MIN</code>",
+                tips: "تستخدم للتأكد من عدم حدوث Overflow (تجاوز السعة)."
+            },
+            "tail recursion": {
+                title: "التكرار المرتد الذيلي",
+                desc: "نوع خاص من الـ Recursion حيث يكون استدعاء الدالة لنفسها هو آخر عملية تقوم بها.",
+                example: "<code>return f(n-1); // بدون عمليات إضافية</code>",
+                tips: "يمكن للمترجمات الذكية تحويله إلى Loop لتوفير ذاكرة الـ Stack."
+            },
+            "knapsack problem": {
+                title: "مسألة حقيبة الظهر",
+                desc: "مسألة كلاسيكية في الخوارزميات: كيف تختار عناصر بقيم مختلفة لتملأ حقيبة بسعة محددة.",
+                example: "<code>Solved using DP or Greedy</code>",
+                tips: "تستخدم في تحسين التحميل والخدمات اللوجستية."
+            },
+            "bst": {
+                title: "شجرة البحث الثنائية (BST)",
+                desc: "شجرة ثنائية حيث كل عقدة يسار أصغر من الجذر، وكل عقدة يمين أكبر منه.",
+                example: "<code>Left < Root < Right</code>",
+                tips: "تسمح بالبحث السريع جداً عن البيانات."
+            },
+            "inorder traversal": {
+                title: "المرور الداخلي (Inorder)",
+                desc: "طريقة لزيارة عناصر الشجرة بالترتيب: يسار -> جذر -> يمين.",
+                example: "<code>Results in sorted order for BST</code>",
+                tips: "أهم طرق المرور لأنها تعطي البيانات مرتبة في أشجار البحث."
+            },
+            "preorder traversal": {
+                title: "المرور المسبق (Preorder)",
+                desc: "زيارة عناصر الشجرة بالترتيب: جذر -> يسار -> يمين.",
+                example: "<code>Used to clone a tree</code>",
+                tips: "مفيدة لنسخ الشجرة أو تقييم التعبيرات الرياضية."
+            },
+            "postorder traversal": {
+                title: "المرور اللاحق (Postorder)",
+                desc: "زيارة عناصر الشجرة بالترتيب: يسار -> يمين -> جذر.",
+                example: "<code>Used to delete a tree</code>",
+                tips: "مفيدة جداً لحذف الشجرة من الذاكرة بالكامل."
+            },
+            "hashing collisions": {
+                title: "تصادم التجزئة",
+                desc: "يحدث عندما تعطي دالة الـ Hash نفس الرقم لمدخلين مختلفين.",
+                example: "<code>Chaining or Open Addressing</code>",
+                tips: "يجب حلها لضمان عدم ضياع البيانات في الـ Hash Table."
+            },
+            "binary file read": {
+                title: "قراءة الملفات الثنائية",
+                desc: "استخدام دالة fread لقراءة كميات من البيانات دفعة واحدة.",
+                example: "<code>fread(&struct_obj, sizeof(S), 1, fp);</code>",
+                tips: "أسرع بكثير من قراءة الملفات النصية سطراً بسطر."
+            },
+            "command line arguments": {
+                title: "وسائط سطر الأوامر",
+                desc: "تمرير قيم للبرنامج عند تشغيله من الشاشة السوداء.",
+                example: "<code>int main(int argc, char *argv[])</code>",
+                tips: "argc هو عدد الوسائط، و argv هو مصفوفة النصوص الممرة."
+            },
+            "null character": {
+                title: "رمز النهاية (\\0)",
+                desc: "حرف مخفي قيمته 0 يوضع في نهاية كل نص في لغة C لإخبار الكمبيوتر بنهاية النص.",
+                example: "<code>char s[] = {'H', 'i', '\\0'};</code>",
+                tips: "بدونه، سيستمر البرنامج في قراءة الذاكرة العشوائية حتى ينهار."
+            },
+            "pointer arithmetic": {
+                title: "حسابات المؤشرات",
+                desc: "إمكانية جمع أو طرح أرقام من المؤشر للتنقل في الذاكرة.",
+                example: "<code>ptr++; // ينتقل للعنصر التالي</code>",
+                tips: "عند زيادة المؤشر بـ 1، فإنه يقفز بعدد بايتات نوع البيانات (مثلاً 4 بايت للـ int)."
+            },
+            "wild pointer": {
+                title: "المؤشر البري (Wild Pointer)",
+                desc: "مؤشر تم تعريفه ولكن لم يتم إعطاؤه أي قيمة ابتدائية، فيشير لمكان عشوائي.",
+                example: "<code>int *p; *p = 10; // خطير جداً</code>",
+                tips: "دائماً اجعل قيمة المؤشر الابتدائية NULL."
+            },
+            "dangling else": {
+                title: "مشكلة else المعلقة",
+                desc: "غموض يحدث عند وجود if متداخلة بدون أقواس حول الـ else.",
+                example: "<code>if(a) if(b) else // لمن تتبع else؟</code>",
+                tips: "استخدم الأقواس <code>{}</code> دائماً لتجنب هذا الغموض."
+            },
+            "infinite recursion": {
+                title: "التكرار اللانهائي",
+                desc: "دالة تستدعي نفسها بدون توقف، مما يملأ الـ Stack ويسبب crash.",
+                example: "<code>f() { f(); }</code>",
+                tips: "هو الموازي للـ Infinite Loop ولكن في الدوال المرتدة."
+            },
+            "static function": {
+                title: "الدالة الساكنة (static)",
+                desc: "دالة لا يمكن رؤيتها أو استدعاؤها إلا من داخل نفس الملف الذي عرفت فيه.",
+                example: "<code>static void private_func() { ... }</code>",
+                tips: "تستخدم لتحقيق الخصوصية (Encapsulation) في المشاريع الكبيرة."
+            },
+            "extern": {
+                title: "الكلمة المفتاحية extern",
+                desc: "تخبر المترجم أن المتغير معرف في ملف آخر وسنستخدمه هنا.",
+                example: "<code>extern int global_count;</code>",
+                tips: "تستخدم لربط المتغيرات العامة بين ملفات المشروع المختلفة."
+            },
+            "math.h functions": {
+                title: "دوال math.h",
+                desc: "مكتبة توفر دوال مثل floor (تقريب لأسفل)، ceil (تقريب لأعلى)، و log.",
+                example: "<code>floor(2.9) = 2.0; ceil(2.1) = 3.0;</code>",
+                tips: "لا تنسَ تضمين <code>#include <math.h></code>."
+            },
+            "const with pointers": {
+                title: "الثوابت مع المؤشرات",
+                desc: "يمكن جعل العنوان ثابتاً، أو القيمة ثابتة، أو كلاهما.",
+                example: "<code>const int *ptr; // القيمة ثابتة</code>",
+                tips: "يستخدم لحماية البيانات من التعديل عند تمريرها للدوال."
+            },
+            "memory management": {
+                title: "إدارة الذاكرة",
+                desc: "العملية الكاملة لحجز واستخدام وتحرير الذاكرة لضمان كفاءة البرنامج.",
+                example: "<code>malloc -> use -> free</code>",
+                tips: "الإدارة السيئة للذاكرة هي السبب الأول لثغرات الأمان وانهيار البرامج."
+            },
+            "preprocessor macros": {
+                title: "الماكرو المتقدم",
+                desc: "استخدام # و ## في الماكرو لتحويل المدخلات لنصوص أو دمج الأسماء.",
+                example: "<code>#define STR(x) #x</code>",
+                tips: "تقنيات متقدمة تستخدم في بناء الـ Frameworks والمكتبات."
+            },
+            "bit manipulation": {
+                title: "التلاعب بالبتات",
+                desc: "استخدام العمليات المنطقية لتغيير بت معين داخل رقم (Set, Clear, Toggle).",
+                example: "<code>n |= (1 << k); // Set bit k</code>",
+                tips: "فعالة جداً وسريعة للتحكم في الأجهزة (Hardware Control)."
+            },
+            "sorting stability": {
+                title: "استقرار الترتيب (Stability)",
+                desc: "خاصية في خوارزميات الترتيب تحافظ على الترتيب النسبي للعناصر المتساوية.",
+                example: "<code>Merge Sort is stable, Quick Sort is not</code>",
+                tips: "مهمة عندما ترتب بيانات بناءً على أكثر من معيار (مثلاً الاسم ثم العمر)."
+            },
+            "adaptive sorting": {
+                title: "الترتيب التكيفي",
+                desc: "خوارزمية تصبح أسرع إذا كانت البيانات مرتبة جزئياً بالفعل.",
+                example: "<code>Insertion Sort is adaptive</code>",
+                tips: "اختر خوارزمية تكيفية إذا كنت تتوقع بيانات شبه مرتبة."
+            },
+            "in-place sorting": {
+                title: "الترتيب الموضعي",
+                desc: "خوارزمية ترتب البيانات داخل نفس المصفوفة بدون الحاجة لمساحة إضافية كبيرة.",
+                example: "<code>Bubble Sort, Quick Sort</code>",
+                tips: "توفر في استهلاك الذاكرة (Space Complexity)."
+            },
+            "algorithm paradigm": {
+                title: "منهجيات الخوارزميات",
+                desc: "الأساليب الكبرى لتصميم الحلول مثل (Divide & Conquer) و (Dynamic Programming).",
+                example: "<code>Merge Sort (D&C), Fibonacci (DP)</code>",
+                tips: "فهم هذه المنهجيات يجعلك مبرمجاً قادراً على حل أي مشكلة جديدة."
+            },
+            "logical operators priority": {
+                title: "أولوية المشغلات المنطقية",
+                desc: "النفي (!) له أعلى أولوية، يليه 'و' (&&)، ثم 'أو' (||).",
+                example: "<code>!a || b && c // تعني (!a) || (b && c)</code>",
+                tips: "استخدم الأقواس دائماً لتجنب الأخطاء المنطقية الصعبة."
+            },
+            "project structure": {
+                title: "هيكلة المشروع",
+                desc: "تنظيم الملفات في مجلدات مثل src للكود و include لملفات الرأس.",
+                example: "<code>/src, /include, /lib, /bin</code>",
+                tips: "التنظيم الجيد يجعل المشروع قابلاً للتوسع والعمل الجماعي."
+            },
+            "coding standards": {
+                title: "معايير الكود",
+                desc: "قواعد يتبعها المبرمجون لجعل الكود موحداً وسهل القراءة (مثل مسافات الإزاحة).",
+                example: "<code>Indent 4 spaces, camelCase naming</code>",
+                tips: "اتبع معايير الفريق الذي تعمل معه دائماً."
+            },
+            "debugging techniques": {
+                title: "تقنيات التصحيح",
+                desc: "استخدام نقاط التوقف (Breakpoints) وتتبع المتغيرات خطوة بخطوة.",
+                example: "<code>Step over, Step into, Watch variable</code>",
+                tips: "المبرمج المحترف يقضي وقتاً في التصحيح أكثر من الكتابة."
+            },
+            "secure coding": {
+                title: "البرمجة الآمنة",
+                desc: "تجنب الدوال الخطيرة مثل gets وفحص طول المدخلات دائماً.",
+                example: "<code>Use fgets instead of gets</code>",
+                tips: "الأمان يبدأ من كتابة أول سطر كود."
+            },
+            "circular queue": {
+                title: "الطابور الدائري",
+                desc: "طابور يربط نهايته ببدايته لتجنب ضياع مساحة الذاكرة عند الحذف.",
+                example: "<code>index = (index + 1) % size;</code>",
+                tips: "يستخدم بكثرة في أنظمة البث (Streaming) وتخزين البيانات المؤقت."
+            },
+            "generic programming": {
+                title: "البرمجة العامة (Generics)",
+                desc: "محاكاة البرمجة العامة في C باستخدام void* والماكرو للتعامل مع أي نوع بيانات.",
+                example: "<code>void sort(void* array, ...)</code>",
+                tips: "تجعل الدوال قابلة لإعادة الاستخدام مع أنواع مختلفة."
+            },
+            "dynamic programming types": {
+                title: "أنواع البرمجة الديناميكية",
+                desc: "هناك أسلوبان: (Top-Down) باستخدام المذكرة، و (Bottom-Up) باستخدام الجداول.",
+                example: "<code>Memoization vs Tabulation</code>",
+                tips: "Bottom-Up غالباً ما يكون أسرع ويوفر في ذاكرة الـ Stack."
+            },
+            "graph connectivity": {
+                title: "اتصال الرسم البياني",
+                desc: "التحقق هل يمكن الوصول من أي عقدة لأي عقدة أخرى.",
+                example: "<code>Solved using BFS or DFS</code>",
+                tips: "مهم في شبكات التواصل والاتصالات."
+            },
+            "spanning tree": {
+                title: "الشجرة الممتدة (Spanning Tree)",
+                desc: "مجموعة من الروابط التي تربط كل العقد بدون تكوين أي دورة (Cycle).",
+                example: "<code>Minimum Spanning Tree (MST)</code>",
+                tips: "تستخدم لتقليل تكلفة بناء الشبكات (مثل تمديد الكابلات)."
+            },
+            "algorithm efficiency": {
+                title: "كفاءة الخوارزمية",
+                desc: "الموازنة بين سرعة التنفيذ واستهلاك الذاكرة.",
+                example: "<code>Time-Memory Tradeoff</code>",
+                tips: "أحياناً نضحي بالذاكرة (نستخدم جداول) لنحصل على سرعة هائلة."
+            },
+            "code optimization": {
+                title: "تحسين الكود",
+                desc: "تعديل الكود ليعمل بشكل أسرع أو يستهلك طاقة أقل.",
+                example: "<code>Loop unrolling, Register usage</code>",
+                tips: "لا تحسن الكود مبكراً (Premature Optimization)، ركز على الوضوح أولاً."
+            },
+            "recursion limit": {
+                title: "حد التكرار المرتد",
+                desc: "أقصى عمق يمكن أن تصل إليه الدالة قبل أن يمتلئ الـ Stack.",
+                example: "<code>Depends on Stack Size (usually 1MB-8MB)</code>",
+                tips: "للمسائل الضخمة، استبدل الـ Recursion بحلقة تكرارية (Loop)."
+            },
+            "bitwise logic in c": {
+                title: "المنطق البتي",
+                desc: "استخدام XOR لتبديل قيمتين بدون متغير ثالث، أو فحص حالة بت معين.",
+                example: "<code>a ^= b; b ^= a; a ^= b;</code>",
+                tips: "خدعة شهيرة لتبديل القيم باستخدام XOR."
+            },
+            "c library functions": {
+                title: "دوال مكتبة C",
+                desc: "الإلمام بالدوال الجاهزة يوفر عليك إعادة اختراع العجلة.",
+                example: "<code>qsort, bsearch, strtok</code>",
+                tips: "اقرأ دائماً التوثيق (Documentation) للمكتبات القياسية."
+            },
+            "memory leak detection": {
+                title: "اكتشاف تسرب الذاكرة",
+                desc: "استخدام أدوات مثل Valgrind لمراقبة تخصيص وتحرير الذاكرة.",
+                example: "<code>valgrind --leak-check=full ./app</code>",
+                tips: "أداة لا غنى عنها لأي مبرمج C محترف."
+            },
+            "bitmasking": {
+                title: "القناع البتي (Bitmask)",
+                desc: "استخدام رقم كـ 'قناع' لاستخراج أو تعديل مجموعة من البتات معاً.",
+                example: "<code>n & 0xFF // استخراج آخر 8 بتات</code>",
+                tips: "تستخدم بكثرة في معالجة الصور وبروتوكولات الشبكة."
+            },
+            "data structure choice": {
+                title: "اختيار هيكل البيانات",
+                desc: "أهم قرار برمجي: المصفوفة للوصول السريع، القائمة للحذف السريع، الشجرة للبحث.",
+                example: "<code>Array (O(1) access), List (O(1) insert)</code>",
+                tips: "هيكل البيانات الصحيح يحل نصف المشكلة."
             }
         };
 
-        // حالة التطبيق
-        let currentLang = 'ar';
-        let lastAnalysisResult = null;
-
-        // عناصر DOM
-        const langButtons = document.querySelectorAll('.lang-btn');
-        const codeInput = document.getElementById('codeInput');
-        const lineNumbers = document.getElementById('lineNumbers');
-        const analyzeBtn = document.getElementById('analyzeBtn');
-        const clearBtn = document.getElementById('clearBtn');
-        const optimizeBtn = document.getElementById('optimizeBtn');
-        const copyCodeBtn = document.getElementById('copyCodeBtn');
-        const copyCorrectedCodeBtn = document.getElementById('copyCorrectedCodeBtn');
-        const loadingIndicator = document.getElementById('loadingIndicator');
-        const errorsContainer = document.getElementById('errorsContainer');
-        const noErrorsMessage = document.getElementById('noErrorsMessage');
-        const suggestionsList = document.getElementById('suggestionsList');
-        const statsBar = document.getElementById('statsBar');
-        const examplesList = document.getElementById('examplesList');
-        const loadExampleBtn = document.getElementById('loadExampleBtn');
-        const copyNotification = document.getElementById('copyNotification');
-        const notificationText = document.getElementById('notification-text');
-
-        // تحديث أرقام الأسطر
-        function updateLineNumbers() {
-            const lines = codeInput.value.split('\n').length;
-            const lineCount = Math.max(lines, 15);
-            
-            let numbers = '';
-            for (let i = 1; i <= lineCount; i++) {
-                numbers += i + '<br>';
-            }
-            lineNumbers.innerHTML = numbers;
-        }
-
-        // إظهار الإشعار
-        function showNotification(message) {
-            notificationText.textContent = message;
-            copyNotification.classList.add('show');
-            
-            setTimeout(() => {
-                copyNotification.classList.remove('show');
-            }, 3000);
-        }
-
-        // نسخ النص إلى الحافظة
-        function copyToClipboard(text) {
-            const textArea = document.createElement('textarea');
-            textArea.value = text;
-            textArea.style.position = 'fixed';
-            textArea.style.left = '-999999px';
-            textArea.style.top = '-999999px';
-            document.body.appendChild(textArea);
-            
-            textArea.focus();
-            textArea.select();
-            
-            try {
-                document.execCommand('copy');
-                return true;
-            } catch (err) {
-                console.error('Failed to copy text: ', err);
-                return false;
-            } finally {
-                document.body.removeChild(textArea);
-            }
-        }
-
-        // نسخ الكود المصحح
-        function copyCorrectedCode() {
-            if (!lastAnalysisResult || !lastAnalysisResult.correctedCode) {
-                showNotification(
-                    currentLang === 'ar' ? 'الرجاء تحليل الكود أولاً' :
-                    currentLang === 'en' ? 'Please analyze the code first' :
-                    'Veuillez analyser le code d\'abord'
-                );
-                return;
-            }
-            
-            const success = copyToClipboard(lastAnalysisResult.correctedCode);
-            if (success) {
-                showNotification(translations[currentLang].notificationText);
-                
-                copyCorrectedCodeBtn.classList.add('touch-feedback');
-                setTimeout(() => {
-                    copyCorrectedCodeBtn.classList.remove('touch-feedback');
-                }, 300);
-            }
-        }
-
-        // نسخ الكود الحالي
-        function copyCurrentCode() {
-            const code = codeInput.value.trim();
-            
-            if (!code) {
-                showNotification(
-                    currentLang === 'ar' ? 'لا يوجد كود لنسخه' :
-                    currentLang === 'en' ? 'No code to copy' :
-                    'Aucun code à copier'
-                );
-                return;
-            }
-            
-            const success = copyToClipboard(code);
-            if (success) {
-                showNotification(translations[currentLang].notificationText);
-                
-                copyCodeBtn.classList.add('touch-feedback');
-                setTimeout(() => {
-                    copyCodeBtn.classList.remove('touch-feedback');
-                }, 300);
-            }
-        }
-
-        // تحديث اللغة
-        function updateLanguage(lang) {
-            currentLang = lang;
-            const texts = translations[lang];
-            
-            // تحديث اتجاه النص
-            if (lang === 'ar') {
-                document.documentElement.dir = 'rtl';
-            } else {
-                document.documentElement.dir = 'ltr';
-            }
-            
-            // تحديث النصوص
-            document.getElementById('header-title').textContent = texts.title;
-            document.getElementById('header-subtitle').textContent = texts.subtitle;
-            document.getElementById('input-title').textContent = texts.inputTitle;
-            document.getElementById('analyze-text').textContent = texts.analyzeText;
-            document.getElementById('clear-text').textContent = texts.clearText;
-            document.getElementById('optimize-text').textContent = texts.optimizeText;
-            document.getElementById('copy-text').textContent = texts.copyText;
-            document.getElementById('copy-corrected-text').textContent = texts.copyCorrectedText;
-            document.getElementById('loading-text').textContent = texts.loadingText;
-            document.getElementById('results-title').textContent = texts.resultsTitle;
-            document.getElementById('no-errors-title').textContent = texts.noErrorsTitle;
-            document.getElementById('no-errors-text').textContent = texts.noErrorsText;
-            document.getElementById('suggestions-title').textContent = texts.suggestionsTitle;
-            document.getElementById('footer-text').textContent = texts.footerText;
-            document.getElementById('copyright-text').textContent = texts.copyrightText;
-            document.getElementById('errors-text').textContent = texts.errorsText;
-            document.getElementById('warnings-text').textContent = texts.warningsText;
-            document.getElementById('suggestions-text').textContent = texts.suggestionsText;
-            document.getElementById('score-text').textContent = texts.scoreText;
-            document.getElementById('example-title').textContent = texts.exampleTitle;
-            document.getElementById('load-example-text').textContent = texts.loadExampleText;
-            document.getElementById('notification-text').textContent = texts.notificationText;
-            document.getElementById('home-text').textContent = texts.homeText;
-            
-            // تحديث أمثلة الكود
-            updateExamplesList();
-        }
-
-        // تحديث قائمة الأمثلة
-        function updateExamplesList() {
-            const examples = translations[currentLang].examples;
-            let html = '';
-            
-            examples.forEach((example, index) => {
-                html += `
-                    <div class="example-item" onclick="loadExample(${index})">
-                        <div>
-                            <i class="fas fa-code" style="color: #60a5fa;"></i>
-                            <div>
-                                <strong>${example.name}</strong>
-                                <div>
-                                    ${currentLang === 'ar' ? 'انقر لتحميل' : currentLang === 'en' ? 'Click to load' : 'Cliquez pour charger'}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            examplesList.innerHTML = html;
-        }
-
-        // تحميل مثال
-        window.loadExample = function(index) {
-            const example = translations[currentLang].examples[index];
-            codeInput.value = example.code;
-            updateLineNumbers();
-            
-            codeInput.classList.add('highlighted');
-            setTimeout(() => {
-                codeInput.classList.remove('highlighted');
-            }, 2000);
-            
-            // تحليل تلقائي على الهواتف
-            if (window.innerWidth <= 768) {
-                setTimeout(() => {
-                    analyzeCode();
-                }, 500);
-            }
-        };
-
-        // تحليل متقدم للكود
-        function advancedCodeAnalysis(code) {
-            const lines = code.split('\n');
-            const errors = [];
-            const warnings = [];
-            const suggestions = [];
-            let correctedCode = code;
-            
-            // 1. تحليل بناء الجملة الأساسية
-            lines.forEach((line, index) => {
-                const lineNum = index + 1;
-                
-                // البحث عن نقاط منقوطة مفقودة
-                if (line.trim() && !line.trim().startsWith('#') && !line.trim().startsWith('//') && 
-                    !line.includes('{') && !line.includes('}') && !line.trim().endsWith(';') && 
-                    !line.trim().endsWith('{') && !line.trim().endsWith('}')) {
-                    
-                    if (!line.includes('if(') && !line.includes('for(') && !line.includes('while(') && 
-                        !line.includes('else') && !line.includes('do {')) {
-                        
-                        errors.push({
-                            type: 'error',
-                            line: lineNum,
-                            message: {
-                                ar: `نقطة منقوطة مفقودة في نهاية السطر`,
-                                en: `Missing semicolon at end of line`,
-                                fr: `Point-virgule manquant à la fin de la ligne`
-                            },
-                            code: line.trim(),
-                            fix: line.trim() + ';',
-                            explanation: {
-                                ar: `في لغة C، يجب إنهاء معظم الجمل بنقطة منقوطة (;).`,
-                                en: `In C language, most statements must end with a semicolon (;).`,
-                                fr: `En langage C, la plupart des instructions doivent se terminer par un point-virgule (;).`
-                            }
-                        });
-                    }
-                }
-                
-                // البحث عن = بدلاً من == في الشروط
-                if ((line.includes('if(') || line.includes('while(')) && line.includes('=') && 
-                    !line.includes('==') && !line.includes('!=') && !line.includes('>=') && !line.includes('<=')) {
-                    
-                    const assignmentRegex = /if\s*\(([^)]*)=\s*([^)]*)\)/;
-                    if (assignmentRegex.test(line)) {
-                        errors.push({
-                            type: 'error',
-                            line: lineNum,
-                            message: {
-                                ar: `استخدام عامل الإسناد (=) بدلاً من عامل المقارنة (==)`,
-                                en: `Using assignment operator (=) instead of comparison operator (==)`,
-                                fr: `Utilisation de l'opérateur d'affectation (=) au lieu de l'opérateur de comparaison (==)`
-                            },
-                            code: line.trim(),
-                            fix: line.trim().replace('=', '=='),
-                            explanation: {
-                                ar: `في الشروط، يجب استخدام عامل المقارنة (==) للتحقق من التساوي.`,
-                                en: `In conditions, you should use the comparison operator (==) to check for equality.`,
-                                fr: `Dans les conditions, vous devez utiliser l'opérateur de comparaison (==) pour vérifier l'égalité.`
-                            }
-                        });
-                    }
-                }
-                
-                // البحث عن خروج عن حدود المصفوفات
-                if (line.includes('[') && line.includes(']')) {
-                    const arrayAccessRegex = /(\w+)\[(\d+)\]/g;
-                    let match;
-                    while ((match = arrayAccessRegex.exec(line)) !== null) {
-                        const arrayName = match[1];
-                        const index = parseInt(match[2]);
-                        
-                        for (let i = 0; i < lines.length; i++) {
-                            if (lines[i].includes(arrayName) && lines[i].includes('[') && lines[i].includes(']')) {
-                                const sizeMatch = lines[i].match(/(\w+)\[(\d+)\]/);
-                                if (sizeMatch) {
-                                    const size = parseInt(sizeMatch[2]);
-                                    if (index >= size) {
-                                        errors.push({
-                                            type: 'error',
-                                            line: lineNum,
-                                            message: {
-                                                ar: `خروج عن حدود المصفوفة ${arrayName}[${size}]`,
-                                                en: `Array index out of bounds for ${arrayName}[${size}]`,
-                                                fr: `Index de tableau hors limites pour ${arrayName}[${size}]`
-                                            },
-                                            code: line.trim(),
-                                            fix: line.trim().replace(`${arrayName}[${index}]`, `${arrayName}[${size-1}]`),
-                                            explanation: {
-                                                ar: `المصفوفة ${arrayName} بحجم ${size}، لذا المؤشرات الصالحة هي من 0 إلى ${size-1}.`,
-                                                en: `Array ${arrayName} has size ${size}, so valid indices are from 0 to ${size-1}.`,
-                                                fr: `Le tableau ${arrayName} a une taille de ${size}, donc les indices valides vont de 0 à ${size-1}.`
-                                            }
-                                        });
-                                    }
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-                
-                // البحث عن أخطاء في تنسيق printf
-                if (line.includes('printf(') && line.includes('%')) {
-                    const formatSpecifiers = line.match(/%[dfsc]/g);
-                    const variables = line.match(/[^%]\b\w+\b/g);
-                    
-                    if (formatSpecifiers && variables && formatSpecifiers.length !== variables.length) {
-                        warnings.push({
-                            type: 'warning',
-                            line: lineNum,
-                            message: {
-                                ar: `عدم تطابق بين محددات التنسيق والمتغيرات في printf`,
-                                en: `Mismatch between format specifiers and variables in printf`,
-                                fr: `Incompatibilité entre les spécificateurs de format et les variables dans printf`
-                            },
-                            code: line.trim(),
-                            explanation: {
-                                ar: `عدد محددات التنسيق (مثل %d، %f) يجب أن يتطابق مع عدد المتغيرات الممررة.`,
-                                en: `The number of format specifiers (like %d, %f) must match the number of passed variables.`,
-                                fr: `Le nombre de spécificateurs de format (comme %d, %f) doit correspondre au nombre de variables passées.`
-                            }
-                        });
-                    }
-                }
-            });
-            
-            // 2. تحليل المكتبات المستخدمة
-            if (code.includes('printf(') && !code.includes('#include <stdio.h>') && !code.includes('#include<stdio.h>')) {
-                errors.push({
-                    type: 'error',
-                    line: 1,
-                    message: {
-                        ar: `مكتبة stdio.h مطلوبة لدالة printf`,
-                        en: `stdio.h library required for printf function`,
-                        fr: `Bibliothèque stdio.h requise pour la fonction printf`
-                    },
-                    code: 'printf',
-                    fix: 'أضف #include <stdio.h> في الأعلى',
-                    explanation: {
-                        ar: `دالة printf معرفة في مكتبة stdio.h.`,
-                        en: `The printf function is defined in the stdio.h library.`,
-                        fr: `La fonction printf est définie dans la bibliothèque stdio.h.`
-                    }
-                });
-            }
-            
-            // 3. اقتراحات لتحسين الكود
-            if (!code.includes('//') && !code.includes('/*')) {
-                suggestions.push({
-                    type: 'suggestion',
-                    message: {
-                        ar: `إضافة تعليقات توضيحية للكود`,
-                        en: `Add explanatory comments to the code`,
-                        fr: `Ajouter des commentaires explicatifs au code`
-                    },
-                    explanation: {
-                        ar: `التعليقات تجعل الكود أكثر قابلية للقراءة والصيانة.`,
-                        en: `Comments make code more readable and maintainable.`,
-                        fr: `Les commentaires rendent le code plus lisible et maintenable.`
-                    }
-                });
-            }
-            
-            if (code.includes('main()') && !code.includes('return')) {
-                suggestions.push({
-                    type: 'suggestion',
-                    message: {
-                        ar: `إضافة تعليمة return في نهاية main`,
-                        en: `Add return statement at the end of main`,
-                        fr: `Ajouter une instruction return à la fin de main`
-                    },
-                    explanation: {
-                        ar: `الدالة الرئيسية main يجب أن تعيد قيمة صحيحة (عادة 0 للنجاح).`,
-                        en: `The main function should return an integer value (usually 0 for success).`,
-                        fr: `La fonction main doit retourner une valeur entière (généralement 0 pour le succès).`
-                    }
-                });
-            }
-            
-            // 4. إنشاء كود مصحح
-            correctedCode = applyFixes(correctedCode, errors);
-            
-            return {
-                errors: errors,
-                warnings: warnings,
-                suggestions: suggestions,
-                correctedCode: correctedCode,
-                score: calculateQualityScore(code, errors, warnings, suggestions)
-            };
-        }
-
-        // تطبيق التصحيحات
-        function applyFixes(code, errors) {
-            let corrected = code;
-            const lines = corrected.split('\n');
-            
-            errors.sort((a, b) => b.line - a.line).forEach(error => {
-                if (error.fix && error.line <= lines.length) {
-                    const originalLine = lines[error.line - 1];
-                    if (error.fix.includes(';') && !originalLine.includes(';') && !originalLine.trim().endsWith('{') && !originalLine.trim().endsWith('}')) {
-                        lines[error.line - 1] = originalLine + ';';
-                    } else if (error.fix.includes('==') && originalLine.includes('=') && !originalLine.includes('==') && !originalLine.includes('!=')) {
-                        lines[error.line - 1] = originalLine.replace('=', '==');
-                    }
-                }
-            });
-            
-            return lines.join('\n');
-        }
-
-        // حساب نقاط الجودة
-        function calculateQualityScore(code, errors, warnings, suggestions) {
-            const baseScore = 100;
-            const errorPenalty = 15;
-            const warningPenalty = 5;
-            const suggestionBonus = 3;
-            
-            let score = baseScore;
-            score -= errors.length * errorPenalty;
-            score -= warnings.length * warningPenalty;
-            score += suggestions.length * suggestionBonus;
-            
-            const lineCount = code.split('\n').length;
-            if (lineCount > 20) score += 10;
-            
-            return Math.max(0, Math.min(100, score));
-        }
-
-        // تحليل الكود
-        function analyzeCode() {
-            const code = codeInput.value.trim();
-            
-            if (!code) {
-                showNotification(
-                    currentLang === 'ar' ? "الرجاء إدخال كود C لتحليله" : 
-                    currentLang === 'en' ? "Please enter C code to analyze" : 
-                    "Veuillez entrer du code C à analyser"
-                );
-                return;
-            }
-            
-            loadingIndicator.classList.add('active');
-            errorsContainer.innerHTML = '';
-            noErrorsMessage.style.display = 'none';
-            statsBar.style.display = 'none';
-            suggestionsList.innerHTML = '';
-            
-            setTimeout(() => {
-                loadingIndicator.classList.remove('active');
-                const analysisResult = advancedCodeAnalysis(code);
-                lastAnalysisResult = analysisResult;
-                displayAnalysisResults(analysisResult);
-            }, 1800);
-        }
-
-        // عرض نتائج التحليل
-        function displayAnalysisResults(results) {
-            const errors = results.errors;
-            const warnings = results.warnings;
-            const suggestions = results.suggestions;
-            
-            document.getElementById('errorsCount').textContent = errors.length;
-            document.getElementById('warningsCount').textContent = warnings.length;
-            document.getElementById('suggestionsCount').textContent = suggestions.length;
-            document.getElementById('scoreValue').textContent = results.score;
-            statsBar.style.display = 'flex';
-            
-            errorsContainer.innerHTML = '';
-            
-            if (errors.length === 0 && warnings.length === 0) {
-                noErrorsMessage.style.display = 'block';
-            } else {
-                errors.forEach(error => {
-                    addIssueToContainer(error, 'error');
-                });
-                
-                warnings.forEach(warning => {
-                    addIssueToContainer(warning, 'warning');
-                });
-            }
-            
-            suggestionsList.innerHTML = '';
-            suggestions.forEach(suggestion => {
-                const suggestionItem = document.createElement('div');
-                suggestionItem.className = 'suggestion-item';
-                
-                suggestionItem.innerHTML = `
-                    <div class="suggestion-icon">
-                        <i class="fas fa-lightbulb"></i>
-                    </div>
-                    <div class="suggestion-content">
-                        <h4>${suggestion.message[currentLang]}</h4>
-                        <p>${suggestion.explanation[currentLang]}</p>
-                    </div>
-                `;
-                
-                suggestionsList.appendChild(suggestionItem);
-            });
-            
-            if (results.score < 70) {
-                const extraSuggestion = document.createElement('div');
-                extraSuggestion.className = 'suggestion-item';
-                
-                extraSuggestion.innerHTML = `
-                    <div class="suggestion-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <div class="suggestion-content">
-                        <h4>${currentLang === 'ar' ? 'تحتاج إلى مزيد من التحسين' : 
-                              currentLang === 'en' ? 'Needs more improvement' : 
-                              'Nécessite plus d\'amélioration'}</h4>
-                        <p>${currentLang === 'ar' ? 'نقاط جودة كودك أقل من 70. راجع الأخطاء والتحذيرات أعلاه.' : 
-                            currentLang === 'en' ? 'Your code quality score is below 70. Review the errors and warnings above.' : 
-                            'Votre score de qualité de code est inférieur à 70. Examinez les erreurs et avertissements ci-dessus.'}</p>
-                    </div>
-                `;
-                
-                suggestionsList.appendChild(extraSuggestion);
-            }
-            
-            if (errors.length > 0) {
-                const correctedSection = document.createElement('div');
-                correctedSection.className = 'error-item success';
-                correctedSection.innerHTML = `
-                    <div class="error-header">
-                        <div class="error-title">
-                            <i class="fas fa-check-circle"></i>
-                            <strong>${currentLang === 'ar' ? 'الكود المصحح تلقائيًا' : 
-                                     currentLang === 'en' ? 'Automatically Corrected Code' : 
-                                     'Code corrigé automatiquement'}</strong>
-                        </div>
-                    </div>
-                    <div class="error-body">
-                        ${currentLang === 'ar' ? 'قام الذكاء الاصطناعي بتصحيح بعض الأخطاء تلقائيًا:' : 
-                         currentLang === 'en' ? 'AI has automatically corrected some errors:' : 
-                         'L\'IA a automatiquement corrigé certaines erreurs:'}
-                    </div>
-                    <div class="error-fix">
-                        <pre><code class="language-c">${results.correctedCode}</code></pre>
-                    </div>
-                `;
-                
-                errorsContainer.appendChild(correctedSection);
-                
-                setTimeout(() => {
-                    hljs.highlightAll();
-                }, 100);
-            }
-        }
-
-        // إضافة مشكلة إلى الحاوية
-        function addIssueToContainer(issue, type) {
-            const issueElement = document.createElement('div');
-            issueElement.className = `error-item ${type}`;
-            
-            let icon = 'fas fa-exclamation-circle';
-            if (type === 'warning') icon = 'fas fa-exclamation-triangle';
-            if (type === 'info') icon = 'fas fa-info-circle';
-            
-            issueElement.innerHTML = `
-                <div class="error-header">
-                    <div class="error-title">
-                        <i class="${icon}"></i>
-                        <strong>${issue.message[currentLang]}</strong>
-                    </div>
-                    <div class="error-line">${currentLang === 'ar' ? 'السطر' : currentLang === 'en' ? 'Line' : 'Ligne'} ${issue.line}</div>
-                </div>
-                <div class="error-body">
-                    ${issue.explanation[currentLang]}
-                </div>
-                ${issue.code ? `
-                <div class="error-fix">
-                    <div style="margin-bottom: 8px; color: #94a3b8;">
-                        <i class="fas fa-code"></i> ${currentLang === 'ar' ? 'الكود:' : currentLang === 'en' ? 'Code:' : 'Code:'}
-                    </div>
-                    <pre style="margin: 0; color: #fca5a5;">${issue.code}</pre>
-                    ${issue.fix ? `
-                    <div style="margin-top: 10px; margin-bottom: 8px; color: #94a3b8;">
-                        <i class="fas fa-wrench"></i> ${currentLang === 'ar' ? 'التصحيح:' : currentLang === 'en' ? 'Fix:' : 'Correction:'}
-                    </div>
-                    <pre style="margin: 0; color: #86efac;">${issue.fix}</pre>
-                    ` : ''}
-                </div>
-                ` : ''}
-            `;
-            
-            errorsContainer.appendChild(issueElement);
-        }
-
-        // تحسين الكود
-        function optimizeCode() {
-            const code = codeInput.value.trim();
-            
-            if (!code) {
-                showNotification(
-                    currentLang === 'ar' ? "الرجاء إدخال كود لتحسينه" : 
-                    currentLang === 'en' ? "Please enter code to optimize" : 
-                    "Veuillez entrer du code à optimiser"
-                );
-                return;
-            }
-            
-            loadingIndicator.classList.add('active');
-            
-            setTimeout(() => {
-                loadingIndicator.classList.remove('active');
-                
-                let optimized = code;
-                optimized = optimized.replace(/int main\(\)/g, 'int main(void)');
-                optimized = optimized.replace(/printf\("(.*?)"\);/g, (match, p1) => {
-                    if (!p1.includes('\\n')) {
-                        return `printf("${p1}\\n");`;
-                    }
-                    return match;
-                });
-                
-                if (!optimized.includes('/*') && !optimized.includes('//')) {
-                    const comment = currentLang === 'ar' ? 
-                        '/*\n * كود C محسن تلقائيًا\n * تم التحسين بواسطة مساعد الذكاء الاصطناعي\n */\n' :
-                        currentLang === 'en' ? 
-                        '/*\n * Auto-optimized C code\n * Optimized by AI Assistant\n */\n' :
-                        '/*\n * Code C optimisé automatiquement\n * Optimisé par l\'Assistant IA\n */\n';
-                    
-                    optimized = comment + optimized;
-                }
-                
-                codeInput.value = optimized;
-                updateLineNumbers();
-                
-                codeInput.classList.add('highlighted');
-                setTimeout(() => {
-                    codeInput.classList.remove('highlighted');
-                }, 2000);
-                
-                showNotification(
-                    currentLang === 'ar' ? "تم تحسين الكود بنجاح!" : 
-                    currentLang === 'en' ? "Code optimized successfully!" : 
-                    "Code optimisé avec succès!"
-                );
-            }, 1500);
-        }
-
-        // مسح الكل
-        function clearAll() {
-            codeInput.value = '';
-            errorsContainer.innerHTML = '';
-            noErrorsMessage.style.display = 'none';
-            statsBar.style.display = 'none';
-            suggestionsList.innerHTML = '';
-            updateLineNumbers();
-            
-            showNotification(
-                currentLang === 'ar' ? "تم مسح الكل بنجاح" : 
-                currentLang === 'en' ? "All cleared successfully" : 
-                "Tout effacé avec succès"
-            );
-        }
-
-        // إضافة المستمعين للأحداث
-        codeInput.addEventListener('input', updateLineNumbers);
-        analyzeBtn.addEventListener('click', analyzeCode);
-        clearBtn.addEventListener('click', clearAll);
-        optimizeBtn.addEventListener('click', optimizeCode);
-        copyCodeBtn.addEventListener('click', copyCurrentCode);
-        copyCorrectedCodeBtn.addEventListener('click', copyCorrectedCode);
-        loadExampleBtn.addEventListener('click', () => loadExample(0));
-
-        codeInput.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.key === 'Enter') {
-                analyzeCode();
-            }
-        });
-
-        langButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const lang = btn.dataset.lang;
-                updateLanguage(lang);
-            });
-        });
-
-        const touchElements = document.querySelectorAll('.btn, .lang-btn, .example-btn, .home-btn');
-        touchElements.forEach(el => {
-            el.addEventListener('touchstart', function() {
-                this.classList.add('touch-feedback');
-            });
-            
-            el.addEventListener('touchend', function() {
-                setTimeout(() => {
-                    this.classList.remove('touch-feedback');
-                }, 300);
-            });
-        });
-
-        updateLanguage('ar');
-        updateLineNumbers();
-        updateExamplesList();
-        
+        // Improved Semantic Logic
         setTimeout(() => {
-            hljs.highlightAll();
-        }, 500);
-        
-        setTimeout(() => {
-            document.querySelector('.logo-icon').classList.add('touch-feedback');
+            const typingIndicator = document.getElementById('typingIndicator');
+            if (typingIndicator) typingIndicator.remove();
+
+            let response = "";
+            const lowerText = text.toLowerCase();
+            
+            let foundKey = null;
+            
+            // Extensive matching logic
+            for (let key in knowledgeBase) {
+                if (lowerText.includes(key) || 
+                    (key === "algorithme" && (lowerText.includes("خوارزم") || lowerText.includes("الغوريت"))) ||
+                    (key === "array" && (lowerText.includes("مصفوف") || lowerText.includes("جدول"))) ||
+                    (key === "pointer" && (lowerText.includes("مؤشر") || lowerText.includes("بوينتر"))) ||
+                    (key === "function" && (lowerText.includes("دال") || lowerText.includes("فنكشن"))) ||
+                    (key === "struct" && (lowerText.includes("سجل") || lowerText.includes("ستركت"))) ||
+                    (key === "union" && (lowerText.includes("اتحاد") || lowerText.includes("يونيون"))) ||
+                    (key === "string" && (lowerText.includes("نص") || lowerText.includes("سترينج"))) ||
+                    (key === "recursion" && (lowerText.includes("معاود") || lowerText.includes("ركيرجن") || lowerText.includes("مرتد"))) ||
+                    (key === "file" && (lowerText.includes("ملف") || lowerText.includes("فايل"))) ||
+                    (key === "memory" && (lowerText.includes("ذاكر") || lowerText.includes("مالوك") || lowerText.includes("ميموري"))) ||
+                    (key === "operator" && (lowerText.includes("عمليات") || lowerText.includes("مشغل"))) ||
+                    (key === "boolean" && (lowerText.includes("منطق") || lowerText.includes("بولين"))) ||
+                    (key === "define" && (lowerText.includes("ماكرو") || lowerText.includes("ديفاين"))) ||
+                    (key === "stack" && lowerText.includes("ستك")) ||
+                    (key === "heap" && lowerText.includes("هيب")) ||
+                    (key === "comment" && lowerText.includes("تعليق")) ||
+                    (key === "logical" && (lowerText.includes("منطق") || lowerText.includes("شرط"))) ||
+                    (key === "linked list" && (lowerText.includes("قائم") || lowerText.includes("لينكد"))) ||
+                    (key === "stack structure" && (lowerText.includes("مكدس") || lowerText.includes("ستاك"))) ||
+                    (key === "queue structure" && (lowerText.includes("طابور") || lowerText.includes("كيو"))) ||
+                    (key === "binary tree" && (lowerText.includes("شجر") || lowerText.includes("تري"))) ||
+                    (key === "bubble sort" && (lowerText.includes("ترتيب") || lowerText.includes("ببل"))) ||
+                    (key === "quick sort" && (lowerText.includes("سريع") || lowerText.includes("كويك"))) ||
+                    (key === "binary search" && (lowerText.includes("بحث") || lowerText.includes("باينري"))) ||
+                    (key === "big o" && (lowerText.includes("تعقيد") || lowerText.includes("بيج أو"))) ||
+                    (key === "bitwise" && (lowerText.includes("بت") || lowerText.includes("بتوايز"))) ||
+                    (key === "variable naming" && (lowerText.includes("تسمية") || lowerText.includes("اسم"))) ||
+                    (key === "infinite loop" && lowerText.includes("لانهائ")) ||
+                    (key === "null pointer" && lowerText.includes("نل")) ||
+                    (key === "memory leak" && lowerText.includes("تسرب")) ||
+                    (key === "call by value" && lowerText.includes("قيمة")) ||
+                    (key === "call by reference" && lowerText.includes("مرجع")) ||
+                    (key === "prime number" && lowerText.includes("أولي")) ||
+                    (key === "multithreading" && (lowerText.includes("خيوط") || lowerText.includes("ثريد"))) ||
+                    (key === "mutex" && (lowerText.includes("قفل") || lowerText.includes("ميوتاكس"))) ||
+                    (key === "hashing" && (lowerText.includes("تجزئة") || lowerText.includes("هاش"))) ||
+                    (key === "graph" && (lowerText.includes("رسم بياني") || lowerText.includes("غراف"))) ||
+                    (key === "bfs" && lowerText.includes("عرض")) ||
+                    (key === "dfs" && lowerText.includes("عمق")) ||
+                    (key === "dijkstra" && lowerText.includes("ديكسترا")) ||
+                    (key === "dynamic programming" && (lowerText.includes("برمجة ديناميكية") || lowerText.includes("دي بي"))) ||
+                    (key === "greedy algorithm" && lowerText.includes("جشع")) ||
+                    (key === "backtracking" && lowerText.includes("تراجع")) ||
+                    (key === "space complexity" && lowerText.includes("مساحة")) ||
+                    (key === "segmentation fault" && lowerText.includes("انهيار")) ||
+                    (key === "makefile" && lowerText.includes("ميكفايل")) ||
+                    (key === "unit testing" && lowerText.includes("اختبار"))) {
+                    foundKey = key;
+                    break;
+                }
+            }
+
+            if (foundKey) {
+                const item = knowledgeBase[foundKey];
+                response = `<div style="border-right: 4px solid var(--primary-light); padding-right: 15px;">
+                                <h3 style="color: var(--primary-light); margin-bottom: 10px;">${item.title}</h3>
+                                <p>${item.desc}</p>
+                                <pre>${item.example}</pre>
+                                <p style="margin-top: 10px; font-size: 0.9rem; color: var(--secondary);">💡 <strong>نصيحة:</strong> ${item.tips}</p>
+                            </div>`;
+            } else if (lowerText.includes("مرحبا") || lowerText.includes("سلام") || lowerText.includes("هلا")) {
+                response = "أهلاً بك مبرمج المستقبل! 👋 أنا مساعدك الذكي المتخصص. يمكنني شرح أي شيء من أساسيات C إلى إدارة الذاكرة والملفات. ماذا تريد أن تتعلم الآن؟";
+            } else if (lowerText.includes("شكرا") || lowerText.includes("تسلم")) {
+                response = "لا شكر على واجب! أنا هنا دائماً لتبسيط البرمجة لك. هل تريد شرحاً لمفهوم آخر؟";
+            } else if (lowerText.includes("مشكل") || lowerText.includes("خطأ") || lowerText.includes("حل")) {
+                response = "لحل أي مشكلة برمجية، اتبع الخطوات التالية:<br>1. افهم المشكلة جيداً.<br>2. اكتب خوارزمية (خطوات حل) بالورقة والقلم.<br>3. ابدأ بكتابة الكود تدريجياً.<br>4. ابحث عن الأخطاء (Debug) باستخدام printf.<br><b>أنا هنا لمساعدتك في أي خطوة!</b>";
+            } else {
+                response = "سؤال مثير للاهتمام! ولكن يفضل أن تسألني عن مفاهيم محددة مثل:<br>• <strong>إدارة الذاكرة (malloc)</strong><br>• <strong>التعامل مع الملفات</strong><br>• <strong>النصوص (Strings)</strong><br>• <strong>التكرار المرتد (Recursion)</strong><br>أو أي كلمة برمجية أخرى!";
+            }
+            
+            addMessage(response, 'bot');
         }, 1000);
-    </script>
+    }
+
+    sendBtn.addEventListener('click', handleSend);
+    userInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleSend();
+        }
+    });
+</script>
+
 </body>
 </html>

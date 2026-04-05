@@ -543,7 +543,7 @@
         </div>
         <div class="option-content">
             <h3>مشاهدة الفيديوهات</h3>
-            <p>تصفح جميع دروس ومحاضرات لغة C المصورة</p>
+            
         </div>
     </a>
 
@@ -553,7 +553,7 @@
         </div>
         <div class="option-content">
             <h3>قائمة الفيديوهات</h3>
-            <p>جميع الدروس مرتبة ومنظمة لتسهيل التعلم</p>
+            <p>جميع الشروحات مرتبة ومنظمة لتسهيل التعلم</p>
         </div>
     </a>
 
@@ -563,12 +563,11 @@
         </div>
         <div class="option-content">
             <h3>قوائم التشغيل</h3>
-            <p>دروس مجمعة حسب المواضيع والمستويات</p>
+            
         </div>
     </a>
 </div>
 
-<!-- زر Home إضافي في الأسفل -->
 <div class="home-bottom-btn">
     <a href="asasi.html">
         <i class="fas fa-home"></i>
@@ -582,15 +581,12 @@
 </footer>
 
 <script>
-// فتح القناة على اليوتيوب
 function openChannel() {
     window.open('https://www.youtube.com/@bibobibars-e3k/featured', '_blank', 'noopener,noreferrer');
     
-    // تأثير اللمس
     createTouchEffect(event);
 }
 
-// تأثيرات اللمس
 function createTouchEffect(event) {
     const element = event.currentTarget || document.getElementById('mainChannel');
     const rect = element.getBoundingClientRect();
@@ -604,7 +600,6 @@ function createTouchEffect(event) {
     element.appendChild(effect);
     setTimeout(() => effect.remove(), 600);
     
-    // تأثير اهتزاز على الهواتف
     if (window.innerWidth <= 768) {
         element.style.transform = 'scale(0.95)';
         setTimeout(() => {
@@ -613,15 +608,12 @@ function createTouchEffect(event) {
     }
 }
 
-// تهيئة الصفحة
 function initPage() {
-    // إضافة تأثيرات اللمس للعناصر
     const clickableElements = document.querySelectorAll('.main-channel, .visit-btn, .option-card, .nav-btn, .home-bottom-btn a');
     
     clickableElements.forEach(element => {
         element.addEventListener('click', createTouchEffect);
-        
-        // تأثير عند اللمس للهواتف
+       
         element.addEventListener('touchstart', function() {
             this.style.opacity = '0.8';
         });
@@ -631,7 +623,7 @@ function initPage() {
         });
     });
     
-    // تأثير الظهور التدريجي للبطاقات
+
     const cards = document.querySelectorAll('.option-card');
     cards.forEach((card, index) => {
         card.style.opacity = '0';
@@ -645,16 +637,16 @@ function initPage() {
     });
 }
 
-// بدء التحميل
+
 window.addEventListener('load', initPage);
 
-// حماية بسيطة بدون تعقيد
+
 document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
 });
 
 document.addEventListener('keydown', function(e) {
-    // منع Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U, F12
+  
     if (
         e.keyCode === 123 || // F12
         (e.ctrlKey && e.shiftKey && e.keyCode === 73) || // Ctrl+Shift+I
@@ -691,8 +683,7 @@ document.addEventListener('keydown', function(e) {
     <div class="no-script-message">
         <div>
             <h1 style="color: #ff0000;">⚠️ JavaScript مطلوب</h1>
-            <p>هذه الصفحة تحتاج إلى JavaScript لتعمل بشكل صحيح.</p>
-            <p>يرجى تفعيل JavaScript في متصفحك ثم إعادة تحميل الصفحة.</p>
+          
         </div>
     </div>
 </noscript>
